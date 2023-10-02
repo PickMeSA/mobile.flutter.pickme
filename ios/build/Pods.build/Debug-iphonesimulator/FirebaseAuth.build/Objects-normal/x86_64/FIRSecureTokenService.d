@@ -1,0 +1,36 @@
+dependencies: \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/SystemService/FIRSecureTokenService.m \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseAuth.build/module.modulemap \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/SystemService/FIRSecureTokenService.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuth.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthAPNSTokenType.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthErrors.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuthSerialTaskQueue.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuthTokenResult_Internal.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthTokenResult.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuth_Internal.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Interop/FIRAuthInterop.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLogger.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseCore.build/module.modulemap \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRVersion.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIROptions.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FirebaseCore.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRLoggerLevel.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRConfiguration.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRApp.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/Target\ Support\ Files/FirebaseCore/FirebaseCore-umbrella.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthBackend.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRPCRequest.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRPCResponse.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/FIRAuthRequestConfiguration.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/RPC/FIRSecureTokenRequest.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Backend/RPC/FIRSecureTokenResponse.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FirebaseCoreInternal.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRAppInternal.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponent.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentContainer.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRComponentType.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRDependency.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRHeartbeatLogger.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIRLibrary.h \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FIROptionsInternal.h

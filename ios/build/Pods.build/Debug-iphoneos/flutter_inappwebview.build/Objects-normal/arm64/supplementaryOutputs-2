@@ -1,0 +1,100 @@
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppBrowser/InAppBrowserWebViewController.swift":
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserWebViewController.swiftdeps"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/OnWindowBlurEventJS.swift":
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowBlurEventJS.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowBlurEventJS.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowBlurEventJS.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowBlurEventJS.d"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/MyWebStorageManager.swift":
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyWebStorageManager.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyWebStorageManager.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyWebStorageManager.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyWebStorageManager.swiftdeps"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebView/InAppWebView.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.d"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebView.swiftdeps"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/OnLoadResourceJS.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnLoadResourceJS.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnLoadResourceJS.swiftdeps"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnLoadResourceJS.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnLoadResourceJS.d"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebView/InAppWebViewOptions.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewOptions.swiftdeps"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewOptions.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewOptions.o"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewOptions.d"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/JavaScriptBridgeJS.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.swiftdeps"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/JavaScriptBridgeJS.o"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebViewMethodHandler.swift":
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewMethodHandler.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewMethodHandler.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewMethodHandler.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewMethodHandler.swiftdeps"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PlatformUtil.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PlatformUtil.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PlatformUtil.swiftdeps"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PlatformUtil.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/PlatformUtil.d"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/InterceptAjaxRequestJS.swift":
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.swiftdeps"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptAjaxRequestJS.o"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/Options.swift":
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Options.d"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Options.swiftdeps"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Options.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/Options.dia"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/LeakAvoider.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LeakAvoider.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LeakAvoider.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LeakAvoider.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LeakAvoider.dia"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/OnWindowFocusEventJS.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowFocusEventJS.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowFocusEventJS.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowFocusEventJS.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OnWindowFocusEventJS.o"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/MyCookieManager.swift":
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyCookieManager.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyCookieManager.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyCookieManager.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/MyCookieManager.o"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/OriginalViewPortMetaTagContentJS.swift":
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OriginalViewPortMetaTagContentJS.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OriginalViewPortMetaTagContentJS.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OriginalViewPortMetaTagContentJS.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/OriginalViewPortMetaTagContentJS.d"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppBrowser/InAppBrowserOptions.swift":
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserOptions.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserOptions.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserOptions.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppBrowserOptions.swiftdeps"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebViewStatic.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.swiftdeps"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.o"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InAppWebViewStatic.dia"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/Types/NSAttributedString.swift":
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/NSAttributedString.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/NSAttributedString.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/NSAttributedString.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/NSAttributedString.d"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/LastTouchedAnchorOrImageJS.swift":
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LastTouchedAnchorOrImageJS.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LastTouchedAnchorOrImageJS.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LastTouchedAnchorOrImageJS.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/LastTouchedAnchorOrImageJS.swiftdeps"
+"/Users/erhard/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/InterceptFetchRequestJS.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/flutter_inappwebview.build/Objects-normal/arm64/InterceptFetchRequestJS.d"

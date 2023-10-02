@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "8408f9e892d136cf405ff76e0f36671ba18b0ac469e330b8557df9fdf6a8c86b"
+build_start_time: [1689673677, 468835830]
+build_end_time: [1689673742, 767110824]
+inputs:
+  "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/OrderedSet/Sources/OrderedSet.swift": [1677671565, 555602073]

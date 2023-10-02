@@ -1,0 +1,25 @@
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageUploadTask.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUploadTask.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUploadTask.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUploadTask.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUploadTask.dia"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageUtils.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUtils.o"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUtils.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUtils.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUtils.swiftdeps"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageUpdateMetadataTask.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUpdateMetadataTask.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUpdateMetadataTask.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUpdateMetadataTask.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageUpdateMetadataTask.dia"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageTaskState.swift":
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTaskState.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTaskState.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTaskState.dia"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTaskState.swiftdeps"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageTokenAuthorizer.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTokenAuthorizer.swiftdeps"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTokenAuthorizer.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTokenAuthorizer.d"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/FirebaseStorage.build/Objects-normal/x86_64/StorageTokenAuthorizer.o"

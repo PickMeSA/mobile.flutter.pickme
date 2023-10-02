@@ -1,0 +1,2 @@
+dependencies: \
+  /Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphonesimulator/OrderedSet.build/DerivedSources/OrderedSet_vers.c

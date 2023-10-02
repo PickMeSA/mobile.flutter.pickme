@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>997061604237-i6125u9kl9p6ncu1e28vkimjjlsal3b8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.997061604237-i6125u9kl9p6ncu1e28vkimjjlsal3b8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>997061604237-pul8invva2ceglj7qt8l723mo1gsiftk.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCi-Isv_MV7ju3WZy1N_4RaWtTzexvSLwU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>997061604237</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>co.za.pickme.app</string>
+	<key>PROJECT_ID</key>
+	<string>pick-me-61f34</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pick-me-61f34.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:997061604237:ios:f9abe4eb1de0119d8343c4</string>
+</dict>
+</plist>

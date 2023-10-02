@@ -1,0 +1,14 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Debug-iphoneos/OrderedSet/OrderedSet.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/OrderedSet.build/unextended-module.modulemap",
+    }]
+  }]
+}

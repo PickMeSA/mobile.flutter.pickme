@@ -1,0 +1,69 @@
+name: app
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  firebase_core: ^2.4.1
+  firebase_auth: ^4.2.2
+  cloud_firestore: ^4.3.1
+  firebase_storage: ^11.0.10
+  google_maps_flutter: ^2.2.1
+  google_place: ^0.4.7
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
+  google_maps_controller: ^1.2.0
+  google_fonts: ^4.0.1
+  flutter_spinkit: ^5.1.0
+  smooth_page_indicator: ^1.0.0+2
+  flutter_svg: ^1.1.4
+  pin_code_fields: ^7.4.0
+  expandable: ^5.0.1
+  flutter_rating_bar: ^4.0.1
+  intl: ^0.18.0
+  http: ^0.13.3
+  image_picker: ^0.8.5+3
+  flutter_staggered_grid_view: ^0.6.2
+  carousel_slider: ^4.1.1
+  url_launcher: ^6.1.7
+  connectivity_plus: ^3.0.2
+  onesignal_flutter: ^3.5.1
+  mailer: ^6.0.1
+  pdf_render: ^1.4.0
+  cupertino_icons: ^1.0.2
+  flutter_keyboard_visibility: ^5.3.0
+  flutter_inappwebview: ^5.7.2+3
+  webviewx: ^0.2.1
+  multi_select_flutter: ^4.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.11.0
+
+  flutter_lints: ^2.0.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+  image_path_android: "assets/images/logo_rnd.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/google_fonts/
+    - assets/icons/
+    - assets/icons/services/
+    - assets/docs/

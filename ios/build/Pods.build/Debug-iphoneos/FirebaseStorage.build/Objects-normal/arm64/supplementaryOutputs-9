@@ -1,0 +1,30 @@
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageDeleteTask.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageDeleteTask.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageDeleteTask.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageDeleteTask.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageDeleteTask.dia"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Result.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Result.swiftdeps"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Result.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Result.o"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Result.d"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageComponent.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageComponent.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageComponent.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageComponent.dia"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageComponent.o"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/AsyncAwait.swift":
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/AsyncAwait.swiftdeps"
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/AsyncAwait.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/AsyncAwait.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/AsyncAwait.d"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageConstants.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageConstants.o"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageConstants.swiftdeps"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageConstants.d"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/StorageConstants.dia"
+"/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Storage.swift":
+  object: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Storage.o"
+  diagnostics: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Storage.dia"
+  dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Storage.d"
+  swift-dependencies: "/Users/erhard/Projects/Apps/PickMe/App/ios/build/Pods.build/Debug-iphoneos/FirebaseStorage.build/Objects-normal/arm64/Storage.swiftdeps"

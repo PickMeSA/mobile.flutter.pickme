@@ -1,0 +1,27 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "41b6e5bc0cb1aadedcb2cd5de78a575fc79aa660a7eea95ded8231959b57cd27"
+build_start_time: [1689683120, 540156841]
+build_end_time: [1689683132, 218899965]
+inputs:
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift"
+  : [1677671516, 22412300]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
+  : [1677671516, 23042201]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
+  : [1677671516, 23382186]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
+  : [1677671516, 23521900]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
+  : [1677671516, 23802280]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
+  : [1677671516, 22640705]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift"
+  : [1677671516, 22235631]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
+  : [1677671516, 23939609]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
+  : [1677671516, 23665904]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
+  : [1677671516, 22870063]
+  ? "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
+  : [1677671516, 23212432]

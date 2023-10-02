@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "b0c3d56287fea8f5b1b08ae0733250576f52710fd12d1a6dba11a0ada5c7360e"
+build_start_time: [1689683139, 370401859]
+build_end_time: [1689683139, 516814947]
+inputs:
+  "/Users/erhard/Projects/Apps/PickMe/App/ios/Runner/AppDelegate.swift": !private [1668146822, 544554710]

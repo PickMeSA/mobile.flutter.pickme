@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "966bdccde4a101305f84d1f523b0c71153387d906cad65103fe70448b326caf8"
+build_start_time: [1689673677, 44800996]
+build_end_time: [1689673702, 389307022]
+inputs:
+  "/Users/erhard/Projects/Apps/PickMe/App/ios/Pods/ReachabilitySwift/Sources/Reachability.swift": [1677671569, 816167831]

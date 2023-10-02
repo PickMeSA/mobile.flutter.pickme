@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "e73d070d5bfbb127b736d12afe35aa9110303106a32a26adae2ea7e2903cd876"
+build_start_time: [1689673677, 44708013]
+build_end_time: [1689674368, 419498920]
+inputs:
+  "/Users/erhard/.pub-cache/hosted/pub.dev/path_provider_foundation-2.1.1/ios/Classes/PathProviderPlugin.swift": [1677073414, 575993061]
+  "/Users/erhard/.pub-cache/hosted/pub.dev/path_provider_foundation-2.1.1/ios/Classes/messages.g.swift": [1677073414, 576363801]
