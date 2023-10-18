@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 import 'package:app/components/constants.dart';
-import 'package:app/screens/auth/login_screen.dart';
+import 'package:app/features/login/presentation/login_screen.dart';
 import 'package:app/screens/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

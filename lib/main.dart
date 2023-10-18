@@ -21,6 +21,7 @@ void main() async {
   await OneSignal.shared.setAppId(
     oneSignalId,
   );
+
   OneSignal.shared.promptLocationPermission();
   runApp(const MyApp());
 }
@@ -91,4 +92,10 @@ class SplashScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+enum Environment {
+  dev,
+  uat,
+  prod
 }
