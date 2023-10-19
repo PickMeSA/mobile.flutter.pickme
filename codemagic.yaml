@@ -1,0 +1,109 @@
+workflows:
+  android-workflow:
+    name: Android workflow
+    max_build_duration: 60
+    environment:
+      flutter: 3.10.6
+      xcode: latest
+      cocoapods: default
+    cache:
+      cache_paths:
+        - $HOME/.gradle/caches
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - $CM_BUILD_DIR/node_modules
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+          source: false
+      tag_patterns:
+        - pattern: '*'
+          include: true
+    scripts:
+      - |
+        echo "Hello there"
+        echo "flutter.sdk=$HOME/programs/flutter"
+      - flutter clean
+      - flutter packages pub get
+      - flutter pub run build_runner build --delete-conflicting-outputs
+      - flutter build apk --release --split-debug-info=build/app/outputs/symbols -t lib/main.dart
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/release/mapping.txt
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - fmathebula@dvtsoftware.com
+          - asithole2@dvt.co.za
+          - dbotha@dvt.co.za
+          - zlagardien@dvtsoftware.com
+        notify:
+          success: true # To not receive a notification when a build succeeds
+          failure: false # To not receive a notification when a build fails
+      slack:
+        channel: '#general'
+        notify_on_build_start: true
+
+  ios-workflow:
+    name: iOS Workflow
+    max_build_duration: 120
+    integrations:
+      app_store_connect: Beam Application
+    environment:
+      ios_signing:
+        provisioning_profiles:
+          - distribution_profile
+        certificates:
+          - distribution_certificate_2
+      vars:
+        APP_ID: 6446151145
+      flutter: 3.10.6
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+          source: false
+      tag_patterns:
+        - pattern: '*'
+          include: true
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Run build_runner
+        script: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Flutter build ipa
+        script: |
+          flutter build ipa --release -t lib/main.dart \
+            --build-name=1.0.0 \
+            --build-number=1 \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        # Configuration related to TestFlight (optional)
+        # Note: This action is performed during post-processing.
+        submit_to_testflight: true
+        beta_groups: # Specify the names of beta tester groups that will get access to the build once it has passed beta review.
+          - testers
+
+        # Configuration related to App Store (optional)
+        # Note: This action is performed during post-processing.
+        submit_to_app_store: false

@@ -1,0 +1,6 @@
+{
+  "digital_ocean":{
+    "base_url" : "https://api-dev.pick-me.co.za/api/",
+    "version": "v1"
+}
+}

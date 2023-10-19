@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "997061604237",
+    "firebase_url": "https://pick-me-61f34-default-rtdb.firebaseio.com",
+    "project_id": "pick-me-61f34",
+    "storage_bucket": "pick-me-61f34.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997061604237:android:b17810b55761ff648343c4",
+        "android_client_info": {
+          "package_name": "co.za.pickme.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997061604237-pul8invva2ceglj7qt8l723mo1gsiftk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.za.pickme.app",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "997061604237-ouun5sdnp8rs45695p9gja181dulqpbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdZ8IZ_5xCmBuIX5demh32yuO3fDhUy18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997061604237-8b5vj64cedstiq9mgsqee3dm7mnoj8q6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "997061604237-i6125u9kl9p6ncu1e28vkimjjlsal3b8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.za.pickme.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997061604237:android:a041174da7eb7d1b8343c4",
+        "android_client_info": {
+          "package_name": "mobile.flutter.pickme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997061604237-0dse65j4s5grbju7gdid053l38cm63eg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mobile.flutter.pickme",
+            "certificate_hash": "f446cda09f684f1f5129c02a8e8d41b44973c7d5"
+          }
+        },
+        {
+          "client_id": "997061604237-ouun5sdnp8rs45695p9gja181dulqpbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdZ8IZ_5xCmBuIX5demh32yuO3fDhUy18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997061604237-8b5vj64cedstiq9mgsqee3dm7mnoj8q6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "997061604237-i6125u9kl9p6ncu1e28vkimjjlsal3b8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.za.pickme.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
