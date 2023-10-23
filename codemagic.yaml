@@ -41,6 +41,8 @@ workflows:
           - asithole2@dvt.co.za
           - dbotha@dvt.co.za
           - zlagardien@dvtsoftware.com
+          - elrinaretief@icloud.com
+          - attie@pick-me.co.za
         notify:
           success: true # To not receive a notification when a build succeeds
           failure: false # To not receive a notification when a build fails

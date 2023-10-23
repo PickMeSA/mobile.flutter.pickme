@@ -13,14 +13,14 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/Users/fmathebula/StudioProjects/pickme/android/app/src/debug/AndroidManifest.xml:6:5-66
-15-->/Users/fmathebula/StudioProjects/pickme/android/app/src/debug/AndroidManifest.xml:6:22-64
+15-->/Users/fmathebula/StudioProjects/mobile.flutter.pickme/android/app/src/debug/AndroidManifest.xml:6:5-66
+15-->/Users/fmathebula/StudioProjects/mobile.flutter.pickme/android/app/src/debug/AndroidManifest.xml:6:22-64
 16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-16-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
-16-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
+16-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
+16-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
 17    <uses-permission android:name="android.permission.WAKE_LOCK" />
-17-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-68
-17-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-65
+17-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-68
+17-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-65
 18    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 18-->[com.google.android.gms:play-services-measurement-api:21.3.0] /Users/fmathebula/.gradle/caches/transforms-3/3f3098215fae9d894648ef5af693e2ec/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:25:5-79
 18-->[com.google.android.gms:play-services-measurement-api:21.3.0] /Users/fmathebula/.gradle/caches/transforms-3/3f3098215fae9d894648ef5af693e2ec/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:25:22-76
@@ -69,31 +69,31 @@
 58            android:value="2" />
 59
 60        <service
-60-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-18:19
+60-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-18:19
 61            android:name="com.google.firebase.components.ComponentDiscoveryService"
-61-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:14:18-89
+61-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:14:18-89
 62            android:directBootAware="true"
 62-->[com.google.firebase:firebase-common:20.3.3] /Users/fmathebula/.gradle/caches/transforms-3/04d54205cae76f1c8bb124053dfe73f4/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:34:13-43
 63            android:exported="false" >
 63-->[com.google.firebase:firebase-auth:22.1.2] /Users/fmathebula/.gradle/caches/transforms-3/10e5d7af579ba6b9972f33f02984d205/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:68:13-37
 64            <meta-data
-64-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:85
+64-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:85
 65                android:name="com.google.firebase.components:io.flutter.plugins.firebase.analytics.FlutterFirebaseAppRegistrar"
-65-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-128
+65-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-128
 66                android:value="com.google.firebase.components.ComponentRegistrar" />
-66-->[:firebase_analytics] /Users/fmathebula/StudioProjects/pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-82
+66-->[:firebase_analytics] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_analytics/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-82
 67            <meta-data
-67-->[:firebase_auth] /Users/fmathebula/StudioProjects/pickme/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+67-->[:firebase_auth] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 68                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-68-->[:firebase_auth] /Users/fmathebula/StudioProjects/pickme/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+68-->[:firebase_auth] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 69                android:value="com.google.firebase.components.ComponentRegistrar" />
-69-->[:firebase_auth] /Users/fmathebula/StudioProjects/pickme/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+69-->[:firebase_auth] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 70            <meta-data
-70-->[:firebase_core] /Users/fmathebula/StudioProjects/pickme/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+70-->[:firebase_core] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 71                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-71-->[:firebase_core] /Users/fmathebula/StudioProjects/pickme/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+71-->[:firebase_core] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 72                android:value="com.google.firebase.components.ComponentRegistrar" />
-72-->[:firebase_core] /Users/fmathebula/StudioProjects/pickme/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+72-->[:firebase_core] /Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 73            <meta-data
 73-->[com.google.firebase:firebase-auth:22.1.2] /Users/fmathebula/.gradle/caches/transforms-3/10e5d7af579ba6b9972f33f02984d205/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:69:13-71:85
 74                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"

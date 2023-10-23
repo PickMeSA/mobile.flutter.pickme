@@ -1,1 +1,16 @@
-{}
+{
+  "welcomeTopickme": "Welcome to pickme!",
+  "connectingWorkersAndClients": "Connecting workers and clients",
+  "loginIn": " Log in",
+  "newHereCreateAccount": "New here? Create Account",
+  "hiThere!": "Hi there!",
+  "letsGetYouStartedByCreatingYourAccount": "let's get you started by creating your account",
+  "firstName": "First name",
+  "surname": "Surname",
+  "phoneNumber": "Phone number",
+  "emailAddress": "Email address",
+  "passPortNumber": "Passport number",
+  "idNumber": "ID number",
+  "indicatesArequiredField": "*Indicate a required field",
+  "ccontinue": "Continue"
+}

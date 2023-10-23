@@ -21,5 +21,26 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
+        "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
+            "Connecting workers and clients"),
+        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
+        "firstName": MessageLookupByLibrary.simpleMessage("First name"),
+        "idNumber": MessageLookupByLibrary.simpleMessage("ID number"),
+        "indicatesArequiredField":
+            MessageLookupByLibrary.simpleMessage("*Indicate a required field"),
+        "letsGetYouStartedByCreatingYourAccount":
+            MessageLookupByLibrary.simpleMessage(
+                "let\'s get you started by creating your account"),
+        "loginIn": MessageLookupByLibrary.simpleMessage(" Log in"),
+        "newHereCreateAccount":
+            MessageLookupByLibrary.simpleMessage("New here? Create Account"),
+        "passPortNumber":
+            MessageLookupByLibrary.simpleMessage("Passport number"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "surname": MessageLookupByLibrary.simpleMessage("Surname"),
+        "welcomeTopickme":
+            MessageLookupByLibrary.simpleMessage("Welcome to pickme!")
+      };
 }

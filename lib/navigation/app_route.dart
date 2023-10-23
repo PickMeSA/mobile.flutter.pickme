@@ -1,6 +1,11 @@
+
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
+import 'package:pickme/features/register/presentation/register_page.dart';
+
+
+import '../features/login/presentation/loginPage.dart';
 
 part 'app_route.gr.dart';
 
@@ -12,8 +17,16 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes =>[
     AnimatedRoute(
       page: LandingRoute.page,
-      initial: true
-    )
+      initial: true,
+
+    ),
+
+    AnimatedRoute(
+        page: LoginRoute.page,),
+    AnimatedRoute(
+        page: RegisterRoute.page,),
+
+
   ];
 }
 

@@ -27,7 +27,7 @@ abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends Bas
         appBar: buildAppbar(),
         bottomNavigationBar: bottomNavigationBar(),
         floatingActionButton: floatingActionButton(),
-        body: SafeArea(child: SingleChildScrollView( child: buildView(context))),
+        body: SafeArea(child: buildView(context)),
       ),
     ),);
   }

@@ -49,6 +49,138 @@ class AppLocalizations {
   static AppLocalizations? maybeOf(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
+
+  /// `Welcome to pickme!`
+  String get welcomeTopickme {
+    return Intl.message(
+      'Welcome to pickme!',
+      name: 'welcomeTopickme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connecting workers and clients`
+  String get connectingWorkersAndClients {
+    return Intl.message(
+      'Connecting workers and clients',
+      name: 'connectingWorkersAndClients',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Log in`
+  String get loginIn {
+    return Intl.message(
+      ' Log in',
+      name: 'loginIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New here? Create Account`
+  String get newHereCreateAccount {
+    return Intl.message(
+      'New here? Create Account',
+      name: 'newHereCreateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'hiThere!' key
+
+  /// `let's get you started by creating your account`
+  String get letsGetYouStartedByCreatingYourAccount {
+    return Intl.message(
+      'let\'s get you started by creating your account',
+      name: 'letsGetYouStartedByCreatingYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First name`
+  String get firstName {
+    return Intl.message(
+      'First name',
+      name: 'firstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Surname`
+  String get surname {
+    return Intl.message(
+      'Surname',
+      name: 'surname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address`
+  String get emailAddress {
+    return Intl.message(
+      'Email address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passport number`
+  String get passPortNumber {
+    return Intl.message(
+      'Passport number',
+      name: 'passPortNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID number`
+  String get idNumber {
+    return Intl.message(
+      'ID number',
+      name: 'idNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `*Indicate a required field`
+  String get indicatesArequiredField {
+    return Intl.message(
+      '*Indicate a required field',
+      name: 'indicatesArequiredField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get ccontinue {
+    return Intl.message(
+      'Continue',
+      name: 'ccontinue',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
