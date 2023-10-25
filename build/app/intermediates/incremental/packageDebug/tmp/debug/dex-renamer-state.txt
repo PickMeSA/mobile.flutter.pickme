@@ -1,4 +1,0 @@
-#Mon Oct 23 20:07:45 SAST 2023
-base.0=/Users/fmathebula/StudioProjects/mobile.flutter.pickme/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

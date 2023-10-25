@@ -1,2 +1,0 @@
-#- File Locator -
-listingFile=../../../../../android/app/debug/output-metadata.json
