@@ -3,7 +3,7 @@ workflows:
     name: Android workflow
     max_build_duration: 60
     environment:
-      flutter: 3.10.6
+      flutter: 3.13.4
       xcode: latest
       cocoapods: default
     cache:
@@ -63,7 +63,7 @@ workflows:
           - distribution_certificate_2
       vars:
         APP_ID: 6446151145
-      flutter: 3.10.6
+      flutter: 3.13.4
     triggering:
       events:
         - push
