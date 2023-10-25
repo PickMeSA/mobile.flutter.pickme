@@ -29,7 +29,7 @@ workflows:
       - flutter clean
       - flutter packages pub get
       - flutter pub run build_runner build --delete-conflicting-outputs
-      - flutter build apk --release --split-debug-info=build/app/outputs/symbols -t lib/main.dart
+      - flutter build apk --release --no-tree-shake-icons --split-debug-info=build/app/outputs/symbols -t lib/main.dart
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
       - build/app/outputs/release/mapping.txt
@@ -89,7 +89,7 @@ workflows:
           flutter pub run build_runner build --delete-conflicting-outputs
       - name: Flutter build ipa
         script: |
-          flutter build ipa --release -t lib/main.dart \
+          flutter build ipa --release --no-tree-shake-icons -t lib/main.dart \
             --build-name=1.0.0 \
             --build-number=1 \
             --export-options-plist=/Users/builder/export_options.plist
