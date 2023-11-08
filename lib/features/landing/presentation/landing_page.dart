@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/landing_bloc.dart';
 
@@ -78,7 +79,7 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                   child: PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,onPressed: () async {
                     context.router.push(LoginRoute());
                   },
-                      child: Text(getLocalization().loginIn)),
+                      child: wText(getLocalization().loginIn)),
                 ),
               ),
 
@@ -88,7 +89,7 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
                   child: SecondaryButton(width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
                     context.router.push(const RegisterRoute());
-                  }, child: Text(getLocalization().newHereCreateAccount)),
+                  }, child: wText(getLocalization().newHereCreateAccount)),
                 ),
               )
             ],

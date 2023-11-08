@@ -90,83 +90,101 @@ class AppLocalizations {
     );
   }
 
-  // skipped getter for the 'hiThere!' key
+  /// `Hi there!`
+  String get hiThere {
+    return Intl.message(
+      'Hi there!',
+      name: 'hiThere',
+      desc: '',
+      args: [],
+    );
+  }
 
-  /// `let's get you started by creating your account`
+  /// `Let’s get you started by creating your account.`
   String get letsGetYouStartedByCreatingYourAccount {
     return Intl.message(
-      'let\'s get you started by creating your account',
+      'Let’s get you started by creating your account.',
       name: 'letsGetYouStartedByCreatingYourAccount',
       desc: '',
       args: [],
     );
   }
 
-  /// `First name`
+  /// `First name *`
   String get firstName {
     return Intl.message(
-      'First name',
+      'First name *',
       name: 'firstName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Surname`
+  /// `Surname *`
   String get surname {
     return Intl.message(
-      'Surname',
+      'Surname *',
       name: 'surname',
       desc: '',
       args: [],
     );
   }
 
-  /// `Phone number`
+  /// `Phone number *`
   String get phoneNumber {
     return Intl.message(
-      'Phone number',
+      'Phone number *',
       name: 'phoneNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Email address`
+  /// `Email address *`
   String get emailAddress {
     return Intl.message(
-      'Email address',
+      'Email address *',
       name: 'emailAddress',
       desc: '',
       args: [],
     );
   }
 
-  /// `Passport number`
-  String get passPortNumber {
+  /// `Passport number *`
+  String get passPortNumberA {
     return Intl.message(
-      'Passport number',
-      name: 'passPortNumber',
+      'Passport number *',
+      name: 'passPortNumberA',
       desc: '',
       args: [],
     );
   }
 
-  /// `ID number`
+  /// `Passport number`
+  String get passport {
+    return Intl.message(
+      'Passport number',
+      name: 'passport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID number *`
   String get idNumber {
     return Intl.message(
-      'ID number',
+      'ID number *',
       name: 'idNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `*Indicate a required field`
-  String get indicatesArequiredField {
+  /// `*Indicates a required field`
+  String get indicatesARequiredField {
     return Intl.message(
-      '*Indicate a required field',
-      name: 'indicatesArequiredField',
+      '*Indicates a required field',
+      name: 'indicatesARequiredField',
       desc: '',
       args: [],
     );
@@ -177,6 +195,26 @@ class AppLocalizations {
     return Intl.message(
       'Continue',
       name: 'ccontinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Work permit number *`
+  String get workPermitNumber {
+    return Intl.message(
+      'Work permit number *',
+      name: 'workPermitNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
       desc: '',
       args: [],
     );

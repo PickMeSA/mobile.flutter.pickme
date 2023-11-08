@@ -25,22 +25,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
-        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
-        "firstName": MessageLookupByLibrary.simpleMessage("First name"),
-        "idNumber": MessageLookupByLibrary.simpleMessage("ID number"),
-        "indicatesArequiredField":
-            MessageLookupByLibrary.simpleMessage("*Indicate a required field"),
+        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
+        "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
+        "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
+        "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
+        "indicatesARequiredField":
+            MessageLookupByLibrary.simpleMessage("*Indicates a required field"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
-                "let\'s get you started by creating your account"),
+                "Let’s get you started by creating your account."),
         "loginIn": MessageLookupByLibrary.simpleMessage(" Log in"),
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
-        "passPortNumber":
-            MessageLookupByLibrary.simpleMessage("Passport number"),
-        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
-        "surname": MessageLookupByLibrary.simpleMessage("Surname"),
+        "passPortNumberA":
+            MessageLookupByLibrary.simpleMessage("Passport number *"),
+        "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
+        "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
         "welcomeTopickme":
-            MessageLookupByLibrary.simpleMessage("Welcome to pickme!")
+            MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
+        "workPermitNumber":
+            MessageLookupByLibrary.simpleMessage("Work permit number *")
       };
 }
