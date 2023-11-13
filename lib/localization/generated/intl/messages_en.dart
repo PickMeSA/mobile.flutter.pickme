@@ -20,14 +20,24 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(number) =>
+      "We’ve sent a One-Time Pin (OTP) to your number ${number}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
+        "contactHelpCenter":
+            MessageLookupByLibrary.simpleMessage("Contact help center"),
+        "didntReceiveACode":
+            MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
+        "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
+        "iDidntReceiveACode":
+            MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
         "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
         "indicatesARequiredField":
             MessageLookupByLibrary.simpleMessage("*Indicates a required field"),
@@ -41,10 +51,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passport number *"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
+        "pleaseReenterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
+            "Please re-enter your phone number. If the problem persists, please contact our help centre."),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
+        "weveSentaOneTimePine": m0,
         "workPermitNumber":
             MessageLookupByLibrary.simpleMessage("Work permit number *")
       };

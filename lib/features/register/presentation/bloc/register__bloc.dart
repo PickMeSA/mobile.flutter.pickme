@@ -34,16 +34,12 @@ class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
       )async {
     emit(ContinueClickedState()..dataState = DataState.loading);
       await continueClickedUseCase.callBack(
-        onSuccesss: (verificationId , resendToken){
-          emit(ContinueClickedState(
-              userModel: event.user,
-              verificationId: verificationId,
-              resendToken: resendToken)..dataState = DataState.success);
+        onSuccesss: (verificationId , resendToken)async {
         },
         onError: (error){
           emit(ContinueClickedState(userModel: event.user)..dataState = DataState.error);
         },
-        mobileNumber: "0810434369"
+        mobileNumber: event.user.mobile
       );
 
       }

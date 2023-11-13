@@ -58,22 +58,22 @@ class PFirebaseAuthentication extends Authentication {
   @override
   Future<void> codeSent({
     Function(String verificationId, int? resendToken)? onSuccess,
-    Function(String error)? onError
-    ,required String mobileNumber}) async{
+    Function(String error)? onError,
+    required String mobileNumber}) async{
 
     try {
-      await firebaseAuth.verifyPhoneNumber(
+       firebaseAuth.verifyPhoneNumber(
           phoneNumber: mobileNumber,
           codeAutoRetrievalTimeout: (verificationId) {},
           timeout: const Duration(seconds: 120),
           verificationCompleted: (credential) {},
           verificationFailed: (e) =>
             onError!(e.toString()),
-          codeSent: (String verificationId, int? resentToken) async
+          codeSent: (String verificationId, int? resentToken)
           => onSuccess!(verificationId,resentToken));
     }catch(ex) {
       onError!(ex.toString());
-    };
+    }
           //codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
 
   }

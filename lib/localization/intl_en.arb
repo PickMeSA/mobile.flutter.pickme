@@ -16,5 +16,11 @@
   "ccontinue": "Continue",
   "workPermitNumber": "Work permit number *",
   "letsGetYouStartedByCreatingYourAccount": "Let’s get you started by creating your account.",
-  "submit": "Submit"
+  "submit": "Submit",
+  "iDidntReceiveACode": "I didn't receive a code",
+  "enterYourOTP": "Enter your OTP",
+  "weveSentaOneTimePine": "We’ve sent a One-Time Pin (OTP) to your number {number}",
+  "didntReceiveACode": "Didn't receive a code?",
+  "pleaseReenterYourPhoneNumber": "Please re-enter your phone number. If the problem persists, please contact our help centre.",
+  "contactHelpCenter": "Contact help center"
 }

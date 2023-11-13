@@ -219,6 +219,66 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `I didn't receive a code`
+  String get iDidntReceiveACode {
+    return Intl.message(
+      'I didn\'t receive a code',
+      name: 'iDidntReceiveACode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your OTP`
+  String get enterYourOTP {
+    return Intl.message(
+      'Enter your OTP',
+      name: 'enterYourOTP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’ve sent a One-Time Pin (OTP) to your number {number}`
+  String weveSentaOneTimePine(Object number) {
+    return Intl.message(
+      'We’ve sent a One-Time Pin (OTP) to your number $number',
+      name: 'weveSentaOneTimePine',
+      desc: '',
+      args: [number],
+    );
+  }
+
+  /// `Didn't receive a code?`
+  String get didntReceiveACode {
+    return Intl.message(
+      'Didn\'t receive a code?',
+      name: 'didntReceiveACode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please re-enter your phone number. If the problem persists, please contact our help centre.`
+  String get pleaseReenterYourPhoneNumber {
+    return Intl.message(
+      'Please re-enter your phone number. If the problem persists, please contact our help centre.',
+      name: 'pleaseReenterYourPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact help center`
+  String get contactHelpCenter {
+    return Intl.message(
+      'Contact help center',
+      name: 'contactHelpCenter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

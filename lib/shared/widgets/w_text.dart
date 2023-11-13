@@ -46,3 +46,7 @@ Widget wText (String data,
   );
 
 }
+
+String obscureNumber(String number){
+  return number.replaceRange(3, 10, " *** **** **");
+}

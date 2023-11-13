@@ -2,7 +2,7 @@ class UserModel{
 
   final String firstName;
   final String surname;
-  final String mobile;
+  String mobile;
   final String? idNumber;
   final String? passportNumber;
   final String? workPermitNumber;
@@ -22,6 +22,10 @@ class UserModel{
      this.workPermitNumber
 
   });
+
+  setMobile({required String mobile}) {
+  this.mobile = mobile;
+  }
 
 }
 

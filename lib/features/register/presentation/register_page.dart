@@ -39,9 +39,6 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
   Widget buildView(BuildContext context) {
     return BlocConsumer<RegisterBloc, RegisterState>(
   listener: (context, state) {
-    if(state is ContinueClickedState && state.dataState == DataState.success ){
-      context.router.push(OtpRoute(userModel: state!.userModel));
-    }
   },
   builder: (context, state) {
     return SizedBox(
@@ -57,15 +54,16 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
               color: Colors.grey,
               height: MediaQuery.sizeOf(context).height * (1/3) ,
               width: MediaQuery.sizeOf(context).width,
-                child: const Padding(
-                  padding: EdgeInsets.all(20.0),
+                child:  Padding(
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
                         width: 25,
                         height: 25,
-                      child: Icon(Icons.arrow_back),),
+                        child: InkWell(onTap: ()=> context.router.pop(),
+                            child: Icon(Icons.arrow_back)),),
                       Padding(padding: EdgeInsets.only(top: 56,left: 32, right: 32, bottom: 8),)
                     ],
                   ),
@@ -99,17 +97,19 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             padding: const EdgeInsets.only(left: 20, right: 20,),
                             textFieldType: TextFieldType.NAME, labelText: getLocalization().surname,),
                         ),
-                       /* Padding(
+                       Padding(
                           padding: const EdgeInsets.only(top: 10, bottom:  10),
                           child: AppTextFormField(
                            // validator: (value)=> validatePhoneNumber(value??""),
-                            prefixIcon: Row(
-                              children: [Text("+27",)],
+                            prefixIcon: SizedBox(width: 50,
+                              child: Row(
+                                children: [Text("+27",)],
+                              ),
                             ),
                             controller: phoneNumberController,
                             padding: const EdgeInsets.only(left: 20, right: 20),
-                            textFieldType: TextFieldType.PHONE, labelText: getLocalization().phoneNumber,),
-                        ),*/
+                            textFieldType: TextFieldType.NUMBER, labelText: getLocalization().phoneNumber,),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only( top: 10, bottom: 10),
                           child: AppTextFormField(
@@ -171,8 +171,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                           child: PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,
                               onPressed: () async {
                                 if(_formKey.currentState!.validate()) {
-                                  getBloc().add(
-                                  ContinueClickedEvent(user: UserModel(
+                                  UserModel userModel = UserModel(
                                       firstName: firstNameController.text,
                                       idNumber: idNumberController.text,
                                       mobile: phoneNumberController.text,
@@ -182,9 +181,12 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                       surname: surnameController.text,
                                       workPermitNumber: workPermitController
                                           .text
-                                  )
+                                  );
+                                  getBloc().add(
+                                  ContinueClickedEvent(user: userModel
                                   )
                               );
+                                  context.router.push(OtpRoute(userModel:userModel));
                             }
                           },
                               child: Text(getLocalization().ccontinue)),

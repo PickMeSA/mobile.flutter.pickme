@@ -33,6 +33,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterPage(),
       );
     },
+    ResendOTPRoute.name: (routeData) {
+      final args = routeData.argsAs<ResendOTPRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ResendOTPPage(
+          key: args.key,
+          userModel: args.userModel,
+        ),
+      );
+    },
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -93,6 +103,44 @@ class RegisterRoute extends PageRouteInfo<void> {
   static const String name = 'RegisterRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ResendOTPPage]
+class ResendOTPRoute extends PageRouteInfo<ResendOTPRouteArgs> {
+  ResendOTPRoute({
+    Key? key,
+    required UserModel userModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ResendOTPRoute.name,
+          args: ResendOTPRouteArgs(
+            key: key,
+            userModel: userModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ResendOTPRoute';
+
+  static const PageInfo<ResendOTPRouteArgs> page =
+      PageInfo<ResendOTPRouteArgs>(name);
+}
+
+class ResendOTPRouteArgs {
+  const ResendOTPRouteArgs({
+    this.key,
+    required this.userModel,
+  });
+
+  final Key? key;
+
+  final UserModel userModel;
+
+  @override
+  String toString() {
+    return 'ResendOTPRouteArgs{key: $key, userModel: $userModel}';
+  }
 }
 
 /// generated route for
