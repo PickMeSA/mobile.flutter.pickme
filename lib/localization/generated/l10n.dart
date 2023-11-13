@@ -90,83 +90,91 @@ class AppLocalizations {
     );
   }
 
-  // skipped getter for the 'hiThere!' key
-
-  /// `let's get you started by creating your account`
-  String get letsGetYouStartedByCreatingYourAccount {
+  /// `Hi there!`
+  String get hiThere {
     return Intl.message(
-      'let\'s get you started by creating your account',
-      name: 'letsGetYouStartedByCreatingYourAccount',
+      'Hi there!',
+      name: 'hiThere',
       desc: '',
       args: [],
     );
   }
 
-  /// `First name`
+  /// `First name *`
   String get firstName {
     return Intl.message(
-      'First name',
+      'First name *',
       name: 'firstName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Surname`
+  /// `Surname *`
   String get surname {
     return Intl.message(
-      'Surname',
+      'Surname *',
       name: 'surname',
       desc: '',
       args: [],
     );
   }
 
-  /// `Phone number`
+  /// `Phone number *`
   String get phoneNumber {
     return Intl.message(
-      'Phone number',
+      'Phone number *',
       name: 'phoneNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Email address`
+  /// `Email address *`
   String get emailAddress {
     return Intl.message(
-      'Email address',
+      'Email address *',
       name: 'emailAddress',
       desc: '',
       args: [],
     );
   }
 
-  /// `Passport number`
-  String get passPortNumber {
+  /// `Passport number *`
+  String get passPortNumberA {
     return Intl.message(
-      'Passport number',
-      name: 'passPortNumber',
+      'Passport number *',
+      name: 'passPortNumberA',
       desc: '',
       args: [],
     );
   }
 
-  /// `ID number`
+  /// `Passport number`
+  String get passport {
+    return Intl.message(
+      'Passport number',
+      name: 'passport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID number *`
   String get idNumber {
     return Intl.message(
-      'ID number',
+      'ID number *',
       name: 'idNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `*Indicate a required field`
-  String get indicatesArequiredField {
+  /// `*Indicates a required field`
+  String get indicatesARequiredField {
     return Intl.message(
-      '*Indicate a required field',
-      name: 'indicatesArequiredField',
+      '*Indicates a required field',
+      name: 'indicatesARequiredField',
       desc: '',
       args: [],
     );
@@ -177,6 +185,136 @@ class AppLocalizations {
     return Intl.message(
       'Continue',
       name: 'ccontinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Work permit number *`
+  String get workPermitNumber {
+    return Intl.message(
+      'Work permit number *',
+      name: 'workPermitNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s get you started by creating your account.`
+  String get letsGetYouStartedByCreatingYourAccount {
+    return Intl.message(
+      'Let’s get you started by creating your account.',
+      name: 'letsGetYouStartedByCreatingYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I didn't receive a code`
+  String get iDidntReceiveACode {
+    return Intl.message(
+      'I didn\'t receive a code',
+      name: 'iDidntReceiveACode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your OTP`
+  String get enterYourOTP {
+    return Intl.message(
+      'Enter your OTP',
+      name: 'enterYourOTP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’ve sent a One-Time Pin (OTP) to your number {number}`
+  String weveSentaOneTimePine(Object number) {
+    return Intl.message(
+      'We’ve sent a One-Time Pin (OTP) to your number $number',
+      name: 'weveSentaOneTimePine',
+      desc: '',
+      args: [number],
+    );
+  }
+
+  /// `Didn't receive a code?`
+  String get didntReceiveACode {
+    return Intl.message(
+      'Didn\'t receive a code?',
+      name: 'didntReceiveACode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please re-enter your phone number. If the problem persists, please contact our help centre.`
+  String get pleaseReenterYourPhoneNumber {
+    return Intl.message(
+      'Please re-enter your phone number. If the problem persists, please contact our help centre.',
+      name: 'pleaseReenterYourPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact help center`
+  String get contactHelpCenter {
+    return Intl.message(
+      'Contact help center',
+      name: 'contactHelpCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome back!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in to your account with your phone number and an OTP`
+  String get logIntoYourAccountWithYourPhoneNumberAndOtp {
+    return Intl.message(
+      'Log in to your account with your phone number and an OTP',
+      name: 'logIntoYourAccountWithYourPhoneNumberAndOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No account? Create one`
+  String get noAccountCreateOne {
+    return Intl.message(
+      'No account? Create one',
+      name: 'noAccountCreateOne',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `+27`
+  String get phonePrefix {
+    return Intl.message(
+      '+27',
+      name: 'phonePrefix',
       desc: '',
       args: [],
     );

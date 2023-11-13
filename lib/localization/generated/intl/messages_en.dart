@@ -20,27 +20,52 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(number) =>
+      "We’ve sent a One-Time Pin (OTP) to your number ${number}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
-        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
-        "firstName": MessageLookupByLibrary.simpleMessage("First name"),
-        "idNumber": MessageLookupByLibrary.simpleMessage("ID number"),
-        "indicatesArequiredField":
-            MessageLookupByLibrary.simpleMessage("*Indicate a required field"),
+        "contactHelpCenter":
+            MessageLookupByLibrary.simpleMessage("Contact help center"),
+        "didntReceiveACode":
+            MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
+        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
+        "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
+        "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
+        "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
+        "iDidntReceiveACode":
+            MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
+        "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
+        "indicatesARequiredField":
+            MessageLookupByLibrary.simpleMessage("*Indicates a required field"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
-                "let\'s get you started by creating your account"),
+                "Let’s get you started by creating your account."),
+        "logIntoYourAccountWithYourPhoneNumberAndOtp":
+            MessageLookupByLibrary.simpleMessage(
+                "Log in to your account with your phone number and an OTP"),
         "loginIn": MessageLookupByLibrary.simpleMessage(" Log in"),
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
-        "passPortNumber":
-            MessageLookupByLibrary.simpleMessage("Passport number"),
-        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
-        "surname": MessageLookupByLibrary.simpleMessage("Surname"),
+        "noAccountCreateOne":
+            MessageLookupByLibrary.simpleMessage("No account? Create one"),
+        "passPortNumberA":
+            MessageLookupByLibrary.simpleMessage("Passport number *"),
+        "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
+        "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
+        "pleaseReenterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
+            "Please re-enter your phone number. If the problem persists, please contact our help centre."),
+        "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeTopickme":
-            MessageLookupByLibrary.simpleMessage("Welcome to pickme!")
+            MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
+        "weveSentaOneTimePine": m0,
+        "workPermitNumber":
+            MessageLookupByLibrary.simpleMessage("Work permit number *")
       };
 }

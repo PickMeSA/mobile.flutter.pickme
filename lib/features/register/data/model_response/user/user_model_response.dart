@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user_model.freezed.dart';
-part 'user_model.g.dart';
+part 'user_model_response.freezed.dart';
+part 'user_model_response.g.dart';
 
 @freezed
-class UserModel with _$UserModel{
-  const factory UserModel({
+class UserModelResponse with _$UserModelResponse{
+  const factory UserModelResponse({
     required String email,
     required String? id,
     required String idNumber,
@@ -18,7 +18,7 @@ class UserModel with _$UserModel{
     required String workPermitNumber,
     required bool? isActive,
 
-}) = _UserModel;
+}) = _UserModelResponse;
 
-  factory UserModel.fromJson(Map<String,Object?> json) => _$UserModelFromJson(json);
+  factory UserModelResponse.fromJson(Map<String,Object?> json) => _$UserModelResponseFromJson(json);
 }
