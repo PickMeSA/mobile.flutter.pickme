@@ -100,16 +100,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Let’s get you started by creating your account.`
-  String get letsGetYouStartedByCreatingYourAccount {
-    return Intl.message(
-      'Let’s get you started by creating your account.',
-      name: 'letsGetYouStartedByCreatingYourAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `First name *`
   String get firstName {
     return Intl.message(
@@ -210,6 +200,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Let’s get you started by creating your account.`
+  String get letsGetYouStartedByCreatingYourAccount {
+    return Intl.message(
+      'Let’s get you started by creating your account.',
+      name: 'letsGetYouStartedByCreatingYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Submit`
   String get submit {
     return Intl.message(
@@ -275,6 +275,36 @@ class AppLocalizations {
     return Intl.message(
       'Contact help center',
       name: 'contactHelpCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome back!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in to your account with your phone number and an OTP`
+  String get logIntoYourAccountWithYourPhoneNumberAndOtp {
+    return Intl.message(
+      'Log in to your account with your phone number and an OTP',
+      name: 'logIntoYourAccountWithYourPhoneNumberAndOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No account? Create one`
+  String get noAccountCreateOne {
+    return Intl.message(
+      'No account? Create one',
+      name: 'noAccountCreateOne',
       desc: '',
       args: [],
     );

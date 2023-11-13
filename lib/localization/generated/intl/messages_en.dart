@@ -44,9 +44,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
+        "logIntoYourAccountWithYourPhoneNumberAndOtp":
+            MessageLookupByLibrary.simpleMessage(
+                "Log in to your account with your phone number and an OTP"),
         "loginIn": MessageLookupByLibrary.simpleMessage(" Log in"),
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
+        "noAccountCreateOne":
+            MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "passPortNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
@@ -55,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please re-enter your phone number. If the problem persists, please contact our help centre."),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
         "weveSentaOneTimePine": m0,

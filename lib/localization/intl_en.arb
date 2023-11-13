@@ -4,7 +4,6 @@
   "loginIn": " Log in",
   "newHereCreateAccount": "New here? Create Account",
   "hiThere": "Hi there!",
-  "letsGetYouStartedByCreatingYourAccount": "let's get you started by creating your account",
   "firstName": "First name *",
   "surname": "Surname *",
   "phoneNumber": "Phone number *",
@@ -22,5 +21,8 @@
   "weveSentaOneTimePine": "We’ve sent a One-Time Pin (OTP) to your number {number}",
   "didntReceiveACode": "Didn't receive a code?",
   "pleaseReenterYourPhoneNumber": "Please re-enter your phone number. If the problem persists, please contact our help centre.",
-  "contactHelpCenter": "Contact help center"
+  "contactHelpCenter": "Contact help center",
+  "welcomeBack": "Welcome back!",
+  "logIntoYourAccountWithYourPhoneNumberAndOtp":"Log in to your account with your phone number and an OTP",
+  "noAccountCreateOne": "No account? Create one"
 }
