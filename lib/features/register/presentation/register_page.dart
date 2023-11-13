@@ -63,8 +63,8 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                         width: 25,
                         height: 25,
                         child: InkWell(onTap: ()=> context.router.pop(),
-                            child: Icon(Icons.arrow_back)),),
-                      Padding(padding: EdgeInsets.only(top: 56,left: 32, right: 32, bottom: 8),)
+                            child: const Icon(Icons.arrow_back)),),
+                      const Padding(padding: EdgeInsets.only(top: 56,left: 32, right: 32, bottom: 8),)
                     ],
                   ),
                 ),)
@@ -103,7 +103,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                            // validator: (value)=> validatePhoneNumber(value??""),
                             prefixIcon: SizedBox(width: 50,
                               child: Row(
-                                children: [Text("+27",)],
+                                children: [Text(getLocalization().phonePrefix,)],
                               ),
                             ),
                             controller: phoneNumberController,

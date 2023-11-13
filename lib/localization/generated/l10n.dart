@@ -309,6 +309,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `+27`
+  String get phonePrefix {
+    return Intl.message(
+      '+27',
+      name: 'phonePrefix',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

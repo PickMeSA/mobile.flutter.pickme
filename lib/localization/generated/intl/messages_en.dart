@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passport number *"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
+        "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
         "pleaseReenterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Please re-enter your phone number. If the problem persists, please contact our help centre."),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),

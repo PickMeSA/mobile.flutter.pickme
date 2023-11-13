@@ -92,11 +92,11 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                            getBloc().add(LoginContinueClickedEvent(mobileNumber: mobileNumberTextEditingController.text));
                          },
                          child: Text(getLocalization().ccontinue)),
-                     Padding(padding: EdgeInsets.only(top: 24, bottom: 14),
+                     Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
                        child: Center(
                            child: InkWell(
                              onTap: (){
-
+                              context.router.push(const RegisterRoute());
                              } ,
                              child: wText(getLocalization().noAccountCreateOne, style:
                              const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),

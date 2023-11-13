@@ -24,5 +24,6 @@
   "contactHelpCenter": "Contact help center",
   "welcomeBack": "Welcome back!",
   "logIntoYourAccountWithYourPhoneNumberAndOtp":"Log in to your account with your phone number and an OTP",
-  "noAccountCreateOne": "No account? Create one"
+  "noAccountCreateOne": "No account? Create one",
+  "phonePrefix": "+27"
 }
