@@ -54,7 +54,7 @@ abstract class _$AppRouter extends RootStackRouter {
           routeData.argsAs<OtpRouteArgs>(orElse: () => const OtpRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: otpPage(
+        child: OTPPage(
           key: args.key,
           userModel: args.userModel,
         ),
@@ -158,7 +158,7 @@ class SignUpRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [otpPage]
+/// [OTPPage]
 class OtpRoute extends PageRouteInfo<OtpRouteArgs> {
   OtpRoute({
     Key? key,

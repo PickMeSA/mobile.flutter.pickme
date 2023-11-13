@@ -14,16 +14,16 @@ import 'package:pickme/shared/widgets/w_text.dart';
 import 'bloc/otp_bloc.dart';
 
 @RoutePage()
-class otpPage extends BasePage {
+class OTPPage extends BasePage {
 
   UserModel? userModel;
-   otpPage({super.key, this.userModel});
+   OTPPage({super.key, this.userModel});
 
   @override
   _otpPageState createState() => _otpPageState();
 }
 
-class _otpPageState extends BasePageState<otpPage, otpBloc> {
+class _otpPageState extends BasePageState<OTPPage, otpBloc> {
 
   @override
   void initState() {

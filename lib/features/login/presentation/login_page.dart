@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/login/presentation/bloc/login_bloc.dart';
+import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
@@ -18,6 +22,8 @@ class LoginPage extends BasePage {
 }
 
 class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
+
+  TextEditingController mobileNumberTextEditingController = TextEditingController();
   @override
   Widget buildView(BuildContext context) {
    return BlocConsumer<LoginBloc,LoginState>
@@ -69,6 +75,8 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                      Padding(
                        padding: const EdgeInsets.only(top: 20, bottom:  10),
                        child: AppTextFormField(
+
+                         controller: mobileNumberTextEditingController,
                          // validator: (value)=> validatePhoneNumber(value??""),
                          prefixIcon: SizedBox(width: 50,
                            child: Row(
@@ -81,6 +89,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                      const Spacer(),
                      PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,
                          onPressed: () async {
+                           getBloc().add(LoginContinueClickedEvent(mobileNumber: mobileNumberTextEditingController.text));
                          },
                          child: Text(getLocalization().ccontinue)),
                      Padding(padding: EdgeInsets.only(top: 24, bottom: 14),
@@ -102,7 +111,12 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
          ],
        ),
      );
-   }, listener: (context , state){
+   },
+       listener: (context , state){
+       if(state is LoginContinueClickedState && state.dataState == DataState.loading){
+         context.router.push(OtpRoute(
+             userModel: UserModel(mobile:mobileNumberTextEditingController.text , email: '', surname: '', firstName: '')));
+       }
    });
   }
 

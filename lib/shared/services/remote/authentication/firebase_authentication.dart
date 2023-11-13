@@ -3,16 +3,16 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
-
 import 'authentication.dart';
 
-@Injectable(as: Authentication)
+@Singleton(as: Authentication)
 class PFirebaseAuthentication extends Authentication {
   final FirebaseAuth firebaseAuth;
+
+  String? verificationId;
+  int? resentToken;
 
 
   PFirebaseAuthentication({required this.firebaseAuth}) {}
@@ -62,19 +62,39 @@ class PFirebaseAuthentication extends Authentication {
     required String mobileNumber}) async{
 
     try {
-       firebaseAuth.verifyPhoneNumber(
+       await firebaseAuth.verifyPhoneNumber(
           phoneNumber: mobileNumber,
           codeAutoRetrievalTimeout: (verificationId) {},
           timeout: const Duration(seconds: 120),
           verificationCompleted: (credential) {},
           verificationFailed: (e) =>
-            onError!(e.toString()),
-          codeSent: (String verificationId, int? resentToken)
-          => onSuccess!(verificationId,resentToken));
+           throw(e),
+          codeSent: (String verificationId, int? resentToken){
+            this.verificationId = verificationId;
+            this.resentToken = resentToken;
+            onSuccess!(this.verificationId!, this.resentToken);
+          }
+       ) ;
+
+
     }catch(ex) {
       onError!(ex.toString());
     }
           //codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
 
+  }
+
+
+  Future<TokenModel> getToken({required String otp}) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: this.verificationId!, smsCode: otp);
+      return TokenModel(
+          refreshToken: credential.token.toString(),
+          accessToken: credential.accessToken!,
+          tokenID: "");
+    } catch (ex) {
+      rethrow;
+    }
   }
 }

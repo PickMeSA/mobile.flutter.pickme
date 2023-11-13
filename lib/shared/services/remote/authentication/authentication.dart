@@ -6,6 +6,9 @@ abstract class Authentication{
 
   Future<void> authenticate({required String mobileNumber});
 
+  Future<TokenModel> getToken({required String otp});
+
+
   Future<UserCredential> getCredential({
     required String verificationId,
     required String smsCode});
@@ -16,4 +19,7 @@ abstract class Authentication{
     Function(String? verificationId, int? resendToken)onSuccess,
     Function(String? error) onError,
     required String mobileNumber});
+
+
+
 }
