@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -17,7 +18,8 @@ import 'bloc/otp_bloc.dart';
 class OTPPage extends BasePage {
 
   UserModel? userModel;
-   OTPPage({super.key, this.userModel});
+  bool? fromregister;
+   OTPPage({super.key, this.userModel, this.fromregister = false});
 
   @override
   _otpPageState createState() => _otpPageState();
@@ -40,7 +42,11 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
   @override
   Widget buildView(BuildContext context) {
     return BlocConsumer<otpBloc, otpPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
+          context.router.push(SetupProfileRoute(userModel: widget.userModel!));
+        }
+      },
       builder: (context, state) {
          return SizedBox(
            width: MediaQuery.sizeOf(context).width,
@@ -96,6 +102,13 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                          const Spacer(),
                          PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,
                              onPressed: () async {
+                           if(widget.fromregister!) {
+                             //save the user model
+                             getBloc().add(RegisterOTPCompleteEvent(userModel: widget.userModel));
+                           }else{
+                             //navigate to
+                             LoginOTPCompleteEvent(otp: "987876");
+                           }
                              },
                              child: Text(getLocalization().submit)),
                          Padding(padding: EdgeInsets.only(top: 24, bottom: 14),

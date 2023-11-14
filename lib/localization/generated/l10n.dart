@@ -319,6 +319,56 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Welcome {name}! Let's set up your profile`
+  String welcomeLetsSetUpYourProfile(Object name) {
+    return Intl.message(
+      'Welcome $name! Let\'s set up your profile',
+      name: 'welcomeLetsSetUpYourProfile',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `What would you like to do?`
+  String get whatWouldYouLikeToDo {
+    return Intl.message(
+      'What would you like to do?',
+      name: 'whatWouldYouLikeToDo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Work`
+  String get work {
+    return Intl.message(
+      'Work',
+      name: 'work',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hire`
+  String get hire {
+    return Intl.message(
+      'Hire',
+      name: 'hire',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Started`
+  String get getStarted {
+    return Intl.message(
+      'Get Started',
+      name: 'getStarted',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

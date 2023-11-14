@@ -114,7 +114,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
    },
        listener: (context , state){
        if(state is LoginContinueClickedState && state.dataState == DataState.loading){
-         context.router.push(OtpRoute(
+         context.router.push(OTPRoute(
              userModel: UserModel(mobile:mobileNumberTextEditingController.text , email: '', surname: '', firstName: '')));
        }
    });

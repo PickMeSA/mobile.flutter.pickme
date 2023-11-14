@@ -25,5 +25,10 @@
   "welcomeBack": "Welcome back!",
   "logIntoYourAccountWithYourPhoneNumberAndOtp":"Log in to your account with your phone number and an OTP",
   "noAccountCreateOne": "No account? Create one",
-  "phonePrefix": "+27"
+  "phonePrefix": "+27",
+  "welcomeLetsSetUpYourProfile": "Welcome {name}! Let's set up your profile",
+  "whatWouldYouLikeToDo": "What would you like to do?",
+  "work": "Work",
+  "hire": "Hire",
+  "getStarted": "Get Started"
 }

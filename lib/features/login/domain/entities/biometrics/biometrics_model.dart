@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 part 'biometrics_model.g.dart';
 
 @Injectable()
-@HiveType(typeId: 6)
+@HiveType(typeId: 1)
 class BiometricsModel {
 
   @HiveField(0)

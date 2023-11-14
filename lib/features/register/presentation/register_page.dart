@@ -186,7 +186,9 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                   ContinueClickedEvent(user: userModel
                                   )
                               );
-                                  context.router.push(OtpRoute(userModel:userModel));
+                                  context.router.push(OTPRoute(
+                                      userModel:userModel,
+                                      fromregister: true));
                             }
                           },
                               child: Text(getLocalization().ccontinue)),
