@@ -10,3 +10,9 @@ class OTPGetTokenState extends otpPageState{
   OTPGetTokenState({this.tokenModel});
 }
 
+class RegisterOTPCompleteState extends otpPageState{
+}
+
+class LoginOTPCompleteState extends otpPageState{
+}
+

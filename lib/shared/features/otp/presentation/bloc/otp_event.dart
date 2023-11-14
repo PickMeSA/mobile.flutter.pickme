@@ -8,3 +8,16 @@ class OTPGetTokenEvent extends otpPageEvent{
 
   OTPGetTokenEvent({required this.verificationId, required this.smsCode});
 }
+
+class RegisterOTPCompleteEvent extends otpPageEvent{
+   UserModel? userModel;
+   RegisterOTPCompleteEvent({this.userModel});
+}
+
+
+class LoginOTPCompleteEvent extends otpPageEvent{
+   String? otp;
+
+   LoginOTPCompleteEvent({this.otp});
+}
+

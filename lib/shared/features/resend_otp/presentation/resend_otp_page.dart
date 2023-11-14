@@ -90,7 +90,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                             // validator: (value)=> validatePhoneNumber(value??""),
                             prefixIcon: SizedBox(width: 50,
                               child: Row(
-                                children: [Text("+27",)],
+                                children: [Text(getLocalization().phonePrefix,)],
                               ),
                             ),
                             padding: const EdgeInsets.only(left: 20, right: 20),
@@ -106,7 +106,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                               child: InkWell(
                                 onTap: (){
                                   widget.userModel.mobile = "";
-                                  context.router.push(OtpRoute(userModel: widget.userModel));
+                                  context.router.push(OTPRoute(userModel: widget.userModel));
                                   } ,
                                 child: wText(getLocalization().contactHelpCenter, style:
                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),

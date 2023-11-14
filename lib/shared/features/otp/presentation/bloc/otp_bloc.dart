@@ -6,7 +6,9 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
+import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/otp_get_token_usecase.dart';
+import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/register_otp_complete_usecase.dart';
 
 part 'otp_event.dart';
 part 'otp_state.dart';
@@ -14,10 +16,36 @@ part 'otp_state.dart';
 @injectable
 class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
     final OTPGetTokenUseCase otpGetTokenUseCase;
+    final RegisterOTPCompleteUseCase registerOTPCompleteUseCase;
     otpBloc({
+        required this.registerOTPCompleteUseCase,
         required this.otpGetTokenUseCase
     }): super(otpPageInitState()) {
         on<OTPGetTokenEvent>((event, emit)=> _onOTPGetTokenEvent(event, emit));
+        on<RegisterOTPCompleteEvent>((event, emit)=> _onRegisterOTPCompleteEvent(event,emit));
+        on<LoginOTPCompleteEvent>((event,emit)=> _onLoginOTPCompleteEvent(event,emit));
+    }
+
+    _onLoginOTPCompleteEvent(
+        LoginOTPCompleteEvent event,
+        Emitter<otpPageState> emit
+        )async{
+    }
+
+    _onRegisterOTPCompleteEvent(
+        RegisterOTPCompleteEvent event,
+        Emitter<otpPageState> emit
+        ) async{
+        emit(RegisterOTPCompleteState()..dataState = DataState.loading);
+
+        try{
+            await registerOTPCompleteUseCase.call(params: RegisterOTPCompleteUseCaseParams(userModel: event.userModel!));
+            emit(RegisterOTPCompleteState()..dataState = DataState.success);
+
+        }catch(ex){
+            emit(RegisterOTPCompleteState()..dataState = DataState.error);
+        }
+
     }
 
     _onOTPGetTokenEvent(

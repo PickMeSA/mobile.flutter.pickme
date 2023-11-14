@@ -20,7 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(number) =>
+  static String m0(name) => "Welcome ${name}! Let\'s set up your profile";
+
+  static String m1(number) =>
       "We’ve sent a One-Time Pin (OTP) to your number ${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -35,7 +37,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
+        "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
+        "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "iDidntReceiveACode":
             MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
         "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
@@ -62,9 +66,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
+        "welcomeLetsSetUpYourProfile": m0,
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
-        "weveSentaOneTimePine": m0,
+        "weveSentaOneTimePine": m1,
+        "whatWouldYouLikeToDo":
+            MessageLookupByLibrary.simpleMessage("What would you like to do?"),
+        "work": MessageLookupByLibrary.simpleMessage("Work"),
         "workPermitNumber":
             MessageLookupByLibrary.simpleMessage("Work permit number *")
       };

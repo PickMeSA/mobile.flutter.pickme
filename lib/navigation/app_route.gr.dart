@@ -27,6 +27,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    OTPRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<OTPRouteArgs>(orElse: () => const OTPRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: OTPPage(
+          key: args.key,
+          userModel: args.userModel,
+          fromregister: args.fromregister,
+        ),
+      );
+    },
     RegisterRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -43,21 +55,20 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SetupProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<SetupProfileRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SetupProfilePage(
+          key: args.key,
+          userModel: args.userModel,
+        ),
+      );
+    },
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SignUpPage(),
-      );
-    },
-    OtpRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<OtpRouteArgs>(orElse: () => const OtpRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: OTPPage(
-          key: args.key,
-          userModel: args.userModel,
-        ),
       );
     },
   };
@@ -89,6 +100,48 @@ class LoginRoute extends PageRouteInfo<void> {
   static const String name = 'LoginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [OTPPage]
+class OTPRoute extends PageRouteInfo<OTPRouteArgs> {
+  OTPRoute({
+    Key? key,
+    UserModel? userModel,
+    bool? fromregister = false,
+    List<PageRouteInfo>? children,
+  }) : super(
+          OTPRoute.name,
+          args: OTPRouteArgs(
+            key: key,
+            userModel: userModel,
+            fromregister: fromregister,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'OTPRoute';
+
+  static const PageInfo<OTPRouteArgs> page = PageInfo<OTPRouteArgs>(name);
+}
+
+class OTPRouteArgs {
+  const OTPRouteArgs({
+    this.key,
+    this.userModel,
+    this.fromregister = false,
+  });
+
+  final Key? key;
+
+  final UserModel? userModel;
+
+  final bool? fromregister;
+
+  @override
+  String toString() {
+    return 'OTPRouteArgs{key: $key, userModel: $userModel, fromregister: $fromregister}';
+  }
 }
 
 /// generated route for
@@ -144,6 +197,44 @@ class ResendOTPRouteArgs {
 }
 
 /// generated route for
+/// [SetupProfilePage]
+class SetupProfileRoute extends PageRouteInfo<SetupProfileRouteArgs> {
+  SetupProfileRoute({
+    Key? key,
+    required UserModel userModel,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SetupProfileRoute.name,
+          args: SetupProfileRouteArgs(
+            key: key,
+            userModel: userModel,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SetupProfileRoute';
+
+  static const PageInfo<SetupProfileRouteArgs> page =
+      PageInfo<SetupProfileRouteArgs>(name);
+}
+
+class SetupProfileRouteArgs {
+  const SetupProfileRouteArgs({
+    this.key,
+    required this.userModel,
+  });
+
+  final Key? key;
+
+  final UserModel userModel;
+
+  @override
+  String toString() {
+    return 'SetupProfileRouteArgs{key: $key, userModel: $userModel}';
+  }
+}
+
+/// generated route for
 /// [SignUpPage]
 class SignUpRoute extends PageRouteInfo<void> {
   const SignUpRoute({List<PageRouteInfo>? children})
@@ -155,41 +246,4 @@ class SignUpRoute extends PageRouteInfo<void> {
   static const String name = 'SignUpRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [OTPPage]
-class OtpRoute extends PageRouteInfo<OtpRouteArgs> {
-  OtpRoute({
-    Key? key,
-    UserModel? userModel,
-    List<PageRouteInfo>? children,
-  }) : super(
-          OtpRoute.name,
-          args: OtpRouteArgs(
-            key: key,
-            userModel: userModel,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'OtpRoute';
-
-  static const PageInfo<OtpRouteArgs> page = PageInfo<OtpRouteArgs>(name);
-}
-
-class OtpRouteArgs {
-  const OtpRouteArgs({
-    this.key,
-    this.userModel,
-  });
-
-  final Key? key;
-
-  final UserModel? userModel;
-
-  @override
-  String toString() {
-    return 'OtpRouteArgs{key: $key, userModel: $userModel}';
-  }
 }

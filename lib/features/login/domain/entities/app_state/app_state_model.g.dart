@@ -8,7 +8,7 @@ part of 'app_state_model.dart';
 
 class AppStateModelAdapter extends TypeAdapter<AppStateModel> {
   @override
-  final int typeId = 5;
+  final int typeId = 2;
 
   @override
   AppStateModel read(BinaryReader reader) {
