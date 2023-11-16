@@ -3,15 +3,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
+import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/features/register/presentation/register_page.dart';
 import 'package:pickme/features/setup_profile/presentation/setup_profile_page.dart';
 import 'package:pickme/features/sign_up/presentation/sign_up_page.dart';
+import 'package:pickme/features/register_account_step_1/presentation/register_account_step1_page.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
 
 
 import '../features/login/presentation/login_page.dart';
+import '../features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
 
 part 'app_route.gr.dart';
 
@@ -36,8 +39,12 @@ class AppRouter extends _$AppRouter{
       page: ResendOTPRoute.page,),
     AnimatedRoute(
       page: SetupProfileRoute.page,),
-
-
+    AnimatedRoute(
+      page: RegisterAccountStep1Route.page,),
+    AnimatedRoute(
+      page: TermsAndConditionsRoute.page,),
+    AnimatedRoute(
+      page: MembershipInformationRoute.page,),
   ];
 }
 

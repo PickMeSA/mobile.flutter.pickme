@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    MembershipInformationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MembershipInformationPage(),
+      );
+    },
     OTPRoute.name: (routeData) {
       final args =
           routeData.argsAs<OTPRouteArgs>(orElse: () => const OTPRouteArgs());
@@ -37,6 +43,12 @@ abstract class _$AppRouter extends RootStackRouter {
           userModel: args.userModel,
           fromregister: args.fromregister,
         ),
+      );
+    },
+    RegisterAccountStep1Route.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterAccountStep1Page(),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -71,6 +83,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SignUpPage(),
       );
     },
+    TermsAndConditionsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const TermsAndConditionsPage(),
+      );
+    },
   };
 }
 
@@ -98,6 +116,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MembershipInformationPage]
+class MembershipInformationRoute extends PageRouteInfo<void> {
+  const MembershipInformationRoute({List<PageRouteInfo>? children})
+      : super(
+          MembershipInformationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MembershipInformationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -142,6 +174,20 @@ class OTPRouteArgs {
   String toString() {
     return 'OTPRouteArgs{key: $key, userModel: $userModel, fromregister: $fromregister}';
   }
+}
+
+/// generated route for
+/// [RegisterAccountStep1Page]
+class RegisterAccountStep1Route extends PageRouteInfo<void> {
+  const RegisterAccountStep1Route({List<PageRouteInfo>? children})
+      : super(
+          RegisterAccountStep1Route.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterAccountStep1Route';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -244,6 +290,20 @@ class SignUpRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SignUpRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [TermsAndConditionsPage]
+class TermsAndConditionsRoute extends PageRouteInfo<void> {
+  const TermsAndConditionsRoute({List<PageRouteInfo>? children})
+      : super(
+          TermsAndConditionsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TermsAndConditionsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
