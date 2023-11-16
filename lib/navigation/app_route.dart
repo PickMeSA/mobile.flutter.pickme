@@ -2,7 +2,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/add_memberships/presentation/add_memberships_page.dart';
+import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
+import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
+import 'package:pickme/features/qualification/presentation/qualification_page.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/features/register/presentation/register_page.dart';
 import 'package:pickme/features/setup_profile/presentation/setup_profile_page.dart';
@@ -24,18 +28,17 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(
       page: LandingRoute.page,
       initial: true,
-
     ),
-    AnimatedRoute(
-        page: LoginRoute.page,),
-    AnimatedRoute(
-        page: RegisterRoute.page,),
-    AnimatedRoute(
-      page: OTPRoute.page,),
-    AnimatedRoute(
-      page: ResendOTPRoute.page,),
-    AnimatedRoute(
-      page: SetupProfileRoute.page,),
+    AnimatedRoute(page: LoginRoute.page,),
+    AnimatedRoute(page: RegisterRoute.page,),
+    AnimatedRoute(page: OTPRoute.page,),
+    AnimatedRoute(page: ResendOTPRoute.page,),
+    AnimatedRoute(page: SetupProfileRoute.page,),
+    AnimatedRoute(page: QualificationsRoute.page),
+    AnimatedRoute(page: AddMembershipsRoute.page),
+    AnimatedRoute(page: AddWorkExperienceRoute.page),
+    AnimatedRoute(page: AddQualificationRoute.page)
+
 
 
   ];

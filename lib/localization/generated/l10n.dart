@@ -369,6 +369,246 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Step 2`
+  String get step2 {
+    return Intl.message(
+      'Step 2',
+      name: 'step2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tell us about your qualifications`
+  String get tellUsAboutYourQualifications {
+    return Intl.message(
+      'Tell us about your qualifications',
+      name: 'tellUsAboutYourQualifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Qualifications`
+  String get qualifications {
+    return Intl.message(
+      'Qualifications',
+      name: 'qualifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a qualification`
+  String get addAQualification {
+    return Intl.message(
+      'Add a qualification',
+      name: 'addAQualification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Work experience`
+  String get workExperience {
+    return Intl.message(
+      'Work experience',
+      name: 'workExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add work experience`
+  String get addWorkExperience {
+    return Intl.message(
+      'Add work experience',
+      name: 'addWorkExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Membership/Award name`
+  String get membershipAwardName {
+    return Intl.message(
+      'Membership/Award name',
+      name: 'membershipAwardName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add membership \nor award`
+  String get addMembershipOrAward {
+    return Intl.message(
+      'Add membership \nor award',
+      name: 'addMembershipOrAward',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next Step`
+  String get nextStep {
+    return Intl.message(
+      'Next Step',
+      name: 'nextStep',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Qualification type *`
+  String get qualificationType {
+    return Intl.message(
+      'Qualification type *',
+      name: 'qualificationType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Issue date *`
+  String get issueDate {
+    return Intl.message(
+      'Issue date *',
+      name: 'issueDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Qualification name *`
+  String get qualificationName {
+    return Intl.message(
+      'Qualification name *',
+      name: 'qualificationName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Issuing organisation *`
+  String get issuingOrganisations {
+    return Intl.message(
+      'Issuing organisation *',
+      name: 'issuingOrganisations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Position title *`
+  String get positionTitle {
+    return Intl.message(
+      'Position title *',
+      name: 'positionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company *`
+  String get company {
+    return Intl.message(
+      'Company *',
+      name: 'company',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I'm currently working in this role`
+  String get imCurrentlyWorkingInThisRole {
+    return Intl.message(
+      'I\'m currently working in this role',
+      name: 'imCurrentlyWorkingInThisRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start date *`
+  String get startDate {
+    return Intl.message(
+      'Start date *',
+      name: 'startDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End date *`
+  String get endDate {
+    return Intl.message(
+      'End date *',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Industry *`
+  String get industry {
+    return Intl.message(
+      'Industry *',
+      name: 'industry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos of work (optional)`
+  String get photosOfWorkOptional {
+    return Intl.message(
+      'Photos of work (optional)',
+      name: 'photosOfWorkOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload`
+  String get upload {
+    return Intl.message(
+      'Upload',
+      name: 'upload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name *`
+  String get name {
+    return Intl.message(
+      'Name *',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

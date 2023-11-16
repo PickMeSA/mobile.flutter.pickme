@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/firebase_options.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/main.dart';
@@ -41,10 +42,7 @@ class PickMeApp{
         darkTheme: ThemeData(
 
         ),
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-
-        ),
+        theme: AppTheme().defaultTheme,
 
 
       )
