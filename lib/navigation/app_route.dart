@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/add_memberships/presentation/add_memberships_page.dart';
 import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
+import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
@@ -39,7 +40,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: AddMembershipsRoute.page),
     AnimatedRoute(page: AddWorkExperienceRoute.page),
     AnimatedRoute(page: AddQualificationRoute.page),
-    AnimatedRoute(page: SkillsAndIndustryRoute.page)
+    AnimatedRoute(page: SkillsAndIndustryRoute.page),
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),

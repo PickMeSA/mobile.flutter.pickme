@@ -58,7 +58,6 @@ dependencies:
 #    git:
 #      url: https://github.com/pickmesa/pickmme.flutter.uipackage.git
     path: ../pickmme.flutter.uipackage
-
   flutter_svg: ^2.0.7
   flutter_launcher_icons: ^0.13.1
   iconsax: ^0.0.8

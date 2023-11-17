@@ -120,7 +120,7 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                         foregroundColor: MaterialStateProperty.all(theme.colorScheme.secondary)
                       ),
                       onPressed: (){
-                        Navigator.pop(context);
+                        context.router.pop();
                       },
                       child: const Icon(Icons.arrow_back_outlined),
                     ),
@@ -147,7 +147,7 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                           )
                         ),
                         onPressed: !state.checked?null:() {
-
+                          context.router.push(QualificationsRoute());
                         },
                         child: Text(getLocalization().nextStep),
                       )
