@@ -108,8 +108,9 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
                 bottom: 0,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
-                  child: PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,onPressed: () async {
-                    context.router.push(const LoginRoute());
+                  child: PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,
+                      onPressed: () async {
+                    context.router.push(const QualificationsRoute());
                   },
                       child: wText(getLocalization().getStarted)),
                 ),

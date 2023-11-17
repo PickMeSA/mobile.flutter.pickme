@@ -15,6 +15,24 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AddMembershipsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddMembershipsPage(),
+      );
+    },
+    AddQualificationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddQualificationPage(),
+      );
+    },
+    AddWorkExperienceRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddWorkExperiencePage(),
+      );
+    },
     LandingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -37,6 +55,12 @@ abstract class _$AppRouter extends RootStackRouter {
           userModel: args.userModel,
           fromregister: args.fromregister,
         ),
+      );
+    },
+    QualificationsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const QualificationsPage(),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -72,6 +96,48 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AddMembershipsPage]
+class AddMembershipsRoute extends PageRouteInfo<void> {
+  const AddMembershipsRoute({List<PageRouteInfo>? children})
+      : super(
+          AddMembershipsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddMembershipsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AddQualificationPage]
+class AddQualificationRoute extends PageRouteInfo<void> {
+  const AddQualificationRoute({List<PageRouteInfo>? children})
+      : super(
+          AddQualificationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddQualificationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AddWorkExperiencePage]
+class AddWorkExperienceRoute extends PageRouteInfo<void> {
+  const AddWorkExperienceRoute({List<PageRouteInfo>? children})
+      : super(
+          AddWorkExperienceRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddWorkExperienceRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -142,6 +208,20 @@ class OTPRouteArgs {
   String toString() {
     return 'OTPRouteArgs{key: $key, userModel: $userModel, fromregister: $fromregister}';
   }
+}
+
+/// generated route for
+/// [QualificationsPage]
+class QualificationsRoute extends PageRouteInfo<void> {
+  const QualificationsRoute({List<PageRouteInfo>? children})
+      : super(
+          QualificationsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'QualificationsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

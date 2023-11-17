@@ -30,5 +30,37 @@
   "whatWouldYouLikeToDo": "What would you like to do?",
   "work": "Work",
   "hire": "Hire",
-  "getStarted": "Get Started"
+  "getStarted": "Get Started",
+  "step2": "Step 2",
+  "tellUsAboutYourQualifications": "Tell us about your qualifications",
+  "qualifications": "Qualifications",
+  "addAQualification": "Add a qualification",
+  "workExperience": "Work experience",
+  "addWorkExperience": "Add work experience",
+  "membershipAwardName": "Membership/Award name",
+  "addMembershipOrAward": "Add membership \nor award",
+  "nextStep": "Next Step",
+  "skip": "Skip",
+  "qualificationType": "Qualification type *",
+  "issueDate": "Issue date *",
+  "qualificationName": "Qualification name *",
+  "issuingOrganisations": "Issuing organisation *",
+  "add": "Add",
+  "positionTitle": "Position title *",
+  "company": "Company *",
+  "imCurrentlyWorkingInThisRole": "I'm currently working in this role",
+  "startDate": "Start date *",
+  "endDate": "End date *",
+  "industry": "Industry *",
+  "photosOfWorkOptional": "Photos of work (optional)",
+  "upload": "Upload",
+  "name": "Name *",
+  "skillsAndIndustry": "Skills & industry",
+  "preferredIndustry": "Preferred industry *",
+  "skillsMax5": "Skills (max. 5)",
+  "addASkill": "Add a skill",
+  "step3": "Step 3"
+
+
+
 }
