@@ -55,12 +55,14 @@ dependencies:
   auto_size_text: ^3.0.0
   dartz: ^0.10.1
   flutter_ui_components:
-    git:
-      url: https://github.com/pickmesa/pickmme.flutter.uipackage.git
+#    git:
+#      url: https://github.com/pickmesa/pickmme.flutter.uipackage.git
+    path: ../pickmme.flutter.uipackage
+
   flutter_svg: ^2.0.7
   flutter_launcher_icons: ^0.13.1
-
-
+  iconsax: ^0.0.8
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -108,12 +110,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Montserrat
+      fonts:
+         - asset: assets/fonts/montserrat_regular.ttf
+         - asset: assets/fonts/montserrat_italic.ttf
+           style: italic
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
