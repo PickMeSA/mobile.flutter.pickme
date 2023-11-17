@@ -609,6 +609,56 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Skills & industry`
+  String get skillsAndIndustry {
+    return Intl.message(
+      'Skills & industry',
+      name: 'skillsAndIndustry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preferred industry *`
+  String get preferredIndustry {
+    return Intl.message(
+      'Preferred industry *',
+      name: 'preferredIndustry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skills (max. 5)`
+  String get skillsMax5 {
+    return Intl.message(
+      'Skills (max. 5)',
+      name: 'skillsMax5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a skill`
+  String get addASkill {
+    return Intl.message(
+      'Add a skill',
+      name: 'addASkill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 3`
+  String get step3 {
+    return Intl.message(
+      'Step 3',
+      name: 'step3',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

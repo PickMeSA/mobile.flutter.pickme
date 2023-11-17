@@ -112,7 +112,9 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                          
                        ),
                        const SizedBox(width: 10,),
-                       PrimaryButton(onPressed: (){},
+                       PrimaryButton(onPressed: (){
+                         context.router.push(SkillsAndIndustryRoute());
+                       },
                          fullWidth:  false,
                        width: MediaQuery.sizeOf(context).width * 3.6/5,
                          child: wText(getLocalization().nextStep),)

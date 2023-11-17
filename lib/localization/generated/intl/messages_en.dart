@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addAQualification":
             MessageLookupByLibrary.simpleMessage("Add a qualification"),
+        "addASkill": MessageLookupByLibrary.simpleMessage("Add a skill"),
         "addMembershipOrAward":
             MessageLookupByLibrary.simpleMessage("Add membership \nor award"),
         "addWorkExperience":
@@ -86,15 +87,21 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please re-enter your phone number. If the problem persists, please contact our help centre."),
         "positionTitle":
             MessageLookupByLibrary.simpleMessage("Position title *"),
+        "preferredIndustry":
+            MessageLookupByLibrary.simpleMessage("Preferred industry *"),
         "qualificationName":
             MessageLookupByLibrary.simpleMessage("Qualification name *"),
         "qualificationType":
             MessageLookupByLibrary.simpleMessage("Qualification type *"),
         "qualifications":
             MessageLookupByLibrary.simpleMessage("Qualifications"),
+        "skillsAndIndustry":
+            MessageLookupByLibrary.simpleMessage("Skills & industry"),
+        "skillsMax5": MessageLookupByLibrary.simpleMessage("Skills (max. 5)"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start date *"),
         "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
+        "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
         "tellUsAboutYourQualifications": MessageLookupByLibrary.simpleMessage(

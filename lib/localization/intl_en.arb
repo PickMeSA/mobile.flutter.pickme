@@ -54,7 +54,12 @@
   "industry": "Industry *",
   "photosOfWorkOptional": "Photos of work (optional)",
   "upload": "Upload",
-  "name": "Name *"
+  "name": "Name *",
+  "skillsAndIndustry": "Skills & industry",
+  "preferredIndustry": "Preferred industry *",
+  "skillsMax5": "Skills (max. 5)",
+  "addASkill": "Add a skill",
+  "step3": "Step 3"
 
 
 
