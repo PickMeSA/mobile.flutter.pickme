@@ -15,6 +15,8 @@ part 'otp_state.dart';
 
 @injectable
 class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
+    bool checked = false;
+    String? otp;
     final OTPGetTokenUseCase otpGetTokenUseCase;
     final RegisterOTPCompleteUseCase registerOTPCompleteUseCase;
     otpBloc({
@@ -24,7 +26,21 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         on<OTPGetTokenEvent>((event, emit)=> _onOTPGetTokenEvent(event, emit));
         on<RegisterOTPCompleteEvent>((event, emit)=> _onRegisterOTPCompleteEvent(event,emit));
         on<LoginOTPCompleteEvent>((event,emit)=> _onLoginOTPCompleteEvent(event,emit));
+        on<OTPEnteredEvent>((event, emit) => _onOTPEnteredEvent(event, emit));
     }
+
+    _onOTPEnteredEvent(
+        OTPEnteredEvent event,
+        Emitter<otpPageState> emit
+        ) async{
+        if(event.otp.length == 6) {
+          checked = true;
+          emit(OTPEnteredState());
+        }
+
+    }
+
+
 
     _onLoginOTPCompleteEvent(
         LoginOTPCompleteEvent event,

@@ -23,6 +23,7 @@ class ResendOTPPage extends BasePage {
 
 class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
 
+  TextEditingController phoneNumberController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
@@ -37,6 +38,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
 
   @override
   Widget buildView(BuildContext context) {
+    var theme = Theme.of(context);
     return BlocConsumer<ResendOTPBloc, ResendOTPPageState>(
       listener: (context, state){},
       builder: (context, state) {
@@ -88,6 +90,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                           padding: const EdgeInsets.only(top: 20, bottom:  10),
                           child: AppTextFormField(
                             // validator: (value)=> validatePhoneNumber(value??""),
+                            onChanged: (value)=> getBloc().add(NumberEnteredEvent(mobileNumber: value)),
                             prefixIcon: SizedBox(width: 50,
                               child: Row(
                                 children: [Text(getLocalization().phonePrefix,)],
@@ -97,10 +100,31 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                             textFieldType: TextFieldType.NUMBER, labelText: getLocalization().phoneNumber,),
                         ),
                         const Spacer(),
-                        PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,
-                            onPressed: () async {
-                            },
-                            child: Text(getLocalization().submit)),
+                        PrimaryButton(
+                          width: MediaQuery.sizeOf(context).width,
+                          style: ButtonStyle(
+                              side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                return BorderSide(
+                                  color: states.contains(MaterialState.disabled)?
+                                  theme.colorScheme.secondary.withOpacity(0):
+                                  theme.colorScheme.secondary,
+                                  width: 2,
+                                );
+                              }
+                              ),
+                              backgroundColor: MaterialStateProperty.resolveWith(
+                                      (Set<MaterialState> states){
+                                    return states.contains(MaterialState.disabled)?
+                                    theme.colorScheme.secondary.withOpacity(0.3):
+                                    theme.colorScheme.secondary;
+                                  }
+                              )
+                          ),
+                          onPressed: !getBloc().checked!?null:() {
+                            getBloc().add(NumberEnteredEvent(mobileNumber: phoneNumberController.text));
+                          },
+                          child: Text(getLocalization().submit),
+                        ),
                         Padding(padding: EdgeInsets.only(top: 24, bottom: 14),
                           child: Center(
                               child: InkWell(
@@ -112,7 +136,6 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                               )
                           ),)
-
                       ],
                     ),
                   ),

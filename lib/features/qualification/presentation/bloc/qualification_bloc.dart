@@ -10,5 +10,5 @@ part 'qualification_state.dart';
 @injectable
 class QualificationsBloc
     extends BaseBloc<QualificationsPageEvent, QualificationsPageState> {
-    QualificationsBloc(): super(QualificationsPageInitState()) {}
+    QualificationsBloc(): super(QualificationsPageInitState(checked: true)) {}
 } 

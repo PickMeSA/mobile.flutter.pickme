@@ -62,7 +62,6 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                          ],
                        ),
                      ),
-
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10),
                        child: AppTextFormField(textFieldType: TextFieldType.NAME,
@@ -73,15 +72,16 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                        child: AppTextFormField(textFieldType: TextFieldType.NAME,
                          labelText: getLocalization().company,),
                      ),
-                     Divider(),
+                     const AppDivider(),
                      Padding(
                        padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                        child: Row(
                          children: [
-                           Checkbox(value: false, onChanged: (value){}, ),
+                           Checkbox(value: false, onChanged: (value){
 
+                           }, ),
                            wText(getLocalization().imCurrentlyWorkingInThisRole),
-                           Spacer(),
+                           const Spacer(),
                          ],
                        ),
                      ),
@@ -98,9 +98,8 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                        child: AppTextFormField(textFieldType: TextFieldType.NAME,
                          labelText: getLocalization().industry,),
                      ),
-                     SizedBox(height: 75,),
+                     const SizedBox(height: 75,),
                      PrimaryButton(width: MediaQuery.sizeOf(context).width,onPressed: (){}, child: wText(getLocalization().add))
-
                    ],
                  ),
                ),

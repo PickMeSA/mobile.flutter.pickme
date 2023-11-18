@@ -150,8 +150,10 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                           context.router.push(QualificationsRoute());
                         },
                         child: Text(getLocalization().nextStep),
-                      )
+                      ),
                   ),
+
+
                 ],
               ),
             ],

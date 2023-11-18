@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -10,5 +11,19 @@ part 'resend_otp_state.dart';
 @injectable
 class ResendOTPBloc
     extends BaseBloc<ResendOTPPageEvent, ResendOTPPageState> {
-    ResendOTPBloc(): super(ResendOTPPageInitState()) {}
+
+    bool? checked = false;
+    ResendOTPBloc(): super(ResendOTPPageInitState()) {
+
+        on<NumberEnteredEvent>((event, emit)=> _onNumberEnteredEvent(event, emit));
+    }
+
+    _onNumberEnteredEvent(
+        NumberEnteredEvent event,
+        Emitter<ResendOTPPageState> emit){
+        if(event.mobileNumber.length == 9 ){
+            checked = true;
+            emit(NumberEnteredState());
+        }
+    }
 } 

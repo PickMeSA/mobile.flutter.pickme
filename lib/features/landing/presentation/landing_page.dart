@@ -44,7 +44,7 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                 ),
               ),
               Positioned(
-                top: 120,
+                top: 140,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10.0, bottom: 10),
                   child: Text(
@@ -78,11 +78,9 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
                   child: PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,onPressed: () async {
                     context.router.push(LoginRoute());
-                  },
-                      child: wText(getLocalization().loginIn)),
+                  }, child: wText(getLocalization().loginIn)),
                 ),
               ),
-
               Positioned(
                 bottom: 0,
                 child: Padding(

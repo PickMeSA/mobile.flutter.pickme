@@ -26,6 +26,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
   TextEditingController mobileNumberTextEditingController = TextEditingController();
   @override
   Widget buildView(BuildContext context) {
+    var theme = Theme.of(context);
    return BlocConsumer<LoginBloc,LoginState>
      (builder: (context , state){
      return SizedBox(
@@ -75,7 +76,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                      Padding(
                        padding: const EdgeInsets.only(top: 20, bottom:  10),
                        child: AppTextFormField(
-
+                          onChanged: (value)=> getBloc().add(NumberChangedEvent(mobileNumber: value)),
                          controller: mobileNumberTextEditingController,
                          // validator: (value)=> validatePhoneNumber(value??""),
                          prefixIcon: SizedBox(width: 50,
@@ -87,11 +88,31 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                          textFieldType: TextFieldType.NUMBER, labelText: getLocalization().phoneNumber,),
                      ),
                      const Spacer(),
-                     PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,
-                         onPressed: () async {
-                           getBloc().add(LoginContinueClickedEvent(mobileNumber: mobileNumberTextEditingController.text));
-                         },
-                         child: Text(getLocalization().ccontinue)),
+                     PrimaryButton(
+                       width: MediaQuery.sizeOf(context).width,
+                       style: ButtonStyle(
+                           side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                             return BorderSide(
+                               color: states.contains(MaterialState.disabled)?
+                               theme.colorScheme.secondary.withOpacity(0):
+                               theme.colorScheme.secondary,
+                               width: 2,
+                             );
+                           }
+                           ),
+                           backgroundColor: MaterialStateProperty.resolveWith(
+                                   (Set<MaterialState> states){
+                                 return states.contains(MaterialState.disabled)?
+                                 theme.colorScheme.secondary.withOpacity(0.3):
+                                 theme.colorScheme.secondary;
+                               }
+                           )
+                       ),
+                       onPressed: !state.checked?null:() {
+                         getBloc().add(LoginContinueClickedEvent(mobileNumber: mobileNumberTextEditingController.text));
+                       },
+                       child: Text(getLocalization().ccontinue),
+                     ),
                      Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
                        child: Center(
                            child: InkWell(
@@ -102,7 +123,6 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                              const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                            )
                        ),)
-
                    ],
                  ),
                ),
@@ -115,7 +135,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
        listener: (context , state){
        if(state is LoginContinueClickedState && state.dataState == DataState.loading){
          context.router.push(OTPRoute(
-             userModel: UserModel(mobile:mobileNumberTextEditingController.text , email: '', surname: '', firstName: '')));
+             userModel: UserModel(mobile:"+27${mobileNumberTextEditingController.text}" , email: '', surname: '', firstName: '')));
        }
    });
   }

@@ -21,3 +21,10 @@ class LoginOTPCompleteEvent extends otpPageEvent{
    LoginOTPCompleteEvent({this.otp});
 }
 
+class OTPEnteredEvent extends otpPageEvent{
+
+   String otp;
+
+   OTPEnteredEvent({required this.otp});
+}
+

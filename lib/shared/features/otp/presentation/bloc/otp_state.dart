@@ -1,8 +1,13 @@
 part of 'otp_bloc.dart';
 @immutable
-abstract class otpPageState extends BaseState {}
+abstract class otpPageState extends BaseState {
 
-class otpPageInitState extends otpPageState  {}
+}
+
+class otpPageInitState extends otpPageState  {
+
+
+}
 
 class OTPGetTokenState extends otpPageState{
   TokenModel ?tokenModel;
@@ -14,5 +19,8 @@ class RegisterOTPCompleteState extends otpPageState{
 }
 
 class LoginOTPCompleteState extends otpPageState{
+}
+
+class OTPEnteredState extends otpPageState{
 }
 

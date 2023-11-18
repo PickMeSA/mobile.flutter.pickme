@@ -37,6 +37,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
 
   @override
   Widget buildView(BuildContext context) {
+    var theme = Theme.of(context);
     return BlocConsumer<QualificationsBloc, QualificationsPageState>(
       listener: (context, state){},
       builder: (context, state) {
@@ -51,11 +52,16 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                  children: [
                    Row(
                      children: [
-                       Spacer(),
+                       const Spacer(),
                        wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
                      ],
                    ),
-                   wText(getLocalization().step2,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                   wText(
+                     getLocalization().step2,
+                     style: theme.textTheme.headlineLarge!.copyWith(
+                       color: theme.primaryColor,
+                     ),
+                   ),
                    const SizedBox(height: 10,),
                    wText(getLocalization().tellUsAboutYourQualifications,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
                    Padding(
@@ -71,7 +77,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                      )
                    ),
                    SizedBox(height: 20,),
-                   Divider(height: 1),
+                   AppDivider(height: 1),
                    Padding(
                        padding: const EdgeInsets.only(top: 20),
                        child: qualificationSlab(
@@ -85,7 +91,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                        )
                    ),
                    SizedBox(height: 20,),
-                   Divider(height: 1,),
+                   AppDivider(height: 1,),
                    Padding(
                        padding: const EdgeInsets.only(top: 20),
                        child: qualificationSlab(
@@ -112,17 +118,34 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                          
                        ),
                        const SizedBox(width: 10,),
-                       PrimaryButton(onPressed: (){
-                         context.router.push(SkillsAndIndustryRoute());
-                       },
-                         fullWidth:  false,
-                       width: MediaQuery.sizeOf(context).width * 3.6/5,
-                         child: wText(getLocalization().nextStep),)
+             Expanded(
+               child: PrimaryButton(
+                 style: ButtonStyle(
+                     side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                       return BorderSide(
+                         color: states.contains(MaterialState.disabled)?
+                         theme.colorScheme.secondary.withOpacity(0):
+                         theme.colorScheme.secondary,
+                         width: 2,
+                       );
+                     }
+                     ),
+                     backgroundColor: MaterialStateProperty.resolveWith(
+                             (Set<MaterialState> states){
+                           return states.contains(MaterialState.disabled)?
+                           theme.colorScheme.secondary.withOpacity(0.3):
+                           theme.colorScheme.secondary;
+                         }
+                     )
+                 ),
+                 onPressed: !state.checked?null:() {
+                   context.router.push(QualificationsRoute());
+                 },
+                 child: Text(getLocalization().nextStep),
+               ),
+             ),
                      ],
                    )
-
-
-
                  ],
                ),
              ),

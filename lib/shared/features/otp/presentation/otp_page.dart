@@ -41,6 +41,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
 
   @override
   Widget buildView(BuildContext context) {
+
+    var theme = Theme.of(context);
     return BlocConsumer<otpBloc, otpPageState>(
       listener: (context, state){
         if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
@@ -95,23 +97,39 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                          Padding(
                            padding: const EdgeInsets.only(top: 50),
                            child: OTPInput(
-                             onSubmitted: (int pin){
-
+                             length: 6,
+                             onchange: (String pin){
+                              getBloc().add(OTPEnteredEvent(otp: pin));
                            },),
                          ),
                          const Spacer(),
-                         PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,
-                             onPressed: () async {
-                           if(widget.fromregister!) {
-                             //save the user model
-                             getBloc().add(RegisterOTPCompleteEvent(userModel: widget.userModel));
-                           }else{
-                             //navigate to
-                             LoginOTPCompleteEvent(otp: "987876");
-                           }
-                             },
-                             child: Text(getLocalization().submit)),
-                         Padding(padding: EdgeInsets.only(top: 24, bottom: 14),
+                         PrimaryButton(
+                           width: MediaQuery.sizeOf(context).width,
+                           style: ButtonStyle(
+                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                 return BorderSide(
+                                   color: states.contains(MaterialState.disabled)?
+                                   theme.colorScheme.secondary.withOpacity(0):
+                                   theme.colorScheme.secondary,
+                                   width: 2,
+                                 );
+                               }
+                               ),
+                               backgroundColor: MaterialStateProperty.resolveWith(
+                                       (Set<MaterialState> states){
+                                     return states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.secondary.withOpacity(0.3):
+                                     theme.colorScheme.secondary;
+                                   }
+                               )
+                           ),
+                           onPressed: !getBloc().checked?null:() {
+
+                             getBloc().add(LoginOTPCompleteEvent(otp: getBloc().otp ));
+                           },
+                           child: Text(getLocalization().ccontinue),
+                         ),
+                         Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
                          child: Center(
                           child: InkWell(
                             onTap: ()=> context.router.push(ResendOTPRoute(userModel: widget.userModel!)) ,
