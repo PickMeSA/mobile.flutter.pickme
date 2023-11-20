@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import '../../../shared/widgets/w_page_padding.dart';
+import '../../../../shared/widgets/w_page_padding.dart';
 import '../domain/entities/subscription_plan_entity.dart';
 import 'bloc/register_account_step1_bloc.dart';
 
