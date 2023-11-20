@@ -21,9 +21,9 @@ class ResendOTPBloc
     _onNumberEnteredEvent(
         NumberEnteredEvent event,
         Emitter<ResendOTPPageState> emit){
-        if(event.mobileNumber.length == 9 ){
-            checked = true;
-            emit(NumberEnteredState());
-        }
+
+        checked = event.mobileNumber.length == 9;
+
+        emit(NumberEnteredState());
     }
 } 

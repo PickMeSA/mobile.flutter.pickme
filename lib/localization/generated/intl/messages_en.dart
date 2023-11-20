@@ -82,9 +82,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
-        "passPortNumberA":
-            MessageLookupByLibrary.simpleMessage("Passport number *"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
+        "passportNumberA":
+            MessageLookupByLibrary.simpleMessage("Passport number *"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
         "photosOfWorkOptional":

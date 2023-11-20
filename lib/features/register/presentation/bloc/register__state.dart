@@ -15,3 +15,9 @@ class ContinueClickedState extends RegisterState{
 class PassportClickedState extends RegisterState{}
 
 class IDClickedState extends RegisterState{}
+
+class ValueChangedState extends RegisterState{}
+
+class IdentificationChangedState extends RegisterState{
+
+}

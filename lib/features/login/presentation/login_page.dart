@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -34,36 +35,63 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
        height: MediaQuery.sizeOf(context).height,
        child: Stack(
          children:[
+
            Positioned(
                top: 0,
                child: Container(
-                 color: Colors.grey,
-                 height: MediaQuery.sizeOf(context).height * (1/3) ,
+                 color: Colors.white,
+                 height: MediaQuery.sizeOf(context).height * (1.5/3) ,
                  width: MediaQuery.sizeOf(context).width,
-                 child:  Padding(
-                   padding: EdgeInsets.all(30.0),
-                   child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: [
-                       SizedBox(
-                         width: 25,
-                         height: 25,
-                         child: InkWell(onTap: ()=> context.router.pop()
-                             ,child: Icon(Icons.arrow_back)),),
-                       Padding(
-                         padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                         child: wText(getLocalization().welcomeBack,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                       ),
-                       Padding(
-                         padding: EdgeInsets.only( right: 32, bottom: 8),
-                         child: wText(getLocalization().logIntoYourAccountWithYourPhoneNumberAndOtp,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                       )
-                     ],
+                 child:  Stack(
+                   children:[
+                   Positioned(
+                   top: 12,
+                   right:  -30,
+                   child: Container(
+                     child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
                    ),
+                 ),
+                     Positioned(
+                       top: 0,
+                       left:  29.78,
+                       child: Container(
+                         child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
+                       ),
+                     ),
+                     Positioned(
+                       top: 12,
+                       right:  0,
+                       child: Container(
+                         child: SvgPicture.asset("assets/welcome_back_lady.svg"),
+                       ),
+                     ),
+                     Padding(
+                     padding: EdgeInsets.all(30.0),
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         SizedBox(
+                           width: 25,
+                           height: 25,
+                           child: InkWell(onTap: ()=> context.router.pop()
+                               ,child: Icon(Icons.arrow_back)),),
+                         Padding(
+                           padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
+                           child: wText(getLocalization().welcomeBack,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                         ),
+                         Padding(
+                           padding: EdgeInsets.only( right: 32, bottom: 8),
+                           child: wText(getLocalization().logIntoYourAccountWithYourPhoneNumberAndOtp,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                         )
+                       ],
+                     ),
+                   ),]
                  ),)
            ),
+
+
            Positioned(bottom: 0,
-             child: Container(height: MediaQuery.sizeOf(context).height * (2/3) ,
+             child: Container(height: MediaQuery.sizeOf(context).height * (1.9/3) ,
                width: MediaQuery.sizeOf(context).width,
                decoration: const BoxDecoration(
                  color: Colors.white,
@@ -128,6 +156,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                ),
              ),
            ),
+
          ],
        ),
      );

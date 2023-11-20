@@ -141,10 +141,10 @@ class AppLocalizations {
   }
 
   /// `Passport number *`
-  String get passPortNumberA {
+  String get passportNumberA {
     return Intl.message(
       'Passport number *',
-      name: 'passPortNumberA',
+      name: 'passportNumberA',
       desc: '',
       args: [],
     );

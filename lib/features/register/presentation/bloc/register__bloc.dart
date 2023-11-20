@@ -16,6 +16,9 @@ part 'register__state.dart';
 @injectable
 class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
 
+  bool checked = false;
+  int index = 0;
+
   final ContinueClickedUseCase continueClickedUseCase;
   int identificationType = 1;
   RegisterBloc({
@@ -25,6 +28,38 @@ class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
       // TODO: implement event handler
     });
     on<ContinueClickedEvent>((event, emit)=> _onContinueClickedEvent(event, emit));
+    on<ValueChangedEvent>((event, emit) => _onValueChangedEvent(event, emit));
+    on<IdentificationChangedEvent>((event, emit)=> _onIdentificationChangedEvent(event, emit));
+  }
+
+  _onIdentificationChangedEvent(
+      IdentificationChangedEvent event,
+      Emitter<RegisterState> emit){
+    index = event.index;
+    emit(IdentificationChangedState());
+  }
+
+  _onValueChangedEvent(
+      ValueChangedEvent event,
+      Emitter<RegisterState> emit
+      ) async{
+    checked = false;
+      if(
+          event.userModel.firstName!.isNotEmpty&&
+          event.userModel.surname!.isNotEmpty&&
+          event.userModel.email!.isNotEmpty
+      ){
+        if(index == 0){
+          if(event.userModel.idNumber!.isNotEmpty){
+            checked = true;
+          }
+        }else if(event.userModel.passportNumber!.isNotEmpty &&
+        event.userModel.workPermitNumber!.isNotEmpty){
+          checked = true;
+        }
+
+        emit(ValueChangedState());
+      }
   }
 
 
