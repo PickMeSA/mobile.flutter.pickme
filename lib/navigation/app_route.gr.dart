@@ -27,16 +27,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddQualificationPage(),
       );
     },
-    AddSkillsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AddSkillsPage(),
-      );
-    },
     AddWorkExperienceRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const AddWorkExperiencePage(),
+      );
+    },
+    JobsLandingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const JobsLandingPage(),
       );
     },
     LandingRoute.name: (routeData) {
@@ -113,12 +113,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SignUpPage(),
       );
     },
-    SkillsAndIndustryRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SkillsAndIndustryPage(),
-      );
-    },
     TermsAndConditionsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -157,20 +151,6 @@ class AddQualificationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AddSkillsPage]
-class AddSkillsRoute extends PageRouteInfo<void> {
-  const AddSkillsRoute({List<PageRouteInfo>? children})
-      : super(
-          AddSkillsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AddSkillsRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [AddWorkExperiencePage]
 class AddWorkExperienceRoute extends PageRouteInfo<void> {
   const AddWorkExperienceRoute({List<PageRouteInfo>? children})
@@ -180,6 +160,20 @@ class AddWorkExperienceRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AddWorkExperienceRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [JobsLandingPage]
+class JobsLandingRoute extends PageRouteInfo<void> {
+  const JobsLandingRoute({List<PageRouteInfo>? children})
+      : super(
+          JobsLandingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'JobsLandingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -396,20 +390,6 @@ class SignUpRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SignUpRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SkillsAndIndustryPage]
-class SkillsAndIndustryRoute extends PageRouteInfo<void> {
-  const SkillsAndIndustryRoute({List<PageRouteInfo>? children})
-      : super(
-          SkillsAndIndustryRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SkillsAndIndustryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

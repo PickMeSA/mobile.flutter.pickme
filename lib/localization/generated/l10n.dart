@@ -729,6 +729,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `My Job Requests`
+  String get myJobRequests {
+    return Intl.message(
+      'My Job Requests',
+      name: 'myJobRequests',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -66,6 +66,7 @@
   "preferredIndustry": "Preferred industry *",
   "skillsMax5": "Skills (max. 5)",
   "addASkill": "Add a skill",
-  "step3": "Step 3"
+  "step3": "Step 3",
+  "myJobRequests": "My Job Requests"
 
 }
