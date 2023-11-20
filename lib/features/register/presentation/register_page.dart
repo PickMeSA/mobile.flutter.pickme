@@ -43,6 +43,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
     var theme = Theme.of(context);
     return BlocConsumer<RegisterBloc, RegisterState>(
   listener: (context, state) {
+
   },
   builder: (context, state) {
     return SizedBox(
@@ -235,6 +236,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             ),
                             onPressed: !getBloc().checked!?null:() {
                               getBloc().add(ContinueClickedEvent(user: getGetUserModel()));
+                              context.router.push(OTPRoute(userModel: getGetUserModel()));
                             },
                             child: Text(getLocalization().submit),
                           ),

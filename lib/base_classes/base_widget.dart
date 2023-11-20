@@ -10,12 +10,14 @@ abstract class BaseWidget extends StatefulWidget{
 abstract class BaseWidgetState<T extends BaseWidget , B extends BaseBloc > extends State<T>{
   late B baseBloc;
   late AppLocalizations baseLocalization;
+  late ThemeData theme;
 
   @mustCallSuper
   void onBlocStateChanged(BaseBlocPrimaryState state) => state.call(context);
 
   @override
   void initState() {
+    theme = Theme.of(context);
     baseLocalization = initLocalization();
     baseBloc = initBloc();
     baseBloc.baseState?.listen(onBlocStateChanged);
@@ -25,6 +27,9 @@ abstract class BaseWidgetState<T extends BaseWidget , B extends BaseBloc > exten
   B getBloc() => baseBloc;
 
   B initBloc();
+
+
+  ThemeData getTheme() => theme;
 
   AppLocalizations initLocalization();
 

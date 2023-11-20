@@ -23,6 +23,8 @@ class LandingPage extends BasePage {
 class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
   @override
   Widget buildView(BuildContext context) {
+
+
     return BlocConsumer<LandingBloc, LandingState>(
       listener: (context, state) {
         // TODO: implement listener
@@ -78,17 +80,31 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
                   child: PrimaryButton(width: MediaQuery.sizeOf(context).width - 45,onPressed: () async {
                     context.router.push(LoginRoute());
-                  }, child: wText(getLocalization().loginIn)),
+                  },
+                      child: wText(getLocalization().loginIn)),
                 ),
               ),
+
               Positioned(
                 bottom: 0,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
-                  child: SecondaryButton(width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
-                     context.router.push(const RegisterRoute());
+                  child: SecondaryButton(style:ButtonStyle(
+        side: MaterialStateProperty.all(BorderSide(color:
+        theme.colorScheme.secondary,
+        width: 2,
+        ),
+        ),
+        backgroundColor: MaterialStateProperty.resolveWith(
+        (Set<MaterialState> states){
+        return states.contains(MaterialState.disabled)?
+        theme.colorScheme.secondary.withOpacity(0.3):
+        theme.colorScheme.secondary;
+        }
+        )),width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
+                    // context.router.push(const RegisterRoute());
                     // ToDo: Change back to above
-
+                    context.router.push(const RegisterAccountStep1Route());
                   }, child: wText(getLocalization().newHereCreateAccount)),
                 ),
               )
