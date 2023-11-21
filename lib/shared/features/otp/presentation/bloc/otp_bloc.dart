@@ -33,6 +33,7 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         OTPEnteredEvent event,
         Emitter<otpPageState> emit
         ) async{
+        otp = event.otp;
         if(event.otp.length == 6) {
           checked = true;
           emit(OTPEnteredState());
@@ -46,6 +47,10 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         LoginOTPCompleteEvent event,
         Emitter<otpPageState> emit
         )async{
+        try{
+        }catch(ex){
+
+        }
     }
 
     _onRegisterOTPCompleteEvent(

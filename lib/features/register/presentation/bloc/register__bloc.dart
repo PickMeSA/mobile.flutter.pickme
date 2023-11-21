@@ -27,7 +27,7 @@ class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
     on<RegisterEvent>((event, emit) {
       // TODO: implement event handler
     });
-    on<ContinueClickedEvent>((event, emit)=> _onContinueClickedEvent(event, emit));
+    on<SubmitClickedEvent>((event, emit)=> _onContinueClickedEvent(event, emit));
     on<ValueChangedEvent>((event, emit) => _onValueChangedEvent(event, emit));
     on<IdentificationChangedEvent>((event, emit)=> _onIdentificationChangedEvent(event, emit));
   }
@@ -50,7 +50,7 @@ class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
           event.userModel.email!.isNotEmpty
       ){
         if(index == 0){
-          if(event.userModel.idNumber!.isNotEmpty){
+          if(event.userModel.idNumber!.isNotEmpty && event.userModel.idNumber!.length == 13){
             checked = true;
           }
         }else if(event.userModel.passportNumber!.isNotEmpty &&
@@ -64,7 +64,7 @@ class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
 
 
   _onContinueClickedEvent(
-      ContinueClickedEvent event,
+      SubmitClickedEvent event,
       Emitter<RegisterState> emit
       )async {
     emit(ContinueClickedState()..dataState = DataState.loading);

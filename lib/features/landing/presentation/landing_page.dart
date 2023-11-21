@@ -30,6 +30,8 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
         // TODO: implement listener
       },
       builder: (context, state) {
+
+        var theme = Theme.of(context);
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
@@ -89,23 +91,15 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                 bottom: 0,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
-                  child: SecondaryButton(style:ButtonStyle(
+                  child: SecondaryButtonDark(style:ButtonStyle(textStyle:
+                  MaterialStateProperty.all(TextStyle(color: theme.colorScheme.secondary)),
         side: MaterialStateProperty.all(BorderSide(color:
         theme.colorScheme.secondary,
-        width: 2,
-        ),
-        ),
-        backgroundColor: MaterialStateProperty.resolveWith(
-        (Set<MaterialState> states){
-        return states.contains(MaterialState.disabled)?
-        theme.colorScheme.secondary.withOpacity(0.3):
-        theme.colorScheme.secondary;
-        }
-        )),width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
-                    // context.router.push(const RegisterRoute());
+        width: 2,),),),width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
+                     context.router.push(const RegisterRoute());
                     // ToDo: Change back to above
-                    context.router.push(const RegisterAccountStep1Route());
-                  }, child: wText(getLocalization().newHereCreateAccount)),
+                    //context.router.push(const RegisterAccountStep1Route());
+                  }, child: wText(getLocalization().newHereCreateAccount),color: theme.colorScheme.secondary),
                 ),
               )
             ],

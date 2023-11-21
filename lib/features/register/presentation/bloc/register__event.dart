@@ -4,10 +4,10 @@ part of 'register__bloc.dart';
 abstract class RegisterEvent extends BaseEvent {
 }
 
-class ContinueClickedEvent extends RegisterEvent{
+class SubmitClickedEvent extends RegisterEvent{
  final UserModel user;
 
- ContinueClickedEvent({required this.user});
+ SubmitClickedEvent({required this.user});
 }
 
 class PassportClickedEvent extends RegisterEvent{}

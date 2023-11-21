@@ -133,4 +133,5 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
 }

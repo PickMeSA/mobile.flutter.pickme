@@ -7,17 +7,16 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/sign_up_bloc.dart';
+import 'bloc/add_skills_bloc.dart';
 
 @RoutePage()
-class SignUpPage extends BasePage {
-  const SignUpPage({super.key});
+class AddSkillsPage extends BasePage {
+  const AddSkillsPage({super.key});
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _AddSkillsPageState createState() => _AddSkillsPageState();
 }
-
-class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
+class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
   @override
   void initState() {
@@ -33,7 +32,7 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
 
   @override
   Widget buildView(BuildContext context) {
-    return BlocConsumer<SignUpBloc, SignUpPageState>(
+    return BlocConsumer<AddSkillsBloc, AddSkillsPageState>(
       listener: (context, state){},
       builder: (context, state) {
          return Container(
@@ -44,8 +43,8 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
 
 
   @override
-  SignUpBloc initBloc() {
-    return locator<SignUpBloc>();
+  AddSkillsBloc initBloc() {
+    return locator<AddSkillsBloc>();
   }
 
   @override

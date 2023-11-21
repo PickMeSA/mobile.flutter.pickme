@@ -120,4 +120,5 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
 }

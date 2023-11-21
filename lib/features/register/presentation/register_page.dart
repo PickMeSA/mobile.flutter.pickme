@@ -235,7 +235,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                 )
                             ),
                             onPressed: !getBloc().checked!?null:() {
-                              getBloc().add(ContinueClickedEvent(user: getGetUserModel()));
+                              getBloc().add(SubmitClickedEvent(user: getGetUserModel()));
                               context.router.push(OTPRoute(userModel: getGetUserModel()));
                             },
                             child: Text(getLocalization().submit),
@@ -271,11 +271,12 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
         email: emailAddressController.text,
         surname: surnameController.text,
         firstName: firstNameController.text,
-        mobile: phoneNumberController.text,
+        mobile: "+27${phoneNumberController.text}",
         workPermitNumber: workPermitController.text,
         passportNumber: passportNumberController.text,
         idNumber: idNumberController.text,
     );
   }
+
 
 }

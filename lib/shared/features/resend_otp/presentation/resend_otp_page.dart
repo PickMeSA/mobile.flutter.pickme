@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -40,7 +41,16 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     return BlocConsumer<ResendOTPBloc, ResendOTPPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is NumberEnteredState && state.dataState == DataState.loading){
+          context.router.push(OTPRoute(
+              userModel: UserModel(
+                  mobile:"+27${phoneNumberController.text}" ,
+                  email: '',
+                  surname: '',
+                  firstName: '')));
+        }
+      },
       builder: (context, state) {
         return SizedBox(
           width: MediaQuery.sizeOf(context).width,
@@ -50,7 +60,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
               Positioned(
                   top: 0,
                   child: Container(
-                    color: Colors.grey,
+                    color: Colors.white,
                     height: MediaQuery.sizeOf(context).height * (1/3) ,
                     width: MediaQuery.sizeOf(context).width,
                     child:  Padding(
@@ -129,8 +139,12 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                           child: Center(
                               child: InkWell(
                                 onTap: (){
-                                  widget.userModel.mobile = "";
-                                  context.router.push(OTPRoute(userModel: widget.userModel));
+                                  getBloc().add(ResendOTPSubmitClickedEvent(
+                                      userModel: UserModel(
+                                          mobile:"+27${phoneNumberController.text}" ,
+                                          email: '',
+                                          surname: '',
+                                          firstName: '')));
                                   } ,
                                 child: wText(getLocalization().contactHelpCenter, style:
                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
@@ -158,4 +172,6 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
+
 }

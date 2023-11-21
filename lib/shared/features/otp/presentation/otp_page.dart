@@ -125,7 +125,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                            ),
                            onPressed: !getBloc().checked?null:() {
 
-                             getBloc().add(LoginOTPCompleteEvent(otp: getBloc().otp ));
+                             getBloc().add(OTPGetTokenEvent(smsCode: getBloc().otp!,verificationId: "" ));
                            },
                            child: Text(getLocalization().ccontinue),
                          ),
@@ -160,4 +160,5 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
 }

@@ -48,7 +48,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
           //emit(LoginContinueClickedState(checked: false)..dataState = DataState.error);
         },
         onSuccesss:(verificationId, resentCode){
-          emit(LoginContinueClickedState(checked: true)..dataState = DataState.success);
+          //emit(LoginContinueClickedState(checked: true)..dataState = DataState.success);
         }
       );
     }catch(ex){

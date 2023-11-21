@@ -165,4 +165,5 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
 }

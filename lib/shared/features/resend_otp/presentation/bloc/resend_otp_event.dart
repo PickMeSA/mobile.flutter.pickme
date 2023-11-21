@@ -7,3 +7,9 @@ class NumberEnteredEvent extends ResendOTPPageEvent{
 
   NumberEnteredEvent({required this.mobileNumber});
 }
+
+class ResendOTPSubmitClickedEvent extends ResendOTPPageEvent{
+   final UserModel userModel;
+
+   ResendOTPSubmitClickedEvent({required this.userModel});
+}
