@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/login/domain/entities/token/token_model.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'api-service.dart';
 
 
@@ -9,7 +11,13 @@ class DioApiService extends ApiService{
   final Dio dio;
 
   DioApiService({
-    required this.dio});
+    required this.dio}){
+   dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options, RequestInterceptorHandler handler){
+     TokenModel tokenModel = boxTokens.get(current);
+     options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
+     return handler.next(options);
+   }));
+  }
 
   @override
   Future<Response<T>> delete<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) {

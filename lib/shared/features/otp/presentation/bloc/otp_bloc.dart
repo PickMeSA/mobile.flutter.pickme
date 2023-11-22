@@ -46,6 +46,7 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         emit(SaveRemoteProfileDataState()..dataState = DataState.loading);
         try{
             emit(SaveRemoteProfileDataState(error: "")..dataState = DataState.success);
+
         }catch(ex){
             emit(SaveRemoteProfileDataState(error: ex.toString()).. dataState = DataState.error);
         }
