@@ -3,6 +3,8 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/add_skills/domain/entities/preferred_industry.dart';
+import 'package:pickme/features/add_skills/domain/entities/skill.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,8 @@ class AddSkillsPage extends BasePage {
 }
 class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
   
-  late TextEditingController dropdownController = TextEditingController();
+  late TextEditingController dropdownIndustryController = TextEditingController();
+  late TextEditingController dropDownSkillController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
@@ -68,24 +71,30 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 60),
-                    child: AppDropdownMenu(
+                    child: AppDropdownMenu<PreferredIndustry>(
+                      onSelected: (selected){
+                        getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
+                      },
                         width: MediaQuery.sizeOf(context).width - 40,
                         enableFilter: true,
                         dropdownMenuEntries: getBloc().industryEntries,
-                        controller: dropdownController,
-                    label: wText(getLocalization().preferredIndustry, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: WColors.pickMeGrey))),
+                        controller: dropdownIndustryController,
+                    label: wText(getLocalization().preferredIndustry, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
                   ),
                    wText(getLocalization().skillsMax5,style: theme.textTheme.bodyMedium?.copyWith(
                        fontSize: 16,
                    fontWeight: FontWeight.w600)),
                    Padding(
                      padding: const EdgeInsets.only(top: 10, bottom: 30),
-                     child: AppDropdownMenu(
+                     child: AppDropdownMenu<Skill>(
+                        onSelected: (selected){
+                          getBloc().add(SkillSelectedEvent(skill: selected!));
+                        },
                          width: MediaQuery.sizeOf(context).width - 40,
                          enableFilter: true,
                          dropdownMenuEntries: getBloc().skillEntries,
-                         controller: dropdownController,
-                         label: wText(getLocalization().skillsA, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: WColors.pickMeGrey))),
+                         controller: dropDownSkillController,
+                         label: wText(getLocalization().skillsA, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16,color: Colors.grey))),
                    ),
 
                    SizedBox(
@@ -93,7 +102,11 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                      child: Center(
                        child: ChipGroup(
                          inputs: getBloc().chipOptions,
-                         onDeleted: (){}, onSelected: (bool value) {  },
+                         onDeleted: (){
+                           getBloc().add(SkillChipDeletedEvent(index: 0));
+                         }, onSelected: (bool value) {
+
+                       },
                        ),
                      ),
                    ),
@@ -132,7 +145,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                                    }
                                )
                            ),
-                           onPressed: !state.checked?null:() {
+                           onPressed: !getBloc().checked?null:() {
                              //context.router.push(QualificationsRoute());
                            },
                            child: Text(getLocalization().nextStep),

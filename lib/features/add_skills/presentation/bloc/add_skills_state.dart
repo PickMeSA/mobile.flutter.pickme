@@ -1,12 +1,20 @@
 part of 'add_skills_bloc.dart';
 @immutable
 abstract class AddSkillsPageState extends BaseState {
-  bool checked;
 
-  AddSkillsPageState({required this.checked});
+
+  AddSkillsPageState();
 }
 
 class AddSkillsPageInitState extends AddSkillsPageState  {
-  AddSkillsPageInitState({required super.checked});
+  AddSkillsPageInitState();
+}
+
+class SkillSelectedState extends AddSkillsPageState{
+  SkillSelectedState();
+}
+
+class SkillChipDeletedState extends AddSkillsPageState{
+
 }
 
