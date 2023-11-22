@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Contact help center"),
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
+        "ePWP": MessageLookupByLibrary.simpleMessage("EPWP"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
@@ -92,12 +93,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "membership": MessageLookupByLibrary.simpleMessage("Membership"),
         "membershipAwardName":
             MessageLookupByLibrary.simpleMessage("Membership/Award name"),
+        "minimumWage": MessageLookupByLibrary.simpleMessage("Minimum Wage"),
+        "minimumWageText1": MessageLookupByLibrary.simpleMessage(
+            "We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr."),
+        "minimumWageText2": MessageLookupByLibrary.simpleMessage(
+            "As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour."),
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
+        "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
@@ -136,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Skills & industry"),
         "skillsMax5": MessageLookupByLibrary.simpleMessage("Skills (max. 5)"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "southAfricanMinimumWage":
+            MessageLookupByLibrary.simpleMessage("South African Minimum Wage"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start date *"),
         "startTime": MessageLookupByLibrary.simpleMessage("Start time *"),
         "step1": MessageLookupByLibrary.simpleMessage("Step 1"),
@@ -160,7 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weveSentaOneTimePine": m1,
         "whatIsYourHourlyRateAndWorkTimes":
             MessageLookupByLibrary.simpleMessage(
-                "What is your hourly rate & work times"),
+                "What is your hourly rate & work times?"),
         "whatWouldYouLikeToDo":
             MessageLookupByLibrary.simpleMessage("What would you like to do?"),
         "work": MessageLookupByLibrary.simpleMessage("Work"),

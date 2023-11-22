@@ -2,12 +2,15 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/shared/widgets/w_time_picker.dart';
 
 import 'bloc/rate_and_work_times_bloc.dart';
 
@@ -20,6 +23,11 @@ class RateAndWorkTimesPage extends BasePage {
 }
 
 class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, RateAndWorkTimesBloc> {
+
+  TextEditingController amountTextController  = TextEditingController();
+  TextEditingController startTimeTextController = TextEditingController();
+  TextEditingController endTimeTextController = TextEditingController();
+  TextEditingController workingDayTextController = TextEditingController();
 
   @override
   void initState() {
@@ -48,12 +56,7 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   Row(
-                     children: [
-                       const Spacer(),
-                       wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
-                     ],
-                   ),
+
                    wText(
                      getLocalization().step4,
                      style: theme.textTheme.headlineLarge!.copyWith(
@@ -61,16 +64,69 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                      ),
                    ),
                    const SizedBox(height: 10,),
-                   wText(getLocalization().whatIsYourHourlyRateAndWorkTimes,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
+                   Row(
+                     children: [
+                       Expanded(
+                         child: wText(
+                           getLocalization().whatIsYourHourlyRateAndWorkTimes,
+                           style: theme.textTheme.headlineLarge!.copyWith(
+                               fontWeight: FontWeight.w300
+                           ),
+                         ),
+                       ),
+                       TertiaryButton(onPressed: (){
+                         context.router.push(const MinimumWageRoute());
+                       },
+                           child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,)
+                       )
+                     ],
+                   ),
                     30.height,
                    wText(getLocalization().hourlyRate, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700)),
                     10.height,
                    Row(
                      children: [
-                       wText(getLocalization().r, style: theme.textTheme.bodyMedium?.copyWith(fontSize: 32, fontWeight: FontWeight.w600))
+                       10.width,
+                       wText(getLocalization().r,
+                           style: theme.textTheme.bodyMedium?.copyWith(
+                               fontSize: 32,
+                               fontWeight: FontWeight.w600)),
+                       30.width,
+                       Expanded(child: AppTextFormField(
+                         controller: amountTextController,
+                         textFieldType: TextFieldType.NUMBER,
+                       labelText: getLocalization().noAmount,)),
+                       20.height
                      ],
                    ),
-
+                   30.height,
+                   wText(getLocalization().workingHours,
+                       style: theme.textTheme.bodyMedium?.copyWith(
+                           fontWeight: FontWeight.w700)),
+                   20.height,
+                   AppTextFormField(controller: startTimeTextController,
+                     textFieldType: TextFieldType.NUMBER,
+                   labelText: getLocalization().startTime,
+                   suffix: InkWell(
+                       onTap:()=> appTimePicker(context, startTimeTextController),
+                       child: const Icon(Iconsax.clock)),),
+                   10.height,
+                   AppTextFormField(controller: endTimeTextController
+                   ,textFieldType: TextFieldType.NUMBER,
+                     labelText: getLocalization().endTime,
+                     suffix: InkWell(
+                         onTap: ()=> appTimePicker(context, endTimeTextController),
+                         child: const Icon(Iconsax.clock)),),
+                   30.height,
+                   wText(getLocalization().workingDays,
+                       style: theme.textTheme.bodyMedium?.copyWith(
+                           fontWeight: FontWeight.w700)),
+                   10.height,
+                   AppDropdownMenu(label: wText(getLocalization().workingDaysA),
+                       controller: workingDayTextController,
+                       width: MediaQuery.sizeOf(context).width -40,
+                       enableFilter: true,
+                       dropdownMenuEntries: []),
                    const SizedBox(height: 50,),
                    Row(
                      children: [
@@ -106,7 +162,7 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                                )
                            ),
                            onPressed: !getBloc().checked?null:() {
-                            // context.router.push(const RateAndWorkTimesRoute());
+                            context.router.push(const BankDetailsRoute());
                            },
                            child: Text(getLocalization().nextStep),
                          ),

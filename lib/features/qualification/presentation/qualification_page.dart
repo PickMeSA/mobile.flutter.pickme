@@ -54,7 +54,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                    Row(
                      children: [
                        const Spacer(),
-                       wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
+                       InkWell(onTap:()=> context.router.push(const AddSkillsRoute()),child: wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
                      ],
                    ),
                    wText(

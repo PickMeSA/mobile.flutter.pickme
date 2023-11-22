@@ -770,10 +770,10 @@ class AppLocalizations {
     );
   }
 
-  /// `What is your hourly rate & work times`
+  /// `What is your hourly rate & work times?`
   String get whatIsYourHourlyRateAndWorkTimes {
     return Intl.message(
-      'What is your hourly rate & work times',
+      'What is your hourly rate & work times?',
       name: 'whatIsYourHourlyRateAndWorkTimes',
       desc: '',
       args: [],
@@ -800,7 +800,15 @@ class AppLocalizations {
     );
   }
 
-  // skipped getter for the '0.00' key
+  /// `0.00`
+  String get noAmount {
+    return Intl.message(
+      '0.00',
+      name: 'noAmount',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Working hours`
   String get workingHours {
@@ -967,6 +975,56 @@ class AppLocalizations {
     return Intl.message(
       'PickMe Receives a R2/hr worked as services fees',
       name: 'pickMeReceivesAR2hrWorkedAsServiceFees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minimum Wage`
+  String get minimumWage {
+    return Intl.message(
+      'Minimum Wage',
+      name: 'minimumWage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `South African Minimum Wage`
+  String get southAfricanMinimumWage {
+    return Intl.message(
+      'South African Minimum Wage',
+      name: 'southAfricanMinimumWage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EPWP`
+  String get ePWP {
+    return Intl.message(
+      'EPWP',
+      name: 'ePWP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr.`
+  String get minimumWageText1 {
+    return Intl.message(
+      'We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr.',
+      name: 'minimumWageText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour.`
+  String get minimumWageText2 {
+    return Intl.message(
+      'As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour.',
+      name: 'minimumWageText2',
       desc: '',
       args: [],
     );

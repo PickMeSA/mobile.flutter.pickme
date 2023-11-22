@@ -7,6 +7,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/heading_button.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -52,7 +53,7 @@ class _SkillsAndIndustryPageState extends BasePageState<SkillsAndIndustryPage, S
                    Row(
                      children: [
                        Spacer(),
-                       wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
+                       InkWell(onTap: ()=> context.router.push(const RateAndWorkTimesRoute()),child: wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
                      ],
                    ),
                    wText(getLocalization().step3,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),

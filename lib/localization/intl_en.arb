@@ -71,10 +71,10 @@
   "photosOfWork": "Photos of work (optional)",
   "skillsA": "Skills *",
   "step4": "Step 4",
-  "whatIsYourHourlyRateAndWorkTimes": "What is your hourly rate & work times",
+  "whatIsYourHourlyRateAndWorkTimes": "What is your hourly rate & work times?",
   "hourlyRate": "Hourly rate",
   "r": "R",
-  "0.00": "0.00",
+  "noAmount": "0.00",
   "workingHours": "Working hours",
   "startTime": "Start time *",
   "endTime": "End time *",
@@ -91,7 +91,10 @@
   "investmentFund": "Investment fund",
   "pickMeInvestsR4hrWorkedInAProfessionalInvestmentFundForYourFuture": "PickMe invests a R4/hr worked in a personal investment fund for your future.",
   "transactionFees": "Transaction fees",
-  "pickMeReceivesAR2hrWorkedAsServiceFees": "PickMe Receives a R2/hr worked as services fees"
-
-
+  "pickMeReceivesAR2hrWorkedAsServiceFees": "PickMe Receives a R2/hr worked as services fees",
+  "minimumWage": "Minimum Wage",
+  "southAfricanMinimumWage": "South African Minimum Wage",
+  "ePWP": "EPWP",
+  "minimumWageText1": "We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr.",
+  "minimumWageText2": "As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour."
 }
