@@ -759,6 +759,218 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Step 4`
+  String get step4 {
+    return Intl.message(
+      'Step 4',
+      name: 'step4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is your hourly rate & work times`
+  String get whatIsYourHourlyRateAndWorkTimes {
+    return Intl.message(
+      'What is your hourly rate & work times',
+      name: 'whatIsYourHourlyRateAndWorkTimes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hourly rate`
+  String get hourlyRate {
+    return Intl.message(
+      'Hourly rate',
+      name: 'hourlyRate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R`
+  String get r {
+    return Intl.message(
+      'R',
+      name: 'r',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the '0.00' key
+
+  /// `Working hours`
+  String get workingHours {
+    return Intl.message(
+      'Working hours',
+      name: 'workingHours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start time *`
+  String get startTime {
+    return Intl.message(
+      'Start time *',
+      name: 'startTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End time *`
+  String get endTime {
+    return Intl.message(
+      'End time *',
+      name: 'endTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Working days`
+  String get workingDays {
+    return Intl.message(
+      'Working days',
+      name: 'workingDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Working days *`
+  String get workingDaysA {
+    return Intl.message(
+      'Working days *',
+      name: 'workingDaysA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription fee`
+  String get subscriptionFee {
+    return Intl.message(
+      'Subscription fee',
+      name: 'subscriptionFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Individual`
+  String get individual {
+    return Intl.message(
+      'Individual',
+      name: 'individual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looking for job opportunities as a single individual?`
+  String get lookingForJobOpportunitiesAsASingleIndividual {
+    return Intl.message(
+      'Looking for job opportunities as a single individual?',
+      name: 'lookingForJobOpportunitiesAsASingleIndividual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration fee`
+  String get registrationFee {
+    return Intl.message(
+      'Registration fee',
+      name: 'registrationFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A one-time fee of R50.00 (including VAT) get you started, with no monthly charges.`
+  String get aOneTimeFeeOf500GetYouStarted {
+    return Intl.message(
+      'A one-time fee of R50.00 (including VAT) get you started, with no monthly charges.',
+      name: 'aOneTimeFeeOf500GetYouStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have the flexibility to set your own hourly rate`
+  String get youHaveTheFlexibilityToSetYourOwnHourlyRate {
+    return Intl.message(
+      'You have the flexibility to set your own hourly rate',
+      name: 'youHaveTheFlexibilityToSetYourOwnHourlyRate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional information`
+  String get additionalInformation {
+    return Intl.message(
+      'Additional information',
+      name: 'additionalInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At PickMe, we add additional costs to your rate to cover essential aspects:`
+  String get atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects {
+    return Intl.message(
+      'At PickMe, we add additional costs to your rate to cover essential aspects:',
+      name: 'atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment fund`
+  String get investmentFund {
+    return Intl.message(
+      'Investment fund',
+      name: 'investmentFund',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PickMe invests a R4/hr worked in a personal investment fund for your future.`
+  String get pickMeInvestsR4hrWorkedInAProfessionalInvestmentFundForYourFuture {
+    return Intl.message(
+      'PickMe invests a R4/hr worked in a personal investment fund for your future.',
+      name: 'pickMeInvestsR4hrWorkedInAProfessionalInvestmentFundForYourFuture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction fees`
+  String get transactionFees {
+    return Intl.message(
+      'Transaction fees',
+      name: 'transactionFees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PickMe Receives a R2/hr worked as services fees`
+  String get pickMeReceivesAR2hrWorkedAsServiceFees {
+    return Intl.message(
+      'PickMe Receives a R2/hr worked as services fees',
+      name: 'pickMeReceivesAR2hrWorkedAsServiceFees',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

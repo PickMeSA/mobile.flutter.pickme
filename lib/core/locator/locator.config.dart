@@ -23,80 +23,82 @@ import '../../features/add_work_experience/presentation/bloc/add_work_experience
     as _i6;
 import '../../features/landing/presentation/bloc/landing_bloc.dart' as _i17;
 import '../../features/login/data/repository_impl/login_repository_impl/login_continue_clicked_repository_impl.dart'
-    as _i48;
+    as _i49;
 import '../../features/login/domain/entities/app_state/app_state_model.dart'
     as _i11;
 import '../../features/login/domain/entities/biometrics/biometrics_model.dart'
     as _i14;
-import '../../features/login/domain/entities/token/token_model.dart' as _i39;
+import '../../features/login/domain/entities/token/token_model.dart' as _i40;
 import '../../features/login/domain/repository/login_repository/login_continue_clicked_repository.dart'
-    as _i47;
+    as _i48;
 import '../../features/login/domain/use_cases/login_usecase/login_continue_clicked_usecase.dart'
-    as _i49;
-import '../../features/login/presentation/bloc/login_bloc.dart' as _i61;
+    as _i50;
+import '../../features/login/presentation/bloc/login_bloc.dart' as _i62;
 import '../../features/membership_information/presentation/bloc/membership_information_bloc.dart'
     as _i18;
 import '../../features/qualification/presentation/bloc/qualification_bloc.dart'
     as _i22;
-import '../../features/register/data/repository_impl/continue_clicked_repository_impl.dart'
-    as _i45;
-import '../../features/register/domain/repository/continue_clicked_repository.dart'
-    as _i44;
-import '../../features/register/domain/usecase/continue_clicked_usecase.dart'
-    as _i46;
-import '../../features/register/presentation/bloc/register__bloc.dart' as _i58;
-import '../../features/register_account_step_1/presentation/bloc/register_account_step1_bloc.dart'
+import '../../features/rate_and_work_times/presentation/bloc/rate_and_work_times_bloc.dart'
     as _i23;
+import '../../features/register/data/repository_impl/continue_clicked_repository_impl.dart'
+    as _i46;
+import '../../features/register/domain/repository/continue_clicked_repository.dart'
+    as _i45;
+import '../../features/register/domain/usecase/continue_clicked_usecase.dart'
+    as _i47;
+import '../../features/register/presentation/bloc/register__bloc.dart' as _i59;
+import '../../features/register_account_step_1/presentation/bloc/register_account_step1_bloc.dart'
+    as _i24;
 import '../../features/setup_profile/data/repository_impl/setup_profile_repository_impl/setup_profile_get_local_profile_repository_impl.dart'
-    as _i29;
-import '../../features/setup_profile/domain/repository/setup_profile_repository/setup_profile_get_local_profile_repository.dart'
-    as _i28;
-import '../../features/setup_profile/domain/use_cases/setup_profile_usecase/setup_profile_get_local_profile_usecase.dart'
     as _i30;
+import '../../features/setup_profile/domain/repository/setup_profile_repository/setup_profile_get_local_profile_repository.dart'
+    as _i29;
+import '../../features/setup_profile/domain/use_cases/setup_profile_usecase/setup_profile_get_local_profile_usecase.dart'
+    as _i31;
 import '../../features/setup_profile/presentation/bloc/setup_profile_bloc.dart'
-    as _i59;
+    as _i60;
 import '../../features/sign_up/data/repository_impl/sign_up_repository_impl/submit_sign_up_repository_impl.dart'
-    as _i34;
-import '../../features/sign_up/domain/repository/sign_up_repository/submit_sign_up_repository.dart'
-    as _i33;
-import '../../features/sign_up/domain/use_cases/sign_up_usecase/submit_sign_up_usecase.dart'
     as _i35;
-import '../../features/sign_up/presentation/bloc/sign_up_bloc.dart' as _i31;
-import '../../features/skills_and_industry/presentation/bloc/skills_and_industry_bloc.dart'
-    as _i32;
-import '../../features/terms_and_conditions/presentation/bloc/terms_and_conditions_bloc.dart'
+import '../../features/sign_up/domain/repository/sign_up_repository/submit_sign_up_repository.dart'
+    as _i34;
+import '../../features/sign_up/domain/use_cases/sign_up_usecase/submit_sign_up_usecase.dart'
     as _i36;
+import '../../features/sign_up/presentation/bloc/sign_up_bloc.dart' as _i32;
+import '../../features/skills_and_industry/presentation/bloc/skills_and_industry_bloc.dart'
+    as _i33;
+import '../../features/terms_and_conditions/presentation/bloc/terms_and_conditions_bloc.dart'
+    as _i37;
 import '../../localization/generated/l10n.dart' as _i7;
 import '../../navigation/app_route.dart' as _i8;
 import '../../shared/features/otp/data/repository_impl/otp_repository_impl/login_otp_complete_event_repository_impl.dart'
-    as _i51;
-import '../../shared/features/otp/data/repository_impl/otp_repository_impl/otp_get_token_repository_impl.dart'
-    as _i54;
-import '../../shared/features/otp/data/repository_impl/otp_repository_impl/otp_save_remote_profile_data_repository_impl.dart'
-    as _i63;
-import '../../shared/features/otp/data/repository_impl/otp_repository_impl/register_otp_complete_repository_impl.dart'
-    as _i25;
-import '../../shared/features/otp/domain/repository/otp_repository/login_otp_complete_event_repository.dart'
-    as _i50;
-import '../../shared/features/otp/domain/repository/otp_repository/otp_get_token_repository.dart'
-    as _i53;
-import '../../shared/features/otp/domain/repository/otp_repository/otp_save_remote_profile_data_repository.dart'
-    as _i62;
-import '../../shared/features/otp/domain/repository/otp_repository/register_otp_complete_repository.dart'
-    as _i24;
-import '../../shared/features/otp/domain/use_cases/otp_usecase/login_otp_complete_event_usecase.dart'
     as _i52;
-import '../../shared/features/otp/domain/use_cases/otp_usecase/otp_get_token_usecase.dart'
+import '../../shared/features/otp/data/repository_impl/otp_repository_impl/otp_get_token_repository_impl.dart'
     as _i55;
-import '../../shared/features/otp/domain/use_cases/otp_usecase/otp_save_remote_profile_data_usecase.dart'
+import '../../shared/features/otp/data/repository_impl/otp_repository_impl/otp_save_remote_profile_data_repository_impl.dart'
     as _i64;
-import '../../shared/features/otp/domain/use_cases/otp_usecase/register_otp_complete_usecase.dart'
+import '../../shared/features/otp/data/repository_impl/otp_repository_impl/register_otp_complete_repository_impl.dart'
     as _i26;
-import '../../shared/features/otp/presentation/bloc/otp_bloc.dart' as _i60;
-import '../../shared/features/resend_otp/presentation/bloc/resend_otp_bloc.dart'
+import '../../shared/features/otp/domain/repository/otp_repository/login_otp_complete_event_repository.dart'
+    as _i51;
+import '../../shared/features/otp/domain/repository/otp_repository/otp_get_token_repository.dart'
+    as _i54;
+import '../../shared/features/otp/domain/repository/otp_repository/otp_save_remote_profile_data_repository.dart'
+    as _i63;
+import '../../shared/features/otp/domain/repository/otp_repository/register_otp_complete_repository.dart'
+    as _i25;
+import '../../shared/features/otp/domain/use_cases/otp_usecase/login_otp_complete_event_usecase.dart'
+    as _i53;
+import '../../shared/features/otp/domain/use_cases/otp_usecase/otp_get_token_usecase.dart'
+    as _i56;
+import '../../shared/features/otp/domain/use_cases/otp_usecase/otp_save_remote_profile_data_usecase.dart'
+    as _i65;
+import '../../shared/features/otp/domain/use_cases/otp_usecase/register_otp_complete_usecase.dart'
     as _i27;
-import '../../shared/remote/api-service.dart' as _i40;
-import '../../shared/remote/dio_api_service_impl.dart' as _i41;
+import '../../shared/features/otp/presentation/bloc/otp_bloc.dart' as _i61;
+import '../../shared/features/resend_otp/presentation/bloc/resend_otp_bloc.dart'
+    as _i28;
+import '../../shared/remote/api-service.dart' as _i41;
+import '../../shared/remote/dio_api_service_impl.dart' as _i42;
 import '../../shared/services/local/Hive/app_state_local_storage/app_state_local_storage.dart'
     as _i9;
 import '../../shared/services/local/Hive/app_state_local_storage/app_state_local_storage_impl.dart'
@@ -112,18 +114,18 @@ import '../../shared/services/local/Hive/profile_local_storage/profile_local_sto
 import '../../shared/services/local/Hive/profile_local_storage/profile_local_storage_impl.dart'
     as _i20;
 import '../../shared/services/local/Hive/token_local_storage/token_local_storage.dart'
-    as _i37;
-import '../../shared/services/local/Hive/token_local_storage/token_local_storage_impl.dart'
     as _i38;
+import '../../shared/services/local/Hive/token_local_storage/token_local_storage_impl.dart'
+    as _i39;
 import '../../shared/services/remote/api_service/profile_service/profile_service.dart'
-    as _i56;
-import '../../shared/services/remote/api_service/profile_service/profile_service_impl.dart'
     as _i57;
+import '../../shared/services/remote/api_service/profile_service/profile_service_impl.dart'
+    as _i58;
 import '../../shared/services/remote/authentication/authentication.dart'
-    as _i42;
-import '../../shared/services/remote/authentication/firebase_authentication.dart'
     as _i43;
-import 'locator.dart' as _i65;
+import '../../shared/services/remote/authentication/firebase_authentication.dart'
+    as _i44;
+import 'locator.dart' as _i66;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -166,87 +168,88 @@ extension GetItInjectableX on _i1.GetIt {
           passportNumber: gh<String>(),
         ));
     gh.factory<_i22.QualificationsBloc>(() => _i22.QualificationsBloc());
-    gh.factory<_i23.RegisterAccountStep1Bloc>(
-        () => _i23.RegisterAccountStep1Bloc());
-    gh.factory<_i24.RegisterOTPCompleteRepository>(() =>
-        _i25.RegisterOTPCompleteRepositoryImpl(
+    gh.factory<_i23.RateAndWorkTimesBloc>(() => _i23.RateAndWorkTimesBloc());
+    gh.factory<_i24.RegisterAccountStep1Bloc>(
+        () => _i24.RegisterAccountStep1Bloc());
+    gh.factory<_i25.RegisterOTPCompleteRepository>(() =>
+        _i26.RegisterOTPCompleteRepositoryImpl(
             profileLocalStorage: gh<_i19.ProfileLocalStorage>()));
-    gh.factory<_i26.RegisterOTPCompleteUseCase>(() =>
-        _i26.RegisterOTPCompleteUseCase(
+    gh.factory<_i27.RegisterOTPCompleteUseCase>(() =>
+        _i27.RegisterOTPCompleteUseCase(
             registerOTPCompleteEventRepository:
-                gh<_i24.RegisterOTPCompleteRepository>()));
-    gh.factory<_i27.ResendOTPBloc>(() => _i27.ResendOTPBloc());
-    gh.factory<_i28.SetupProfileGetLocalProfileRepository>(() =>
-        _i29.SetupProfileGetLocalProfileRepositoryImpl(
+                gh<_i25.RegisterOTPCompleteRepository>()));
+    gh.factory<_i28.ResendOTPBloc>(() => _i28.ResendOTPBloc());
+    gh.factory<_i29.SetupProfileGetLocalProfileRepository>(() =>
+        _i30.SetupProfileGetLocalProfileRepositoryImpl(
             profileLocalStorage: gh<_i19.ProfileLocalStorage>()));
-    gh.factory<_i30.SetupProfileGetLocalProfileUseCase>(() =>
-        _i30.SetupProfileGetLocalProfileUseCase(
+    gh.factory<_i31.SetupProfileGetLocalProfileUseCase>(() =>
+        _i31.SetupProfileGetLocalProfileUseCase(
             setupProfileGetLocalProfileRepository:
-                gh<_i28.SetupProfileGetLocalProfileRepository>()));
-    gh.factory<_i31.SignUpBloc>(() => _i31.SignUpBloc());
-    gh.factory<_i32.SkillsAndIndustryBloc>(() => _i32.SkillsAndIndustryBloc());
-    gh.factory<_i33.SubmitSignUpRepository>(
-        () => _i34.SubmitSignUpRepositoryImpl());
-    gh.factory<_i35.SubmitSignUpUseCase>(() => _i35.SubmitSignUpUseCase(
-        submitSignUpRepository: gh<_i33.SubmitSignUpRepository>()));
-    gh.factory<_i36.TermsAndConditionsBloc>(
-        () => _i36.TermsAndConditionsBloc());
-    gh.factory<_i37.TokenLocalStorage>(() => _i38.TokenLocalStorageImpl());
-    gh.factory<_i39.TokenModel>(() => _i39.TokenModel(
+                gh<_i29.SetupProfileGetLocalProfileRepository>()));
+    gh.factory<_i32.SignUpBloc>(() => _i32.SignUpBloc());
+    gh.factory<_i33.SkillsAndIndustryBloc>(() => _i33.SkillsAndIndustryBloc());
+    gh.factory<_i34.SubmitSignUpRepository>(
+        () => _i35.SubmitSignUpRepositoryImpl());
+    gh.factory<_i36.SubmitSignUpUseCase>(() => _i36.SubmitSignUpUseCase(
+        submitSignUpRepository: gh<_i34.SubmitSignUpRepository>()));
+    gh.factory<_i37.TermsAndConditionsBloc>(
+        () => _i37.TermsAndConditionsBloc());
+    gh.factory<_i38.TokenLocalStorage>(() => _i39.TokenLocalStorageImpl());
+    gh.factory<_i40.TokenModel>(() => _i40.TokenModel(
           refreshToken: gh<String>(),
           accessToken: gh<String>(),
           tokenID: gh<String>(),
         ));
-    gh.singleton<_i40.ApiService>(_i41.DioApiService(dio: gh<_i15.Dio>()));
-    gh.singleton<_i42.Authentication>(
-        _i43.PFirebaseAuthentication(firebaseAuth: gh<_i16.FirebaseAuth>()));
-    gh.factory<_i44.ContinueClickedRepository>(() =>
-        _i45.ContinueClickedRepositoryImpl(
-            authentication: gh<_i42.Authentication>()));
-    gh.factory<_i46.ContinueClickedUseCase>(() => _i46.ContinueClickedUseCase(
-        continueClickedRepository: gh<_i44.ContinueClickedRepository>()));
-    gh.factory<_i47.LoginContinueClickedRepository>(() =>
-        _i48.LoginContinueClickedRepositoryImpl(
-            authentication: gh<_i42.Authentication>()));
-    gh.factory<_i49.LoginContinueClickedUseCase>(() =>
-        _i49.LoginContinueClickedUseCase(
+    gh.singleton<_i41.ApiService>(_i42.DioApiService(dio: gh<_i15.Dio>()));
+    gh.singleton<_i43.Authentication>(
+        _i44.PFirebaseAuthentication(firebaseAuth: gh<_i16.FirebaseAuth>()));
+    gh.factory<_i45.ContinueClickedRepository>(() =>
+        _i46.ContinueClickedRepositoryImpl(
+            authentication: gh<_i43.Authentication>()));
+    gh.factory<_i47.ContinueClickedUseCase>(() => _i47.ContinueClickedUseCase(
+        continueClickedRepository: gh<_i45.ContinueClickedRepository>()));
+    gh.factory<_i48.LoginContinueClickedRepository>(() =>
+        _i49.LoginContinueClickedRepositoryImpl(
+            authentication: gh<_i43.Authentication>()));
+    gh.factory<_i50.LoginContinueClickedUseCase>(() =>
+        _i50.LoginContinueClickedUseCase(
             loginContinueClickedRepository:
-                gh<_i47.LoginContinueClickedRepository>()));
-    gh.factory<_i50.LoginOTPCompleteEventRepository>(() =>
-        _i51.LoginOTPCompleteEventRepositoryImpl(
+                gh<_i48.LoginContinueClickedRepository>()));
+    gh.factory<_i51.LoginOTPCompleteEventRepository>(() =>
+        _i52.LoginOTPCompleteEventRepositoryImpl(
             profileLocalStorage: gh<_i19.ProfileLocalStorage>()));
-    gh.factory<_i52.LoginOTPCompleteEventUseCase>(() =>
-        _i52.LoginOTPCompleteEventUseCase(
+    gh.factory<_i53.LoginOTPCompleteEventUseCase>(() =>
+        _i53.LoginOTPCompleteEventUseCase(
             loginOTPCompleteEventRepository:
-                gh<_i50.LoginOTPCompleteEventRepository>()));
-    gh.factory<_i53.OTPGetTokenRepository>(() => _i54.OTPGetTokenRepositoryImpl(
-        authentication: gh<_i42.Authentication>()));
-    gh.factory<_i55.OTPGetTokenUseCase>(() => _i55.OTPGetTokenUseCase(
-        oTPGetTokenRepository: gh<_i53.OTPGetTokenRepository>()));
-    gh.singleton<_i56.ProfileService>(_i57.ProfileServiceImpl(
-      apiService: gh<_i40.ApiService>(),
-      tokenLocalStorage: gh<_i37.TokenLocalStorage>(),
+                gh<_i51.LoginOTPCompleteEventRepository>()));
+    gh.factory<_i54.OTPGetTokenRepository>(() => _i55.OTPGetTokenRepositoryImpl(
+        authentication: gh<_i43.Authentication>()));
+    gh.factory<_i56.OTPGetTokenUseCase>(() => _i56.OTPGetTokenUseCase(
+        oTPGetTokenRepository: gh<_i54.OTPGetTokenRepository>()));
+    gh.singleton<_i57.ProfileService>(_i58.ProfileServiceImpl(
+      apiService: gh<_i41.ApiService>(),
+      tokenLocalStorage: gh<_i38.TokenLocalStorage>(),
     ));
-    gh.factory<_i58.RegisterBloc>(() => _i58.RegisterBloc(
-        continueClickedUseCase: gh<_i46.ContinueClickedUseCase>()));
-    gh.factory<_i59.SetupProfileBloc>(() => _i59.SetupProfileBloc(
+    gh.factory<_i59.RegisterBloc>(() => _i59.RegisterBloc(
+        continueClickedUseCase: gh<_i47.ContinueClickedUseCase>()));
+    gh.factory<_i60.SetupProfileBloc>(() => _i60.SetupProfileBloc(
         setupProfileGetLocalProfileUseCase:
-            gh<_i30.SetupProfileGetLocalProfileUseCase>()));
-    gh.factory<_i60.otpBloc>(() => _i60.otpBloc(
-          registerOTPCompleteUseCase: gh<_i26.RegisterOTPCompleteUseCase>(),
-          otpGetTokenUseCase: gh<_i55.OTPGetTokenUseCase>(),
+            gh<_i31.SetupProfileGetLocalProfileUseCase>()));
+    gh.factory<_i61.otpBloc>(() => _i61.otpBloc(
+          registerOTPCompleteUseCase: gh<_i27.RegisterOTPCompleteUseCase>(),
+          otpGetTokenUseCase: gh<_i56.OTPGetTokenUseCase>(),
         ));
-    gh.factory<_i61.LoginBloc>(() => _i61.LoginBloc(
-        loginContinueClickedUsecase: gh<_i49.LoginContinueClickedUseCase>()));
-    gh.factory<_i62.OTPSaveRemoteProfileDataRepository>(() =>
-        _i63.OTPSaveRemoteProfileDataRepositoryImpl(
-            profileService: gh<_i56.ProfileService>()));
-    gh.factory<_i64.OTPSaveRemoteProfileDataUseCase>(() =>
-        _i64.OTPSaveRemoteProfileDataUseCase(
+    gh.factory<_i62.LoginBloc>(() => _i62.LoginBloc(
+        loginContinueClickedUsecase: gh<_i50.LoginContinueClickedUseCase>()));
+    gh.factory<_i63.OTPSaveRemoteProfileDataRepository>(() =>
+        _i64.OTPSaveRemoteProfileDataRepositoryImpl(
+            profileService: gh<_i57.ProfileService>()));
+    gh.factory<_i65.OTPSaveRemoteProfileDataUseCase>(() =>
+        _i65.OTPSaveRemoteProfileDataUseCase(
             oTPSaveRemoteProfileDataRepository:
-                gh<_i62.OTPSaveRemoteProfileDataRepository>()));
+                gh<_i63.OTPSaveRemoteProfileDataRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i65.RegisterModule {}
+class _$RegisterModule extends _i66.RegisterModule {}

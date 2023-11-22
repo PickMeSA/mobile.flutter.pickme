@@ -10,5 +10,7 @@ part 'rate_and_work_times_state.dart';
 @injectable
 class RateAndWorkTimesBloc
     extends BaseBloc<RateAndWorkTimesPageEvent, RateAndWorkTimesPageState> {
+
+    bool checked = false;
     RateAndWorkTimesBloc(): super(RateAndWorkTimesPageInitState()) {}
 } 

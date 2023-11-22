@@ -75,6 +75,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const QualificationsPage(),
       );
     },
+    RateAndWorkTimesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RateAndWorkTimesPage(),
+      );
+    },
     RegisterAccountStep1Route.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -278,6 +284,20 @@ class QualificationsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'QualificationsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RateAndWorkTimesPage]
+class RateAndWorkTimesRoute extends PageRouteInfo<void> {
+  const RateAndWorkTimesRoute({List<PageRouteInfo>? children})
+      : super(
+          RateAndWorkTimesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RateAndWorkTimesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

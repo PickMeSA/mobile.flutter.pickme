@@ -9,6 +9,7 @@ import 'package:pickme/features/add_work_experience/presentation/add_work_experi
 import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
 import 'package:pickme/features/qualification/presentation/qualification_page.dart';
+import 'package:pickme/features/rate_and_work_times/presentation/rate_and_work_times_page.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/features/register/presentation/register_page.dart';
 import 'package:pickme/features/setup_profile/presentation/setup_profile_page.dart';
@@ -44,7 +45,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
-    AnimatedRoute(page: AddSkillsRoute.page)
+    AnimatedRoute(page: AddSkillsRoute.page),
+    AnimatedRoute(page:RateAndWorkTimesRoute.page)
 
   ];
 }

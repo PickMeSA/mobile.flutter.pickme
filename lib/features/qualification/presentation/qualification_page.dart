@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -81,7 +82,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                    Padding(
                        padding: const EdgeInsets.only(top: 20),
                        child: qualificationSlab(
-                           icon: const Icon(Icons.work_outline_rounded,
+                           icon: const Icon(Iconsax.briefcase,
                              size: 24,),
                            caption: getLocalization().workExperience,
                            buttonCaption: getLocalization().addWorkExperience,

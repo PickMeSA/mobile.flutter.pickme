@@ -9,6 +9,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/w_colors.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -146,7 +147,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                                )
                            ),
                            onPressed: !getBloc().checked?null:() {
-                             //context.router.push(QualificationsRoute());
+                             context.router.push(const RateAndWorkTimesRoute());
                            },
                            child: Text(getLocalization().nextStep),
                          ),

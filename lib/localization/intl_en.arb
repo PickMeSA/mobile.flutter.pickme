@@ -68,9 +68,30 @@
   "skillsMax5": "Skills (max. 5)",
   "addASkill": "Add a skill",
   "step3": "Step 3",
-  "upload": "Upload",
   "photosOfWork": "Photos of work (optional)",
-  "skillsA": "Skills *"
+  "skillsA": "Skills *",
+  "step4": "Step 4",
+  "whatIsYourHourlyRateAndWorkTimes": "What is your hourly rate & work times",
+  "hourlyRate": "Hourly rate",
+  "r": "R",
+  "0.00": "0.00",
+  "workingHours": "Working hours",
+  "startTime": "Start time *",
+  "endTime": "End time *",
+  "workingDays": "Working days",
+  "workingDaysA": "Working days *",
+  "subscriptionFee": "Subscription fee",
+  "individual": "Individual",
+  "lookingForJobOpportunitiesAsASingleIndividual": "Looking for job opportunities as a single individual?",
+  "registrationFee": "Registration fee",
+  "aOneTimeFeeOf500GetYouStarted": "A one-time fee of R50.00 (including VAT) get you started, with no monthly charges.",
+  "youHaveTheFlexibilityToSetYourOwnHourlyRate": "You have the flexibility to set your own hourly rate",
+  "additionalInformation": "Additional information",
+  "atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects": "At PickMe, we add additional costs to your rate to cover essential aspects:",
+  "investmentFund": "Investment fund",
+  "pickMeInvestsR4hrWorkedInAProfessionalInvestmentFundForYourFuture": "PickMe invests a R4/hr worked in a personal investment fund for your future.",
+  "transactionFees": "Transaction fees",
+  "pickMeReceivesAR2hrWorkedAsServiceFees": "PickMe Receives a R2/hr worked as services fees"
 
 
 }
