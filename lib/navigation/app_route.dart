@@ -44,6 +44,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
+    AnimatedRoute(page: AddSkillsRoute.page)
 
   ];
 }

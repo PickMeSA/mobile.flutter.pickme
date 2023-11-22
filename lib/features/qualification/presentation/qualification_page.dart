@@ -69,8 +69,8 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                      child: qualificationSlab(
                          icon: const Icon(Icons.school_outlined,
                            size: 24,),
-                         caption: getLocalization().qualifications,
-                       buttonCaption: getLocalization().addAQualification,
+                         caption: getLocalization().qualificationMembership,
+                       buttonCaption: getLocalization().addAQualificationMembership,
                        onClick: (){
                            context.router.push(AddQualificationRoute());
                        }
@@ -90,20 +90,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                          }
                        )
                    ),
-                   SizedBox(height: 20,),
-                   AppDivider(height: 1,),
-                   Padding(
-                       padding: const EdgeInsets.only(top: 20),
-                       child: qualificationSlab(
-                           icon: const Icon(Icons.star_outline_rounded,
-                             size: 24,),
-                           caption: getLocalization().membershipAwardName,
-                           buttonCaption: getLocalization().addMembershipOrAward,
-                         onClick: (){
-                             context.router.push(AddMembershipsRoute());
-                         }
-                       )
-                   ),
+
                    const SizedBox(height: 50,),
                    Row(
                      children: [
@@ -139,7 +126,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                      )
                  ),
                  onPressed: !state.checked?null:() {
-                   context.router.push(QualificationsRoute());
+                   context.router.push(const AddSkillsRoute());
                  },
                  child: Text(getLocalization().nextStep),
                ),

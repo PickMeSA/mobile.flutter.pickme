@@ -1,8 +1,8 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
-import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/shared/constants/qualifications.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
-
 import 'bloc/add_qualification_bloc.dart';
 
 @RoutePage()
@@ -57,7 +56,7 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                      padding: const EdgeInsets.only(top: 20, bottom: 50),
                      child: Row(
                        children: [
-                         wText(getLocalization().addAQualification, style: const TextStyle(
+                         wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
                            fontSize: 20, fontWeight: FontWeight.w400
                          )),
                          const Spacer(),
@@ -86,9 +85,47 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                      child: AppTextFormField(textFieldType: TextFieldType.NAME,
                      labelText: getLocalization().issuingOrganisations,),
                    ),
+
+
                    DateTextBox(labelText: getLocalization().issueDate,),
+                   Padding(padding: const EdgeInsets.only(bottom: 30, top: 15),
+                       child:Container(
+                         height: 130,
+                         child: Stack(
+                           children:<Widget> [
+
+                             Positioned(top: 10,
+                               child: Container(
+                               height: 100,
+                               width: MediaQuery.sizeOf(context).width- 40,
+
+                               decoration:  BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(10)), border: Border.all(color:Colors.black )),
+                               child: Center(
+                                 child: SizedBox(
+                                   width: 90,
+                                   child: Row(
+                                     children: [
+                                      SvgPicture.asset("assets/upload_icon.svg",width: 25),
+                                       Spacer(),
+                                       wText(getLocalization().upload,
+                                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400,fontSize: 16))
+                                     ],
+                                   ),
+                                 ),
+                               ),
+
+
+                           ),
+                             ),
+                             Positioned(left: 20, top: 0,child: Container(
+                               width: 220,
+                               decoration: BoxDecoration(color: Colors.white) ,
+                               child: Center(child: wText(getLocalization().photosOfWork)),
+                             )),
+                         ]),
+                       )),
                    const Spacer(),
-                   PrimaryButton(width: MediaQuery.sizeOf(context).width,onPressed: (){}, child: wText(getLocalization().add))
+                   PrimaryButtonDark(width: MediaQuery.sizeOf(context).width,onPressed: (){}, child: wText(getLocalization().add))
 
                  ],
                ),

@@ -28,8 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Add"),
-        "addAQualification":
-            MessageLookupByLibrary.simpleMessage("Add a qualification"),
+        "addAQualificationMembership": MessageLookupByLibrary.simpleMessage(
+            "Add a qualification/membership"),
+        "addAQualificationOrMembership": MessageLookupByLibrary.simpleMessage(
+            "Add a qualification or membership"),
         "addASkill": MessageLookupByLibrary.simpleMessage("Add a skill"),
         "addMembershipOrAward":
             MessageLookupByLibrary.simpleMessage("Add membership \nor award"),
@@ -87,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passport number *"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
+        "photosOfWork":
+            MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
         "photosOfWorkOptional":
             MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
         "pleaseReenterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
@@ -95,14 +99,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Position title *"),
         "preferredIndustry":
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
+        "qualificationMembership":
+            MessageLookupByLibrary.simpleMessage("Qualifications/Membership"),
         "qualificationName":
             MessageLookupByLibrary.simpleMessage("Qualification name *"),
         "qualificationType":
             MessageLookupByLibrary.simpleMessage("Qualification type *"),
-        "qualifications":
-            MessageLookupByLibrary.simpleMessage("Qualifications"),
         "selectMembership":
             MessageLookupByLibrary.simpleMessage("Select your membership"),
+        "skillsA": MessageLookupByLibrary.simpleMessage("Skills *"),
         "skillsAndIndustry":
             MessageLookupByLibrary.simpleMessage("Skills & industry"),
         "skillsMax5": MessageLookupByLibrary.simpleMessage("Skills (max. 5)"),

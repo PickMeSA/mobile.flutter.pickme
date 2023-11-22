@@ -470,21 +470,31 @@ class AppLocalizations {
     );
   }
 
-  /// `Qualifications`
-  String get qualifications {
+  /// `Qualifications/Membership`
+  String get qualificationMembership {
     return Intl.message(
-      'Qualifications',
-      name: 'qualifications',
+      'Qualifications/Membership',
+      name: 'qualificationMembership',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add a qualification`
-  String get addAQualification {
+  /// `Add a qualification/membership`
+  String get addAQualificationMembership {
     return Intl.message(
-      'Add a qualification',
-      name: 'addAQualification',
+      'Add a qualification/membership',
+      name: 'addAQualificationMembership',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a qualification or membership`
+  String get addAQualificationOrMembership {
+    return Intl.message(
+      'Add a qualification or membership',
+      name: 'addAQualificationOrMembership',
       desc: '',
       args: [],
     );
@@ -725,6 +735,26 @@ class AppLocalizations {
     return Intl.message(
       'Step 3',
       name: 'step3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos of work (optional)`
+  String get photosOfWork {
+    return Intl.message(
+      'Photos of work (optional)',
+      name: 'photosOfWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skills *`
+  String get skillsA {
+    return Intl.message(
+      'Skills *',
+      name: 'skillsA',
       desc: '',
       args: [],
     );

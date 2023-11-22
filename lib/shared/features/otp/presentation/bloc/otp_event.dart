@@ -28,3 +28,11 @@ class OTPEnteredEvent extends otpPageEvent{
    OTPEnteredEvent({required this.otp});
 }
 
+class SaveRemoteProfileDataEvent extends otpPageEvent{
+   final UserModel userModel;
+
+   SaveRemoteProfileDataEvent({required this.userModel});
+}
+
+class GetProfileProgressEvent extends otpPageEvent{}
+

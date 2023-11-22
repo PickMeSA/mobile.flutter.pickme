@@ -17,6 +17,7 @@ part 'otp_state.dart';
 class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
     bool checked = false;
     String? otp;
+    bool preloaderActive = false;
     final OTPGetTokenUseCase otpGetTokenUseCase;
     final RegisterOTPCompleteUseCase registerOTPCompleteUseCase;
     otpBloc({
@@ -27,6 +28,27 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         on<RegisterOTPCompleteEvent>((event, emit)=> _onRegisterOTPCompleteEvent(event,emit));
         on<LoginOTPCompleteEvent>((event,emit)=> _onLoginOTPCompleteEvent(event,emit));
         on<OTPEnteredEvent>((event, emit) => _onOTPEnteredEvent(event, emit));
+        on<SaveRemoteProfileDataEvent>((event, emit) => _onSaveRemoteProfileDataEvent(event, emit));
+        on<GetProfileProgressEvent>((event, emit) => _onGetProfileProgressEvent(event,emit));
+    }
+
+    _onGetProfileProgressEvent(
+        GetProfileProgressEvent event,
+        Emitter<otpPageState> emit) async{
+        //run code to check the progress of the user in the registration flow
+        emit(GetProfileProgressState()..dataState = DataState.success);
+    }
+
+    _onSaveRemoteProfileDataEvent(
+        SaveRemoteProfileDataEvent event,
+        Emitter<otpPageState> emit
+        ) async{
+        emit(SaveRemoteProfileDataState()..dataState = DataState.loading);
+        try{
+            emit(SaveRemoteProfileDataState(error: "")..dataState = DataState.success);
+        }catch(ex){
+            emit(SaveRemoteProfileDataState(error: ex.toString()).. dataState = DataState.error);
+        }
     }
 
     _onOTPEnteredEvent(
