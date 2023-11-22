@@ -99,7 +99,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                          labelText: getLocalization().industry,),
                      ),
                      const SizedBox(height: 75,),
-                     PrimaryButton(width: MediaQuery.sizeOf(context).width,onPressed: (){}, child: wText(getLocalization().add))
+                     PrimaryButtonDark(width: MediaQuery.sizeOf(context).width,onPressed: (){}, child: wText(getLocalization().add))
                    ],
                  ),
                ),

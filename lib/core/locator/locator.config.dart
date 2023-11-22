@@ -33,7 +33,7 @@ import '../../features/login/domain/repository/login_repository/login_continue_c
     as _i47;
 import '../../features/login/domain/use_cases/login_usecase/login_continue_clicked_usecase.dart'
     as _i49;
-import '../../features/login/presentation/bloc/login_bloc.dart' as _i59;
+import '../../features/login/presentation/bloc/login_bloc.dart' as _i61;
 import '../../features/membership_information/presentation/bloc/membership_information_bloc.dart'
     as _i18;
 import '../../features/qualification/presentation/bloc/qualification_bloc.dart'
@@ -44,7 +44,7 @@ import '../../features/register/domain/repository/continue_clicked_repository.da
     as _i44;
 import '../../features/register/domain/usecase/continue_clicked_usecase.dart'
     as _i46;
-import '../../features/register/presentation/bloc/register__bloc.dart' as _i56;
+import '../../features/register/presentation/bloc/register__bloc.dart' as _i58;
 import '../../features/register_account_step_1/presentation/bloc/register_account_step1_bloc.dart'
     as _i23;
 import '../../features/setup_profile/data/repository_impl/setup_profile_repository_impl/setup_profile_get_local_profile_repository_impl.dart'
@@ -54,7 +54,7 @@ import '../../features/setup_profile/domain/repository/setup_profile_repository/
 import '../../features/setup_profile/domain/use_cases/setup_profile_usecase/setup_profile_get_local_profile_usecase.dart'
     as _i30;
 import '../../features/setup_profile/presentation/bloc/setup_profile_bloc.dart'
-    as _i57;
+    as _i59;
 import '../../features/sign_up/data/repository_impl/sign_up_repository_impl/submit_sign_up_repository_impl.dart'
     as _i34;
 import '../../features/sign_up/domain/repository/sign_up_repository/submit_sign_up_repository.dart'
@@ -72,21 +72,27 @@ import '../../shared/features/otp/data/repository_impl/otp_repository_impl/login
     as _i51;
 import '../../shared/features/otp/data/repository_impl/otp_repository_impl/otp_get_token_repository_impl.dart'
     as _i54;
+import '../../shared/features/otp/data/repository_impl/otp_repository_impl/otp_save_remote_profile_data_repository_impl.dart'
+    as _i63;
 import '../../shared/features/otp/data/repository_impl/otp_repository_impl/register_otp_complete_repository_impl.dart'
     as _i25;
 import '../../shared/features/otp/domain/repository/otp_repository/login_otp_complete_event_repository.dart'
     as _i50;
 import '../../shared/features/otp/domain/repository/otp_repository/otp_get_token_repository.dart'
     as _i53;
+import '../../shared/features/otp/domain/repository/otp_repository/otp_save_remote_profile_data_repository.dart'
+    as _i62;
 import '../../shared/features/otp/domain/repository/otp_repository/register_otp_complete_repository.dart'
     as _i24;
 import '../../shared/features/otp/domain/use_cases/otp_usecase/login_otp_complete_event_usecase.dart'
     as _i52;
 import '../../shared/features/otp/domain/use_cases/otp_usecase/otp_get_token_usecase.dart'
     as _i55;
+import '../../shared/features/otp/domain/use_cases/otp_usecase/otp_save_remote_profile_data_usecase.dart'
+    as _i64;
 import '../../shared/features/otp/domain/use_cases/otp_usecase/register_otp_complete_usecase.dart'
     as _i26;
-import '../../shared/features/otp/presentation/bloc/otp_bloc.dart' as _i58;
+import '../../shared/features/otp/presentation/bloc/otp_bloc.dart' as _i60;
 import '../../shared/features/resend_otp/presentation/bloc/resend_otp_bloc.dart'
     as _i27;
 import '../../shared/remote/api-service.dart' as _i40;
@@ -109,11 +115,15 @@ import '../../shared/services/local/Hive/token_local_storage/token_local_storage
     as _i37;
 import '../../shared/services/local/Hive/token_local_storage/token_local_storage_impl.dart'
     as _i38;
+import '../../shared/services/remote/api_service/profile_service/profile_service.dart'
+    as _i56;
+import '../../shared/services/remote/api_service/profile_service/profile_service_impl.dart'
+    as _i57;
 import '../../shared/services/remote/authentication/authentication.dart'
     as _i42;
 import '../../shared/services/remote/authentication/firebase_authentication.dart'
     as _i43;
-import 'locator.dart' as _i60;
+import 'locator.dart' as _i65;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -213,19 +223,30 @@ extension GetItInjectableX on _i1.GetIt {
         authentication: gh<_i42.Authentication>()));
     gh.factory<_i55.OTPGetTokenUseCase>(() => _i55.OTPGetTokenUseCase(
         oTPGetTokenRepository: gh<_i53.OTPGetTokenRepository>()));
-    gh.factory<_i56.RegisterBloc>(() => _i56.RegisterBloc(
+    gh.singleton<_i56.ProfileService>(_i57.ProfileServiceImpl(
+      apiService: gh<_i40.ApiService>(),
+      tokenLocalStorage: gh<_i37.TokenLocalStorage>(),
+    ));
+    gh.factory<_i58.RegisterBloc>(() => _i58.RegisterBloc(
         continueClickedUseCase: gh<_i46.ContinueClickedUseCase>()));
-    gh.factory<_i57.SetupProfileBloc>(() => _i57.SetupProfileBloc(
+    gh.factory<_i59.SetupProfileBloc>(() => _i59.SetupProfileBloc(
         setupProfileGetLocalProfileUseCase:
             gh<_i30.SetupProfileGetLocalProfileUseCase>()));
-    gh.factory<_i58.otpBloc>(() => _i58.otpBloc(
+    gh.factory<_i60.otpBloc>(() => _i60.otpBloc(
           registerOTPCompleteUseCase: gh<_i26.RegisterOTPCompleteUseCase>(),
           otpGetTokenUseCase: gh<_i55.OTPGetTokenUseCase>(),
         ));
-    gh.factory<_i59.LoginBloc>(() => _i59.LoginBloc(
+    gh.factory<_i61.LoginBloc>(() => _i61.LoginBloc(
         loginContinueClickedUsecase: gh<_i49.LoginContinueClickedUseCase>()));
+    gh.factory<_i62.OTPSaveRemoteProfileDataRepository>(() =>
+        _i63.OTPSaveRemoteProfileDataRepositoryImpl(
+            profileService: gh<_i56.ProfileService>()));
+    gh.factory<_i64.OTPSaveRemoteProfileDataUseCase>(() =>
+        _i64.OTPSaveRemoteProfileDataUseCase(
+            oTPSaveRemoteProfileDataRepository:
+                gh<_i62.OTPSaveRemoteProfileDataRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i60.RegisterModule {}
+class _$RegisterModule extends _i65.RegisterModule {}

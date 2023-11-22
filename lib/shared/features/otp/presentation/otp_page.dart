@@ -10,6 +10,8 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/otp_bloc.dart';
@@ -45,9 +47,85 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
     var theme = Theme.of(context);
     return BlocConsumer<otpBloc, otpPageState>(
       listener: (context, state){
-        if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
-          context.router.push(SetupProfileRoute(userModel: widget.userModel!));
+
+        //OTPGetTokenState////////////////////////////////////////////////////
+        //success
+        if(state is OTPGetTokenState && state.dataState == DataState.success){
+          if(widget.fromregister!) {
+            getBloc().add(RegisterOTPCompleteEvent(userModel: widget.userModel));
+          }else{
+          getBloc().add(GetProfileProgressEvent());
         }
+        }
+
+        //error
+        if(state is OTPGetTokenState && state.dataState == DataState.error){
+        // error dialog
+        }
+        //loading
+        if(state is OTPGetTokenState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+
+        //RegisterOTPCompleteState/////////////////////////////////////
+        //Success
+        if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
+
+            getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
+
+        }
+        //loading
+        if(state is RegisterOTPCompleteState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //error
+        if(state is RegisterOTPCompleteState && state.dataState == DataState.error){
+          // will use error dialog
+        }
+
+        // SaveRemoteProfileDataState/////////////////////////////////////////
+        //loading
+        if(state is SaveRemoteProfileDataState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //success
+        if(state is SaveRemoteProfileDataState && state.dataState == DataState.success){
+          getBloc().add(GetProfileProgressEvent());
+        }
+        //error
+        if(state is SaveRemoteProfileDataState && state.dataState == DataState.error){
+          //will use error dialog
+        }
+
+        //GetProfileProgressState////////////////////////////////////
+        //success
+        if(state is GetProfileProgressState && state.dataState == DataState.success){
+          Navigator.pop(context);
+          getBloc().preloaderActive = false;
+          context.router.push(const RegisterAccountStep1Route());
+        }
+
+        if(state is GetProfileProgressState && state.dataState == DataState.error){
+
+        }
+
+        if(state is GetProfileProgressState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+
+
       },
       builder: (context, state) {
          return SizedBox(
@@ -124,7 +202,6 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                                )
                            ),
                            onPressed: !getBloc().checked?null:() {
-
                              getBloc().add(OTPGetTokenEvent(smsCode: getBloc().otp!,verificationId: "" ));
                            },
                            child: Text(getLocalization().ccontinue),
