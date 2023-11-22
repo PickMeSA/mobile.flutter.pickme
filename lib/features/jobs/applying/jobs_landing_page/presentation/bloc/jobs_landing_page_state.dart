@@ -2,16 +2,14 @@ part of 'jobs_landing_page_bloc.dart';
 
 @immutable
 abstract class JobsLandingPageState extends BaseState {
-  final bool checked;
-
-  JobsLandingPageState({super.dataState, required this.checked});
+  JobsLandingPageState({super.dataState});
 
 }
 
 class JobsLandingPageInitial extends JobsLandingPageState {
-  JobsLandingPageInitial({required super.checked});
+  JobsLandingPageInitial();
 }
 
-class TermsAndConditionsToggledState extends JobsLandingPageState {
-  TermsAndConditionsToggledState({required super.checked});
+class SeeAllClickedState extends JobsLandingPageState {
+  SeeAllClickedState();
 }

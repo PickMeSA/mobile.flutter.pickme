@@ -10,15 +10,13 @@ part 'jobs_landing_page_state.dart';
 
 @injectable
 class JobsLandingPageBloc extends BaseBloc<JobsLandingPageEvent, JobsLandingPageState> {
-  bool checked = false;
-  JobsLandingPageBloc() : super(JobsLandingPageInitial(checked: false)) {
-    on<TermsAndConditionsToggledEvent>((event, emit) => _onTermsAndConditionsToggledEvent(event, emit));
+  JobsLandingPageBloc() : super(JobsLandingPageInitial()) {
+    on<SeeAllClickedEvent>((event, emit) => _onSeeAllClickedEventEvent(event, emit));
   }
-  _onTermsAndConditionsToggledEvent(
-      TermsAndConditionsToggledEvent event,
+  _onSeeAllClickedEventEvent(
+      SeeAllClickedEvent event,
       Emitter<JobsLandingPageState> emit
       ) {
-    checked = !checked;
-    emit(TermsAndConditionsToggledState(checked: checked));
+  // go to all page
   }
 }

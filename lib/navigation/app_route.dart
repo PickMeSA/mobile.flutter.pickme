@@ -20,7 +20,7 @@ import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.d
 import '../features/login/presentation/login_page.dart';
 import '../features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
 //JOB
-import '../features/Jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
+import '../features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
 
 part 'app_route.gr.dart';
 

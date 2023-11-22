@@ -70,6 +70,9 @@
   "step3": "Step 3",
   "photosOfWork": "Photos of work (optional)",
   "skillsA": "Skills *",
-  "myJobRequests": "My Job Requests"
-
+  "exploreAllJobs": "Explore all jobs",
+  "myJobRequests": "My job requests",
+  "mySavedJobs": "My saved jobs",
+  "recommendedForYou": "Recommended for you",
+  "seeAll": "See all"
 }

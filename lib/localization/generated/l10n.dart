@@ -759,6 +759,56 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Explore all jobs`
+  String get exploreAllJobs {
+    return Intl.message(
+      'Explore all jobs',
+      name: 'exploreAllJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My job requests`
+  String get myJobRequests {
+    return Intl.message(
+      'My job requests',
+      name: 'myJobRequests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My saved jobs`
+  String get mySavedJobs {
+    return Intl.message(
+      'My saved jobs',
+      name: 'mySavedJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommended for you`
+  String get recommendedForYou {
+    return Intl.message(
+      'Recommended for you',
+      name: 'recommendedForYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all`
+  String get seeAll {
+    return Intl.message(
+      'See all',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

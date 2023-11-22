@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
+        "exploreAllJobs":
+            MessageLookupByLibrary.simpleMessage("Explore all jobs"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
@@ -78,7 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "membershipAwardName":
             MessageLookupByLibrary.simpleMessage("Membership/Award name"),
         "myJobRequests":
-            MessageLookupByLibrary.simpleMessage("My Job Requests"),
+            MessageLookupByLibrary.simpleMessage("My job requests"),
+        "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
@@ -107,6 +110,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Qualification name *"),
         "qualificationType":
             MessageLookupByLibrary.simpleMessage("Qualification type *"),
+        "recommendedForYou":
+            MessageLookupByLibrary.simpleMessage("Recommended for you"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "selectMembership":
             MessageLookupByLibrary.simpleMessage("Select your membership"),
         "skillsA": MessageLookupByLibrary.simpleMessage("Skills *"),
