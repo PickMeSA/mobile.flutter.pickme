@@ -17,8 +17,11 @@ class AddSkillsBloc
     List<ChipOption> chipOptions = [];
     List<DropdownMenuEntry<PreferredIndustry>> industryEntries
     = <DropdownMenuEntry<PreferredIndustry>>[];
+    List<DropdownMenuEntry<String>> skillEntries = [];
 
 
-    AddSkillsBloc(): super(AddSkillsPageInitState(checked: false)) {}
+    AddSkillsBloc(): super(AddSkillsPageInitState(checked: false)) {
+
+    }
 
 } 

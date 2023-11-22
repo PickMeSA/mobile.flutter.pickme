@@ -83,7 +83,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                      child: AppDropdownMenu(
                          width: MediaQuery.sizeOf(context).width - 40,
                          enableFilter: true,
-                         dropdownMenuEntries: getBloc().industryEntries,
+                         dropdownMenuEntries: getBloc().skillEntries,
                          controller: dropdownController,
                          label: wText(getLocalization().skillsA, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: WColors.pickMeGrey))),
                    ),

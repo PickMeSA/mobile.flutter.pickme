@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/profile_data_model_response.dart';
 import 'package:pickme/shared/remote/api-service.dart';
-import 'package:pickme/shared/remote/dio_api_service_impl.dart';
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
 @Singleton(as: ProfileService)
