@@ -740,10 +740,10 @@ class AppLocalizations {
     );
   }
 
-  /// `My job requests`
+  /// `My Job Requests`
   String get myJobRequests {
     return Intl.message(
-      'My job requests',
+      'My Job Requests',
       name: 'myJobRequests',
       desc: '',
       args: [],
@@ -845,6 +845,46 @@ class AppLocalizations {
     return Intl.message(
       'In your area',
       name: 'inYourArea',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All services`
+  String get allServices {
+    return Intl.message(
+      'All services',
+      name: 'allServices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What are you looking for?`
+  String get whatAreYouLookingFor {
+    return Intl.message(
+      'What are you looking for?',
+      name: 'whatAreYouLookingFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location/area based on profile`
+  String get locationAreaBasedOnProfile {
+    return Intl.message(
+      'Location/area based on profile',
+      name: 'locationAreaBasedOnProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Browse categories`
+  String get browseCategories {
+    return Intl.message(
+      'Browse categories',
+      name: 'browseCategories',
       desc: '',
       args: [],
     );

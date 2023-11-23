@@ -73,11 +73,14 @@
   "skillsA": "Skills *",
   "exploreAllJobs": "Explore all jobs",
   "exploreAllServices": "Explore all services",
-  "myJobRequests": "My job requests",
   "myJobListings": "My job listings",
   "mySavedJobs": "My saved jobs",
   "recommendedForYou": "Recommended for you",
   "seeAll": "See all",
   "services": "Services",
-  "inYourArea": "In your area"
+  "inYourArea": "In your area",
+  "allServices": "All services",
+  "whatAreYouLookingFor": "What are you looking for?",
+  "locationAreaBasedOnProfile": "Location/area based on profile",
+  "browseCategories": "Browse categories"
 }

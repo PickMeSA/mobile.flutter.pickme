@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -34,67 +36,44 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
-          padding: wPagePadding(),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppExplorationTile(
-                  title: getLocalization().exploreAllJobs,
-                  onClick: (){},
+          padding: wPagePadding(top: 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppTextField(
+                textFieldType: TextFieldType.OTHER,
+                bgColor: neutrals100Color,
+                borderColor: whiteColor,
+                prefixIcon: const Icon(Iconsax.search_normal_1),
+                hint: getLocalization().whatAreYouLookingFor,
+              ),
+              10.height,
+              AppTextField(
+                textFieldType: TextFieldType.OTHER,
+                bgColor: neutrals100Color,
+                borderColor: whiteColor,
+                prefixIcon: const Icon(Iconsax.location),
+                hint: getLocalization().locationAreaBasedOnProfile,
+              ),
+              20.height,
+              Text(getLocalization().browseCategories,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(fontVariations: [const FontVariation('wght', 600)]),),
+              10.height,
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text("Service Category"),
+                      trailing: Icon(Iconsax.arrow_right_3),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return AppDivider();
+                  }, itemCount: 3,
                 ),
-                10.height,
-                AppExplorationTile(
-                  title: getLocalization().myJobRequests,
-                  count: 0,
-                  icon: const Icon(Iconsax.document_text_14),
-                  onClick: (){},
-                ),
-                10.height,
-                AppExplorationTile(
-                  title: getLocalization().mySavedJobs,
-                  count: 0,
-                  icon: const Icon(Iconsax.archive_tick),
-                  onClick: (){},
-                ),
-                40.height,
-                Row(
-                  children: [
-                    Expanded(child: Text(
-                      getLocalization().recommendedForYou,
-                      style: theme.textTheme.titleMedium,
-                    )),
-                    TextButton(
-                        onPressed: ()=> getBloc().add(SeeAllClickedEvent()),
-                        child: Row(
-                          children: [
-                            Text(
-                              getLocalization().seeAll,
-                              style: theme.textTheme.labelMedium,
-                            ),
-                            10.width,
-                            const Icon(
-                              Iconsax.arrow_right_1,
-                              size: 16,
-                              color: neutrals500Color,
-                            )
-                          ],
-                        ))
-                  ],
-                ),
-                Column(
-                  children: [
-                    AppJobAdvertCard.matching(
-                      jobName: "Job Name",
-                      employerName: "Employer Name",
-                      locationName: "location Name",
-                      dateTime: DateTime.now(),
-                      onNext: (){}
-                      ,)
-                  ],
-                )
-              ],
-            ),
+              )
+
+            ],
           ),
         );
       },
@@ -114,7 +93,10 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-        title: Text(getLocalization().services)
+      title: Text(getLocalization().allServices),
+      actions: [
+        TextButton(onPressed: (){}, child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
+      ],
     );
   }
 

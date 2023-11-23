@@ -37,6 +37,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add membership \nor award"),
         "addWorkExperience":
             MessageLookupByLibrary.simpleMessage("Add work experience"),
+        "allServices": MessageLookupByLibrary.simpleMessage("All services"),
+        "browseCategories":
+            MessageLookupByLibrary.simpleMessage("Browse categories"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "company": MessageLookupByLibrary.simpleMessage("Company *"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
@@ -73,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
+        "locationAreaBasedOnProfile": MessageLookupByLibrary.simpleMessage(
+            "Location/area based on profile"),
         "logIntoYourAccountWithYourPhoneNumberAndOtp":
             MessageLookupByLibrary.simpleMessage(
                 "Log in to your account with your phone number and an OTP"),
@@ -85,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myJobListings":
             MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
-            MessageLookupByLibrary.simpleMessage("My job requests"),
+            MessageLookupByLibrary.simpleMessage("My Job Requests"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
         "newHereCreateAccount":
@@ -142,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
         "weveSentaOneTimePine": m1,
+        "whatAreYouLookingFor":
+            MessageLookupByLibrary.simpleMessage("What are you looking for?"),
         "whatWouldYouLikeToDo":
             MessageLookupByLibrary.simpleMessage("What would you like to do?"),
         "work": MessageLookupByLibrary.simpleMessage("Work"),
