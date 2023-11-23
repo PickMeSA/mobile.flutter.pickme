@@ -67,12 +67,13 @@
   "preferredIndustry": "Preferred industry *",
   "skillsMax5": "Skills (max. 5)",
   "addASkill": "Add a skill",
-  "step3": "Step 3",
   "photosOfWork": "Photos of work (optional)",
   "skillsA": "Skills *",
   "exploreAllJobs": "Explore all jobs",
-  "myJobRequests": "My job requests",
   "mySavedJobs": "My saved jobs",
   "recommendedForYou": "Recommended for you",
-  "seeAll": "See all"
+  "seeAll": "See all",
+  "step3": "Step 3",
+  "myJobRequests": "My Job Requests"
+
 }

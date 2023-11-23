@@ -1,2 +1,5 @@
+/lib/core/locator/locator.config.dart
+/lib/navigation/app_route.gr.dart
+/lib/localization/generated/intl/*
 /lib/shared/features/otp/data/models/otp_model_response/profile_data_model_response.freezed.dart
 /lib/shared/features/otp/data/models/otp_model_response/profile_data_model_response.g.dart
