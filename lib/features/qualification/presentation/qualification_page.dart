@@ -126,7 +126,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                      )
                  ),
                  onPressed: !state.checked?null:() {
-                   context.router.push(const AddSkillsRoute());
+                   // context.router.push(const AddSkillsRoute());
                  },
                  child: Text(getLocalization().nextStep),
                ),

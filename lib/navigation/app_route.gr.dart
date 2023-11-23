@@ -33,6 +33,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddWorkExperiencePage(),
       );
     },
+    AllServicesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AllServicesPage(),
+      );
+    },
+    JobsHiringLandingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const JobsHiringLandingPage(),
+      );
+    },
     JobsLandingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -166,6 +178,34 @@ class AddWorkExperienceRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AddWorkExperienceRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AllServicesPage]
+class AllServicesRoute extends PageRouteInfo<void> {
+  const AllServicesRoute({List<PageRouteInfo>? children})
+      : super(
+          AllServicesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AllServicesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [JobsHiringLandingPage]
+class JobsHiringLandingRoute extends PageRouteInfo<void> {
+  const JobsHiringLandingRoute({List<PageRouteInfo>? children})
+      : super(
+          JobsHiringLandingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'JobsHiringLandingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

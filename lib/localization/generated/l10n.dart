@@ -739,6 +739,116 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `My job requests`
+  String get myJobRequests {
+    return Intl.message(
+      'My job requests',
+      name: 'myJobRequests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos of work (optional)`
+  String get photosOfWork {
+    return Intl.message(
+      'Photos of work (optional)',
+      name: 'photosOfWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skills *`
+  String get skillsA {
+    return Intl.message(
+      'Skills *',
+      name: 'skillsA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore all jobs`
+  String get exploreAllJobs {
+    return Intl.message(
+      'Explore all jobs',
+      name: 'exploreAllJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore all services`
+  String get exploreAllServices {
+    return Intl.message(
+      'Explore all services',
+      name: 'exploreAllServices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My job listings`
+  String get myJobListings {
+    return Intl.message(
+      'My job listings',
+      name: 'myJobListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My saved jobs`
+  String get mySavedJobs {
+    return Intl.message(
+      'My saved jobs',
+      name: 'mySavedJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommended for you`
+  String get recommendedForYou {
+    return Intl.message(
+      'Recommended for you',
+      name: 'recommendedForYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all`
+  String get seeAll {
+    return Intl.message(
+      'See all',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Services`
+  String get services {
+    return Intl.message(
+      'Services',
+      name: 'services',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In your area`
+  String get inYourArea {
+    return Intl.message(
+      'In your area',
+      name: 'inYourArea',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

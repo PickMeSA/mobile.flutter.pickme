@@ -90,7 +90,7 @@ class _SkillsAndIndustryPageState extends BasePageState<SkillsAndIndustryPage, S
                        ChipOption(label: "Skill 3", id: 3),
                        ChipOption(label: "Skill 4", id: 4),
                      ],
-                     onDeleted: (){}, onSelected: (bool value) {  },
+                     // onDeleted: (){}, onSelected: (bool value) {  },
                    ),
 
                     SizedBox(height:MediaQuery.sizeOf(context).height * 0.7/3 ,),

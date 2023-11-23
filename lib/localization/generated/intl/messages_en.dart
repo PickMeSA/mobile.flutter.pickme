@@ -50,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
         "exploreAllJobs":
             MessageLookupByLibrary.simpleMessage("Explore all jobs"),
+        "exploreAllServices":
+            MessageLookupByLibrary.simpleMessage("Explore all services"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
@@ -61,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(
             "I\'m currently working in this role"),
+        "inYourArea": MessageLookupByLibrary.simpleMessage("In your area"),
         "indicatesARequiredField":
             MessageLookupByLibrary.simpleMessage("*Indicates a required field"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry *"),
@@ -79,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "membership": MessageLookupByLibrary.simpleMessage("Membership"),
         "membershipAwardName":
             MessageLookupByLibrary.simpleMessage("Membership/Award name"),
+        "myJobListings":
+            MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
             MessageLookupByLibrary.simpleMessage("My job requests"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
@@ -115,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "selectMembership":
             MessageLookupByLibrary.simpleMessage("Select your membership"),
+        "services": MessageLookupByLibrary.simpleMessage("Services"),
         "skillsA": MessageLookupByLibrary.simpleMessage("Skills *"),
         "skillsAndIndustry":
             MessageLookupByLibrary.simpleMessage("Skills & industry"),

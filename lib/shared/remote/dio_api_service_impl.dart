@@ -13,8 +13,8 @@ class DioApiService extends ApiService{
   DioApiService({
     required this.dio}){
    dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options, RequestInterceptorHandler handler){
-     TokenModel tokenModel = boxTokens.get(current);
-     options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
+     // TokenModel tokenModel = boxTokens.get(current);
+     options.headers['authorization'] = "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImE2YzYzNTNmMmEzZWMxMjg2NTA1MzBkMTVmNmM0Y2Y0NTcxYTQ1NTciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcGljay1tZS02MWYzNCIsImF1ZCI6InBpY2stbWUtNjFmMzQiLCJhdXRoX3RpbWUiOjE3MDA2MzgzMjAsInVzZXJfaWQiOiI0Q0hhbFdqV215TklmNVBDcEc4RTVudHlBVHQxIiwic3ViIjoiNENIYWxXaldteU5JZjVQQ3BHOEU1bnR5QVR0MSIsImlhdCI6MTcwMDYzODMyMCwiZXhwIjoxNzAwNjQxOTIwLCJlbWFpbCI6ImFzaXRob2xlQGR2dHNvZnR3YXJlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhc2l0aG9sZUBkdnRzb2Z0d2FyZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.XvkMYjpLQDYL3SH9G5ajnhLrmKJluw42XJVLB2JWKig1g_A4NMADV2__6_UlzmoHQ6Pp765h8Te3ltFNWrjzyRR4bsqdTRw7Ae_8c6lZ7qjCGWD7pd1GxSzp2ycOpOlMzZvQvowfHkuQNbuHCNpt4Hje5h4U9lBpBmFyRoUzN2FNXj2hQ89JKP7-PEmF2itc8rXyBu01PUftzsBhmoSdHQEOQHHNMdyopnJ18d9ZwNLiLLrPuyDEp1TqRHkT4UjCNX27EVk5PkY_iIJ7jqKLboOs4JA9P9vuKaOxJogpvWmWQXnvdeMD90YBfWdRpG3iu5_IAt79WOEFp2gvR8UImw";
      return handler.next(options);
    }));
   }

@@ -93,7 +93,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                      child: Center(
                        child: ChipGroup(
                          inputs: getBloc().chipOptions,
-                         onDeleted: (){}, onSelected: (bool value) {  },
+                         // onDeleted: (){}, onSelected: (bool value) {  },
                        ),
                      ),
                    ),

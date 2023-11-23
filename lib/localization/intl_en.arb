@@ -67,13 +67,17 @@
   "preferredIndustry": "Preferred industry *",
   "skillsMax5": "Skills (max. 5)",
   "addASkill": "Add a skill",
+  "step3": "Step 3",
+  "myJobRequests": "My Job Requests",
   "photosOfWork": "Photos of work (optional)",
   "skillsA": "Skills *",
   "exploreAllJobs": "Explore all jobs",
+  "exploreAllServices": "Explore all services",
+  "myJobRequests": "My job requests",
+  "myJobListings": "My job listings",
   "mySavedJobs": "My saved jobs",
   "recommendedForYou": "Recommended for you",
   "seeAll": "See all",
-  "step3": "Step 3",
-  "myJobRequests": "My Job Requests"
-
+  "services": "Services",
+  "inYourArea": "In your area"
 }

@@ -1,5 +1,6 @@
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/jobs/hiring/landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:auto_route/auto_route.dart';
@@ -96,7 +97,7 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
         side: MaterialStateProperty.all(BorderSide(color:
         theme.colorScheme.secondary,
         width: 2,),),),width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
-                     context.router.push(const RegisterRoute());
+                     context.router.push(const JobsHiringLandingRoute());
                     // ToDo: Change back to above
                     //context.router.push(const RegisterAccountStep1Route());
                   }, child: wText(getLocalization().newHereCreateAccount),color: theme.colorScheme.secondary),
