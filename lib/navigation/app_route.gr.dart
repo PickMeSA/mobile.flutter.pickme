@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddQualificationPage(),
       );
     },
+    AddSkillsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddSkillsPage(),
+      );
+    },
     AddWorkExperienceRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -37,6 +43,17 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const AllServicesPage(),
+      );
+    },
+    FilterCandidatesRoute.name: (routeData) {
+      final args = routeData.argsAs<FilterCandidatesRouteArgs>(
+          orElse: () => const FilterCandidatesRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: FilterCandidatesPage(
+          key: args.key,
+          serviceCategoryId: args.serviceCategoryId,
+        ),
       );
     },
     JobsHiringLandingRoute.name: (routeData) {
@@ -115,6 +132,17 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ServiceCategoryCandidatesRoute.name: (routeData) {
+      final args = routeData.argsAs<ServiceCategoryCandidatesRouteArgs>(
+          orElse: () => const ServiceCategoryCandidatesRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ServiceCategoryCandidatesPage(
+          key: args.key,
+          serviceCategoryId: args.serviceCategoryId,
+        ),
+      );
+    },
     SetupProfileRoute.name: (routeData) {
       final args = routeData.argsAs<SetupProfileRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -129,6 +157,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SignUpPage(),
+      );
+    },
+    SkillsAndIndustryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SkillsAndIndustryPage(),
       );
     },
     TermsAndConditionsRoute.name: (routeData) {
@@ -169,6 +203,20 @@ class AddQualificationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AddSkillsPage]
+class AddSkillsRoute extends PageRouteInfo<void> {
+  const AddSkillsRoute({List<PageRouteInfo>? children})
+      : super(
+          AddSkillsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddSkillsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [AddWorkExperiencePage]
 class AddWorkExperienceRoute extends PageRouteInfo<void> {
   const AddWorkExperienceRoute({List<PageRouteInfo>? children})
@@ -194,6 +242,44 @@ class AllServicesRoute extends PageRouteInfo<void> {
   static const String name = 'AllServicesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FilterCandidatesPage]
+class FilterCandidatesRoute extends PageRouteInfo<FilterCandidatesRouteArgs> {
+  FilterCandidatesRoute({
+    Key? key,
+    String? serviceCategoryId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          FilterCandidatesRoute.name,
+          args: FilterCandidatesRouteArgs(
+            key: key,
+            serviceCategoryId: serviceCategoryId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'FilterCandidatesRoute';
+
+  static const PageInfo<FilterCandidatesRouteArgs> page =
+      PageInfo<FilterCandidatesRouteArgs>(name);
+}
+
+class FilterCandidatesRouteArgs {
+  const FilterCandidatesRouteArgs({
+    this.key,
+    this.serviceCategoryId,
+  });
+
+  final Key? key;
+
+  final String? serviceCategoryId;
+
+  @override
+  String toString() {
+    return 'FilterCandidatesRouteArgs{key: $key, serviceCategoryId: $serviceCategoryId}';
+  }
 }
 
 /// generated route for
@@ -403,6 +489,45 @@ class ResendOTPRouteArgs {
 }
 
 /// generated route for
+/// [ServiceCategoryCandidatesPage]
+class ServiceCategoryCandidatesRoute
+    extends PageRouteInfo<ServiceCategoryCandidatesRouteArgs> {
+  ServiceCategoryCandidatesRoute({
+    Key? key,
+    String? serviceCategoryId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ServiceCategoryCandidatesRoute.name,
+          args: ServiceCategoryCandidatesRouteArgs(
+            key: key,
+            serviceCategoryId: serviceCategoryId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ServiceCategoryCandidatesRoute';
+
+  static const PageInfo<ServiceCategoryCandidatesRouteArgs> page =
+      PageInfo<ServiceCategoryCandidatesRouteArgs>(name);
+}
+
+class ServiceCategoryCandidatesRouteArgs {
+  const ServiceCategoryCandidatesRouteArgs({
+    this.key,
+    this.serviceCategoryId,
+  });
+
+  final Key? key;
+
+  final String? serviceCategoryId;
+
+  @override
+  String toString() {
+    return 'ServiceCategoryCandidatesRouteArgs{key: $key, serviceCategoryId: $serviceCategoryId}';
+  }
+}
+
+/// generated route for
 /// [SetupProfilePage]
 class SetupProfileRoute extends PageRouteInfo<SetupProfileRouteArgs> {
   SetupProfileRoute({
@@ -450,6 +575,20 @@ class SignUpRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SignUpRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SkillsAndIndustryPage]
+class SkillsAndIndustryRoute extends PageRouteInfo<void> {
+  const SkillsAndIndustryRoute({List<PageRouteInfo>? children})
+      : super(
+          SkillsAndIndustryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SkillsAndIndustryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

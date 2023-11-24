@@ -82,5 +82,14 @@
   "allServices": "All services",
   "whatAreYouLookingFor": "What are you looking for?",
   "locationAreaBasedOnProfile": "Location/area based on profile",
-  "browseCategories": "Browse categories"
+  "browseCategories": "Browse categories",
+  "viewProfile": "view Profile",
+  "serviceCategory": "Service category",
+  "loadMore": "Load more",
+  "filters": "Filters",
+  "maxDistance": "Max. distance",
+  "reset": "Reset",
+  "applyFilters": "Apply filters",
+  "possiblePriceRange": "Possible price range",
+  "candidateRating": "Candidate rating"
 }

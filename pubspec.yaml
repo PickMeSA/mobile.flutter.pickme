@@ -63,6 +63,7 @@ dependencies:
   equatable: ^2.0.5
   logger: ^2.0.2+1
   iconsax_flutter: ^1.0.0
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:

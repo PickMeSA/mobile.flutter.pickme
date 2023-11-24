@@ -8,7 +8,9 @@ import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 // import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
+import 'package:pickme/features/jobs/hiring/candidate_filters/presentation/filter_candidates_page.dart';
 import 'package:pickme/features/jobs/hiring/landing_page/presentation/jobs_hiring_landing_page.dart';
+import 'package:pickme/features/jobs/hiring/service_category_candidates/presentation/service_category_candidates_page.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
 import 'package:pickme/features/qualification/presentation/qualification_page.dart';
@@ -55,8 +57,9 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: JobsLandingRoute.page,),
     AnimatedRoute(page: JobsHiringLandingRoute.page,),
     // AnimatedRoute(page: AddSkillsRoute.page),
-    AnimatedRoute(page: AllServicesRoute.page)
-
+    AnimatedRoute(page: AllServicesRoute.page),
+    AnimatedRoute(page: ServiceCategoryCandidatesRoute.page),
+    AnimatedRoute(page: FilterCandidatesRoute.page),
   ];
 }
 

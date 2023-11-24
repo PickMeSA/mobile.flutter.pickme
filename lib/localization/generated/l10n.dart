@@ -889,6 +889,96 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `view Profile`
+  String get viewProfile {
+    return Intl.message(
+      'view Profile',
+      name: 'viewProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service category`
+  String get serviceCategory {
+    return Intl.message(
+      'Service category',
+      name: 'serviceCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load more`
+  String get loadMore {
+    return Intl.message(
+      'Load more',
+      name: 'loadMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filters`
+  String get filters {
+    return Intl.message(
+      'Filters',
+      name: 'filters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max. distance`
+  String get maxDistance {
+    return Intl.message(
+      'Max. distance',
+      name: 'maxDistance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message(
+      'Reset',
+      name: 'reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply filters`
+  String get applyFilters {
+    return Intl.message(
+      'Apply filters',
+      name: 'applyFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Possible price range`
+  String get possiblePriceRange {
+    return Intl.message(
+      'Possible price range',
+      name: 'possiblePriceRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Candidate rating`
+  String get candidateRating {
+    return Intl.message(
+      'Candidate rating',
+      name: 'candidateRating',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
