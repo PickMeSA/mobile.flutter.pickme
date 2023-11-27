@@ -1040,10 +1040,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Bank Details`
+  /// `Bank details`
   String get bankDetails {
     return Intl.message(
-      'Bank Details',
+      'Bank details',
       name: 'bankDetails',
       desc: '',
       args: [],

@@ -48,7 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "At PickMe, we add additional costs to your rate to cover essential aspects:"),
         "bankA": MessageLookupByLibrary.simpleMessage("Bank *"),
-        "bankDetails": MessageLookupByLibrary.simpleMessage("Bank Details"),
+        "bankDetails": MessageLookupByLibrary.simpleMessage("Bank details"),
         "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "company": MessageLookupByLibrary.simpleMessage("Company *"),

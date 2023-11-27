@@ -3,6 +3,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/bank_details/entities/account_type_entity.dart';
 import 'package:pickme/features/bank_details/entities/bank_details_entities.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -74,25 +75,25 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
 
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: AppDropdownMenu<String>(
-
+                    child: AppDropdownMenu<AccountTypeEntity>(
+                      controller: accountTypeController,
                       label: wText(getLocalization().accountTypeA),
                       enableFilter: true,
-                      dropdownMenuEntries:[],
+                      dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
                       width: MediaQuery.of(context).size.width-40,),
 
                   ),
                   20.height,
                   AppTextFormField(
                     onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: bankNameController,
+                    controller: accountNumberController,
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     textFieldType: TextFieldType.NAME,
                     labelText: getLocalization().accountNumberA,),
                   20.height,
                   AppTextFormField(
                     onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: bankNameController,
+                    controller: branchCodeController,
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     textFieldType: TextFieldType.NAME,
                     labelText: getLocalization().branchCodeA,),
@@ -155,7 +156,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
   BankDetailsEntity getFormData (){
     return BankDetailsEntity(
         accountNumber: accountNumberController.text,
-        accountnUmber: accountNumberController.text,
+        accountType: accountTypeController.text,
         bank: bankNameController.text,
         branchCode: branchCodeController.text);
   }
