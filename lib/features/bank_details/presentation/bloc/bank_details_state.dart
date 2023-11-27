@@ -4,3 +4,7 @@ abstract class BankDetailsPageState extends BaseState {}
 
 class BankDetailsPageInitState extends BankDetailsPageState  {}
 
+class BankDetailsValueChangedState extends BankDetailsPageState{
+
+}
+

@@ -1029,6 +1029,66 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Step 5`
+  String get step5 {
+    return Intl.message(
+      'Step 5',
+      name: 'step5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank details`
+  String get bankDetails {
+    return Intl.message(
+      'Bank details',
+      name: 'bankDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank *`
+  String get bankA {
+    return Intl.message(
+      'Bank *',
+      name: 'bankA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account type *`
+  String get accountTypeA {
+    return Intl.message(
+      'Account type *',
+      name: 'accountTypeA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account number *`
+  String get accountNumberA {
+    return Intl.message(
+      'Account number *',
+      name: 'accountNumberA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Branch Code *`
+  String get branchCodeA {
+    return Intl.message(
+      'Branch Code *',
+      name: 'branchCodeA',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
