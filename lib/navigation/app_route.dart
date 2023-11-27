@@ -6,9 +6,12 @@ import 'package:pickme/features/add_memberships/presentation/add_memberships_pag
 import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
+import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
+import 'package:pickme/features/minimum_wage/presentation/minimum_wage_page.dart';
 import 'package:pickme/features/qualification/presentation/qualification_page.dart';
+import 'package:pickme/features/rate_and_work_times/presentation/rate_and_work_times_page.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/features/register/presentation/register_page.dart';
 import 'package:pickme/features/setup_profile/presentation/setup_profile_page.dart';
@@ -44,7 +47,10 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
-    AnimatedRoute(page: AddSkillsRoute.page)
+    AnimatedRoute(page: AddSkillsRoute.page),
+    AnimatedRoute(page:RateAndWorkTimesRoute.page),
+    AnimatedRoute(page: MinimumWageRoute.page),
+    AnimatedRoute(page: BankDetailsRoute.page)
 
   ];
 }

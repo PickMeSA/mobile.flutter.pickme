@@ -9,6 +9,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/w_colors.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -40,7 +41,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
   @override
   Widget buildView(BuildContext context) {
-    var theme = Theme.of(context);
+    ThemeData theme = Theme.of(context);
     return BlocConsumer<AddSkillsBloc, AddSkillsPageState>(
       listener: (context, state){},
       builder: (context, state) {
@@ -57,7 +58,10 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                    Row(
                      children: [
                        const Spacer(),
-                       wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
+                       InkWell(
+                           onTap: ()=> context.router.push(const RateAndWorkTimesRoute()),
+                           child: wText(getLocalization().skip,
+                               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
                      ],
                    ),
                    wText(
@@ -146,7 +150,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                                )
                            ),
                            onPressed: !getBloc().checked?null:() {
-                             //context.router.push(QualificationsRoute());
+                             context.router.push(const RateAndWorkTimesRoute());
                            },
                            child: Text(getLocalization().nextStep),
                          ),
