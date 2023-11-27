@@ -29,6 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aOneTimeFeeOf500GetYouStarted": MessageLookupByLibrary.simpleMessage(
             "A one-time fee of R50.00 (including VAT) get you started, with no monthly charges."),
+        "accountNumberA":
+            MessageLookupByLibrary.simpleMessage("Account number *"),
+        "accountTypeA": MessageLookupByLibrary.simpleMessage("Account type *"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addAQualificationMembership": MessageLookupByLibrary.simpleMessage(
             "Add a qualification/membership"),
@@ -44,6 +47,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects":
             MessageLookupByLibrary.simpleMessage(
                 "At PickMe, we add additional costs to your rate to cover essential aspects:"),
+        "bankA": MessageLookupByLibrary.simpleMessage("Bank *"),
+        "bankDetails": MessageLookupByLibrary.simpleMessage("Bank Details"),
+        "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "company": MessageLookupByLibrary.simpleMessage("Company *"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
@@ -151,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "step2": MessageLookupByLibrary.simpleMessage("Step 2"),
         "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
         "step4": MessageLookupByLibrary.simpleMessage("Step 4"),
+        "step5": MessageLookupByLibrary.simpleMessage("Step 5"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subscriptionFee":
             MessageLookupByLibrary.simpleMessage("Subscription fee"),
