@@ -41,7 +41,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
   @override
   Widget buildView(BuildContext context) {
-    var theme = Theme.of(context);
+    ThemeData theme = Theme.of(context);
     return BlocConsumer<AddSkillsBloc, AddSkillsPageState>(
       listener: (context, state){},
       builder: (context, state) {
@@ -58,7 +58,10 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                    Row(
                      children: [
                        const Spacer(),
-                       wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
+                       InkWell(
+                           onTap: ()=> context.router.push(const RateAndWorkTimesRoute()),
+                           child: wText(getLocalization().skip,
+                               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
                      ],
                    ),
                    wText(

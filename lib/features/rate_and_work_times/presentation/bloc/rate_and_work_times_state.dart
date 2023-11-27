@@ -4,3 +4,5 @@ abstract class RateAndWorkTimesPageState extends BaseState {}
 
 class RateAndWorkTimesPageInitState extends RateAndWorkTimesPageState  {}
 
+class FormValueChangedState extends RateAndWorkTimesPageState{}
+

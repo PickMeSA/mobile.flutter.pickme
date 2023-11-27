@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/rate_and_work_times/domain/entities/working_days.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,6 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-
                    wText(
                      getLocalization().step4,
                      style: theme.textTheme.headlineLarge!.copyWith(
@@ -93,6 +93,7 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                                fontWeight: FontWeight.w600)),
                        30.width,
                        Expanded(child: AppTextFormField(
+                         onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                          controller: amountTextController,
                          textFieldType: TextFieldType.NUMBER,
                        labelText: getLocalization().noAmount,)),
@@ -105,14 +106,16 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                            fontWeight: FontWeight.w700)),
                    20.height,
                    AppTextFormField(controller: startTimeTextController,
+                     onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                      textFieldType: TextFieldType.NUMBER,
                    labelText: getLocalization().startTime,
                    suffix: InkWell(
                        onTap:()=> appTimePicker(context, startTimeTextController),
                        child: const Icon(Iconsax.clock)),),
                    10.height,
-                   AppTextFormField(controller: endTimeTextController
-                   ,textFieldType: TextFieldType.NUMBER,
+                   AppTextFormField(controller: endTimeTextController,
+                     onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
+                     textFieldType: TextFieldType.NUMBER,
                      labelText: getLocalization().endTime,
                      suffix: InkWell(
                          onTap: ()=> appTimePicker(context, endTimeTextController),
@@ -122,7 +125,9 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                        style: theme.textTheme.bodyMedium?.copyWith(
                            fontWeight: FontWeight.w700)),
                    10.height,
-                   AppDropdownMenu(label: wText(getLocalization().workingDaysA),
+                   AppDropdownMenu(
+                     onSelected: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
+                       label: wText(getLocalization().workingDaysA),
                        controller: workingDayTextController,
                        width: MediaQuery.sizeOf(context).width -40,
                        enableFilter: true,
@@ -189,5 +194,13 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
     return locator<AppLocalizations>();
   }
 
+
+  HourRateTimes getHourRateTimesFormDetails(){
+    return HourRateTimes(
+        amount: amountTextController.text,
+        endTime: endTimeTextController.text,
+        startTime: startTimeTextController.text,
+        workingTimes: workingDayTextController.text);
+  }
 
 }

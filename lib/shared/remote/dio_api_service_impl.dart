@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'api-service.dart';
-
 
 @Singleton(as:ApiService)
 class DioApiService extends ApiService{
 
   final Dio dio;
+  Logger logger = Logger();
+
 
   DioApiService({
     required this.dio}){
@@ -45,8 +47,13 @@ class DioApiService extends ApiService{
 
   @override
   Future<Response<T>> get<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
-    Response<T> response = await dio.get(path, data: data, queryParameters: queryParameters, options: options);
-    return response;
+      Response<T> response = await dio.get(
+          path, data: data, queryParameters: queryParameters, options: options);
+      logger.d(response);
+      return response;
+
+
+
   }
 
   @override
@@ -70,6 +77,7 @@ class DioApiService extends ApiService{
   @override
   Future<Response<T>> patch<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onSendProgress, ProgressCallback? onReceiveProgress}) async {
     Response<T> response = await dio.patch(path, data: data, queryParameters: queryParameters, options: options);
+    logger.d(response);
     return response;
   }
 
@@ -85,6 +93,7 @@ class DioApiService extends ApiService{
    data: data,
    queryParameters: queryParameters,
    options: options);
+   logger.d(response);
    return response;
   }
 
@@ -97,6 +106,7 @@ class DioApiService extends ApiService{
   @override
   Future<Response<T>> put<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onSendProgress, ProgressCallback? onReceiveProgress}) async {
     Response<T> response = await dio.put(path, data: data, queryParameters: queryParameters, options: options);
+    logger.d(response);
     return response;
   }
 
