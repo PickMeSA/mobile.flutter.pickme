@@ -1089,6 +1089,116 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Step 6`
+  String get step6 {
+    return Intl.message(
+      'Step 6',
+      name: 'step6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Where are you located?`
+  String get whereAreYouLocated {
+    return Intl.message(
+      'Where are you located?',
+      name: 'whereAreYouLocated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use my current location`
+  String get useMyCurrentLocation {
+    return Intl.message(
+      'Use my current location',
+      name: 'useMyCurrentLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step 7`
+  String get step7 {
+    return Intl.message(
+      'Step 7',
+      name: 'step7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final details`
+  String get finalDetails {
+    return Intl.message(
+      'Final details',
+      name: 'finalDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About you (based on your profile)`
+  String get aboutYouBasedOnYourProfile {
+    return Intl.message(
+      'About you (based on your profile)',
+      name: 'aboutYouBasedOnYourProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Police clearance (optional)`
+  String get policeClearanceOptional {
+    return Intl.message(
+      'Police clearance (optional)',
+      name: 'policeClearanceOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create profile`
+  String get createProfile {
+    return Intl.message(
+      'Create profile',
+      name: 'createProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You're all set up!`
+  String get youAreAllSetup {
+    return Intl.message(
+      'You\'re all set up!',
+      name: 'youAreAllSetup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days.`
+  String get yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators {
+    return Intl.message(
+      'Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days.',
+      name: 'yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to dashboard`
+  String get goToDashboard {
+    return Intl.message(
+      'Go to dashboard',
+      name: 'goToDashboard',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

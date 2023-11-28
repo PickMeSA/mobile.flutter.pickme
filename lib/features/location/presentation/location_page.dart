@@ -2,33 +2,26 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/bank_details/entities/account_type_entity.dart';
-import 'package:pickme/features/bank_details/entities/bank_details_entities.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/constants/w_colors.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import 'bloc/bank_details_bloc.dart';
+import 'bloc/location_bloc.dart';
 
 @RoutePage()
-class BankDetailsPage extends BasePage {
-  const BankDetailsPage({super.key});
+class LocationPage extends BasePage {
+  const LocationPage({super.key});
 
   @override
-  _BankDetailsPageState createState() => _BankDetailsPageState();
+  _LocationPageState createState() => _LocationPageState();
 }
 
-class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBloc> {
-
-  TextEditingController bankNameController = TextEditingController();
-  TextEditingController accountTypeController = TextEditingController();
-  TextEditingController accountNumberController = TextEditingController();
-  TextEditingController branchCodeController = TextEditingController();
+class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
 
   @override
   void initState() {
@@ -45,7 +38,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
   @override
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return BlocConsumer<BankDetailsBloc, BankDetailsPageState>(
+    return BlocConsumer<LocationBloc, LocationPageState>(
       listener: (context, state){},
       builder: (context, state) {
         return SizedBox(
@@ -58,49 +51,33 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  wText(getLocalization().step5,style:theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 32,
-                    color: theme.primaryColor
+                  wText(getLocalization().step6,style:theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 32,
+                      color: theme.primaryColor
                   )),
                   const SizedBox(height: 10,),
-                  wText(getLocalization().bankDetails,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
-              30.height,
-            AppTextFormField(
-              onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-              controller: bankNameController,
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              textFieldType: TextFieldType.NAME,
-              labelText: getLocalization().bankA,),
-
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: AppDropdownMenu<AccountTypeEntity>(
-                      controller: accountTypeController,
-                      label: wText(getLocalization().accountTypeA),
-                      enableFilter: true,
-                      dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
-                      width: MediaQuery.of(context).size.width-40,),
-
+                  wText(getLocalization().whereAreYouLocated,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
+                  30.height,
+                  const SizedBox(
+                    height: 450,
+                    child: Placeholder(),
                   ),
                   20.height,
-                  AppTextFormField(
-                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: accountNumberController,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    textFieldType: TextFieldType.NAME,
-                    labelText: getLocalization().accountNumberA,),
-                  20.height,
-                  AppTextFormField(
-                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: branchCodeController,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    textFieldType: TextFieldType.NAME,
-                    labelText: getLocalization().branchCodeA,),
-
-                    100.height,
-
+                  Row(
+                    children: [
+                      Spacer(),
+                      Icon(Iconsax.location),
+                      10.width,
+                      wText(getLocalization().useMyCurrentLocation, style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14
+                      )),
+                      Spacer(),
+                    ],
+                  ),
+                  50.height
+,
                   Row(
                     children: [
                       Container(
@@ -135,7 +112,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                               )
                           ),
                           onPressed: !getBloc().checked?null:() {
-                            context.router.push(const LocationRoute());
+                            context.router.push(const FinalDetailsRoute());
                           },
                           child: Text(getLocalization().nextStep),
                         ),
@@ -154,18 +131,10 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
     );
   }
 
-  BankDetailsEntity getFormData (){
-    return BankDetailsEntity(
-        accountNumber: accountNumberController.text,
-        accountType: accountTypeController.text,
-        bank: bankNameController.text,
-        branchCode: branchCodeController.text);
-  }
-
 
   @override
-  BankDetailsBloc initBloc() {
-    return locator<BankDetailsBloc>();
+  LocationBloc initBloc() {
+    return locator<LocationBloc>();
   }
 
   @override

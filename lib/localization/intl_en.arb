@@ -102,5 +102,16 @@
   "bankA": "Bank *",
   "accountTypeA": "Account type *",
   "accountNumberA": "Account number *",
-  "branchCodeA": "Branch Code *"
+  "branchCodeA": "Branch Code *",
+  "step6": "Step 6",
+  "whereAreYouLocated": "Where are you located?",
+  "useMyCurrentLocation": "Use my current location",
+  "step7": "Step 7",
+  "finalDetails": "Final details",
+  "aboutYouBasedOnYourProfile": "About you (based on your profile)",
+  "policeClearanceOptional": "Police clearance (optional)",
+  "createProfile": "Create profile",
+  "youAreAllSetup": "You're all set up!",
+  "yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators": "Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days.",
+  "goToDashboard": "Go to dashboard"
 }
