@@ -45,10 +45,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BankDetailsPage(),
       );
     },
+    FinalDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FinalDetailsPage(),
+      );
+    },
     LandingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LandingPage(),
+      );
+    },
+    LocationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LocationPage(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -143,6 +155,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TermsAndConditionsPage(),
       );
     },
+    YouAreAllSetupRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const YouAreAllSetupPage(),
+      );
+    },
   };
 }
 
@@ -217,6 +235,20 @@ class BankDetailsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [FinalDetailsPage]
+class FinalDetailsRoute extends PageRouteInfo<void> {
+  const FinalDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          FinalDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FinalDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [LandingPage]
 class LandingRoute extends PageRouteInfo<void> {
   const LandingRoute({List<PageRouteInfo>? children})
@@ -226,6 +258,20 @@ class LandingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LandingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LocationPage]
+class LocationRoute extends PageRouteInfo<void> {
+  const LocationRoute({List<PageRouteInfo>? children})
+      : super(
+          LocationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LocationRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -484,6 +530,20 @@ class TermsAndConditionsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'TermsAndConditionsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [YouAreAllSetupPage]
+class YouAreAllSetupRoute extends PageRouteInfo<void> {
+  const YouAreAllSetupRoute({List<PageRouteInfo>? children})
+      : super(
+          YouAreAllSetupRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'YouAreAllSetupRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

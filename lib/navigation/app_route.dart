@@ -7,7 +7,9 @@ import 'package:pickme/features/add_qualification/presentation/add_qualification
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
+import 'package:pickme/features/final_details/presentation/final_details_page.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
+import 'package:pickme/features/location/presentation/location_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
 import 'package:pickme/features/minimum_wage/presentation/minimum_wage_page.dart';
 import 'package:pickme/features/qualification/presentation/qualification_page.dart';
@@ -18,6 +20,7 @@ import 'package:pickme/features/setup_profile/presentation/setup_profile_page.da
 import 'package:pickme/features/sign_up/presentation/sign_up_page.dart';
 import 'package:pickme/features/register_account_step_1/presentation/register_account_step1_page.dart';
 import 'package:pickme/features/skills_and_industry/presentation/skills_and_industry_page.dart';
+import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup_page.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
 import '../features/login/presentation/login_page.dart';
@@ -50,7 +53,10 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page:RateAndWorkTimesRoute.page),
     AnimatedRoute(page: MinimumWageRoute.page),
-    AnimatedRoute(page: BankDetailsRoute.page)
+    AnimatedRoute(page: BankDetailsRoute.page),
+    AnimatedRoute(page: LocationRoute.page),
+    AnimatedRoute(page: FinalDetailsRoute.page),
+    AnimatedRoute(page: YouAreAllSetupRoute.page)
 
   ];
 }

@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aOneTimeFeeOf500GetYouStarted": MessageLookupByLibrary.simpleMessage(
             "A one-time fee of R50.00 (including VAT) get you started, with no monthly charges."),
+        "aboutYouBasedOnYourProfile": MessageLookupByLibrary.simpleMessage(
+            "About you (based on your profile)"),
         "accountNumberA":
             MessageLookupByLibrary.simpleMessage("Account number *"),
         "accountTypeA": MessageLookupByLibrary.simpleMessage("Account type *"),
@@ -56,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Connecting workers and clients"),
         "contactHelpCenter":
             MessageLookupByLibrary.simpleMessage("Contact help center"),
+        "createProfile": MessageLookupByLibrary.simpleMessage("Create profile"),
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
         "ePWP": MessageLookupByLibrary.simpleMessage("EPWP"),
@@ -63,8 +66,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
+        "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "goToDashboard":
+            MessageLookupByLibrary.simpleMessage("Go to dashboard"),
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
         "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "hourlyRate": MessageLookupByLibrary.simpleMessage("Hourly rate"),
@@ -129,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "PickMe Receives a R2/hr worked as services fees"),
         "pleaseReenterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Please re-enter your phone number. If the problem persists, please contact our help centre."),
+        "policeClearanceOptional":
+            MessageLookupByLibrary.simpleMessage("Police clearance (optional)"),
         "positionTitle":
             MessageLookupByLibrary.simpleMessage("Position title *"),
         "preferredIndustry":
@@ -158,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "step3": MessageLookupByLibrary.simpleMessage("Step 3"),
         "step4": MessageLookupByLibrary.simpleMessage("Step 4"),
         "step5": MessageLookupByLibrary.simpleMessage("Step 5"),
+        "step6": MessageLookupByLibrary.simpleMessage("Step 6"),
+        "step7": MessageLookupByLibrary.simpleMessage("Step 7"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subscriptionFee":
             MessageLookupByLibrary.simpleMessage("Subscription fee"),
@@ -169,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+        "useMyCurrentLocation":
+            MessageLookupByLibrary.simpleMessage("Use my current location"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeLetsSetUpYourProfile": m0,
         "welcomeTopickme":
@@ -179,6 +191,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "What is your hourly rate & work times?"),
         "whatWouldYouLikeToDo":
             MessageLookupByLibrary.simpleMessage("What would you like to do?"),
+        "whereAreYouLocated":
+            MessageLookupByLibrary.simpleMessage("Where are you located?"),
         "work": MessageLookupByLibrary.simpleMessage("Work"),
         "workExperience":
             MessageLookupByLibrary.simpleMessage("Work experience"),
@@ -187,8 +201,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "workingDays": MessageLookupByLibrary.simpleMessage("Working days"),
         "workingDaysA": MessageLookupByLibrary.simpleMessage("Working days *"),
         "workingHours": MessageLookupByLibrary.simpleMessage("Working hours"),
+        "youAreAllSetup":
+            MessageLookupByLibrary.simpleMessage("You\'re all set up!"),
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
-                "You have the flexibility to set your own hourly rate")
+                "You have the flexibility to set your own hourly rate"),
+        "yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators":
+            MessageLookupByLibrary.simpleMessage(
+                "Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days.")
       };
 }
