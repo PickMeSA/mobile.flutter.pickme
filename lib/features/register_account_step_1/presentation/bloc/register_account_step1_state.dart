@@ -15,3 +15,8 @@ class RegisterAccountStep1Initial extends RegisterAccountStep1State {
 class TermsAndConditionsToggledState extends RegisterAccountStep1State {
   TermsAndConditionsToggledState({required super.checked});
 }
+
+class RegisterAccountRemoteSubmitStep1State extends RegisterAccountStep1State{
+  RegisterAccountRemoteSubmitStep1State({required super.checked});
+
+}
