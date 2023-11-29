@@ -979,6 +979,86 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `I understand`
+  String get iUnderstand {
+    return Intl.message(
+      'I understand',
+      name: 'iUnderstand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your profile is still pending`
+  String get yourProfileIsStillPending {
+    return Intl.message(
+      'Your profile is still pending',
+      name: 'yourProfileIsStillPending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active listings`
+  String get activeListings {
+    return Intl.message(
+      'Active listings',
+      name: 'activeListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive listings`
+  String get inactiveListings {
+    return Intl.message(
+      'Inactive listings',
+      name: 'inactiveListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a new job listing`
+  String get createANewJobListing {
+    return Intl.message(
+      'Create a new job listing',
+      name: 'createANewJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any active listings`
+  String get youDontHaveAnyActiveListings {
+    return Intl.message(
+      'You don\'t have any active listings',
+      name: 'youDontHaveAnyActiveListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any active listings`
+  String get youDontHaveAnyInactiveListings {
+    return Intl.message(
+      'You don\'t have any active listings',
+      name: 'youDontHaveAnyInactiveListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates.`
+  String get weAreStillVerifyingYourAccount {
+    return Intl.message(
+      'We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates.',
+      name: 'weAreStillVerifyingYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

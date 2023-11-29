@@ -5,7 +5,7 @@ import 'package:pickme/shared/domain/entities/pagination_entity.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/remote/api_service/industries_service/industry_service.dart';
 
-@Singleton(as: IndustryService)
+// @Singleton(as: IndustryService)
 class IndustryServiceMockImpl extends IndustryService{
 
   final ApiService apiService;

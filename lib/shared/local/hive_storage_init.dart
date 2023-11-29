@@ -24,15 +24,18 @@ openBoxes() async {
   boxAppState = await Hive.openBox(appStateBox);
   boxBiometrics = await Hive.openBox(biometricsBox);
   boxProfile = await Hive.openBox(profileBox);
+  boxSyncData = await Hive.openBox(syncBox);
 }
 
 late Box boxTokens;
 late Box boxAppState;
 late Box boxBiometrics;
 late Box boxProfile;
+late Box boxSyncData;
 
 const String tokenBox = "TokenBox";
 const String appStateBox = "AppStateBox";
 const String current = "CURRENT";
 const String biometricsBox = "BiometricsBox";
 const String profileBox = "ProfileBox";
+const String syncBox = "SyncBox";

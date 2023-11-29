@@ -5,7 +5,8 @@ class PaginationEntity{
   final int totalPages;
   final int? nextPage;
   final int? prevPage;
-  final String searchTerm;
+  final String? searchTerm;
+  final DateTime? lastUpdated;
 
   PaginationEntity({
     required this.pageSize,
@@ -14,7 +15,8 @@ class PaginationEntity{
     required this.totalPages,
     this.nextPage,
     this.prevPage,
-    required this.searchTerm
+    required this.searchTerm,
+    this.lastUpdated
   });
   
 }

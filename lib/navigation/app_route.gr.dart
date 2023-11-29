@@ -45,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AllServicesPage(),
       );
     },
+    CreateJobListingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CreateJobListingPage(),
+      );
+    },
     FilterCandidatesRoute.name: (routeData) {
       final args = routeData.argsAs<FilterCandidatesRouteArgs>(
           orElse: () => const FilterCandidatesRouteArgs());
@@ -86,6 +92,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MembershipInformationPage(),
       );
     },
+    MyJobListingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MyJobListingsPage(),
+      );
+    },
     OTPRoute.name: (routeData) {
       final args =
           routeData.argsAs<OTPRouteArgs>(orElse: () => const OTPRouteArgs());
@@ -96,6 +108,12 @@ abstract class _$AppRouter extends RootStackRouter {
           userModel: args.userModel,
           fromregister: args.fromregister,
         ),
+      );
+    },
+    PendingProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PendingProfilePage(),
       );
     },
     QualificationsRoute.name: (routeData) {
@@ -245,6 +263,20 @@ class AllServicesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CreateJobListingPage]
+class CreateJobListingRoute extends PageRouteInfo<void> {
+  const CreateJobListingRoute({List<PageRouteInfo>? children})
+      : super(
+          CreateJobListingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CreateJobListingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [FilterCandidatesPage]
 class FilterCandidatesRoute extends PageRouteInfo<FilterCandidatesRouteArgs> {
   FilterCandidatesRoute({
@@ -353,6 +385,20 @@ class MembershipInformationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MyJobListingsPage]
+class MyJobListingsRoute extends PageRouteInfo<void> {
+  const MyJobListingsRoute({List<PageRouteInfo>? children})
+      : super(
+          MyJobListingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MyJobListingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [OTPPage]
 class OTPRoute extends PageRouteInfo<OTPRouteArgs> {
   OTPRoute({
@@ -392,6 +438,20 @@ class OTPRouteArgs {
   String toString() {
     return 'OTPRouteArgs{key: $key, userModel: $userModel, fromregister: $fromregister}';
   }
+}
+
+/// generated route for
+/// [PendingProfilePage]
+class PendingProfileRoute extends PageRouteInfo<void> {
+  const PendingProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          PendingProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PendingProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

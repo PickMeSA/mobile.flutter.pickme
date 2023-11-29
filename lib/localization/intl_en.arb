@@ -91,5 +91,13 @@
   "reset": "Reset",
   "applyFilters": "Apply filters",
   "possiblePriceRange": "Possible price range",
-  "candidateRating": "Candidate rating"
+  "candidateRating": "Candidate rating",
+  "iUnderstand": "I understand",
+  "yourProfileIsStillPending": "Your profile is still pending",
+  "activeListings": "Active listings",
+  "inactiveListings": "Inactive listings",
+  "createANewJobListing": "Create a new job listing",
+  "youDontHaveAnyActiveListings": "You don't have any active listings",
+  "youDontHaveAnyInactiveListings": "You don't have any active listings",
+  "weAreStillVerifyingYourAccount": "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."
 }

@@ -9,6 +9,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
@@ -61,6 +62,7 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                         ]
                       ),),
                       AppSlider(currentSliderValue: state.maxDistance,
+                        maximumSliderValue: defaultMaxDistance.toDouble(),
                         onChanged: (double newMaxDistance) => getBloc().add(MaxDistanceChangedEvent(maxDistance: newMaxDistance)),),
                       Align(
                         alignment: Alignment.centerRight,
@@ -68,13 +70,18 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
                             child: Text("${state.maxDistance.toStringAsFixed(2)}km",)),),
+                      24.height,
                       Text(getLocalization().possiblePriceRange, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontVariations: [
                           const FontVariation("wght", 600)
                         ]
                       ),),
-                      AppRangeSlider( rangeValues: state.priceRange,
-                        onChanged: (RangeValues priceRange) => getBloc().add(PriceRangeChangedEvent(priceRange: priceRange)),),
+                      AppRangeSlider(
+                        rangeValues: state.priceRange,
+                        minimumSliderValue: 0,
+                        maximumSliderValue: defaultMaxPrice.toDouble(),
+                        onChanged: (RangeValues priceRange) => getBloc().add(PriceRangeChangedEvent(priceRange: priceRange))
+                        ,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -88,6 +95,7 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                             child: Text("${state.priceRange.end.toStringAsFixed(2)}",))
                       ],
                     ),
+                      48.height,
                       Text(getLocalization().candidateRating, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontVariations: [
                             const FontVariation("wght", 600)

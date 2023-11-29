@@ -57,7 +57,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                   title: getLocalization().myJobListings,
                   count: 0,
                   icon: const Icon(Iconsax.document_text_14),
-                  onClick: (){},
+                  onClick: ()=>context.router.push(const MyJobListingsRoute()),
                 ),
                 40.height,
                 Row(
@@ -162,6 +162,10 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                   },
                 ),
 
+                PrimaryButton(onPressed:
+                    ()=>context.router.push(const PendingProfileRoute()),
+                    child: const Text("Pending profile"),
+                )
               ],
             ),
           ),

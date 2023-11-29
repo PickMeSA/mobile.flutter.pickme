@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "activeListings":
+            MessageLookupByLibrary.simpleMessage("Active listings"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addAQualificationMembership": MessageLookupByLibrary.simpleMessage(
             "Add a qualification/membership"),
@@ -49,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Connecting workers and clients"),
         "contactHelpCenter":
             MessageLookupByLibrary.simpleMessage("Contact help center"),
+        "createANewJobListing":
+            MessageLookupByLibrary.simpleMessage("Create a new job listing"),
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
@@ -67,10 +71,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
         "iHaveReadThe":
             MessageLookupByLibrary.simpleMessage("I have read & accept the"),
+        "iUnderstand": MessageLookupByLibrary.simpleMessage("I understand"),
         "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(
             "I\'m currently working in this role"),
         "inYourArea": MessageLookupByLibrary.simpleMessage("In your area"),
+        "inactiveListings":
+            MessageLookupByLibrary.simpleMessage("Inactive listings"),
         "indicatesARequiredField":
             MessageLookupByLibrary.simpleMessage("*Indicates a required field"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry *"),
@@ -154,6 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "viewProfile": MessageLookupByLibrary.simpleMessage("view Profile"),
+        "weAreStillVerifyingYourAccount": MessageLookupByLibrary.simpleMessage(
+            "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeLetsSetUpYourProfile": m0,
         "welcomeTopickme":
@@ -167,6 +176,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "workExperience":
             MessageLookupByLibrary.simpleMessage("Work experience"),
         "workPermitNumber":
-            MessageLookupByLibrary.simpleMessage("Work permit number *")
+            MessageLookupByLibrary.simpleMessage("Work permit number *"),
+        "youDontHaveAnyActiveListings": MessageLookupByLibrary.simpleMessage(
+            "You don\'t have any active listings"),
+        "youDontHaveAnyInactiveListings": MessageLookupByLibrary.simpleMessage(
+            "You don\'t have any active listings"),
+        "yourProfileIsStillPending": MessageLookupByLibrary.simpleMessage(
+            "Your profile is still pending")
       };
 }

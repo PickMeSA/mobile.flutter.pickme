@@ -6,6 +6,7 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/pagination_entity.dart';
 
 part 'filter_candidates_event.dart';
@@ -14,13 +15,13 @@ part 'filter_candidates_state.dart';
 @injectable
 class FilterCandidatesBloc extends BaseBloc<FilterCandidatesEvent, FilterCandidatesState> {
   //ToDo: Confirm defaults here
-  double maxDistance = 0;
-  RangeValues priceRange = const RangeValues(0, 100);
+  double maxDistance = defaultDistance.toDouble();
+  RangeValues priceRange = defaultPriceRange;
   Logger logger = Logger();
 
   FilterCandidatesBloc() : super(FilterCandidatesInitial(
-      maxDistance: 4,
-      priceRange: const RangeValues(0, 100),
+      maxDistance: defaultDistance.toDouble(),
+      priceRange: defaultPriceRange,
   )) {
     on<FilterCandidatesPageEnteredEvent>((event, emit) =>
         _onFilterCandidatesPageEnteredEvent(event, emit));
