@@ -13,6 +13,7 @@ class RegisterAccountStep1Bloc extends BaseBloc<RegisterAccountStep1Event, Regis
   bool checked = false;
   RegisterAccountStep1Bloc() : super(RegisterAccountStep1Initial(checked: false)) {
     on<TermsAndConditionsToggledEvent>((event, emit) => _onTermsAndConditionsToggledEvent(event, emit));
+    on<RegisterAccountRemoteSubmitStep1Event>((event, emit)=> _onRegisterAccountRemoteSubmitStep1Event(event, emit));
   }
   _onTermsAndConditionsToggledEvent(
       TermsAndConditionsToggledEvent event,
@@ -20,5 +21,12 @@ class RegisterAccountStep1Bloc extends BaseBloc<RegisterAccountStep1Event, Regis
       ) {
     checked = !checked;
     emit(TermsAndConditionsToggledState(checked: checked));
+  }
+
+  _onRegisterAccountRemoteSubmitStep1Event(
+      RegisterAccountRemoteSubmitStep1Event event,
+      Emitter<RegisterAccountStep1State> emit
+      )async{
+
   }
 }

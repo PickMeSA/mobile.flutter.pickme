@@ -6,3 +6,5 @@ abstract class RegisterAccountStep1Event extends BaseEvent {}
 class TermsAndConditionsToggledEvent extends RegisterAccountStep1Event{
   TermsAndConditionsToggledEvent();
 }
+
+class RegisterAccountRemoteSubmitStep1Event extends RegisterAccountStep1Event{}
