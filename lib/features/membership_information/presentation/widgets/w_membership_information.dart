@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:pickme/features/membership_information/domain/membership_information_entity.dart';
+import 'package:pickme/features/membership_information/entities/membership_information_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 

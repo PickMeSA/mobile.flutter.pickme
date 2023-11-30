@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pickme/features/membership_information/data/response_models/information_item_model_response/information_item_model_response.dart';
-import 'package:pickme/features/membership_information/domain/membership_item_entity.dart';
+import 'package:pickme/features/membership_information/entities/membership_item_entity.dart';
 
 part 'membership_item_model_response.freezed.dart';
 part 'membership_item_model_response.g.dart';
