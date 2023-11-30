@@ -45,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AllServicesPage(),
       );
     },
+    BankDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BankDetailsPage(),
+      );
+    },
     CreateJobListingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -60,6 +66,12 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           serviceCategoryId: args.serviceCategoryId,
         ),
+      );
+    },
+    FinalDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FinalDetailsPage(),
       );
     },
     JobsHiringLandingRoute.name: (routeData) {
@@ -80,6 +92,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LandingPage(),
       );
     },
+    LocationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LocationPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -90,6 +108,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const MembershipInformationPage(),
+      );
+    },
+    MinimumWageRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MinimumWagePage(),
       );
     },
     MyJobListingsRoute.name: (routeData) {
@@ -189,6 +213,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TermsAndConditionsPage(),
       );
     },
+    YouAreAllSetupRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const YouAreAllSetupPage(),
+      );
+    },
   };
 }
 
@@ -263,6 +293,20 @@ class AllServicesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BankDetailsPage]
+class BankDetailsRoute extends PageRouteInfo<void> {
+  const BankDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          BankDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BankDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CreateJobListingPage]
 class CreateJobListingRoute extends PageRouteInfo<void> {
   const CreateJobListingRoute({List<PageRouteInfo>? children})
@@ -315,6 +359,20 @@ class FilterCandidatesRouteArgs {
 }
 
 /// generated route for
+/// [FinalDetailsPage]
+class FinalDetailsRoute extends PageRouteInfo<void> {
+  const FinalDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          FinalDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FinalDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [JobsHiringLandingPage]
 class JobsHiringLandingRoute extends PageRouteInfo<void> {
   const JobsHiringLandingRoute({List<PageRouteInfo>? children})
@@ -357,6 +415,20 @@ class LandingRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [LocationPage]
+class LocationRoute extends PageRouteInfo<void> {
+  const LocationRoute({List<PageRouteInfo>? children})
+      : super(
+          LocationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LocationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [LoginPage]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
@@ -385,6 +457,20 @@ class MembershipInformationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MinimumWagePage]
+class MinimumWageRoute extends PageRouteInfo<void> {
+  const MinimumWageRoute({List<PageRouteInfo>? children})
+      : super(
+          MinimumWageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MinimumWageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [MyJobListingsPage]
 class MyJobListingsRoute extends PageRouteInfo<void> {
   const MyJobListingsRoute({List<PageRouteInfo>? children})
@@ -403,7 +489,7 @@ class MyJobListingsRoute extends PageRouteInfo<void> {
 class OTPRoute extends PageRouteInfo<OTPRouteArgs> {
   OTPRoute({
     Key? key,
-    UserModel? userModel,
+    UserEntity? userModel,
     bool? fromregister = false,
     List<PageRouteInfo>? children,
   }) : super(
@@ -430,7 +516,7 @@ class OTPRouteArgs {
 
   final Key? key;
 
-  final UserModel? userModel;
+  final UserEntity? userModel;
 
   final bool? fromregister;
 
@@ -515,7 +601,7 @@ class RegisterRoute extends PageRouteInfo<void> {
 class ResendOTPRoute extends PageRouteInfo<ResendOTPRouteArgs> {
   ResendOTPRoute({
     Key? key,
-    required UserModel userModel,
+    required UserEntity userModel,
     List<PageRouteInfo>? children,
   }) : super(
           ResendOTPRoute.name,
@@ -540,7 +626,7 @@ class ResendOTPRouteArgs {
 
   final Key? key;
 
-  final UserModel userModel;
+  final UserEntity userModel;
 
   @override
   String toString() {
@@ -592,7 +678,7 @@ class ServiceCategoryCandidatesRouteArgs {
 class SetupProfileRoute extends PageRouteInfo<SetupProfileRouteArgs> {
   SetupProfileRoute({
     Key? key,
-    required UserModel userModel,
+    required UserEntity userModel,
     List<PageRouteInfo>? children,
   }) : super(
           SetupProfileRoute.name,
@@ -617,7 +703,7 @@ class SetupProfileRouteArgs {
 
   final Key? key;
 
-  final UserModel userModel;
+  final UserEntity userModel;
 
   @override
   String toString() {
@@ -663,6 +749,20 @@ class TermsAndConditionsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'TermsAndConditionsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [YouAreAllSetupPage]
+class YouAreAllSetupRoute extends PageRouteInfo<void> {
+  const YouAreAllSetupRoute({List<PageRouteInfo>? children})
+      : super(
+          YouAreAllSetupRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'YouAreAllSetupRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

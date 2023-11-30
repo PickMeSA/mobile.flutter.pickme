@@ -4,11 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/pagination_entity.dart';
+import 'package:pickme/shared/models/candidate_profile/candidate_profile_model_response.dart';
 import 'package:pickme/shared/models/pagination/data/response_models/pagination_model_response/pagination_model_response.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/remote/api_service/candidates_service/candidates_service.dart';
 
-import '../../../../models/candidate_profile/candidate_profile_model_response.dart';
 
 // @Singleton(as: IndustryService)
 class CandidateProfilesImpl extends CandidatesService{
