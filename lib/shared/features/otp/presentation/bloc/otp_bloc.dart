@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/otp_get_token_usecase.dart';
+import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/otp_save_remote_profile_data_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/register_otp_complete_usecase.dart';
 
 part 'otp_event.dart';
@@ -20,9 +21,11 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
     bool preloaderActive = false;
     final OTPGetTokenUseCase otpGetTokenUseCase;
     final RegisterOTPCompleteUseCase registerOTPCompleteUseCase;
+    final OTPSaveRemoteProfileDataUseCase otpSaveRemoteProfileDataUseCase;
     otpBloc({
         required this.registerOTPCompleteUseCase,
-        required this.otpGetTokenUseCase
+        required this.otpGetTokenUseCase,
+        required this.otpSaveRemoteProfileDataUseCase
     }): super(otpPageInitState()) {
         on<OTPGetTokenEvent>((event, emit)=> _onOTPGetTokenEvent(event, emit));
         on<RegisterOTPCompleteEvent>((event, emit)=> _onRegisterOTPCompleteEvent(event,emit));
@@ -36,7 +39,7 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         GetProfileProgressEvent event,
         Emitter<otpPageState> emit) async{
         //run code to check the progress of the user in the registration flow
-        emit(GetProfileProgressState()..dataState = DataState.success);
+        emit(GetProfileProgressState(userModel: event.userModel)..dataState = DataState.success);
     }
 
     _onSaveRemoteProfileDataEvent(
@@ -45,7 +48,10 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         ) async{
         emit(SaveRemoteProfileDataState()..dataState = DataState.loading);
         try{
-            emit(SaveRemoteProfileDataState(error: "")..dataState = DataState.success);
+            await otpSaveRemoteProfileDataUseCase.call(
+                params: OTPSaveRemoteProfileDataUseCaseParams(
+                    userModel: event.userModel));
+            emit(SaveRemoteProfileDataState(error: "", userModel: event.userModel)..dataState = DataState.success);
 
         }catch(ex){
             emit(SaveRemoteProfileDataState(error: ex.toString()).. dataState = DataState.error);

@@ -9,7 +9,7 @@ class NumberEnteredEvent extends ResendOTPPageEvent{
 }
 
 class ResendOTPSubmitClickedEvent extends ResendOTPPageEvent{
-   final UserModel userModel;
+   final UserEntity userModel;
 
    ResendOTPSubmitClickedEvent({required this.userModel});
 }

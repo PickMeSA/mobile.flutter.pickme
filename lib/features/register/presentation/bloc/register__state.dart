@@ -6,7 +6,7 @@ abstract class RegisterState extends BaseState {}
 class RegisterInitial extends RegisterState {}
 
 class ContinueClickedState extends RegisterState{
-  UserModel? userModel;
+  UserEntity? userModel;
   String? verificationId;
   int? resendToken;
   ContinueClickedState({this.userModel, this.verificationId, this.resendToken});

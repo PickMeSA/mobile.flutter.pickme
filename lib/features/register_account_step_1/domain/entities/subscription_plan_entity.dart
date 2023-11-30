@@ -20,10 +20,17 @@ const List<SubscriptionPlanEntity> mockSubscriptionPlans = [
     name: "name",
     price: 20,
     entityType: EntityType.individual,
-    subscriptionType: '',
+    subscriptionType: "Subscription fee",
     includedItems: [
-      "AI candidate matching",
-      "PickMe invest"
+     "Nationwide exposure",
+      "Public endorsement",
+      "work opportunities",
+      "Free investment portfolio",
+      "Free printable CV",
+      "Build your credit profile",
+      "Develop me as a brand",
+      "Advance my skills",
+      "Smart matching"
     ],
   )
 ];

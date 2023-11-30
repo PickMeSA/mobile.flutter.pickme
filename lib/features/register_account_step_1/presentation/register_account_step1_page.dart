@@ -64,8 +64,9 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
               ),
               30.height,
               Column(
-                children: mockSubscriptionPlans.map((plan) => AppSubscriptionPlan(
-                  price: "R${plan.price}",
+                children: mockSubscriptionPlans.map((plan) =>
+                    AppSubscriptionPlan(
+                  price: "${getLocalization().r}${plan.price}",
                   subscriptionType: plan.subscriptionType,
                   entityType: plan.entityType,
                   selected: true,
@@ -107,55 +108,45 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
               40.height,
               Row(
                 children: [
-                  SizedBox(
+                  Container(
                     height: 56,
-                    child: OutlinedButton(
-                      style: ButtonStyle(
-                        side: MaterialStateProperty.all(
-                          BorderSide(
-                            color: theme.colorScheme.secondary,
-                            width: 2,
-                          ),
-                        ),
-                        foregroundColor: MaterialStateProperty.all(theme.colorScheme.secondary)
-                      ),
-                      onPressed: (){
-                        context.router.pop();
-                      },
-                      child: const Icon(Icons.arrow_back_outlined),
-                    ),
+                    width: 56,
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 2,
+                            color: Colors.black),
+                        borderRadius: const BorderRadius.all(Radius.circular(10))),
+                    child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
+
                   ),
-                  16.width,
+                  const SizedBox(width: 10,),
                   Expanded(
-                      child: PrimaryButton(
-                        style: ButtonStyle(
+                    child: PrimaryButton(
+                      style: ButtonStyle(
                           side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                              return BorderSide(
-                                color: states.contains(MaterialState.disabled)?
-                                theme.colorScheme.secondary.withOpacity(0):
-                                theme.colorScheme.secondary,
-                                width: 2,
-                              );
+                            return BorderSide(
+                              color: states.contains(MaterialState.disabled)?
+                              theme.colorScheme.secondary.withOpacity(0):
+                              theme.colorScheme.secondary,
+                              width: 2,
+                            );
                           }
                           ),
                           backgroundColor: MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> states){
+                                  (Set<MaterialState> states){
                                 return states.contains(MaterialState.disabled)?
                                 theme.colorScheme.secondary.withOpacity(0.3):
                                 theme.colorScheme.secondary;
                               }
                           )
-                        ),
-                        onPressed: !state.checked?null:() {
-                          context.router.push(QualificationsRoute());
-                        },
-                        child: Text(getLocalization().nextStep),
                       ),
+                      onPressed: !state.checked?null:() {
+                        context.router.push(const QualificationsRoute());
+                      },
+                      child: Text(getLocalization().nextStep),
+                    ),
                   ),
-
-
                 ],
-              ),
+              )
             ],
           ),
         );

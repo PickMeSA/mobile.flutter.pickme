@@ -4,7 +4,7 @@ import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 abstract class LoginOTPCompleteEventRepository  extends BaseRepository<LoginOTPCompleteEventRepositoryParams, bool>{}
 
 class LoginOTPCompleteEventRepositoryParams extends BaseRepositoryParams{
-  UserModel? userModel;
+  UserEntity? userModel;
 
   LoginOTPCompleteEventRepositoryParams({this.userModel});
 }

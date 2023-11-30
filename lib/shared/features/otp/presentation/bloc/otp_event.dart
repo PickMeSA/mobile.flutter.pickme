@@ -10,7 +10,7 @@ class OTPGetTokenEvent extends otpPageEvent{
 }
 
 class RegisterOTPCompleteEvent extends otpPageEvent{
-   UserModel? userModel;
+   UserEntity? userModel;
    RegisterOTPCompleteEvent({this.userModel});
 }
 
@@ -29,10 +29,14 @@ class OTPEnteredEvent extends otpPageEvent{
 }
 
 class SaveRemoteProfileDataEvent extends otpPageEvent{
-   final UserModel userModel;
+   final UserEntity userModel;
 
    SaveRemoteProfileDataEvent({required this.userModel});
 }
 
-class GetProfileProgressEvent extends otpPageEvent{}
+class GetProfileProgressEvent extends otpPageEvent{
+   UserEntity? userModel;
+
+   GetProfileProgressEvent({this.userModel});
+}
 

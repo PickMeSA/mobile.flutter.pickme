@@ -1,0 +1,5 @@
+import 'package:pickme/base_classes/base_repository.dart';
+
+abstract class SubmitRemoteTermsAndConditionsAcceptanceRepository  extends BaseRepository<SubmitRemoteTermsAndConditionsAcceptanceRepositoryParams, bool>{}
+
+class SubmitRemoteTermsAndConditionsAcceptanceRepositoryParams extends BaseRepositoryParams{}

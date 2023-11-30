@@ -5,7 +5,7 @@ abstract class RegisterEvent extends BaseEvent {
 }
 
 class SubmitClickedEvent extends RegisterEvent{
- final UserModel user;
+ final UserEntity user;
 
  SubmitClickedEvent({required this.user});
 }
@@ -15,7 +15,7 @@ class PassportClickedEvent extends RegisterEvent{}
 class IdClickedEvent extends RegisterEvent{}
 
 class ValueChangedEvent extends RegisterEvent{
-UserModel userModel;
+UserEntity userModel;
 
  ValueChangedEvent({
  required this.userModel

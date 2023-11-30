@@ -2,8 +2,8 @@ part of 'otp_bloc.dart';
 @immutable
 abstract class otpPageState extends BaseState {
   String? error;
-
-  otpPageState({this.error});
+  UserEntity? userModel;
+  otpPageState({this.error, this.userModel});
 }
 
 class otpPageInitState extends otpPageState  {
@@ -27,8 +27,11 @@ class OTPEnteredState extends otpPageState{
 }
 
 class SaveRemoteProfileDataState extends otpPageState{
-  SaveRemoteProfileDataState({super.error});
+  SaveRemoteProfileDataState({super.error, super.userModel });
 }
 
-class GetProfileProgressState extends otpPageState{}
+class GetProfileProgressState extends otpPageState{
+
+  GetProfileProgressState({required super.userModel});
+}
 

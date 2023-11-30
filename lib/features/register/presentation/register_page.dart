@@ -266,8 +266,8 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
     return locator<AppLocalizations>();
   }
 
- UserModel getGetUserModel(){
-    return UserModel(
+ UserEntity getGetUserModel(){
+    return UserEntity(
         email: emailAddressController.text,
         surname: surnameController.text,
         firstName: firstNameController.text,

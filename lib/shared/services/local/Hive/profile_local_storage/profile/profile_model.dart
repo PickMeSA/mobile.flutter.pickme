@@ -26,6 +26,7 @@ class ProfileModel {
   late String? workPermitNumber;
 
 
+
   ProfileModel({
     required this.workPermitNumber,
   required this.idNumber,

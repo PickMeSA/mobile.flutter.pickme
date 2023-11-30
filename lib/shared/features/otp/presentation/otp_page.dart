@@ -19,7 +19,7 @@ import 'bloc/otp_bloc.dart';
 @RoutePage()
 class OTPPage extends BasePage {
 
-  UserModel? userModel;
+  UserEntity? userModel;
   bool? fromregister;
    OTPPage({super.key, this.userModel, this.fromregister = false});
 
@@ -99,7 +99,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         }
         //success
         if(state is SaveRemoteProfileDataState && state.dataState == DataState.success){
-          getBloc().add(GetProfileProgressEvent());
+          getBloc().add(GetProfileProgressEvent(userModel:  state.userModel));
         }
         //error
         if(state is SaveRemoteProfileDataState && state.dataState == DataState.error){
@@ -111,7 +111,11 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         if(state is GetProfileProgressState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          context.router.push(const RegisterAccountStep1Route());
+          if(!widget.fromregister!){
+
+          }else {
+            context.router.push(SetupProfileRoute(userModel: state.userModel!));
+          }
         }
 
         if(state is GetProfileProgressState && state.dataState == DataState.error){

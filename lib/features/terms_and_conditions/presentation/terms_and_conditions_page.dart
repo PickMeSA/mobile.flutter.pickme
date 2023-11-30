@@ -1,12 +1,13 @@
 import 'dart:ui';
-
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/terms_and_conditions_bloc.dart';
 
@@ -20,6 +21,13 @@ class TermsAndConditionsPage extends BasePage {
 }
 
 class _TermsAndConditionsState extends BasePageState<TermsAndConditionsPage, TermsAndConditionsBloc> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getBloc().add(GetRemoteTermsAndConditionsEvent());
+  }
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
@@ -28,7 +36,8 @@ class _TermsAndConditionsState extends BasePageState<TermsAndConditionsPage, Ter
         // TODO: implement listener
       },
       builder: (context, state) {
-        return Container(
+        return state is GetRemoteTermsAndConditionsState && state.dataState == DataState.success?
+          SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: Padding(
@@ -55,15 +64,22 @@ class _TermsAndConditionsState extends BasePageState<TermsAndConditionsPage, Ter
                 32.height,
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Text(
-                        getLocalization().longDemoText
+                    child: wText(
+                      getBloc().termsAndConditionsEntity.termsAndConditions
                     ),
                   ),
                 ),
               ],
             ),
           ),
-        );
+        ): state is GetRemoteTermsAndConditionsState && state.dataState == DataState.loading?
+        Container(
+          child: const Center(
+            child: CircularProgressIndicator(),
+          ),
+        ):
+        state is GetRemoteTermsAndConditionsState && state.dataState == DataState.error?
+        Container(child: wText(state.error!),): Container();
       },
     );
   }

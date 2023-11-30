@@ -24,7 +24,7 @@ class RegisterOTPCompleteUseCase extends BaseUseCase<RegisterOTPCompleteUseCaseP
 }
 
 class RegisterOTPCompleteUseCaseParams extends BaseUseCaseParams{
-  final UserModel userModel;
+  final UserEntity userModel;
 
   RegisterOTPCompleteUseCaseParams({required this.userModel});
 }
