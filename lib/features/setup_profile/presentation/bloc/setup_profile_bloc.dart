@@ -54,9 +54,9 @@ class SetupProfileBloc
             emit(SetupProfileSubmitProfileTypeState()
                 ..dataState = DataState.loading);
             if(selectedToggleButtons[0] == true){
-               type = 'Work';
+               type = 'work';
             }else{
-                type = "Hire";
+                type = "hire";
             }
         await setupProfileRemoteSubmitProfileTypeUseCase.call(
             params: SetupProfileRemoteSubmitProfileTypeUseCaseParams(

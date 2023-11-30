@@ -6,4 +6,6 @@ abstract class ProfileService extends PickMeCoreApi{
 
   Future<bool> submitProfileType(ProfileTypeEntity profileTypeEntity);
 
+
+
 }

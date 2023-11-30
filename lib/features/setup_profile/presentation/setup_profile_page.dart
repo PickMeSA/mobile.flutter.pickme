@@ -3,6 +3,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:logger/logger.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
@@ -58,6 +59,12 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
         if(state is SetupProfileSubmitProfileTypeState && state.dataState == DataState.error){
 
         }
+
+        if(state is SetUpProfileToggleSelectedState && state.dataState == DataState.success){
+          Logger logger = Logger();
+
+          logger.d(getBloc().selectedToggleButtons);
+        }
       },
       builder: (context, state) {
         return Container(
@@ -95,6 +102,7 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
                   padding: const EdgeInsets.only(right: 15,left: 15,top: 10.0, bottom: 10),
                   child: ProfileToggle(
                     onPressed: (int index) {
+                      print("Clicked $index");
                       getBloc().add(SetUpProfileToggleSelectedEvent(selectedIndex: index));
                     },
                     selected: getBloc().selectedToggleButtons,

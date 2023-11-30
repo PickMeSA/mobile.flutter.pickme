@@ -57,8 +57,6 @@ class UserServiceImpl extends UserService{
 
       boxUser.put(current, UserModel(id: profileDataModelResponse.id));
 
-      boxProfile.put(current, newUserModel);
-
       return newUserModel;
     }catch(ex){
       rethrow;

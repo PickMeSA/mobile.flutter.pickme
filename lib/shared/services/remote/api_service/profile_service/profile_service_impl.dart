@@ -20,7 +20,7 @@ class ProfileServiceImpl extends ProfileService{
 
         UserModel userModel = boxUser.get(current);
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-      data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type));
+      data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type).toJson());
       return true;
     }catch(ex){
       rethrow;
