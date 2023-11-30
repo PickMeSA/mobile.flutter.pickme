@@ -1,52 +1,30 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pickme/features/register/domain/entities/user/user_model.dart';
-import 'package:pickme/shared/features/otp/data/models/otp_model_response/profile_data_model_response.dart';
+import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
+import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
 @Singleton(as: ProfileService)
+
 class ProfileServiceImpl extends ProfileService{
 
   final ApiService apiService;
 
-  ProfileServiceImpl({required this.apiService ,required super.tokenLocalStorage});
-
-  
+  ProfileServiceImpl({required this.apiService, required super.tokenLocalStorage});
   @override
-  Future<UserModel> getRemoteProfileData() {
-    // TODO: implement getRemoteProfileData
-    throw UnimplementedError();
-  }
+  Future<bool> submitProfileType(ProfileTypeEntity profileTypeEntity) async  {
+    try{
 
-  @override
-  Future<bool> saveRemoteProfileData({required UserModel userModel}) async {
-    try {
-      Response<dynamic> response = await
-      apiService.post("$baseUrl/api/$version/users",
-          data: ProfileDataModelResponse(
-              email: userModel.email,
-              id: userModel.idNumber,
-              idNumber: userModel.idNumber ?? "not used",
-              surname: userModel.surname,
-              firstName: userModel.firstName,
-              mobile: userModel.mobile,
-              passportNumber: userModel.passportNumber ?? "not used",
-              profileType: userModel.profileType,
-              subscriptionType: userModel.subscriptionType,
-              workPermitNumber: userModel.workPermitNumber ?? "not used",
-              isActive: false));
-      if(response.statusCode == 200) {
-        return true;
-      }
-      return false;
+        UserModel userModel = boxUser.get(current);
+      await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+      data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type));
+      return true;
     }catch(ex){
       rethrow;
     }
-
   }
-
-
-
 
 }

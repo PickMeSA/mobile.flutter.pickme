@@ -8,7 +8,7 @@ class ProfileLocalStorageImpl extends ProfileLocalStorage{
   @override
   Future<ProfileModel> getProfileModel() {
     if(boxProfile.isNotEmpty){
-      return boxProfile.get(current);
+      return Future.value(boxProfile.get(current));
     }else{
       throw("no profile saved");
     }

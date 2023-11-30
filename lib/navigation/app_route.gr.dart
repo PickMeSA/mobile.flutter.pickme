@@ -323,7 +323,7 @@ class MinimumWageRoute extends PageRouteInfo<void> {
 class OTPRoute extends PageRouteInfo<OTPRouteArgs> {
   OTPRoute({
     Key? key,
-    UserModel? userModel,
+    UserEntity? userModel,
     bool? fromregister = false,
     List<PageRouteInfo>? children,
   }) : super(
@@ -350,7 +350,7 @@ class OTPRouteArgs {
 
   final Key? key;
 
-  final UserModel? userModel;
+  final UserEntity? userModel;
 
   final bool? fromregister;
 
@@ -421,7 +421,7 @@ class RegisterRoute extends PageRouteInfo<void> {
 class ResendOTPRoute extends PageRouteInfo<ResendOTPRouteArgs> {
   ResendOTPRoute({
     Key? key,
-    required UserModel userModel,
+    required UserEntity userModel,
     List<PageRouteInfo>? children,
   }) : super(
           ResendOTPRoute.name,
@@ -446,7 +446,7 @@ class ResendOTPRouteArgs {
 
   final Key? key;
 
-  final UserModel userModel;
+  final UserEntity userModel;
 
   @override
   String toString() {
@@ -459,7 +459,7 @@ class ResendOTPRouteArgs {
 class SetupProfileRoute extends PageRouteInfo<SetupProfileRouteArgs> {
   SetupProfileRoute({
     Key? key,
-    required UserModel userModel,
+    required UserEntity userModel,
     List<PageRouteInfo>? children,
   }) : super(
           SetupProfileRoute.name,
@@ -484,7 +484,7 @@ class SetupProfileRouteArgs {
 
   final Key? key;
 
-  final UserModel userModel;
+  final UserEntity userModel;
 
   @override
   String toString() {

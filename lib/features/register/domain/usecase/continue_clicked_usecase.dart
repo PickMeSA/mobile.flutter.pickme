@@ -39,7 +39,7 @@ class ContinueClickedUseCase extends BaseUseCase<ContinueClickedUseCaseParams, b
 
 class ContinueClickedUseCaseParams extends BaseUseCaseParams {
 
-  final UserModel user;
+  final UserEntity user;
   ContinueClickedUseCaseParams({
     required this.user
   });

@@ -5,14 +5,14 @@ import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/shared/features/otp/domain/repository/otp_repository/otp_save_remote_profile_data_repository.dart';
 
 @Injectable()
-class OTPSaveRemoteProfileDataUseCase extends BaseUseCase<OTPSaveRemoteProfileDataUseCaseParams, bool>{
+class OTPSaveRemoteProfileDataUseCase extends BaseUseCase<OTPSaveRemoteProfileDataUseCaseParams, UserEntity>{
 
   final OTPSaveRemoteProfileDataRepository oTPSaveRemoteProfileDataRepository;
 
   OTPSaveRemoteProfileDataUseCase({required this.oTPSaveRemoteProfileDataRepository});
 
   @override
-  Future<bool> call({OTPSaveRemoteProfileDataUseCaseParams? params}) async{
+  Future<UserEntity> call({OTPSaveRemoteProfileDataUseCaseParams? params}) async{
     try{
       return oTPSaveRemoteProfileDataRepository.call(params: OTPSaveRemoteProfileDataRepositoryParams(userModel: params!.userModel));
     }catch(ex){
@@ -22,7 +22,7 @@ class OTPSaveRemoteProfileDataUseCase extends BaseUseCase<OTPSaveRemoteProfileDa
 }
 
 class OTPSaveRemoteProfileDataUseCaseParams extends BaseUseCaseParams{
-  final UserModel userModel;
+  final UserEntity userModel;
 
   OTPSaveRemoteProfileDataUseCaseParams({required this.userModel});
 }

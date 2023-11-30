@@ -5,7 +5,7 @@ abstract class RegisterOTPCompleteRepository  extends BaseRepository<RegisterOTP
 
 class RegisterOTPCompleteRepositoryParams extends BaseRepositoryParams{
 
-  final UserModel userModel;
+  final UserEntity userModel;
 
   RegisterOTPCompleteRepositoryParams({required this.userModel});
 }

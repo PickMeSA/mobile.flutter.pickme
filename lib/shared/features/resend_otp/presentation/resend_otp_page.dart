@@ -17,7 +17,7 @@ import 'bloc/resend_otp_bloc.dart';
 @RoutePage()
 class ResendOTPPage extends BasePage {
    ResendOTPPage({super.key, required this.userModel});
-   UserModel userModel;
+   UserEntity userModel;
   @override
   _ResendOTPPageState createState() => _ResendOTPPageState();
 }
@@ -44,7 +44,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
       listener: (context, state){
         if(state is NumberEnteredState && state.dataState == DataState.loading){
           context.router.push(OTPRoute(
-              userModel: UserModel(
+              userModel: UserEntity(
                   mobile:"+27${phoneNumberController.text}" ,
                   email: '',
                   surname: '',
@@ -140,7 +140,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                               child: InkWell(
                                 onTap: (){
                                   getBloc().add(ResendOTPSubmitClickedEvent(
-                                      userModel: UserModel(
+                                      userModel: UserEntity(
                                           mobile:"+27${phoneNumberController.text}" ,
                                           email: '',
                                           surname: '',

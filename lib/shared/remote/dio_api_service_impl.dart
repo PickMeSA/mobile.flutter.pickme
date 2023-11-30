@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'api-service.dart';
 
 @Singleton(as:ApiService)
@@ -14,8 +15,11 @@ class DioApiService extends ApiService{
 
   DioApiService({
     required this.dio}){
-   dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options, RequestInterceptorHandler handler){
+   dio.interceptors.add(InterceptorsWrapper(onRequest:
+       (RequestOptions options, RequestInterceptorHandler handler){
+     //attach
      TokenModel tokenModel = boxTokens.get(current);
+     options.headers['Content-Type'] = 'application/json';
      options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
      return handler.next(options);
    }));
