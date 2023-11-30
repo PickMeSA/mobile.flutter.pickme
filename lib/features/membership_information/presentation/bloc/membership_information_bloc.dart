@@ -4,7 +4,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:pickme/features/membership_information/domain/membership_information_entity.dart';
+import 'package:pickme/features/membership_information/entities/membership_information_entity.dart';
 import 'package:pickme/features/membership_information/domain/use_cases/membership_information_usecase/get_membership_information_usecase.dart';
 
 part 'membership_information_event.dart';

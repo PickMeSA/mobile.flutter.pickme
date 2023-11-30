@@ -5,9 +5,9 @@ import 'package:injectable/injectable.dart';
 import 'package:pickme/features/membership_information/data/response_models/membership_information_model_response/membership_item_model_response.dart';
 import 'package:pickme/features/membership_information/data/response_models/membership_item_list_model_response/membership_item_list_model_response.dart';
 import 'package:pickme/features/membership_information/data/service/remote/membership_details_service.dart';
-import 'package:pickme/features/membership_information/domain/information_item_entity.dart';
-import 'package:pickme/features/membership_information/domain/membership_information_entity.dart';
-import 'package:pickme/features/membership_information/domain/membership_item_entity.dart';
+import 'package:pickme/features/membership_information/entities/information_item_entity.dart';
+import 'package:pickme/features/membership_information/entities/membership_information_entity.dart';
+import 'package:pickme/features/membership_information/entities/membership_item_entity.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 
 @Singleton(as: MembershipDetailsService)
