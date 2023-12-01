@@ -31,7 +31,7 @@ class SaveRemoteProfileDataState extends otpPageState{
 }
 
 class GetProfileProgressState extends otpPageState{
-
-  GetProfileProgressState({required super.userModel});
+  ProfileEntity? profileEntity;
+  GetProfileProgressState({required super.userModel,this.profileEntity, super.error });
 }
 

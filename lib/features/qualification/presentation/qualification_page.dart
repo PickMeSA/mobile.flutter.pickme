@@ -9,6 +9,7 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
@@ -54,7 +55,13 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                    Row(
                      children: [
                        const Spacer(),
-                       InkWell(onTap:()=> context.router.push(const AddSkillsRoute()),child: wText(getLocalization().skip,style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
+                       InkWell(
+                           onTap:()=> context.router.push(const AddSkillsRoute()),
+                           child: wText(getLocalization().skip,
+                               style: const TextStyle(
+                                   fontSize: 14,
+                                   fontWeight:
+                                   FontWeight.w600)))
                      ],
                    ),
                    wText(
@@ -68,12 +75,15 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                    Padding(
                      padding: const EdgeInsets.only(top: 20),
                      child: qualificationSlab(
+                       otpQualificationEntityList: getBloc().otpQualificationEntityList,
+                         otpWorkExperienceEntityList: [],
                          icon: const Icon(Icons.school_outlined,
                            size: 24,),
                          caption: getLocalization().qualificationMembership,
                        buttonCaption: getLocalization().addAQualificationMembership,
-                       onClick: (){
-                           context.router.push(AddQualificationRoute());
+                       onClick: () async{
+                           getBloc().add(AddQualificationEvent(
+                               otpQualificationEntity: await context.router.push(const AddQualificationRoute()) as OTPQualificationEntity));
                        }
                      )
                    ),
@@ -82,6 +92,8 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                    Padding(
                        padding: const EdgeInsets.only(top: 20),
                        child: qualificationSlab(
+                         otpWorkExperienceEntityList: getBloc().otpWorKExperienceEntityList,
+                           otpQualificationEntityList: [],
                            icon: const Icon(Iconsax.briefcase,
                              size: 24,),
                            caption: getLocalization().workExperience,
@@ -126,7 +138,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                          }
                      )
                  ),
-                 onPressed: !state.checked?null:() {
+                 onPressed: () {
                    context.router.push(const AddSkillsRoute());
                  },
                  child: Text(getLocalization().nextStep),
