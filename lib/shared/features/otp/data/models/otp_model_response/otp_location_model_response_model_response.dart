@@ -9,7 +9,7 @@ class OTPLocationModelResponse with _$OTPLocationModelResponse {
   const factory OTPLocationModelResponse({
     required String? id,
     required String? latitude,
-    required String longitude
+    required String? longitude
   }) = _OTPLocationModelResponse;
 
   factory OTPLocationModelResponse.fromJson(

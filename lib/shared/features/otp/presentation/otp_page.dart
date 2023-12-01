@@ -111,10 +111,22 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         if(state is GetProfileProgressState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(!widget.fromregister!){
-
-          }else {
+          if(state.profileEntity!.type!.isEmpty){
+            //
             context.router.push(SetupProfileRoute(userModel: state.userModel!));
+          }else if (state.profileEntity!.qualifications!.isEmpty &&
+                    state.profileEntity!.workExperience!.isEmpty){
+            context.router.push(const QualificationsRoute());
+          }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
+            context.router.push(const SkillsAndIndustryRoute());
+          }else if(state.profileEntity!.hourlyRate! == 0){
+            context.router.push(const RateAndWorkTimesRoute());
+          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+            context.router.push(const BankDetailsRoute());
+          }else if(state.profileEntity!.location!.id!.isEmpty ){
+            context.router.push(const LocationRoute());
+          }else if(state.profileEntity!.description!.isEmpty){
+            context.router.push(const FinalDetailsRoute());
           }
         }
 

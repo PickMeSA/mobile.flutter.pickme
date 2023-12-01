@@ -12,9 +12,12 @@ class GetRemoteProfileUseCase extends BaseUseCase<GetRemoteProfileUseCaseParams,
   GetRemoteProfileUseCase({required this.getRemoteProfileRepository});
 
   @override
-  Future<ProfileEntity> call({GetRemoteProfileUseCaseParams? params}) {
-    // TODO: implement call
-    throw UnimplementedError();
+  Future<ProfileEntity> call({GetRemoteProfileUseCaseParams? params})  async{
+    try{
+      return await getRemoteProfileRepository.call();
+    }catch(ex){
+      rethrow;
+    }
   }
 }
 

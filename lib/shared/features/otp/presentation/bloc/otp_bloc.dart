@@ -7,6 +7,8 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remote_profile_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/otp_get_token_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/otp_save_remote_profile_data_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/register_otp_complete_usecase.dart';
@@ -22,7 +24,9 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
     final OTPGetTokenUseCase otpGetTokenUseCase;
     final RegisterOTPCompleteUseCase registerOTPCompleteUseCase;
     final OTPSaveRemoteProfileDataUseCase otpSaveRemoteProfileDataUseCase;
+    final GetRemoteProfileUseCase getRemoteProfileUseCase;
     otpBloc({
+        required this.getRemoteProfileUseCase,
         required this.registerOTPCompleteUseCase,
         required this.otpGetTokenUseCase,
         required this.otpSaveRemoteProfileDataUseCase
@@ -42,8 +46,10 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         emit(GetProfileProgressState(userModel: event.userModel)..dataState = DataState.loading);
         try{
 
+        emit(GetProfileProgressState(userModel: event.userModel ,
+            profileEntity: await getRemoteProfileUseCase.call())..dataState = DataState.success);
         }catch(ex){
-
+            emit(GetProfileProgressState(userModel: event.userModel,error: ex.toString()));
         }
     }
 

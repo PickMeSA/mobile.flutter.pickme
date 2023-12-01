@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_business_entity.dart';
 
 part 'otp_business_model_response.freezed.dart';
 part 'otp_business_model_response.g.dart';
@@ -16,4 +17,5 @@ class OTPBusinessModelResponse with _$OTPBusinessModelResponse {
   factory OTPBusinessModelResponse.fromJson(
           Map<String, Object?> json) =>
       _$OTPBusinessModelResponseFromJson(json);
+
 }

@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_location_model_response_model_response.dart';
 
 class OTPLocationEntity extends Equatable{
   String? id;
-  int? latitude;
-  int? longitude;
+  String? latitude;
+  String? longitude;
 
   @override
   // TODO: implement props
@@ -14,5 +15,9 @@ class OTPLocationEntity extends Equatable{
     required this.latitude,
     required this.longitude});
 
-
+  OTPLocationEntity.fromResponse(OTPLocationModelResponse response){
+    id = response.id??"";
+    longitude = response.longitude??"";
+    latitude = response.latitude??"";
+  }
 }
