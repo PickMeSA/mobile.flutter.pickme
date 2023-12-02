@@ -25,4 +25,14 @@ class OTPWorkExperienceEntity {
     company = response.company??"";
     isCurrent = response.isCurrent??false;
   }
+
+  OTPWorkExperienceModelResponse toResponse(){
+    return OTPWorkExperienceModelResponse(
+        title: title,
+        company: company,
+        startDate: startDate.toString(),
+        endDate: endDate.toString(),
+        isCurrent: isCurrent,
+        industryId: industryId);
+  }
 }

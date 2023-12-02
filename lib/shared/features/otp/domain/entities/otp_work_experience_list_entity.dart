@@ -16,4 +16,20 @@ class OTPWorkExperienceListEntity{
     });
   }
 
+  List<OTPWorkExperienceModelResponse> toResponseList(){
+    List<OTPWorkExperienceModelResponse> otpWorkExperienceModelResponseList = [];
+
+    workExperience!.forEach((element) {
+      otpWorkExperienceModelResponseList.add(OTPWorkExperienceModelResponse(
+          title: element.title,
+          company: element.company,
+          startDate: element.startDate.toString(),
+          endDate: element.endDate.toString(),
+          isCurrent: element.isCurrent,
+          industryId: element.industryId));
+    });
+
+    return otpWorkExperienceModelResponseList;
+  }
+
 }

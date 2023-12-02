@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/qualification/data/response_models/qualification_model_response/submit_remote_qualification_and_experience_model_response.dart';
+import 'package:pickme/features/qualification/domain/entities/submit_qualification_and_experience_entity.dart';
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_full_profile_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_location_model_response_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_payment_details_model_response.dart';
+import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_qualification_model_response_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_skill_id_model_response.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_business_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
@@ -46,35 +49,57 @@ class ProfileServiceImpl extends ProfileService{
     try{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
-      OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
-      return ProfileEntity(
-         type: otpFullProfileModelResponse.type??"",
-      description:  otpFullProfileModelResponse.description??"",
-      business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? OTPBusinessModelResponse(
-          name: "",
-          number: "",
-          cipc: "",
-          website:false)
-      ),
-      hourlyRate: otpFullProfileModelResponse.hourlyRate??0,
-      industryId: otpFullProfileModelResponse.industryID??0,
-      location: OTPLocationEntity.fromResponse(otpFullProfileModelResponse.location??OTPLocationModelResponse(
-          id: "",
-          latitude: "",
-          longitude: "")),
-      paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails??OTPPaymentDetailsModelResponse(
-          bankName: "",
-          bankAccountType: "",
-          bankAccountNumber: "",
-          bankBranchCode: "",
-          taxNumber: "",
-          vatNumber: "")),
-      qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualifications??[],
-      skillIds: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skillIds??SkillIdModelResponse(skillsId: [])),
-      workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
+      return returnProfileEntity(response: response);
     }catch(ex){
       rethrow;
     }
   }
+
+  @override
+  Future<ProfileEntity> submitWorkQualificationAndWorkExperience({required SubmitQualificationAndExperienceEntity submitQualificationAndExperienceEntity}) async {
+    try{
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+        data: SubmitRemoteQualificationAndExperienceModelResponse(
+            otpQualificationResponseModelList: submitQualificationAndExperienceEntity.otpQualificationEntityList.toResponseList(),
+            otpWorKExperienceResponseModelList: submitQualificationAndExperienceEntity.otpWorKExperienceEntityList.toResponseList()));
+
+      return returnProfileEntity(response: response);
+
+    }catch(ex){
+      rethrow;
+    }
+  }
+
+  returnProfileEntity({required Response<dynamic> response}){
+    OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
+    return ProfileEntity(
+        type: otpFullProfileModelResponse.type??"",
+        description:  otpFullProfileModelResponse.description??"",
+        business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? const OTPBusinessModelResponse(
+            name: "",
+            number: "",
+            cipc: "",
+            website:false)
+        ),
+        hourlyRate: otpFullProfileModelResponse.hourlyRate??0,
+        industryId: otpFullProfileModelResponse.industryID??0,
+        location: OTPLocationEntity.fromResponse(otpFullProfileModelResponse.location??const OTPLocationModelResponse(
+            id: "",
+            latitude: "",
+            longitude: "")),
+        paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails??const OTPPaymentDetailsModelResponse(
+            bankName: "",
+            bankAccountType: "",
+            bankAccountNumber: "",
+            bankBranchCode: "",
+            taxNumber: "",
+            vatNumber: "")),
+        qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualifications??[],
+        skillIds: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skillIds??SkillIdModelResponse(skillsId: [])),
+        workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
+  }
+
+
 
 }
