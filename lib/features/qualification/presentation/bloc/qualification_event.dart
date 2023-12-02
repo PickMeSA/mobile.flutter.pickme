@@ -7,3 +7,9 @@ class AddQualificationEvent extends QualificationsPageEvent{
 
   AddQualificationEvent({required this.otpQualificationEntity});
 }
+
+class AddWorkExperienceEvent extends QualificationsPageEvent{
+   final OTPWorkExperienceEntity otpWorkExperienceEntity;
+
+   AddWorkExperienceEvent({required this.otpWorkExperienceEntity});
+}

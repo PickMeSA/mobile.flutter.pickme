@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/shared/constants/qualifications.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/add_qualification_bloc.dart';
 
 @RoutePage()
@@ -27,6 +28,8 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
   TextEditingController issuingOrganisationController = TextEditingController();
   TextEditingController qualificationTypeController = TextEditingController();
   TextEditingController issueDateController = TextEditingController();
+
+  late DateTime? selectedDateTime = DateTime.now();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -74,7 +77,6 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                    Padding(
                      padding: const EdgeInsets.only(bottom:20 , right: 40),
                      child: AppDropdownMenu<Qualifications>(
-
                          label: wText(getLocalization().qualificationType),
                          enableFilter: true,
                          dropdownMenuEntries: state.entries??[],
@@ -83,22 +85,36 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                    ),
                    Padding(
                      padding: const EdgeInsets.only(bottom: 10),
-                     child: AppTextFormField(textFieldType: TextFieldType.NAME,
+                     child: AppTextFormField(
+                       validator: (value){
+                         if(value!.isEmpty){
+                           return getLocalization().pleaseEnterQualificationName;
+                         }
+                       },
+                         textFieldType: TextFieldType.NAME,
                          labelText: getLocalization().qualificationName,
                      controller: qualificationNameController),
                    ),
                    Padding(
                      padding: const EdgeInsets.only(bottom: 10),
-                     child: AppTextFormField(textFieldType: TextFieldType.NAME,
+                     child: AppTextFormField(
+                       validator: (value){
+                         if(value!.isEmpty){
+                           return getLocalization().pleaseEnterIssuingOrganization;
+                         }
+                       },
+                       textFieldType: TextFieldType.NAME,
                      labelText: getLocalization().issuingOrganisations,
                      controller: issuingOrganisationController,),
                    ),
 
 
-                   DateTextBox(labelText: getLocalization().issueDate,
+                   DateTextBox(
+                       labelText: getLocalization().issueDate,
                      controller: issueDateController,
-                   onDateSelected: (DateTime dateTIme){
-                     issueDateController.text = dateTIme.toString();
+                   onDateSelected: (DateTime dateTime){
+                      selectedDateTime = dateTime;
+                     issueDateController.text = DateFormatters.getWordDate(dateTime);
                    }),
                    Padding(padding: const EdgeInsets.only(bottom: 30, top: 15),
                        child:Container(
@@ -163,7 +179,7 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
 
   OTPQualificationEntity getQualification(){
     return OTPQualificationEntity(
-        issueDate: "2022" ,
+        issueDate: selectedDateTime ,
         type: qualificationTypeController.text,
         name: qualificationNameController.text,
         issuingOrganization: issuingOrganisationController.text);

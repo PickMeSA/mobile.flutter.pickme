@@ -19,6 +19,7 @@ class QualificationsBloc
     List<OTPWorkExperienceEntity> otpWorKExperienceEntityList = [];
     QualificationsBloc(): super(QualificationsPageInitState()) {
         on<AddQualificationEvent>((event, emit)=> _onAddQualificationEvent(event, emit));
+        on<AddWorkExperienceEvent>((event, emit) => _onAddWorkExperienceEvent(event,emit));
     }
 
     _onAddQualificationEvent(
@@ -27,4 +28,12 @@ class QualificationsBloc
         otpQualificationEntityList.add(event.otpQualificationEntity);
         emit(AddQualificationState());
     }
+
+    _onAddWorkExperienceEvent(
+        AddWorkExperienceEvent event,
+        Emitter<QualificationsPageState> emit) async{
+        otpWorKExperienceEntityList.add(event.otpWorkExperienceEntity);
+        emit(AddWorkExperienceState());
+    }
+
 } 

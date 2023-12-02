@@ -26,7 +26,7 @@ Widget qualificationSlab({
                     institutionName: otpQualificationEntityList![index].issuingOrganization!,
                   educationType: otpQualificationEntityList![index].type,
                   qualificationType: AppQualificationType.education,
-                  issuedOn: DateTime.tryParse(otpQualificationEntityList![index].issueDate!)
+                  issuedOn: otpQualificationEntityList![index].issueDate!
                   
 
 
@@ -34,7 +34,7 @@ Widget qualificationSlab({
           }): otpWorkExperienceEntityList!.isNotEmpty?
       ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: otpWorkExperienceEntityList.length,
           itemBuilder: (context , index){
             return AppProfileQualification(
@@ -42,8 +42,8 @@ Widget qualificationSlab({
                     name:otpWorkExperienceEntityList![index].title!,
                     institutionName: otpWorkExperienceEntityList![index].company!,
                     qualificationType: AppQualificationType.experience,
-                  dateStarted: DateTime.tryParse(otpWorkExperienceEntityList![index].startDate!),
-                  dateEnded: DateTime.tryParse(otpWorkExperienceEntityList![index].endDate!)
+                  dateStarted: otpWorkExperienceEntityList![index].startDate!,
+                  dateEnded: otpWorkExperienceEntityList![index].endDate!
                 ));
           }):
       Row(

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
@@ -98,8 +99,9 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                              size: 24,),
                            caption: getLocalization().workExperience,
                            buttonCaption: getLocalization().addWorkExperience,
-                         onClick: (){
-                             context.router.push(AddWorkExperienceRoute());
+                         onClick: () async {
+                           getBloc().add(AddWorkExperienceEvent(otpWorkExperienceEntity: await context.router.push(const AddWorkExperienceRoute()) as OTPWorkExperienceEntity))
+                             ;
                          }
                        )
                    ),
