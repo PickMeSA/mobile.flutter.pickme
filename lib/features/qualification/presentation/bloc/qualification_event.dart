@@ -13,3 +13,7 @@ class AddWorkExperienceEvent extends QualificationsPageEvent{
 
    AddWorkExperienceEvent({required this.otpWorkExperienceEntity});
 }
+
+class AddQualificationRemoteSubmitEvent extends QualificationsPageEvent{
+
+}

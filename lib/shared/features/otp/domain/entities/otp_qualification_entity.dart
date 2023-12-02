@@ -27,4 +27,12 @@ class OTPQualificationEntity{
       qualifications!.add(OTPQualificationEntity.fromResponse(element));
     });
   }
+
+  OTPQualificationModelResponse toResponse(){
+    return OTPQualificationModelResponse(
+        type: type,
+        name: name,
+        issuingOrganization: issuingOrganization,
+        issueDate: issueDate.toString());
+  }
 }

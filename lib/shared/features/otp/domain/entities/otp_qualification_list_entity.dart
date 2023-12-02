@@ -16,4 +16,18 @@ class OTPQualificationListEntity {
     });
   }
 
+  List<OTPQualificationModelResponse>toResponseList(){
+    List<OTPQualificationModelResponse> otpQualificationModelResponseList =  [];
+    qualifications!.forEach((element) {
+      otpQualificationModelResponseList.add(OTPQualificationModelResponse(
+          type: element.type,
+          name: element.name,
+          issuingOrganization: element.issuingOrganization,
+          issueDate: element.issueDate.toString()));
+    });
+    return otpQualificationModelResponseList;
+
+  }
+
+
 }

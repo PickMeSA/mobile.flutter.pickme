@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_skill_id_model_response.dart';
 
 class OTPSkillIdsEntity {
-  List<int>? skillIds;
+  List<int>? skillIds = [];
 
 
   OTPSkillIdsEntity({
