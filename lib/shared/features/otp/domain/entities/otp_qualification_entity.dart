@@ -5,7 +5,7 @@ class OTPQualificationEntity{
   String? type;
   String? name;
   String? issuingOrganization;
-  String? issueDate;
+  DateTime? issueDate;
   List<OTPQualificationEntity>? qualifications;
 
   OTPQualificationEntity({
@@ -18,7 +18,7 @@ class OTPQualificationEntity{
     type = response.type??"";
     name = response.name??"";
     issuingOrganization = response.issuingOrganization??"";
-    issueDate = response.issueDate??"";
+    issueDate = DateTime.parse(response.issueDate!);
   }
 
   toQualificationList(List<OTPQualificationModelResponse> response){

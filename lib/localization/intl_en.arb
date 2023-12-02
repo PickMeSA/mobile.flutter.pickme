@@ -113,5 +113,15 @@
   "createProfile": "Create profile",
   "youAreAllSetup": "You're all set up!",
   "yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators": "Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days.",
-  "goToDashboard": "Go to dashboard"
+  "goToDashboard": "Go to dashboard",
+  "pleaseEnterQualificationName": "Please enter qualification name",
+  "pleaseEnterIssuingOrganization": "Please enter issuing organization",
+  "pleaseSelectIssueDate": "Please enter issue date",
+  "pleaseEnterQualificationType" : "Please enter qualification type",
+  "pleaseEnterPositionTitle": "Please enter position title",
+  "pleaseEnterCompanyName": "Please enter company name",
+  "pleaseSelectStartDate": "Please select start date",
+  "pleaseSelectEndDate": "Please select end date",
+  "endDateCannotBeBeforeStartDate": "End date cannot be before start date",
+  "pleaseSelectIndustry": "Please select industry"
 }

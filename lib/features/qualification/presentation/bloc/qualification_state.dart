@@ -1,8 +1,6 @@
 part of 'qualification_bloc.dart';
 @immutable
 abstract class QualificationsPageState extends BaseState {
-
-
 }
 
 class QualificationsPageInitState extends QualificationsPageState  {
@@ -12,5 +10,9 @@ class QualificationsPageInitState extends QualificationsPageState  {
 
 class AddQualificationState extends QualificationsPageState{
   AddQualificationState();
+}
+
+class AddWorkExperienceState extends QualificationsPageState{
+
 }
 

@@ -61,6 +61,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //error
         if(state is OTPGetTokenState && state.dataState == DataState.error){
         // error dialog
+          print(state.error);
         }
         //loading
         if(state is OTPGetTokenState && state.dataState == DataState.loading){
@@ -87,6 +88,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //error
         if(state is RegisterOTPCompleteState && state.dataState == DataState.error){
           // will use error dialog
+          print(state.error);
         }
 
         // SaveRemoteProfileDataState/////////////////////////////////////////
@@ -103,7 +105,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         }
         //error
         if(state is SaveRemoteProfileDataState && state.dataState == DataState.error){
-          //will use error dialog
+          //will use error dialog[
+          print(state.error);
         }
 
         //GetProfileProgressState////////////////////////////////////
@@ -112,7 +115,6 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           Navigator.pop(context);
           getBloc().preloaderActive = false;
           if(state.profileEntity!.type!.isEmpty){
-            //
             context.router.push(SetupProfileRoute(userModel: state.userModel!));
           }else if (state.profileEntity!.qualifications!.isEmpty &&
                     state.profileEntity!.workExperience!.isEmpty){

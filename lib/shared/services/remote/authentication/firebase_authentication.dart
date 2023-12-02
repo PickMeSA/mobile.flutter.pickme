@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'authentication.dart';
 
 @Singleton(as: Authentication)
@@ -98,12 +99,20 @@ class PFirebaseAuthentication extends Authentication {
           verificationId: verificationId!, smsCode: otp);
       UserCredential userCredential = await firebaseAuth.signInWithCredential(credential);
       String? token = await userCredential.user?.getIdToken();
+
       TokenModel tokenModel =
        TokenModel(
           refreshToken: token??"",
           accessToken: token??"",
           tokenID: token??"");
       boxTokens.put(current, tokenModel);
+
+      if(boxUser.isNotEmpty) {
+        UserModel userModel = boxUser.get(current);
+        userModel.id = userCredential.user?.uid;
+        boxUser.put(current, userModel);
+      }
+
       return tokenModel;
     } catch (ex) {
       rethrow;

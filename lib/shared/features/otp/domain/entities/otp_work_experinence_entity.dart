@@ -5,8 +5,8 @@ class OTPWorkExperienceEntity {
   String? company;
   bool? isCurrent;
   int? industryId;
-  String? startDate;
-  String? endDate;
+  DateTime? startDate;
+  DateTime? endDate;
 
   OTPWorkExperienceEntity({
     required this.title,
@@ -20,8 +20,8 @@ class OTPWorkExperienceEntity {
   OTPWorkExperienceEntity.fromResponse(OTPWorkExperienceModelResponse response){
     title = response.title??"";
     industryId = response.industryId??0;
-    endDate = response.endDate??"";
-    startDate = response.startDate??"";
+    endDate = DateTime.parse(response.endDate!);
+    startDate = DateTime.parse(response.startDate!);
     company = response.company??"";
     isCurrent = response.isCurrent??false;
   }
