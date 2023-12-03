@@ -123,5 +123,6 @@
   "pleaseSelectStartDate": "Please select start date",
   "pleaseSelectEndDate": "Please select end date",
   "endDateCannotBeBeforeStartDate": "End date cannot be before start date",
-  "pleaseSelectIndustry": "Please select industry"
+  "pleaseSelectIndustry": "Please select industry",
+  "workingDaysA": "Working days *"
 }
