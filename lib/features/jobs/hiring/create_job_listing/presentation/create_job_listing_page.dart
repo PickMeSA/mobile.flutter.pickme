@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -44,48 +46,35 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           padding: wPagePadding(top:0),
-          child: AppTabBar(
-            initialIndex: state.selectedTabIndex,
-            tabs: [
-              Text(getLocalization().activeListings),
-              Text(getLocalization().inactiveListings),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(getLocalization().jobListingDetails, style: theme.textTheme.bodyMedium!.copyWith(
+                  fontVariations: [
+                    const FontVariation("wght", 600)
+                  ]
+              ),),
+              24.height,
+              Expanded(child: Form(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      AppTextFormField(
+                        textFieldType: TextFieldType.OTHER,
+                        labelText: "${getLocalization().jobName} *",
+                      ),
+                      16.height,
+                      AppTextFormField(
+                        textFieldType: TextFieldType.MULTILINE,
+                        labelText: "${getLocalization().jobDescription} *",
+                        hint: getLocalization().loremIpsumDescriptionField,
+                      ),
+                    ],
+                  ),
+                ),
+              ))
+
             ],
-            views: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: Image(
-                      image: AssetImage("assets/no_items_found.png"),
-                    ),
-                  ),
-                  24.height,
-                  Text(getLocalization().youDontHaveAnyActiveListings,
-                    style: theme.textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 160,
-                    width: 160,
-                    child: Image(
-                      image: AssetImage("assets/no_items_found.png"),
-                    ),
-                  ),
-                  24.height,
-                  Text(getLocalization().youDontHaveAnyInactiveListings,
-                    style: theme.textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              ),
-            ], onTap: (int index) => getBloc().add(SelectedTabChangedEvent(tabIndex: index)),
           ),
         );
       },
@@ -105,7 +94,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().myJobListings,),
+      title: Text(getLocalization().createAJobListing,),
     );
   }
 

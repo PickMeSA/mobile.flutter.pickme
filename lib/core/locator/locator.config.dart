@@ -32,11 +32,11 @@ import '../../features/jobs/hiring/all_services/presentation/bloc/all_services_p
 import '../../features/jobs/hiring/candidate_filters/presentation/bloc/filter_candidates_bloc.dart'
     as _i18;
 import '../../features/jobs/hiring/create_job_listing/data/repository_impl/get_industries_repository_impl/get_my_job_listings_repository_impl.dart'
-    as _i97;
+    as _i95;
 import '../../features/jobs/hiring/create_job_listing/domain/repository/get_my_job_listings_repository.dart'
-    as _i96;
+    as _i94;
 import '../../features/jobs/hiring/create_job_listing/domain/use_cases/otp_usecase/get_my_job_listings_usecase.dart'
-    as _i98;
+    as _i99;
 import '../../features/jobs/hiring/create_job_listing/presentation/bloc/create_job_listing_bloc.dart'
     as _i113;
 import '../../features/jobs/hiring/landing_page/data/repository_impl/get_industries_repository_impl/get_industries_repository_impl.dart'
@@ -48,11 +48,11 @@ import '../../features/jobs/hiring/landing_page/domain/use_cases/otp_usecase/get
 import '../../features/jobs/hiring/landing_page/presentation/bloc/jobs_hiring_landing_page_bloc.dart'
     as _i103;
 import '../../features/jobs/hiring/my_job_listings/data/repository_impl/get_industries_repository_impl/get_my_job_listings_repository_impl.dart'
-    as _i95;
+    as _i97;
 import '../../features/jobs/hiring/my_job_listings/domain/repository/get_my_job_listings_repository.dart'
-    as _i94;
+    as _i96;
 import '../../features/jobs/hiring/my_job_listings/domain/use_cases/otp_usecase/get_my_job_listings_usecase.dart'
-    as _i99;
+    as _i98;
 import '../../features/jobs/hiring/my_job_listings/presentation/bloc/my_job_listings_bloc.dart'
     as _i106;
 import '../../features/jobs/hiring/pending_profile/presentation/bloc/pending_profile_bloc.dart'
@@ -419,7 +419,7 @@ extension GetItInjectableX on _i1.GetIt {
             getMembershipInformationUseCase:
                 gh<_i93.GetMembershipInformationUseCase>()));
     gh.factory<_i106.MyJobListingsBloc>(() => _i106.MyJobListingsBloc(
-        getIndustriesUseCase: gh<_i99.GetMyJobListingsUseCase>()));
+        getIndustriesUseCase: gh<_i98.GetMyJobListingsUseCase>()));
     gh.factory<_i107.OTPSaveRemoteProfileDataRepository>(() =>
         _i108.OTPSaveRemoteProfileDataRepositoryImpl(
             userService: gh<_i86.UserService>()));
@@ -443,7 +443,7 @@ extension GetItInjectableX on _i1.GetIt {
               gh<_i109.OTPSaveRemoteProfileDataUseCase>(),
         ));
     gh.factory<_i113.CreateJobListingBloc>(() => _i113.CreateJobListingBloc(
-        getIndustriesUseCase: gh<_i98.GetMyJobListingsUseCase>()));
+        getIndustriesUseCase: gh<_i99.GetMyJobListingsUseCase>()));
     return this;
   }
 }

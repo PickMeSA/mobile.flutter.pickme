@@ -15,6 +15,8 @@ part 'jobs_hiring_landing_page_state.dart';
 class JobsHiringLandingPageBloc extends BaseBloc<JobsHiringLandingPageEvent, JobsHiringLandingPageState> {
   final GetIndustriesUseCase getIndustriesUseCase;
   PaginatedIndustryEntity? paginatedIndustries;
+  bool preloaderActive = false;
+
   Logger logger = Logger();
   JobsHiringLandingPageBloc({required this.getIndustriesUseCase}) : super(JobsHiringLandingPageInitial()) {
     on<JobsHiringLandingPageEnteredEvent>((event, emit) => _onJobsHiringLandingPageEnteredEvent(event, emit));

@@ -50,7 +50,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                 icon: const Icon(Iconsax.add),
                 showNextIcon: false,
                 title: getLocalization().createANewJobListing,
-                onClick: () => context.router.push(const AllServicesRoute()),
+                onClick: () => context.router.push(const CreateJobListingRoute()),
               ),
               24.height,
               Expanded(

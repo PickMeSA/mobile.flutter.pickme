@@ -66,9 +66,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Connecting workers and clients"),
         "contactHelpCenter":
             MessageLookupByLibrary.simpleMessage("Contact help center"),
+        "createAJobListing":
+            MessageLookupByLibrary.simpleMessage("Create a job listing"),
         "createANewJobListing":
             MessageLookupByLibrary.simpleMessage("Create a new job listing"),
         "createProfile": MessageLookupByLibrary.simpleMessage("Create profile"),
+        "dateTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
         "ePWP": MessageLookupByLibrary.simpleMessage("EPWP"),
@@ -76,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
+        "estHours": MessageLookupByLibrary.simpleMessage("Est. hours"),
         "exploreAllJobs":
             MessageLookupByLibrary.simpleMessage("Explore all jobs"),
         "exploreAllServices":
@@ -89,6 +94,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
         "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "hourlyRate": MessageLookupByLibrary.simpleMessage("Hourly rate"),
+        "hoursTotalFee":
+            MessageLookupByLibrary.simpleMessage("hours & total fee"),
+        "iAmFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
+            "I am flexible (open to discuss)"),
         "iDidntReceiveACode":
             MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
         "iHaveReadThe":
@@ -109,6 +118,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "issueDate": MessageLookupByLibrary.simpleMessage("Issue date *"),
         "issuingOrganisations":
             MessageLookupByLibrary.simpleMessage("Issuing organisation *"),
+        "jobDescription":
+            MessageLookupByLibrary.simpleMessage("Job description"),
+        "jobListingDetails":
+            MessageLookupByLibrary.simpleMessage("Job listing details"),
+        "jobName": MessageLookupByLibrary.simpleMessage("Job name"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
@@ -124,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lookingForJobOpportunitiesAsASingleIndividual":
             MessageLookupByLibrary.simpleMessage(
                 "Looking for job opportunities as a single individual?"),
+        "loremIpsumDescriptionField": MessageLookupByLibrary.simpleMessage(
+            "Ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\n\n"),
         "maxDistance": MessageLookupByLibrary.simpleMessage("Max. distance"),
         "membership": MessageLookupByLibrary.simpleMessage("Membership"),
         "membershipAwardName":
@@ -146,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
+        "or": MessageLookupByLibrary.simpleMessage("or"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),
@@ -155,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
         "photosOfWorkOptional":
             MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
+        "photosOptional":
+            MessageLookupByLibrary.simpleMessage("Photos (optional)"),
         "pickMeInvestsR4hrWorkedInAProfessionalInvestmentFundForYourFuture":
             MessageLookupByLibrary.simpleMessage(
                 "PickMe invests a R4/hr worked in a personal investment fund for your future."),
@@ -193,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "skillsAndIndustry":
             MessageLookupByLibrary.simpleMessage("Skills & industry"),
         "skillsMax5": MessageLookupByLibrary.simpleMessage("Skills (max. 5)"),
+        "skillsRequired":
+            MessageLookupByLibrary.simpleMessage("Skills required (max. 5)"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "southAfricanMinimumWage":
             MessageLookupByLibrary.simpleMessage("South African Minimum Wage"),
@@ -213,6 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tell us about your qualifications"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
+        "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),

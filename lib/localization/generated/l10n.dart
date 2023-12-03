@@ -1030,6 +1030,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Create a job listing`
+  String get createAJobListing {
+    return Intl.message(
+      'Create a job listing',
+      name: 'createAJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `You don't have any active listings`
   String get youDontHaveAnyActiveListings {
     return Intl.message(
@@ -1315,6 +1335,126 @@ class AppLocalizations {
     return Intl.message(
       'We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr.',
       name: 'minimumWageText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job name`
+  String get jobName {
+    return Intl.message(
+      'Job name',
+      name: 'jobName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job description`
+  String get jobDescription {
+    return Intl.message(
+      'Job description',
+      name: 'jobDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos (optional)`
+  String get photosOptional {
+    return Intl.message(
+      'Photos (optional)',
+      name: 'photosOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date & Time`
+  String get dateTime {
+    return Intl.message(
+      'Date & Time',
+      name: 'dateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am flexible (open to discuss)`
+  String get iAmFlexibleOpenToDiscuss {
+    return Intl.message(
+      'I am flexible (open to discuss)',
+      name: 'iAmFlexibleOpenToDiscuss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hours & total fee`
+  String get hoursTotalFee {
+    return Intl.message(
+      'hours & total fee',
+      name: 'hoursTotalFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skills required (max. 5)`
+  String get skillsRequired {
+    return Intl.message(
+      'Skills required (max. 5)',
+      name: 'skillsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. hours`
+  String get estHours {
+    return Intl.message(
+      'Est. hours',
+      name: 'estHours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total fee`
+  String get totalFee {
+    return Intl.message(
+      'Total fee',
+      name: 'totalFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or`
+  String get or {
+    return Intl.message(
+      'or',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job listing details`
+  String get jobListingDetails {
+    return Intl.message(
+      'Job listing details',
+      name: 'jobListingDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\n\n`
+  String get loremIpsumDescriptionField {
+    return Intl.message(
+      'Ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\n\n',
+      name: 'loremIpsumDescriptionField',
       desc: '',
       args: [],
     );

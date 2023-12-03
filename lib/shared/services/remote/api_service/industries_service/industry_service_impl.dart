@@ -61,7 +61,7 @@ class IndustryServiceImpl extends IndustryService {
         PaginatedIndustryEntity paginatedIndustryEntity = PaginatedIndustryEntity(
             pagination: paginationEntity, industries: industryEntityList);
 
-        boxSyncData.put('paginatedIndustries', (paginatedIndustryEntity));
+        // boxSyncData.put('paginatedIndustries', (paginatedIndustryEntity));
 
         return paginatedIndustryEntity;
       }

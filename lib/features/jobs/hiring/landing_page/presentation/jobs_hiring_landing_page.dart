@@ -1,5 +1,6 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/jobs/hiring/landing_page/presentation/bloc/jobs_hiring_landing_page_bloc.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -11,6 +12,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
 @RoutePage()
 class JobsHiringLandingPage extends BasePage {
@@ -34,7 +36,24 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
     var theme = Theme.of(context);
     return BlocConsumer<JobsHiringLandingPageBloc, JobsHiringLandingPageState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is JobsHiringLandingPageInitial && state.dataState == DataState.success){
+        }
+
+        //error
+        if(state is JobsHiringLandingPageInitial && state.dataState == DataState.error){
+          // error dialog
+        }
+        //loading
+        if(state is GetTopIndustriesState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //loading
+        if(state is GetTopIndustriesState && state.dataState == DataState.success){
+          Navigator.pop(context);
+        }
       },
       builder: (context, state) {
         PaginatedIndustryEntity? industries = state.paginatedIndustries;
