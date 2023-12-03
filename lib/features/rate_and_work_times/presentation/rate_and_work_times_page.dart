@@ -54,11 +54,7 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
         if( state is SubmitRemoteRateAndWorkTimesState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-            context.router.push(const AddSkillsRoute());
-          }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.push(const RateAndWorkTimesRoute());
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+          if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
             context.router.push(const BankDetailsRoute());
           }else if(state.profileEntity!.location!.id!.isEmpty ){
             context.router.push(const LocationRoute());
