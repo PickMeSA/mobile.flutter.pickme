@@ -9,7 +9,7 @@ class TermsAndConditionsServiceImpl extends TermsAndConditionsService{
   
   final ApiService apiService;
   
-  TermsAndConditionsServiceImpl({required this.apiService, required super.tokenLocalStorage});
+  TermsAndConditionsServiceImpl({required this.apiService});
   @override
   Future<Response<dynamic>>getRemoteTermsAndConditions() async{
     Response<dynamic> response = await apiService.get("$baseUrl$version/cms/terms-and-conditions");

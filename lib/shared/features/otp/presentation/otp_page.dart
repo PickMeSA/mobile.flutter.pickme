@@ -120,7 +120,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                     state.profileEntity!.workExperience!.isEmpty){
             context.router.push(const QualificationsRoute());
           }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-            context.router.push(const SkillsAndIndustryRoute());
+            context.router.push(const AddSkillsRoute());
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){

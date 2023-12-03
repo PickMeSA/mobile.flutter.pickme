@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/add_skills/data/response_models/add_skills_model_response/add_skills_submit_remote_skills_and_industry_model_response.dart';
+import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.dart';
 import 'package:pickme/features/qualification/data/response_models/qualification_model_response/submit_remote_qualification_and_experience_model_response.dart';
 import 'package:pickme/features/qualification/domain/entities/submit_qualification_and_experience_entity.dart';
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
@@ -30,7 +32,7 @@ class ProfileServiceImpl extends ProfileService{
 
   final ApiService apiService;
 
-  ProfileServiceImpl({required this.apiService, required super.tokenLocalStorage});
+  ProfileServiceImpl({required this.apiService});
   @override
   Future<bool> submitProfileType(ProfileTypeEntity profileTypeEntity) async  {
     try{
@@ -63,6 +65,25 @@ class ProfileServiceImpl extends ProfileService{
         data: SubmitRemoteQualificationAndExperienceModelResponse(
             otpQualificationResponseModelList: submitQualificationAndExperienceEntity.otpQualificationEntityList.toResponseList(),
             otpWorKExperienceResponseModelList: submitQualificationAndExperienceEntity.otpWorKExperienceEntityList.toResponseList()));
+
+      return returnProfileEntity(response: response);
+
+    }catch(ex){
+      rethrow;
+    }
+  }
+
+
+
+  @override
+  Future<ProfileEntity> submitRemoteSkillsAndIndustry({required SkillsPageEntity skillsPageEntity})async  {
+    try{
+      UserModel userModel = boxUser.get(current);
+      await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+          data: skillsPageEntity.skillListEntity.toResponse());
+
+      Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+          data: skillsPageEntity.preferredIndustryEntity.toResponse());
 
       return returnProfileEntity(response: response);
 

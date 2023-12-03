@@ -19,7 +19,6 @@ import 'package:pickme/features/register/presentation/register_page.dart';
 import 'package:pickme/features/setup_profile/presentation/setup_profile_page.dart';
 import 'package:pickme/features/sign_up/presentation/sign_up_page.dart';
 import 'package:pickme/features/register_account_step_1/presentation/register_account_step1_page.dart';
-import 'package:pickme/features/skills_and_industry/presentation/skills_and_industry_page.dart';
 import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup_page.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
@@ -46,7 +45,6 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: AddMembershipsRoute.page),
     AnimatedRoute(page: AddWorkExperienceRoute.page),
     AnimatedRoute(page: AddQualificationRoute.page),
-    AnimatedRoute(page: SkillsAndIndustryRoute.page),
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
