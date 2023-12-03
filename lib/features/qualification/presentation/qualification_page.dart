@@ -49,7 +49,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
           Navigator.pop(context);
           getBloc().preloaderActive = false;
          if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-            context.router.push(const SkillsAndIndustryRoute());
+            context.router.push(const AddSkillsRoute());
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){

@@ -13,7 +13,7 @@ class UserServiceImpl extends UserService{
 
   final ApiService apiService;
 
-  UserServiceImpl({required this.apiService ,required super.tokenLocalStorage});
+  UserServiceImpl({required this.apiService });
 
   
   @override

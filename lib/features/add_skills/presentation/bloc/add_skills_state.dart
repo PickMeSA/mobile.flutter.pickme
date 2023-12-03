@@ -1,9 +1,9 @@
 part of 'add_skills_bloc.dart';
 @immutable
 abstract class AddSkillsPageState extends BaseState {
+  String? error;
 
-
-  AddSkillsPageState();
+  AddSkillsPageState({this.error});
 }
 
 class AddSkillsPageInitState extends AddSkillsPageState  {
@@ -18,3 +18,16 @@ class SkillChipDeletedState extends AddSkillsPageState{
 
 }
 
+class AddSkillsGetPreferredIndustryListState extends AddSkillsPageState{
+
+  AddSkillsGetPreferredIndustryListState({super.error});
+}
+
+class AddSkillGetSkillsListState extends AddSkillsPageState{
+  AddSkillGetSkillsListState({super.error});
+}
+
+class AddSkillSubmitRemoteSkillsAndIndustryState extends AddSkillsPageState{
+  final ProfileEntity? profileEntity;
+  AddSkillSubmitRemoteSkillsAndIndustryState({super.error, this.profileEntity});
+}

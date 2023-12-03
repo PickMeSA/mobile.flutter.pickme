@@ -14,7 +14,7 @@ import 'package:pickme/shared/remote/api-service.dart';
 
 class MembershipDetailsServiceImpl extends MembershipDetailsService{
   final ApiService apiService;
-  MembershipDetailsServiceImpl({required this.apiService,required super.tokenLocalStorage});
+  MembershipDetailsServiceImpl({required this.apiService});
 
   @override
   Future<List<MembershipInformationEntity>> getMembershipInformationEntity() async {
