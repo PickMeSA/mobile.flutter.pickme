@@ -4,6 +4,7 @@ import 'package:pickme/features/add_skills/data/response_models/add_skills_model
 import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.dart';
 import 'package:pickme/features/qualification/data/response_models/qualification_model_response/submit_remote_qualification_and_experience_model_response.dart';
 import 'package:pickme/features/qualification/domain/entities/submit_qualification_and_experience_entity.dart';
+import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
@@ -119,6 +120,20 @@ class ProfileServiceImpl extends ProfileService{
         qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualifications??[],
         skillIds: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skillIds??SkillIdModelResponse(skillsId: [])),
         workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
+  }
+
+  @override
+  Future<ProfileEntity> submitRemoteRateAndWorkTimes({required RatesAndWorkTimesEntity ratesAndWorkTimesEntity}) async {
+    try{
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+          data: ratesAndWorkTimesEntity.toResponse());
+
+      return returnProfileEntity(response: response);
+
+    }catch(ex){
+      rethrow;
+    }
   }
 
 
