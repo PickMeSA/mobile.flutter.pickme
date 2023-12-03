@@ -110,7 +110,14 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                      textFieldType: TextFieldType.NUMBER,
                    labelText: getLocalization().startTime,
                    suffix: InkWell(
-                       onTap:()=> appTimePicker(context, startTimeTextController),
+                       onTap:() async{
+                         TimeOfDay? timeofDay = await showTimePicker(
+                             context: context,
+                             initialTime:  TimeOfDay.now(),
+                             initialEntryMode: TimePickerEntryMode.inputOnly);
+                         startTimeTextController.text =
+                         "${timeofDay?.hour}:${timeofDay!.minute < 10? "0${timeofDay?.minute}": timeofDay.minute}";
+                       },
                        child: const Icon(Iconsax.clock)),),
                    10.height,
                    AppTextFormField(controller: endTimeTextController,
@@ -118,7 +125,14 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                      textFieldType: TextFieldType.NUMBER,
                      labelText: getLocalization().endTime,
                      suffix: InkWell(
-                         onTap: ()=> appTimePicker(context, endTimeTextController),
+                         onTap: ()async{
+                           TimeOfDay? timeOfDay = await showTimePicker(
+                              context: context,
+                               initialTime:  TimeOfDay.now(),
+                               initialEntryMode: TimePickerEntryMode.inputOnly);
+                           endTimeTextController.text =
+                           "${timeOfDay?.hour}:${timeOfDay!.minute < 10? "0${timeOfDay?.minute}": timeOfDay.minute}";;
+                         },
                          child: const Icon(Iconsax.clock)),),
                    30.height,
                    wText(getLocalization().workingDays,
