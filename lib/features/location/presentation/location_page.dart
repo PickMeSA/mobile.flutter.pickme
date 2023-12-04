@@ -3,13 +3,17 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_page_loader.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'bloc/location_bloc.dart';
 
@@ -27,6 +31,7 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getBloc().add(GetLocalCurrentLocationEvent());
 
   }
 
@@ -57,25 +62,23 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
                       color: theme.primaryColor
                   )),
                   const SizedBox(height: 10,),
-                  wText(getLocalization().whereAreYouLocated,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
+                  wText(getLocalization().whereAreYouLocated,
+                      style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
                   30.height,
-                  const SizedBox(
+
+                   SizedBox(
                     height: 450,
-                    child: Placeholder(),
+                    child: state is GetLocalCurrentLocationState && state.dataState == DataState.success?
+                    GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(
+                        double.parse(state.otpLocationEntity!.latitude!),
+                        double.parse(state.otpLocationEntity!.longitude!),),
+                    zoom: 14),
+
+                    ):
+                    pageLoader(),
                   ),
                   20.height,
-                  Row(
-                    children: [
-                      Spacer(),
-                      Icon(Iconsax.location),
-                      10.width,
-                      wText(getLocalization().useMyCurrentLocation, style: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14
-                      )),
-                      Spacer(),
-                    ],
-                  ),
+
                   50.height
 ,
                   Row(
@@ -141,6 +144,5 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
 
 }
