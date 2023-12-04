@@ -107,11 +107,11 @@ class PFirebaseAuthentication extends Authentication {
           tokenID: token??"");
       boxTokens.put(current, tokenModel);
 
-      if(boxUser.isNotEmpty) {
+
         UserModel userModel = boxUser.get(current);
         userModel.id = userCredential.user?.uid;
         boxUser.put(current, userModel);
-      }
+
 
       return tokenModel;
     } catch (ex) {
