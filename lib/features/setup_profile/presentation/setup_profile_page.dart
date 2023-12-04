@@ -13,13 +13,14 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
 class SetupProfilePage extends BasePage {
-  const SetupProfilePage({super.key, required this.userModel});
-  final UserEntity userModel;
+  const SetupProfilePage({super.key});
+
 
   @override
   _SetupProfilePageState createState() => _SetupProfilePageState();

@@ -115,7 +115,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           Navigator.pop(context);
           getBloc().preloaderActive = false;
           if(state.profileEntity!.type!.isEmpty){
-            context.router.push(SetupProfileRoute(userModel: state.userModel!));
+            context.router.push(const SetupProfileRoute());
           }else if (state.profileEntity!.qualifications!.isEmpty &&
                     state.profileEntity!.workExperience!.isEmpty){
             context.router.push(const QualificationsRoute());
