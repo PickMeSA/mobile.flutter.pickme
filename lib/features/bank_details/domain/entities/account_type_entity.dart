@@ -14,6 +14,9 @@ class AccountTypeEntity extends Equatable{
 
 
 List<AccountTypeEntity> accountTypes = [
-  AccountTypeEntity(id: 0, accountType: "Savings Account"),
-  AccountTypeEntity(id: 1, accountType: "Current Account")
+  AccountTypeEntity(id: 1, accountType: "Savings"),
+  AccountTypeEntity(id: 2, accountType: "Current / Cheque "),
+  AccountTypeEntity(id: 3, accountType: "Fixed / Deposit"),
+  AccountTypeEntity(id: 4, accountType: "Money Market Account"),
+  AccountTypeEntity(id: 4, accountType: "Transmissions "),
 ];

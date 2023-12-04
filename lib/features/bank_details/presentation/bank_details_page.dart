@@ -2,15 +2,16 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/bank_details/entities/account_type_entity.dart';
-import 'package:pickme/features/bank_details/entities/bank_details_entities.dart';
+import 'package:pickme/features/bank_details/domain/entities/account_type_entity.dart';
+import 'package:pickme/features/bank_details/domain/entities/bank_details_entities.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/constants/w_colors.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/bank_details_bloc.dart';
@@ -32,9 +33,8 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
+    getBloc().add(BankDetailsPageEnteredEvent());
   }
 
     @override
@@ -46,7 +46,32 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<BankDetailsBloc, BankDetailsPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is BankDetailsSubmittedState && state.dataState == DataState.success){
+          Navigator.pop(context);
+          getBloc().preloaderActive = false;
+          if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
+            context.router.push(const BankDetailsRoute());
+          }else if(state.profileEntity!.hourlyRate! == 0){
+            context.router.push(const RateAndWorkTimesRoute());
+          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+            context.router.push(const BankDetailsRoute());
+          }else if(state.profileEntity!.location!.id!.isEmpty ){
+            context.router.push(const LocationRoute());
+          }else if(state.profileEntity!.description!.isEmpty){
+            context.router.push(const FinalDetailsRoute());
+          }
+        }
+
+        if(state is BankDetailsSubmittedState && state.dataState == DataState.loading ){
+          preloader(context);
+          getBloc().preloaderActive = true;
+        }
+
+        if(state is BankDetailsSubmittedState && state.dataState == DataState.error ){
+
+        }
+      },
       builder: (context, state) {
         return SizedBox(
           height: MediaQuery.sizeOf(context).height,
@@ -72,8 +97,6 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
               padding: const EdgeInsets.only(left: 20, right: 20),
               textFieldType: TextFieldType.NAME,
               labelText: getLocalization().bankA,),
-
-
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: AppDropdownMenu<AccountTypeEntity>(
@@ -82,7 +105,6 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                       enableFilter: true,
                       dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
                       width: MediaQuery.of(context).size.width-40,),
-
                   ),
                   20.height,
                   AppTextFormField(
@@ -135,7 +157,8 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                               )
                           ),
                           onPressed: !getBloc().checked?null:() {
-                            context.router.push(const LocationRoute());
+                            getBloc().add(BankDetailsSubmittedEvent(bankDetailsEntity: getFormData()));
+                            // context.router.push(const LocationRoute());
                           },
                           child: Text(getLocalization().nextStep),
                         ),
