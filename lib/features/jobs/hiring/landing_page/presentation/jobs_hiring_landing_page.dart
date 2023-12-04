@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
@@ -173,12 +175,27 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                   ],
                 ),
                 20.height,
-                //Todo: Substitute with list view
-                AppCandidateProfile(
-                    fullName: "full Name", jobTitle: "jobTitle", rating: 3, hourlyRate: "R20.00p/h",
-                  viewProfileFunction: (){
-                      debugPrint("view profile clicked");
-                  },
+                SizedBox(
+                  height: 450,
+                  child: (state.paginatedCandidates!=null)? ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index){
+                      CandidateProfileEntity candidate = state.paginatedCandidates!.candidates[index];
+                      return AppCandidateProfile(
+                        fullName: candidate.fullName,
+                        jobTitle: candidate.jobTitle,
+                        rating: candidate.rating,
+                        hourlyRate: "R${candidate.hourlyRate}p/h",
+                        image: (candidate.profilePicture!=null)?
+                        CachedNetworkImageProvider(
+                            candidate.profilePicture!
+                        ):null,
+                        viewProfileFunction: (){
+                          debugPrint("view profile clicked");
+                        },
+                      );
+                    },
+                  ):SizedBox(),
                 ),
 
                 PrimaryButton(onPressed:

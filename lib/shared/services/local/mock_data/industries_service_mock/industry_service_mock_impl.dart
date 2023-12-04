@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/jobs/shared/domain/repositories/get_industries_repository.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/domain/entities/pagination_entity.dart';
@@ -13,7 +14,7 @@ class IndustryServiceMockImpl extends IndustryService{
   IndustryServiceMockImpl({required this.apiService ,required super.tokenLocalStorage});
 
   @override
-  Future<PaginatedIndustryEntity> getIndustries() async {
+  Future<PaginatedIndustryEntity> getIndustries({GetIndustriesServiceParams? params}) async {
 
         List<IndustryEntity> industryEntityList = [
         const IndustryEntity(id: "1",industry: "HandyMan"),

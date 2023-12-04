@@ -5,10 +5,11 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
+import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/pagination_entity.dart';
 
-import '../../../../../../shared/domain/entities/paginated_candidate_profile_entity.dart';
-import '../../domain/use_cases/get_candidates/get_paginated_candidates_usecase.dart';
+import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+
 part 'service_category_candidates_event.dart';
 part 'service_category_candidates_state.dart';
 

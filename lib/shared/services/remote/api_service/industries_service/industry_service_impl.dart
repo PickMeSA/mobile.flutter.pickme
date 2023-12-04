@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:pickme/features/jobs/shared/domain/repositories/get_industries_repository.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/domain/entities/pagination_entity.dart';
@@ -21,21 +22,14 @@ class IndustryServiceImpl extends IndustryService {
       {required this.apiService, required super.tokenLocalStorage});
 
   @override
-  Future<PaginatedIndustryEntity> getIndustries() async {
+  Future<PaginatedIndustryEntity> getIndustries({GetIndustriesServiceParams? params}) async {
     try {
-      // todo: Implement a caching functionality
-      // if(boxSyncData.isNotEmpty){
-      //   String? savedPaginatedIndustriesJson = boxSyncData.get('paginatedIndustries');
-      //   if(savedPaginatedIndustriesJson != null){
-      //     PaginatedIndustryEntity hivePaginatedIndustryEntity = json.decode(savedPaginatedIndustriesJson);
-      //     if(hivePaginatedIndustryEntity.pagination.lastUpdated!.isAfter(DateTime.now().add(const Duration(days:-1)))) {
-      //       logger.i("returning saved industries");
-      //       return hivePaginatedIndustryEntity;
-      //     }
-      //   }
-      // }
+      String queryParams = "";
+      if(params!=null){
+        queryParams = "?searchTerm=${params.searchText}";
+      }
       Response<dynamic> response =
-          await apiService.get("$baseUrl$version/industries");
+          await apiService.get("$baseUrl$version/industries$queryParams");
       if (response.statusCode == 200) {
         List<IndustriesModelResponse> industryModelResponseList = [];
         for (var element in response.data["data"]) {
@@ -60,8 +54,6 @@ class IndustryServiceImpl extends IndustryService {
         );
         PaginatedIndustryEntity paginatedIndustryEntity = PaginatedIndustryEntity(
             pagination: paginationEntity, industries: industryEntityList);
-
-        // boxSyncData.put('paginatedIndustries', (paginatedIndustryEntity));
 
         return paginatedIndustryEntity;
       }

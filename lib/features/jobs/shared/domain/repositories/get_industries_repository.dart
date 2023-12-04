@@ -4,6 +4,6 @@ import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 abstract class GetIndustriesRepository  extends BaseRepository<GetIndustriesRepositoryParams, PaginatedIndustryEntity>{}
 
 class GetIndustriesRepositoryParams extends BaseRepositoryParams{
-
-  GetIndustriesRepositoryParams();
+  final String searchText;
+  GetIndustriesRepositoryParams({required this.searchText});
 }

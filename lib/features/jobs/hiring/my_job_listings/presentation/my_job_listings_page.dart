@@ -39,7 +39,6 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
       },
       builder: (context, state) {
         PaginatedIndustryEntity? industries = state.paginatedIndustries;
-
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,

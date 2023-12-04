@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/pagination_entity.dart';
 
 part 'filter_candidates_event.dart';
 part 'filter_candidates_state.dart';

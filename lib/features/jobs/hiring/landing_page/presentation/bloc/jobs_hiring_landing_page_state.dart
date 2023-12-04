@@ -3,7 +3,8 @@ part of 'jobs_hiring_landing_page_bloc.dart';
 @immutable
 abstract class JobsHiringLandingPageState extends BaseState {
   final PaginatedIndustryEntity? paginatedIndustries;
-  JobsHiringLandingPageState({super.dataState, this.paginatedIndustries});
+  final PaginatedCandidateProfileEntity? paginatedCandidates;
+  JobsHiringLandingPageState({super.dataState, this.paginatedCandidates, this.paginatedIndustries});
 }
 
 class JobsHiringLandingPageInitial extends JobsHiringLandingPageState {
@@ -11,5 +12,5 @@ class JobsHiringLandingPageInitial extends JobsHiringLandingPageState {
 }
 
 class GetTopIndustriesState extends JobsHiringLandingPageState {
-  GetTopIndustriesState({super.paginatedIndustries});
+  GetTopIndustriesState({super.paginatedIndustries, super.paginatedCandidates});
 }

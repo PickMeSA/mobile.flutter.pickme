@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:flutter/gestures.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/bloc/all_services_page_bloc.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -10,10 +10,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/classes/debouncer.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
-import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'package:pickme/shared/widgets/w_page_padding.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
 @RoutePage()
 class AllServicesPage extends BasePage {
@@ -25,12 +27,43 @@ class AllServicesPage extends BasePage {
 }
 
 class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPageBloc> {
+  final Debouncer _debouncer = Debouncer(milliseconds: 500);
+  @override
+  void initState() {
+    super.initState();
+    getBloc().add(AllServicesPageEnteredEvent());
+  }
+
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     return BlocConsumer<AllServicesPageBloc, AllServicesPageState>(
       listener: (context, state) {
-        // TODO: implement listener
+        //loading GetIndustriesState
+        if(state is GetIndustriesState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //loading SearchTextChangedState
+        if(state is SearchTextChangedState && state.dataState == DataState.loading){
+          debugPrint(getBloc().preloaderActive.toString());
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //loading
+        if(state is GetIndustriesState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+        }
+        //loading
+        if(state is SearchTextChangedState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+        }
       },
       builder: (context, state) {
         return Container(
@@ -46,6 +79,9 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
                 borderColor: whiteColor,
                 prefixIcon: const Icon(Iconsax.search_normal_1),
                 hint: getLocalization().whatAreYouLookingFor,
+                onChanged: (String searchText) => {
+                 _debouncer.run(() => getBloc().add(SearchTextChangedEvent(searchText: searchText)))
+                },
               ),
               10.height,
               AppTextField(
@@ -59,17 +95,19 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
               Text(getLocalization().browseCategories,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(fontVariations: [const FontVariation('wght', 600)]),),
               10.height,
-              Expanded(
+              if(getBloc().paginatedIndustries!=null)Expanded(
                 child: ListView.separated(
+                  itemCount: getBloc().paginatedIndustries!.industries.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      title: Text("Service Category"),
-                      trailing: Icon(Iconsax.arrow_right_3),
+                      title: Text(getBloc().paginatedIndustries!.industries[index].industry),
+                      trailing: const Icon(Iconsax.arrow_right_3),
+                      onTap: ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[3].id)),
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {
-                    return AppDivider();
-                  }, itemCount: 3,
+                    return const AppDivider();
+                  },
                 ),
               )
 

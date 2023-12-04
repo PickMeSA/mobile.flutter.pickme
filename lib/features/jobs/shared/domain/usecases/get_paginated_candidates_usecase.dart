@@ -3,7 +3,8 @@ import 'package:pickme/base_classes/base_usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 
-import '../../repository/get_paginated_candidates_repository.dart';
+import '../repositories/get_paginated_candidates_repository.dart';
+
 
 @Injectable()
 class GetPaginatedCandidatesByIndustryUseCase extends BaseUseCase<GetPaginatedCandidatesByIndustryUseCaseParams, PaginatedCandidateProfileEntity>{
