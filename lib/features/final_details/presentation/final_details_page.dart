@@ -28,6 +28,7 @@ class FinalDetailsPage extends BasePage {
 class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
   String _filePath = '';
   bool isSelectingProfilePicture = false;
+  final TextEditingController aboutYouController = TextEditingController();
 
   @override
   void initState() {
@@ -118,6 +119,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                   ),
                   40.height,
                   AppTextFormField(
+                    controller: aboutYouController,
                       keyboardType: TextInputType.multiline,
                       labelText: getLocalization().aboutYouBasedOnYourProfile,
                       textFieldType: TextFieldType.USERNAME,
@@ -173,7 +175,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                               )
                           ),
                           onPressed: !getBloc().checked?null:() {
-                            context.router.push(const YouAreAllSetupRoute());
+                            getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
                           },
                           child: Text(getLocalization().createProfile),
                         ),
