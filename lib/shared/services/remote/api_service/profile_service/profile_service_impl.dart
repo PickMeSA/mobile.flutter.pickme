@@ -108,8 +108,8 @@ class ProfileServiceImpl extends ProfileService{
         industryId: otpFullProfileModelResponse.industryID??0,
         location: OTPLocationEntity.fromResponse(otpFullProfileModelResponse.location??const OTPLocationModelResponse(
             id: "",
-            latitude: "",
-            longitude: "")),
+            latitude: 0,
+            longitude: 0)),
         paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails??const OTPPaymentDetailsModelResponse(
             bankName: "",
             bankAccountType: "",
@@ -131,6 +131,18 @@ class ProfileServiceImpl extends ProfileService{
 
       return returnProfileEntity(response: response);
 
+    }catch(ex){
+      rethrow;
+    }
+  }
+
+  @override
+  Future<ProfileEntity> submitRemoteLocation({required OTPLocationEntity otpLocationEntity}) async {
+    try{
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+          data: otpLocationEntity.toResponse().toJson());
+      return returnProfileEntity(response: response);
     }catch(ex){
       rethrow;
     }

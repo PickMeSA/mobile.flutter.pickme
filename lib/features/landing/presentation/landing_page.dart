@@ -91,11 +91,7 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                 bottom: 0,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
-                  child: SecondaryButtonDark(style:ButtonStyle(textStyle:
-                  MaterialStateProperty.all(TextStyle(color: theme.colorScheme.secondary)),
-        side: MaterialStateProperty.all(BorderSide(color:
-        theme.colorScheme.secondary,
-        width: 2,),),),width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
+                  child: SecondaryButtonDark(width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
                      context.router.push(const RegisterRoute());
                     // ToDo: Change back to above
                     //context.router.push(const RegisterAccountStep1Route());
