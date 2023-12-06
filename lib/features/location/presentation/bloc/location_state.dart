@@ -8,9 +8,11 @@ abstract class LocationPageState extends BaseState {
 
 class LocationPageInitState extends LocationPageState  {}
 
-class GetLocalCurrentLocationState extends LocationPageState{
-  OTPLocationEntity? otpLocationEntity;
+class LocationSelectedState extends LocationPageState{}
 
-  GetLocalCurrentLocationState({this.otpLocationEntity, super.error});
+class LocationRemoteSubmitLocationState extends LocationPageState{
+  final ProfileEntity? profileEntity;
+
+  LocationRemoteSubmitLocationState({ this.profileEntity, super.error});
 }
 

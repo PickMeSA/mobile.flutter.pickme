@@ -8,8 +8,8 @@ part 'otp_location_model_response_model_response.g.dart';
 class OTPLocationModelResponse with _$OTPLocationModelResponse {
   const factory OTPLocationModelResponse({
     required String? id,
-    required String? latitude,
-    required String? longitude
+    required double? latitude,
+    required double? longitude
   }) = _OTPLocationModelResponse;
 
   factory OTPLocationModelResponse.fromJson(

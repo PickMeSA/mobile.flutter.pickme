@@ -1,7 +1,10 @@
 
+import 'dart:io';
+
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -10,7 +13,9 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/widgets/w_page_loader.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,11 +32,11 @@ class LocationPage extends BasePage {
 
 class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getBloc().add(GetLocalCurrentLocationEvent());
 
   }
 
@@ -44,7 +49,24 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<LocationBloc, LocationPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is LocationRemoteSubmitLocationState && state.dataState == DataState.success){
+
+            Navigator.pop(context);
+            getBloc().preloaderActive = false;
+            context.router.push(const FinalDetailsRoute());
+
+        }
+
+        if(state is LocationRemoteSubmitLocationState && state.dataState == DataState.loading){
+          preloader(context);
+          getBloc().preloaderActive = true;
+        }
+
+        if(state is LocationRemoteSubmitLocationState && state.dataState == DataState.error){
+          print(state.error);
+        }
+      },
       builder: (context, state) {
         return SizedBox(
           height: MediaQuery.sizeOf(context).height,
@@ -66,21 +88,22 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
                       style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
                   30.height,
 
-                   SizedBox(
-                    height: 450,
-                    child: state is GetLocalCurrentLocationState && state.dataState == DataState.success?
-                    GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(
-                        double.parse(state.otpLocationEntity!.latitude!),
-                        double.parse(state.otpLocationEntity!.longitude!),),
-                    zoom: 14),
-
-                    ):
-                    pageLoader(),
-                  ),
+                     Container(
+                       height: 450,
+                       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
+                       child: PlacePicker(
+                           apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
+                           onPlacePicked: (result) {
+                     print(result);
+                     getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));
+                     },
+                       initialPosition: const LatLng(-33.8567844, 151.213108),
+                       useCurrentLocation: true,
+                       resizeToAvoidBottomInset: false, // only works in page mode, less flickery, remove if wrong offsets
+                     ),
+                     ),
                   20.height,
-
-                  50.height
-,
+                  50.height,
                   Row(
                     children: [
                       Container(
@@ -115,16 +138,13 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
                               )
                           ),
                           onPressed: !getBloc().checked?null:() {
-                            context.router.push(const FinalDetailsRoute());
+                            getBloc().add(LocationRemoteSubmitLocationEvent());
                           },
                           child: Text(getLocalization().nextStep),
                         ),
                       ),
                     ],
                   )
-
-
-
                 ],
               ),
             ),
@@ -143,6 +163,10 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  OTPLocationEntity getLocation(PickResult result){
+    return OTPLocationEntity(id: result.placeId, latitude: result.geometry?.location.lat, longitude: result.geometry?.location.lng);
   }
 
 }
