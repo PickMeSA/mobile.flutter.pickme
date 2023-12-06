@@ -10,3 +10,7 @@ class PoliceClearanceAddedEvent extends FinalDetailsPageEvent{
   final String filePath;
   PoliceClearanceAddedEvent({required this.filePath});
 }
+class SubmitClickedEvent extends FinalDetailsPageEvent{
+  final String description;
+  SubmitClickedEvent({required this.description});
+}

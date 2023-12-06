@@ -4,6 +4,8 @@ import 'package:pickme/features/add_skills/data/response_models/add_skills_model
 import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.dart';
 import 'package:pickme/features/bank_details/data/response_models/qualification_model_response/submit_bank_details_model_response.dart';
 import 'package:pickme/features/bank_details/domain/entities/bank_details_entities.dart';
+import 'package:pickme/features/final_details/data/response_models/submit_final_details_model_response/submit_final_details_model_response.dart';
+import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
 import 'package:pickme/features/qualification/data/response_models/qualification_model_response/submit_remote_qualification_and_experience_model_response.dart';
 import 'package:pickme/features/qualification/domain/entities/submit_qualification_and_experience_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
@@ -105,6 +107,24 @@ class ProfileServiceImpl extends ProfileService{
             bankAccountType: bankDetailsEntity.accountType,
             bankAccountNumber: bankDetailsEntity.accountNumber,
             bankBranchCode: bankDetailsEntity.branchCode,
+          ).toJson());
+
+      return returnProfileEntity(response: response);
+
+    }catch(ex){
+      rethrow;
+    }
+  }
+
+  @override
+  Future<ProfileEntity> submitFinalDetails({required FinalDetailsEntity finalDetailsEntity})async  {
+    try{
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+          data: SubmittedFinalDetailsModelResponse(
+            description: finalDetailsEntity.description,
+            profilePicture: finalDetailsEntity.profilePicture?.url??"",
+            policeClearance: finalDetailsEntity.policeClearance?.url??""
           ).toJson());
 
       return returnProfileEntity(response: response);
