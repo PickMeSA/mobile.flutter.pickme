@@ -1,9 +1,11 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -24,6 +26,8 @@ class FinalDetailsPage extends BasePage {
 }
 
 class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
+  String _filePath = '';
+  bool isSelectingProfilePicture = false;
 
   @override
   void initState() {
@@ -67,38 +71,50 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                       SizedBox(
                         height: 96,
                           width: 96,
-                        child: Stack(children: [
-                          CircleAvatar(radius: 48,backgroundColor: Colors.grey),
-                          Positioned(
-                            top: 1,
-                            left: 1,
-                            child: CircleAvatar(
-                                backgroundColor:Colors.white70 ,
-                            radius: 47,
-                            child: SvgPicture.asset("assets/profile.svg")),
-                          ),
-                          const Positioned(
-                            bottom: 0,
-                              right: 10,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isSelectingProfilePicture = true;
+                            });
+                            _pickFile();
+                          },
+                          child: Stack(children: [
+                            CircleAvatar(radius: 48,backgroundColor: Colors.grey),
+                            Positioned(
+                              top: 1,
+                              left: 1,
                               child: CircleAvatar(
-                                radius: 9,
-                                backgroundColor: Colors.black,
-                                child: Icon(Icons.add, color: Colors.black,size: 11),
-                              )),
-                          const Positioned(
-                              bottom:1,
-                              right:11,
-                              child: CircleAvatar(
-                                radius: 8,
-                                backgroundColor: Colors.white,
-                                child: Icon(Icons.add, color: Colors.black,size: 11),
-                              ))
+                                  backgroundColor:Colors.white70 ,
+                              radius: 47,
+                              child: SvgPicture.asset("assets/profile.svg")),
+                            ),
+                            const Positioned(
+                              bottom: 0,
+                                right: 10,
+                                child: CircleAvatar(
+                                  radius: 9,
+                                  backgroundColor: Colors.black,
+                                  child: Icon(Icons.add, color: Colors.black,size: 11),
+                                )),
+                            const Positioned(
+                                bottom:1,
+                                right:11,
+                                child: CircleAvatar(
+                                  radius: 8,
+                                  backgroundColor: Colors.white,
+                                  child: Icon(Icons.add, color: Colors.black,size: 11),
+                                ))
 
-                        ],
+                          ],
+                          ),
                         ),
                       ),
                       const Spacer(),
                     ],
+                  ),
+                  if(state is ProfilePictureAddedState && state.dataState == DataState.error)Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                    child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
                   ),
                   40.height,
                   AppTextFormField(
@@ -187,5 +203,20 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
     return locator<AppLocalizations>();
   }
 
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      if(isSelectingProfilePicture){
+        getBloc().add(ProfilePictureAddedEvent(filePath: result.files.single.path!));
+      }
+    } else {
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
+    }
+    setState(() {
+      isSelectingProfilePicture = false;
+    });
+  }
 
 }
