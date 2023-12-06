@@ -36,6 +36,7 @@ class FinalDetailsBloc
             finalDetailsEntity = finalDetailsEntity.copyWith(newDescription: event.description);
             try{
                 ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
+
                 emit(SubmitClickedState()..dataState = DataState.success);
 
             }catch(ex){

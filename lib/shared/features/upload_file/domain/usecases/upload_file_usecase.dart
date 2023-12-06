@@ -1,7 +1,9 @@
+import 'package:injectable/injectable.dart';
 import 'package:pickme/base_classes/base_usecase.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/repository/upload_file_repository.dart';
 
+@Injectable()
 class UploadFileUseCase extends BaseUseCase<UploadFileUseCaseParams, UploadedFileEntity>{
   final UploadFileRepository uploadFileRepository;
 
