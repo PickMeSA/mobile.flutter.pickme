@@ -227,9 +227,6 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                       ),
                     ],
                   )
-
-
-
                 ],
               ),
             ),
