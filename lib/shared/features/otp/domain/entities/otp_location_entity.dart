@@ -3,8 +3,8 @@ import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_lo
 
 class OTPLocationEntity extends Equatable{
   String? id;
-  String? latitude;
-  String? longitude;
+  double? latitude;
+  double? longitude;
 
   @override
   // TODO: implement props
@@ -17,7 +17,11 @@ class OTPLocationEntity extends Equatable{
 
   OTPLocationEntity.fromResponse(OTPLocationModelResponse response){
     id = response.id??"";
-    longitude = response.longitude??"";
-    latitude = response.latitude??"";
+    longitude = response.longitude??0;
+    latitude = response.latitude??0;
+  }
+
+  OTPLocationModelResponse toResponse(){
+    return OTPLocationModelResponse(id: id, latitude: latitude, longitude: longitude);
   }
 }

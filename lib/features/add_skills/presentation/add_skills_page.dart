@@ -172,7 +172,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                          inputs: getBloc().chipOptions,
                          onDeleted: (int index){
                            getBloc().add(SkillChipDeletedEvent(index: 0));
-                         }
+                         },
                        ),
                      ),
                    ),

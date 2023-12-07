@@ -185,10 +185,12 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                        child: Center(
                          child: ChipGroup(
                            inputs: getBloc().chipOptions,
-                           onDeleted: (int index){
+                           onDeleted: (){
                              getBloc().add(SkillChipDeletedEvent(index: 0));
                              getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails()));
-                           },
+                           }, onSelected: (bool value) {
+
+                         },
                          ),
                        ),
                      ),

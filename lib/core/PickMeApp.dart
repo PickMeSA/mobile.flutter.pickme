@@ -1,7 +1,9 @@
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/firebase_options.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -26,6 +28,9 @@ class PickMeApp{
     await configFlavor(await readEnvironment(selectEnvironment(env)));
     await initHive();
     setupLocators();
+    if(Platform.isAndroid) {
+      AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+    }
     PickMeApp.run();
   }
 

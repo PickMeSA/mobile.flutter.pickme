@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/membership_information/entities/membership_information_entity.dart';
 import 'package:pickme/features/membership_information/domain/use_cases/membership_information_usecase/get_membership_information_usecase.dart';
-import 'package:pickme/features/terms_and_conditions/domain/use_cases/terms_and_conditions_usecase/get_remote_terms_and_conditions_usecase.dart';
 
 part 'membership_information_event.dart';
 part 'membership_information_state.dart';
