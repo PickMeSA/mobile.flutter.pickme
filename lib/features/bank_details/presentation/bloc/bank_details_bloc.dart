@@ -20,8 +20,9 @@ class BankDetailsBloc
     bool checked = false;
 
     BankDetailsBloc(): super(BankDetailsPageInitState()) {
-        accountTypeEntityEntries?.add(DropdownMenuEntry(value: accountTypes[0], label: accountTypes[0].accountType));
-        accountTypeEntityEntries?.add(DropdownMenuEntry(value: accountTypes[1], label: accountTypes[1].accountType));
+        accountTypes.forEach((element) {
+           accountTypeEntityEntries?.add(DropdownMenuEntry(value: element, label: element.accountType));
+        });
         emit(BankDetailsPageInitState());
 
         on<BankDetailsValueChangedEvent>((event, emit)=> _onBankDetailsValueChangedEvent(event, emit));
