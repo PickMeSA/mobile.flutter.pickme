@@ -6,6 +6,13 @@ import 'package:pickme/features/add_memberships/presentation/add_memberships_pag
 import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
+import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
+import 'package:pickme/features/jobs/hiring/candidate_filters/presentation/filter_candidates_page.dart';
+import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
+import 'package:pickme/features/jobs/hiring/landing_page/presentation/jobs_hiring_landing_page.dart';
+import 'package:pickme/features/jobs/hiring/my_job_listings/presentation/my_job_listings_page.dart';
+import 'package:pickme/features/jobs/hiring/pending_profile/presentation/pending_profile_page.dart';
+import 'package:pickme/features/jobs/hiring/service_category_candidates/presentation/service_category_candidates_page.dart';
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
@@ -24,6 +31,9 @@ import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
 import '../features/login/presentation/login_page.dart';
 import '../features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
+//JOB
+import '../features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
+
 part 'app_route.gr.dart';
 
 @lazySingleton
@@ -48,6 +58,15 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
+    AnimatedRoute(page: JobsLandingRoute.page,),
+    AnimatedRoute(page: JobsHiringLandingRoute.page,),
+    // AnimatedRoute(page: AddSkillsRoute.page),
+    AnimatedRoute(page: AllServicesRoute.page),
+    AnimatedRoute(page: ServiceCategoryCandidatesRoute.page),
+    AnimatedRoute(page: FilterCandidatesRoute.page),
+    AnimatedRoute(page: PendingProfileRoute.page),
+    AnimatedRoute(page: MyJobListingsRoute.page),
+    AnimatedRoute(page: CreateJobListingRoute.page),
     AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page:RateAndWorkTimesRoute.page),
     AnimatedRoute(page: MinimumWageRoute.page),

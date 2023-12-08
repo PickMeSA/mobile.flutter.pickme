@@ -740,6 +740,16 @@ class AppLocalizations {
     );
   }
 
+  /// `My Job Requests`
+  String get myJobRequests {
+    return Intl.message(
+      'My Job Requests',
+      name: 'myJobRequests',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Photos of work (optional)`
   String get photosOfWork {
     return Intl.message(
@@ -755,6 +765,316 @@ class AppLocalizations {
     return Intl.message(
       'Skills *',
       name: 'skillsA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore all jobs`
+  String get exploreAllJobs {
+    return Intl.message(
+      'Explore all jobs',
+      name: 'exploreAllJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore all services`
+  String get exploreAllServices {
+    return Intl.message(
+      'Explore all services',
+      name: 'exploreAllServices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My job listings`
+  String get myJobListings {
+    return Intl.message(
+      'My job listings',
+      name: 'myJobListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My saved jobs`
+  String get mySavedJobs {
+    return Intl.message(
+      'My saved jobs',
+      name: 'mySavedJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommended for you`
+  String get recommendedForYou {
+    return Intl.message(
+      'Recommended for you',
+      name: 'recommendedForYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all`
+  String get seeAll {
+    return Intl.message(
+      'See all',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Services`
+  String get services {
+    return Intl.message(
+      'Services',
+      name: 'services',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In your area`
+  String get inYourArea {
+    return Intl.message(
+      'In your area',
+      name: 'inYourArea',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All services`
+  String get allServices {
+    return Intl.message(
+      'All services',
+      name: 'allServices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What are you looking for?`
+  String get whatAreYouLookingFor {
+    return Intl.message(
+      'What are you looking for?',
+      name: 'whatAreYouLookingFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location/area based on profile`
+  String get locationAreaBasedOnProfile {
+    return Intl.message(
+      'Location/area based on profile',
+      name: 'locationAreaBasedOnProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Browse categories`
+  String get browseCategories {
+    return Intl.message(
+      'Browse categories',
+      name: 'browseCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `view Profile`
+  String get viewProfile {
+    return Intl.message(
+      'view Profile',
+      name: 'viewProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service category`
+  String get serviceCategory {
+    return Intl.message(
+      'Service category',
+      name: 'serviceCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load more`
+  String get loadMore {
+    return Intl.message(
+      'Load more',
+      name: 'loadMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filters`
+  String get filters {
+    return Intl.message(
+      'Filters',
+      name: 'filters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max. distance`
+  String get maxDistance {
+    return Intl.message(
+      'Max. distance',
+      name: 'maxDistance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message(
+      'Reset',
+      name: 'reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply filters`
+  String get applyFilters {
+    return Intl.message(
+      'Apply filters',
+      name: 'applyFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Possible price range`
+  String get possiblePriceRange {
+    return Intl.message(
+      'Possible price range',
+      name: 'possiblePriceRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Candidate rating`
+  String get candidateRating {
+    return Intl.message(
+      'Candidate rating',
+      name: 'candidateRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I understand`
+  String get iUnderstand {
+    return Intl.message(
+      'I understand',
+      name: 'iUnderstand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your profile is still pending`
+  String get yourProfileIsStillPending {
+    return Intl.message(
+      'Your profile is still pending',
+      name: 'yourProfileIsStillPending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active listings`
+  String get activeListings {
+    return Intl.message(
+      'Active listings',
+      name: 'activeListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive listings`
+  String get inactiveListings {
+    return Intl.message(
+      'Inactive listings',
+      name: 'inactiveListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a new job listing`
+  String get createANewJobListing {
+    return Intl.message(
+      'Create a new job listing',
+      name: 'createANewJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a job listing`
+  String get createAJobListing {
+    return Intl.message(
+      'Create a job listing',
+      name: 'createAJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any active listings`
+  String get youDontHaveAnyActiveListings {
+    return Intl.message(
+      'You don\'t have any active listings',
+      name: 'youDontHaveAnyActiveListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any active listings`
+  String get youDontHaveAnyInactiveListings {
+    return Intl.message(
+      'You don\'t have any active listings',
+      name: 'youDontHaveAnyInactiveListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates.`
+  String get weAreStillVerifyingYourAccount {
+    return Intl.message(
+      'We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates.',
+      name: 'weAreStillVerifyingYourAccount',
       desc: '',
       args: [],
     );
@@ -1015,6 +1335,126 @@ class AppLocalizations {
     return Intl.message(
       'We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr.',
       name: 'minimumWageText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job name`
+  String get jobName {
+    return Intl.message(
+      'Job name',
+      name: 'jobName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job description`
+  String get jobDescription {
+    return Intl.message(
+      'Job description',
+      name: 'jobDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos (optional)`
+  String get photosOptional {
+    return Intl.message(
+      'Photos (optional)',
+      name: 'photosOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date & Time`
+  String get dateTime {
+    return Intl.message(
+      'Date & Time',
+      name: 'dateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am flexible (open to discuss)`
+  String get iAmFlexibleOpenToDiscuss {
+    return Intl.message(
+      'I am flexible (open to discuss)',
+      name: 'iAmFlexibleOpenToDiscuss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hours & total fee`
+  String get hoursTotalFee {
+    return Intl.message(
+      'hours & total fee',
+      name: 'hoursTotalFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skills required (max. 5)`
+  String get skillsRequired {
+    return Intl.message(
+      'Skills required (max. 5)',
+      name: 'skillsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. hours`
+  String get estHours {
+    return Intl.message(
+      'Est. hours',
+      name: 'estHours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total fee`
+  String get totalFee {
+    return Intl.message(
+      'Total fee',
+      name: 'totalFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or`
+  String get or {
+    return Intl.message(
+      'or',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job listing details`
+  String get jobListingDetails {
+    return Intl.message(
+      'Job listing details',
+      name: 'jobListingDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\n\n`
+  String get loremIpsumDescriptionField {
+    return Intl.message(
+      'Ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\n\n',
+      name: 'loremIpsumDescriptionField',
       desc: '',
       args: [],
     );
