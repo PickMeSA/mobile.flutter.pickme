@@ -20,10 +20,12 @@ part 'final_details_state.dart';
 class FinalDetailsBloc
     extends BaseBloc<FinalDetailsPageEvent, FinalDetailsPageState> {
     bool checked = true;
+    bool preloaderActive = false;
     String uploadErrorMessage = "";
     UploadFileUseCase uploadFileUseCase;
     SubmitFinalDetailsUseCase submitFinalDetailsUseCase;
     FinalDetailsEntity finalDetailsEntity = const FinalDetailsEntity();
+    String? policeClearancePath;
     FinalDetailsBloc({required this.uploadFileUseCase, required this.submitFinalDetailsUseCase}): super(FinalDetailsPageInitState()) {
         on<ProfilePictureAddedEvent>((event, emit) => _onProfilePictureAddedEvent(event, emit));
         on<PoliceClearanceAddedEvent>((event, emit) => _onPoliceClearanceAddedEvent(event, emit));
@@ -33,6 +35,8 @@ class FinalDetailsBloc
         if(event.description.isEmpty){
             emit(SubmitClickedState()..dataState = DataState.error);
         }else{
+            emit(SubmitClickedState()..dataState = DataState.loading);
+
             finalDetailsEntity = finalDetailsEntity.copyWith(newDescription: event.description);
             try{
                 ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
@@ -46,25 +50,33 @@ class FinalDetailsBloc
         }
     }
     _onProfilePictureAddedEvent(ProfilePictureAddedEvent event, Emitter<FinalDetailsPageState> emit) async{
+
+        uploadErrorMessage = "";
         File file = File(event.filePath);
         try{
+            emit(ProfilePictureAddedState()..dataState = DataState.loading);
             validateFile(file);
             UploadedFileEntity uploadedFileEntity = await uploadFileUseCase.call(params: UploadFileUseCaseParams(filePath: event.filePath));
             finalDetailsEntity = finalDetailsEntity.copyWith(newProfilePicture: uploadedFileEntity);
+            emit(ProfilePictureAddedState()..dataState = DataState.success);
         }catch(ex){
             uploadErrorMessage = ex.toString();
             emit(ProfilePictureAddedState()..dataState = DataState.error);
         }
     }
     _onPoliceClearanceAddedEvent(PoliceClearanceAddedEvent event, Emitter<FinalDetailsPageState> emit) async{
+        uploadErrorMessage = "";
         File file = File(event.filePath);
         try{
             validateFile(file);
+            emit(PoliceClearanceAddedState()..dataState = DataState.loading);
             UploadedFileEntity uploadedFileEntity = await uploadFileUseCase.call(params: UploadFileUseCaseParams(filePath: event.filePath));
             finalDetailsEntity = finalDetailsEntity.copyWith(newPoliceClearance: uploadedFileEntity);
+            emit(PoliceClearanceAddedState()..dataState = DataState.success);
+            policeClearancePath = event.filePath.split('/').last;
         }catch(ex){
             uploadErrorMessage = ex.toString();
-            emit(ProfilePictureAddedState()..dataState = DataState.error);
+            emit(PoliceClearanceAddedState()..dataState = DataState.error);
         }
     }
     void validateFile(File file){
