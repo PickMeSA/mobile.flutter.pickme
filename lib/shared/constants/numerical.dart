@@ -1,0 +1,1 @@
+const maxUploadSize = 5; //file size in mb
