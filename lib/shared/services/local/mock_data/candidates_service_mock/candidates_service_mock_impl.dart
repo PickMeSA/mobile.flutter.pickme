@@ -11,7 +11,7 @@ class CandidatesServiceMock extends CandidatesService{
 
   final ApiService apiService;
 
-  CandidatesServiceMock({required this.apiService ,required super.tokenLocalStorage});
+  CandidatesServiceMock({required this.apiService});
 
   @override
   Future<PaginatedCandidateProfileEntity> getPaginatedCandidateProfiles() async {

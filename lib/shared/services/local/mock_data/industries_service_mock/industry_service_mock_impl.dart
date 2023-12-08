@@ -11,7 +11,7 @@ class IndustryServiceMockImpl extends IndustryService{
 
   final ApiService apiService;
 
-  IndustryServiceMockImpl({required this.apiService ,required super.tokenLocalStorage});
+  IndustryServiceMockImpl({required this.apiService});
 
   @override
   Future<PaginatedIndustryEntity> getIndustries({GetIndustriesServiceParams? params}) async {
