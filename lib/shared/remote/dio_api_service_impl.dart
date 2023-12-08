@@ -17,7 +17,9 @@ class DioApiService extends ApiService{
     required this.dio}){
    dio.interceptors.add(InterceptorsWrapper(onRequest:
        (RequestOptions options, RequestInterceptorHandler handler){
-     //attach
+         logger.d(options);
+
+         //attach
      TokenModel tokenModel = boxTokens.get(current);
      options.headers['Content-Type'] = 'application/json';
      options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
