@@ -15,7 +15,7 @@ class CandidateProfilesImpl extends CandidatesService{
 
   final ApiService apiService;
 
-  CandidateProfilesImpl({required this.apiService ,required super.tokenLocalStorage});
+  CandidateProfilesImpl({required this.apiService });
 
   @override
   Future<PaginatedCandidateProfileEntity> getPaginatedCandidateProfiles() async {

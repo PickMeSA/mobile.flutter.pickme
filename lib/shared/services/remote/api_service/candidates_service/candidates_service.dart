@@ -2,7 +2,7 @@ import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity
 import 'package:pickme/shared/remote/PickMeApiCore.dart';
 
 abstract class CandidatesService extends  PickMeCoreApi{
-  CandidatesService({required super.tokenLocalStorage});
+  CandidatesService();
 
   Future<PaginatedCandidateProfileEntity> getPaginatedCandidateProfiles();
 }

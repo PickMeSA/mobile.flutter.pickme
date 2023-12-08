@@ -19,7 +19,7 @@ class IndustryServiceImpl extends IndustryService {
   final Logger logger = Logger();
 
   IndustryServiceImpl(
-      {required this.apiService, required super.tokenLocalStorage});
+      {required this.apiService});
 
   @override
   Future<PaginatedIndustryEntity> getIndustries({GetIndustriesServiceParams? params}) async {
