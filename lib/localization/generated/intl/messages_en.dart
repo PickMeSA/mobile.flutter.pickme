@@ -78,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ePWP": MessageLookupByLibrary.simpleMessage("EPWP"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
+        "endDateCannotBeBeforeStartDate": MessageLookupByLibrary.simpleMessage(
+            "End date cannot be before start date"),
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
         "estHours": MessageLookupByLibrary.simpleMessage("Est. hours"),
@@ -180,8 +182,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickMeReceivesAR2hrWorkedAsServiceFees":
             MessageLookupByLibrary.simpleMessage(
                 "PickMe Receives a R2/hr worked as services fees"),
+        "pleaseEnterCompanyName":
+            MessageLookupByLibrary.simpleMessage("Please enter company name"),
+        "pleaseEnterIssuingOrganization": MessageLookupByLibrary.simpleMessage(
+            "Please enter issuing organization"),
+        "pleaseEnterPositionTitle":
+            MessageLookupByLibrary.simpleMessage("Please enter position title"),
+        "pleaseEnterQualificationName": MessageLookupByLibrary.simpleMessage(
+            "Please enter qualification name"),
+        "pleaseEnterQualificationType": MessageLookupByLibrary.simpleMessage(
+            "Please enter qualification type"),
         "pleaseReenterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Please re-enter your phone number. If the problem persists, please contact our help centre."),
+        "pleaseSelectEndDate":
+            MessageLookupByLibrary.simpleMessage("Please select end date"),
+        "pleaseSelectIndustry":
+            MessageLookupByLibrary.simpleMessage("Please select industry"),
+        "pleaseSelectIssueDate":
+            MessageLookupByLibrary.simpleMessage("Please enter issue date"),
+        "pleaseSelectStartDate":
+            MessageLookupByLibrary.simpleMessage("Please select start date"),
         "policeClearanceOptional":
             MessageLookupByLibrary.simpleMessage("Police clearance (optional)"),
         "positionTitle":

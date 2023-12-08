@@ -13,7 +13,7 @@ class UserServiceImpl extends UserService{
 
   final ApiService apiService;
 
-  UserServiceImpl({required this.apiService ,required super.tokenLocalStorage});
+  UserServiceImpl({required this.apiService });
 
   
   @override
@@ -56,8 +56,6 @@ class UserServiceImpl extends UserService{
       );
 
       boxUser.put(current, UserModel(id: profileDataModelResponse.id));
-
-      boxProfile.put(current, newUserModel);
 
       return newUserModel;
     }catch(ex){

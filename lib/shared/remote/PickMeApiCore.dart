@@ -12,10 +12,8 @@ class PickMeCoreApi{
   late String version;
   late String contentType;
   late String token;
-  final TokenLocalStorage tokenLocalStorage;
-  PickMeCoreApi({
-    required this.tokenLocalStorage
-}){
+
+  PickMeCoreApi(){
     baseUrl = "https://api-dev.pick-me.co.za/api/";//FlavorConfig.instance.variables["digital_oceans"]["base_url"];
     version = "v1";//FlavorConfig.instance.variables["digital_oceans"]["version"];
   }

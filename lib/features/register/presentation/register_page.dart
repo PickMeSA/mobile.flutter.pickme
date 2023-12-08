@@ -234,9 +234,15 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                     }
                                 )
                             ),
+
                             onPressed: !getBloc().checked!?null:() {
-                              getBloc().add(SubmitClickedEvent(user: getGetUserModel()));
-                              context.router.push(OTPRoute(userModel: getGetUserModel(), fromregister: true));
+                              if(_formKey.currentState!.validate()) {
+                                getBloc().add(SubmitClickedEvent(
+                                    user: getGetUserModel()));
+                                context.router.push(OTPRoute(
+                                    userModel: getGetUserModel(),
+                                    fromregister: true));
+                              }
                             },
                             child: Text(getLocalization().submit),
                           ),

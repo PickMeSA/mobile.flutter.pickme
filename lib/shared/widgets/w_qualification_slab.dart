@@ -1,14 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
+import 'package:pickme/shared/widgets/w_award.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 
 Widget qualificationSlab({
+   List<OTPQualificationEntity>? otpQualificationEntityList,
+   List<OTPWorkExperienceEntity>? otpWorkExperienceEntityList,
   required Widget icon,
   required String caption,
   required String buttonCaption,
   required Function onClick}){
   return Column(
     children: [
+      otpQualificationEntityList!.isNotEmpty ?
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: otpQualificationEntityList.length,
+              itemBuilder: (context , index){
+            return AppProfileQualification(
+                qualification: Award(
+                    name:otpQualificationEntityList![index].name!,
+                    institutionName: otpQualificationEntityList![index].issuingOrganization!,
+                  educationType: otpQualificationEntityList![index].type,
+                  qualificationType: AppQualificationType.education,
+                  issuedOn: otpQualificationEntityList![index].issueDate!
+                  
+
+
+                ));
+          }): otpWorkExperienceEntityList!.isNotEmpty?
+      ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: otpWorkExperienceEntityList.length,
+          itemBuilder: (context , index){
+            return AppProfileQualification(
+                qualification: Award(
+                    name:otpWorkExperienceEntityList![index].title!,
+                    institutionName: otpWorkExperienceEntityList![index].company!,
+                    qualificationType: AppQualificationType.experience,
+                  dateStarted: otpWorkExperienceEntityList![index].startDate!,
+                  dateEnded: otpWorkExperienceEntityList![index].endDate!
+                ));
+          }):
       Row(
           children:[
             Container(
@@ -26,7 +63,7 @@ Widget qualificationSlab({
                     fontWeight: FontWeight.w600)
             )
           ]
-      ),
+      ) ,
 
       const SizedBox(height: 20,),
       InkWell(

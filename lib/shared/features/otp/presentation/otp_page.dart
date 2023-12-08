@@ -61,6 +61,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //error
         if(state is OTPGetTokenState && state.dataState == DataState.error){
         // error dialog
+          print(state.error);
         }
         //loading
         if(state is OTPGetTokenState && state.dataState == DataState.loading){
@@ -87,6 +88,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //error
         if(state is RegisterOTPCompleteState && state.dataState == DataState.error){
           // will use error dialog
+          print(state.error);
         }
 
         // SaveRemoteProfileDataState/////////////////////////////////////////
@@ -103,7 +105,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         }
         //error
         if(state is SaveRemoteProfileDataState && state.dataState == DataState.error){
-          //will use error dialog
+          //will use error dialog[
+          print(state.error);
         }
 
         //GetProfileProgressState////////////////////////////////////
@@ -111,10 +114,21 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         if(state is GetProfileProgressState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(!widget.fromregister!){
-
-          }else {
-            context.router.push(SetupProfileRoute(userModel: state.userModel!));
+          if(state.profileEntity!.type!.isEmpty){
+            context.router.push(const SetupProfileRoute());
+          }else if (state.profileEntity!.qualifications!.isEmpty &&
+                    state.profileEntity!.workExperience!.isEmpty){
+            context.router.push(const QualificationsRoute());
+          }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
+            context.router.push(const AddSkillsRoute());
+          }else if(state.profileEntity!.hourlyRate! == 0){
+            context.router.push(const RateAndWorkTimesRoute());
+          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+            context.router.push(const BankDetailsRoute());
+          }else if(state.profileEntity!.location!.id!.isEmpty ){
+            context.router.push(const LocationRoute());
+          }else if(state.profileEntity!.description!.isEmpty){
+            context.router.push(const FinalDetailsRoute());
           }
         }
 

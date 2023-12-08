@@ -9,7 +9,9 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/shared/constants/qualifications.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/add_qualification_bloc.dart';
 
 @RoutePage()
@@ -22,8 +24,14 @@ class AddQualificationPage extends BasePage {
 
 class _AddQualificationPageState extends BasePageState<AddQualificationPage, AddQualificationBloc> {
 
-  TextEditingController qualificationName = TextEditingController();
-  TextEditingController issuingorganisation = TextEditingController();
+  TextEditingController qualificationNameController = TextEditingController();
+  TextEditingController issuingOrganisationController = TextEditingController();
+  TextEditingController qualificationTypeController = TextEditingController();
+  TextEditingController issueDateController = TextEditingController();
+
+  late DateTime? selectedDateTime = DateTime.now();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -45,13 +53,13 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
       builder: (context, state) {
          return Padding(
            padding: const EdgeInsets.all(20.0),
-           child: Container(
+           child: SizedBox(
              width: MediaQuery.sizeOf(context).width,
              height: MediaQuery.sizeOf(context).height- 100,
              child: Form(
+               key: _formKey,
                child: Column(
                  children: [
-
                    Padding(
                      padding: const EdgeInsets.only(top: 20, bottom: 50),
                      child: Row(
@@ -69,31 +77,50 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                    Padding(
                      padding: const EdgeInsets.only(bottom:20 , right: 40),
                      child: AppDropdownMenu<Qualifications>(
-
                          label: wText(getLocalization().qualificationType),
                          enableFilter: true,
                          dropdownMenuEntries: state.entries??[],
-                       width: MediaQuery.of(context).size.width-40,),
+                       width: MediaQuery.of(context).size.width-40,
+                     controller: qualificationTypeController,),
                    ),
                    Padding(
                      padding: const EdgeInsets.only(bottom: 10),
-                     child: AppTextFormField(textFieldType: TextFieldType.NAME,
-                         labelText: getLocalization().qualificationName),
+                     child: AppTextFormField(
+                       validator: (value){
+                         if(value!.isEmpty){
+                           return getLocalization().pleaseEnterQualificationName;
+                         }
+                       },
+                         textFieldType: TextFieldType.NAME,
+                         labelText: getLocalization().qualificationName,
+                     controller: qualificationNameController),
                    ),
                    Padding(
                      padding: const EdgeInsets.only(bottom: 10),
-                     child: AppTextFormField(textFieldType: TextFieldType.NAME,
-                     labelText: getLocalization().issuingOrganisations,),
+                     child: AppTextFormField(
+                       validator: (value){
+                         if(value!.isEmpty){
+                           return getLocalization().pleaseEnterIssuingOrganization;
+                         }
+                       },
+                       textFieldType: TextFieldType.NAME,
+                     labelText: getLocalization().issuingOrganisations,
+                     controller: issuingOrganisationController,),
                    ),
 
 
-                   DateTextBox(labelText: getLocalization().issueDate,),
+                   DateTextBox(
+                       labelText: getLocalization().issueDate,
+                     controller: issueDateController,
+                   onDateSelected: (DateTime dateTime){
+                      selectedDateTime = dateTime;
+                     issueDateController.text = DateFormatters.getWordDate(dateTime);
+                   }),
                    Padding(padding: const EdgeInsets.only(bottom: 30, top: 15),
                        child:Container(
                          height: 130,
                          child: Stack(
                            children:<Widget> [
-
                              Positioned(top: 10,
                                child: Container(
                                height: 100,
@@ -125,8 +152,11 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                          ]),
                        )),
                    const Spacer(),
-                   PrimaryButtonDark(width: MediaQuery.sizeOf(context).width,onPressed: (){}, child: wText(getLocalization().add))
-
+                   PrimaryButtonDark(width: MediaQuery.sizeOf(context).width,onPressed: (){
+                     if(_formKey.currentState!.validate()){
+                       Navigator.pop(context, getQualification());
+                     }
+                   }, child: wText(getLocalization().add))
                  ],
                ),
              ),
@@ -145,6 +175,14 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  OTPQualificationEntity getQualification(){
+    return OTPQualificationEntity(
+        issueDate: selectedDateTime ,
+        type: qualificationTypeController.text,
+        name: qualificationNameController.text,
+        issuingOrganization: issuingOrganisationController.text);
   }
 
 }

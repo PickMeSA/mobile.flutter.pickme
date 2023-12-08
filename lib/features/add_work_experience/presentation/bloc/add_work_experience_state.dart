@@ -4,3 +4,6 @@ abstract class AddWorkExperiencePageState extends BaseState {}
 
 class AddWorkExperiencePageInitState extends AddWorkExperiencePageState  {}
 
+class AddWorkExperienceCurrentSelectedState extends AddWorkExperiencePageState{
+
+}

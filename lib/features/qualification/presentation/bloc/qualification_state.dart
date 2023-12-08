@@ -1,13 +1,27 @@
 part of 'qualification_bloc.dart';
 @immutable
 abstract class QualificationsPageState extends BaseState {
-  bool checked;
+  String? error;
 
-  QualificationsPageState({ required this.checked});
+  QualificationsPageState({this.error});
 }
 
 class QualificationsPageInitState extends QualificationsPageState  {
 
-  QualificationsPageInitState({required super.checked});
+  QualificationsPageInitState();
+}
+
+class AddQualificationState extends QualificationsPageState{
+  AddQualificationState();
+}
+
+class AddWorkExperienceState extends QualificationsPageState{
+
+}
+
+class AddQualificationRemoteSubmitState extends QualificationsPageState{
+ ProfileEntity? profileEntity;
+
+ AddQualificationRemoteSubmitState({ this.profileEntity,  super.error});
 }
 

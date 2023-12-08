@@ -2,15 +2,18 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/add_skills/domain/entities/preferred_industry.dart';
-import 'package:pickme/features/add_skills/domain/entities/skill.dart';
+import 'package:pickme/features/add_skills/domain/entities/preferred_industry_entity.dart';
+import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/w_colors.dart';
+import 'package:pickme/shared/widgets/w_page_loader.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
@@ -31,6 +34,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getBloc().add(AddSkillsGetPreferredIndustryListEvent());
 
   }
 
@@ -43,10 +47,65 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<AddSkillsBloc, AddSkillsPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        //AddSkillsGetPreferredIndustryListState//////
+        //////////////////////////////////////////////
+        if(state is AddSkillsGetPreferredIndustryListState && state.dataState == DataState.success){
+          getBloc().add(AddSkillGetSkillsListEvent());
+        }
+
+        if(state is AddSkillsGetPreferredIndustryListState && state.dataState == DataState.loading){
+
+        }
+
+        if(state is AddSkillsGetPreferredIndustryListState && state.dataState == DataState.error){
+
+        }
+
+        //AddSkillGetSkillsListState//////
+        //////////////////////////////////////////////
+        if(state is AddSkillGetSkillsListState && state.dataState == DataState.success){
+
+        }
+
+        if(state is AddSkillGetSkillsListState && state.dataState == DataState.loading){
+
+        }
+
+        if(state is AddSkillGetSkillsListState && state.dataState == DataState.error){
+
+        }
+
+        //AddSkillSubmitRemoteSkillsAndIndustryState//////
+        //////////////////////////////////////////////
+        if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.success){
+          Navigator.pop(context);
+          getBloc().preloaderActive = false;
+          if(state.profileEntity!.hourlyRate! == 0){
+            context.router.push(const RateAndWorkTimesRoute());
+          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+            context.router.push(const BankDetailsRoute());
+          }else if(state.profileEntity!.location!.id!.isEmpty ){
+            context.router.push(const LocationRoute());
+          }else if(state.profileEntity!.description!.isEmpty){
+            context.router.push(const FinalDetailsRoute());
+          }
+        }
+
+        if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.loading){
+          preloader(context);
+          getBloc().preloaderActive = true;
+        }
+
+        if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.error){
+
+        }
+      },
       builder: (context, state) {
 
-         return SizedBox(
+         return
+              state.dataState == DataState.success && state is AddSkillGetSkillsListState ?
+           SizedBox(
            height: MediaQuery.sizeOf(context).height,
            width: MediaQuery.sizeOf(context).width,
            child:SingleChildScrollView(
@@ -75,7 +134,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 60),
-                    child: AppDropdownMenu<PreferredIndustry>(
+                    child: AppDropdownMenu<PreferredIndustryEntity>(
                       onSelected: (selected){
                         getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
                       },
@@ -85,20 +144,25 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                         controller: dropdownIndustryController,
                     label: wText(getLocalization().preferredIndustry, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
                   ),
+
                    wText(getLocalization().skillsMax5,style: theme.textTheme.bodyMedium?.copyWith(
                        fontSize: 16,
                    fontWeight: FontWeight.w600)),
+
                    Padding(
                      padding: const EdgeInsets.only(top: 10, bottom: 30),
-                     child: AppDropdownMenu<Skill>(
+                     child: AppDropdownMenu<SkillEntity>(
                         onSelected: (selected){
                           getBloc().add(SkillSelectedEvent(skill: selected!));
                         },
                          width: MediaQuery.sizeOf(context).width - 40,
                          enableFilter: true,
                          dropdownMenuEntries: getBloc().skillEntries,
-                         controller: dropDownSkillController,
-                         label: wText(getLocalization().skillsA, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16,color: Colors.grey))),
+                         label: wText(getLocalization().skillsA,
+                             style: theme.textTheme.bodyMedium?.copyWith(
+                                 fontWeight: FontWeight.w400,
+                                 fontSize: 16,
+                                 color: Colors.grey))),
                    ),
 
                    SizedBox(
@@ -148,7 +212,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                                )
                            ),
                            onPressed: !getBloc().checked?null:() {
-                             context.router.push(const RateAndWorkTimesRoute());
+                             getBloc().add(AddSkillSubmitRemoteSkillsAndIndustryEvent());
                            },
                            child: Text(getLocalization().nextStep),
                          ),
@@ -159,7 +223,10 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                ),
              ),
            )  ,
-         );
+         ):
+          state.dataState == DataState.loading && state is AddSkillsGetPreferredIndustryListState ?
+          pageLoader():
+         Container();
       },
     );
   }

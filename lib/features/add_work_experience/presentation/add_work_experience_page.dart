@@ -7,7 +7,9 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/utils/date_formaters.dart';
 
 import 'bloc/add_work_experience_bloc.dart';
 
@@ -20,6 +22,15 @@ class AddWorkExperiencePage extends BasePage {
 }
 
 class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, AddWorkExperienceBloc> {
+
+  late TextEditingController positionTitleController = TextEditingController();
+  late TextEditingController companyController = TextEditingController();
+  late TextEditingController startDateController = TextEditingController();
+  late TextEditingController endDateController = TextEditingController();
+  late TextEditingController industry = TextEditingController();
+  late DateTime startDate = DateTime.now();
+  late DateTime endDate = DateTime.now();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -45,6 +56,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
              height: MediaQuery.sizeOf(context).height- 100,
              child: SingleChildScrollView(
                child: Form(
+                 key: _formKey,
                  child: Column(
                    children: [
 
@@ -64,12 +76,25 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10),
-                       child: AppTextFormField(textFieldType: TextFieldType.NAME,
+                       child: AppTextFormField(
+                         controller:  positionTitleController,
+                           validator: (value){
+                             if(value!.isEmpty){
+                               return getLocalization().pleaseEnterPositionTitle;
+                             }
+                           },textFieldType: TextFieldType.NAME,
                            labelText: getLocalization().positionTitle),
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10),
-                       child: AppTextFormField(textFieldType: TextFieldType.NAME,
+                       child: AppTextFormField(
+                         controller: companyController,
+                         validator: (value){
+                           if(value!.isEmpty){
+                             return getLocalization().pleaseEnterCompanyName;
+                           }
+                         },
+                         textFieldType: TextFieldType.NAME,
                          labelText: getLocalization().company,),
                      ),
                      const AppDivider(),
@@ -77,7 +102,8 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                        padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                        child: Row(
                          children: [
-                           Checkbox(value: false, onChanged: (value){
+                           Checkbox(value: getBloc().current, onChanged: (value){
+                             getBloc().add(AddWorkExperienceCurrentSelectedEvent());
 
                            }, ),
                            wText(getLocalization().imCurrentlyWorkingInThisRole),
@@ -87,19 +113,37 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10.0),
-                       child: DateTextBox(labelText: getLocalization().startDate,),
+                       child: DateTextBox(labelText: getLocalization().startDate,
+                       controller: startDateController,
+                       onDateSelected: (DateTime dateTime){
+                         startDate = dateTime;
+                         startDateController.text = DateFormatters.getWordDate(dateTime);
+                       },),
                      ),
+                     if(!getBloc().current )
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10.0),
-                       child: DateTextBox(labelText: getLocalization().endDate,),
+                       child: DateTextBox(labelText: getLocalization().endDate,
+                       controller: endDateController,
+                       onDateSelected: (DateTime dateTime){
+                         endDate = dateTime;
+                         endDateController.text = DateFormatters.getWordDate(dateTime);
+                       },),
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10),
-                       child: AppTextFormField(textFieldType: TextFieldType.NAME,
+                       child: AppTextFormField(controller: industry,textFieldType: TextFieldType.NAME,
                          labelText: getLocalization().industry,),
                      ),
                      const SizedBox(height: 75,),
-                     PrimaryButtonDark(width: MediaQuery.sizeOf(context).width,onPressed: (){}, child: wText(getLocalization().add))
+                     PrimaryButtonDark(
+                         width: MediaQuery.sizeOf(context).width,
+                         onPressed: (){
+                           if(_formKey.currentState!.validate()){
+                             Navigator.pop(context,getOtpWorkExperience());
+                           }
+                         },
+                         child: wText(getLocalization().add))
                    ],
                  ),
                ),
@@ -119,6 +163,16 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  OTPWorkExperienceEntity getOtpWorkExperience(){
+    return OTPWorkExperienceEntity(
+        title: positionTitleController.text,
+        startDate: startDate,
+        endDate: endDate,
+        company: companyController.text,
+        industryId: 0,
+        isCurrent: getBloc().current);
   }
 
 }

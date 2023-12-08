@@ -1639,6 +1639,106 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Please enter qualification name`
+  String get pleaseEnterQualificationName {
+    return Intl.message(
+      'Please enter qualification name',
+      name: 'pleaseEnterQualificationName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter issuing organization`
+  String get pleaseEnterIssuingOrganization {
+    return Intl.message(
+      'Please enter issuing organization',
+      name: 'pleaseEnterIssuingOrganization',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter issue date`
+  String get pleaseSelectIssueDate {
+    return Intl.message(
+      'Please enter issue date',
+      name: 'pleaseSelectIssueDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter qualification type`
+  String get pleaseEnterQualificationType {
+    return Intl.message(
+      'Please enter qualification type',
+      name: 'pleaseEnterQualificationType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter position title`
+  String get pleaseEnterPositionTitle {
+    return Intl.message(
+      'Please enter position title',
+      name: 'pleaseEnterPositionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter company name`
+  String get pleaseEnterCompanyName {
+    return Intl.message(
+      'Please enter company name',
+      name: 'pleaseEnterCompanyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select start date`
+  String get pleaseSelectStartDate {
+    return Intl.message(
+      'Please select start date',
+      name: 'pleaseSelectStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select end date`
+  String get pleaseSelectEndDate {
+    return Intl.message(
+      'Please select end date',
+      name: 'pleaseSelectEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End date cannot be before start date`
+  String get endDateCannotBeBeforeStartDate {
+    return Intl.message(
+      'End date cannot be before start date',
+      name: 'endDateCannotBeBeforeStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select industry`
+  String get pleaseSelectIndustry {
+    return Intl.message(
+      'Please select industry',
+      name: 'pleaseSelectIndustry',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

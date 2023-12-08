@@ -186,25 +186,15 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SetupProfileRoute.name: (routeData) {
-      final args = routeData.argsAs<SetupProfileRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: SetupProfilePage(
-          key: args.key,
-          userModel: args.userModel,
-        ),
+        child: const SetupProfilePage(),
       );
     },
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SignUpPage(),
-      );
-    },
-    SkillsAndIndustryRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SkillsAndIndustryPage(),
       );
     },
     TermsAndConditionsRoute.name: (routeData) {
@@ -675,40 +665,16 @@ class ServiceCategoryCandidatesRouteArgs {
 
 /// generated route for
 /// [SetupProfilePage]
-class SetupProfileRoute extends PageRouteInfo<SetupProfileRouteArgs> {
-  SetupProfileRoute({
-    Key? key,
-    required UserEntity userModel,
-    List<PageRouteInfo>? children,
-  }) : super(
+class SetupProfileRoute extends PageRouteInfo<void> {
+  const SetupProfileRoute({List<PageRouteInfo>? children})
+      : super(
           SetupProfileRoute.name,
-          args: SetupProfileRouteArgs(
-            key: key,
-            userModel: userModel,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'SetupProfileRoute';
 
-  static const PageInfo<SetupProfileRouteArgs> page =
-      PageInfo<SetupProfileRouteArgs>(name);
-}
-
-class SetupProfileRouteArgs {
-  const SetupProfileRouteArgs({
-    this.key,
-    required this.userModel,
-  });
-
-  final Key? key;
-
-  final UserEntity userModel;
-
-  @override
-  String toString() {
-    return 'SetupProfileRouteArgs{key: $key, userModel: $userModel}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -721,20 +687,6 @@ class SignUpRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SignUpRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SkillsAndIndustryPage]
-class SkillsAndIndustryRoute extends PageRouteInfo<void> {
-  const SkillsAndIndustryRoute({List<PageRouteInfo>? children})
-      : super(
-          SkillsAndIndustryRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SkillsAndIndustryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
