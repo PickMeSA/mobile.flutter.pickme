@@ -2,31 +2,21 @@ part of 'create_job_listing_bloc.dart';
 
 @immutable
 abstract class CreateJobListingState extends BaseState {
-  final PaginatedIndustryEntity? paginatedIndustries;
-  final int selectedTabIndex;
+  String? error;
+
   CreateJobListingState({
     super.dataState,
-    this.paginatedIndustries,
-    required this.selectedTabIndex
+    this.error
   });
 }
 
-class MyJobListingsPageInitial extends CreateJobListingState {
-  MyJobListingsPageInitial({
-    super.paginatedIndustries,
-    required super.selectedTabIndex
-  });
+class CreateJobListingInitial extends CreateJobListingState {
+  CreateJobListingInitial();
+}
+class JobImageAddedState extends CreateJobListingState {
+  JobImageAddedState({super.error});
 }
 
-class SelectedTabChangedState extends CreateJobListingState {
-  SelectedTabChangedState({
-    super.paginatedIndustries,
-    required super.selectedTabIndex
-  });
-}
-class GetTopIndustriesState extends CreateJobListingState {
-  GetTopIndustriesState({
-    super.paginatedIndustries,
-    required super.selectedTabIndex
-  });
+class FlexibleHoursChangedState extends CreateJobListingState {
+  FlexibleHoursChangedState();
 }

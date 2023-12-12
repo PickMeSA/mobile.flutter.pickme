@@ -1739,6 +1739,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Date & time`
+  String get dateAndTime {
+    return Intl.message(
+      'Date & time',
+      name: 'dateAndTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I'm flexible (open to discuss)`
+  String get iMFlexibleOpenToDiscuss {
+    return Intl.message(
+      'I\'m flexible (open to discuss)',
+      name: 'iMFlexibleOpenToDiscuss',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

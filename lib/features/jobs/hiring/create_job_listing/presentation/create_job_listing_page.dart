@@ -1,17 +1,21 @@
 import 'dart:ui';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
-import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/utils/date_formaters.dart';
 
 import 'bloc/create_job_listing_bloc.dart';
 
@@ -25,7 +29,11 @@ class CreateJobListingPage extends BasePage {
 }
 
 class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, CreateJobListingBloc> {
-
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
+  TextEditingController startTimeTextController = TextEditingController();
+  late DateTime startDate;
+  late DateTime endDate;
   @override
   void initState() {
     super.initState();
@@ -40,23 +48,20 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
         // TODO: implement listener
       },
       builder: (context, state) {
-        PaginatedIndustryEntity? industries = state.paginatedIndustries;
 
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           padding: wPagePadding(top:0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(getLocalization().jobListingDetails, style: theme.textTheme.bodyMedium!.copyWith(
-                  fontVariations: [
-                    const FontVariation("wght", 600)
-                  ]
-              ),),
-              24.height,
-              Expanded(child: Form(
-                child: SingleChildScrollView(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(getLocalization().jobListingDetails, style: theme.textTheme.bodyMedium!.copyWith(
+                    fontVariations: 600.fontWeight
+                ),),
+                24.height,
+                Form(
                   child: Column(
                     children: [
                       AppTextFormField(
@@ -69,12 +74,98 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                         labelText: "${getLocalization().jobDescription} *",
                         hint: getLocalization().loremIpsumDescriptionField,
                       ),
+                      GestureDetector(
+                        onTap: () => _pickFile(),
+                        child: labelledPanel(
+                            labelText: getLocalization().photosOptional,
+                            content: Container(
+                              height: 96 ,
+                              child: Center(child: Row(
+                                children: [
+                                  const Spacer(),
+                                  (state is JobImageAddedState && state.dataState == DataState.loading)?
+                                  const CircularProgressIndicator():SvgPicture.asset("assets/upload_icon.svg"),
+                                  10.width,
+                                  wText(getLocalization().upload, style: theme.textTheme.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.w400, color: Colors.grey
+                                  )),
+                                  const Spacer(),
+                                ],
+                              )),
+                            )),
+                      ),
+                      if(getBloc().photos.isNotEmpty)Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: Row(
+                          children: [
+                            Expanded(child: ImageThumbnail(
+                              imagePath:  getBloc().photos[0].url,
+                              onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: 0)),
+                            )),
+                            16.width, // Add some spacing between images
+                            if(getBloc().photos.length == 1) Expanded(child: Container(),),
+                            if(getBloc().photos.length >1)Expanded(child: ImageThumbnail(
+                              imagePath:  getBloc().photos[1].url,
+                              onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: 1)),
+                            )),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ))
-
-            ],
+                24.height,
+                Text(getLocalization().dateAndTime, style: theme.textTheme.bodyMedium!.copyWith(
+                    fontVariations: 600.fontWeight
+                ),),
+                16.height,
+                CheckboxListTile(
+                  title: Text(getLocalization().iMFlexibleOpenToDiscuss),
+                    value: getBloc().flexibleHoursChecked,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    onChanged: (bool? value)=> getBloc().add(FlexibleHoursCheckboxChangedEvent(checked: value!))),
+                AppCenteredDivider(text: getLocalization().or),
+                16.height,
+                Row(
+                  children: [
+                    Expanded(
+                      child: DateTextBox(labelText: getLocalization().startDate,
+                        controller: startDateController,
+                        onDateSelected: (DateTime dateTime){
+                          startDate = dateTime;
+                          startDateController.text = dateTime.toDDMMYYYY();
+                        },),
+                    ),
+                    8.width,
+                    Expanded(
+                      child: DateTextBox(
+                        labelText: getLocalization().endDate,
+                        hint: getLocalization().endDate,
+                        controller: endDateController,
+                        onDateSelected: (DateTime dateTime){
+                          endDate = dateTime;
+                          endDateController.text = dateTime.toDDMMYYYY();
+                        },),
+                    )
+                  ],
+                ),
+                8.height,
+                AppTextFormField(controller: startTimeTextController,
+                  onChanged: (value)=> debugPrint(value),
+                  textFieldType: TextFieldType.NUMBER,
+                  labelText: getLocalization().startTime,
+                  suffix: InkWell(
+                      onTap:() async{
+                        TimeOfDay? timeofDay = await showTimePicker(
+                            context: context,
+                            initialTime:  TimeOfDay.now(),
+                            initialEntryMode: TimePickerEntryMode.inputOnly);
+                        startTimeTextController.text =
+                        "${timeofDay?.hour}:${timeofDay!.minute < 10? "0${timeofDay?.minute}": timeofDay.minute}";
+                      },
+                      child: const Icon(Iconsax.clock)),),
+              ],
+            ),
           ),
         );
       },
@@ -96,6 +187,14 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
     return getAppBar(
       title: Text(getLocalization().createAJobListing,),
     );
+  }
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      getBloc().add(JobImageAddedClickedEvent(filePath: result.files.single.path!));
+
+    }
   }
 
 }

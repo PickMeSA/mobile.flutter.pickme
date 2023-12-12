@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createANewJobListing":
             MessageLookupByLibrary.simpleMessage("Create a new job listing"),
         "createProfile": MessageLookupByLibrary.simpleMessage("Create profile"),
+        "dateAndTime": MessageLookupByLibrary.simpleMessage("Date & time"),
         "dateTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "didntReceiveACode":
@@ -104,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
         "iHaveReadThe":
             MessageLookupByLibrary.simpleMessage("I have read & accept the"),
+        "iMFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
+            "I\'m flexible (open to discuss)"),
         "iUnderstand": MessageLookupByLibrary.simpleMessage("I understand"),
         "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(

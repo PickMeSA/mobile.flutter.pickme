@@ -54,7 +54,9 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           if(widget.fromregister!) {
             getBloc().add(RegisterOTPCompleteEvent(userModel: widget.userModel));
           }else{
-          getBloc().add(GetProfileProgressEvent());
+            context.router.push(const JobsHiringLandingRoute());
+
+            // getBloc().add(GetProfileProgressEvent());
         }
         }
 
