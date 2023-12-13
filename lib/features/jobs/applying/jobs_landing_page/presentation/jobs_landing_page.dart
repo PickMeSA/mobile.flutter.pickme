@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
-
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 
 @RoutePage()

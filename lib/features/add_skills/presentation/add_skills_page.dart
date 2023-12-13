@@ -35,7 +35,6 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
     // TODO: implement initState
     super.initState();
     getBloc().add(AddSkillsGetPreferredIndustryListEvent());
-
   }
 
     @override
@@ -102,9 +101,9 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
         }
       },
       builder: (context, state) {
-
-         return
-              state.dataState == DataState.success && state is AddSkillGetSkillsListState ?
+         return state.dataState == DataState.success && state is AddSkillGetSkillsListState
+             || state.dataState == DataState.success && state is SkillSelectedState
+             || state.dataState == DataState.success && state is SkillChipDeletedState?
            SizedBox(
            height: MediaQuery.sizeOf(context).height,
            width: MediaQuery.sizeOf(context).width,
@@ -142,7 +141,8 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                         enableFilter: true,
                         dropdownMenuEntries: getBloc().industryEntries,
                         controller: dropdownIndustryController,
-                    label: wText(getLocalization().preferredIndustry, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
+                    label: wText(getLocalization().preferredIndustry,
+                        style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
                   ),
 
                    wText(getLocalization().skillsMax5,style: theme.textTheme.bodyMedium?.copyWith(

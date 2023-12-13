@@ -18,7 +18,7 @@ class LocationBloc
 
     final LocationRemoteSubmitLocationUseCase locationRemoteSubmitLocationUseCase;
 
-    bool checked = true;
+    bool checked = false;
     late String placeId;
     late OTPLocationEntity otpLocationEntity;
     bool preloaderActive = false;

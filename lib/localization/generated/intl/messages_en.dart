@@ -151,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr."),
         "minimumWageText2": MessageLookupByLibrary.simpleMessage(
             "As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour."),
+        "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
         "myJobListings":
             MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
