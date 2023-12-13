@@ -8,6 +8,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/you_are_all_setup_bloc.dart';
@@ -66,16 +67,13 @@ crossAxisAlignment: CrossAxisAlignment.start,
                         Positioned(child: Center(child: SvgPicture.asset("assets/success_man.svg"))),
                         Positioned(child: Center(child: SvgPicture.asset("assets/success_woman.svg"))),
                         Positioned(child: Center(child: SvgPicture.asset("assets/success_woman.svg"))),
-
                       ],
                     ),
                   ),
                   40.height,
-                  PrimaryButton(fullWidth: true,onPressed: (){}, child: wText(getLocalization().goToDashboard))
-
-
-
-
+                  PrimaryButton(fullWidth: true,onPressed: (){
+                    context.router.push(BottomNavigationBarRoute());
+                  }, child: wText(getLocalization().goToDashboard))
                 ],
               ),
             ),

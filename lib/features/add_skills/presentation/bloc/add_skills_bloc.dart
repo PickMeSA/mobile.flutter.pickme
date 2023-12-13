@@ -41,13 +41,6 @@ class AddSkillsBloc
       required this.addSkillsGetSkillsListUseCase,
       required this.addSkillsSubmitRemoteSkillsAndIndustryUseCase
 }): super(AddSkillsPageInitState()) {
-            industryEntries.add(DropdownMenuEntry(value: PreferredIndustryEntity(id: "0", industry: "Preferred Industry"), label: "Preferred Industry"));
-      //Hard coded values to be removed when backend integration is implemented.
-            skillEntries.add(DropdownMenuEntry(value: SkillEntity(id: "0", skill: "Skill"), label: "Skill"));
-
-
-            emit(AddSkillsPageInitState());
-
             on<SkillSelectedEvent>((event, emit) => _onSkillSelectedEvent(event, emit));
             on<PreferredIndustrySelectedEvent>((event,emit)=> _onPreferredIndustrySelectedEvent(event, emit));
             on<SkillChipDeletedEvent>((event, emit) => _onSkillChipDeleteEvent(event, emit));
@@ -120,7 +113,7 @@ class AddSkillsBloc
         checked = false;
       }
 
-      emit(AddSkillGetSkillsListState()..dataState = DataState.success);
+      emit(SkillChipDeletedState()..dataState = DataState.success);
     }
 
 
@@ -134,7 +127,7 @@ class AddSkillsBloc
         selectedSkills.skillListEntity?.add(event.skill);
       }
       checked = true;
-      emit(AddSkillGetSkillsListState()..dataState = DataState.success);
+      emit(SkillSelectedState()..dataState = DataState.success);
       }
 
     _onPreferredIndustrySelectedEvent(

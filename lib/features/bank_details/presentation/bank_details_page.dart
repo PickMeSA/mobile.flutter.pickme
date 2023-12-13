@@ -50,13 +50,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
         if(state is BankDetailsSubmittedState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-            context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.push(const RateAndWorkTimesRoute());
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.location!.id!.isEmpty ){
+          if(state.profileEntity!.location!.id!.isEmpty ){
             context.router.push(const LocationRoute());
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.push(const FinalDetailsRoute());

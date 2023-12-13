@@ -55,9 +55,9 @@ dependencies:
   auto_size_text: ^3.0.0
   dartz: ^0.10.1
   flutter_ui_components:
-    #    git:
-    #      url: https://github.com/pickmesa/pickmme.flutter.uipackage.git
-    path: ../pickmme.flutter.uipackage
+        git:
+          url: https://github.com/pickmesa/pickmme.flutter.uipackage.git
+    # path: ../pickmme.flutter.uipackage
   flutter_svg: ^2.0.7
   flutter_launcher_icons: ^0.13.1
   equatable: ^2.0.5
@@ -68,6 +68,7 @@ dependencies:
   file_picker: ^6.1.1
   cached_network_image: ^3.3.0
   iconsax_flutter: ^1.0.0
+  persistent_bottom_nav_bar: ^5.0.2
 
 dev_dependencies:
   flutter_test:

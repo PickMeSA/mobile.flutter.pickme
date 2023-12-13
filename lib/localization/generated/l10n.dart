@@ -1739,6 +1739,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `My Bookings`
+  String get myBookings {
+    return Intl.message(
+      'My Bookings',
+      name: 'myBookings',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

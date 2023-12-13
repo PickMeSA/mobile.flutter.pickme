@@ -168,5 +168,6 @@
   "pleaseSelectEndDate": "Please select end date",
   "endDateCannotBeBeforeStartDate": "End date cannot be before start date",
   "pleaseSelectIndustry": "Please select industry",
-  "workingDaysA": "Working days *"
+  "workingDaysA": "Working days *",
+  "myBookings": "My Bookings"
 }
