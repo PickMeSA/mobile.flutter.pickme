@@ -51,6 +51,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BankDetailsPage(),
       );
     },
+    BottomNavigationBarRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BottomNavigationBarPage(),
+      );
+    },
     CreateJobListingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -72,6 +78,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const FinalDetailsPage(),
+      );
+    },
+    JobDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const JobDetailsPage(),
       );
     },
     JobsHiringLandingRoute.name: (routeData) {
@@ -114,6 +126,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const MinimumWagePage(),
+      );
+    },
+    MyBookingsUpcomingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MyBookingsUpcomingPage(),
       );
     },
     MyJobListingsRoute.name: (routeData) {
@@ -297,6 +315,20 @@ class BankDetailsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BottomNavigationBarPage]
+class BottomNavigationBarRoute extends PageRouteInfo<void> {
+  const BottomNavigationBarRoute({List<PageRouteInfo>? children})
+      : super(
+          BottomNavigationBarRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BottomNavigationBarRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CreateJobListingPage]
 class CreateJobListingRoute extends PageRouteInfo<void> {
   const CreateJobListingRoute({List<PageRouteInfo>? children})
@@ -358,6 +390,20 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FinalDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [JobDetailsPage]
+class JobDetailsRoute extends PageRouteInfo<void> {
+  const JobDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          JobDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'JobDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -456,6 +502,20 @@ class MinimumWageRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MinimumWageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MyBookingsUpcomingPage]
+class MyBookingsUpcomingRoute extends PageRouteInfo<void> {
+  const MyBookingsUpcomingRoute({List<PageRouteInfo>? children})
+      : super(
+          MyBookingsUpcomingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MyBookingsUpcomingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

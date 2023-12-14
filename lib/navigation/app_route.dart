@@ -6,6 +6,8 @@ import 'package:pickme/features/add_memberships/presentation/add_memberships_pag
 import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
+import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_navigation_bar_page.dart';
+import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
 import 'package:pickme/features/jobs/hiring/candidate_filters/presentation/filter_candidates_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
@@ -19,6 +21,7 @@ import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/location/presentation/location_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
 import 'package:pickme/features/minimum_wage/presentation/minimum_wage_page.dart';
+import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
 import 'package:pickme/features/qualification/presentation/qualification_page.dart';
 import 'package:pickme/features/rate_and_work_times/presentation/rate_and_work_times_page.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
@@ -68,12 +71,15 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MyJobListingsRoute.page),
     AnimatedRoute(page: CreateJobListingRoute.page),
     AnimatedRoute(page: AddSkillsRoute.page),
-    AnimatedRoute(page:RateAndWorkTimesRoute.page),
+    AnimatedRoute(page: RateAndWorkTimesRoute.page),
     AnimatedRoute(page: MinimumWageRoute.page),
     AnimatedRoute(page: BankDetailsRoute.page),
     AnimatedRoute(page: LocationRoute.page),
     AnimatedRoute(page: FinalDetailsRoute.page),
-    AnimatedRoute(page: YouAreAllSetupRoute.page)
+    AnimatedRoute(page: YouAreAllSetupRoute.page),
+    AnimatedRoute(page: BottomNavigationBarRoute.page),
+    AnimatedRoute(page: MyBookingsUpcomingRoute.page),
+    AnimatedRoute(page: JobDetailsRoute.page)
 
   ];
 }

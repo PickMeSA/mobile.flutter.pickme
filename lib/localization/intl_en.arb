@@ -169,5 +169,11 @@
   "endDateCannotBeBeforeStartDate": "End date cannot be before start date",
   "pleaseSelectIndustry": "Please select industry",
   "dateAndTime": "Date & time",
-  "iMFlexibleOpenToDiscuss": "I'm flexible (open to discuss)"
+  "iMFlexibleOpenToDiscuss": "I'm flexible (open to discuss)",
+  "myBookings": "My Bookings",
+  "upcoming": "Upcoming",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "jobDetails": "Job Details",
+  "client": "Client"
 }

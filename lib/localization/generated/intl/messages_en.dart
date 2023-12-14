@@ -58,10 +58,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
         "browseCategories":
             MessageLookupByLibrary.simpleMessage("Browse categories"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
+        "client": MessageLookupByLibrary.simpleMessage("Client"),
         "company": MessageLookupByLibrary.simpleMessage("Company *"),
+        "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
         "contactHelpCenter":
@@ -125,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Issuing organisation *"),
         "jobDescription":
             MessageLookupByLibrary.simpleMessage("Job description"),
+        "jobDetails": MessageLookupByLibrary.simpleMessage("Job Details"),
         "jobListingDetails":
             MessageLookupByLibrary.simpleMessage("Job listing details"),
         "jobName": MessageLookupByLibrary.simpleMessage("Job name"),
@@ -154,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr."),
         "minimumWageText2": MessageLookupByLibrary.simpleMessage(
             "As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour."),
+        "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
         "myJobListings":
             MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
@@ -260,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "useMyCurrentLocation":
             MessageLookupByLibrary.simpleMessage("Use my current location"),
