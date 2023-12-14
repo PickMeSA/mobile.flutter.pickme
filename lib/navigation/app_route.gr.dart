@@ -80,6 +80,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const FinalDetailsPage(),
       );
     },
+    JobDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const JobDetailsPage(),
+      );
+    },
     JobsHiringLandingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -384,6 +390,20 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FinalDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [JobDetailsPage]
+class JobDetailsRoute extends PageRouteInfo<void> {
+  const JobDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          JobDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'JobDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

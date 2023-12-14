@@ -4,3 +4,11 @@ abstract class MyBookingsUpcomingPageState extends BaseState {}
 
 class MyBookingsUpcomingPageInitState extends MyBookingsUpcomingPageState  {}
 
+class CalendarMonthIncrementState extends MyBookingsUpcomingPageState{}
+
+class CalendarMonthDecrementState extends MyBookingsUpcomingPageState{}
+
+class CalendarDateSelectedState extends MyBookingsUpcomingPageState{}
+
+class CalendarChangedState extends MyBookingsUpcomingPageState{}
+

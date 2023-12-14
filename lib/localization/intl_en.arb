@@ -169,5 +169,11 @@
   "endDateCannotBeBeforeStartDate": "End date cannot be before start date",
   "pleaseSelectIndustry": "Please select industry",
   "workingDaysA": "Working days *",
-  "myBookings": "My Bookings"
+  "myBookings": "My Bookings",
+  "upcoming": "Upcoming",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "jobDetails": "Job Details",
+  "client": "Client",
+  "description": "Description"
 }
