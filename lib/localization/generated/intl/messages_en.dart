@@ -58,10 +58,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
         "browseCategories":
             MessageLookupByLibrary.simpleMessage("Browse categories"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
+        "client": MessageLookupByLibrary.simpleMessage("Client"),
         "company": MessageLookupByLibrary.simpleMessage("Company *"),
+        "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
         "contactHelpCenter":
@@ -122,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Issuing organisation *"),
         "jobDescription":
             MessageLookupByLibrary.simpleMessage("Job description"),
+        "jobDetails": MessageLookupByLibrary.simpleMessage("Job Details"),
         "jobListingDetails":
             MessageLookupByLibrary.simpleMessage("Job listing details"),
         "jobName": MessageLookupByLibrary.simpleMessage("Job name"),
@@ -258,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "useMyCurrentLocation":
             MessageLookupByLibrary.simpleMessage("Use my current location"),
