@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
-import 'package:pickme/utils/date_formaters.dart';
 
 import 'bloc/create_job_listing_bloc.dart';
 
@@ -32,6 +32,8 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   TextEditingController startTimeTextController = TextEditingController();
+  TextEditingController hoursTextController = TextEditingController();
+  TextEditingController totalFeeTextController = TextEditingController();
   late DateTime startDate;
   late DateTime endDate;
   @override
@@ -124,46 +126,104 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                     value: getBloc().flexibleHoursChecked,
                     controlAffinity: ListTileControlAffinity.leading,
                     onChanged: (bool? value)=> getBloc().add(FlexibleHoursCheckboxChangedEvent(checked: value!))),
-                AppCenteredDivider(text: getLocalization().or),
+                if(!getBloc().flexibleHoursChecked)
+                  Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: Column(
+                      children: [
+                        AppCenteredDivider(text: getLocalization().or),
+                        16.height,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DateTextBox(labelText: getLocalization().startDate,
+                                controller: startDateController,
+                                onDateSelected: (DateTime dateTime){
+                                  startDate = dateTime;
+                                  startDateController.text = dateTime.toDDMMYYYY();
+                                },),
+                            ),
+                            8.width,
+                            Expanded(
+                              child: DateTextBox(
+                                labelText: getLocalization().endDate,
+                                hint: getLocalization().endDate,
+                                controller: endDateController,
+                                onDateSelected: (DateTime dateTime){
+                                  endDate = dateTime;
+                                  endDateController.text = dateTime.toDDMMYYYY();
+                                },),
+                            )
+                          ],
+                        ),
+                        8.height,
+                        AppTextFormField(controller: startTimeTextController,
+                          onChanged: (value)=> debugPrint(value),
+                          textFieldType: TextFieldType.NUMBER,
+                          labelText: getLocalization().startTime,
+                          suffix: InkWell(
+                              onTap:() async{
+                                TimeOfDay? timeofDay = await showTimePicker(
+                                    context: context,
+                                    initialTime:  TimeOfDay.now(),
+                                    initialEntryMode: TimePickerEntryMode.inputOnly);
+                                startTimeTextController.text =
+                                "${timeofDay?.hour}:${timeofDay!.minute < 10? "0${timeofDay.minute}": timeofDay.minute}";
+                              },
+                              child: const Icon(Iconsax.clock)),),
+                      ],
+                ),
+                    ),
+                24.height,
+                AppDivider(),
+                24.height,
+                Text(getLocalization().hoursAndTotalFee, style: theme.textTheme.bodyMedium!.copyWith(
+                    fontVariations: 600.fontWeight
+                ),),
                 16.height,
                 Row(
                   children: [
                     Expanded(
-                      child: DateTextBox(labelText: getLocalization().startDate,
-                        controller: startDateController,
-                        onDateSelected: (DateTime dateTime){
-                          startDate = dateTime;
-                          startDateController.text = dateTime.toDDMMYYYY();
-                        },),
+                      child: AppTextField(
+                        labelText: "${getLocalization().estHours} *",
+                        hint: "${getLocalization().estHours} *",
+                        controller: hoursTextController,
+                        textFieldType: TextFieldType.NUMBER,
+                        ),
                     ),
                     8.width,
                     Expanded(
-                      child: DateTextBox(
-                        labelText: getLocalization().endDate,
-                        hint: getLocalization().endDate,
-                        controller: endDateController,
-                        onDateSelected: (DateTime dateTime){
-                          endDate = dateTime;
-                          endDateController.text = dateTime.toDDMMYYYY();
-                        },),
-                    )
+                      child: AppTextField(
+                        labelText: getLocalization().totalFee,
+                        hint: getLocalization().r00,
+                        controller: totalFeeTextController,
+                        textFieldType: TextFieldType.NUMBER,
+                      ),
+                    ),
                   ],
                 ),
-                8.height,
-                AppTextFormField(controller: startTimeTextController,
-                  onChanged: (value)=> debugPrint(value),
-                  textFieldType: TextFieldType.NUMBER,
-                  labelText: getLocalization().startTime,
-                  suffix: InkWell(
-                      onTap:() async{
-                        TimeOfDay? timeofDay = await showTimePicker(
-                            context: context,
-                            initialTime:  TimeOfDay.now(),
-                            initialEntryMode: TimePickerEntryMode.inputOnly);
-                        startTimeTextController.text =
-                        "${timeofDay?.hour}:${timeofDay!.minute < 10? "0${timeofDay?.minute}": timeofDay.minute}";
-                      },
-                      child: const Icon(Iconsax.clock)),),
+                24.height,
+                AppDivider(),
+                24.height,
+                Text(getLocalization().skillsRequired, style: theme.textTheme.bodyMedium!.copyWith(
+                    fontVariations: 600.fontWeight
+                ),),
+                16.height,
+                AppDropdownMenu<JobsSkillEntity>(
+                  leadingIcon: const Icon(Iconsax.add),
+                    onSelected: (selected){
+                      getBloc().add(SkillSelectedEvent(skill: selected!));
+                    },
+                    width: MediaQuery.sizeOf(context).width - 70,
+                    enableFilter: true,
+                    dropdownMenuEntries: getBloc().skillEntries,
+                    label: wText(getLocalization().skillsA,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            color: Colors.grey)
+                    )
+                )
               ],
             ),
           ),

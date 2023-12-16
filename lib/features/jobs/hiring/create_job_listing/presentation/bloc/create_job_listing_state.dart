@@ -20,3 +20,7 @@ class JobImageAddedState extends CreateJobListingState {
 class FlexibleHoursChangedState extends CreateJobListingState {
   FlexibleHoursChangedState();
 }
+
+class GetSkillsListState extends CreateJobListingState {
+  GetSkillsListState({super.error});
+}

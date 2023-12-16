@@ -24,4 +24,18 @@ class FlexibleHoursCheckboxChangedEvent extends CreateJobListingsEvent{
   FlexibleHoursCheckboxChangedEvent({required this.checked});
 }
 
+class GetSkillsListEvent extends CreateJobListingsEvent{
+  GetSkillsListEvent();
+}
 
+class SkillChipDeletedEvent extends CreateJobListingsEvent{
+  int index;
+  SkillChipDeletedEvent({required this.index});
+}
+
+
+class SkillSelectedEvent extends CreateJobListingsEvent{
+  final JobsSkillEntity skill;
+
+  SkillSelectedEvent({required this.skill});
+}

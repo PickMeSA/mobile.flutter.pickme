@@ -100,6 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
         "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "hourlyRate": MessageLookupByLibrary.simpleMessage("Hourly rate"),
+        "hoursAndTotalFee":
+            MessageLookupByLibrary.simpleMessage("Hours & total fee"),
         "hoursTotalFee":
             MessageLookupByLibrary.simpleMessage("hours & total fee"),
         "iAmFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
@@ -225,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "qualificationType":
             MessageLookupByLibrary.simpleMessage("Qualification type *"),
         "r": MessageLookupByLibrary.simpleMessage("R"),
+        "r00": MessageLookupByLibrary.simpleMessage("R00.00"),
         "recommendedForYou":
             MessageLookupByLibrary.simpleMessage("Recommended for you"),
         "registrationFee":

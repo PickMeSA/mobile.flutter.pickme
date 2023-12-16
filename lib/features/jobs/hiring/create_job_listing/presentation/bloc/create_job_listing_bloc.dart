@@ -1,11 +1,16 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
+import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_list_entity.dart';
+import 'package:pickme/features/jobs/shared/features/skills/domain/usecases/get_skills_list_usecase.dart';
+
 import 'package:pickme/shared/constants/numerical.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
@@ -18,12 +23,15 @@ part 'create_job_listing_state.dart';
 class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobListingState> {
   List<UploadedFileEntity> photos = [];
   UploadFileUseCase uploadFileUseCase;
+  GetSkillsListUseCase getSkillsListUseCase;
   int selectedTabIndex = 0;
   Logger logger = Logger();
   bool flexibleHoursChecked = false;
+  List<DropdownMenuEntry<JobsSkillEntity>> skillEntries = [];
+  JobsSkillListEntity selectedSkills = JobsSkillListEntity(skillListEntity: []);
 
-  CreateJobListingBloc({required this.uploadFileUseCase}) : super(CreateJobListingInitial()) {
-    on<CreateJobListingPageEnteredEvent>((event, emit) => _onMyJobListingsPageEnteredEvent(event, emit));
+  CreateJobListingBloc({required this.uploadFileUseCase, required this.getSkillsListUseCase}) : super(CreateJobListingInitial()) {
+    on<CreateJobListingPageEnteredEvent>((event, emit) => _onCreateJobListingPageEnteredEvent(event, emit));
     on<JobImageAddedClickedEvent>((event, emit) => _onAddJobImageClickedEvent(event, emit));
     on<FlexibleHoursCheckboxChangedEvent>((event, emit) => _onFlexibleHoursCheckboxChangedEvent(event, emit));
   }
@@ -50,10 +58,18 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
     flexibleHoursChecked = event.checked;
     emit(FlexibleHoursChangedState()..dataState = DataState.success);
   }
-  _onMyJobListingsPageEnteredEvent(
+  _onCreateJobListingPageEnteredEvent(
       CreateJobListingPageEnteredEvent event,
       Emitter<CreateJobListingState> emit
       )async{
+    emit(GetSkillsListState()..dataState = DataState.loading);
+    try{
+      JobsSkillListEntity skillListEntity = await getSkillsListUseCase.call();
+      skillEntries = skillListEntity.skillListEntity!.map((e) => DropdownMenuEntry(value: e, label: e.skill!)).toList();
+      emit(GetSkillsListState()..dataState = DataState.success);
+    }catch(ex){
+      emit(GetSkillsListState(error: ex.toString())..dataState = DataState.error);
+    }
 
   }
   void validateFile(File file){

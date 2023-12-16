@@ -1759,6 +1759,86 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `My Bookings`
+  String get myBookings {
+    return Intl.message(
+      'My Bookings',
+      name: 'myBookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get upcoming {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcoming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelled`
+  String get cancelled {
+    return Intl.message(
+      'Cancelled',
+      name: 'cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job Details`
+  String get jobDetails {
+    return Intl.message(
+      'Job Details',
+      name: 'jobDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Client`
+  String get client {
+    return Intl.message(
+      'Client',
+      name: 'client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hours & total fee`
+  String get hoursAndTotalFee {
+    return Intl.message(
+      'Hours & total fee',
+      name: 'hoursAndTotalFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R00.00`
+  String get r00 {
+    return Intl.message(
+      'R00.00',
+      name: 'r00',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
