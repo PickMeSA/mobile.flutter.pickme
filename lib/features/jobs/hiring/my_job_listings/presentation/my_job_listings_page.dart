@@ -52,51 +52,51 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                 onClick: () => context.router.push(const CreateJobListingRoute()),
               ),
               24.height,
-              Expanded(
-                child: AppTabBar(
-                  initialIndex: state.selectedTabIndex,
-                  tabs: [
-                    Text(getLocalization().activeListings),
-                    Text(getLocalization().inactiveListings),
-                  ],
-                  views: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Image(
-                            image: AssetImage("assets/no_items_found.png"),
-                          ),
-                        ),
-                        24.height,
-                        Text(getLocalization().youDontHaveAnyActiveListings,
-                          style: theme.textTheme.headlineSmall,
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 160,
-                          width: 160,
-                          child: Image(
-                            image: AssetImage("assets/no_items_found.png"),
-                          ),
-                        ),
-                        24.height,
-                        Text(getLocalization().youDontHaveAnyInactiveListings,
-                          style: theme.textTheme.headlineSmall,
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                  ], onTap: (int index) => getBloc().add(SelectedTabChangedEvent(tabIndex: index)),
-                ),
-              ),
+              // Expanded(
+                // child: AppTabBar(
+                //   initialIndex: state.selectedTabIndex,
+                //   tabs: [
+                //     Text(getLocalization().activeListings),
+                //     Text(getLocalization().inactiveListings),
+                //   ],
+                //   views: [
+                //     Column(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         const SizedBox(
+                //           height: 200,
+                //           width: 200,
+                //           child: Image(
+                //             image: AssetImage("assets/no_items_found.png"),
+                //           ),
+                //         ),
+                //         24.height,
+                //         Text(getLocalization().youDontHaveAnyActiveListings,
+                //           style: theme.textTheme.headlineSmall,
+                //           textAlign: TextAlign.center,
+                //         )
+                //       ],
+                //     ),
+                //     Column(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         const SizedBox(
+                //           height: 160,
+                //           width: 160,
+                //           child: Image(
+                //             image: AssetImage("assets/no_items_found.png"),
+                //           ),
+                //         ),
+                //         24.height,
+                //         Text(getLocalization().youDontHaveAnyInactiveListings,
+                //           style: theme.textTheme.headlineSmall,
+                //           textAlign: TextAlign.center,
+                //         )
+                //       ],
+                //     ),
+                //   ], onTap: (int index) => getBloc().add(SelectedTabChangedEvent(tabIndex: index)),
+                // ),
+              // ),
             ],
           ),
         );

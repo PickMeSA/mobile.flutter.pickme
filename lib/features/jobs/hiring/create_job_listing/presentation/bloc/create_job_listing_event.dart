@@ -39,3 +39,8 @@ class SkillSelectedEvent extends CreateJobListingsEvent{
 
   SkillSelectedEvent({required this.skill});
 }
+class CreateJobPageSubmitJobEvent extends CreateJobListingsEvent{
+  final CreateJobPageJobEntity job;
+
+  CreateJobPageSubmitJobEvent({required this.job});
+}

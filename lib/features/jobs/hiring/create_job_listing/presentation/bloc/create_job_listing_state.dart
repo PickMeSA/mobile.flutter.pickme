@@ -24,3 +24,14 @@ class FlexibleHoursChangedState extends CreateJobListingState {
 class GetSkillsListState extends CreateJobListingState {
   GetSkillsListState({super.error});
 }
+
+class SkillSelectedState extends CreateJobListingState {
+  SkillSelectedState({super.error});
+}
+
+class SkillChipDeletedState extends CreateJobListingState{
+
+}
+class CreateJobPageSubmitJobState extends CreateJobListingState{
+
+}
