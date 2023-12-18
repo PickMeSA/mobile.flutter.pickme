@@ -1,7 +1,8 @@
 import 'package:pickme/base_classes/base_repository.dart';
-import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
-abstract class GetMyJobListingsRepository  extends BaseRepository<GetMyJobListingsRepositoryParams, PaginatedIndustryEntity>{}
+import '../entities/my_job_listings_page_entity.dart';
+
+abstract class GetMyJobListingsRepository  extends BaseRepository<GetMyJobListingsRepositoryParams, MyJobListingsPageEntity>{}
 
 class GetMyJobListingsRepositoryParams extends BaseRepositoryParams{
 
