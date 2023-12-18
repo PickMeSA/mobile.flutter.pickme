@@ -1799,6 +1799,56 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Your next appointment`
+  String get yourNextAppointment {
+    return Intl.message(
+      'Your next appointment',
+      name: 'yourNextAppointment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For you`
+  String get forYou {
+    return Intl.message(
+      'For you',
+      name: 'forYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Calendar`
+  String get myCalendar {
+    return Intl.message(
+      'My Calendar',
+      name: 'myCalendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Wallet`
+  String get myWallet {
+    return Intl.message(
+      'My Wallet',
+      name: 'myWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need an \nambulance?`
+  String get needAnAmbulance {
+    return Intl.message(
+      'Need an \nambulance?',
+      name: 'needAnAmbulance',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

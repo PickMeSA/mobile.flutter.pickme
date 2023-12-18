@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
+        "forYou": MessageLookupByLibrary.simpleMessage("For you"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "goToDashboard":
             MessageLookupByLibrary.simpleMessage("Go to dashboard"),
@@ -156,12 +157,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "minimumWageText2": MessageLookupByLibrary.simpleMessage(
             "As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour."),
         "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
+        "myCalendar": MessageLookupByLibrary.simpleMessage("My Calendar"),
         "myJobListings":
             MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
             MessageLookupByLibrary.simpleMessage("My Job Requests"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
+        "myWallet": MessageLookupByLibrary.simpleMessage("My Wallet"),
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
+        "needAnAmbulance":
+            MessageLookupByLibrary.simpleMessage("Need an \nambulance?"),
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
@@ -300,6 +305,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
                 "You have the flexibility to set your own hourly rate"),
+        "yourNextAppointment":
+            MessageLookupByLibrary.simpleMessage("Your next appointment"),
         "yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators":
             MessageLookupByLibrary.simpleMessage(
                 "Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days."),
