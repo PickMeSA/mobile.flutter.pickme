@@ -44,9 +44,7 @@ class MyBookingsUpcomingBloc
         try{
             List<BookingEntity> bookings = await getUpComingBookingsUseCase.call();
             bookings.forEach((element) {
-               switch(element.type){
-                   case ""
-               }
+
             });
         }catch(ex){
             emit(GetUpcomingBookingsState()..dataState = DataState.error);

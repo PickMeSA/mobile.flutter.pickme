@@ -90,7 +90,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                             border: Border.all(width: 1,color: Colors.black)
                           ),
                          child: InkWell(
-                           onTap: ()=> getBloc().add(CalendarMonthIncrementEvent()),
+                           onTap: ()=> getBloc().add(CalendarMonthDecrementEvent()),
                              child: const Center(child: Icon(Icons.arrow_back_ios_rounded, size: 11,))),
                        ),
                        30.width,
