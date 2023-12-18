@@ -6,6 +6,8 @@ class JobEntity extends Equatable{
 final String title;
 final String description;
 final String status;
+final String? address;
+final double? hourlyRate;
 final DateTime? startDate;
 final DateTime? endDate;
 final String? startTime;
@@ -17,7 +19,23 @@ final String skills;
 final String id;
 final double distance;
 
-  const JobEntity({required this.title, required this.description, required this.status, this.startDate, this.endDate, this.startTime, required this.estimatedHours, required this.lat, required this.lng, required this.images, required this.skills, required this.id, required this.distance});
+  const JobEntity({
+    required this.title,
+    required this.description,
+    required this.status,
+    this.address,
+    this.hourlyRate,
+    this.startDate,
+    this.endDate,
+    this.startTime,
+    required this.estimatedHours,
+    required this.lat,
+    required this.lng,
+    required this.images,
+    required this.skills,
+    required this.id,
+    required this.distance
+  });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     logger.e({"response": response.startDate});
     return JobEntity(

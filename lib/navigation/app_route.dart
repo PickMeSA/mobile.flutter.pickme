@@ -12,6 +12,7 @@ import 'package:pickme/features/jobs/hiring/all_services/presentation/all_servic
 import 'package:pickme/features/jobs/hiring/candidate_filters/presentation/filter_candidates_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing_info/presentation/create_job_listing_info_page.dart';
+import 'package:pickme/features/jobs/hiring/job_details_page/presentation/hirer_job_details_page.dart';
 import 'package:pickme/features/jobs/hiring/landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/features/jobs/hiring/my_job_listings/presentation/my_job_listings_page.dart';
 import 'package:pickme/features/jobs/hiring/pending_profile/presentation/pending_profile_page.dart';
@@ -20,6 +21,7 @@ import 'package:pickme/features/jobs/hiring/service_category_candidates/presenta
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
 import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/location/presentation/location_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
@@ -84,7 +86,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MyBookingsUpcomingRoute.page),
     AnimatedRoute(page: JobDetailsRoute.page),
     AnimatedRoute(page: CreateJobListingInfoRoute.page),
-    AnimatedRoute(page: ReviewJobListingInfoRoute.page)
+    AnimatedRoute(page: ReviewJobListingInfoRoute.page),
+    AnimatedRoute(page: HirerJobDetailsRoute.page)
 
   ];
 }
