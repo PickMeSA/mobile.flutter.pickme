@@ -57,6 +57,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BottomNavigationBarPage(),
       );
     },
+    CreateJobListingInfoRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CreateJobListingInfoPage(),
+      );
+    },
     CreateJobListingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -324,6 +330,20 @@ class BottomNavigationBarRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'BottomNavigationBarRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CreateJobListingInfoPage]
+class CreateJobListingInfoRoute extends PageRouteInfo<void> {
+  const CreateJobListingInfoRoute({List<PageRouteInfo>? children})
+      : super(
+          CreateJobListingInfoRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CreateJobListingInfoRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

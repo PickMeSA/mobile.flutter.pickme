@@ -1,4 +1,4 @@
-part of 'create_job_listing_bloc.dart';
+part of 'create_job_listing_info_bloc.dart';
 
 @immutable
 abstract class MyJobListingsEvent extends BaseEvent {}
@@ -6,8 +6,8 @@ abstract class MyJobListingsEvent extends BaseEvent {}
 class SeeAllClickedEvent extends MyJobListingsEvent{
   SeeAllClickedEvent();
 }
-class CreateJobListingPageEnteredEvent extends MyJobListingsEvent{
-  CreateJobListingPageEnteredEvent();
+class CreateJobListingInfoPageEnteredEvent extends MyJobListingsEvent{
+  CreateJobListingInfoPageEnteredEvent();
 }
 
 class SelectedTabChangedEvent extends MyJobListingsEvent{

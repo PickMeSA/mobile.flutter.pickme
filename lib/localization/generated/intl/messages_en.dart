@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "A one-time fee of R50.00 (including VAT) get you started, with no monthly charges."),
         "aboutYouBasedOnYourProfile": MessageLookupByLibrary.simpleMessage(
             "About you (based on your profile)"),
+        "acceptAndContinue":
+            MessageLookupByLibrary.simpleMessage("Accept & continue"),
         "accountNumberA":
             MessageLookupByLibrary.simpleMessage("Account number *"),
         "accountTypeA": MessageLookupByLibrary.simpleMessage("Account type *"),

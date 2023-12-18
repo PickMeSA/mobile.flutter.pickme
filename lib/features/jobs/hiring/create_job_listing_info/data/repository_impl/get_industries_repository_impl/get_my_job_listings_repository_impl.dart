@@ -1,19 +1,19 @@
 import 'package:injectable/injectable.dart';
-import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
-import 'package:pickme/shared/services/remote/api_service/industries_service/industry_service.dart';
 
-import '../../../domain/repository/get_my_job_listings_repository.dart';
+import '../../../domain/entities/create_job_listing_info_page_entity.dart';
+import '../../../domain/repository/get_job_listings_info_repository.dart';
+import '../../service/get_job_listings_info/job_listing_info_service.dart';
 
-@Injectable(as: GetMyJobListingsRepository)
-class GetMyJobListingsRepositoryImpl extends GetMyJobListingsRepository {
-  final IndustryService industryService;
+@Injectable(as: GetJobListingsInfoRepository)
+class GetJobListingsInfoRepositoryImpl extends GetJobListingsInfoRepository {
+  final JobListingsInfoService industryService;
 
-  GetMyJobListingsRepositoryImpl({required this.industryService});
+  GetJobListingsInfoRepositoryImpl({required this.industryService});
 
   @override
-  Future<PaginatedIndustryEntity> call({GetMyJobListingsRepositoryParams? params}) async{
+  Future<CreateJobListingInfoPageEntity> call({GetJobListingsInfoRepositoryParams? params}) async{
     try{
-      return await industryService.getIndustries();
+      return await industryService.getInfo();
     }catch(ex){
       rethrow;
     }

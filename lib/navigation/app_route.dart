@@ -11,6 +11,7 @@ import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
 import 'package:pickme/features/jobs/hiring/candidate_filters/presentation/filter_candidates_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
+import 'package:pickme/features/jobs/hiring/create_job_listing_info/presentation/create_job_listing_info_page.dart';
 import 'package:pickme/features/jobs/hiring/landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/features/jobs/hiring/my_job_listings/presentation/my_job_listings_page.dart';
 import 'package:pickme/features/jobs/hiring/pending_profile/presentation/pending_profile_page.dart';
@@ -79,7 +80,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: YouAreAllSetupRoute.page),
     AnimatedRoute(page: BottomNavigationBarRoute.page),
     AnimatedRoute(page: MyBookingsUpcomingRoute.page),
-    AnimatedRoute(page: JobDetailsRoute.page)
+    AnimatedRoute(page: JobDetailsRoute.page),
+    AnimatedRoute(page: CreateJobListingInfoRoute.page)
 
   ];
 }

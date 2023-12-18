@@ -1839,6 +1839,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Accept & continue`
+  String get acceptAndContinue {
+    return Intl.message(
+      'Accept & continue',
+      name: 'acceptAndContinue',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

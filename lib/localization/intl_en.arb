@@ -177,5 +177,6 @@
   "jobDetails": "Job Details",
   "client": "Client",
   "hoursAndTotalFee": "Hours & total fee",
-  "r00": "R00.00"
+  "r00": "R00.00",
+  "acceptAndContinue": "Accept & continue"
 }
