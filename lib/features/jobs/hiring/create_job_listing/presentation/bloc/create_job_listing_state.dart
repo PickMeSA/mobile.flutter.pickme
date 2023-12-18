@@ -35,3 +35,10 @@ class SkillChipDeletedState extends CreateJobListingState{
 class CreateJobPageSubmitJobState extends CreateJobListingState{
 
 }
+class LocationFromProfileToggledState extends CreateJobListingState{
+  final LocationSource locationSource;
+
+  LocationFromProfileToggledState({super.dataState, super.error, required this.locationSource});
+}
+
+enum LocationSource{profile, currentLocation, map}

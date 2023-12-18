@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
+        "choosePickupPoint":
+            MessageLookupByLibrary.simpleMessage("Choose pickup point"),
         "client": MessageLookupByLibrary.simpleMessage("Client"),
         "company": MessageLookupByLibrary.simpleMessage("Company *"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
@@ -140,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
         "loadMore": MessageLookupByLibrary.simpleMessage("Load more"),
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
         "locationAreaBasedOnProfile": MessageLookupByLibrary.simpleMessage(
             "Location/area based on profile"),
         "logIntoYourAccountWithYourPhoneNumberAndOtp":
@@ -235,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "registrationFee":
             MessageLookupByLibrary.simpleMessage("Registration fee"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "selectMembership":
             MessageLookupByLibrary.simpleMessage("Select your membership"),

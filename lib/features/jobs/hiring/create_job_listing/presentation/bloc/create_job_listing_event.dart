@@ -44,3 +44,16 @@ class CreateJobPageSubmitJobEvent extends CreateJobListingsEvent{
 
   CreateJobPageSubmitJobEvent({required this.job});
 }
+
+
+class LocationFromProfileToggledEvent extends CreateJobListingsEvent{
+  final LocationSource locationSource;
+  LocationFromProfileToggledEvent({required this.locationSource});
+}
+
+
+class LocationSelectedEvent extends CreateJobListingsEvent{
+  final OTPLocationEntity otpLocationEntity;
+
+  LocationSelectedEvent({required this.otpLocationEntity});
+}

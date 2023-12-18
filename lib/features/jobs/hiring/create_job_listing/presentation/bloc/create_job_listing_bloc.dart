@@ -18,6 +18,7 @@ import 'package:pickme/features/jobs/shared/features/skills/domain/usecases/get_
 
 import 'package:pickme/shared/constants/numerical.dart';
 import 'package:logger/logger.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 
 import '../../../../../../shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
@@ -33,6 +34,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   int selectedTabIndex = 0;
   Logger logger = Logger();
   bool flexibleHoursChecked = false;
+  LocationSource locationSource = LocationSource.profile;
   List<DropdownMenuItem<JobsSkillEntity>> skillEntries = [];
   JobsSkillListEntity selectedSkills = JobsSkillListEntity(skillListEntity: []);
   List<ChipOption> chipOptions = [];
@@ -47,6 +49,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
     on<SkillSelectedEvent>((event, emit) => _onSkillSelectedEvent(event, emit));
     on<SkillChipDeletedEvent>((event, emit) => _onSkillChipDeletedEvent(event, emit));
     on<CreateJobPageSubmitJobEvent>((event, emit) => _onCreateJobPageSubmitJobEvent(event, emit));
+    on<LocationFromProfileToggledEvent>((event, emit) => _onLocationFromProfileToggledEvent(event, emit));
   }
 
   _onAddJobImageClickedEvent(
@@ -123,6 +126,12 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
     chipOptions.removeAt(event.index);
 
     emit(SkillChipDeletedState()..dataState = DataState.success);
+  }
+  _onLocationFromProfileToggledEvent(LocationFromProfileToggledEvent event,
+      Emitter<CreateJobListingState> emit){
+    emit(LocationFromProfileToggledState(locationSource: event.locationSource)..dataState = DataState.init);
+    locationSource = event.locationSource;
+    emit(LocationFromProfileToggledState(locationSource: event.locationSource)..dataState = DataState.success);
   }
   void validateFile(File file){
     // Limit the file size
