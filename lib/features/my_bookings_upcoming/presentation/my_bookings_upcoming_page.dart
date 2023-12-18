@@ -56,11 +56,11 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                children: [
                  Row(
                    children: [
-                     Icon(Iconsax.calendar_2),
+                     const Icon(Iconsax.calendar_2),
                      10.width,
                      wText(getLocalization().myBookings, style: theme.textTheme.headlineSmall?.copyWith()),
-                     Spacer(),
-                     InkWell(
+                      const Spacer(),
+                     const InkWell(
                        child: Icon(Iconsax.menu),
                      ),
 
@@ -69,7 +69,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                  30.height,
            Card(
              child: Container(
-               padding:EdgeInsets.all(20),
+               padding:const EdgeInsets.all(20),
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  mainAxisAlignment: MainAxisAlignment.start,
