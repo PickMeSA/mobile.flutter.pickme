@@ -8,7 +8,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -45,6 +45,8 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   TextEditingController totalFeeTextController = TextEditingController();
   DateTime? startDate;
   DateTime? endDate;
+  String address = "";
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -343,54 +345,6 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           ),
                         ),
                       ),
-                      Center(
-                        child: PrimaryButton(
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 20)),
-                              side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                return BorderSide(
-                                  color: states.contains(MaterialState.disabled)?
-                                  theme.colorScheme.secondary.withOpacity(0):
-                                  theme.colorScheme.secondary,
-                                  width: 2,
-                                );
-                              }
-                              ),
-                              backgroundColor: MaterialStateProperty.resolveWith(
-                                      (Set<MaterialState> states){
-                                    return states.contains(MaterialState.disabled)?
-                                    theme.colorScheme.secondary.withOpacity(0.3):
-                                    theme.colorScheme.secondary;
-                                  }
-                              )
-                          ),
-                          onPressed: () {
-                            if(_formKey.currentState!.validate() &&
-                                getBloc().chipOptions.isNotEmpty &&
-                                getBloc().chipOptions.length<6 &&
-                                startDate!=null &&
-                                endDate!=null
-                            ){
-                              getBloc().add(CreateJobPageSubmitJobEvent(job: CreateJobPageJobEntity(
-                                  title: jobTitleController.text,
-                                  description: jobDescriptionController.text,
-                                  status: 'new',
-                                  startDate: startDate!,
-                                endDate: endDate!,
-                                  startTime: startTimeTextController.text,
-                                  imFlexible: getBloc().flexibleHoursChecked,
-                                  estimatedHours: hoursTextController.text,
-                                  lat: 0,
-                                  lng: 0,
-                                  images: getBloc().photos.map((e) => e.url).toList(),
-                                  skills: getBloc().chipOptions
-                              )));
-
-                            }
-                          },
-                          child: Text(getLocalization().submit),
-                        ),
-                      )
                     ],
                   ),
                 ),
@@ -416,7 +370,25 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       padding: EdgeInsets.all(24),
                       child: PrimaryButtonDark.fullWidth(
                         child: Text(getLocalization().ccontinue),
-                        onPressed: null,
+                        onPressed: !isValid()?null:(){
+                          CreateJobPageJobEntity job =  CreateJobPageJobEntity(
+                              title: jobTitleController.text,
+                              description: jobDescriptionController.text,
+                              address: address,
+                              status: 'active',
+                              startDate: startDate!,
+                              endDate: endDate!,
+                              startTime: startTimeTextController.text,
+                              imFlexible: getBloc().flexibleHoursChecked,
+                              estimatedHours: hoursTextController.text,
+                              lat: getBloc().otpLocationEntity?.latitude??0,
+                              lng: getBloc().otpLocationEntity?.longitude??0,
+                              rate: double.parse(totalFeeTextController.text),
+                              images: getBloc().photos.map((e) => e.url).toList(),
+                              skills: getBloc().chipOptions
+                          );
+                          context.router.push(ReviewJobListingInfoRoute(jobEntity: job));
+                        }
                       ),
                     ),
                   )
@@ -443,10 +415,10 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
           child: PlacePicker(
             apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
             onPlacePicked: (result) {
-              print(result);
               getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));
+              Navigator.pop(context);
             },
-            initialPosition: const LatLng(-33.8567844, 151.213108),
+            initialPosition: const LatLng(-33.918861, 18.423300),
             useCurrentLocation: true,
             resizeToAvoidBottomInset: false, // only works in page mode, less flickery, remove if wrong offsets
           ),
@@ -521,8 +493,16 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   }
 
   OTPLocationEntity getLocation(PickResult result){
+    address = result.formattedAddress ?? "";
     return OTPLocationEntity(id: result.placeId, latitude: result.geometry?.location.lat, longitude: result.geometry?.location.lng);
   }
-
+  bool isValid(){
+    if(_formKey.currentState==null) return true;
+    return
+        getBloc().chipOptions.isNotEmpty &&
+        getBloc().chipOptions.length<6 &&
+        startDate!=null &&
+        endDate!=null;
+  }
 
 }

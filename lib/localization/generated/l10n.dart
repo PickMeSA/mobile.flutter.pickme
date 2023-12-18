@@ -1870,11 +1870,41 @@ class AppLocalizations {
     );
   }
 
+  /// `Review job listing`
+  String get reviewJobListing {
+    return Intl.message(
+      'Review job listing',
+      name: 'reviewJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Save`
   String get save {
     return Intl.message(
       'Save',
       name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos`
+  String get photos {
+    return Intl.message(
+      'Photos',
+      name: 'photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Publish listing`
+  String get publishListing {
+    return Intl.message(
+      'Publish listing',
+      name: 'publishListing',
       desc: '',
       args: [],
     );

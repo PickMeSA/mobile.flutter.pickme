@@ -181,5 +181,8 @@
   "acceptAndContinue": "Accept & continue",
   "location": "Location",
   "choosePickupPoint": "Choose pickup point",
-  "save": "Save"
+  "reviewJobListing": "Review job listing",
+  "save": "Save",
+  "photos": "Photos",
+  "publishListing": "Publish listing"
 }

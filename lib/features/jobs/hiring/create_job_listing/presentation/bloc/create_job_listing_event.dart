@@ -39,12 +39,6 @@ class SkillSelectedEvent extends CreateJobListingsEvent{
 
   SkillSelectedEvent({required this.skill});
 }
-class CreateJobPageSubmitJobEvent extends CreateJobListingsEvent{
-  final CreateJobPageJobEntity job;
-
-  CreateJobPageSubmitJobEvent({required this.job});
-}
-
 
 class LocationFromProfileToggledEvent extends CreateJobListingsEvent{
   final LocationSource locationSource;

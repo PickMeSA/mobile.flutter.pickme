@@ -185,6 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passport number *"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
+        "photos": MessageLookupByLibrary.simpleMessage("Photos"),
         "photosOfWork":
             MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
         "photosOfWorkOptional":
@@ -225,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Possible price range"),
         "preferredIndustry":
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
+        "publishListing":
+            MessageLookupByLibrary.simpleMessage("Publish listing"),
         "qualificationMembership":
             MessageLookupByLibrary.simpleMessage("Qualifications/Membership"),
         "qualificationName":
@@ -238,6 +241,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "registrationFee":
             MessageLookupByLibrary.simpleMessage("Registration fee"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "reviewJobListing":
+            MessageLookupByLibrary.simpleMessage("Review job listing"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "selectMembership":

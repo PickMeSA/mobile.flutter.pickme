@@ -104,10 +104,15 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             return AppJobAdvertCard(
                                 jobName: job.title,
                                 employerName: "Employer Name",
-                                locationName: job.lat.toString(),
+                                locationName: "Melrose Arch. South Africa",
                                 dateTime: job.startDate!,
                                 status: JobStatus.active,
-                                onNext: (){});
+                                onNext: (){},
+                              totalMatches: 0,
+                              matchesString: "possible Matches",
+                              totalApplications: 0,
+                              applicationsString: "applications",
+                            );
                           }
                       ),
                     ),

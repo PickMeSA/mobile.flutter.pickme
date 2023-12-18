@@ -8,10 +8,6 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:pickme/features/add_skills/presentation/bloc/add_skills_bloc.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing/domain/entities/create_job_page_job_entity.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing/domain/use_cases/create_job_listing_usecase.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_list_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/usecases/get_skills_list_usecase.dart';
@@ -30,7 +26,6 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   List<UploadedFileEntity> photos = [];
   UploadFileUseCase uploadFileUseCase;
   GetSkillsListUseCase getSkillsListUseCase;
-  CreateJobListingUseCase createJobListingUseCase;
   int selectedTabIndex = 0;
   Logger logger = Logger();
   bool flexibleHoursChecked = false;
@@ -39,19 +34,31 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   JobsSkillListEntity selectedSkills = JobsSkillListEntity(skillListEntity: []);
   List<ChipOption> chipOptions = [];
   bool preloaderActive = false;
+  OTPLocationEntity? otpLocationEntity;
 
   CreateJobListingBloc({required this.uploadFileUseCase,
-    required this.getSkillsListUseCase,
-    required this.createJobListingUseCase}) : super(CreateJobListingInitial()) {
+    required this.getSkillsListUseCase}) : super(CreateJobListingInitial()) {
     on<CreateJobListingPageEnteredEvent>((event, emit) => _onCreateJobListingPageEnteredEvent(event, emit));
     on<JobImageAddedClickedEvent>((event, emit) => _onAddJobImageClickedEvent(event, emit));
     on<FlexibleHoursCheckboxChangedEvent>((event, emit) => _onFlexibleHoursCheckboxChangedEvent(event, emit));
     on<SkillSelectedEvent>((event, emit) => _onSkillSelectedEvent(event, emit));
     on<SkillChipDeletedEvent>((event, emit) => _onSkillChipDeletedEvent(event, emit));
-    on<CreateJobPageSubmitJobEvent>((event, emit) => _onCreateJobPageSubmitJobEvent(event, emit));
     on<LocationFromProfileToggledEvent>((event, emit) => _onLocationFromProfileToggledEvent(event, emit));
+    on<LocationSelectedEvent>((event, emit)=> _onLocationSelectedEvent(event, emit));
   }
+  Future<void> _onLocationSelectedEvent(
+      LocationSelectedEvent event,
+      Emitter<CreateJobListingState> emit
+      )async{
+    emit(LocationFromProfileToggledState(locationSource: LocationSource.map)..dataState = DataState.loading);
+    try{
+      otpLocationEntity = event.otpLocationEntity;
+      emit(LocationFromProfileToggledState(locationSource: LocationSource.map)..dataState = DataState.success);
 
+    }catch(ex){
+      emit(LocationFromProfileToggledState(locationSource: LocationSource.map)..dataState = DataState.error);
+    }
+  }
   _onAddJobImageClickedEvent(
       JobImageAddedClickedEvent event,
       Emitter<CreateJobListingState> emit
@@ -108,19 +115,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
       }
     emit(SkillSelectedState()..dataState = DataState.success);
   }
-  _onCreateJobPageSubmitJobEvent(CreateJobPageSubmitJobEvent event,
-      Emitter<CreateJobListingState> emit) async{
-    emit(CreateJobPageSubmitJobState()..dataState=DataState.loading);
-   try{
-     JobEntity insertedJob = await createJobListingUseCase.call(params: CreateJobListingUseCaseParams(jobEntity: event.job));
-     logger.d(insertedJob);
-     emit(CreateJobPageSubmitJobState()..dataState = DataState.success);
-   }catch(ex){
-     logger.e(ex);
 
-     emit(CreateJobPageSubmitJobState()..dataState = DataState.error);
-   }
-  }
   _onSkillChipDeletedEvent(SkillChipDeletedEvent event,
       Emitter<CreateJobListingState> emit){
     chipOptions.removeAt(event.index);

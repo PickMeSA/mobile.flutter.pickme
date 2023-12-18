@@ -198,6 +198,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ReviewJobListingInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<ReviewJobListingInfoRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ReviewJobListingInfoPage(
+          key: args.key,
+          jobEntity: args.jobEntity,
+        ),
+      );
+    },
     ServiceCategoryCandidatesRoute.name: (routeData) {
       final args = routeData.argsAs<ServiceCategoryCandidatesRouteArgs>(
           orElse: () => const ServiceCategoryCandidatesRouteArgs());
@@ -701,6 +711,45 @@ class ResendOTPRouteArgs {
   @override
   String toString() {
     return 'ResendOTPRouteArgs{key: $key, userModel: $userModel}';
+  }
+}
+
+/// generated route for
+/// [ReviewJobListingInfoPage]
+class ReviewJobListingInfoRoute
+    extends PageRouteInfo<ReviewJobListingInfoRouteArgs> {
+  ReviewJobListingInfoRoute({
+    Key? key,
+    required CreateJobPageJobEntity jobEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ReviewJobListingInfoRoute.name,
+          args: ReviewJobListingInfoRouteArgs(
+            key: key,
+            jobEntity: jobEntity,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ReviewJobListingInfoRoute';
+
+  static const PageInfo<ReviewJobListingInfoRouteArgs> page =
+      PageInfo<ReviewJobListingInfoRouteArgs>(name);
+}
+
+class ReviewJobListingInfoRouteArgs {
+  const ReviewJobListingInfoRouteArgs({
+    this.key,
+    required this.jobEntity,
+  });
+
+  final Key? key;
+
+  final CreateJobPageJobEntity jobEntity;
+
+  @override
+  String toString() {
+    return 'ReviewJobListingInfoRouteArgs{key: $key, jobEntity: $jobEntity}';
   }
 }
 
