@@ -56,11 +56,11 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                children: [
                  Row(
                    children: [
-                     Icon(Iconsax.calendar_2),
+                     const Icon(Iconsax.calendar_2),
                      10.width,
                      wText(getLocalization().myBookings, style: theme.textTheme.headlineSmall?.copyWith()),
-                     Spacer(),
-                     InkWell(
+                      const Spacer(),
+                     const InkWell(
                        child: Icon(Iconsax.menu),
                      ),
 
@@ -69,7 +69,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                  30.height,
            Card(
              child: Container(
-               padding:EdgeInsets.all(20),
+               padding:const EdgeInsets.all(20),
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +90,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                             border: Border.all(width: 1,color: Colors.black)
                           ),
                          child: InkWell(
-                           onTap: ()=> getBloc().add(CalendarMonthIncrementEvent()),
+                           onTap: ()=> getBloc().add(CalendarMonthDecrementEvent()),
                              child: const Center(child: Icon(Icons.arrow_back_ios_rounded, size: 11,))),
                        ),
                        30.width,
@@ -132,8 +132,6 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                      getBloc().add(CalendarChangedEvent(dateTime: date));
                    },
                  weekendTextStyle: TextStyle(color: Colors.black),
-
-
                    ), //
                  ],
                ),

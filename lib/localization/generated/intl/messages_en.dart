@@ -73,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Connecting workers and clients"),
         "contactHelpCenter":
             MessageLookupByLibrary.simpleMessage("Contact help center"),
+        "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
         "createAJobListing":
             MessageLookupByLibrary.simpleMessage("Create a job listing"),
         "createANewJobListing":
@@ -98,9 +99,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
+        "forYou": MessageLookupByLibrary.simpleMessage("For you"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "goToDashboard":
             MessageLookupByLibrary.simpleMessage("Go to dashboard"),
+        "hi": MessageLookupByLibrary.simpleMessage("Hi, "),
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
         "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "hourlyRate": MessageLookupByLibrary.simpleMessage("Hourly rate"),
@@ -117,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "iMFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
             "I\'m flexible (open to discuss)"),
         "iUnderstand": MessageLookupByLibrary.simpleMessage("I understand"),
+        "iWouldLikeTo": MessageLookupByLibrary.simpleMessage("I would like to"),
         "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(
             "I\'m currently working in this role"),
@@ -148,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logIntoYourAccountWithYourPhoneNumberAndOtp":
             MessageLookupByLibrary.simpleMessage(
                 "Log in to your account with your phone number and an OTP"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "loginIn": MessageLookupByLibrary.simpleMessage(" Log in"),
         "longDemoText": MessageLookupByLibrary.simpleMessage(
             "The standard Lorem Ipsum passage, used since the 1500s\n\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"\n\nSection 1.10.32 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\n\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\"\n\n1914 translation by H. Rackham\n\"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?\"\n\nSection 1.10.33 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\n\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\""),
@@ -166,12 +171,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "minimumWageText2": MessageLookupByLibrary.simpleMessage(
             "As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour."),
         "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
+        "myCalendar": MessageLookupByLibrary.simpleMessage("My Calendar"),
         "myJobListings":
             MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
             MessageLookupByLibrary.simpleMessage("My Job Requests"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
+        "myWallet": MessageLookupByLibrary.simpleMessage("My Wallet"),
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
+        "needAnAmbulance":
+            MessageLookupByLibrary.simpleMessage("Need an \nambulance?"),
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
@@ -317,6 +326,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
                 "You have the flexibility to set your own hourly rate"),
+        "yourNextAppointment":
+            MessageLookupByLibrary.simpleMessage("Your next appointment"),
         "yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators":
             MessageLookupByLibrary.simpleMessage(
                 "Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days."),

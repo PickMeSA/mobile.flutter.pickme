@@ -117,20 +117,28 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           Navigator.pop(context);
           getBloc().preloaderActive = false;
           if(state.profileEntity!.type!.isEmpty){
-            context.router.push(const SetupProfileRoute());
+            context.router.pushAndPopUntil(SetupProfileRoute(),
+                predicate: (Route<dynamic> route) => false);
           }else if (state.profileEntity!.qualifications!.isEmpty &&
                     state.profileEntity!.workExperience!.isEmpty){
-            context.router.push(const QualificationsRoute());
+            context.router.pushAndPopUntil(QualificationsRoute(),
+                predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-            context.router.push(const AddSkillsRoute());
+
+            context.router.pushAndPopUntil(AddSkillsRoute(),
+                predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.push(const RateAndWorkTimesRoute());
+            context.router.pushAndPopUntil(RateAndWorkTimesRoute(),
+                predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.push(const BankDetailsRoute());
+            context.router.pushAndPopUntil(BankDetailsRoute(),
+                predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.location!.id!.isEmpty ){
-            context.router.push(const LocationRoute());
+            context.router.pushAndPopUntil(LocationRoute(),
+                predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.description!.isEmpty){
-            context.router.push(const FinalDetailsRoute());
+            context.router.pushAndPopUntil(FinalDetailsRoute(),
+                predicate: (Route<dynamic> route) => false);
           }
         }
 

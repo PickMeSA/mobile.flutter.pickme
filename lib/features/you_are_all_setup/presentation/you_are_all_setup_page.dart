@@ -61,18 +61,12 @@ crossAxisAlignment: CrossAxisAlignment.start,
                   20.height,
                   SizedBox(
                     height: 400,
-                    child: Stack(
-                      children: [
-                        Positioned(child: Center(child: SvgPicture.asset("assets/Vector.svg"))),
-                        Positioned(child: Center(child: SvgPicture.asset("assets/success_man.svg"))),
-                        Positioned(child: Center(child: SvgPicture.asset("assets/success_woman.svg"))),
-                        Positioned(child: Center(child: SvgPicture.asset("assets/success_woman.svg"))),
-                      ],
-                    ),
+                   child: SvgPicture.asset("assets/you_are_all_set.svg"),
                   ),
                   40.height,
                   PrimaryButton(fullWidth: true,onPressed: (){
-                    context.router.push(BottomNavigationBarRoute());
+                    context.router.pushAndPopUntil(BottomNavigationBarRoute(),
+                    predicate: (Route<dynamic> route) => false);
                   }, child: wText(getLocalization().goToDashboard))
                 ],
               ),
