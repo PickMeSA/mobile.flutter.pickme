@@ -67,6 +67,8 @@ late ProfileModel profileModel;
                    child: Stack(
 
                      children: [
+                       Positioned(bottom: 0, right :0,child: SvgPicture.asset("assets/dashboard_man.svg",)),
+
                        Padding(
                          padding: const EdgeInsets.only(left: 20.0, right: 20, top :70),
                          child: Column(
@@ -80,10 +82,10 @@ late ProfileModel profileModel;
                                  ),
                                  const Spacer(),
 
-                                 Icon(Iconsax.menu_1,color: Colors.white,),
-
-
-
+                                 InkWell(onTap: (){
+                                   context.router.push(const BurgerMenuRoute());
+                                 },
+                                 child: const Icon(Iconsax.menu_1,color: Colors.white,)),
                                ],
                              ),
                              SizedBox(height: 20,),
@@ -96,7 +98,6 @@ late ProfileModel profileModel;
                          ),
                        ),
 
-                       Positioned(bottom: 0, right :0,child: SvgPicture.asset("assets/dashboard_man.svg",))
                      ],
                    ),
                  ),

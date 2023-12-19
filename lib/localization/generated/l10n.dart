@@ -1849,6 +1849,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Hi, `
+  String get hi {
+    return Intl.message(
+      'Hi, ',
+      name: 'hi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I would like to`
+  String get iWouldLikeTo {
+    return Intl.message(
+      'I would like to',
+      name: 'iWouldLikeTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact us`
+  String get contactUs {
+    return Intl.message(
+      'Contact us',
+      name: 'contactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logOut {
+    return Intl.message(
+      'Log out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

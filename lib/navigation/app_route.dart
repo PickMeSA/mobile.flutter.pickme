@@ -7,6 +7,7 @@ import 'package:pickme/features/add_qualification/presentation/add_qualification
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_navigation_bar_page.dart';
+import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
@@ -81,7 +82,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: BottomNavigationBarRoute.page),
     AnimatedRoute(page: MyBookingsUpcomingRoute.page),
     AnimatedRoute(page: JobDetailsRoute.page),
-    AnimatedRoute(page: HomeRoute.page)
+    AnimatedRoute(page: HomeRoute.page),
+    AnimatedRoute(page: BurgerMenuRoute.page)
 
   ];
 }
