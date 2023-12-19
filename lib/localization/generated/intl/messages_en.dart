@@ -49,10 +49,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "additionalInformation":
             MessageLookupByLibrary.simpleMessage("Additional information"),
         "allServices": MessageLookupByLibrary.simpleMessage("All services"),
+        "applicationSent":
+            MessageLookupByLibrary.simpleMessage("Application sent"),
+        "applicationSenttext": MessageLookupByLibrary.simpleMessage(
+            "We\'ve seen your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\""),
+        "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
         "atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects":
             MessageLookupByLibrary.simpleMessage(
                 "At PickMe, we add additional costs to your rate to cover essential aspects:"),
+        "backToJobs": MessageLookupByLibrary.simpleMessage("Back to Jobs"),
         "bankA": MessageLookupByLibrary.simpleMessage("Bank *"),
         "bankDetails": MessageLookupByLibrary.simpleMessage("Bank details"),
         "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
@@ -75,6 +81,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "createANewJobListing":
             MessageLookupByLibrary.simpleMessage("Create a new job listing"),
         "createProfile": MessageLookupByLibrary.simpleMessage("Create profile"),
+        "dateAndTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
+        "dateFormat": MessageLookupByLibrary.simpleMessage("dd/mm/yyyy"),
+        "dateOfJob": MessageLookupByLibrary.simpleMessage("Date of Job"),
+        "dateOfJobText": MessageLookupByLibrary.simpleMessage(
+            "If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you\'re available"),
         "dateTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "didntReceiveACode":
@@ -87,6 +98,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
         "estHours": MessageLookupByLibrary.simpleMessage("Est. hours"),
+        "exampleText": MessageLookupByLibrary.simpleMessage(
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
         "exploreAllJobs":
             MessageLookupByLibrary.simpleMessage("Explore all jobs"),
         "exploreAllServices":
@@ -106,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("hours & total fee"),
         "iAmFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
             "I am flexible (open to discuss)"),
+        "iAmLookingFor":
+            MessageLookupByLibrary.simpleMessage("I am looking for"),
         "iDidntReceiveACode":
             MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
         "iHaveReadThe":
@@ -179,11 +194,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
+        "otherCommentsOptional":
+            MessageLookupByLibrary.simpleMessage("Other comments (optional)"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
+        "photos": MessageLookupByLibrary.simpleMessage("Photos"),
         "photosOfWork":
             MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
         "photosOfWorkOptional":
@@ -239,6 +257,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "selectMembership":
             MessageLookupByLibrary.simpleMessage("Select your membership"),
+        "sendApplication":
+            MessageLookupByLibrary.simpleMessage("Send Application"),
         "serviceCategory":
             MessageLookupByLibrary.simpleMessage("Service category"),
         "services": MessageLookupByLibrary.simpleMessage("Services"),
@@ -247,6 +267,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Skills & industry"),
         "skillsMax5": MessageLookupByLibrary.simpleMessage("Skills (max. 5)"),
         "skillsRequired":
+            MessageLookupByLibrary.simpleMessage("Skills Required"),
+        "skillsRequiredMax":
             MessageLookupByLibrary.simpleMessage("Skills required (max. 5)"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "southAfricanMinimumWage":
@@ -268,6 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tell us about your qualifications"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
+        "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),

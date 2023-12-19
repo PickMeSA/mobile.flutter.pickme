@@ -6,6 +6,9 @@ import 'package:pickme/features/add_memberships/presentation/add_memberships_pag
 import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
+import 'package:pickme/features/application_sent/presentation/application_sent_page.dart';
+import 'package:pickme/features/apply_for_job/presentation/apply_for_job_page.dart';
+import 'package:pickme/features/apply_for_job_tool_tip/presentation/apply_for_job_tool_tip_page.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_navigation_bar_page.dart';
 import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
@@ -83,7 +86,10 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MyBookingsUpcomingRoute.page),
     AnimatedRoute(page: JobDetailsRoute.page),
     AnimatedRoute(page: HomeRoute.page),
-    AnimatedRoute(page: BurgerMenuRoute.page)
+    AnimatedRoute(page: BurgerMenuRoute.page),
+    AnimatedRoute(page: ApplyForJobRoute.page),
+    AnimatedRoute(page: ApplyForJobToolTipRoute.page),
+    AnimatedRoute(page: ApplicationSentRoute.page)
 
   ];
 }

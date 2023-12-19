@@ -61,7 +61,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                   20.height,
                   SizedBox(
                     height: 400,
-                   child: SvgPicture.asset("assets/you_are_all_set.svg"),
+                   child: Image.asset("assets/man_woman_with_phones.png"),
                   ),
                   40.height,
                   PrimaryButton(fullWidth: true,onPressed: (){

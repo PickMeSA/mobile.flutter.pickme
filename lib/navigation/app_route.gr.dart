@@ -45,6 +45,24 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AllServicesPage(),
       );
     },
+    ApplicationSentRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ApplicationSentPage(),
+      );
+    },
+    ApplyForJobRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ApplyForJobPage(),
+      );
+    },
+    ApplyForJobToolTipRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ApplyForJobToolTipPage(),
+      );
+    },
     BankDetailsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -308,6 +326,48 @@ class AllServicesRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AllServicesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ApplicationSentPage]
+class ApplicationSentRoute extends PageRouteInfo<void> {
+  const ApplicationSentRoute({List<PageRouteInfo>? children})
+      : super(
+          ApplicationSentRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ApplicationSentRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ApplyForJobPage]
+class ApplyForJobRoute extends PageRouteInfo<void> {
+  const ApplyForJobRoute({List<PageRouteInfo>? children})
+      : super(
+          ApplyForJobRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ApplyForJobRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ApplyForJobToolTipPage]
+class ApplyForJobToolTipRoute extends PageRouteInfo<void> {
+  const ApplyForJobToolTipRoute({List<PageRouteInfo>? children})
+      : super(
+          ApplyForJobToolTipRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ApplyForJobToolTipRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

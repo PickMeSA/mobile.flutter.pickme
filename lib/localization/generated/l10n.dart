@@ -1401,10 +1401,10 @@ class AppLocalizations {
   }
 
   /// `Skills required (max. 5)`
-  String get skillsRequired {
+  String get skillsRequiredMax {
     return Intl.message(
       'Skills required (max. 5)',
-      name: 'skillsRequired',
+      name: 'skillsRequiredMax',
       desc: '',
       args: [],
     );
@@ -1885,6 +1885,156 @@ class AppLocalizations {
     return Intl.message(
       'Log out',
       name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am looking for`
+  String get iAmLookingFor {
+    return Intl.message(
+      'I am looking for',
+      name: 'iAmLookingFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`
+  String get exampleText {
+    return Intl.message(
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+      name: 'exampleText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skills Required`
+  String get skillsRequired {
+    return Intl.message(
+      'Skills Required',
+      name: 'skillsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos`
+  String get photos {
+    return Intl.message(
+      'Photos',
+      name: 'photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get apply {
+    return Intl.message(
+      'Apply',
+      name: 'apply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date & Time`
+  String get dateAndTime {
+    return Intl.message(
+      'Date & Time',
+      name: 'dateAndTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HH:MM`
+  String get timeFormat {
+    return Intl.message(
+      'HH:MM',
+      name: 'timeFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `dd/mm/yyyy`
+  String get dateFormat {
+    return Intl.message(
+      'dd/mm/yyyy',
+      name: 'dateFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other comments (optional)`
+  String get otherCommentsOptional {
+    return Intl.message(
+      'Other comments (optional)',
+      name: 'otherCommentsOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of Job`
+  String get dateOfJob {
+    return Intl.message(
+      'Date of Job',
+      name: 'dateOfJob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you're available`
+  String get dateOfJobText {
+    return Intl.message(
+      'If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you\'re available',
+      name: 'dateOfJobText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Application`
+  String get sendApplication {
+    return Intl.message(
+      'Send Application',
+      name: 'sendApplication',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Application sent`
+  String get applicationSent {
+    return Intl.message(
+      'Application sent',
+      name: 'applicationSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"`
+  String get applicationSenttext {
+    return Intl.message(
+      'We\'ve seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"',
+      name: 'applicationSenttext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to Jobs`
+  String get backToJobs {
+    return Intl.message(
+      'Back to Jobs',
+      name: 'backToJobs',
       desc: '',
       args: [],
     );
