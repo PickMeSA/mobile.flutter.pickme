@@ -8,6 +8,9 @@ part 'add_skills_industry_list_model_response.g.dart';
 
 @freezed
 class AddSkillsIndustryListModelResponse with _$AddSkillsIndustryListModelResponse {
+
+
+
   const factory AddSkillsIndustryListModelResponse({
     required List<AddSkillsIndustryModelResponse> data,
   }) = _AddSkillsIndustryListModelResponse;
