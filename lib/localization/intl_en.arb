@@ -175,5 +175,14 @@
   "cancelled": "Cancelled",
   "jobDetails": "Job Details",
   "client": "Client",
-  "description": "Description"
+  "description": "Description",
+  "yourNextAppointment": "Your next appointment",
+  "forYou": "For you",
+  "myCalendar": "My Calendar",
+  "myWallet": "My Wallet",
+  "needAnAmbulance": "Need an \nambulance?",
+  "hi": "Hi, ",
+  "iWouldLikeTo": "I would like to",
+  "contactUs": "Contact us",
+  "logOut": "Log out"
 }

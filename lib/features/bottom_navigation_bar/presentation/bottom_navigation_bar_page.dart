@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bloc/bottom_navigation_bar_bloc.dart';
+import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -92,6 +93,12 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.home),
+        title: ("Home"),
+        activeColorPrimary: theme.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Iconsax.calendar),
         title: ("My bookings"),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -102,13 +109,30 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Iconsax.bubble),
+        title: ("Chats"),
+        activeColorPrimary: theme.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Iconsax.profile),
+        title: ("Profile"),
+        activeColorPrimary: theme.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+
     ];
   }
 
   List<Widget> _buildScreens() {
     return [
+        const HomePage(),
         const MyBookingsUpcomingPage(),
         const JobsLandingPage(),
+        const HomePage(),
+        const HomePage(),
+
 
     ];
   }

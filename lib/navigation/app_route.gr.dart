@@ -57,6 +57,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BottomNavigationBarPage(),
       );
     },
+    BurgerMenuRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BurgerMenuPage(),
+      );
+    },
     CreateJobListingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -78,6 +84,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const FinalDetailsPage(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomePage(),
       );
     },
     JobDetailsRoute.name: (routeData) {
@@ -329,6 +341,20 @@ class BottomNavigationBarRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BurgerMenuPage]
+class BurgerMenuRoute extends PageRouteInfo<void> {
+  const BurgerMenuRoute({List<PageRouteInfo>? children})
+      : super(
+          BurgerMenuRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BurgerMenuRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CreateJobListingPage]
 class CreateJobListingRoute extends PageRouteInfo<void> {
   const CreateJobListingRoute({List<PageRouteInfo>? children})
@@ -390,6 +416,20 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FinalDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

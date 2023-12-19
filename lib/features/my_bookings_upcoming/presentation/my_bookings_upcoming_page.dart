@@ -132,8 +132,6 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                      getBloc().add(CalendarChangedEvent(dateTime: date));
                    },
                  weekendTextStyle: TextStyle(color: Colors.black),
-
-
                    ), //
                  ],
                ),
