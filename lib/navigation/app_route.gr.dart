@@ -111,9 +111,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     JobDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<JobDetailsRouteArgs>(
+          orElse: () => const JobDetailsRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const JobDetailsPage(),
+        child: JobDetailsPage(
+          key: args.key,
+          fromIndex: args.fromIndex,
+        ),
       );
     },
     JobsHiringLandingRoute.name: (routeData) {
@@ -496,16 +501,40 @@ class HomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [JobDetailsPage]
-class JobDetailsRoute extends PageRouteInfo<void> {
-  const JobDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class JobDetailsRoute extends PageRouteInfo<JobDetailsRouteArgs> {
+  JobDetailsRoute({
+    Key? key,
+    int? fromIndex = 0,
+    List<PageRouteInfo>? children,
+  }) : super(
           JobDetailsRoute.name,
+          args: JobDetailsRouteArgs(
+            key: key,
+            fromIndex: fromIndex,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'JobDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<JobDetailsRouteArgs> page =
+      PageInfo<JobDetailsRouteArgs>(name);
+}
+
+class JobDetailsRouteArgs {
+  const JobDetailsRouteArgs({
+    this.key,
+    this.fromIndex = 0,
+  });
+
+  final Key? key;
+
+  final int? fromIndex;
+
+  @override
+  String toString() {
+    return 'JobDetailsRouteArgs{key: $key, fromIndex: $fromIndex}';
+  }
 }
 
 /// generated route for

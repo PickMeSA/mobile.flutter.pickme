@@ -199,5 +199,8 @@
   "sendApplication": "Send Application",
   "applicationSent": "Application sent",
   "applicationSenttext": "We've seen your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\"",
-  "backToJobs": "Back to Jobs"
+  "backToJobs": "Back to Jobs",
+  "rescheduleBooking": "Reschedule booking",
+  "cancelBooking": "Cancel booking",
+  "seeReviews": "See reviews"
 }

@@ -9,12 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_client_widget.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'bloc/job_details_bloc.dart';
 
 @RoutePage()
 class JobDetailsPage extends BasePage {
-  const JobDetailsPage({super.key});
+  int? fromIndex ;
+
+   JobDetailsPage({super.key, this.fromIndex = 0});
 
   @override
   _JobDetailsPageState createState() => _JobDetailsPageState();
@@ -69,6 +72,13 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                        Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
+                           WClientWidget(
+                             context: context,
+                             areaLocation: "Area/Location",
+                             clientName: "Client Name",
+                             rating: 4,
+                             seeReviews: getLocalization().seeReviews
+                           ),
 
                          AppDivider(),
                            20.height,
@@ -76,6 +86,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            wText(getLocalization().exampleText,),
                            20.height,
+                           widget.fromIndex == 0 ?
                            PrimaryButton(
                              width: MediaQuery.sizeOf(context).width,
                              style: ButtonStyle(
@@ -96,7 +107,55 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                context.router.push(ApplyForJobRoute());
                              },
                              child: Text(getLocalization().apply),
-                           ),
+                           ):
+                           widget.fromIndex == 1?
+                           Column(
+                             children: [
+                               SecondaryButtonDark(
+                                 width: MediaQuery.sizeOf(context).width,
+                                 style: ButtonStyle(
+                                     side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                       return BorderSide(
+                                         color: theme.colorScheme.secondary,
+                                         width: 2,
+                                       );
+                                     }
+                                     ),
+                                     backgroundColor: MaterialStateProperty.resolveWith(
+                                             (Set<MaterialState> states){
+                                           return theme.colorScheme.secondary;
+                                         }
+                                     )
+                                 ),
+                                 onPressed:() {
+
+                                 },
+                                 child: Text(getLocalization().rescheduleBooking, style: TextStyle(color: Colors.white)),
+                               ),
+                               20.height,
+                               SecondaryButtonDark(
+                                 width: MediaQuery.sizeOf(context).width,
+                                 style: ButtonStyle(
+                                     side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                       return BorderSide(
+                                         color: theme.colorScheme.secondary,
+                                         width: 2,
+                                       );
+                                     }
+                                     ),
+                                     backgroundColor: MaterialStateProperty.resolveWith(
+                                             (Set<MaterialState> states){
+                                           return Colors.white;
+                                         }
+                                     )
+                                 ),
+                                 onPressed:() {
+
+                                 },
+                                 child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
+                               )
+                             ],
+                           ):SizedBox(),
                          ],
                        ),
                        ListView(
@@ -163,6 +222,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            AppDivider(),
                            20.height,
+                           widget.fromIndex == 0 ?
                            PrimaryButton(
                              width: MediaQuery.sizeOf(context).width,
                              style: ButtonStyle(
@@ -183,7 +243,33 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                               context.router.push(ApplyForJobRoute());
                              },
                              child: Text(getLocalization().apply),
-                           ),
+                           ):
+                           widget.fromIndex == 1?
+                           Column(
+                             children: [
+                               SecondaryButtonDark(
+                                 width: MediaQuery.sizeOf(context).width,
+                                 style: ButtonStyle(
+                                     side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                       return BorderSide(
+                                         color: theme.colorScheme.secondary,
+                                         width: 2,
+                                       );
+                                     }
+                                     ),
+                                     backgroundColor: MaterialStateProperty.resolveWith(
+                                             (Set<MaterialState> states){
+                                           return theme.colorScheme.secondary;
+                                         }
+                                     )
+                                 ),
+                                 onPressed:() {
+                                   context.router.push(ApplyForJobRoute());
+                                 },
+                                 child: Text(getLocalization().apply),
+                               )
+                             ],
+                           ):SizedBox(),
 
                          ],
                        )

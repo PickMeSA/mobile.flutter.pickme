@@ -64,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
         "browseCategories":
             MessageLookupByLibrary.simpleMessage("Browse categories"),
+        "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel booking"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
@@ -253,8 +254,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Recommended for you"),
         "registrationFee":
             MessageLookupByLibrary.simpleMessage("Registration fee"),
+        "rescheduleBooking":
+            MessageLookupByLibrary.simpleMessage("Reschedule booking"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
+        "seeReviews": MessageLookupByLibrary.simpleMessage("See reviews"),
         "selectMembership":
             MessageLookupByLibrary.simpleMessage("Select your membership"),
         "sendApplication":

@@ -157,7 +157,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                               Column(
                                 children: [
                                   InkWell(
-                                onTap: ()=> context.router.push(JobDetailsRoute()),
+                                onTap: ()=> context.router.push(JobDetailsRoute(fromIndex: 1)),
                                     child: AppJobCard(
                                       jobName: 'Tax Preparation',
                                       employerName: 'DVT',
@@ -165,7 +165,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                       dateTime: DateTime.now().add(const Duration(days: 5)),
                                       status: JobStatus.applied,
                                       onNext: () {
-                                        context.router.push(JobDetailsRoute());
+                                        context.router.push(JobDetailsRoute(fromIndex: 1));
                                       },
                                     ),
                                   ),
@@ -181,13 +181,16 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                            return
                              Column(
                                children: [
-                                 AppJobCard(
-                                   jobName: 'Tax Preparation',
-                                   employerName: 'DVT',
-                                   locationName: 'PickMe',
-                                   dateTime: DateTime.now().add(const Duration(days: 5)),
-                                   status: JobStatus.applied,
-                                   onNext: () {  },
+                                 InkWell(
+                                   onTap:()=> context.router.push(JobDetailsRoute(fromIndex: 2)),
+                                   child: AppJobCard(
+                                     jobName: 'Tax Preparation',
+                                     employerName: 'DVT',
+                                     locationName: 'PickMe',
+                                     dateTime: DateTime.now().add(const Duration(days: 5)),
+                                     status: JobStatus.applied,
+                                     onNext: () {  },
+                                   ),
                                  ),
                                  10.height
                                ],

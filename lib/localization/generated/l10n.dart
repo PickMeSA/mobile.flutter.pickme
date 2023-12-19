@@ -2039,6 +2039,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Reschedule booking`
+  String get rescheduleBooking {
+    return Intl.message(
+      'Reschedule booking',
+      name: 'rescheduleBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel booking`
+  String get cancelBooking {
+    return Intl.message(
+      'Cancel booking',
+      name: 'cancelBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See reviews`
+  String get seeReviews {
+    return Intl.message(
+      'See reviews',
+      name: 'seeReviews',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
