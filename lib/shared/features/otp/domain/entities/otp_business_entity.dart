@@ -1,4 +1,4 @@
-import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
+ import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
 
 class OTPBusinessEntity{
   String? name;

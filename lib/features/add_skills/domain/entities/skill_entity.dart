@@ -13,6 +13,8 @@ class SkillEntity{
   }
 
    AddSkillsSkillsModelResponse toResponse() {
-    return AddSkillsSkillsModelResponse(id: id!, skill: skill!);
+    return AddSkillsSkillsModelResponse(
+        id: id!,
+        skill: skill!);
    }
 }

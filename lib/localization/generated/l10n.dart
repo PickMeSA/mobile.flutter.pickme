@@ -1909,6 +1909,96 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Your next appointment`
+  String get yourNextAppointment {
+    return Intl.message(
+      'Your next appointment',
+      name: 'yourNextAppointment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For you`
+  String get forYou {
+    return Intl.message(
+      'For you',
+      name: 'forYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Calendar`
+  String get myCalendar {
+    return Intl.message(
+      'My Calendar',
+      name: 'myCalendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Wallet`
+  String get myWallet {
+    return Intl.message(
+      'My Wallet',
+      name: 'myWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need an \nambulance?`
+  String get needAnAmbulance {
+    return Intl.message(
+      'Need an \nambulance?',
+      name: 'needAnAmbulance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hi, `
+  String get hi {
+    return Intl.message(
+      'Hi, ',
+      name: 'hi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I would like to`
+  String get iWouldLikeTo {
+    return Intl.message(
+      'I would like to',
+      name: 'iWouldLikeTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact us`
+  String get contactUs {
+    return Intl.message(
+      'Contact us',
+      name: 'contactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logOut {
+    return Intl.message(
+      'Log out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
