@@ -31,6 +31,10 @@ class CandidateProfilesImpl extends CandidatesService{
 
         List<CandidateProfileEntity> candidateProfileList = candidatesModelResponseList.map((profile) => CandidateProfileEntity(
             id: profile.id,
+            skills: profile.skills,
+            photos: profile.photos,
+            workExperience: profile.workExperience.map((e) => WorkExperienceEntity(name: e.role, institutionName: e.company, period: e.period)).toList(),
+            about: profile.about,
             fullName: profile.name,
             jobTitle: profile.job_title,
             hourlyRate: profile.hourly_rate,

@@ -2,31 +2,16 @@ part of 'my_job_listings_bloc.dart';
 
 @immutable
 abstract class MyJobListingsState extends BaseState {
-  final PaginatedIndustryEntity? paginatedIndustries;
-  final int selectedTabIndex;
-  MyJobListingsState({
-    super.dataState,
-    this.paginatedIndustries,
-    required this.selectedTabIndex
-  });
+  MyJobListingsState();
 }
 
 class MyJobListingsPageInitial extends MyJobListingsState {
-  MyJobListingsPageInitial({
-    super.paginatedIndustries,
-    required super.selectedTabIndex
-  });
+  MyJobListingsPageInitial();
 }
 
 class SelectedTabChangedState extends MyJobListingsState {
-  SelectedTabChangedState({
-    super.paginatedIndustries,
-    required super.selectedTabIndex
-  });
+  SelectedTabChangedState();
 }
-class GetTopIndustriesState extends MyJobListingsState {
-  GetTopIndustriesState({
-    super.paginatedIndustries,
-    required super.selectedTabIndex
-  });
+class MyJobListingsPageEnteredState extends MyJobListingsState {
+  MyJobListingsPageEnteredState();
 }

@@ -191,7 +191,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                             candidate.profilePicture!
                         ):null,
                         viewProfileFunction: (){
-                          debugPrint("view profile clicked");
+                          context.router.push(CandidateProfileRoute(candidateProfile: candidate));
                         },
                       );
                     },
