@@ -18,7 +18,7 @@ class CandidatesServiceMock extends CandidatesService{
 
     List<CandidateProfileEntity> candidateProfileList = [
       CandidateProfileEntity(
-        id: "1",
+        id: "375f8af0-4b11-42ce-acf6-c2dbe79a1179",
         about: "Hi, I'm Andrew, a skilled Handyman ready to tackle a diverse range of tasks with precision and efficiency. From minor repairs and maintenance to carpentry and electrical work, I bring a hands-on approach and a commitment to customer satisfaction. With a keen eye for detail and a problem-solving mindset, I'm dedicated to making homes and spaces functional and aesthetically pleasing. Let's transform your projects into reality.",
         skills: "Electrical Work,Plumbing,Gardening",
         fullName: "Andrew Sithole",
@@ -30,7 +30,7 @@ class CandidatesServiceMock extends CandidatesService{
         workExperience: [WorkExperienceEntity(name: "Care taker", institutionName: "Old mutual", period: "Sept 2012 - Dec 2023")]
       ),
       CandidateProfileEntity(
-          id: "2",
+          id: "stPC9hPMQBOoiP5HCCxgnLT7Mvx1",
           about: "Hello, I'm Freedom, a proficient Flutter Engineer passionate about crafting seamless cross-platform applications. With expertise in Dart programming, UI/UX design, and integration of RESTful APIs, I bring a creative approach to developing visually appealing and high-performance mobile applications. My commitment to staying abreast of Flutter's latest advancements ensures that I deliver cutting-edge solutions. Let's embark on a journey to create engaging and responsive mobile experiences.",
           skills: "Flutter,bloc,Git,App Development",
           fullName: "Freedom Mathebula",
@@ -42,7 +42,7 @@ class CandidatesServiceMock extends CandidatesService{
           workExperience: [WorkExperienceEntity(name: "Senior Flutter engineer", institutionName: "DVT", period: "Nov 2012 - Dec 2014")]
       ),
       CandidateProfileEntity(
-          id: "2",
+          id: "f614f4c9-d49f-48aa-9a74-e9d272f67f2c",
           about: "Hello, I'm Thulane, a passionate Node.js Backend Developer with a knack for crafting robust and scalable server-side applications. Armed with in-depth knowledge of Node.js, Express, and database management, I thrive on turning complex ideas into efficient, maintainable code. I bring a proactive approach to problem-solving and a commitment to staying current with emerging technologies. Let's build innovative solutions together!",
           skills: "Node,Javascript,Git",
           fullName: "Thulane Khumalo",
@@ -54,7 +54,7 @@ class CandidatesServiceMock extends CandidatesService{
           workExperience: [WorkExperienceEntity(name: "Node engineer", institutionName: "DSTV", period: "Jul 2021 - Jun 2022")]
       ),
       CandidateProfileEntity(
-          id: "2",
+          id: "6hDvMxYe9phUeC8yniERraj76L72",
           about: "Greetings, Ruan, a dedicated miner with a strong commitment to safety and efficiency in extractive operations. Armed with hands-on experience in various mining techniques and equipment, I've contributed to successful mineral extraction projects. My adaptability, attention to detail, and adherence to industry regulations make me a reliable asset in challenging mining environments. Let's delve into new opportunities and unearth success together.",
           skills: "Mining,gold,platinum",
           fullName: "Ruan Botha",
@@ -66,7 +66,7 @@ class CandidatesServiceMock extends CandidatesService{
           workExperience: [WorkExperienceEntity(name: "Care taker", institutionName: "Old mutual", period: "Sept 2012 - Dec 2023")]
       ),
       CandidateProfileEntity(
-          id: "2",
+          id: "6hDvMxYe9phUeC8yniERraj76L72",
         about: "Hello, I'm Zaahidah, an accomplished Delivery Manager adept at overseeing end-to-end delivery processes. With a proven track record of optimizing logistics and ensuring timely, cost-effective deliveries, I excel in team coordination, resource management, and client communication. My strategic planning and problem-solving skills contribute to successful project outcomes. Let's collaborate to streamline your delivery operations and exceed customer expectations.",
         skills: "Team Leadership,Jira,ADO,Communication,Conflict resolution",
           fullName: "Zaahidah",
