@@ -16,6 +16,7 @@ final double lat;
 final double lng;
 final String images;
 final String skills;
+final String comments;
 final String id;
 final double distance;
 
@@ -33,6 +34,7 @@ final double distance;
     required this.lng,
     required this.images,
     required this.skills,
+    this.comments = "",
     required this.id,
     required this.distance
   });

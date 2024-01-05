@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
@@ -103,11 +104,11 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             JobEntity job = getBloc().myJobs!.activeJobs[index];
                             return AppJobAdvertCard(
                                 jobName: job.title,
-                                employerName: "Employer Name",
+                                employerName: "Andrew Test Employer",
                                 locationName: "Melrose Arch. South Africa",
                                 dateTime: job.startDate!,
                                 status: JobStatus.active,
-                                onNext: (){},
+                                onNext: ()=>context.router.push(HirerJobDetailsRoute(jobEntity: job)),
                               totalMatches: 0,
                               matchesString: "possible Matches",
                               totalApplications: 0,
@@ -141,11 +142,15 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             JobEntity job = getBloc().myJobs!.inactiveJobs[index];
                             return AppJobCard(
                                 jobName: job.title,
-                                employerName: "Andrew",
+                                employerName: "Andrew Test Employer",
                                 locationName: "Jo'burg South Africa",
                                 dateTime: job.startDate??DateTime.now(),
                                 status: JobStatus.inactive,
-                                onNext: (){});
+                              onNext: (){
+                                  logger.i(job.title);
+                                  context.router.push(HirerJobDetailsRoute(jobEntity: job));
+                                  },
+                            );
                           }
                       ),
                     )], onTap: (int index) => getBloc().add(SelectedTabChangedEvent(tabIndex: index)),

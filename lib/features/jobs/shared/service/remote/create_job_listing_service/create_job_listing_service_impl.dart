@@ -27,7 +27,7 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
         lat: jobListingRepositoryParams.jobEntity.lat,
         lng: jobListingRepositoryParams.jobEntity.lng,
         images: jobListingRepositoryParams.jobEntity.images.join(","),
-        skills: jobListingRepositoryParams.jobEntity.skills.map((e) => e.id).toList().join(","),
+        skills: jobListingRepositoryParams.jobEntity.skills.map((e) => e.label).toList().join(","),
 
       ).toJson());
 

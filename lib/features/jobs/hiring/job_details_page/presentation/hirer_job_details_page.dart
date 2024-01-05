@@ -11,6 +11,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -32,6 +33,8 @@ class _HirerJobDetailsPageState extends BasePageState<HirerJobDetailsPage, Hirer
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
+    List<String> jobImages = widget.jobEntity.images.isEmpty?[]:widget.jobEntity.images.split(",");
+    logger.d(widget.jobEntity.id);
     return BlocConsumer<HirerJobDetailsPageBloc, HirerJobDetailsPageState>(
       listener: (context, state) {
         //loading
@@ -72,31 +75,31 @@ class _HirerJobDetailsPageState extends BasePageState<HirerJobDetailsPage, Hirer
                 16.height,
                 const AppDivider(),
                 24.height,
-                wText(getLocalization().jobDescription, style: Theme.of(context).textTheme.headlineSmall),
+                wText(getLocalization().jobDescription, style: Theme.of(context).textTheme.titleMedium),
                 16.height,
                 wText(widget.jobEntity.description),
                 16.height,
                 const AppDivider(),
                 24.height,
-                wText(getLocalization().skillsRequired, style: Theme.of(context).textTheme.headlineSmall),
+                wText(getLocalization().skillsRequired, style: Theme.of(context).textTheme.titleMedium),
                 16.height,
-                // ChipGroup(inputs: widget.jobEntity.skills.split(",").map((e) => ChipOption(label: e.label, id: e.id)).toList()),
+                ChipGroup(inputs: widget.jobEntity.skills.split(",").map((e) => ChipOption(label: e, id: 0)).toList()),
                 16.height,
                 const AppDivider(),
                 24.height,
-                wText(getLocalization().photos, style: Theme.of(context).textTheme.headlineSmall),
+                wText(getLocalization().photos, style: Theme.of(context).textTheme.titleMedium),
                 16.height,
-                if(widget.jobEntity.images.isNotEmpty)Padding(
+                if(jobImages.isNotEmpty)Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: Row(
                     children: [
                       Expanded(child: ImageThumbnail(
-                        imagePath:  widget.jobEntity.images[0],
+                        imagePath:  jobImages[0],
                       )),
                       16.width, // Add some spacing between images
-                      if(widget.jobEntity.images.length == 1) Expanded(child: Container(),),
-                      if(widget.jobEntity.images.length >1)Expanded(child: ImageThumbnail(
-                        imagePath:  widget.jobEntity.images[1],
+                      if(jobImages.length == 1) Expanded(child: Container(),),
+                      if(jobImages.length >1)Expanded(child: ImageThumbnail(
+                        imagePath: jobImages[1],
                       )),
                     ],
                   ),
@@ -122,7 +125,11 @@ class _HirerJobDetailsPageState extends BasePageState<HirerJobDetailsPage, Hirer
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().reviewJobListing,),
+      title: Text(getLocalization().jobListing,),
+        actions:[if(widget.jobEntity.status!="active")Padding(
+          padding: const EdgeInsets.only(right:24.0),
+          child: StatusBadge.danger("Inactive"),
+        )]
     );
   }
 

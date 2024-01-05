@@ -14,7 +14,10 @@ class SelectedTabChangedEvent extends ReviewJobEvent{
   final int tabIndex;
   SelectedTabChangedEvent({required this.tabIndex});
 }
-
+class SendJobOfferEvent extends ReviewJobEvent{
+  final CreateJobPageJobEntity job;
+  SendJobOfferEvent({required this.job});
+}
 
 class ReviewJobPageSubmitJobEvent extends ReviewJobEvent{
   final CreateJobPageJobEntity job;

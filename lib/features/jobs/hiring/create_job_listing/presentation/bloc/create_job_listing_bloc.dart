@@ -107,11 +107,14 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
           break;
         }
       }
-      if(!alreadyExists) {
+      if(!alreadyExists && chipOptions.length<5) {
         chipOptions.add(
             ChipOption(label: event.skill.skill!, id: int.parse(event.skill.id!)));
         selectedSkills.skillListEntity?.add(event.skill);
         // checked = true;
+      }
+      if(chipOptions.length>4){
+        return emit(SkillSelectedState()..dataState = DataState.error);
       }
     emit(SkillSelectedState()..dataState = DataState.success);
   }

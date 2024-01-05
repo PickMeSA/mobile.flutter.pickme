@@ -193,5 +193,17 @@
   "hi": "Hi, ",
   "iWouldLikeTo": "I would like to",
   "contactUs": "Contact us",
-  "logOut": "Log out"
+  "logOut": "Log out",
+  "jobListing": "Job listing",
+  "candidateProfile": "Candidate profile",
+  "aboutMe": "About me",
+  "mySkills": "My skills",
+  "qualifications": "Qualifications",
+  "offerAJob": "Offer a job",
+  "whenOfferingAJobToACandidateLongText": "When offering a job to a candidate, you can send an existing listing you’ve created before, or you can create a one-time listing for this specific opportunity.",
+  "selectAnExistingJobListing": "Select an existing job listing",
+  "createAOneTimeListing": "Create a one-time listing",
+  "sendJobOffer": "Send job offer",
+  "offerSentEx": "Offer sent!",
+  "yourJobOfferHasBeenSent": "Your job offer has been sent. You'll receive a notification once the candidate accepts."
 }

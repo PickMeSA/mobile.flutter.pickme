@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aOneTimeFeeOf500GetYouStarted": MessageLookupByLibrary.simpleMessage(
             "A one-time fee of R50.00 (including VAT) get you started, with no monthly charges."),
+        "aboutMe": MessageLookupByLibrary.simpleMessage("About me"),
         "aboutYouBasedOnYourProfile": MessageLookupByLibrary.simpleMessage(
             "About you (based on your profile)"),
         "acceptAndContinue":
@@ -61,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "browseCategories":
             MessageLookupByLibrary.simpleMessage("Browse categories"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
+        "candidateProfile":
+            MessageLookupByLibrary.simpleMessage("Candidate profile"),
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
@@ -78,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create a job listing"),
         "createANewJobListing":
             MessageLookupByLibrary.simpleMessage("Create a new job listing"),
+        "createAOneTimeListing":
+            MessageLookupByLibrary.simpleMessage("Create a one-time listing"),
         "createProfile": MessageLookupByLibrary.simpleMessage("Create profile"),
         "dateAndTime": MessageLookupByLibrary.simpleMessage("Date & time"),
         "dateTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
@@ -139,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "jobDescription":
             MessageLookupByLibrary.simpleMessage("Job description"),
         "jobDetails": MessageLookupByLibrary.simpleMessage("Job Details"),
+        "jobListing": MessageLookupByLibrary.simpleMessage("Job listing"),
         "jobListingDetails":
             MessageLookupByLibrary.simpleMessage("Job listing details"),
         "jobName": MessageLookupByLibrary.simpleMessage("Job name"),
@@ -177,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myJobRequests":
             MessageLookupByLibrary.simpleMessage("My Job Requests"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
+        "mySkills": MessageLookupByLibrary.simpleMessage("My skills"),
         "myWallet": MessageLookupByLibrary.simpleMessage("My Wallet"),
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
         "needAnAmbulance":
@@ -187,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
+        "offerAJob": MessageLookupByLibrary.simpleMessage("Offer a job"),
+        "offerSentEx": MessageLookupByLibrary.simpleMessage("Offer sent!"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
@@ -243,6 +252,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Qualification name *"),
         "qualificationType":
             MessageLookupByLibrary.simpleMessage("Qualification type *"),
+        "qualifications":
+            MessageLookupByLibrary.simpleMessage("Qualifications"),
         "r": MessageLookupByLibrary.simpleMessage("R"),
         "r00": MessageLookupByLibrary.simpleMessage("R00.00"),
         "recommendedForYou":
@@ -254,8 +265,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Review job listing"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
+        "selectAnExistingJobListing": MessageLookupByLibrary.simpleMessage(
+            "Select an existing job listing"),
         "selectMembership":
             MessageLookupByLibrary.simpleMessage("Select your membership"),
+        "sendJobOffer": MessageLookupByLibrary.simpleMessage("Send job offer"),
         "serviceCategory":
             MessageLookupByLibrary.simpleMessage("Service category"),
         "services": MessageLookupByLibrary.simpleMessage("Services"),
@@ -307,6 +321,9 @@ class MessageLookup extends MessageLookupByLibrary {
                 "What is your hourly rate & work times?"),
         "whatWouldYouLikeToDo":
             MessageLookupByLibrary.simpleMessage("What would you like to do?"),
+        "whenOfferingAJobToACandidateLongText":
+            MessageLookupByLibrary.simpleMessage(
+                "When offering a job to a candidate, you can send an existing listing you’ve created before, or you can create a one-time listing for this specific opportunity."),
         "whereAreYouLocated":
             MessageLookupByLibrary.simpleMessage("Where are you located?"),
         "work": MessageLookupByLibrary.simpleMessage("Work"),
@@ -326,6 +343,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
                 "You have the flexibility to set your own hourly rate"),
+        "yourJobOfferHasBeenSent": MessageLookupByLibrary.simpleMessage(
+            "Your job offer has been sent. You\'ll receive a notification once the candidate accepts."),
         "yourNextAppointment":
             MessageLookupByLibrary.simpleMessage("Your next appointment"),
         "yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators":

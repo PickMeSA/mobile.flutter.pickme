@@ -53,18 +53,18 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
                 itemBuilder: (BuildContext context, int index){
                   CandidateProfileEntity candidate = paginatedCandidates.candidates[index];
                   return AppCandidateProfile(
-                      fullName: candidate.fullName,
-                      jobTitle: candidate.jobTitle,
-                      rating: candidate.rating,
-                      hourlyRate: "R${candidate.hourlyRate}p/h",
-                      image: (candidate.profilePicture!=null)?
-                      CachedNetworkImageProvider(
+                    fullName: candidate.fullName,
+                    jobTitle: candidate.jobTitle,
+                    rating: candidate.rating,
+                    hourlyRate: "R${candidate.hourlyRate}p/h",
+                    image: (candidate.profilePicture!=null)?
+                    CachedNetworkImageProvider(
                         candidate.profilePicture!
-                      ):null,
-                      viewProfileFunction: (){
-                        debugPrint("view profile clicked");
-                      },
-                    );
+                    ):null,
+                    viewProfileFunction: (){
+                      context.router.push(CandidateProfileRoute(candidateProfile: candidate));
+                    },
+                  );
                   },
                 ):SizedBox(),
               SecondaryButtonDark(onPressed: ()=> getBloc().add(

@@ -96,7 +96,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingInfoPage, Cr
                 )),
               if(state.dataState==DataState.success)
                 PrimaryButton.fullWidth(onPressed: (){
-                  context.router.push(const CreateJobListingRoute());
+                  context.router.push(CreateJobListingRoute());
                 }, child: Text(getLocalization().acceptAndContinue))
             ],
           ),

@@ -16,3 +16,7 @@ class ReviewJobListingInfoPageEnteredState extends ReviewJobListingState {
 class ReviewJobPageSubmitJobState extends ReviewJobListingState {
   ReviewJobPageSubmitJobState();
 }
+
+class SendJobOfferState extends ReviewJobListingState {
+  SendJobOfferState();
+}

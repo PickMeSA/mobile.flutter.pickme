@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/functions/required_text_validator.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
@@ -28,8 +29,8 @@ import 'bloc/create_job_listing_bloc.dart';
 
 @RoutePage()
 class CreateJobListingPage extends BasePage {
-  const CreateJobListingPage({super.key});
-
+  const CreateJobListingPage({super.key, this.candidateToOffer});
+  final CandidateProfileEntity? candidateToOffer;
 
   @override
   State<CreateJobListingPage> createState() => _MyJobListingsPageState();
@@ -43,6 +44,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   TextEditingController startTimeTextController = TextEditingController();
   TextEditingController hoursTextController = TextEditingController();
   TextEditingController totalFeeTextController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   DateTime? startDate;
   DateTime? endDate;
   String address = "";
@@ -77,6 +79,9 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
           Navigator.pop(context); //Remove loader
         //   todo: Display error
         }
+        if(state is SkillSelectedState && state.dataState == DataState.success){
+          _scrollToBottom();
+        }
       },
       builder: (context, state) {
 
@@ -86,6 +91,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
           child: Stack(
             children: [
               SingleChildScrollView(
+                controller: _scrollController,
                 padding: wPagePadding(top:0),
                 child: Form(
                   key: _formKey,
@@ -334,15 +340,13 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                                   color: Colors.grey)
                           )
                       ),
-                      SizedBox(
-                        height: 250 ,
-                        child: Center(
-                          child: ChipGroup(
-                            inputs: getBloc().chipOptions,
-                            onDeleted: (int index){
-                              getBloc().add(SkillChipDeletedEvent(index: index));
-                            },
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(top:16, bottom: 140.0),
+                        child: ChipGroup(
+                          inputs: getBloc().chipOptions,
+                          onDeleted: (int index){
+                            getBloc().add(SkillChipDeletedEvent(index: index));
+                          },
                         ),
                       ),
                     ],
@@ -399,7 +403,13 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
       },
     );
   }
-
+  void _scrollToBottom() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
+  }
   getMapWindow(){
     var theme = Theme.of(context);
     return Column(
@@ -480,7 +490,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().createAJobListing,),
+      title: Text(widget.candidateToOffer==null?getLocalization().createAJobListing:getLocalization().createAOneTimeListing,),
     );
   }
   Future<void> _pickFile() async {
