@@ -1,15 +1,19 @@
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
 import 'bloc/my_job_listings_bloc.dart';
 
@@ -35,32 +39,47 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
     var theme = Theme.of(context);
     return BlocConsumer<MyJobListingsBloc, MyJobListingsState>(
       listener: (context, state) {
-        // TODO: implement listener
+        //loading
+        if(state is MyJobListingsPageEnteredState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+
+        //loading
+        if(state is MyJobListingsPageEnteredState && state.dataState == DataState.success){
+          Navigator.pop(context); //Remove loader
+        }          //loading
+        if(state is MyJobListingsPageEnteredState && state.dataState == DataState.error){
+          Navigator.pop(context); //Remove loader
+          //   todo: Display error
+        }
       },
       builder: (context, state) {
-        PaginatedIndustryEntity? industries = state.paginatedIndustries;
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           padding: wPagePadding(top:0),
-          child: Column(
-            children: [
-              AppExplorationTile(
-                icon: const Icon(Iconsax.add),
-                showNextIcon: false,
-                title: getLocalization().createANewJobListing,
-                onClick: () => context.router.push(const CreateJobListingRoute()),
-              ),
-              24.height,
-              Expanded(
-                child: AppTabBar(
-                  initialIndex: state.selectedTabIndex,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AppExplorationTile(
+                  icon: const Icon(Iconsax.add),
+                  showNextIcon: false,
+                  title: getLocalization().createANewJobListing,
+                  onClick: () => context.router.push(const CreateJobListingInfoRoute()),
+                ),
+                24.height,
+                AppTabBar(
+                  viewHeight: MediaQuery.sizeOf(context).height - 355,
+                  initialIndex: getBloc().selectedTabIndex,
                   tabs: [
                     Text(getLocalization().activeListings),
                     Text(getLocalization().inactiveListings),
                   ],
                   views: [
-                    Column(
+                    if(getBloc().myJobs== null || getBloc().myJobs!.activeJobs.isEmpty)Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(
@@ -77,7 +96,28 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                         )
                       ],
                     ),
-                    Column(
+                    if(getBloc().myJobs!= null && getBloc().myJobs!.activeJobs.isNotEmpty) SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                          itemCount: getBloc().myJobs!.activeJobs.length,
+                          itemBuilder: (BuildContext context, int index){
+                            JobEntity job = getBloc().myJobs!.activeJobs[index];
+                            return AppJobAdvertCard(
+                                jobName: job.title,
+                                employerName: "Andrew Test Employer",
+                                locationName: "Melrose Arch. South Africa",
+                                dateTime: job.startDate!,
+                                status: JobStatus.active,
+                                onNext: ()=>context.router.push(HirerJobDetailsRoute(jobEntity: job)),
+                              totalMatches: 0,
+                              matchesString: "possible Matches",
+                              totalApplications: 0,
+                              applicationsString: "applications",
+                            );
+                          }
+                      ),
+                    ),
+                    if(getBloc().myJobs== null || getBloc().myJobs!.inactiveJobs.isEmpty)Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(
@@ -94,10 +134,29 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                         )
                       ],
                     ),
-                  ], onTap: (int index) => getBloc().add(SelectedTabChangedEvent(tabIndex: index)),
+                    if(getBloc().myJobs!= null && getBloc().myJobs!.inactiveJobs.isNotEmpty) SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                          itemCount: getBloc().myJobs!.inactiveJobs.length,
+                          itemBuilder: (BuildContext context, int index){
+                            JobEntity job = getBloc().myJobs!.inactiveJobs[index];
+                            return AppJobCard(
+                                jobName: job.title,
+                                employerName: "Andrew Test Employer",
+                                locationName: "Jo'burg South Africa",
+                                dateTime: job.startDate??DateTime.now(),
+                                status: JobStatus.inactive,
+                              onNext: (){
+                                  logger.i(job.title);
+                                  context.router.push(HirerJobDetailsRoute(jobEntity: job));
+                                  },
+                            );
+                          }
+                      ),
+                    )], onTap: (int index) => getBloc().add(SelectedTabChangedEvent(tabIndex: index)),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
-import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'api-service.dart';
 
 @Singleton(as:ApiService)
@@ -21,7 +20,8 @@ class DioApiService extends ApiService{
 
          //attach
      TokenModel tokenModel = boxTokens.get(current);
-     options.headers['Content-Type'] = 'application/json';
+         logger.d(tokenModel.accessToken);
+         options.headers['Content-Type'] = 'application/json';
      options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
      return handler.next(options);
    }));
@@ -53,7 +53,8 @@ class DioApiService extends ApiService{
 
   @override
   Future<Response<T>> get<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
-      Response<T> response = await dio.get(
+    logger.d(path);
+    Response<T> response = await dio.get(
           path, data: data, queryParameters: queryParameters, options: options);
       logger.d(response);
       return response;

@@ -1401,10 +1401,10 @@ class AppLocalizations {
   }
 
   /// `Skills required (max. 5)`
-  String get skillsRequiredMax {
+  String get skillsRequired {
     return Intl.message(
       'Skills required (max. 5)',
-      name: 'skillsRequiredMax',
+      name: 'skillsRequired',
       desc: '',
       args: [],
     );
@@ -1740,21 +1740,31 @@ class AppLocalizations {
     );
   }
 
-  /// `My Bookings`
-  String get myBookings {
+  /// `Date & time`
+  String get dateAndTime {
     return Intl.message(
-      'My Bookings',
-      name: 'myBookings',
+      'Date & time',
+      name: 'dateAndTime',
       desc: '',
       args: [],
     );
   }
 
-  /// `Bookings`
-  String get bookings {
+  /// `I'm flexible (open to discuss)`
+  String get iMFlexibleOpenToDiscuss {
     return Intl.message(
-      'Bookings',
-      name: 'bookings',
+      'I\'m flexible (open to discuss)',
+      name: 'iMFlexibleOpenToDiscuss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Bookings`
+  String get myBookings {
+    return Intl.message(
+      'My Bookings',
+      name: 'myBookings',
       desc: '',
       args: [],
     );
@@ -1805,6 +1815,96 @@ class AppLocalizations {
     return Intl.message(
       'Client',
       name: 'client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hours & total fee`
+  String get hoursAndTotalFee {
+    return Intl.message(
+      'Hours & total fee',
+      name: 'hoursAndTotalFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R00.00`
+  String get r00 {
+    return Intl.message(
+      'R00.00',
+      name: 'r00',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept & continue`
+  String get acceptAndContinue {
+    return Intl.message(
+      'Accept & continue',
+      name: 'acceptAndContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose pickup point`
+  String get choosePickupPoint {
+    return Intl.message(
+      'Choose pickup point',
+      name: 'choosePickupPoint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review job listing`
+  String get reviewJobListing {
+    return Intl.message(
+      'Review job listing',
+      name: 'reviewJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos`
+  String get photos {
+    return Intl.message(
+      'Photos',
+      name: 'photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Publish listing`
+  String get publishListing {
+    return Intl.message(
+      'Publish listing',
+      name: 'publishListing',
       desc: '',
       args: [],
     );
@@ -1900,531 +2000,121 @@ class AppLocalizations {
     );
   }
 
-  /// `I am looking for`
-  String get iAmLookingFor {
+  /// `Job listing`
+  String get jobListing {
     return Intl.message(
-      'I am looking for',
-      name: 'iAmLookingFor',
+      'Job listing',
+      name: 'jobListing',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`
-  String get exampleText {
+  /// `Candidate profile`
+  String get candidateProfile {
     return Intl.message(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      name: 'exampleText',
+      'Candidate profile',
+      name: 'candidateProfile',
       desc: '',
       args: [],
     );
   }
 
-  /// `Skills Required`
-  String get skillsRequired {
+  /// `About me`
+  String get aboutMe {
     return Intl.message(
-      'Skills Required',
-      name: 'skillsRequired',
+      'About me',
+      name: 'aboutMe',
       desc: '',
       args: [],
     );
   }
 
-  /// `Photos`
-  String get photos {
+  /// `My skills`
+  String get mySkills {
     return Intl.message(
-      'Photos',
-      name: 'photos',
+      'My skills',
+      name: 'mySkills',
       desc: '',
       args: [],
     );
   }
 
-  /// `Apply`
-  String get apply {
+  /// `Qualifications`
+  String get qualifications {
     return Intl.message(
-      'Apply',
-      name: 'apply',
+      'Qualifications',
+      name: 'qualifications',
       desc: '',
       args: [],
     );
   }
 
-  /// `Date & Time`
-  String get dateAndTime {
+  /// `Offer a job`
+  String get offerAJob {
     return Intl.message(
-      'Date & Time',
-      name: 'dateAndTime',
+      'Offer a job',
+      name: 'offerAJob',
       desc: '',
       args: [],
     );
   }
 
-  /// `HH:MM *`
-  String get timeFormat {
+  /// `When offering a job to a candidate, you can send an existing listing you’ve created before, or you can create a one-time listing for this specific opportunity.`
+  String get whenOfferingAJobToACandidateLongText {
     return Intl.message(
-      'HH:MM *',
-      name: 'timeFormat',
+      'When offering a job to a candidate, you can send an existing listing you’ve created before, or you can create a one-time listing for this specific opportunity.',
+      name: 'whenOfferingAJobToACandidateLongText',
       desc: '',
       args: [],
     );
   }
 
-  /// `DD/MM/YYYY *`
-  String get dateFormat {
+  /// `Select an existing job listing`
+  String get selectAnExistingJobListing {
     return Intl.message(
-      'DD/MM/YYYY *',
-      name: 'dateFormat',
+      'Select an existing job listing',
+      name: 'selectAnExistingJobListing',
       desc: '',
       args: [],
     );
   }
 
-  /// `Other comments (optional)`
-  String get otherCommentsOptional {
+  /// `Create a one-time listing`
+  String get createAOneTimeListing {
     return Intl.message(
-      'Other comments (optional)',
-      name: 'otherCommentsOptional',
+      'Create a one-time listing',
+      name: 'createAOneTimeListing',
       desc: '',
       args: [],
     );
   }
 
-  /// `Date of Job`
-  String get dateOfJob {
+  /// `Send job offer`
+  String get sendJobOffer {
     return Intl.message(
-      'Date of Job',
-      name: 'dateOfJob',
+      'Send job offer',
+      name: 'sendJobOffer',
       desc: '',
       args: [],
     );
   }
 
-  /// `If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you're available`
-  String get dateOfJobText {
+  /// `Offer sent!`
+  String get offerSentEx {
     return Intl.message(
-      'If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you\'re available',
-      name: 'dateOfJobText',
+      'Offer sent!',
+      name: 'offerSentEx',
       desc: '',
       args: [],
     );
   }
 
-  /// `Send Application`
-  String get sendApplication {
+  /// `Your job offer has been sent. You'll receive a notification once the candidate accepts.`
+  String get yourJobOfferHasBeenSent {
     return Intl.message(
-      'Send Application',
-      name: 'sendApplication',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Application sent`
-  String get applicationSent {
-    return Intl.message(
-      'Application sent',
-      name: 'applicationSent',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `We've seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"`
-  String get applicationSenttext {
-    return Intl.message(
-      'We\'ve seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"',
-      name: 'applicationSenttext',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Back to Jobs`
-  String get backToJobs {
-    return Intl.message(
-      'Back to Jobs',
-      name: 'backToJobs',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reschedule booking`
-  String get rescheduleBooking {
-    return Intl.message(
-      'Reschedule booking',
-      name: 'rescheduleBooking',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cancel booking`
-  String get cancelBooking {
-    return Intl.message(
-      'Cancel booking',
-      name: 'cancelBooking',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `See reviews`
-  String get seeReviews {
-    return Intl.message(
-      'See reviews',
-      name: 'seeReviews',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Need to reschedule? Select an alternative date and/or time and we'll let your client know.`
-  String get needToRescheduleSelectAnAlternativeDate {
-    return Intl.message(
-      'Need to reschedule? Select an alternative date and/or time and we\'ll let your client know.',
-      name: 'needToRescheduleSelectAnAlternativeDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reason for reschedule`
-  String get reasonForReschedule {
-    return Intl.message(
-      'Reason for reschedule',
-      name: 'reasonForReschedule',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Select a reason *`
-  String get selectAReason {
-    return Intl.message(
-      'Select a reason *',
-      name: 'selectAReason',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Proposed date & time`
-  String get proposedDateAndTime {
-    return Intl.message(
-      'Proposed date & time',
-      name: 'proposedDateAndTime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reschedule request sent`
-  String get rescheduleRequestSent {
-    return Intl.message(
-      'Reschedule request sent',
-      name: 'rescheduleRequestSent',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time.`
-  String get yourRescheduleRequestHasBeenSent {
-    return Intl.message(
-      'Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time.',
-      name: 'yourRescheduleRequestHasBeenSent',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Back to bookings`
-  String get backToBooking {
-    return Intl.message(
-      'Back to bookings',
-      name: 'backToBooking',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Home`
-  String get home {
-    return Intl.message(
-      'Home',
-      name: 'home',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Jobs`
-  String get jobs {
-    return Intl.message(
-      'Jobs',
-      name: 'jobs',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `chat`
-  String get chat {
-    return Intl.message(
-      'chat',
-      name: 'chat',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `profile`
-  String get profile {
-    return Intl.message(
-      'profile',
-      name: 'profile',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reschedule Request`
-  String get rescheduleRequest {
-    return Intl.message(
-      'Reschedule Request',
-      name: 'rescheduleRequest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `A reschedule request has been sent to you, Once you approve, your booking will be updated in your calendar to the proposed date and time`
-  String get aRescheduleRequestHasBeenSentToYou {
-    return Intl.message(
-      'A reschedule request has been sent to you, Once you approve, your booking will be updated in your calendar to the proposed date and time',
-      name: 'aRescheduleRequestHasBeenSentToYou',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Go to reschedule request`
-  String get goToRescheduleRequest {
-    return Intl.message(
-      'Go to reschedule request',
-      name: 'goToRescheduleRequest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request`
-  String needsToRescheduleThisBooking(Object name) {
-    return Intl.message(
-      '$name needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request',
-      name: 'needsToRescheduleThisBooking',
-      desc: '',
-      args: [name],
-    );
-  }
-
-  /// `Other comments`
-  String get otherComments {
-    return Intl.message(
-      'Other comments',
-      name: 'otherComments',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Propose another time?`
-  String get proposeAnotherTime {
-    return Intl.message(
-      'Propose another time?',
-      name: 'proposeAnotherTime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Propose Alternative`
-  String get proposeAlternative {
-    return Intl.message(
-      'Propose Alternative',
-      name: 'proposeAlternative',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Request approved`
-  String get requestAccepted {
-    return Intl.message(
-      'Request approved',
-      name: 'requestAccepted',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Request declined`
-  String get requestDeclined {
-    return Intl.message(
-      'Request declined',
-      name: 'requestDeclined',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `You've approved the reschedule request and it has been updated in your calendar.`
-  String get youveAcceptedTheRescheduleRequest {
-    return Intl.message(
-      'You\'ve approved the reschedule request and it has been updated in your calendar.',
-      name: 'youveAcceptedTheRescheduleRequest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `You,ve declined the reschedule request. You can still propose an alternative date & time`
-  String get youveDeclinedTheRescheduleRequest {
-    return Intl.message(
-      'You,ve declined the reschedule request. You can still propose an alternative date & time',
-      name: 'youveDeclinedTheRescheduleRequest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Not satisfied with the proposed reschedule date & time? you can propose an alternative`
-  String get notSatisfiedWithTheProposedRescheduleDateAndTime {
-    return Intl.message(
-      'Not satisfied with the proposed reschedule date & time? you can propose an alternative',
-      name: 'notSatisfiedWithTheProposedRescheduleDateAndTime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Select an alternative Date and/or Time.`
-  String get selectAnAlternativeDateAndOrTime {
-    return Intl.message(
-      'Select an alternative Date and/or Time.',
-      name: 'selectAnAlternativeDateAndOrTime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Alternative date & time`
-  String get alternativeDateAndTime {
-    return Intl.message(
-      'Alternative date & time',
-      name: 'alternativeDateAndTime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Send alternative`
-  String get sendAlternative {
-    return Intl.message(
-      'Send alternative',
-      name: 'sendAlternative',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Alternative sent`
-  String get alternativeSent {
-    return Intl.message(
-      'Alternative sent',
-      name: 'alternativeSent',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `We've sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected`
-  String get weveSentYourAlternativeDateAndTimeProposal {
-    return Intl.message(
-      'We\'ve sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected',
-      name: 'weveSentYourAlternativeDateAndTimeProposal',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Alternative reschedule request`
-  String get alternativeRescheduleRequest {
-    return Intl.message(
-      'Alternative reschedule request',
-      name: 'alternativeRescheduleRequest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `An Alternative reschedule request has been sent to you. Once you approve, your booking will be updated in your calendar to the proposed date and time.`
-  String get anAlternativeRescheduleRequestHasBeenSentToYou {
-    return Intl.message(
-      'An Alternative reschedule request has been sent to you. Once you approve, your booking will be updated in your calendar to the proposed date and time.',
-      name: 'anAlternativeRescheduleRequestHasBeenSentToYou',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Go to alternative Request`
-  String get goToAlternativeRequest {
-    return Intl.message(
-      'Go to alternative Request',
-      name: 'goToAlternativeRequest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Alternative request`
-  String get alternativeRequest {
-    return Intl.message(
-      'Alternative request',
-      name: 'alternativeRequest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{name} sent an alternative request. You can approve, or decline this request`
-  String sentAnAlternativeRequest(Object name) {
-    return Intl.message(
-      '$name sent an alternative request. You can approve, or decline this request',
-      name: 'sentAnAlternativeRequest',
-      desc: '',
-      args: [name],
-    );
-  }
-
-  /// `Decline`
-  String get decline {
-    return Intl.message(
-      'Decline',
-      name: 'decline',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Accept`
-  String get accept {
-    return Intl.message(
-      'Accept',
-      name: 'accept',
+      'Your job offer has been sent. You\'ll receive a notification once the candidate accepts.',
+      name: 'yourJobOfferHasBeenSent',
       desc: '',
       args: [],
     );
