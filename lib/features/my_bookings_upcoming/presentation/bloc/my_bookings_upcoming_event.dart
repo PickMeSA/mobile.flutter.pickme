@@ -20,3 +20,5 @@ class CalendarChangedEvent extends MyBookingsUpcomingPageEvent{
 
   CalendarChangedEvent({required this.dateTime});
 }
+
+class LoadBookingsUpcomingEvent extends MyBookingsUpcomingPageEvent{}

@@ -45,6 +45,30 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AllServicesPage(),
       );
     },
+    AlternativeRequestDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AlternativeRequestDetailsPage(),
+      );
+    },
+    AlternativeRequestResponseRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AlternativeRequestResponsePage(),
+      );
+    },
+    AlternativeRescheduleRequestRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AlternativeRescheduleRequestPage(),
+      );
+    },
+    AlternativeSentRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AlternativeSentPage(),
+      );
+    },
     ApplicationSentRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -69,6 +93,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BankDetailsPage(),
       );
     },
+    BookingRescheduleSentRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BookingRescheduleSentPage(),
+      );
+    },
     BottomNavigationBarRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -79,6 +109,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const BurgerMenuPage(),
+      );
+    },
+    CancelBookingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CancelBookingPage(),
       );
     },
     CreateJobListingRoute.name: (routeData) {
@@ -193,6 +229,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const PendingProfilePage(),
       );
     },
+    ProposeAlternativeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProposeAlternativePage(),
+      );
+    },
     QualificationsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -215,6 +257,34 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const RegisterPage(),
+      );
+    },
+    RescheduleBookingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RescheduleBookingPage(),
+      );
+    },
+    RescheduleRequestDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RescheduleRequestDetailsPage(),
+      );
+    },
+    RescheduleRequestRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RescheduleRequestPage(),
+      );
+    },
+    RescheduleSelectionResponseRoute.name: (routeData) {
+      final args = routeData.argsAs<RescheduleSelectionResponseRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RescheduleSelectionResponsePage(
+          key: args.key,
+          approved: args.approved,
+        ),
       );
     },
     ResendOTPRoute.name: (routeData) {
@@ -336,6 +406,62 @@ class AllServicesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AlternativeRequestDetailsPage]
+class AlternativeRequestDetailsRoute extends PageRouteInfo<void> {
+  const AlternativeRequestDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          AlternativeRequestDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AlternativeRequestDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AlternativeRequestResponsePage]
+class AlternativeRequestResponseRoute extends PageRouteInfo<void> {
+  const AlternativeRequestResponseRoute({List<PageRouteInfo>? children})
+      : super(
+          AlternativeRequestResponseRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AlternativeRequestResponseRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AlternativeRescheduleRequestPage]
+class AlternativeRescheduleRequestRoute extends PageRouteInfo<void> {
+  const AlternativeRescheduleRequestRoute({List<PageRouteInfo>? children})
+      : super(
+          AlternativeRescheduleRequestRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AlternativeRescheduleRequestRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AlternativeSentPage]
+class AlternativeSentRoute extends PageRouteInfo<void> {
+  const AlternativeSentRoute({List<PageRouteInfo>? children})
+      : super(
+          AlternativeSentRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AlternativeSentRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [ApplicationSentPage]
 class ApplicationSentRoute extends PageRouteInfo<void> {
   const ApplicationSentRoute({List<PageRouteInfo>? children})
@@ -392,6 +518,20 @@ class BankDetailsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BookingRescheduleSentPage]
+class BookingRescheduleSentRoute extends PageRouteInfo<void> {
+  const BookingRescheduleSentRoute({List<PageRouteInfo>? children})
+      : super(
+          BookingRescheduleSentRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BookingRescheduleSentRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [BottomNavigationBarPage]
 class BottomNavigationBarRoute extends PageRouteInfo<void> {
   const BottomNavigationBarRoute({List<PageRouteInfo>? children})
@@ -415,6 +555,20 @@ class BurgerMenuRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'BurgerMenuRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CancelBookingPage]
+class CancelBookingRoute extends PageRouteInfo<void> {
+  const CancelBookingRoute({List<PageRouteInfo>? children})
+      : super(
+          CancelBookingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CancelBookingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -720,6 +874,20 @@ class PendingProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ProposeAlternativePage]
+class ProposeAlternativeRoute extends PageRouteInfo<void> {
+  const ProposeAlternativeRoute({List<PageRouteInfo>? children})
+      : super(
+          ProposeAlternativeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProposeAlternativeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [QualificationsPage]
 class QualificationsRoute extends PageRouteInfo<void> {
   const QualificationsRoute({List<PageRouteInfo>? children})
@@ -773,6 +941,87 @@ class RegisterRoute extends PageRouteInfo<void> {
   static const String name = 'RegisterRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RescheduleBookingPage]
+class RescheduleBookingRoute extends PageRouteInfo<void> {
+  const RescheduleBookingRoute({List<PageRouteInfo>? children})
+      : super(
+          RescheduleBookingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RescheduleBookingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RescheduleRequestDetailsPage]
+class RescheduleRequestDetailsRoute extends PageRouteInfo<void> {
+  const RescheduleRequestDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          RescheduleRequestDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RescheduleRequestDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RescheduleRequestPage]
+class RescheduleRequestRoute extends PageRouteInfo<void> {
+  const RescheduleRequestRoute({List<PageRouteInfo>? children})
+      : super(
+          RescheduleRequestRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RescheduleRequestRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RescheduleSelectionResponsePage]
+class RescheduleSelectionResponseRoute
+    extends PageRouteInfo<RescheduleSelectionResponseRouteArgs> {
+  RescheduleSelectionResponseRoute({
+    Key? key,
+    required bool approved,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RescheduleSelectionResponseRoute.name,
+          args: RescheduleSelectionResponseRouteArgs(
+            key: key,
+            approved: approved,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RescheduleSelectionResponseRoute';
+
+  static const PageInfo<RescheduleSelectionResponseRouteArgs> page =
+      PageInfo<RescheduleSelectionResponseRouteArgs>(name);
+}
+
+class RescheduleSelectionResponseRouteArgs {
+  const RescheduleSelectionResponseRouteArgs({
+    this.key,
+    required this.approved,
+  });
+
+  final Key? key;
+
+  final bool approved;
+
+  @override
+  String toString() {
+    return 'RescheduleSelectionResponseRouteArgs{key: $key, approved: $approved}';
+  }
 }
 
 /// generated route for

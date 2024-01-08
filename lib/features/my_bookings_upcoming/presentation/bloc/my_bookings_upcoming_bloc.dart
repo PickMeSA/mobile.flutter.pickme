@@ -6,6 +6,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/use_cases/my_bookings_upcoming_usecase/load_bookings_upcoming_usecase.dart';
 
 part 'my_bookings_upcoming_event.dart';
 part 'my_bookings_upcoming_state.dart';
@@ -19,13 +20,27 @@ class MyBookingsUpcomingBloc
     String currentMonth = DateFormat.yMMM().format(DateTime.now());
     DateTime targetDateTime = DateTime.now();
 
+    final LoadBookingsUpcomingUseCase loadBookingsUpcomingUseCase;
 
-    MyBookingsUpcomingBloc(): super(MyBookingsUpcomingPageInitState()) {
 
+    MyBookingsUpcomingBloc({
+        required this.loadBookingsUpcomingUseCase
+    } ): super(MyBookingsUpcomingPageInitState()) {
+        on<LoadBookingsUpcomingEvent>((event, emit)=> _onLoadBookingsUpcomingEvent(event,emit));
         on<CalendarMonthIncrementEvent>((event, emit) => _onCalendarMonthIncrementEvent(event, emit));
         on<CalendarMonthDecrementEvent>((event, emit) => _onCalendarMonthDecrementEvent(event, emit));
         on<CalendarDateSelectedEvent>((event ,emit) => _onCalendarDateSelectedEvent(event, emit));
         on<CalendarChangedEvent>((event, emit)=> _onCalendarChangedEvent(event, emit));
+    }
+
+    _onLoadBookingsUpcomingEvent(event,emit) async{
+        emit(LoadBookingUpcomingState()..dataState = DataState.loading);
+        try{
+            await loadBookingsUpcomingUseCase.call();
+            emit(LoadBookingUpcomingState()..dataState = DataState.success);
+        }catch(ex){
+            emit(LoadBookingUpcomingState()..dataState = DataState.error);
+        }
     }
 
     _onCalendarChangedEvent(

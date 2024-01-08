@@ -1750,6 +1750,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Bookings`
+  String get bookings {
+    return Intl.message(
+      'Bookings',
+      name: 'bookings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Upcoming`
   String get upcoming {
     return Intl.message(
@@ -1950,20 +1960,20 @@ class AppLocalizations {
     );
   }
 
-  /// `HH:MM`
+  /// `HH:MM *`
   String get timeFormat {
     return Intl.message(
-      'HH:MM',
+      'HH:MM *',
       name: 'timeFormat',
       desc: '',
       args: [],
     );
   }
 
-  /// `dd/mm/yyyy`
+  /// `DD/MM/YYYY *`
   String get dateFormat {
     return Intl.message(
-      'dd/mm/yyyy',
+      'DD/MM/YYYY *',
       name: 'dateFormat',
       desc: '',
       args: [],
@@ -2065,6 +2075,356 @@ class AppLocalizations {
     return Intl.message(
       'See reviews',
       name: 'seeReviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need to reschedule? Select an alternative date and/or time and we'll let your client know.`
+  String get needToRescheduleSelectAnAlternativeDate {
+    return Intl.message(
+      'Need to reschedule? Select an alternative date and/or time and we\'ll let your client know.',
+      name: 'needToRescheduleSelectAnAlternativeDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reason for reschedule`
+  String get reasonForReschedule {
+    return Intl.message(
+      'Reason for reschedule',
+      name: 'reasonForReschedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a reason *`
+  String get selectAReason {
+    return Intl.message(
+      'Select a reason *',
+      name: 'selectAReason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proposed date & time`
+  String get proposedDateAndTime {
+    return Intl.message(
+      'Proposed date & time',
+      name: 'proposedDateAndTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reschedule request sent`
+  String get rescheduleRequestSent {
+    return Intl.message(
+      'Reschedule request sent',
+      name: 'rescheduleRequestSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time.`
+  String get yourRescheduleRequestHasBeenSent {
+    return Intl.message(
+      'Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time.',
+      name: 'yourRescheduleRequestHasBeenSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to bookings`
+  String get backToBooking {
+    return Intl.message(
+      'Back to bookings',
+      name: 'backToBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Jobs`
+  String get jobs {
+    return Intl.message(
+      'Jobs',
+      name: 'jobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `chat`
+  String get chat {
+    return Intl.message(
+      'chat',
+      name: 'chat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `profile`
+  String get profile {
+    return Intl.message(
+      'profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reschedule Request`
+  String get rescheduleRequest {
+    return Intl.message(
+      'Reschedule Request',
+      name: 'rescheduleRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A reschedule request has been sent to you, Once you approve, your booking will be updated in your calendar to the proposed date and time`
+  String get aRescheduleRequestHasBeenSentToYou {
+    return Intl.message(
+      'A reschedule request has been sent to you, Once you approve, your booking will be updated in your calendar to the proposed date and time',
+      name: 'aRescheduleRequestHasBeenSentToYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to reschedule request`
+  String get goToRescheduleRequest {
+    return Intl.message(
+      'Go to reschedule request',
+      name: 'goToRescheduleRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request`
+  String needsToRescheduleThisBooking(Object name) {
+    return Intl.message(
+      '$name needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request',
+      name: 'needsToRescheduleThisBooking',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Other comments`
+  String get otherComments {
+    return Intl.message(
+      'Other comments',
+      name: 'otherComments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Propose another time?`
+  String get proposeAnotherTime {
+    return Intl.message(
+      'Propose another time?',
+      name: 'proposeAnotherTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Propose Alternative`
+  String get proposeAlternative {
+    return Intl.message(
+      'Propose Alternative',
+      name: 'proposeAlternative',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request approved`
+  String get requestAccepted {
+    return Intl.message(
+      'Request approved',
+      name: 'requestAccepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request declined`
+  String get requestDeclined {
+    return Intl.message(
+      'Request declined',
+      name: 'requestDeclined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've approved the reschedule request and it has been updated in your calendar.`
+  String get youveAcceptedTheRescheduleRequest {
+    return Intl.message(
+      'You\'ve approved the reschedule request and it has been updated in your calendar.',
+      name: 'youveAcceptedTheRescheduleRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You,ve declined the reschedule request. You can still propose an alternative date & time`
+  String get youveDeclinedTheRescheduleRequest {
+    return Intl.message(
+      'You,ve declined the reschedule request. You can still propose an alternative date & time',
+      name: 'youveDeclinedTheRescheduleRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not satisfied with the proposed reschedule date & time? you can propose an alternative`
+  String get notSatisfiedWithTheProposedRescheduleDateAndTime {
+    return Intl.message(
+      'Not satisfied with the proposed reschedule date & time? you can propose an alternative',
+      name: 'notSatisfiedWithTheProposedRescheduleDateAndTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select an alternative Date and/or Time.`
+  String get selectAnAlternativeDateAndOrTime {
+    return Intl.message(
+      'Select an alternative Date and/or Time.',
+      name: 'selectAnAlternativeDateAndOrTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alternative date & time`
+  String get alternativeDateAndTime {
+    return Intl.message(
+      'Alternative date & time',
+      name: 'alternativeDateAndTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send alternative`
+  String get sendAlternative {
+    return Intl.message(
+      'Send alternative',
+      name: 'sendAlternative',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alternative sent`
+  String get alternativeSent {
+    return Intl.message(
+      'Alternative sent',
+      name: 'alternativeSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected`
+  String get weveSentYourAlternativeDateAndTimeProposal {
+    return Intl.message(
+      'We\'ve sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected',
+      name: 'weveSentYourAlternativeDateAndTimeProposal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alternative reschedule request`
+  String get alternativeRescheduleRequest {
+    return Intl.message(
+      'Alternative reschedule request',
+      name: 'alternativeRescheduleRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An Alternative reschedule request has been sent to you. Once you approve, your booking will be updated in your calendar to the proposed date and time.`
+  String get anAlternativeRescheduleRequestHasBeenSentToYou {
+    return Intl.message(
+      'An Alternative reschedule request has been sent to you. Once you approve, your booking will be updated in your calendar to the proposed date and time.',
+      name: 'anAlternativeRescheduleRequestHasBeenSentToYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to alternative Request`
+  String get goToAlternativeRequest {
+    return Intl.message(
+      'Go to alternative Request',
+      name: 'goToAlternativeRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alternative request`
+  String get alternativeRequest {
+    return Intl.message(
+      'Alternative request',
+      name: 'alternativeRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{name} sent an alternative request. You can approve, or decline this request`
+  String sentAnAlternativeRequest(Object name) {
+    return Intl.message(
+      '$name sent an alternative request. You can approve, or decline this request',
+      name: 'sentAnAlternativeRequest',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Decline`
+  String get decline {
+    return Intl.message(
+      'Decline',
+      name: 'decline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept`
+  String get accept {
+    return Intl.message(
+      'Accept',
+      name: 'accept',
       desc: '',
       args: [],
     );

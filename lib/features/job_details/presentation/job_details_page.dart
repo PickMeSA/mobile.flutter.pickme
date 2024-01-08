@@ -128,9 +128,9 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                      )
                                  ),
                                  onPressed:() {
-
+                                    context.router.push(const RescheduleBookingRoute());
                                  },
-                                 child: Text(getLocalization().rescheduleBooking, style: TextStyle(color: Colors.white)),
+                                 child: Text(getLocalization().rescheduleBooking, style: const TextStyle(color: Colors.white)),
                                ),
                                20.height,
                                SecondaryButtonDark(
