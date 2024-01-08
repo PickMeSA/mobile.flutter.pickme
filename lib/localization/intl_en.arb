@@ -205,5 +205,6 @@
   "createAOneTimeListing": "Create a one-time listing",
   "sendJobOffer": "Send job offer",
   "offerSentEx": "Offer sent!",
-  "yourJobOfferHasBeenSent": "Your job offer has been sent. You'll receive a notification once the candidate accepts."
+  "yourJobOfferHasBeenSent": "Your job offer has been sent. You'll receive a notification once the candidate accepts.",
+  "jobs": "Jobs"
 }

@@ -39,6 +39,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const AddWorkExperiencePage(),
       );
     },
+    AllJobsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AllJobsPage(),
+      );
+    },
     AllServicesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -127,6 +133,16 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const JobDetailsPage(),
+      );
+    },
+    JobListRoute.name: (routeData) {
+      final args = routeData.argsAs<JobListRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: JobListPage(
+          key: args.key,
+          candidateProfileEntity: args.candidateProfileEntity,
+        ),
       );
     },
     JobsHiringLandingRoute.name: (routeData) {
@@ -361,6 +377,20 @@ class AddWorkExperienceRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AddWorkExperienceRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AllJobsPage]
+class AllJobsRoute extends PageRouteInfo<void> {
+  const AllJobsRoute({List<PageRouteInfo>? children})
+      : super(
+          AllJobsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AllJobsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -627,6 +657,44 @@ class JobDetailsRoute extends PageRouteInfo<void> {
   static const String name = 'JobDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [JobListPage]
+class JobListRoute extends PageRouteInfo<JobListRouteArgs> {
+  JobListRoute({
+    Key? key,
+    required CandidateProfileEntity candidateProfileEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
+          JobListRoute.name,
+          args: JobListRouteArgs(
+            key: key,
+            candidateProfileEntity: candidateProfileEntity,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'JobListRoute';
+
+  static const PageInfo<JobListRouteArgs> page =
+      PageInfo<JobListRouteArgs>(name);
+}
+
+class JobListRouteArgs {
+  const JobListRouteArgs({
+    this.key,
+    required this.candidateProfileEntity,
+  });
+
+  final Key? key;
+
+  final CandidateProfileEntity candidateProfileEntity;
+
+  @override
+  String toString() {
+    return 'JobListRouteArgs{key: $key, candidateProfileEntity: $candidateProfileEntity}';
+  }
 }
 
 /// generated route for

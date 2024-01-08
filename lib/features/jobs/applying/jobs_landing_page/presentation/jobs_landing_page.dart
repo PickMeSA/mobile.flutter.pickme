@@ -1,16 +1,14 @@
-import 'package:flutter/gestures.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/entities/subscription_plan_entity.dart';
 import 'package:pickme/features/jobs/applying/jobs_landing_page/presentation/bloc/jobs_landing_page_bloc.dart';
 import 'package:pickme/localization/generated/l10n.dart';
-import 'package:pickme/navigation/app_route.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
-import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 
 @RoutePage()
@@ -34,14 +32,14 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
-          padding: wPagePadding(),
+          padding: wPagePadding(top: 0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppExplorationTile(
                   title: getLocalization().exploreAllJobs,
-                  onClick: (){},
+                  onClick: ()=>context.router.push(const AllJobsRoute()),
                 ),
                 10.height,
                 AppExplorationTile(
@@ -112,4 +110,10 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
   }
 
 
+  @override
+  PreferredSizeWidget buildAppbar(){
+    return getAppBar(
+      title: Text(getLocalization().jobs,),
+    );
+  }
 }

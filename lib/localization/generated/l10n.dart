@@ -2119,6 +2119,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Jobs`
+  String get jobs {
+    return Intl.message(
+      'Jobs',
+      name: 'jobs',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -148,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "jobListingDetails":
             MessageLookupByLibrary.simpleMessage("Job listing details"),
         "jobName": MessageLookupByLibrary.simpleMessage("Job name"),
+        "jobs": MessageLookupByLibrary.simpleMessage("Jobs"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),

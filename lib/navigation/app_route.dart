@@ -10,6 +10,7 @@ import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_naviga
 import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
+import 'package:pickme/features/jobs/applying/all_jobs/presentation/all_jobs_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
 import 'package:pickme/features/jobs/hiring/candidate_filters/presentation/filter_candidates_page.dart';
 import 'package:pickme/features/jobs/hiring/candidate_profile_page/presentation/candidate_profile_page.dart';
@@ -103,6 +104,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: BurgerMenuRoute.page),
     AnimatedRoute(page: SelectExistingJobRoute.page),
     AnimatedRoute(page: OfferSentRoute.page),
+    AnimatedRoute(page: AllJobsRoute.page),
 
   ];
 }
