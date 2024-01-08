@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class DateFormatters{
 
 
@@ -22,5 +24,17 @@ class DateFormatters{
 
   static String getWordDate (DateTime dateTime){
      return "${toMonthWord(dateTime)} ${dateTime.year}";
+  }
+
+  static String getFullDate (DateTime dateTime){
+     return DateFormat.yMMMMd('en_US').format(dateTime);
+  }
+  
+  static String getHMTime(DateTime dateTime){
+     return DateFormat("HH:mm").format(dateTime);
+  }
+
+  static String getDayMonthYear(DateTime dateTime){
+     return DateFormat("dd MMMM yyyy").format(dateTime);
   }
 }

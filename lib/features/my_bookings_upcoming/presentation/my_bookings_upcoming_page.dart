@@ -25,16 +25,11 @@ class MyBookingsUpcomingPage extends BasePage {
 class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage, MyBookingsUpcomingBloc> {
 
 
-
-
-
-
-
       @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    getBloc().add(LoadBookingsUpcomingEvent());
   }
 
     @override
@@ -157,15 +152,15 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                               Column(
                                 children: [
                                   InkWell(
-                                onTap: ()=> context.router.push(JobDetailsRoute()),
+                                onTap: ()=> context.router.push(AlternativeRescheduleRequestRoute()),
                                     child: AppJobCard(
                                       jobName: 'Tax Preparation',
                                       employerName: 'DVT',
                                       locationName: 'PickMe',
                                       dateTime: DateTime.now().add(const Duration(days: 5)),
-                                      status: JobStatus.applied,
+                                      status: JobStatus.cancelled,
                                       onNext: () {
-                                        context.router.push(JobDetailsRoute());
+                                        //context.router.push(JobDetailsRoute(fromIndex: 1));
                                       },
                                     ),
                                   ),
@@ -181,13 +176,16 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                            return
                              Column(
                                children: [
-                                 AppJobCard(
-                                   jobName: 'Tax Preparation',
-                                   employerName: 'DVT',
-                                   locationName: 'PickMe',
-                                   dateTime: DateTime.now().add(const Duration(days: 5)),
-                                   status: JobStatus.applied,
-                                   onNext: () {  },
+                                 InkWell(
+                                   onTap:()=> context.router.push(JobDetailsRoute(fromIndex: 2)),
+                                   child: AppJobCard(
+                                     jobName: 'Tax Preparation',
+                                     employerName: 'DVT',
+                                     locationName: 'PickMe',
+                                     dateTime: DateTime.now().add(const Duration(days: 5)),
+
+                                     onNext: () {  },
+                                   ),
                                  ),
                                  10.height
                                ],
@@ -196,18 +194,20 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                          }),
                      ListView.builder(
                          itemCount: 4,
-                         physics: NeverScrollableScrollPhysics(),
+                         physics: const NeverScrollableScrollPhysics(),
                          itemBuilder: (context , index){
                            return
                              Column(
                                children: [
-                                 AppJobCard(
-                                   jobName: 'Tax Preparation',
-                                   employerName: 'DVT',
-                                   locationName: 'PickMe',
-                                   dateTime: DateTime.now().add(const Duration(days: 5)),
-                                   status: JobStatus.applied,
-                                   onNext: () {  },
+                                 InkWell(
+                                   child: AppJobCard(
+                                     jobName: 'Tax Preparation',
+                                     employerName: 'DVT',
+                                     locationName: 'PickMe',
+                                     dateTime: DateTime.now().add(const Duration(days: 5)),
+                                     status: JobStatus.cancelled,
+                                     onNext: () {  },
+                                   ),
                                  ),
                                  10.height
                                ],

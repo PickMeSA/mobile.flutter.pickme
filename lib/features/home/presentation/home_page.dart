@@ -115,20 +115,31 @@ late ProfileModel profileModel;
                              trailing: Icon(Icons.arrow_forward,size: 20,),
                            ),
                          ),
-                         SizedBox(height: 20,),
+                         const SizedBox(height: 20,),
                          wText(getLocalization().forYou),
-                         SizedBox(height: 20,),
+                         const SizedBox(height: 20,),
 
-                       /*  Row(
+                         Row(
                            children: [
-                             AppSectionCard(title: getLocalization().myBookings,
-                             color: theme.hoverColor,
-                             icon:Icon(Iconsax.calendar) ,),
-                             AppSectionCard(title: getLocalization().myWallet,
-                               color: theme.primaryColor,
-                               icon:Icon(Iconsax.wallet),)
+                             SizedBox(
+                               height: 230,
+                               width: (MediaQuery.sizeOf(context).width/ 2) - 25,
+                               child: AppSectionCard(title: getLocalization().myBookings,
+                                 color: WColors.pickMeBlue,
+                                 icon:Icon(Iconsax.calendar, color: Colors.white,size: 20) ,
+                               ),
+                             ),
+                             10.width,
+                             SizedBox(
+                               height: 230,
+                               width: (MediaQuery.sizeOf(context).width/ 2) - 25,
+                               child: AppSectionCard(title: getLocalization().myWallet,
+                                 color: theme.primaryColor,
+                                 icon:Icon(Iconsax.wallet, color: Colors.white,size: 20) ,
+                                 ),
+                             ),
                            ],
-                         ),*/
+                         ),
 
                          wText(getLocalization().myCalendar),
                      30.height,
