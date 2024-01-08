@@ -1740,6 +1740,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Date & time`
+  String get dateAndTime {
+    return Intl.message(
+      'Date & time',
+      name: 'dateAndTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I'm flexible (open to discuss)`
+  String get iMFlexibleOpenToDiscuss {
+    return Intl.message(
+      'I\'m flexible (open to discuss)',
+      name: 'iMFlexibleOpenToDiscuss',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `My Bookings`
   String get myBookings {
     return Intl.message(
@@ -1795,6 +1815,96 @@ class AppLocalizations {
     return Intl.message(
       'Client',
       name: 'client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hours & total fee`
+  String get hoursAndTotalFee {
+    return Intl.message(
+      'Hours & total fee',
+      name: 'hoursAndTotalFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `R00.00`
+  String get r00 {
+    return Intl.message(
+      'R00.00',
+      name: 'r00',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept & continue`
+  String get acceptAndContinue {
+    return Intl.message(
+      'Accept & continue',
+      name: 'acceptAndContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose pickup point`
+  String get choosePickupPoint {
+    return Intl.message(
+      'Choose pickup point',
+      name: 'choosePickupPoint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review job listing`
+  String get reviewJobListing {
+    return Intl.message(
+      'Review job listing',
+      name: 'reviewJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos`
+  String get photos {
+    return Intl.message(
+      'Photos',
+      name: 'photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Publish listing`
+  String get publishListing {
+    return Intl.message(
+      'Publish listing',
+      name: 'publishListing',
       desc: '',
       args: [],
     );
@@ -1885,6 +1995,126 @@ class AppLocalizations {
     return Intl.message(
       'Log out',
       name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job listing`
+  String get jobListing {
+    return Intl.message(
+      'Job listing',
+      name: 'jobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Candidate profile`
+  String get candidateProfile {
+    return Intl.message(
+      'Candidate profile',
+      name: 'candidateProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About me`
+  String get aboutMe {
+    return Intl.message(
+      'About me',
+      name: 'aboutMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My skills`
+  String get mySkills {
+    return Intl.message(
+      'My skills',
+      name: 'mySkills',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Qualifications`
+  String get qualifications {
+    return Intl.message(
+      'Qualifications',
+      name: 'qualifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Offer a job`
+  String get offerAJob {
+    return Intl.message(
+      'Offer a job',
+      name: 'offerAJob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `When offering a job to a candidate, you can send an existing listing you’ve created before, or you can create a one-time listing for this specific opportunity.`
+  String get whenOfferingAJobToACandidateLongText {
+    return Intl.message(
+      'When offering a job to a candidate, you can send an existing listing you’ve created before, or you can create a one-time listing for this specific opportunity.',
+      name: 'whenOfferingAJobToACandidateLongText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select an existing job listing`
+  String get selectAnExistingJobListing {
+    return Intl.message(
+      'Select an existing job listing',
+      name: 'selectAnExistingJobListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a one-time listing`
+  String get createAOneTimeListing {
+    return Intl.message(
+      'Create a one-time listing',
+      name: 'createAOneTimeListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send job offer`
+  String get sendJobOffer {
+    return Intl.message(
+      'Send job offer',
+      name: 'sendJobOffer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Offer sent!`
+  String get offerSentEx {
+    return Intl.message(
+      'Offer sent!',
+      name: 'offerSentEx',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your job offer has been sent. You'll receive a notification once the candidate accepts.`
+  String get yourJobOfferHasBeenSent {
+    return Intl.message(
+      'Your job offer has been sent. You\'ll receive a notification once the candidate accepts.',
+      name: 'yourJobOfferHasBeenSent',
       desc: '',
       args: [],
     );
