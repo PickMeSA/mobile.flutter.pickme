@@ -6,8 +6,17 @@ import 'package:pickme/features/add_memberships/presentation/add_memberships_pag
 import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
 import 'package:pickme/features/add_work_experience/presentation/add_work_experience_page.dart';
+import 'package:pickme/features/alternative_request_details/presentation/alternative_request_details_page.dart';
+import 'package:pickme/features/alternative_request_response/presentation/alternative_request_response_page.dart';
+import 'package:pickme/features/alternative_reschedule_request/presentation/alternative_reschedule_request_page.dart';
+import 'package:pickme/features/alternative_sent/presentation/alternative_sent_page.dart';
+import 'package:pickme/features/application_sent/presentation/application_sent_page.dart';
+import 'package:pickme/features/apply_for_job/presentation/apply_for_job_page.dart';
+import 'package:pickme/features/apply_for_job_tool_tip/presentation/apply_for_job_tool_tip_page.dart';
+import 'package:pickme/features/booking_reschedule_sent/presentation/booking_reschedule_sent_page.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_navigation_bar_page.dart';
 import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
+import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
@@ -33,10 +42,15 @@ import 'package:pickme/features/location/presentation/location_page.dart';
 import 'package:pickme/features/membership_information/presentation/membership_information_page.dart';
 import 'package:pickme/features/minimum_wage/presentation/minimum_wage_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
+import 'package:pickme/features/propose_alternative/presentation/propose_alternative_page.dart';
 import 'package:pickme/features/qualification/presentation/qualification_page.dart';
 import 'package:pickme/features/rate_and_work_times/presentation/rate_and_work_times_page.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/features/register/presentation/register_page.dart';
+import 'package:pickme/features/reschedule_booking/presentation/reschedule_booking_page.dart';
+import 'package:pickme/features/reschedule_request/presentation/reschedule_request_page.dart';
+import 'package:pickme/features/reschedule_request_details/presentation/reschedule_request_details_page.dart';
+import 'package:pickme/features/reschedule_selection_response/presentation/reschedule_selection_response_page.dart';
 import 'package:pickme/features/setup_profile/presentation/setup_profile_page.dart';
 import 'package:pickme/features/sign_up/presentation/sign_up_page.dart';
 import 'package:pickme/features/register_account_step_1/presentation/register_account_step1_page.dart';
@@ -103,6 +117,20 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: BurgerMenuRoute.page),
     AnimatedRoute(page: SelectExistingJobRoute.page),
     AnimatedRoute(page: OfferSentRoute.page),
+    AnimatedRoute(page: BurgerMenuRoute.page),
+    AnimatedRoute(page: ApplyForJobRoute.page),
+    AnimatedRoute(page: ApplyForJobToolTipRoute.page),
+    AnimatedRoute(page: ApplicationSentRoute.page),
+    AnimatedRoute(page: RescheduleBookingRoute.page),
+    AnimatedRoute(page: BookingRescheduleSentRoute.page),
+    AnimatedRoute(page:RescheduleRequestRoute.page),
+    AnimatedRoute(page: RescheduleRequestDetailsRoute.page),
+    AnimatedRoute(page: RescheduleSelectionResponseRoute.page),
+    AnimatedRoute(page: ProposeAlternativeRoute.page),
+    AnimatedRoute(page: AlternativeSentRoute.page),
+    AnimatedRoute(page: AlternativeRescheduleRequestRoute.page),
+    AnimatedRoute(page: AlternativeRequestDetailsRoute.page),
+    AnimatedRoute(page: CancelBookingRoute.page)
 
   ];
 }

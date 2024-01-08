@@ -12,5 +12,5 @@ class CalendarDateSelectedState extends MyBookingsUpcomingPageState{}
 
 class CalendarChangedState extends MyBookingsUpcomingPageState{}
 
-class GetUpcomingBookingsState extends MyBookingsUpcomingPageState{}
+class LoadBookingUpcomingState extends MyBookingsUpcomingPageState{}
 
