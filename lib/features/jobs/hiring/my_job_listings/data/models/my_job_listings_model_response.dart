@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'my_job_listings_job_model_response.dart';
+import '../../../../../../shared/models/jobs/my_job_listings_job_model_response.dart';
 
 part 'my_job_listings_model_response.freezed.dart';
 part 'my_job_listings_model_response.g.dart';
