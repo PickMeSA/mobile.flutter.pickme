@@ -28,6 +28,7 @@ class IndustryServiceImpl extends IndustryService {
       if(params!=null){
         queryParams = "?searchTerm=${params.searchText}";
       }
+      logger.i("$baseUrl$version/industries$queryParams");
       Response<dynamic> response =
           await apiService.get("$baseUrl$version/industries$queryParams");
       if (response.statusCode == 200) {

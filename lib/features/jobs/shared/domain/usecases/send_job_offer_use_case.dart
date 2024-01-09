@@ -1,7 +1,7 @@
 
 import 'package:pickme/base_classes/base_usecase.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 
 import '../repositories/send_job_offer_repository.dart';

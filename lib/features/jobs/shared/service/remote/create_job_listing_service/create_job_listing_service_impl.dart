@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/jobs/hiring/review_job_listing_details/data/models/create_job_listing_model_response.dart';
 import 'package:pickme/features/jobs/hiring/review_job_listing_details/domain/repository/create_job_listing_repository.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/features/jobs/shared/service/remote/create_job_listing_service/create_job_listing_service.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 @Singleton(as: CreateJobListingService)

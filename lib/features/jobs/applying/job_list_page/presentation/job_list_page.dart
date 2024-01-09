@@ -9,24 +9,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
 import 'bloc/select_existing_job_listing_bloc.dart';
 
-@RoutePage()
-class SelectExistingJobPage extends BasePage {
-  const SelectExistingJobPage({super.key, required this.candidateProfileEntity});
-  final CandidateProfileEntity candidateProfileEntity;
+enum JobListMode { categoryJobs, recommendedJobs, inYourArea }
 
+@RoutePage()
+class JobListPage extends BasePage {
+  const JobListPage({super.key,
+    required this.pageMode,
+    this.categoryId,
+  }):assert(
+  (pageMode==JobListMode.categoryJobs && categoryId!=null) ||
+      (pageMode!=JobListMode.categoryJobs && categoryId==null)
+  );
+  final JobListMode pageMode;
+  final String? categoryId;
   @override
-  State<SelectExistingJobPage> createState() => _MyJobListingsPageState();
+  State<JobListPage> createState() => _JobListPageState();
 }
 
-class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, SelectExistingJobBloc> {
+class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
 
   @override
   void initState() {
@@ -37,7 +43,7 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
-    return BlocConsumer<SelectExistingJobBloc, SelectExistingJobState>(
+    return BlocConsumer<JobListBloc, SelectExistingJobState>(
       listener: (context, state) {
         //loading
         if(state is SelectExistingJobPageEnteredState && state.dataState == DataState.loading){
@@ -113,7 +119,7 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
                 ),
               ),
               PrimaryButton.fullWidth(onPressed: getBloc().selectedJob == null?null: (){
-                getBloc().add(SendJobOfferClickedEvent(candidateProfileEntity: widget.candidateProfileEntity));
+
               }, child: Text(getLocalization().sendJobOffer)),
             ],
           ),
@@ -123,8 +129,8 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
   }
 
   @override
-  SelectExistingJobBloc initBloc() {
-    return locator<SelectExistingJobBloc>();
+  JobListBloc initBloc() {
+    return locator<JobListBloc>();
   }
 
   @override

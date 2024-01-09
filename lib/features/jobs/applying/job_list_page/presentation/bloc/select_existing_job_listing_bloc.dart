@@ -15,7 +15,7 @@ part 'select_existing_job_listing_event.dart';
 part 'select_existing_job_listing_state.dart';
 
 @injectable
-class SelectExistingJobBloc extends BaseBloc<SelectExistingJobEvent, SelectExistingJobState> {
+class JobListBloc extends BaseBloc<SelectExistingJobEvent, SelectExistingJobState> {
   final GetMyJobListingsUseCase getMyJobListingsUseCase;
   final SendJobOfferUseCase sendJobOfferUseCase;
   MyJobListingsPageEntity? myJobs;
@@ -23,7 +23,7 @@ class SelectExistingJobBloc extends BaseBloc<SelectExistingJobEvent, SelectExist
   bool preloaderActive = false;
   JobEntity? selectedJob;
 
-  SelectExistingJobBloc({required this.getMyJobListingsUseCase, required this.sendJobOfferUseCase}) : super(MyJobListingsPageInitial()) {
+  JobListBloc({required this.getMyJobListingsUseCase, required this.sendJobOfferUseCase}) : super(MyJobListingsPageInitial()) {
     on<MyJobListingsPageEnteredEvent>((event, emit) => _onSelectExistingJobPageEnteredEvent(event, emit));
     on<JobSelectedEvent>((event, emit) => _onJobSelectedEvent(event, emit));
     on<SendJobOfferClickedEvent>((event, emit) => _onSendJobOfferClickedEvent(event, emit));

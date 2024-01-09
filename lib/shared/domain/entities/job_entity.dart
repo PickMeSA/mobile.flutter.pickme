@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:pickme/features/jobs/hiring/my_job_listings/data/models/my_job_listings_job_model_response.dart';
+import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 
 class JobEntity extends Equatable{
