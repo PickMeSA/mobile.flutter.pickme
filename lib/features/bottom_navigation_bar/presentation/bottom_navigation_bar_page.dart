@@ -93,31 +93,31 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.home),
-        title: ("Home"),
+        title: (getLocalization().home),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.calendar),
-        title: ("My bookings"),
+        title: (getLocalization().bookings),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.briefcase),
-        title: ("Jobs"),
+        title: (getLocalization().jobs),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.bubble),
-        title: ("Chats"),
+        title: (getLocalization().chat),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.profile),
-        title: ("Profile"),
+        title: (getLocalization().profile),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
