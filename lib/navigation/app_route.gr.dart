@@ -123,10 +123,31 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CancelBookingPage(),
       );
     },
-    CreateJobListingRoute.name: (routeData) {
+    CandidateProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<CandidateProfileRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CreateJobListingPage(),
+        child: CandidateProfilePage(
+          key: args.key,
+          candidateProfile: args.candidateProfile,
+        ),
+      );
+    },
+    CreateJobListingInfoRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CreateJobListingInfoPage(),
+      );
+    },
+    CreateJobListingRoute.name: (routeData) {
+      final args = routeData.argsAs<CreateJobListingRouteArgs>(
+          orElse: () => const CreateJobListingRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CreateJobListingPage(
+          key: args.key,
+          candidateToOffer: args.candidateToOffer,
+        ),
       );
     },
     FilterCandidatesRoute.name: (routeData) {
@@ -144,6 +165,16 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const FinalDetailsPage(),
+      );
+    },
+    HirerJobDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<HirerJobDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: HirerJobDetailsPage(
+          key: args.key,
+          jobEntity: args.jobEntity,
+        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -240,6 +271,22 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    OfferAJobRoute.name: (routeData) {
+      final args = routeData.argsAs<OfferAJobRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: OfferAJobPage(
+          key: args.key,
+          candidateProfileEntity: args.candidateProfileEntity,
+        ),
+      );
+    },
+    OfferSentRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OfferSentPage(),
+      );
+    },
     PendingProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -311,6 +358,26 @@ abstract class _$AppRouter extends RootStackRouter {
         child: ResendOTPPage(
           key: args.key,
           userModel: args.userModel,
+        ),
+      );
+    },
+    ReviewJobListingInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<ReviewJobListingInfoRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ReviewJobListingInfoPage(
+          key: args.key,
+          jobEntity: args.jobEntity,
+        ),
+      );
+    },
+    SelectExistingJobRoute.name: (routeData) {
+      final args = routeData.argsAs<SelectExistingJobRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SelectExistingJobPage(
+          key: args.key,
+          candidateProfileEntity: args.candidateProfileEntity,
         ),
       );
     },
@@ -605,17 +672,93 @@ class CancelBookingRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [CreateJobListingPage]
-class CreateJobListingRoute extends PageRouteInfo<void> {
-  const CreateJobListingRoute({List<PageRouteInfo>? children})
+/// [CandidateProfilePage]
+class CandidateProfileRoute extends PageRouteInfo<CandidateProfileRouteArgs> {
+  CandidateProfileRoute({
+    Key? key,
+    required CandidateProfileEntity candidateProfile,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CandidateProfileRoute.name,
+          args: CandidateProfileRouteArgs(
+            key: key,
+            candidateProfile: candidateProfile,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'CandidateProfileRoute';
+
+  static const PageInfo<CandidateProfileRouteArgs> page =
+      PageInfo<CandidateProfileRouteArgs>(name);
+}
+
+class CandidateProfileRouteArgs {
+  const CandidateProfileRouteArgs({
+    this.key,
+    required this.candidateProfile,
+  });
+
+  final Key? key;
+
+  final CandidateProfileEntity candidateProfile;
+
+  @override
+  String toString() {
+    return 'CandidateProfileRouteArgs{key: $key, candidateProfile: $candidateProfile}';
+  }
+}
+
+/// generated route for
+/// [CreateJobListingInfoPage]
+class CreateJobListingInfoRoute extends PageRouteInfo<void> {
+  const CreateJobListingInfoRoute({List<PageRouteInfo>? children})
       : super(
+          CreateJobListingInfoRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CreateJobListingInfoRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CreateJobListingPage]
+class CreateJobListingRoute extends PageRouteInfo<CreateJobListingRouteArgs> {
+  CreateJobListingRoute({
+    Key? key,
+    CandidateProfileEntity? candidateToOffer,
+    List<PageRouteInfo>? children,
+  }) : super(
           CreateJobListingRoute.name,
+          args: CreateJobListingRouteArgs(
+            key: key,
+            candidateToOffer: candidateToOffer,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CreateJobListingRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CreateJobListingRouteArgs> page =
+      PageInfo<CreateJobListingRouteArgs>(name);
+}
+
+class CreateJobListingRouteArgs {
+  const CreateJobListingRouteArgs({
+    this.key,
+    this.candidateToOffer,
+  });
+
+  final Key? key;
+
+  final CandidateProfileEntity? candidateToOffer;
+
+  @override
+  String toString() {
+    return 'CreateJobListingRouteArgs{key: $key, candidateToOffer: $candidateToOffer}';
+  }
 }
 
 /// generated route for
@@ -668,6 +811,44 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
   static const String name = 'FinalDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HirerJobDetailsPage]
+class HirerJobDetailsRoute extends PageRouteInfo<HirerJobDetailsRouteArgs> {
+  HirerJobDetailsRoute({
+    Key? key,
+    required JobEntity jobEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
+          HirerJobDetailsRoute.name,
+          args: HirerJobDetailsRouteArgs(
+            key: key,
+            jobEntity: jobEntity,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'HirerJobDetailsRoute';
+
+  static const PageInfo<HirerJobDetailsRouteArgs> page =
+      PageInfo<HirerJobDetailsRouteArgs>(name);
+}
+
+class HirerJobDetailsRouteArgs {
+  const HirerJobDetailsRouteArgs({
+    this.key,
+    required this.jobEntity,
+  });
+
+  final Key? key;
+
+  final JobEntity jobEntity;
+
+  @override
+  String toString() {
+    return 'HirerJobDetailsRouteArgs{key: $key, jobEntity: $jobEntity}';
+  }
 }
 
 /// generated route for
@@ -934,6 +1115,58 @@ class OTPRouteArgs {
 }
 
 /// generated route for
+/// [OfferAJobPage]
+class OfferAJobRoute extends PageRouteInfo<OfferAJobRouteArgs> {
+  OfferAJobRoute({
+    Key? key,
+    required CandidateProfileEntity candidateProfileEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
+          OfferAJobRoute.name,
+          args: OfferAJobRouteArgs(
+            key: key,
+            candidateProfileEntity: candidateProfileEntity,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'OfferAJobRoute';
+
+  static const PageInfo<OfferAJobRouteArgs> page =
+      PageInfo<OfferAJobRouteArgs>(name);
+}
+
+class OfferAJobRouteArgs {
+  const OfferAJobRouteArgs({
+    this.key,
+    required this.candidateProfileEntity,
+  });
+
+  final Key? key;
+
+  final CandidateProfileEntity candidateProfileEntity;
+
+  @override
+  String toString() {
+    return 'OfferAJobRouteArgs{key: $key, candidateProfileEntity: $candidateProfileEntity}';
+  }
+}
+
+/// generated route for
+/// [OfferSentPage]
+class OfferSentRoute extends PageRouteInfo<void> {
+  const OfferSentRoute({List<PageRouteInfo>? children})
+      : super(
+          OfferSentRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OfferSentRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [PendingProfilePage]
 class PendingProfileRoute extends PageRouteInfo<void> {
   const PendingProfileRoute({List<PageRouteInfo>? children})
@@ -1133,6 +1366,83 @@ class ResendOTPRouteArgs {
   @override
   String toString() {
     return 'ResendOTPRouteArgs{key: $key, userModel: $userModel}';
+  }
+}
+
+/// generated route for
+/// [ReviewJobListingInfoPage]
+class ReviewJobListingInfoRoute
+    extends PageRouteInfo<ReviewJobListingInfoRouteArgs> {
+  ReviewJobListingInfoRoute({
+    Key? key,
+    required CreateJobPageJobEntity jobEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ReviewJobListingInfoRoute.name,
+          args: ReviewJobListingInfoRouteArgs(
+            key: key,
+            jobEntity: jobEntity,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ReviewJobListingInfoRoute';
+
+  static const PageInfo<ReviewJobListingInfoRouteArgs> page =
+      PageInfo<ReviewJobListingInfoRouteArgs>(name);
+}
+
+class ReviewJobListingInfoRouteArgs {
+  const ReviewJobListingInfoRouteArgs({
+    this.key,
+    required this.jobEntity,
+  });
+
+  final Key? key;
+
+  final CreateJobPageJobEntity jobEntity;
+
+  @override
+  String toString() {
+    return 'ReviewJobListingInfoRouteArgs{key: $key, jobEntity: $jobEntity}';
+  }
+}
+
+/// generated route for
+/// [SelectExistingJobPage]
+class SelectExistingJobRoute extends PageRouteInfo<SelectExistingJobRouteArgs> {
+  SelectExistingJobRoute({
+    Key? key,
+    required CandidateProfileEntity candidateProfileEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SelectExistingJobRoute.name,
+          args: SelectExistingJobRouteArgs(
+            key: key,
+            candidateProfileEntity: candidateProfileEntity,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectExistingJobRoute';
+
+  static const PageInfo<SelectExistingJobRouteArgs> page =
+      PageInfo<SelectExistingJobRouteArgs>(name);
+}
+
+class SelectExistingJobRouteArgs {
+  const SelectExistingJobRouteArgs({
+    this.key,
+    required this.candidateProfileEntity,
+  });
+
+  final Key? key;
+
+  final CandidateProfileEntity candidateProfileEntity;
+
+  @override
+  String toString() {
+    return 'SelectExistingJobRouteArgs{key: $key, candidateProfileEntity: $candidateProfileEntity}';
   }
 }
 

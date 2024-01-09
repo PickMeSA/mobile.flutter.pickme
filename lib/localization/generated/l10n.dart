@@ -2630,11 +2630,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Jobs`
-  String get jobs {
+  /// `Bookings`
+  String get bookings {
     return Intl.message(
-      'Jobs',
-      name: 'jobs',
+      'Bookings',
+      name: 'bookings',
       desc: '',
       args: [],
     );
