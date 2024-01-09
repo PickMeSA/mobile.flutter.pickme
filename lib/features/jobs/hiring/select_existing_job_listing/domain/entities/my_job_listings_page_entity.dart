@@ -1,5 +1,5 @@
 import 'package:pickme/features/jobs/hiring/my_job_listings/data/models/my_job_listings_job_model_response.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 

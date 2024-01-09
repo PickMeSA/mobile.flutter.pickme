@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/features/jobs/shared/domain/usecases/send_job_offer_use_case.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 
 import '../../domain/entities/my_job_listings_page_entity.dart';

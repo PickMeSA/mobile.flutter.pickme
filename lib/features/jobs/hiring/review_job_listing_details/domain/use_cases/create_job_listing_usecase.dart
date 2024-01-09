@@ -2,7 +2,7 @@
 import 'package:pickme/base_classes/base_usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
 import '../repository/create_job_listing_repository.dart';

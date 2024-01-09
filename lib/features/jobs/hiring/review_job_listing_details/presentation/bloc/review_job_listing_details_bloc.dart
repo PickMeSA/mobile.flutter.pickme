@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:pickme/features/jobs/shared/domain/usecases/send_job_offer_use_case.dart';
 
 import '../../../../shared/domain/entities/create_job_page_job_entity.dart';
-import '../../../../shared/domain/entities/job_entity.dart';
+import '../../../../../../shared/domain/entities/job_entity.dart';
 import '../../domain/use_cases/create_job_listing_usecase.dart';
 
 part 'review_job_listing_details_event.dart';

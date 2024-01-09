@@ -2,26 +2,32 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
 import 'bloc/select_existing_job_listing_bloc.dart';
 
+enum JobListMode { categoryJobs, recommendedJobs, inYourArea }
+
 @RoutePage()
 class JobListPage extends BasePage {
-  const JobListPage({super.key, required this.candidateProfileEntity});
-  final CandidateProfileEntity candidateProfileEntity;
-
+  const JobListPage({super.key,
+    required this.pageMode,
+    this.categoryId,
+  }):assert(
+  (pageMode==JobListMode.categoryJobs && categoryId!=null) ||
+      (pageMode!=JobListMode.categoryJobs && categoryId==null)
+  );
+  final JobListMode pageMode;
+  final String? categoryId;
   @override
   State<JobListPage> createState() => _JobListPageState();
 }
@@ -113,7 +119,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                 ),
               ),
               PrimaryButton.fullWidth(onPressed: getBloc().selectedJob == null?null: (){
-                getBloc().add(SendJobOfferClickedEvent(candidateProfileEntity: widget.candidateProfileEntity));
+
               }, child: Text(getLocalization().sendJobOffer)),
             ],
           ),

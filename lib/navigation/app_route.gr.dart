@@ -141,7 +141,8 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: JobListPage(
           key: args.key,
-          candidateProfileEntity: args.candidateProfileEntity,
+          pageMode: args.pageMode,
+          categoryId: args.categoryId,
         ),
       );
     },
@@ -664,13 +665,15 @@ class JobDetailsRoute extends PageRouteInfo<void> {
 class JobListRoute extends PageRouteInfo<JobListRouteArgs> {
   JobListRoute({
     Key? key,
-    required CandidateProfileEntity candidateProfileEntity,
+    required JobListMode pageMode,
+    String? categoryId,
     List<PageRouteInfo>? children,
   }) : super(
           JobListRoute.name,
           args: JobListRouteArgs(
             key: key,
-            candidateProfileEntity: candidateProfileEntity,
+            pageMode: pageMode,
+            categoryId: categoryId,
           ),
           initialChildren: children,
         );
@@ -684,16 +687,19 @@ class JobListRoute extends PageRouteInfo<JobListRouteArgs> {
 class JobListRouteArgs {
   const JobListRouteArgs({
     this.key,
-    required this.candidateProfileEntity,
+    required this.pageMode,
+    this.categoryId,
   });
 
   final Key? key;
 
-  final CandidateProfileEntity candidateProfileEntity;
+  final JobListMode pageMode;
+
+  final String? categoryId;
 
   @override
   String toString() {
-    return 'JobListRouteArgs{key: $key, candidateProfileEntity: $candidateProfileEntity}';
+    return 'JobListRouteArgs{key: $key, pageMode: $pageMode, categoryId: $categoryId}';
   }
 }
 

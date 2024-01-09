@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/jobs/shared/data/models/send_job_offer_model_request.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
