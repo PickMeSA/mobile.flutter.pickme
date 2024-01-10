@@ -46,9 +46,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     AllServicesRoute.name: (routeData) {
+      final args = routeData.argsAs<AllServicesRouteArgs>(
+          orElse: () => const AllServicesRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AllServicesPage(),
+        child: AllServicesPage(
+          key: args.key,
+          pageMode: args.pageMode,
+        ),
       );
     },
     AlternativeRequestDetailsRoute.name: (routeData) {
@@ -150,14 +155,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    FilterCandidatesRoute.name: (routeData) {
-      final args = routeData.argsAs<FilterCandidatesRouteArgs>(
-          orElse: () => const FilterCandidatesRouteArgs());
-      return AutoRoutePage<dynamic>(
+    FiltersRoute.name: (routeData) {
+      final args = routeData.argsAs<FiltersRouteArgs>(
+          orElse: () => const FiltersRouteArgs());
+      return AutoRoutePage<FilterEntity>(
         routeData: routeData,
-        child: FilterCandidatesPage(
+        child: FiltersPage(
           key: args.key,
           serviceCategoryId: args.serviceCategoryId,
+          filterEntity: args.filterEntity,
+          appMode: args.appMode,
         ),
       );
     },
@@ -202,6 +209,7 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           pageMode: args.pageMode,
           categoryId: args.categoryId,
+          pageTitle: args.pageTitle,
         ),
       );
     },
@@ -491,16 +499,40 @@ class AllJobsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AllServicesPage]
-class AllServicesRoute extends PageRouteInfo<void> {
-  const AllServicesRoute({List<PageRouteInfo>? children})
-      : super(
+class AllServicesRoute extends PageRouteInfo<AllServicesRouteArgs> {
+  AllServicesRoute({
+    Key? key,
+    ServicesPageMode pageMode = ServicesPageMode.hiring,
+    List<PageRouteInfo>? children,
+  }) : super(
           AllServicesRoute.name,
+          args: AllServicesRouteArgs(
+            key: key,
+            pageMode: pageMode,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AllServicesRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AllServicesRouteArgs> page =
+      PageInfo<AllServicesRouteArgs>(name);
+}
+
+class AllServicesRouteArgs {
+  const AllServicesRouteArgs({
+    this.key,
+    this.pageMode = ServicesPageMode.hiring,
+  });
+
+  final Key? key;
+
+  final ServicesPageMode pageMode;
+
+  @override
+  String toString() {
+    return 'AllServicesRouteArgs{key: $key, pageMode: $pageMode}';
+  }
 }
 
 /// generated route for
@@ -762,40 +794,50 @@ class CreateJobListingRouteArgs {
 }
 
 /// generated route for
-/// [FilterCandidatesPage]
-class FilterCandidatesRoute extends PageRouteInfo<FilterCandidatesRouteArgs> {
-  FilterCandidatesRoute({
+/// [FiltersPage]
+class FiltersRoute extends PageRouteInfo<FiltersRouteArgs> {
+  FiltersRoute({
     Key? key,
     String? serviceCategoryId,
+    FilterEntity? filterEntity,
+    AppMode appMode = AppMode.working,
     List<PageRouteInfo>? children,
   }) : super(
-          FilterCandidatesRoute.name,
-          args: FilterCandidatesRouteArgs(
+          FiltersRoute.name,
+          args: FiltersRouteArgs(
             key: key,
             serviceCategoryId: serviceCategoryId,
+            filterEntity: filterEntity,
+            appMode: appMode,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'FilterCandidatesRoute';
+  static const String name = 'FiltersRoute';
 
-  static const PageInfo<FilterCandidatesRouteArgs> page =
-      PageInfo<FilterCandidatesRouteArgs>(name);
+  static const PageInfo<FiltersRouteArgs> page =
+      PageInfo<FiltersRouteArgs>(name);
 }
 
-class FilterCandidatesRouteArgs {
-  const FilterCandidatesRouteArgs({
+class FiltersRouteArgs {
+  const FiltersRouteArgs({
     this.key,
     this.serviceCategoryId,
+    this.filterEntity,
+    this.appMode = AppMode.working,
   });
 
   final Key? key;
 
   final String? serviceCategoryId;
 
+  final FilterEntity? filterEntity;
+
+  final AppMode appMode;
+
   @override
   String toString() {
-    return 'FilterCandidatesRouteArgs{key: $key, serviceCategoryId: $serviceCategoryId}';
+    return 'FiltersRouteArgs{key: $key, serviceCategoryId: $serviceCategoryId, filterEntity: $filterEntity, appMode: $appMode}';
   }
 }
 
@@ -910,6 +952,7 @@ class JobListRoute extends PageRouteInfo<JobListRouteArgs> {
     Key? key,
     required JobListMode pageMode,
     String? categoryId,
+    String? pageTitle,
     List<PageRouteInfo>? children,
   }) : super(
           JobListRoute.name,
@@ -917,6 +960,7 @@ class JobListRoute extends PageRouteInfo<JobListRouteArgs> {
             key: key,
             pageMode: pageMode,
             categoryId: categoryId,
+            pageTitle: pageTitle,
           ),
           initialChildren: children,
         );
@@ -932,6 +976,7 @@ class JobListRouteArgs {
     this.key,
     required this.pageMode,
     this.categoryId,
+    this.pageTitle,
   });
 
   final Key? key;
@@ -940,9 +985,11 @@ class JobListRouteArgs {
 
   final String? categoryId;
 
+  final String? pageTitle;
+
   @override
   String toString() {
-    return 'JobListRouteArgs{key: $key, pageMode: $pageMode, categoryId: $categoryId}';
+    return 'JobListRouteArgs{key: $key, pageMode: $pageMode, categoryId: $categoryId, pageTitle: $pageTitle}';
   }
 }
 

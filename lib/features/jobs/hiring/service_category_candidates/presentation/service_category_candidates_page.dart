@@ -95,7 +95,7 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
     return getAppBar(
       title: Text(getLocalization().serviceCategory,),
       actions: [
-        TextButton(onPressed: ()=> context.router.push(FilterCandidatesRoute()), child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
+        TextButton(onPressed: ()=> context.router.push(FiltersRoute()), child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
       ],
     );
   }

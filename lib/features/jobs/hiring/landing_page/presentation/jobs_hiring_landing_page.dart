@@ -71,7 +71,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
               children: [
                 AppExplorationTile(
                   title: getLocalization().exploreAllServices,
-                  onClick: () => context.router.push(const AllServicesRoute()),
+                  onClick: () => context.router.push(AllServicesRoute()),
                 ),
                 10.height,
                 AppExplorationTile(
@@ -88,7 +88,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: () => context.router.push(const AllServicesRoute()),
+                        onPressed: () => context.router.push(AllServicesRoute()),
                         child: Row(
                           children: [
                             Text(
@@ -157,7 +157,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: () => context.router.push(const AllServicesRoute()),
+                        onPressed: () => context.router.push(AllServicesRoute()),
                         child: Row(
                           children: [
                             Text(

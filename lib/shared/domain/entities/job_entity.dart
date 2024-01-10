@@ -18,7 +18,7 @@ final String images;
 final String skills;
 final String comments;
 final String id;
-final double distance;
+final double? distance;
 
   const JobEntity({
     required this.title,
@@ -36,7 +36,7 @@ final double distance;
     required this.skills,
     this.comments = "",
     required this.id,
-    required this.distance
+    this.distance
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     logger.e({"response": response.startDate});

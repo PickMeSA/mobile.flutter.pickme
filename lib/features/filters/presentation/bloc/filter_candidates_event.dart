@@ -4,13 +4,9 @@ part of 'filter_candidates_bloc.dart';
 abstract class FilterCandidatesEvent extends BaseEvent {}
 
 class FilterCandidatesPageEnteredEvent extends FilterCandidatesEvent{
-  final int? serviceCategoryId;
-  final double maxDistance;
-  final RangeValues priceRange;
+  FilterEntity? filterEntity;
   FilterCandidatesPageEnteredEvent({
-    required this.maxDistance,
-    required this.priceRange,
-    this.serviceCategoryId
+    this.filterEntity
   });
 }
 
@@ -23,6 +19,17 @@ class MaxDistanceChangedEvent extends FilterCandidatesEvent{
 class PriceRangeChangedEvent extends FilterCandidatesEvent{
   final RangeValues priceRange;
   PriceRangeChangedEvent({required this.priceRange});
+}
+class EstimatedHoursChangedEvent extends FilterCandidatesEvent{
+  final double estimatedHours;
+  EstimatedHoursChangedEvent({required this.estimatedHours});
+}
+class RatingChangedEvent extends FilterCandidatesEvent{
+  final int rating;
+  RatingChangedEvent({required this.rating});
+}
+class ResetClickedEvent extends FilterCandidatesEvent{
+  ResetClickedEvent();
 }
 
 

@@ -19,7 +19,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     required String images,
     required String skills,
     String? id,
-    required double distance,
+    double? distance,
   }) = _MyJobListingsJobModelResponse;
 
   factory MyJobListingsJobModelResponse.fromJson(

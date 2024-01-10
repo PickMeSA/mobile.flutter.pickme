@@ -2639,6 +2639,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No jobs found`
+  String get noJobsFound {
+    return Intl.message(
+      'No jobs found',
+      name: 'noJobsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other services`
+  String get otherServices {
+    return Intl.message(
+      'Other services',
+      name: 'otherServices',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

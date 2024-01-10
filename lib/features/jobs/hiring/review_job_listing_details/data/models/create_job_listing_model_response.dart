@@ -13,13 +13,13 @@ class CreateJobListingModelResponse with _$CreateJobListingModelResponse {
     String? startDate,
     String? endDate,
     String? startTime,
-    required String estimatedHours,
+    required double estimatedHours,
     required double lat,
     required double lng,
     required String images,
     required String skills,
     String? id,
-    required double distance,
+    double? distance,
   }) = _CreateJobListingModelResponse;
 
   factory CreateJobListingModelResponse.fromJson(

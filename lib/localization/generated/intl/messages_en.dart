@@ -244,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
+        "noJobsFound": MessageLookupByLibrary.simpleMessage("No jobs found"),
         "notSatisfiedWithTheProposedRescheduleDateAndTime":
             MessageLookupByLibrary.simpleMessage(
                 "Not satisfied with the proposed reschedule date & time? you can propose an alternative"),
@@ -254,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otherComments": MessageLookupByLibrary.simpleMessage("Other comments"),
         "otherCommentsOptional":
             MessageLookupByLibrary.simpleMessage("Other comments (optional)"),
+        "otherServices": MessageLookupByLibrary.simpleMessage("Other services"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),

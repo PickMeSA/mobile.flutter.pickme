@@ -17,12 +17,12 @@ import 'package:pickme/features/booking_reschedule_sent/presentation/booking_res
 import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_navigation_bar_page.dart';
 import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.dart';
+import 'package:pickme/features/filters/presentation/filters_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/presentation/all_jobs_page.dart';
 import 'package:pickme/features/jobs/applying/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
-import 'package:pickme/features/jobs/hiring/candidate_filters/presentation/filter_candidates_page.dart';
 import 'package:pickme/features/jobs/hiring/candidate_profile_page/presentation/candidate_profile_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing_info/presentation/create_job_listing_info_page.dart';
@@ -38,6 +38,7 @@ import 'package:pickme/features/jobs/hiring/service_category_candidates/presenta
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
 import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/location/presentation/location_page.dart';
@@ -58,6 +59,7 @@ import 'package:pickme/features/sign_up/presentation/sign_up_page.dart';
 import 'package:pickme/features/register_account_step_1/presentation/register_account_step1_page.dart';
 import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup_page.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/enums/app_mode_enum.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
 import '../features/login/presentation/login_page.dart';
@@ -94,7 +96,7 @@ class AppRouter extends _$AppRouter{
     // AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page: AllServicesRoute.page),
     AnimatedRoute(page: ServiceCategoryCandidatesRoute.page),
-    AnimatedRoute(page: FilterCandidatesRoute.page),
+    AnimatedRoute(page: FiltersRoute.page),
     AnimatedRoute(page: PendingProfileRoute.page),
     AnimatedRoute(page: MyJobListingsRoute.page),
     AnimatedRoute(page: CreateJobListingRoute.page),
@@ -133,8 +135,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: AlternativeSentRoute.page),
     AnimatedRoute(page: AlternativeRescheduleRequestRoute.page),
     AnimatedRoute(page: AlternativeRequestDetailsRoute.page),
-    AnimatedRoute(page: CancelBookingRoute.page)
-
+    AnimatedRoute(page: CancelBookingRoute.page),
+    AnimatedRoute(page: JobListRoute.page),
   ];
 }
 

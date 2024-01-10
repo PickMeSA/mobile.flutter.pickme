@@ -11,3 +11,8 @@ class SearchTextChangedEvent extends AllServicesPageEvent{
   final String searchText;
   SearchTextChangedEvent({required this.searchText});
 }
+
+class FilterChangedEvent extends AllServicesPageEvent{
+  final FilterEntity filterEntity;
+  FilterChangedEvent({required this.filterEntity});
+}

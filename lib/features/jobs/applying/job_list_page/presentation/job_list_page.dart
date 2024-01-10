@@ -2,6 +2,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/shared/constants/default_values.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -13,7 +15,7 @@ import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
-import 'bloc/select_existing_job_listing_bloc.dart';
+import 'bloc/job_list_page_bloc.dart';
 
 enum JobListMode { categoryJobs, recommendedJobs, inYourArea }
 
@@ -22,12 +24,14 @@ class JobListPage extends BasePage {
   const JobListPage({super.key,
     required this.pageMode,
     this.categoryId,
+    this.pageTitle,
   }):assert(
   (pageMode==JobListMode.categoryJobs && categoryId!=null) ||
       (pageMode!=JobListMode.categoryJobs && categoryId==null)
   );
   final JobListMode pageMode;
   final String? categoryId;
+  final String? pageTitle;
   @override
   State<JobListPage> createState() => _JobListPageState();
 }
@@ -43,7 +47,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
-    return BlocConsumer<JobListBloc, SelectExistingJobState>(
+    return BlocConsumer<JobListBloc, JobListPageState>(
       listener: (context, state) {
         //loading
         if(state is SelectExistingJobPageEnteredState && state.dataState == DataState.loading){
@@ -95,7 +99,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                       ),
                     ),
                     24.height,
-                    Text(getLocalization().youDontHaveAnyActiveListings,
+                    Text(getLocalization().noJobsFound,
                       style: theme.textTheme.headlineSmall,
                       textAlign: TextAlign.center,
                     )
@@ -113,14 +117,11 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                         locationName: "Melrose Arch. South Africa",
                         dateTime: job.startDate!,
                         selected: getBloc().selectedJob==job,
-                        onClick: ()=>getBloc().add(JobSelectedEvent(job: job)),
+                        onNext: ()=> context.router.push(JobDetailsRoute()),
                       );
                     }
                 ),
               ),
-              PrimaryButton.fullWidth(onPressed: getBloc().selectedJob == null?null: (){
-
-              }, child: Text(getLocalization().sendJobOffer)),
             ],
           ),
         );
@@ -140,8 +141,21 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
 
   @override
   PreferredSizeWidget buildAppbar(){
+    String pageTitle = getLocalization().recommendedForYou;
+    if(widget.pageTitle!=null){
+      pageTitle = widget.pageTitle!;
+    }
     return getAppBar(
-      title: Text(getLocalization().myJobListings,),
+      title: Text(pageTitle,),
+      actions: [
+        TextButton(onPressed: () async{
+          FilterEntity? filter = await context.router.push<FilterEntity>(FiltersRoute());
+          logger.i(filter);
+          if(filter!=null){
+            getBloc().add(FilterChangedEvent(filterEntity: filter));
+          }
+        }, child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
+      ],
     );
   }
 
