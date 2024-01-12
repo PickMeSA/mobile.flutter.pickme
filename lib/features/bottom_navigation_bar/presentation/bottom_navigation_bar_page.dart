@@ -110,12 +110,6 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Iconsax.bubble),
-        title: (getLocalization().chat),
-        activeColorPrimary: theme.primaryColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.profile),
         title: (getLocalization().profile),
         activeColorPrimary: theme.primaryColor,
@@ -130,10 +124,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
         const HomePage(),
         const MyBookingsUpcomingPage(),
         const JobsLandingPage(),
-        const HomePage(),
-        const HomePage(),
-
-
+        const HomePage()
     ];
   }
 

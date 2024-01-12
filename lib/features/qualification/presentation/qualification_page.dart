@@ -58,7 +58,9 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
             context.router.push(const LocationRoute());
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.push(const FinalDetailsRoute());
-          }
+          }else{
+           context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+         }
         }
 
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.loading ){

@@ -2639,6 +2639,186 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `+27`
+  String get countryCode {
+    return Intl.message(
+      '+27',
+      name: 'countryCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `800000000`
+  String get exampleNumber {
+    return Intl.message(
+      '800000000',
+      name: 'exampleNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid cell number.`
+  String get pleaseEnterValidCellNumber {
+    return Intl.message(
+      'Please enter a valid cell number.',
+      name: 'pleaseEnterValidCellNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hi, {name}`
+  String HiName(Object name) {
+    return Intl.message(
+      'Hi, $name',
+      name: 'HiName',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need to cancel your booking? Fill in the cancellation form and we'll inform your client.`
+  String get needToCancelYourBooking {
+    return Intl.message(
+      'Need to cancel your booking? Fill in the cancellation form and we\'ll inform your client.',
+      name: 'needToCancelYourBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reason for cancellation`
+  String get reasonForCancellation {
+    return Intl.message(
+      'Reason for cancellation',
+      name: 'reasonForCancellation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay`
+  String get pay {
+    return Intl.message(
+      'Pay',
+      name: 'pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My banking details`
+  String get myBankingDetails {
+    return Intl.message(
+      'My banking details',
+      name: 'myBankingDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay someone`
+  String get paySomeone {
+    return Intl.message(
+      'Pay someone',
+      name: 'paySomeone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Successful`
+  String get paymentSuccessful {
+    return Intl.message(
+      'Payment Successful',
+      name: 'paymentSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Unsuccessful`
+  String get paymentUnsuccessful {
+    return Intl.message(
+      'Payment Unsuccessful',
+      name: 'paymentUnsuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to my wallet`
+  String get backToMyWallet {
+    return Intl.message(
+      'Back to my wallet',
+      name: 'backToMyWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to pay someone`
+  String get BackToPaySomeone {
+    return Intl.message(
+      'Back to pay someone',
+      name: 'BackToPaySomeone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your payment was successful`
+  String get yourPaymentWasSuccessful {
+    return Intl.message(
+      'Your payment was successful',
+      name: 'yourPaymentWasSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ooops! Something went wrong with your payment, Please try again`
+  String get oopsSomethingWentWrongWithYourPayment {
+    return Intl.message(
+      'Ooops! Something went wrong with your payment, Please try again',
+      name: 'oopsSomethingWentWrongWithYourPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay now`
+  String get payNow {
+    return Intl.message(
+      'Pay now',
+      name: 'payNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit my banking details`
+  String get editMyBankingDetails {
+    return Intl.message(
+      'Edit my banking details',
+      name: 'editMyBankingDetails',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

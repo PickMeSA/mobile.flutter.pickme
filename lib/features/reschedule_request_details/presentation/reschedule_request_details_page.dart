@@ -15,7 +15,9 @@ import 'bloc/reschedule_request_details_bloc.dart';
 
 @RoutePage()
 class RescheduleRequestDetailsPage extends BasePage {
-  const RescheduleRequestDetailsPage({super.key});
+
+  final String bookingId;
+  const RescheduleRequestDetailsPage({super.key, required this.bookingId});
 
   @override
   _RescheduleRequestDetailsPageState createState() => _RescheduleRequestDetailsPageState();
@@ -91,7 +93,7 @@ class _RescheduleRequestDetailsPageState extends BasePageState<RescheduleRequest
                    wText(getLocalization().notSatisfiedWithTheProposedRescheduleDateAndTime),
                    20.height,
                    InkWell(
-                     onTap: ()=> context.router.push(ProposeAlternativeRoute()),
+                     onTap: ()=> context.router.push(ProposeAlternativeRoute(bookingId: widget.bookingId)),
                      child: Row(
                        children: [
                          wText(getLocalization().proposeAlternative, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),

@@ -257,5 +257,25 @@
   "sendJobOffer": "Send job offer",
   "offerSentEx": "Offer sent!",
   "yourJobOfferHasBeenSent": "Your job offer has been sent. You'll receive a notification once the candidate accepts.",
-  "bookings": "Bookings"
+  "bookings": "Bookings",
+  "countryCode": "+27",
+  "exampleNumber" : "800000000",
+  "pleaseEnterValidCellNumber" : "Please enter a valid cell number.",
+  "HiName": "Hi, {name}",
+  "error": "Error",
+  "needToCancelYourBooking" : "Need to cancel your booking? Fill in the cancellation form and we'll inform your client.",
+  "reasonForCancellation" : "Reason for cancellation",
+  "pay": "Pay",
+  "myBankingDetails": "My banking details",
+  "paySomeone" : "Pay someone",
+  "paymentSuccessful": "Payment Successful",
+  "paymentUnsuccessful": "Payment Unsuccessful",
+  "backToMyWallet": "Back to my wallet",
+  "BackToPaySomeone": "Back to pay someone",
+  "yourPaymentWasSuccessful": "Your payment was successful",
+  "oopsSomethingWentWrongWithYourPayment": "Ooops! Something went wrong with your payment, Please try again",
+  "payNow": "Pay now",
+  "editMyBankingDetails": "Edit my banking details"
+
+
 }

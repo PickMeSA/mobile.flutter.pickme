@@ -7,19 +7,19 @@ part 'my_job_listings_job_model_response.g.dart';
 @freezed
 class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
   const factory MyJobListingsJobModelResponse({
-    required String title,
-    required String description,
-    required String status,
+    String? title,
+    String? description,
+    String? status,
     String? startDate,
     String? endDate,
     String? startTime,
-    required double estimatedHours,
-    required double lat,
-    required double lng,
-    required String images,
-    required String skills,
+    double? estimatedHours,
+    double? lat,
+    double? lng,
+    String? images,
+    String? skills,
     String? id,
-    required double distance,
+    double? distance,
   }) = _MyJobListingsJobModelResponse;
 
   factory MyJobListingsJobModelResponse.fromJson(

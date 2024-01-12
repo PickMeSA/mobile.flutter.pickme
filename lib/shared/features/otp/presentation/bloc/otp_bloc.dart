@@ -97,14 +97,14 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         RegisterOTPCompleteEvent event,
         Emitter<otpPageState> emit
         ) async{
-        emit(RegisterOTPCompleteState()..dataState = DataState.loading);
+        emit(RegisterOTPCompleteState(profileEntity: event.profileEntity!)..dataState = DataState.loading);
 
         try{
-            await registerOTPCompleteUseCase.call(params: RegisterOTPCompleteUseCaseParams(userModel: event.userModel!));
-            emit(RegisterOTPCompleteState()..dataState = DataState.success);
+            await registerOTPCompleteUseCase.call(params: RegisterOTPCompleteUseCaseParams(userModel: event.userEntity!));
+            emit(RegisterOTPCompleteState(profileEntity: event.profileEntity!)..dataState = DataState.success);
 
         }catch(ex){
-            emit(RegisterOTPCompleteState()..dataState = DataState.error);
+            emit(RegisterOTPCompleteState(profileEntity: event.profileEntity!)..dataState = DataState.error);
         }
 
     }

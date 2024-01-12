@@ -15,7 +15,9 @@ import 'bloc/reschedule_request_bloc.dart';
 
 @RoutePage()
 class RescheduleRequestPage extends BasePage {
-  const RescheduleRequestPage({super.key});
+
+  final String bookingId;
+  const RescheduleRequestPage({super.key, required this.bookingId});
 
   @override
   _RescheduleRequestPageState createState() => _RescheduleRequestPageState();
@@ -40,7 +42,6 @@ class _RescheduleRequestPageState extends BasePageState<RescheduleRequestPage, R
     return BlocConsumer<RescheduleRequestBloc, RescheduleRequestPageState>(
       listener: (context, state){},
       builder: (context, state) {
-
     ThemeData theme = Theme.of(context);
     return SizedBox(
     height: MediaQuery.sizeOf(context).height,
@@ -92,7 +93,7 @@ class _RescheduleRequestPageState extends BasePageState<RescheduleRequestPage, R
     )
     ),
     onPressed: () {
-    context.router.push(const RescheduleRequestDetailsRoute());
+    context.router.push( RescheduleRequestDetailsRoute(bookingId: widget.bookingId ));
     },
     child: Text(getLocalization().goToRescheduleRequest, style: TextStyle(color: theme.colorScheme.secondary),),
     ),

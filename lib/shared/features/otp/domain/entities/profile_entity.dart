@@ -1,5 +1,3 @@
-import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_qualification_model_response_model_response.dart';
-import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_work_experience_model_response.dart';
 
 import 'otp_business_entity.dart';
 import 'otp_location_entity.dart';
@@ -9,6 +7,13 @@ import 'otp_skill_ids_entity.dart';
 import 'otp_work_experinence_entity.dart';
 
 class ProfileEntity {
+  int? id;
+  String? firstName;
+  String? surname;
+  String? email;
+  String? mobile;
+  String? idNumber;
+  String? passportNumber;
   String? type;
   int? hourlyRate;
   String? description;
@@ -21,6 +26,12 @@ class ProfileEntity {
   OTPBusinessEntity? business;
 
   ProfileEntity({
+    this.id,
+    this.firstName,
+    this.idNumber,
+    this.surname, this.mobile,
+    this.passportNumber,
+    this.email,
     this.type,
     this.industryId,
   this.skillIds,

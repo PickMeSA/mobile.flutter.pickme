@@ -30,11 +30,9 @@ class _HomePageState extends BasePageState<HomePage, HomeBloc> {
 late ProfileModel profileModel;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
-    profileModel = boxProfile.get(current);
-
+  profileModel = boxProfile.get(current);
+  getBloc().add(LoadJobsInAreaEvent());
   }
 
     @override
@@ -90,7 +88,7 @@ late ProfileModel profileModel;
                              ),
                              SizedBox(height: 20,),
                              wText(
-                                 "Hi, ${profileModel.firstName}"
+                                 getLocalization().hi
                                  ,style: theme.textTheme.headlineSmall?.copyWith(
                                  color: Colors.white,
                                  fontWeight: FontWeight.w500)),
@@ -125,18 +123,22 @@ late ProfileModel profileModel;
                                height: 230,
                                width: (MediaQuery.sizeOf(context).width/ 2) - 25,
                                child: AppSectionCard(title: getLocalization().myBookings,
+                                 onClick: ()=> context.router.push(MyWalletRoute()),
                                  color: WColors.pickMeBlue,
                                  icon:Icon(Iconsax.calendar, color: Colors.white,size: 20) ,
                                ),
                              ),
                              10.width,
-                             SizedBox(
-                               height: 230,
-                               width: (MediaQuery.sizeOf(context).width/ 2) - 25,
-                               child: AppSectionCard(title: getLocalization().myWallet,
-                                 color: theme.primaryColor,
-                                 icon:Icon(Iconsax.wallet, color: Colors.white,size: 20) ,
-                                 ),
+                             InkWell(
+                               onTap: ()=>context.router.push(MyWalletRoute()),
+                               child: SizedBox(
+                                 height: 230,
+                                 width: (MediaQuery.sizeOf(context).width/ 2) - 25,
+                                 child: AppSectionCard(title: getLocalization().myWallet,
+                                   color: theme.primaryColor,
+                                   icon:Icon(Iconsax.wallet, color: Colors.white,size: 20) ,
+                                   ),
+                               ),
                              ),
                            ],
                          ),
@@ -213,6 +215,7 @@ late ProfileModel profileModel;
                          ),
                        ),),
                          30.height,
+                         getBloc().JobsInAreaList.isNotEmpty?
                          Row(
                            children: [
                              wText(getLocalization().inYourArea),
@@ -223,19 +226,19 @@ late ProfileModel profileModel;
                              10.width,
                              const Icon(Icons.arrow_forward,size: 15,color: Colors.grey,)
                            ],
-                         ),
+                         ):
                          20.height,
+                         getBloc().JobsInAreaList.isNotEmpty?
                          SizedBox(
                            height: 500,
                            child: ListView.builder(
-                               itemCount: 5,
-                               physics: NeverScrollableScrollPhysics(),
+                               itemCount: getBloc().JobsInAreaList.length,
                                itemBuilder: (context , index){
                                  return
                                    Column(
                                      children: [
                                        InkWell(
-                                         onTap: ()=> context.router.push(JobDetailsRoute()),
+                                         onTap: ()=> context.router.push(JobDetailsRoute(jobId: getBloc().JobsInAreaList[index].id)),
                                          child: AppJobAdvertCard(
                                            jobName: 'Tax Preparation',
                                            employerName: 'DVT',
@@ -243,7 +246,7 @@ late ProfileModel profileModel;
                                            dateTime: DateTime.now().add(const Duration(days: 5)),
                                            status: JobStatus.applied,
                                            onNext: () {
-                                             context.router.push(JobDetailsRoute());
+                                             context.router.push(JobDetailsRoute(jobId: ""));
                                            },
                                          ),
                                        ),
@@ -252,7 +255,8 @@ late ProfileModel profileModel;
                                    );
 
                                }),
-                         )
+                         ):
+                             const SizedBox()
 
 
 

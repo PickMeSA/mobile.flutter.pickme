@@ -6,6 +6,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/use_cases/my_bookings_upcoming_usecase/load_bookings_upcoming_usecase.dart';
 
 part 'my_bookings_upcoming_event.dart';
@@ -19,6 +20,9 @@ class MyBookingsUpcomingBloc
     DateTime currentDate2 = DateTime.now();
     String currentMonth = DateFormat.yMMM().format(DateTime.now());
     DateTime targetDateTime = DateTime.now();
+    List<BookingEntity> upcomingBookingsList = [];
+    List<BookingEntity> completeBookingsList = [];
+    List<BookingEntity> cancelledBookingsList = [];
 
     final LoadBookingsUpcomingUseCase loadBookingsUpcomingUseCase;
 
@@ -36,7 +40,17 @@ class MyBookingsUpcomingBloc
     _onLoadBookingsUpcomingEvent(event,emit) async{
         emit(LoadBookingUpcomingState()..dataState = DataState.loading);
         try{
-            await loadBookingsUpcomingUseCase.call();
+            await loadBookingsUpcomingUseCase.call().then((profileBookings){
+                profileBookings.forEach((element) {
+                   switch(element.type){
+                       case "cancelled": cancelledBookingsList.add(element);
+                        break;
+                       case "completed": completeBookingsList.add(element);
+                        break;
+                       default: upcomingBookingsList.add(element);
+                   }
+                });
+            });
             emit(LoadBookingUpcomingState()..dataState = DataState.success);
         }catch(ex){
             emit(LoadBookingUpcomingState()..dataState = DataState.error);

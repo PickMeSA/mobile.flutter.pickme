@@ -58,7 +58,6 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                      const InkWell(
                        child: Icon(Iconsax.menu),
                      ),
-
                    ],
                  ),
                  30.height,
@@ -145,20 +144,29 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                    ],
                    views:  <Widget>[
                       ListView.builder(
-                        itemCount: 5,
-                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: getBloc().upcomingBookingsList.length,
+                      //  physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context , index){
                             return
                               Column(
                                 children: [
                                   InkWell(
-                                onTap: ()=> context.router.push(AlternativeRescheduleRequestRoute()),
+                                onTap: (){ if(getBloc().upcomingBookingsList[index].status == JobStatus.requestedReschedule){
+                                  context.router.push(RescheduleRequestRoute(
+                                      bookingId: getBloc().upcomingBookingsList[index].id));
+                                }else {
+                                  context.router.push(JobDetailsRoute(
+                                      fromIndex: 1,
+                                      jobId: getBloc().upcomingBookingsList[index].jobId,
+                                      bookingId: getBloc().upcomingBookingsList[index].id));
+                                }
+                                },
                                     child: AppJobCard(
-                                      jobName: 'Tax Preparation',
+                                      jobName: "Job name",
                                       employerName: 'DVT',
                                       locationName: 'PickMe',
                                       dateTime: DateTime.now().add(const Duration(days: 5)),
-                                      status: JobStatus.cancelled,
+                                      status: getBloc().upcomingBookingsList[index].status,
                                       onNext: () {
                                         //context.router.push(JobDetailsRoute(fromIndex: 1));
                                       },
@@ -170,14 +178,14 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
 
                       }),
                      ListView.builder(
-                         itemCount: 2,
-                         physics: NeverScrollableScrollPhysics(),
+                         itemCount: getBloc().completeBookingsList.length,
+                         //physics: NeverScrollableScrollPhysics(),
                          itemBuilder: (context , index){
                            return
                              Column(
                                children: [
                                  InkWell(
-                                   onTap:()=> context.router.push(JobDetailsRoute(fromIndex: 2)),
+                                   onTap:()=> context.router.push(JobDetailsRoute(fromIndex: 2, jobId: getBloc().completeBookingsList[index].jobId)),
                                    child: AppJobCard(
                                      jobName: 'Tax Preparation',
                                      employerName: 'DVT',
@@ -193,13 +201,18 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
 
                          }),
                      ListView.builder(
-                         itemCount: 4,
-                         physics: const NeverScrollableScrollPhysics(),
+                         itemCount: getBloc().cancelledBookingsList.length,
+                         //physics: const NeverScrollableScrollPhysics(),
                          itemBuilder: (context , index){
                            return
                              Column(
                                children: [
                                  InkWell(
+                                   onTap:()=> context.router.push(JobDetailsRoute(
+                                       fromIndex: 2,
+                                       jobId: getBloc().cancelledBookingsList[index].jobId,
+                                   )),
+
                                    child: AppJobCard(
                                      jobName: 'Tax Preparation',
                                      employerName: 'DVT',

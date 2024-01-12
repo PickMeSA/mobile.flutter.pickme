@@ -134,6 +134,13 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
+        firstName: otpFullProfileModelResponse.firstName,
+        surname: otpFullProfileModelResponse.surname,
+        email: otpFullProfileModelResponse.email,
+        id: otpFullProfileModelResponse.id,
+        idNumber: otpFullProfileModelResponse.idNumber,
+        mobile: otpFullProfileModelResponse.mobile,
+        passportNumber: otpFullProfileModelResponse.passportNumber,
         type: otpFullProfileModelResponse.type??"",
         description:  otpFullProfileModelResponse.description??"",
         business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? const OTPBusinessModelResponse(
@@ -185,6 +192,19 @@ class ProfileServiceImpl extends ProfileService{
     }catch(ex){
       rethrow;
     }
+  }
+
+  @override
+  Future<OTPPaymentDetailsEntity> getBankDetails() async {
+    try{
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
+      ProfileEntity profileEntity =  returnProfileEntity(response: response);
+      return profileEntity.paymentDetails!;
+    }catch(ex){
+      rethrow;
+    }
+
   }
 
 
