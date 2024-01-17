@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
@@ -22,10 +23,15 @@ class GetMyJobListingsServiceImpl extends GetMyJobListingsService{
     try{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.get("$baseUrl$version/jobs?creatorId=${userModel.id}");
-      ProfileEntity profile = await profileService.getRemoteProfileData();
+      ProfileEntity? profileEntity;
+      try{
+        profileEntity = await profileService.getRemoteProfileData();
+      }catch(ex){
+        logger.e("Failed to convert profile");
+      }
       return MyJobListingsPageEntity.fromResponse(
           listingsResponse: response.data,
-        profile: profile
+        profile: profileEntity
       );
     }catch(ex){
       rethrow;

@@ -25,8 +25,8 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
         startTime: jobListingRepositoryParams.jobEntity.startTime!=null?jobListingRepositoryParams.jobEntity.startTime!:null,
         estimatedHours: double.parse(jobListingRepositoryParams.jobEntity.estimatedHours),
         distance: 0,
-        lat: jobListingRepositoryParams.jobEntity.lat,
-        lng: jobListingRepositoryParams.jobEntity.lng,
+        lat: double.parse(jobListingRepositoryParams.jobEntity.lat),
+        lng: double.parse(jobListingRepositoryParams.jobEntity.lng),
         images: jobListingRepositoryParams.jobEntity.images.join(","),
         skills: jobListingRepositoryParams.jobEntity.skills.map((e) => e.label).toList().join(","),
 

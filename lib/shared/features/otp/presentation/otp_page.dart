@@ -52,7 +52,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //success
         if(state is OTPGetTokenState && state.dataState == DataState.success){
           if(widget.fromregister!) {
-            getBloc().add(RegisterOTPCompleteEvent(userModel: widget.userModel));
+            getBloc().add(RegisterOTPCompleteEvent());
           }else{
             context.router.push(const JobsHiringLandingRoute());
             // getBloc().add(GetProfileProgressEvent());
@@ -122,19 +122,19 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                     state.profileEntity!.workExperience!.isEmpty){
             context.router.pushAndPopUntil(QualificationsRoute(),
                 predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-
-            context.router.pushAndPopUntil(AddSkillsRoute(),
-                predicate: (Route<dynamic> route) => false);
+          // }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
+          //
+          //   context.router.pushAndPopUntil(AddSkillsRoute(),
+          //       predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.pushAndPopUntil(RateAndWorkTimesRoute(),
                 predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
             context.router.pushAndPopUntil(BankDetailsRoute(),
                 predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.location!.id!.isEmpty ){
-            context.router.pushAndPopUntil(LocationRoute(),
-                predicate: (Route<dynamic> route) => false);
+          // }else if(state.profileEntity!.location!.id!.isEmpty ){
+          //   context.router.pushAndPopUntil(LocationRoute(),
+          //       predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.pushAndPopUntil(FinalDetailsRoute(),
                 predicate: (Route<dynamic> route) => false);

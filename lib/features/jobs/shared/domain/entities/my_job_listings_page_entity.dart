@@ -7,13 +7,13 @@ import '../../../../../shared/models/jobs/my_job_listings_job_model_response.dar
 class MyJobListingsPageEntity {
   final List<JobEntity> activeJobs;
   final List<JobEntity> inactiveJobs;
-  final ProfileEntity profile;
+  final ProfileEntity? profile;
 
-  MyJobListingsPageEntity({required this.activeJobs, required this.inactiveJobs, required this.profile});
+  MyJobListingsPageEntity({required this.activeJobs, required this.inactiveJobs, this.profile});
 
   factory MyJobListingsPageEntity.fromResponse({
     required List<dynamic> listingsResponse,
-    required ProfileEntity profile,
+    required ProfileEntity? profile,
       }){
     try{
       return MyJobListingsPageEntity(

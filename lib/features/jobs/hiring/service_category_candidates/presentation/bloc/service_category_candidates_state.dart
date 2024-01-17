@@ -13,3 +13,6 @@ class ServiceCategoryCandidatesInitial extends ServiceCategoryCandidatesState {
 class GetServiceCategoryCandidatesState extends ServiceCategoryCandidatesState {
   GetServiceCategoryCandidatesState({super.paginatedCandidates});
 }
+class FilterChangedState extends ServiceCategoryCandidatesState {
+  FilterChangedState();
+}

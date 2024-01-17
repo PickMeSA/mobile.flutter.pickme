@@ -117,7 +117,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                         locationName: "Melrose Arch. South Africa",
                         dateTime: job.startDate!,
                         selected: getBloc().selectedJob==job,
-                        onNext: ()=> context.router.push(JobDetailsRoute()),
+                        onNext: ()=> context.router.push(JobDetailsRoute(jobId: job.id)),
                       );
                     }
                 ),

@@ -48,7 +48,7 @@ class JobsHiringLandingPageBloc extends BaseBloc<JobsHiringLandingPageEvent, Job
           params: GetIndustriesUseCaseParams());
       paginatedIndustries = paginatedIndustryEntity;
       PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
-          params: GetPaginatedCandidatesByIndustryUseCaseParams());
+          params: GetPaginatedCandidatesByIndustryUseCaseParams(pageNumber: 1, pageSize: 5));
       paginatedCandidates = paginatedCandidateProfileEntity;
       jobListingsPageEntity = await getMyJobListingsUseCase.call();
       jobCount = ((jobListingsPageEntity?.activeJobs.length??0) + (jobListingsPageEntity?.inactiveJobs.length??0) );

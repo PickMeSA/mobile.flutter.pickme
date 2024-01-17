@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:auto_route/annotations.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/jobs/shared/domain/repositories/get_paginated_candidates_repository.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
@@ -20,14 +22,12 @@ class CandidateProfilesImpl extends CandidatesService{
   CandidateProfilesImpl({required this.apiService });
 
   @override
-  Future<PaginatedCandidateProfileEntity> getPaginatedCandidateProfiles() async {
-    // try {
+  Future<PaginatedCandidateProfileEntity> getPaginatedCandidateProfiles(GetPaginatedCandidatesByIndustryRepositoryParams? params) async {
+    try {
       Response<dynamic> response = await
-      apiService.get("${baseUrl}$version/profiles");
-      logger.e("response status ${response.statusCode}");
-      // if(response.statusCode == 200) {
+      apiService.get("${baseUrl}$version/profiles${params!.toQueryString()}");
+      if(response.statusCode == 200) {
         var decoded = (response.data["data"]);
-        logger.i(decoded is List<dynamic>);
         List<CandidateProfileModelResponse> candidatesModelResponseList = [];
       decoded
             .forEach((data){
@@ -68,10 +68,11 @@ class CandidateProfilesImpl extends CandidatesService{
             prevPage: paginationModelResponse.prev_page,
             searchTerm: paginationModelResponse.searchTerm);
         return PaginatedCandidateProfileEntity(pagination: paginationEntity, candidates: candidateProfileList);
-      // }
-    // }catch(ex){
-    //   rethrow;
-    // }
+      }
+      throw ("A server error occurred");
+    }catch(ex){
+      rethrow;
+    }
 
   }
 

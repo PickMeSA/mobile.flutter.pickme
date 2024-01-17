@@ -116,7 +116,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                       employerName: "Employer Name",
                       locationName: "location Name",
                       dateTime: DateTime.now(),
-                      onNext: ()=>context.router.push(JobDetailsRoute())
+                      onNext: ()=>context.router.push(JobDetailsRoute(jobId: ""))
                       ,)
                   ],
                 ),

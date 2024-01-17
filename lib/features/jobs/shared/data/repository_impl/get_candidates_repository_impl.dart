@@ -14,7 +14,7 @@ class GetPaginatedCandidatesByIndustryRepositoryImpl extends GetPaginatedCandida
   @override
   Future<PaginatedCandidateProfileEntity> call({GetPaginatedCandidatesByIndustryRepositoryParams? params}) async{
     try{
-      return await candidatesService.getPaginatedCandidateProfiles();
+      return await candidatesService.getPaginatedCandidateProfiles(params);
     }catch(ex){
       rethrow;
     }
