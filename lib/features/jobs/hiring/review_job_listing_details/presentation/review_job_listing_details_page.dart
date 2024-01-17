@@ -46,6 +46,8 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
         //loading
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.success){
           Navigator.pop(context); //Remove loader
+          context.router.popUntilRouteWithName("JobsHiringLandingRoute");
+          context.router.push(MyJobListingsRoute());
         }          //loading
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.error){
           Navigator.pop(context); //Remove loader
