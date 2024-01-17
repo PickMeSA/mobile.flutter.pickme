@@ -84,7 +84,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
             context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.location!.id!.isEmpty ){
+          }else if(state.profileEntity!.location!.address =="" ){
             context.router.push(const LocationRoute());
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.push(const FinalDetailsRoute());

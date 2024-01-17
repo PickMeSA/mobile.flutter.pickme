@@ -45,7 +45,6 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         //run code to check the progress of the user in the registration flow
         emit(GetProfileProgressState(userModel: event.userModel)..dataState = DataState.loading);
         try{
-
         emit(GetProfileProgressState(userModel: event.userModel ,
             profileEntity: await getRemoteProfileUseCase.call())..dataState = DataState.success);
         }catch(ex){

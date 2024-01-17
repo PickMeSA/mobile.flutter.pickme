@@ -17,7 +17,8 @@ class PlacesServiceImpl extends PlacesService {
       String url = "https://maps.google.com/maps/api/places/details/json?place_id=$placeId&key=$ApiKey";
       Response<dynamic> response = await apiService.get(url);
       print(response.data);
-      return OTPLocationEntity(id: "",
+      return OTPLocationEntity(
+        address: response.data.toString(),
           latitude: response.data['geometry']['location']['lat'],
           longitude: response.data['geometry']['location']['lng']);
     } catch (ex) {

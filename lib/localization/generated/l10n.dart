@@ -470,20 +470,20 @@ class AppLocalizations {
     );
   }
 
-  /// `Qualifications/Membership`
+  /// `Qualifications / Membership`
   String get qualificationMembership {
     return Intl.message(
-      'Qualifications/Membership',
+      'Qualifications / Membership',
       name: 'qualificationMembership',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add a qualification/membership`
+  /// `Add a qualification / membership`
   String get addAQualificationMembership {
     return Intl.message(
-      'Add a qualification/membership',
+      'Add a qualification / membership',
       name: 'addAQualificationMembership',
       desc: '',
       args: [],
@@ -2815,6 +2815,16 @@ class AppLocalizations {
     return Intl.message(
       'Edit my banking details',
       name: 'editMyBankingDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
       desc: '',
       args: [],
     );

@@ -385,8 +385,8 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               startTime: startTimeTextController.text,
                               imFlexible: getBloc().flexibleHoursChecked,
                               estimatedHours: hoursTextController.text,
-                              lat: getBloc().otpLocationEntity?.latitude??0,
-                              lng: getBloc().otpLocationEntity?.longitude??0,
+                              lat: getBloc().otpLocationEntity?.latitude.toString()??"",
+                              lng: getBloc().otpLocationEntity?.longitude.toString()??"",
                               rate: double.parse(totalFeeTextController.text),
                               images: getBloc().photos.map((e) => e.url).toList(),
                               skills: getBloc().chipOptions
@@ -504,7 +504,8 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
 
   OTPLocationEntity getLocation(PickResult result){
     address = result.formattedAddress ?? "";
-    return OTPLocationEntity(id: result.placeId, latitude: result.geometry?.location.lat, longitude: result.geometry?.location.lng);
+    ///change this back to string as location comes with id from api.
+    return OTPLocationEntity(address: result.adrAddress , latitude: result.geometry?.location.lat, longitude: result.geometry?.location.lng);
   }
   bool isValid(){
     if(_formKey.currentState==null) return true;

@@ -152,7 +152,7 @@ class ProfileServiceImpl extends ProfileService{
         hourlyRate: otpFullProfileModelResponse.hourlyRate??0,
         industryId: otpFullProfileModelResponse.industryID??0,
         location: OTPLocationEntity.fromResponse(otpFullProfileModelResponse.location??const OTPLocationModelResponse(
-            id: "",
+            address: "",
             latitude: 0,
             longitude: 0)),
         paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails??const OTPPaymentDetailsModelResponse(
@@ -163,8 +163,8 @@ class ProfileServiceImpl extends ProfileService{
             taxNumber: "",
             vatNumber: "")),
         qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualifications??[],
-        skillIds: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skillIds??SkillIdModelResponse(skillsId: [])),
-        workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
+        workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[],
+    skillIds: otpFullProfileModelResponse.skillIds??[]);
   }
 
   @override

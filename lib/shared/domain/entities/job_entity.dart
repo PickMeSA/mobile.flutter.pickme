@@ -12,8 +12,8 @@ final DateTime? startDate;
 final DateTime? endDate;
 final String? startTime;
 final double estimatedHours;
-final double lat;
-final double lng;
+final String lat;
+final String lng;
 final String images;
 final String skills;
 final String comments;
@@ -49,8 +49,8 @@ final double distance;
         images: response.images??"",
         status: response.status??"",
         estimatedHours: response.estimatedHours??0,
-        lat: response.lat??0,
-        lng: response.lng??0,
+        lat: response.lat.toString()??"",
+        lng: response.lng.toString()??"",
         skills: response.skills??"",
         id: response.id!,
         distance: response.distance??0
@@ -67,7 +67,7 @@ final double distance;
         endDate: endDate!.toIso8601String(),
         startTime: startTime!,
         estimatedHours: estimatedHours,
-        lat: lat,
+        lat: lat.toString(),
         lng: lng,
         skills: skills,
         id: id,

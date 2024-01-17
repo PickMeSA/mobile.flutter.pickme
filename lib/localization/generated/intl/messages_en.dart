@@ -55,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Active listings"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addAQualificationMembership": MessageLookupByLibrary.simpleMessage(
-            "Add a qualification/membership"),
+            "Add a qualification / membership"),
         "addAQualificationOrMembership": MessageLookupByLibrary.simpleMessage(
             "Add a qualification or membership"),
         "addASkill": MessageLookupByLibrary.simpleMessage("Add a skill"),
@@ -97,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
         "browseCategories":
             MessageLookupByLibrary.simpleMessage("Browse categories"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel booking"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "candidateProfile":
@@ -338,7 +339,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "publishListing":
             MessageLookupByLibrary.simpleMessage("Publish listing"),
         "qualificationMembership":
-            MessageLookupByLibrary.simpleMessage("Qualifications/Membership"),
+            MessageLookupByLibrary.simpleMessage("Qualifications / Membership"),
         "qualificationName":
             MessageLookupByLibrary.simpleMessage("Qualification name *"),
         "qualificationType":

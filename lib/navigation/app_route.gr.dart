@@ -155,9 +155,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     EditMyBankingDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<EditMyBankingDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const EditMyBankingDetailsPage(),
+        child: EditMyBankingDetailsPage(
+          key: args.key,
+          bankDetailsEntity: args.bankDetailsEntity,
+        ),
       );
     },
     FilterCandidatesRoute.name: (routeData) {
@@ -326,6 +330,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const PendingProfilePage(),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfilePage(),
       );
     },
     ProposeAlternativeRoute.name: (routeData) {
@@ -838,16 +848,41 @@ class CreateJobListingRouteArgs {
 
 /// generated route for
 /// [EditMyBankingDetailsPage]
-class EditMyBankingDetailsRoute extends PageRouteInfo<void> {
-  const EditMyBankingDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class EditMyBankingDetailsRoute
+    extends PageRouteInfo<EditMyBankingDetailsRouteArgs> {
+  EditMyBankingDetailsRoute({
+    Key? key,
+    required OTPPaymentDetailsEntity bankDetailsEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
           EditMyBankingDetailsRoute.name,
+          args: EditMyBankingDetailsRouteArgs(
+            key: key,
+            bankDetailsEntity: bankDetailsEntity,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'EditMyBankingDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<EditMyBankingDetailsRouteArgs> page =
+      PageInfo<EditMyBankingDetailsRouteArgs>(name);
+}
+
+class EditMyBankingDetailsRouteArgs {
+  const EditMyBankingDetailsRouteArgs({
+    this.key,
+    required this.bankDetailsEntity,
+  });
+
+  final Key? key;
+
+  final OTPPaymentDetailsEntity bankDetailsEntity;
+
+  @override
+  String toString() {
+    return 'EditMyBankingDetailsRouteArgs{key: $key, bankDetailsEntity: $bankDetailsEntity}';
+  }
 }
 
 /// generated route for
@@ -1331,6 +1366,20 @@ class PendingProfileRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PendingProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProfilePage]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

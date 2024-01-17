@@ -24,7 +24,7 @@ class OTPFullProfileModelResponse with _$OTPFullProfileModelResponse {
     required String? type,
     required int? hourlyRate,
     required String? description,
-    required SkillIdModelResponse? skillIds,
+    required List<int>? skillIds,
     required int? industryID,
     required OTPLocationModelResponse? location,
     required List<OTPQualificationModelResponse>? qualifications,

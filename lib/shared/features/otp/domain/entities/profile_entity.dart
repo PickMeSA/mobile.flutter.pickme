@@ -17,7 +17,7 @@ class ProfileEntity {
   String? type;
   int? hourlyRate;
   String? description;
-  OTPSkillIdsEntity? skillIds;
+  List<int>? skillIds;
   int? industryId;
   OTPLocationEntity? location;
   List<OTPQualificationEntity>? qualifications;

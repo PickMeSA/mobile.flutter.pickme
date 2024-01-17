@@ -43,6 +43,7 @@ import 'package:pickme/features/my_banking_details/presentation/my_banking_detai
 import 'package:pickme/features/my_wallet/presentation/my_wallet_page.dart';
 import 'package:pickme/features/pay_someone/presentation/pay_someone_page.dart';
 import 'package:pickme/features/pay_someone_web_view/presentation/pay_someone_web_view_page.dart';
+import 'package:pickme/features/profile/presentation/profile_page.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/features/landing/presentation/landing_page.dart';
 import 'package:pickme/features/location/presentation/location_page.dart';
@@ -63,6 +64,7 @@ import 'package:pickme/features/sign_up/presentation/sign_up_page.dart';
 import 'package:pickme/features/register_account_step_1/presentation/register_account_step1_page.dart';
 import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup_page.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_payment_details_entity.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
 import '../features/login/presentation/login_page.dart';
@@ -142,7 +144,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MyWalletRoute.page),
     AnimatedRoute(page: MyBankingDetailsRoute.page),
     AnimatedRoute(page: PaySomeoneWebViewRoute.page),
-    AnimatedRoute(page: EditMyBankingDetailsRoute.page)
+    AnimatedRoute(page: EditMyBankingDetailsRoute.page),
+    AnimatedRoute(page: ProfileRoute.page)
 
   ];
 }

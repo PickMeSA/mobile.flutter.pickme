@@ -95,8 +95,10 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
                         imagePath:  widget.jobEntity.images[0],
                       )),
                       16.width, // Add some spacing between images
-                      if(widget.jobEntity.images.length == 1) Expanded(child: Container(),),
-                      if(widget.jobEntity.images.length >1)Expanded(child: ImageThumbnail(
+                      if(widget.jobEntity.images.length == 1)
+                        Expanded(child: Container(),),
+                      if(widget.jobEntity.images.length > 1)
+                        Expanded(child: ImageThumbnail(
                         imagePath:  widget.jobEntity.images[1],
                       )),
                     ],

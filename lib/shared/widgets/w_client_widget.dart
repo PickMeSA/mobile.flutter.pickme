@@ -10,14 +10,12 @@ required String areaLocation,
 required int rating,
 required BuildContext context,
   required String seeReviews,
-
+  Function? onEdit,
+  String? hourlyRate,
+  String? occupation
 }
 ){
-
-
-  final Color color = const Color(0xFF9CA2AE);
-
-
+  const Color color = Color(0xFF9CA2AE);
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
@@ -35,21 +33,31 @@ required BuildContext context,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    wText(clientName,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w600
-                      ),
+                    Row(
+                      children: [
+                        wText(clientName,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w600
+                          ),
+                        ),
+                        const Spacer(),
+                        if(onEdit != null)
+                        InkWell(
+                          onTap: ()=> onEdit(),
+                          child: const Icon(Iconsax.edit),
+                        )
+                      ],
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Row(
                           children: [
                             Expanded(child: wText(areaLocation, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color,),)),
-
+                            if(occupation != null)
+                              Expanded(child: wText(occupation!))
                           ],
                         ),
-
                         Row(
                           children: [
                             AppStarRating(rating: rating, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
@@ -58,6 +66,9 @@ required BuildContext context,
                             wText(seeReviews,style: TextStyle(decoration: TextDecoration.underline)),
                           ],
                         ),
+                        if(hourlyRate!= null)
+                          wText("$hourlyRate"),
+
                       ],
                     ),
                   ],

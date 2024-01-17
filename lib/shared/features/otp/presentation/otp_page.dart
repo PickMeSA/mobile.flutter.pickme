@@ -76,15 +76,14 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //Success
         if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
 
-
-         if(state.profileEntity!.type!.isEmpty){
+          if(state.profileEntity!.type!.isEmpty){
             context.router.pushAndPopUntil(const SetupProfileRoute(),
                 predicate: (Route<dynamic> route) => false);
           }else if (state.profileEntity!.qualifications!.isEmpty &&
               state.profileEntity!.workExperience!.isEmpty){
             context.router.pushAndPopUntil(const QualificationsRoute(),
                 predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
+          }else if(state.profileEntity!.skillIds!.isEmpty){
             context.router.pushAndPopUntil(const AddSkillsRoute(),
                 predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.hourlyRate! == 0){
@@ -93,7 +92,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
             context.router.pushAndPopUntil(const BankDetailsRoute(),
                 predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.location!.id!.isEmpty ){
+          }else if(state.profileEntity!.location!.address == "" ){
             context.router.pushAndPopUntil(const LocationRoute(),
                 predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.description!.isEmpty){
