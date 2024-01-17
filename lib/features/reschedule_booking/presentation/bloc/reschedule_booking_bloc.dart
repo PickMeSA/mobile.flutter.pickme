@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/reschedule_booking/domain/entities/RescheduleReasonEntity.dart';
+import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_entity.dart';
+import 'package:pickme/features/reschedule_booking/domain/use_cases/reschedule_booking_usecase/reschedule_booking_clicked_usecase.dart';
 
 part 'reschedule_booking_event.dart';
 part 'reschedule_booking_state.dart';
@@ -13,6 +16,8 @@ part 'reschedule_booking_state.dart';
 class RescheduleBookingBloc
     extends BaseBloc<RescheduleBookingPageEvent, RescheduleBookingPageState> {
 
+
+    final RescheduleBookingClickedUseCase rescheduleBookingClickedUseCase;
     bool checked = false;
 
     List<DropdownMenuEntry> rescheduleBookingEntries = [
@@ -23,5 +28,27 @@ class RescheduleBookingBloc
         DropdownMenuEntry(value: RescheduleReasonEntity(id: 4, reason: "Religious purposes"), label: "Religious purposes"),
     ];
 
-    RescheduleBookingBloc(): super(RescheduleBookingPageInitState()) {}
-} 
+    RescheduleBookingBloc(
+    {required this.rescheduleBookingClickedUseCase}
+        ): super(RescheduleBookingPageInitState()) {
+
+        on<RescheduleBookingClickedEvent>((event, emit)=> _onRescheduleBookingClickedEvent(event,emit));
+    }
+
+    Future<void> _onRescheduleBookingClickedEvent(RescheduleBookingClickedEvent event,
+        Emitter<RescheduleBookingPageState> emit)async{
+
+        emit(RescheduleBookingClickedState()..dataState = DataState.loading);
+
+        try{
+            await rescheduleBookingClickedUseCase.call(params: RescheduleBookingClickedUseCaseParams(rescheduleEntity: event.rescheduleEntity));
+            emit(RescheduleBookingClickedState()..dataState = DataState.success);
+        }catch(ex){
+            emit(RescheduleBookingClickedState(error: ex.toString())..dataState = DataState.error);
+        }
+
+
+    }
+}
+
+

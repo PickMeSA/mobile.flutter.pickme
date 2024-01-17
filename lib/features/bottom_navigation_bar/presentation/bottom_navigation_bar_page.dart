@@ -8,12 +8,14 @@ import 'package:pickme/features/bottom_navigation_bar/presentation/bloc/bottom_n
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
+import 'package:pickme/features/profile/presentation/profile_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:pickme/navigation/app_route.dart';
 
 @RoutePage()
 class BottomNavigationBarPage extends BasePage {
@@ -110,12 +112,6 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Iconsax.bubble),
-        title: (getLocalization().chat),
-        activeColorPrimary: theme.primaryColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.profile),
         title: (getLocalization().profile),
         activeColorPrimary: theme.primaryColor,
@@ -130,10 +126,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
         const HomePage(),
         const MyBookingsUpcomingPage(),
         const JobsLandingPage(),
-        const HomePage(),
-        const HomePage(),
-
-
+        const ProfilePage()
     ];
   }
 

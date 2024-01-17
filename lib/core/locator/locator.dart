@@ -1,4 +1,5 @@
 
+import 'package:geolocator/geolocator.dart';
 import 'package:pickme/core/locator/locator.config.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:dio/dio.dart';
@@ -26,4 +27,5 @@ abstract class RegisterModule{
   Dio get dio => Dio();
   @singleton
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
+  GeolocatorPlatform get geolocatorPlatform => GeolocatorPlatform.instance;
 }

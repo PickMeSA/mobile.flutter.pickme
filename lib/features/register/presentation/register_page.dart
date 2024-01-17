@@ -156,7 +156,8 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             validator:(value)=> validateEmailAddress(value??""),
                             controller: emailAddressController,
                             padding: const EdgeInsets.only(left: 20, right: 20),
-                            textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
+                            textFieldType: TextFieldType.EMAIL,
+                            labelText: getLocalization().emailAddress,),
                         ),
                         AppTabBar(
                           onTap: (index)=> getBloc().add(IdentificationChangedEvent(index: index)),

@@ -4,3 +4,7 @@ abstract class JobDetailsPageState extends BaseState {}
 
 class JobDetailsPageInitState extends JobDetailsPageState  {}
 
+class GetFullJobDetailsState extends JobDetailsPageState{
+
+}
+

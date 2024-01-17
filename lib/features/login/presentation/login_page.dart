@@ -11,7 +11,6 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
@@ -104,12 +103,13 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                      Padding(
                        padding: const EdgeInsets.only(top: 20, bottom:  10),
                        child: AppTextFormField(
+                         hint: getLocalization().exampleNumber,
                           onChanged: (value)=> getBloc().add(NumberChangedEvent(mobileNumber: value)),
                          controller: mobileNumberTextEditingController,
                          // validator: (value)=> validatePhoneNumber(value??""),
                          prefixIcon: SizedBox(width: 50,
                            child: Row(
-                             children: [Text("+27",)],
+                             children: [Text(getLocalization().countryCode,)],
                            ),
                          ),
                          padding: const EdgeInsets.only(left: 20, right: 20),
@@ -137,7 +137,9 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                            )
                        ),
                        onPressed: !state.checked?null:() {
-                         getBloc().add(LoginContinueClickedEvent(mobileNumber: mobileNumberTextEditingController.text));
+                         getBloc().add(LoginContinueClickedEvent(
+                             mobileNumber: mobileNumberTextEditingController.text,
+                         countryCode: getLocalization().countryCode));
                        },
                        child: Text(getLocalization().ccontinue),
                      ),

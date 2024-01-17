@@ -50,10 +50,12 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
         if(state is BankDetailsSubmittedState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(state.profileEntity!.location!.id!.isEmpty ){
+          if(state.profileEntity!.location!.address ==""){
             context.router.push(const LocationRoute());
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.push(const FinalDetailsRoute());
+          }else{
+            context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }
         }
 

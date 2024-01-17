@@ -4,3 +4,6 @@ abstract class ProposeAlternativePageState extends BaseState {}
 
 class ProposeAlternativePageInitState extends ProposeAlternativePageState  {}
 
+class ProposeAlternativeClickedState extends ProposeAlternativePageState{
+
+}

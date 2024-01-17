@@ -12,3 +12,5 @@ class CalendarDateSelectedState extends HomePageState{}
 
 class CalendarChangedState extends HomePageState{}
 
+class LoadJobsInAreaState extends HomePageState{}
+
