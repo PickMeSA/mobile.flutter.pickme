@@ -12,8 +12,8 @@ final DateTime? startDate;
 final DateTime? endDate;
 final String? startTime;
 final double estimatedHours;
-final double lat;
-final double lng;
+final String lat;
+final String lng;
 final String images;
 final String skills;
 final String comments;
@@ -41,19 +41,19 @@ final double distance;
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     logger.e({"response": response.startDate});
     return JobEntity(
-        title: response.title,
-        startDate: (response.startDate!=null)?DateTime.parse(response.startDate!):null,
-        endDate: (response.endDate!=null)?DateTime.parse(response.endDate!):null,
+        title: response.title??"",
+        startDate: response.startDate!=null && response.startDate!= ""?DateTime.parse(response.startDate!):DateTime.now(),
+        endDate: response.endDate!=null && response.endDate != ""?DateTime.parse(response.endDate!):DateTime.now(),
         startTime: response.startTime,
-        description: response.description,
-        images: response.images,
-        status: response.status,
-        estimatedHours: response.estimatedHours,
-        lat: response.lat,
-        lng: response.lng,
-        skills: response.skills,
+        description: response.description??"",
+        images: response.images??"",
+        status: response.status??"",
+        estimatedHours: response.estimatedHours??0,
+        lat: response.lat.toString()??"",
+        lng: response.lng.toString()??"",
+        skills: response.skills??"",
         id: response.id!,
-        distance: response.distance
+        distance: response.distance??0
     );
   }
 
@@ -67,7 +67,7 @@ final double distance;
         endDate: endDate!.toIso8601String(),
         startTime: startTime!,
         estimatedHours: estimatedHours,
-        lat: lat,
+        lat: lat.toString(),
         lng: lng,
         skills: skills,
         id: id,

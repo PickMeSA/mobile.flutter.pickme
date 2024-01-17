@@ -10,8 +10,9 @@ class OTPGetTokenEvent extends otpPageEvent{
 }
 
 class RegisterOTPCompleteEvent extends otpPageEvent{
-   UserEntity? userModel;
-   RegisterOTPCompleteEvent({this.userModel});
+   UserEntity? userEntity;
+   ProfileEntity? profileEntity;
+   RegisterOTPCompleteEvent({this.userEntity, this.profileEntity});
 }
 
 

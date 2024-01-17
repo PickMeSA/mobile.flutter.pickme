@@ -28,24 +28,27 @@ required BuildContext context}) {
                   Expanded(child:
                   Container(
                     height: 120,
-                    width: 25,
+                    width: 15,
                     decoration: BoxDecoration(
                         color: Colors.red.shade200,
                         borderRadius: BorderRadius.all(Radius.circular(10))
                     ),
                     child: Center(
                       child: SizedBox(
-                        height: 50,
-                        width: MediaQuery.sizeOf(context).width* 0.7,
+                        height: 90,
+                        width: MediaQuery.sizeOf(context).width* 0.9,
                         child: Row(
                           children: [
                             Icon(Icons.error, color: Colors.red.shade700,size: 50,),
-                            30.width,
+                            15.width,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 wText(type),
-                                wText(message)],
+                                SizedBox(
+                                width: MediaQuery.sizeOf(context).width * 0.6,
+                                    height: 67 ,
+                                    child: wText(message,style: TextStyle(fontSize: 12)))],
                             ),
                           ],
                         ),

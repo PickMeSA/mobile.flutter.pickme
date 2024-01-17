@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
@@ -52,11 +53,10 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //success
         if(state is OTPGetTokenState && state.dataState == DataState.success){
           if(widget.fromregister!) {
-            getBloc().add(RegisterOTPCompleteEvent(userModel: widget.userModel));
+            getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
           }else{
-            context.router.push(const JobsLandingRoute());
-            // getBloc().add(GetProfileProgressEvent());
-        }
+            getBloc().add(GetProfileProgressEvent());
+          }
         }
 
         //error
@@ -76,8 +76,32 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //Success
         if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
 
-            getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
+          if(state.profileEntity!.type!.isEmpty){
+            context.router.pushAndPopUntil(const SetupProfileRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if (state.profileEntity!.qualifications!.isEmpty &&
+              state.profileEntity!.workExperience!.isEmpty){
+            context.router.pushAndPopUntil(const QualificationsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.skillIds!.isEmpty){
+            context.router.pushAndPopUntil(const AddSkillsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.hourlyRate! == 0){
+            context.router.pushAndPopUntil(const RateAndWorkTimesRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+            context.router.pushAndPopUntil(const BankDetailsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.location!.address == "" ){
+            context.router.pushAndPopUntil(const LocationRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.description!.isEmpty){
+            context.router.pushAndPopUntil(const FinalDetailsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else{
+           context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
 
+         }
         }
         //loading
         if(state is RegisterOTPCompleteState && state.dataState == DataState.loading){
@@ -115,30 +139,14 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         if(state is GetProfileProgressState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(state.profileEntity!.type!.isEmpty){
-            context.router.pushAndPopUntil(SetupProfileRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if (state.profileEntity!.qualifications!.isEmpty &&
-                    state.profileEntity!.workExperience!.isEmpty){
-            context.router.pushAndPopUntil(QualificationsRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-
-            context.router.pushAndPopUntil(AddSkillsRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.pushAndPopUntil(RateAndWorkTimesRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.pushAndPopUntil(BankDetailsRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.location!.id!.isEmpty ){
-            context.router.pushAndPopUntil(LocationRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.description!.isEmpty){
-            context.router.pushAndPopUntil(FinalDetailsRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }
+          getBloc().add(RegisterOTPCompleteEvent(userEntity: UserEntity(
+              mobile: state.profileEntity?.mobile??"",
+              surname: state.profileEntity?.surname??"",
+              firstName: state.profileEntity?.firstName??"",
+              email: state.profileEntity?.email??"",
+              idNumber: state.profileEntity?.email??"",
+              passportNumber: state.profileEntity?.passportNumber??""
+          ), profileEntity: state.profileEntity));
         }
 
         if(state is GetProfileProgressState && state.dataState == DataState.error){

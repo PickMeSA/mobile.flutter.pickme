@@ -17,7 +17,9 @@ class BookingsModelResponse with _$BookingsModelResponse {
     required String? comments,
     required String? customerUid,
     required int? estimatedHours,
-    required String? labourerUid
+    required String? labourerUid,
+    required String? jobId,
+    required String? status
   }) = _BookingaModelResponse;
 
   factory BookingsModelResponse.fromJson(

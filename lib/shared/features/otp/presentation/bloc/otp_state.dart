@@ -18,6 +18,10 @@ class OTPGetTokenState extends otpPageState{
 }
 
 class RegisterOTPCompleteState extends otpPageState{
+
+  ProfileEntity profileEntity;
+
+  RegisterOTPCompleteState({required this.profileEntity});
 }
 
 class LoginOTPCompleteState extends otpPageState{

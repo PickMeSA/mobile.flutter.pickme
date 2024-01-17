@@ -48,17 +48,19 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-         if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
+         if(state.profileEntity!.skillIds!.isEmpty){
             context.router.push(const AddSkillsRoute());
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
             context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.location!.id!.isEmpty ){
+          }else if(state.profileEntity!.location!.address == "" ){
             context.router.push(const LocationRoute());
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.push(const FinalDetailsRoute());
-          }
+          }else{
+           context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+         }
         }
 
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.loading ){

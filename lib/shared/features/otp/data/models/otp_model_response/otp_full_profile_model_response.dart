@@ -14,10 +14,17 @@ part 'otp_full_profile_model_response.g.dart';
 @freezed
 class OTPFullProfileModelResponse with _$OTPFullProfileModelResponse {
   const factory OTPFullProfileModelResponse({
+    required int? id,
+    required String? firstName,
+    required String? surname,
+    required String? email,
+    required String? mobile,
+    required String? idNumber,
+    required String? passportNumber,
     required String? type,
     required int? hourlyRate,
     required String? description,
-    required SkillIdModelResponse? skillIds,
+    required List<int>? skillIds,
     required int? industryID,
     required OTPLocationModelResponse? location,
     required List<OTPQualificationModelResponse>? qualifications,

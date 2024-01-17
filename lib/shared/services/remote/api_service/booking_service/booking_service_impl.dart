@@ -15,10 +15,11 @@ class BookingServiceImpl extends BookingService{
   Future<List<BookingEntity>> getRemoteBookings() async{
     try {
       Response<dynamic> response = await apiService.get(
-          "$baseUrl/api/$version/jobs/bookings");
+          "$baseUrl$version/jobs/bookings");
       List<dynamic> bookingsList = response.data;
       List<BookingsModelResponse> bookingsModelList = bookingsList.map((e) =>
           BookingsModelResponse(
+              jobId: e["jobId"],
               name: e["name"],
               id: e["id"],
               endDate: e["endDate"],
@@ -29,21 +30,24 @@ class BookingServiceImpl extends BookingService{
               comments: e["comments"],
               customerUid: e["customerUid"],
               estimatedHours: e["estimatedHours"],
+              status: e["status"],
               labourerUid: e["labourerUid"])).toList();
       List<BookingEntity> bookingEntityList = [];
 
       bookingsModelList.forEach((element) {
         bookingEntityList.add(BookingEntity(
-            id: element.id!,
-            endDate: element.endDate!,
-            startDate: element.startDate!,
-            type: element.type!,
-            applied: element.applied!,
-            bookingId: element.bookingId!,
-            comments: element.comments!,
-            customerUid: element.customerUid!,
-            estimatedHours: element.estimatedHours!,
-            labourerUid: element.labourerUid!));
+          statusString: element.status??"",
+            jobId: element.jobId??"",
+            id: element.id??"",
+            endDate: element.endDate??DateTime.now().toString(),
+            startDate: element.startDate?? DateTime.now().toString(),
+            type: element.type??"Unknown",
+            applied: element.applied??"",
+            bookingId: element.bookingId??"",
+            comments: element.comments??"",
+            customerUid: element.customerUid??"",
+            estimatedHours: element.estimatedHours??0,
+            labourerUid: element.labourerUid??""));
       });
 
       return bookingEntityList;

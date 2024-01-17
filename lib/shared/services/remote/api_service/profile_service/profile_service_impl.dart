@@ -134,6 +134,13 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
+        firstName: otpFullProfileModelResponse.firstName,
+        surname: otpFullProfileModelResponse.surname,
+        email: otpFullProfileModelResponse.email,
+        id: otpFullProfileModelResponse.id,
+        idNumber: otpFullProfileModelResponse.idNumber,
+        mobile: otpFullProfileModelResponse.mobile,
+        passportNumber: otpFullProfileModelResponse.passportNumber,
         type: otpFullProfileModelResponse.type??"",
         description:  otpFullProfileModelResponse.description??"",
         business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? const OTPBusinessModelResponse(
@@ -145,7 +152,7 @@ class ProfileServiceImpl extends ProfileService{
         hourlyRate: otpFullProfileModelResponse.hourlyRate??0,
         industryId: otpFullProfileModelResponse.industryID??0,
         location: OTPLocationEntity.fromResponse(otpFullProfileModelResponse.location??const OTPLocationModelResponse(
-            id: "",
+            address: "",
             latitude: 0,
             longitude: 0)),
         paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails??const OTPPaymentDetailsModelResponse(
@@ -156,8 +163,8 @@ class ProfileServiceImpl extends ProfileService{
             taxNumber: "",
             vatNumber: "")),
         qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualifications??[],
-        skillIds: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skillIds??SkillIdModelResponse(skillsId: [])),
-        workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
+        workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[],
+    skillIds: otpFullProfileModelResponse.skillIds??[]);
   }
 
   @override
@@ -185,6 +192,19 @@ class ProfileServiceImpl extends ProfileService{
     }catch(ex){
       rethrow;
     }
+  }
+
+  @override
+  Future<OTPPaymentDetailsEntity> getBankDetails() async {
+    try{
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
+      ProfileEntity profileEntity =  returnProfileEntity(response: response);
+      return profileEntity.paymentDetails!;
+    }catch(ex){
+      rethrow;
+    }
+
   }
 
 

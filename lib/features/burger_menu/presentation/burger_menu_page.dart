@@ -76,10 +76,13 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                    ],
                  ),
                  30.height,
-                 ListTile(
-                   leading: Icon(Iconsax.wallet_1),
-                   title: wText(getLocalization().myWallet),
-                   trailing: Icon(Icons.arrow_forward_ios),
+                 InkWell(
+                   onTap: ()=> context.router.push(MyWalletRoute()),
+                   child: ListTile(
+                     leading: Icon(Iconsax.wallet_1),
+                     title: wText(getLocalization().myWallet),
+                     trailing: Icon(Icons.arrow_forward_ios),
+                   ),
                  ),
                  AppDivider(),
                  ListTile(

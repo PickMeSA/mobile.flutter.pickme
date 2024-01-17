@@ -20,3 +20,9 @@ class CalendarChangedEvent extends HomePageEvent{
 
  CalendarChangedEvent({required this.dateTime});
 }
+
+class LoadJobsInAreaEvent extends HomePageEvent{
+
+
+ LoadJobsInAreaEvent();
+}

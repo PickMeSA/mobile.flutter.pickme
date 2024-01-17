@@ -45,7 +45,6 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         //run code to check the progress of the user in the registration flow
         emit(GetProfileProgressState(userModel: event.userModel)..dataState = DataState.loading);
         try{
-
         emit(GetProfileProgressState(userModel: event.userModel ,
             profileEntity: await getRemoteProfileUseCase.call())..dataState = DataState.success);
         }catch(ex){
@@ -97,14 +96,14 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         RegisterOTPCompleteEvent event,
         Emitter<otpPageState> emit
         ) async{
-        emit(RegisterOTPCompleteState()..dataState = DataState.loading);
+        emit(RegisterOTPCompleteState(profileEntity: event.profileEntity!)..dataState = DataState.loading);
 
         try{
-            await registerOTPCompleteUseCase.call(params: RegisterOTPCompleteUseCaseParams(userModel: event.userModel!));
-            emit(RegisterOTPCompleteState()..dataState = DataState.success);
+            await registerOTPCompleteUseCase.call(params: RegisterOTPCompleteUseCaseParams(userModel: event.userEntity!));
+            emit(RegisterOTPCompleteState(profileEntity: event.profileEntity!)..dataState = DataState.success);
 
         }catch(ex){
-            emit(RegisterOTPCompleteState()..dataState = DataState.error);
+            emit(RegisterOTPCompleteState(profileEntity: event.profileEntity!)..dataState = DataState.error);
         }
 
     }

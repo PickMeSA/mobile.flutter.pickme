@@ -20,19 +20,24 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(name) =>
-      "${name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request";
+  static String m0(name) => "Hi, ${name}";
 
   static String m1(name) =>
+      "${name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request";
+
+  static String m2(name) =>
       "${name} sent an alternative request. You can approve, or decline this request";
 
-  static String m2(name) => "Welcome ${name}! Let\'s set up your profile";
+  static String m3(name) => "Welcome ${name}! Let\'s set up your profile";
 
-  static String m3(number) =>
+  static String m4(number) =>
       "We’ve sent a One-Time Pin (OTP) to your number ${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "BackToPaySomeone":
+            MessageLookupByLibrary.simpleMessage("Back to pay someone"),
+        "HiName": m0,
         "aOneTimeFeeOf500GetYouStarted": MessageLookupByLibrary.simpleMessage(
             "A one-time fee of R50.00 (including VAT) get you started, with no monthly charges."),
         "aRescheduleRequestHasBeenSentToYou": MessageLookupByLibrary.simpleMessage(
@@ -50,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Active listings"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addAQualificationMembership": MessageLookupByLibrary.simpleMessage(
-            "Add a qualification/membership"),
+            "Add a qualification / membership"),
         "addAQualificationOrMembership": MessageLookupByLibrary.simpleMessage(
             "Add a qualification or membership"),
         "addASkill": MessageLookupByLibrary.simpleMessage("Add a skill"),
@@ -84,12 +89,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "backToBooking":
             MessageLookupByLibrary.simpleMessage("Back to bookings"),
         "backToJobs": MessageLookupByLibrary.simpleMessage("Back to Jobs"),
+        "backToMyWallet":
+            MessageLookupByLibrary.simpleMessage("Back to my wallet"),
         "bankA": MessageLookupByLibrary.simpleMessage("Bank *"),
         "bankDetails": MessageLookupByLibrary.simpleMessage("Bank details"),
         "bookings": MessageLookupByLibrary.simpleMessage("Bookings"),
         "branchCodeA": MessageLookupByLibrary.simpleMessage("Branch Code *"),
         "browseCategories":
             MessageLookupByLibrary.simpleMessage("Browse categories"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel booking"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "candidateProfile":
@@ -108,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactHelpCenter":
             MessageLookupByLibrary.simpleMessage("Contact help center"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "countryCode": MessageLookupByLibrary.simpleMessage("+27"),
         "createAJobListing":
             MessageLookupByLibrary.simpleMessage("Create a job listing"),
         "createANewJobListing":
@@ -126,13 +135,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
         "ePWP": MessageLookupByLibrary.simpleMessage("EPWP"),
+        "editMyBankingDetails":
+            MessageLookupByLibrary.simpleMessage("Edit my banking details"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "endDateCannotBeBeforeStartDate": MessageLookupByLibrary.simpleMessage(
             "End date cannot be before start date"),
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "estHours": MessageLookupByLibrary.simpleMessage("Est. hours"),
+        "exampleNumber": MessageLookupByLibrary.simpleMessage("800000000"),
         "exampleText": MessageLookupByLibrary.simpleMessage(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
         "exploreAllJobs":
@@ -222,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "We set out the minimum loans for each province as a guideline to set up your hourly rate and not to undersell yourself.\n\nPlease note that you cannot set an hourly rate that is less than the lowest minimum wage at R25.42 p/hour.\n\nAs of the 01 March 2023 the Department of Employment and Labor has declared the minimum wage in South Africa to be no less than R25.42p/hr."),
         "minimumWageText2": MessageLookupByLibrary.simpleMessage(
             "As per the Department of Employment and Labor Farm workers will earn a minimum in line with the rate, as will domestic workers. However, workers employed in expanded public works programmes will be entitled to a lower rate at R13.97 per hour."),
+        "myBankingDetails":
+            MessageLookupByLibrary.simpleMessage("My banking details"),
         "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
         "myCalendar": MessageLookupByLibrary.simpleMessage("My Calendar"),
         "myJobListings":
@@ -234,10 +249,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
         "needAnAmbulance":
             MessageLookupByLibrary.simpleMessage("Need an \nambulance?"),
+        "needToCancelYourBooking": MessageLookupByLibrary.simpleMessage(
+            "Need to cancel your booking? Fill in the cancellation form and we\'ll inform your client."),
         "needToRescheduleSelectAnAlternativeDate":
             MessageLookupByLibrary.simpleMessage(
                 "Need to reschedule? Select an alternative date and/or time and we\'ll let your client know."),
-        "needsToRescheduleThisBooking": m0,
+        "needsToRescheduleThisBooking": m1,
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
@@ -250,6 +267,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "offerAJob": MessageLookupByLibrary.simpleMessage("Offer a job"),
         "offerSentEx": MessageLookupByLibrary.simpleMessage("Offer sent!"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
+        "oopsSomethingWentWrongWithYourPayment":
+            MessageLookupByLibrary.simpleMessage(
+                "Ooops! Something went wrong with your payment, Please try again"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "otherComments": MessageLookupByLibrary.simpleMessage("Other comments"),
         "otherCommentsOptional":
@@ -257,6 +277,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),
+        "pay": MessageLookupByLibrary.simpleMessage("Pay"),
+        "payNow": MessageLookupByLibrary.simpleMessage("Pay now"),
+        "paySomeone": MessageLookupByLibrary.simpleMessage("Pay someone"),
+        "paymentSuccessful":
+            MessageLookupByLibrary.simpleMessage("Payment Successful"),
+        "paymentUnsuccessful":
+            MessageLookupByLibrary.simpleMessage("Payment Unsuccessful"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
@@ -282,6 +309,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please enter qualification name"),
         "pleaseEnterQualificationType": MessageLookupByLibrary.simpleMessage(
             "Please enter qualification type"),
+        "pleaseEnterValidCellNumber": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid cell number."),
         "pleaseReenterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Please re-enter your phone number. If the problem persists, please contact our help centre."),
         "pleaseSelectEndDate":
@@ -310,7 +339,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "publishListing":
             MessageLookupByLibrary.simpleMessage("Publish listing"),
         "qualificationMembership":
-            MessageLookupByLibrary.simpleMessage("Qualifications/Membership"),
+            MessageLookupByLibrary.simpleMessage("Qualifications / Membership"),
         "qualificationName":
             MessageLookupByLibrary.simpleMessage("Qualification name *"),
         "qualificationType":
@@ -319,6 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Qualifications"),
         "r": MessageLookupByLibrary.simpleMessage("R"),
         "r00": MessageLookupByLibrary.simpleMessage("R00.00"),
+        "reasonForCancellation":
+            MessageLookupByLibrary.simpleMessage("Reason for cancellation"),
         "reasonForReschedule":
             MessageLookupByLibrary.simpleMessage("Reason for reschedule"),
         "recommendedForYou":
@@ -355,7 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendApplication":
             MessageLookupByLibrary.simpleMessage("Send Application"),
         "sendJobOffer": MessageLookupByLibrary.simpleMessage("Send job offer"),
-        "sentAnAlternativeRequest": m1,
+        "sentAnAlternativeRequest": m2,
         "serviceCategory":
             MessageLookupByLibrary.simpleMessage("Service category"),
         "services": MessageLookupByLibrary.simpleMessage("Services"),
@@ -399,13 +430,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "weAreStillVerifyingYourAccount": MessageLookupByLibrary.simpleMessage(
             "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeLetsSetUpYourProfile": m2,
+        "welcomeLetsSetUpYourProfile": m3,
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
         "weveSentYourAlternativeDateAndTimeProposal":
             MessageLookupByLibrary.simpleMessage(
                 "We\'ve sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected"),
-        "weveSentaOneTimePine": m3,
+        "weveSentaOneTimePine": m4,
         "whatAreYouLookingFor":
             MessageLookupByLibrary.simpleMessage("What are you looking for?"),
         "whatIsYourHourlyRateAndWorkTimes":
@@ -439,6 +470,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your job offer has been sent. You\'ll receive a notification once the candidate accepts."),
         "yourNextAppointment":
             MessageLookupByLibrary.simpleMessage("Your next appointment"),
+        "yourPaymentWasSuccessful":
+            MessageLookupByLibrary.simpleMessage("Your payment was successful"),
         "yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators":
             MessageLookupByLibrary.simpleMessage(
                 "Your profile has been successfully submitted to the PickMe administrators. \n\nYour information needs to be verified before you can start to apply or accept jobs. You will be notified within 00 business days."),

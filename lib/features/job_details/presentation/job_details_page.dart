@@ -16,8 +16,10 @@ import 'bloc/job_details_bloc.dart';
 @RoutePage()
 class JobDetailsPage extends BasePage {
   int? fromIndex ;
+  final String jobId;
+  String? bookingId;
 
-   JobDetailsPage({super.key, this.fromIndex = 0});
+   JobDetailsPage({super.key, this.fromIndex = 0, required this.jobId, this.bookingId});
 
   @override
   _JobDetailsPageState createState() => _JobDetailsPageState();
@@ -29,7 +31,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId));
   }
 
     @override
@@ -128,7 +130,8 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                      )
                                  ),
                                  onPressed:() {
-                                    context.router.push(const RescheduleBookingRoute());
+                                    context.router.push( RescheduleBookingRoute(
+                                        bookingId: widget.bookingId!));
                                  },
                                  child: Text(getLocalization().rescheduleBooking, style: const TextStyle(color: Colors.white)),
                                ),
@@ -150,7 +153,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                      )
                                  ),
                                  onPressed:() {
-
+                                    context.router.push(CancelBookingRoute(bookingId: widget.bookingId!));
                                  },
                                  child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
                                )

@@ -22,11 +22,10 @@ class PFirebaseAuthentication extends Authentication {
   @override
   Future<void> authenticate({ required String mobileNumber})  async {
     await firebaseAuth.verifyPhoneNumber(
-      phoneNumber: '+27810434369',
+      phoneNumber: mobileNumber,
       timeout: const Duration(minutes: 1),
       autoRetrievedSmsCodeForTesting:"984596",
       verificationCompleted: (PhoneAuthCredential credential) async{
-        final fCredential = credential;
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
           await value.user!.getIdToken(true).then((value1) {
 

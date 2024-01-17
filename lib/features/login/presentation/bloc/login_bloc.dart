@@ -40,14 +40,13 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       Emitter<LoginState> emit
       )async{
     emit(LoginContinueClickedState(checked: true)..dataState = DataState.loading);
-
     try{
-      loginContinueClickedUsecase.callBack(
-        mobileNumber: "+27${event!.mobileNumber}",
-        onError: (error){
-          //emit(LoginContinueClickedState(checked: false)..dataState = DataState.error);
+      await loginContinueClickedUsecase.callBack(
+        mobileNumber: "${event.countryCode}${event!.mobileNumber}",
+        onError: (error)async {
+          //emit(LoginContinueClickedState(checked: false, error: error)..dataState = DataState.error);
         },
-        onSuccesss:(verificationId, resentCode){
+        onSuccesss:(verificationId, resentCode)async{
           //emit(LoginContinueClickedState(checked: true)..dataState = DataState.success);
         }
       );
