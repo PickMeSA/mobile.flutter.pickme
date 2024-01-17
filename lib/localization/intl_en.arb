@@ -259,5 +259,8 @@
   "yourJobOfferHasBeenSent": "Your job offer has been sent. You'll receive a notification once the candidate accepts.",
   "bookings": "Bookings",
   "noJobsFound": "No jobs found",
-  "otherServices": "Other services"
+  "otherServices": "Other services",
+  "noJobDescription": "No job description",
+  "noProfileDescription": "No profile description",
+  "noRating": "No ratings yet"
 }

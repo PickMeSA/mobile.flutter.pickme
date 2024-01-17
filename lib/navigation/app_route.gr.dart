@@ -262,9 +262,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MyJobListingsRoute.name: (routeData) {
+      final args = routeData.argsAs<MyJobListingsRouteArgs>(
+          orElse: () => const MyJobListingsRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MyJobListingsPage(),
+        child: MyJobListingsPage(
+          key: args.key,
+          jobListingsPageEntity: args.jobListingsPageEntity,
+        ),
       );
     },
     OTPRoute.name: (routeData) {
@@ -1107,16 +1112,40 @@ class MyBookingsUpcomingRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MyJobListingsPage]
-class MyJobListingsRoute extends PageRouteInfo<void> {
-  const MyJobListingsRoute({List<PageRouteInfo>? children})
-      : super(
+class MyJobListingsRoute extends PageRouteInfo<MyJobListingsRouteArgs> {
+  MyJobListingsRoute({
+    Key? key,
+    MyJobListingsPageEntity? jobListingsPageEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
           MyJobListingsRoute.name,
+          args: MyJobListingsRouteArgs(
+            key: key,
+            jobListingsPageEntity: jobListingsPageEntity,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MyJobListingsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<MyJobListingsRouteArgs> page =
+      PageInfo<MyJobListingsRouteArgs>(name);
+}
+
+class MyJobListingsRouteArgs {
+  const MyJobListingsRouteArgs({
+    this.key,
+    this.jobListingsPageEntity,
+  });
+
+  final Key? key;
+
+  final MyJobListingsPageEntity? jobListingsPageEntity;
+
+  @override
+  String toString() {
+    return 'MyJobListingsRouteArgs{key: $key, jobListingsPageEntity: $jobListingsPageEntity}';
+  }
 }
 
 /// generated route for

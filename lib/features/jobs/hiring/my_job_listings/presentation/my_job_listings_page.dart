@@ -10,18 +10,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
+import 'package:pickme/features/jobs/shared/domain/entities/my_job_listings_page_entity.dart';
 import 'bloc/my_job_listings_bloc.dart';
 
 @RoutePage()
 class MyJobListingsPage extends BasePage {
-  const MyJobListingsPage({super.key});
-
-
+  const MyJobListingsPage({super.key, this.jobListingsPageEntity, });
+  final MyJobListingsPageEntity? jobListingsPageEntity;
   @override
   State<MyJobListingsPage> createState() => _MyJobListingsPageState();
 }
@@ -31,7 +30,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
   @override
   void initState() {
     super.initState();
-    getBloc().add(MyJobListingsPageEnteredEvent());
+    getBloc().add(MyJobListingsPageEnteredEvent(jobListingsPageEntity:widget.jobListingsPageEntity));
   }
 
   @override

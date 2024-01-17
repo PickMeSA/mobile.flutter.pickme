@@ -54,8 +54,8 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
                   CandidateProfileEntity candidate = paginatedCandidates.candidates[index];
                   return AppCandidateProfile(
                     fullName: candidate.fullName,
-                    jobTitle: candidate.jobTitle,
-                    rating: candidate.rating,
+                    jobTitle: candidate.jobTitle?? getLocalization().noJobDescription,
+                    rating: candidate.rating??0,
                     hourlyRate: "R${candidate.hourlyRate}p/h",
                     image: (candidate.profilePicture!=null)?
                     CachedNetworkImageProvider(

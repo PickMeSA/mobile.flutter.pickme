@@ -10,31 +10,35 @@ _$CandidateProfileModelResponseImpl
     _$$CandidateProfileModelResponseImplFromJson(Map<String, dynamic> json) =>
         _$CandidateProfileModelResponseImpl(
           id: json['id'] as String,
-          name: json['name'] as String,
-          job_title: json['job_title'] as String,
-          skills: json['skills'] as String,
-          about: json['about'] as String,
-          photos: json['photos'] as String,
-          workExperience: (json['workExperience'] as List<dynamic>)
-              .map((e) => WorkExperienceModelResponse.fromJson(
+          userId: json['userId'] as String,
+          firstName: json['firstName'] as String,
+          surname: json['surname'] as String,
+          jobTitle: json['jobTitle'] as String?,
+          skills: json['skills'] as String?,
+          description: json['description'] as String?,
+          photos: json['photos'] as String?,
+          workExperience: (json['workExperience'] as List<dynamic>?)
+              ?.map((e) => WorkExperienceModelResponse.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-          hourly_rate: (json['hourly_rate'] as num).toDouble(),
-          rating: json['rating'] as int,
-          profile_picture: json['profile_picture'] as String?,
+          hourlyRate: (json['hourlyRate'] as num?)?.toDouble(),
+          rating: json['rating'] as int?,
+          profilePictureUrl: json['profilePictureUrl'] as String?,
         );
 
 Map<String, dynamic> _$$CandidateProfileModelResponseImplToJson(
         _$CandidateProfileModelResponseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
-      'job_title': instance.job_title,
+      'userId': instance.userId,
+      'firstName': instance.firstName,
+      'surname': instance.surname,
+      'jobTitle': instance.jobTitle,
       'skills': instance.skills,
-      'about': instance.about,
+      'description': instance.description,
       'photos': instance.photos,
       'workExperience': instance.workExperience,
-      'hourly_rate': instance.hourly_rate,
+      'hourlyRate': instance.hourlyRate,
       'rating': instance.rating,
-      'profile_picture': instance.profile_picture,
+      'profilePictureUrl': instance.profilePictureUrl,
     };

@@ -62,10 +62,10 @@ import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
-import '../features/login/presentation/login_page.dart';
-import '../features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
-//JOB
-import '../features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
+import 'package:pickme/features/jobs/shared/domain/entities/my_job_listings_page_entity.dart';
+import 'package:pickme/features/login/presentation/login_page.dart';
+import 'package:pickme/features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
+import 'package:pickme/features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
 
 part 'app_route.gr.dart';
 
@@ -77,7 +77,6 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes =>[
     AnimatedRoute(
       page: LandingRoute.page,
-      initial: true,
     ),
     AnimatedRoute(page: LoginRoute.page,),
     AnimatedRoute(page: RegisterRoute.page,),
@@ -92,7 +91,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
     AnimatedRoute(page: JobsLandingRoute.page,),
-    AnimatedRoute(page: JobsHiringLandingRoute.page,),
+    AnimatedRoute(page: JobsHiringLandingRoute.page,      initial: true,
+    ),
     // AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page: AllServicesRoute.page),
     AnimatedRoute(page: ServiceCategoryCandidatesRoute.page),

@@ -2659,6 +2659,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No job description`
+  String get noJobDescription {
+    return Intl.message(
+      'No job description',
+      name: 'noJobDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No profile description`
+  String get noProfileDescription {
+    return Intl.message(
+      'No profile description',
+      name: 'noProfileDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No ratings yet`
+  String get noRating {
+    return Intl.message(
+      'No ratings yet',
+      name: 'noRating',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

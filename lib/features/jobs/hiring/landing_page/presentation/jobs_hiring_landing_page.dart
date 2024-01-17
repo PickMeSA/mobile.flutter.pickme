@@ -76,9 +76,9 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                 10.height,
                 AppExplorationTile(
                   title: getLocalization().myJobListings,
-                  count: 0,
+                  count: getBloc().jobCount,
                   icon: const Icon(Iconsax.document_text_14),
-                  onClick: ()=>context.router.push(const MyJobListingsRoute()),
+                  onClick: ()=>context.router.push(MyJobListingsRoute(jobListingsPageEntity: getBloc().jobListingsPageEntity)),
                 ),
                 40.height,
                 Row(
@@ -183,8 +183,8 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       CandidateProfileEntity candidate = state.paginatedCandidates!.candidates[index];
                       return AppCandidateProfile(
                         fullName: candidate.fullName,
-                        jobTitle: candidate.jobTitle,
-                        rating: candidate.rating,
+                        jobTitle: candidate.jobTitle?? getLocalization().noJobDescription,
+                        rating: candidate.rating??0,
                         hourlyRate: "R${candidate.hourlyRate}p/h",
                         image: (candidate.profilePicture!=null)?
                         CachedNetworkImageProvider(
@@ -197,11 +197,6 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                     },
                   ):SizedBox(),
                 ),
-
-                PrimaryButton(onPressed:
-                    ()=>context.router.push(const PendingProfileRoute()),
-                    child: const Text("Pending profile"),
-                )
               ],
             ),
           ),

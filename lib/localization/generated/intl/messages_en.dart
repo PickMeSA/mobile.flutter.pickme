@@ -244,7 +244,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
+        "noJobDescription":
+            MessageLookupByLibrary.simpleMessage("No job description"),
         "noJobsFound": MessageLookupByLibrary.simpleMessage("No jobs found"),
+        "noProfileDescription":
+            MessageLookupByLibrary.simpleMessage("No profile description"),
+        "noRating": MessageLookupByLibrary.simpleMessage("No ratings yet"),
         "notSatisfiedWithTheProposedRescheduleDateAndTime":
             MessageLookupByLibrary.simpleMessage(
                 "Not satisfied with the proposed reschedule date & time? you can propose an alternative"),

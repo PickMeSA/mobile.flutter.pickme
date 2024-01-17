@@ -208,11 +208,4 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
     return locator<AppLocalizations>();
   }
 
-
-  @override
-  PreferredSizeWidget buildAppbar(){
-    return getAppBar(
-      title: Text(getLocalization().jobs,),
-    );
-  }
 }

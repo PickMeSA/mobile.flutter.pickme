@@ -31,7 +31,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     CandidateProfileEntity profile = widget.candidateProfile;
-    List<String> jobImages = profile.photos.isEmpty?[]:profile.photos.split(",");
+    List<String> jobImages = (profile.photos==null || profile.photos =="")?[]:profile.photos!.split(",");
 
     return BlocConsumer<CandidateProfilePageBloc, CandidateProfilePageState>(
       listener: (context, state) {
@@ -49,8 +49,8 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppCandidateProfile(fullName: profile.fullName,
-                      jobTitle: profile.jobTitle,
-                      rating: profile.rating,
+                      jobTitle: profile.jobTitle??getLocalization().noJobDescription,
+                      rating: profile.rating??0,
                       hourlyRate: "R${profile.hourlyRate} p/h",
                       seeReviewsFunction: (){},
                       image: (profile.profilePicture!=null)?
@@ -60,20 +60,20 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     ),
                     wText(getLocalization().aboutMe, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    wText(profile.about),
+                    wText(profile.about??getLocalization().noProfileDescription),
                     16.height,
                     const AppDivider(),
                     24.height,
                     wText(getLocalization().mySkills, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    ChipGroup(inputs: profile.skills.split(",").map((e) => ChipOption(label: e, id: 0)).toList()),
+                    profile.skills!=null && profile.skills!.isNotEmpty?ChipGroup(inputs: profile.skills!.split(",").map((e) => ChipOption(label: e, id: 0)).toList()): const SizedBox(),
                     16.height,
                     const AppDivider(),
                     24.height,
                     wText(getLocalization().workExperience, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    profile.workExperience.map((e) => AppProfileQualification(
-                        qualification: e)).first,
+                    profile.workExperience!=null && profile.workExperience!.isNotEmpty?profile.workExperience!.map((e) => AppProfileQualification(
+                        qualification: e)).first: const SizedBox(),
                     16.height,
                     wText(getLocalization().photos, style: Theme.of(context).textTheme.titleMedium),
                     16.height,

@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 
-import '../../domain/entities/my_job_listings_page_entity.dart';
-import '../../domain/use_cases/get_my_job_listings_usecase.dart';
+import '../../../../shared/domain/entities/my_job_listings_page_entity.dart';
+import '../../../../shared/domain/usecases/get_my_job_listings_usecase.dart';
 part 'my_job_listings_event.dart';
 part 'my_job_listings_state.dart';
 
@@ -38,7 +38,11 @@ class MyJobListingsBloc extends BaseBloc<MyJobListingsEvent, MyJobListingsState>
       )async{
     emit(MyJobListingsPageEnteredState()..dataState=DataState.loading);
     try{
-      myJobs = await getMyJobListingsUseCase.call();
+      if(event.jobListingsPageEntity!=null){
+        myJobs = event.jobListingsPageEntity;
+      }else{
+        myJobs = await getMyJobListingsUseCase.call();
+      }
       emit(MyJobListingsPageEnteredState()..dataState=DataState.success);
     }catch(ex){
       emit(MyJobListingsPageEnteredState()..dataState=DataState.error);
