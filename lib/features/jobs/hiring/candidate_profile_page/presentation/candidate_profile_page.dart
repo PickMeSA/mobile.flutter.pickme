@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -9,9 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/candidate_profile_page_bloc.dart';
@@ -30,20 +34,36 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
-    CandidateProfileEntity profile = widget.candidateProfile;
+    CandidateProfileEntity? profile = widget.candidateProfile;
     List<String> jobImages = (profile.photos==null || profile.photos =="")?[]:profile.photos!.split(",");
-
+    ProfileEntity? profileEntity = getBloc().candidateProfile;
     return BlocConsumer<CandidateProfilePageBloc, CandidateProfilePageState>(
-      listener: (context, state) {
+        listener: (context, state) {
+          //loading
+          if(state is CandidateProfilePageEnteredState && state.dataState == DataState.loading){
+            if(!getBloc().preloaderActive){
+              getBloc().preloaderActive = true;
+              preloader(context);
+            }
+          }
 
-      },
+          //loading
+          if(state is CandidateProfilePageEnteredState && state.dataState == DataState.success){
+            Navigator.pop(context);
+          }
+
+          if(state is CandidateProfilePageEnteredState && state.dataState == DataState.error){
+            Navigator.pop(context);
+            wErrorPopUp(message: "failed to get candidate details", type: getLocalization().error, context: context);
+          }
+        },
       builder: (context, state) {
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: Stack(
             children: [
-              SingleChildScrollView(
+              (profile !=null)? SingleChildScrollView(
                 padding: wPagePadding(top:0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +80,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     ),
                     wText(getLocalization().aboutMe, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    wText(profile.about??getLocalization().noProfileDescription),
+                    wText(profileEntity?.description??getLocalization().noProfileDescription),
                     16.height,
                     const AppDivider(),
                     24.height,
@@ -95,7 +115,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     150.height,
                   ],
                 ),
-              ),
+              ):SizedBox(),
               Positioned(
                   bottom: 0,
                   left: 0,

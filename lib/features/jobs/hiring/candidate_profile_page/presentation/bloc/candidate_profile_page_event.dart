@@ -1,22 +1,23 @@
 part of 'candidate_profile_page_bloc.dart';
 
 @immutable
-abstract class ReviewJobEvent extends BaseEvent {}
+abstract class CandidateProfilePageEvent extends BaseEvent {}
 
-class SeeAllClickedEvent extends ReviewJobEvent{
+class SeeAllClickedEvent extends CandidateProfilePageEvent{
   SeeAllClickedEvent();
 }
-class ReviewJobListingInfoPageEnteredEvent extends ReviewJobEvent{
-  ReviewJobListingInfoPageEnteredEvent();
+class CandidateProfilePageEnteredEvent extends CandidateProfilePageEvent{
+  final CandidateProfileEntity candidateProfile;
+  CandidateProfilePageEnteredEvent({required this.candidateProfile});
 }
 
-class SelectedTabChangedEvent extends ReviewJobEvent{
+class SelectedTabChangedEvent extends CandidateProfilePageEvent{
   final int tabIndex;
   SelectedTabChangedEvent({required this.tabIndex});
 }
 
 
-class ReviewJobPageSubmitJobEvent extends ReviewJobEvent{
+class ReviewJobPageSubmitJobEvent extends CandidateProfilePageEvent{
   final CreateJobPageJobEntity job;
 
   ReviewJobPageSubmitJobEvent({required this.job});
