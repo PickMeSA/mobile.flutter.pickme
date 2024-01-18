@@ -84,7 +84,23 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
                     },
                   );
                   },
-                ):SizedBox(),
+                ):Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Image(
+                      image: AssetImage("assets/no_items_found.png"),
+                    ),
+                  ),
+                  24.height,
+                  Text(getLocalization().noProfilesAvailableForThisCategory,
+                    style: theme.textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
               if(paginatedCandidates!=null && paginatedCandidates.pagination.nextPage!=null)SecondaryButtonDark(onPressed: ()=> getBloc().add(
                   LoadMoreClickedEvent(
                       paginationEntity: paginatedCandidates!.pagination,

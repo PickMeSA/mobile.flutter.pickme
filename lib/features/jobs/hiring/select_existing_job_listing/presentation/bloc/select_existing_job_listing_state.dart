@@ -2,7 +2,8 @@ part of 'select_existing_job_listing_bloc.dart';
 
 @immutable
 abstract class SelectExistingJobState extends BaseState {
-  SelectExistingJobState();
+  final String? error;
+  SelectExistingJobState({this.error});
 }
 
 class MyJobListingsPageInitial extends SelectExistingJobState {
@@ -17,5 +18,5 @@ class SelectExistingJobPageEnteredState extends SelectExistingJobState {
 }
 
 class SendJobOfferClickedState extends SelectExistingJobState {
-  SendJobOfferClickedState();
+  SendJobOfferClickedState({super.error});
 }

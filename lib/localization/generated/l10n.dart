@@ -2889,6 +2889,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No profiles available for this category`
+  String get noProfilesAvailableForThisCategory {
+    return Intl.message(
+      'No profiles available for this category',
+      name: 'noProfilesAvailableForThisCategory',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

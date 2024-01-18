@@ -13,6 +13,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
@@ -44,6 +45,11 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
         //error
         if(state is JobsHiringLandingPageInitial && state.dataState == DataState.error){
           // error dialog
+        }
+
+        if(state is GetTopIndustriesState && state.dataState == DataState.error){
+          Navigator.pop(context); //Remove loader
+          wErrorPopUp(message: "An error occurred while fetching your data.", type: getLocalization().error, context: context);
         }
         //loading
         if(state is GetTopIndustriesState && state.dataState == DataState.loading){

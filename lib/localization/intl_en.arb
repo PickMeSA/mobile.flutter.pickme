@@ -282,6 +282,6 @@
   "payNow": "Pay now",
   "editMyBankingDetails": "Edit my banking details",
   "cancel": "Cancel",
-  "createJobListingInfoPublicationFeeDesc": "Please note that there is no publication fee associated with each job\nlisting."
-
+  "createJobListingInfoPublicationFeeDesc": "Please note that there is no publication fee associated with each job\nlisting.",
+  "noProfilesAvailableForThisCategory": "No profiles available for this category"
 }

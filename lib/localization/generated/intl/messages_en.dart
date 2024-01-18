@@ -269,6 +269,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noJobsFound": MessageLookupByLibrary.simpleMessage("No jobs found"),
         "noProfileDescription":
             MessageLookupByLibrary.simpleMessage("No profile description"),
+        "noProfilesAvailableForThisCategory":
+            MessageLookupByLibrary.simpleMessage(
+                "No profiles available for this category"),
         "noRating": MessageLookupByLibrary.simpleMessage("No ratings yet"),
         "notSatisfiedWithTheProposedRescheduleDateAndTime":
             MessageLookupByLibrary.simpleMessage(

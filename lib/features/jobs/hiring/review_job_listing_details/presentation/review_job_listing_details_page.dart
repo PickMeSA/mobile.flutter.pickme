@@ -36,19 +36,16 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
     var theme = Theme.of(context);
     return BlocConsumer<ReviewJobListingInfoBloc, ReviewJobListingState>(
       listener: (context, state) {
-        //loading
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.loading){
             getBloc().preloaderActive = true;
             preloader(context);
 
         }
-
-        //loading
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.success){
           Navigator.pop(context); //Remove loader
           context.router.popUntilRouteWithName("JobsHiringLandingRoute");
           context.router.push(MyJobListingsRoute());
-        }          //loading
+        }
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.error){
           Navigator.pop(context); //Remove loader
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
