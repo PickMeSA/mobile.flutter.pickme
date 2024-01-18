@@ -17,7 +17,9 @@ class ProfileEntity {
   String? type;
   int? hourlyRate;
   String? description;
+  String? industry;
   List<int>? skillIds;
+  List<Map<String, dynamic>>? skills;
   int? industryId;
   OTPLocationEntity? location;
   List<OTPQualificationEntity>? qualifications;
@@ -35,13 +37,16 @@ class ProfileEntity {
     this.type,
     this.industryId,
   this.skillIds,
+  this.skills,
   this.paymentDetails,
   this.workExperience,
   this.description,
   this.hourlyRate,
   this.qualifications,
   this.business,
-  this.location});
+  this.location,
+  this.industry,
+  });
 
 
 

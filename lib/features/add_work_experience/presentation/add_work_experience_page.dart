@@ -172,7 +172,9 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
         endDate: endDate,
         company: companyController.text,
         industryId: 0,
-        isCurrent: getBloc().current);
+        isCurrent: getBloc().current,
+      files: []
+    );
   }
 
 }

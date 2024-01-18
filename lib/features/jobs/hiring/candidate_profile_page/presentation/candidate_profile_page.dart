@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/FileEntity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
@@ -30,13 +31,27 @@ class CandidateProfilePage extends BasePage {
 }
 
 class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, CandidateProfilePageBloc> {
-
+  @override
+  void initState() {
+    super.initState();
+    getBloc().add(CandidateProfilePageEnteredEvent(candidateProfile: widget.candidateProfile));
+  }
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     CandidateProfileEntity? profile = widget.candidateProfile;
-    List<String> jobImages = (profile.photos==null || profile.photos =="")?[]:profile.photos!.split(",");
     ProfileEntity? profileEntity = getBloc().candidateProfile;
+    List<AppFileEntity> jobImages = [];
+    if(profileEntity?.workExperience!=null && profileEntity!.workExperience!.isNotEmpty){
+      for (var experience in profileEntity.workExperience!) {
+        if(experience.files !=null){
+          for(AppFileEntity file in experience.files!){
+            jobImages.add(file);
+          }
+        }
+
+      }
+    }
     return BlocConsumer<CandidateProfilePageBloc, CandidateProfilePageState>(
         listener: (context, state) {
           //loading
@@ -80,20 +95,25 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     ),
                     wText(getLocalization().aboutMe, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    wText(profileEntity?.description??getLocalization().noProfileDescription),
+                    wText(profileEntity?.industry??getLocalization().noProfileDescription),
                     16.height,
                     const AppDivider(),
                     24.height,
                     wText(getLocalization().mySkills, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    profile.skills!=null && profile.skills!.isNotEmpty?ChipGroup(inputs: profile.skills!.split(",").map((e) => ChipOption(label: e, id: 0)).toList()): const SizedBox(),
+                    (profileEntity?.skills!=null && profileEntity!.skills!.isNotEmpty)?ChipGroup(inputs: profileEntity!.skills!.map((e) => ChipOption(label: e["skill"], id: e["id"])).toList()): const SizedBox(),
                     16.height,
                     const AppDivider(),
                     24.height,
                     wText(getLocalization().workExperience, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    profile.workExperience!=null && profile.workExperience!.isNotEmpty?profile.workExperience!.map((e) => AppProfileQualification(
-                        qualification: e)).first: const SizedBox(),
+                    profileEntity?.workExperience!=null && profileEntity!.workExperience!.isNotEmpty?profileEntity.workExperience!.map((e) => AppProfileQualification(
+                        qualification: WorkExperienceEntity(
+                          qualificationType: AppQualificationType.experience,
+                            name: e.title!,
+                            institutionName: e.company!,
+                            period: "${e.startDate?.toMonthYearString()} - ${(e.isCurrent!=null && e.isCurrent!)?'present':e.endDate?.toMonthYearString()}",
+                        ))).first: const SizedBox(),
                     16.height,
                     wText(getLocalization().photos, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
@@ -102,12 +122,12 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                       child: Row(
                         children: [
                           Expanded(child: ImageThumbnail(
-                            imagePath:  jobImages[0],
+                            imagePath:  jobImages[0].url,
                           )),
                           16.width, // Add some spacing between images
                           if(jobImages.length == 1) Expanded(child: Container(),),
                           if(jobImages.length >1)Expanded(child: ImageThumbnail(
-                            imagePath: jobImages[1],
+                            imagePath: jobImages[1].url,
                           )),
                         ],
                       ),

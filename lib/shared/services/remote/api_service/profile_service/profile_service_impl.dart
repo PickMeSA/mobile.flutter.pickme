@@ -141,6 +141,7 @@ class ProfileServiceImpl extends ProfileService{
   }
 
   returnProfileEntity({required Response<dynamic> response}){
+    logger.d(response.data["industry"]["industry"]);
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
         firstName: otpFullProfileModelResponse.firstName,
@@ -152,6 +153,8 @@ class ProfileServiceImpl extends ProfileService{
         passportNumber: otpFullProfileModelResponse.passportNumber,
         type: otpFullProfileModelResponse.type??"",
         description:  otpFullProfileModelResponse.description??"",
+        industry:  otpFullProfileModelResponse.industry?["industry"]??"",
+        skills:  otpFullProfileModelResponse.skills,
         business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? const OTPBusinessModelResponse(
             name: "",
             number: "",
