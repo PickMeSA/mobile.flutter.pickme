@@ -83,7 +83,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
               state.profileEntity!.workExperience!.isEmpty){
             context.router.pushAndPopUntil(const QualificationsRoute(),
                 predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.skillIds!.isEmpty){
+          }else if(state.profileEntity!.skills!.skillIds!.isEmpty){
             context.router.pushAndPopUntil(const AddSkillsRoute(),
                 predicate: (Route<dynamic> route) => false);
           }else if(state.profileEntity!.hourlyRate! == 0){

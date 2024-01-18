@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -41,8 +42,8 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
       listener: (context, state){},
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
-        return Padding(
-          padding: EdgeInsets.all(20),
+        return state.dataState == DataState.loading? const Center(child: CircularProgressIndicator(),): Padding(
+          padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +94,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                     AppStarRating(rating: 3, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
                                     wText(3.toDouble().toString()),
                                     const Spacer(),
-                                    wText(getLocalization().seeReviews,style: TextStyle(decoration: TextDecoration.underline)),
+                                    wText(getLocalization().seeReviews,style: const TextStyle(decoration: TextDecoration.underline)),
                                   ],
                                 ),
                                   wText("R${getBloc().profileEntity.hourlyRate} p/h"),
@@ -121,13 +122,13 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                 ),
                 20.height,
                 wText(getBloc().profileEntity.description!),
-                if(getBloc().profileEntity.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
                 20.height,
-                if(getBloc().profileEntity.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
                 const AppDivider(),
-                if(getBloc().profileEntity.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
                 10.height,
-                if(getBloc().profileEntity.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
                 Row(
                   children: [
                     wText(getLocalization().mySkills, style: theme.textTheme.titleMedium),
@@ -139,9 +140,9 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
 
                   ],
                 ),
-                if(getBloc().profileEntity.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
                 20.height,
-                if(getBloc().profileEntity.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
                 SizedBox(
                   height: 250 ,
                   child: Center(

@@ -17,12 +17,12 @@ class IndustryServiceMockImpl extends IndustryService{
   Future<PaginatedIndustryEntity> getIndustries({GetIndustriesServiceParams? params}) async {
 
         List<IndustryEntity> industryEntityList = [
-        const IndustryEntity(id: "1",industry: "HandyMan"),
-        const IndustryEntity(id: "2",industry: "Electricians"),
-        const IndustryEntity(id: "3",industry: "Painters"),
-        const IndustryEntity(id: "4",industry: "Plumbers"),
-        const IndustryEntity(id: "5",industry: "Tutor"),
-        const IndustryEntity(id: "5",industry: "Tutor"),
+         IndustryEntity(id: "1",industry: "HandyMan"),
+         IndustryEntity(id: "2",industry: "Electricians"),
+         IndustryEntity(id: "3",industry: "Painters"),
+         IndustryEntity(id: "4",industry: "Plumbers"),
+         IndustryEntity(id: "5",industry: "Tutor"),
+         IndustryEntity(id: "5",industry: "Tutor"),
         ];
         PaginationEntity paginationEntity = PaginationEntity(
             pageSize: 10,

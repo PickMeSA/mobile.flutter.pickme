@@ -9,8 +9,10 @@ import 'package:pickme/features/qualification/domain/entities/submit_qualificati
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
+import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_full_profile_model_response.dart';
+import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_industry_model_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_location_model_response_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_payment_details_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_skill_id_model_response.dart';
@@ -134,13 +136,6 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
-        firstName: otpFullProfileModelResponse.firstName,
-        surname: otpFullProfileModelResponse.surname,
-        email: otpFullProfileModelResponse.email,
-        id: otpFullProfileModelResponse.id,
-        idNumber: otpFullProfileModelResponse.idNumber,
-        mobile: otpFullProfileModelResponse.mobile,
-        passportNumber: otpFullProfileModelResponse.passportNumber,
         type: otpFullProfileModelResponse.type??"",
         description:  otpFullProfileModelResponse.description??"",
         business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? const OTPBusinessModelResponse(
@@ -150,11 +145,10 @@ class ProfileServiceImpl extends ProfileService{
             website:false)
         ),
         hourlyRate: otpFullProfileModelResponse.hourlyRate??0,
-        industryId: otpFullProfileModelResponse.industryID??0,
+        industry: IndustryEntity.fromResponse(otpFullProfileModelResponse.industry??OTPIndustryModelModelResponse(id: "0", industry: "")),
         location: OTPLocationEntity.fromResponse(otpFullProfileModelResponse.location??const OTPLocationModelResponse(
-            address: "",
             latitude: 0,
-            longitude: 0)),
+            longitude: 0, address: '')),
         paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails??const OTPPaymentDetailsModelResponse(
             bankName: "",
             bankAccountType: "",
@@ -163,8 +157,8 @@ class ProfileServiceImpl extends ProfileService{
             taxNumber: "",
             vatNumber: "")),
         qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualifications??[],
-        workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[],
-    skillIds: otpFullProfileModelResponse.skillIds??[]);
+        skills: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skills??SkillIdModelResponse(skillsId: [])),
+        workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
   }
 
   @override
@@ -195,16 +189,9 @@ class ProfileServiceImpl extends ProfileService{
   }
 
   @override
-  Future<OTPPaymentDetailsEntity> getBankDetails() async {
-    try{
-      UserModel userModel = boxUser.get(current);
-      Response<dynamic> response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
-      ProfileEntity profileEntity =  returnProfileEntity(response: response);
-      return profileEntity.paymentDetails!;
-    }catch(ex){
-      rethrow;
-    }
-
+  Future<OTPPaymentDetailsEntity> getBankDetails() {
+    // TODO: implement getBankDetails
+    throw UnimplementedError();
   }
 
 
