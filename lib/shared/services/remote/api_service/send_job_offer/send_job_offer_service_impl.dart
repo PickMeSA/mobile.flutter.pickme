@@ -40,7 +40,7 @@ class SendJobOfferServiceImpl extends SendJobOfferService{
       logger.d(params);
       Response<dynamic> response = await apiService.post("$baseUrl$version/jobs/jobInterest",
           queryParameters: params);
-      logger.i(response.data);
+      logger.i("response: ${response.data}");
       if(response.data["id"]!=null){
         return true;
       }

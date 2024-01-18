@@ -47,7 +47,7 @@ class CandidateProfilesImpl extends CandidatesService{
         PaginationModelResponse paginationModelResponse = PaginationModelResponse.fromJson(response.data["pagination"]);
 
         List<CandidateProfileEntity> candidateProfileList = candidatesModelResponseList.map((profile) => CandidateProfileEntity(
-            id: profile.id,
+            id: profile.userId,
             skills: profile.skills,
             photos: profile.photos,
             workExperience: profile.workExperience?.map((e) => WorkExperienceEntity(name: e.role, institutionName: e.company, period: e.period)).toList(),
