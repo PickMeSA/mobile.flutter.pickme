@@ -20,6 +20,7 @@ import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/functions/required_text_validator.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -77,10 +78,22 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
         }          //loading
         if(state is CreateJobPageSubmitJobState && state.dataState == DataState.error){
           Navigator.pop(context); //Remove loader
-        //   todo: Display error
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
         if(state is SkillSelectedState && state.dataState == DataState.success){
           _scrollToBottom();
+        }
+        if(state is FlexibleHoursChangedState && state.dataState == DataState.success){
+          setState(() {
+            startDate = null;
+            endDate = null;
+            startTimeTextController.text = "";
+            startDateController.text = "";
+            endDateController.text = "";
+          });
+        }
+        if(state is JobImageAddedState && state.dataState == DataState.error){
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
       },
       builder: (context, state) {
@@ -180,22 +193,22 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           ),
                         onPressed: () => getBloc().add(LocationFromProfileToggledEvent(locationSource: LocationSource.profile)),
                       ),
-                      InputChip(
-                        color: MaterialStateProperty.resolveWith((states) => (getBloc().locationSource == LocationSource.currentLocation)?neutrals100Color:whiteColor),
-                        label: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              const Icon(Iconsax.map),
-                              16.width,
-                              Expanded(child: Text(getLocalization().useMyCurrentLocation)),
-                              16.width,
-                              if(getBloc().locationSource == LocationSource.currentLocation)const Icon(Icons.close)
-                            ],
-                          ),
-                        ),
-                        onPressed: () => getBloc().add(LocationFromProfileToggledEvent(locationSource: LocationSource.currentLocation)),
-                      ),
+                      // InputChip(
+                      //   color: MaterialStateProperty.resolveWith((states) => (getBloc().locationSource == LocationSource.currentLocation)?neutrals100Color:whiteColor),
+                      //   label: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Row(
+                      //       children: [
+                      //         const Icon(Iconsax.map),
+                      //         16.width,
+                      //         Expanded(child: Text(getLocalization().useMyCurrentLocation)),
+                      //         16.width,
+                      //         if(getBloc().locationSource == LocationSource.currentLocation)const Icon(Icons.close)
+                      //       ],
+                      //     ),
+                      //   ),
+                      //   onPressed: () => getBloc().add(LocationFromProfileToggledEvent(locationSource: LocationSource.currentLocation)),
+                      // ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16.0),
                           child: Column(
@@ -249,16 +262,22 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               Row(
                                 children: [
                                   Expanded(
-                                    child: DateTextBox(labelText: getLocalization().startDate,
+                                    child: DateTextBox(
+                                      firstDate: DateTime.now(),
+                                      lastDate: endDate,
+                                      labelText: getLocalization().startDate,
                                       controller: startDateController,
                                       onDateSelected: (DateTime dateTime){
                                         startDate = dateTime;
                                         startDateController.text = dateTime.toDDMMYYYY();
+                                        getBloc().add(DateChangedEvent());
                                       },),
                                   ),
                                   8.width,
                                   Expanded(
                                     child: DateTextBox(
+                                      firstDate: startDate??DateTime.now(),
+                                      initialDate: DateTime.now(),
                                       labelText: getLocalization().endDate,
                                       hint: getLocalization().endDate,
                                       controller: endDateController,
@@ -373,15 +392,14 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                     child: Padding(
                       padding: EdgeInsets.all(24),
                       child: PrimaryButtonDark.fullWidth(
-                        child: Text(getLocalization().ccontinue),
                         onPressed: !isValid()?null:(){
                           CreateJobPageJobEntity job =  CreateJobPageJobEntity(
                               title: jobTitleController.text,
                               description: jobDescriptionController.text,
                               address: address,
                               status: 'active',
-                              startDate: startDate!,
-                              endDate: endDate!,
+                              startDate: startDate,
+                              endDate: endDate,
                               startTime: startTimeTextController.text,
                               imFlexible: getBloc().flexibleHoursChecked,
                               estimatedHours: hoursTextController.text,
@@ -392,7 +410,8 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               skills: getBloc().chipOptions
                           );
                           context.router.push(ReviewJobListingInfoRoute(jobEntity: job));
-                        }
+                        },
+                        child: Text(getLocalization().ccontinue)
                       ),
                     ),
                   )
@@ -510,10 +529,12 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   bool isValid(){
     if(_formKey.currentState==null) return true;
     return
+        jobTitleController.text.isNotEmpty &&
+        jobDescriptionController.text.isNotEmpty &&
         getBloc().chipOptions.isNotEmpty &&
         getBloc().chipOptions.length<6 &&
-        startDate!=null &&
-        endDate!=null;
+        (getBloc().flexibleHoursChecked || (startDate!=null &&
+        endDate!=null));
   }
 
 }

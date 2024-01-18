@@ -45,6 +45,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
     on<SkillChipDeletedEvent>((event, emit) => _onSkillChipDeletedEvent(event, emit));
     on<LocationFromProfileToggledEvent>((event, emit) => _onLocationFromProfileToggledEvent(event, emit));
     on<LocationSelectedEvent>((event, emit)=> _onLocationSelectedEvent(event, emit));
+    on<DateChangedEvent>((event, emit)=> _onDateChangedEvent(event, emit));
   }
   Future<void> _onLocationSelectedEvent(
       LocationSelectedEvent event,
@@ -80,7 +81,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
       Emitter<CreateJobListingState> emit
       ){
     flexibleHoursChecked = event.checked;
-    emit(FlexibleHoursChangedState()..dataState = DataState.success);
+    emit(FlexibleHoursChangedState(flexibleHoursChecked:flexibleHoursChecked)..dataState = DataState.success);
   }
   _onCreateJobListingPageEnteredEvent(
       CreateJobListingPageEnteredEvent event,
@@ -130,6 +131,11 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
     emit(LocationFromProfileToggledState(locationSource: event.locationSource)..dataState = DataState.init);
     locationSource = event.locationSource;
     emit(LocationFromProfileToggledState(locationSource: event.locationSource)..dataState = DataState.success);
+  }
+  _onDateChangedEvent(DateChangedEvent event,
+      Emitter<CreateJobListingState> emit){
+    emit(DateChangedState()..dataState = DataState.loading);
+    emit(DateChangedState()..dataState = DataState.success);
   }
   void validateFile(File file){
     // Limit the file size

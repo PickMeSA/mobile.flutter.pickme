@@ -281,6 +281,7 @@
   "oopsSomethingWentWrongWithYourPayment": "Ooops! Something went wrong with your payment, Please try again",
   "payNow": "Pay now",
   "editMyBankingDetails": "Edit my banking details",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "createJobListingInfoPublicationFeeDesc": "Please note that there is no publication fee associated with each job\nlisting."
 
 }

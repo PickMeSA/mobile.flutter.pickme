@@ -2879,6 +2879,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Please note that there is no publication fee associated with each job\nlisting.`
+  String get createJobListingInfoPublicationFeeDesc {
+    return Intl.message(
+      'Please note that there is no publication fee associated with each job\nlisting.',
+      name: 'createJobListingInfoPublicationFeeDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

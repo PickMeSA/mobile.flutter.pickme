@@ -35,7 +35,7 @@ class ReviewJobListingInfoBloc extends BaseBloc<ReviewJobEvent, ReviewJobListing
     }catch(ex){
       logger.e(ex);
 
-      emit(ReviewJobPageSubmitJobState()..dataState = DataState.error);
+      emit(ReviewJobPageSubmitJobState(error:"An error occurred while submitting your data. Please check to see if your data is valid")..dataState = DataState.error);
     }
   }
   _onSendJobOfferEvent(SendJobOfferEvent event,

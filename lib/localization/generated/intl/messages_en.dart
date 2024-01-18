@@ -123,6 +123,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create a new job listing"),
         "createAOneTimeListing":
             MessageLookupByLibrary.simpleMessage("Create a one-time listing"),
+        "createJobListingInfoPublicationFeeDesc":
+            MessageLookupByLibrary.simpleMessage(
+                "Please note that there is no publication fee associated with each job\nlisting."),
         "createProfile": MessageLookupByLibrary.simpleMessage("Create profile"),
         "dateAndTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
         "dateFormat": MessageLookupByLibrary.simpleMessage("DD/MM/YYYY *"),
