@@ -15,6 +15,7 @@ import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
@@ -46,7 +47,8 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
 
         //error
         if(state is GetServiceCategoryCandidatesState && state.dataState == DataState.error){
-          // error dialog
+          Navigator.pop(context);
+          wErrorPopUp(message: "failed to get candidates", type: getLocalization().error, context: context);
         }
         //loading
         if(state is GetServiceCategoryCandidatesState && state.dataState == DataState.loading){
@@ -64,7 +66,7 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
           padding: wPagePadding(top:0),
           child: ListView(
             children: <Widget>[
-              (paginatedCandidates!=null)? ListView.builder(
+              (paginatedCandidates!=null && paginatedCandidates.candidates.isEmpty)? ListView.builder(
                 physics: ScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: paginatedCandidates.candidates.length,
