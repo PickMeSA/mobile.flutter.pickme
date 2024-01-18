@@ -28,8 +28,8 @@ class SendJobOfferServiceImpl extends SendJobOfferService{
         "jobId": job.id,
         "customerUid": userModel.id.toString(),
         "labourerUid": candidateProfileEntity.id,
-        "startDate": job.startDate,
-        "endDate": job.endDate,
+        "startDate": job.startDate?.toIso8601String(),
+        "endDate": job.endDate?.toIso8601String(),
         "startTime": job.startTime,
         "estimatedHours": job.estimatedHours,
         "comments": job.comments,
@@ -39,7 +39,7 @@ class SendJobOfferServiceImpl extends SendJobOfferService{
       };
       logger.d(params);
       Response<dynamic> response = await apiService.post("$baseUrl$version/jobs/jobInterest",
-          queryParameters: params);
+          data: params);
       logger.i("response: ${response.data}");
       if(response.data["id"]!=null){
         return true;
