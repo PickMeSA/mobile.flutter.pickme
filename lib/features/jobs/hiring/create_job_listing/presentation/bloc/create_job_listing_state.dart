@@ -18,7 +18,8 @@ class JobImageAddedState extends CreateJobListingState {
 }
 
 class FlexibleHoursChangedState extends CreateJobListingState {
-  FlexibleHoursChangedState();
+  bool flexibleHoursChecked;
+  FlexibleHoursChangedState({required this.flexibleHoursChecked});
 }
 
 class GetSkillsListState extends CreateJobListingState {
@@ -39,6 +40,14 @@ class LocationFromProfileToggledState extends CreateJobListingState{
   final LocationSource locationSource;
 
   LocationFromProfileToggledState({super.dataState, super.error, required this.locationSource});
+}
+
+class DateChangedState extends CreateJobListingState{
+  DateChangedState();
+}
+
+class ImFlexibleCheckedState extends CreateJobListingState{
+  ImFlexibleCheckedState();
 }
 
 enum LocationSource{profile, currentLocation, map}

@@ -12,6 +12,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
@@ -55,6 +56,7 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
           Navigator.pop(context); //Remove loader
           //   todo: Display error
         }
+
         if(state is SendJobOfferClickedState && state.dataState == DataState.loading){
           if(!getBloc().preloaderActive){
             getBloc().preloaderActive = true;
@@ -62,7 +64,8 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
           }
         }
         if(state is SendJobOfferClickedState && state.dataState == DataState.error){
-          //Display error
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
         if(state is SendJobOfferClickedState && state.dataState == DataState.success){
           context.router.popUntilRouteWithName("AllServicesRoute");

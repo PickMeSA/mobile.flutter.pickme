@@ -79,6 +79,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                  key: _formKey,
                  child: Column(
                    children: [
+
                      Padding(
                        padding: const EdgeInsets.only(top: 20, bottom: 50),
                        child: Row(
@@ -200,6 +201,9 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
         company: companyController.text,
         industryId: int.parse(getBloc().selectedIndustry.id!),
         isCurrent: getBloc().current);
+
+      files: []
+    );
   }
 
 }

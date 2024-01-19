@@ -24,21 +24,23 @@ class SendJobOfferServiceImpl extends SendJobOfferService{
   Future<bool> sendOffer({required JobEntity job, required CandidateProfileEntity candidateProfileEntity}) async{
     UserModel userModel = boxUser.get(current);
     try{
+      Map<String, dynamic> params = {
+        "jobId": job.id,
+        "customerUid": userModel.id.toString(),
+        "labourerUid": candidateProfileEntity.id,
+        "startDate": job.startDate?.toIso8601String(),
+        "endDate": job.endDate?.toIso8601String(),
+        "startTime": job.startTime,
+        "estimatedHours": job.estimatedHours,
+        "comments": job.comments,
+        "type": "offer",
+        "status": "offered",
+        "bookingId": ""
+      };
+      logger.d(params);
       Response<dynamic> response = await apiService.post("$baseUrl$version/jobs/jobInterest",
-          data: SendJobOfferModelRequest(
-                jobId: job.id,
-                customerUid: userModel.id.toString(),
-                labourerUid: candidateProfileEntity.id,
-                startDate: null,
-                endDate: null,
-                startTime: job.startTime,
-                estimatedHours: job.estimatedHours,
-                comments: job.comments,
-                type: "offer",
-                status: "offered",
-                bookingId: ""
-          ));
-      logger.i(response.data);
+          data: params);
+      logger.i("response: ${response.data}");
       if(response.data["id"]!=null){
         return true;
       }

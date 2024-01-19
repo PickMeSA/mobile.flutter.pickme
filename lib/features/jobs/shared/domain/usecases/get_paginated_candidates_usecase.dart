@@ -17,7 +17,15 @@ class GetPaginatedCandidatesByIndustryUseCase extends BaseUseCase<GetPaginatedCa
   Future<PaginatedCandidateProfileEntity> call({GetPaginatedCandidatesByIndustryUseCaseParams? params}) async {
    try{
      return await getPaginatedCandidateProfilesRepository.call(
-         params: GetPaginatedCandidatesByIndustryRepositoryParams());
+         params: GetPaginatedCandidatesByIndustryRepositoryParams(
+           pageNumber: params?.pageNumber,
+           pageSize: params?.pageSize,
+           maxDistance: params?.maxDistance,
+           minHourlyRate: params?.minHourlyRate,
+           maxHourlyRate: params?.maxHourlyRate,
+           minRating: params?.minRating,
+           industryId: params?.industryId,
+         ));
    }catch(ex){
      rethrow;
    }
@@ -25,5 +33,20 @@ class GetPaginatedCandidatesByIndustryUseCase extends BaseUseCase<GetPaginatedCa
 }
 
 class GetPaginatedCandidatesByIndustryUseCaseParams extends BaseUseCaseParams{
-  GetPaginatedCandidatesByIndustryUseCaseParams();
+  final int? pageNumber;
+  final int? pageSize;
+  final double? maxDistance;
+  final double? minHourlyRate;
+  final double? maxHourlyRate;
+  final int? minRating;
+  final String? industryId;
+  GetPaginatedCandidatesByIndustryUseCaseParams({
+    this.pageNumber,
+    this.pageSize,
+    this.maxDistance,
+    this.minHourlyRate,
+    this.maxHourlyRate,
+    this.minRating,
+    this.industryId,
+  });
 }

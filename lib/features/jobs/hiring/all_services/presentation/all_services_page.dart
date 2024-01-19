@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/jobs/applying/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/bloc/all_services_page_bloc.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -12,15 +13,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/classes/debouncer.dart';
+import 'package:pickme/shared/constants/default_values.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
-
+enum ServicesPageMode{ hiring, working}
 @RoutePage()
 class AllServicesPage extends BasePage {
-  const AllServicesPage({super.key});
-
+  const AllServicesPage({super.key, this.pageMode = ServicesPageMode.hiring});
+  final ServicesPageMode pageMode;
 
   @override
   State<AllServicesPage> createState() => _AllServicesPageState();
@@ -102,7 +105,13 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
                     return ListTile(
                       title: Text(getBloc().paginatedIndustries!.industries[index].industry!),
                       trailing: const Icon(Iconsax.arrow_right_3),
-                      onTap: ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[3].id)),
+                      onTap: (){
+                        if(widget.pageMode == ServicesPageMode.hiring){
+                          context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[index].id));
+                        }else{
+                          context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getBloc().paginatedIndustries!.industries[index].industry, categoryId: getBloc().paginatedIndustries!.industries[3].id));
+                        }
+                      },
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {
@@ -133,7 +142,12 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
     return getAppBar(
       title: Text(getLocalization().allServices),
       actions: [
-        TextButton(onPressed: (){}, child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
+        TextButton(onPressed: () async{
+          FilterEntity? filter = await context.router.push(FiltersRoute());
+          if(filter!=null){
+            getBloc().add(FilterChangedEvent(filterEntity: filter));
+          }
+        }, child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
       ],
     );
   }

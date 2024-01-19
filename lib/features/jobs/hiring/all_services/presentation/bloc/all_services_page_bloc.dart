@@ -6,6 +6,7 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/shared/classes/debouncer.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
 import '../../../../shared/domain/usecases/get_industries_usecase.dart';
@@ -28,6 +29,7 @@ class AllServicesPageBloc extends BaseBloc<AllServicesPageEvent, AllServicesPage
     required this.getPaginatedCandidatesByIndustryUseCase}) : super(AllServicesPageInitial()) {
     on<AllServicesPageEnteredEvent>((event, emit) => _onAllServicesPageEnteredEvent(event, emit));
     on<SearchTextChangedEvent>((event, emit) => _onSearchTextChangedEvent(event, emit));
+    on<FilterChangedEvent>((event, emit) => _onFilterChangedEvent(event, emit));
   }
 
   _onAllServicesPageEnteredEvent(
@@ -54,6 +56,20 @@ class AllServicesPageBloc extends BaseBloc<AllServicesPageEvent, AllServicesPage
     try{
       PaginatedIndustryEntity paginatedIndustryEntity = await getIndustriesUseCase.call(
           params: GetIndustriesUseCaseParams(searchText: event.searchText));
+      paginatedIndustries = paginatedIndustryEntity;
+      emit(SearchTextChangedState()..dataState = DataState.success);
+    }catch(ex){
+      emit(SearchTextChangedState()..dataState = DataState.error);
+    }
+  }
+  _onFilterChangedEvent(
+      FilterChangedEvent event,
+      Emitter<AllServicesPageState> emit
+      )async{
+    emit(SearchTextChangedState()..dataState = DataState.loading);
+    try{
+      PaginatedIndustryEntity paginatedIndustryEntity = await getIndustriesUseCase.call(
+          params: GetIndustriesUseCaseParams(filterEntity: event.filterEntity));
       paginatedIndustries = paginatedIndustryEntity;
       emit(SearchTextChangedState()..dataState = DataState.success);
     }catch(ex){

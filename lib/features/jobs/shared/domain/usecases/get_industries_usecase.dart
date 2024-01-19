@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pickme/base_classes/base_usecase.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/features/jobs/shared/domain/repositories/get_industries_repository.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
@@ -29,5 +30,6 @@ class GetIndustriesUseCase extends BaseUseCase<GetIndustriesUseCaseParams, Pagin
 
 class GetIndustriesUseCaseParams extends BaseUseCaseParams{
   final String searchText;
-  GetIndustriesUseCaseParams({this.searchText = ""});
+  final FilterEntity? filterEntity;
+  GetIndustriesUseCaseParams({this.searchText = "", this.filterEntity});
 }

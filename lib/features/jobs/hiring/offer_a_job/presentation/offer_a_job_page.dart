@@ -63,7 +63,7 @@ class _OfferAJobPageState extends BasePageState<OfferAJobPage, OfferAJobBloc> {
                   AppCenteredDivider(text: getLocalization().or),
                   16.height,
                   AppOfferJobCard(
-                    text: getLocalization().selectAnExistingJobListing,
+                    text: getLocalization().createANewJobListing,
                     selected: getBloc().selectedOfferType == "one-time",
                     onTap: ()=> getBloc().add(SelectedOfferTypeChangedEvent(offerType: "one-time")),
                   ),                ],

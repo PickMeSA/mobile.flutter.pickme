@@ -10,6 +10,6 @@ class JobsLandingPageInitial extends JobsLandingPageState {
   JobsLandingPageInitial();
 }
 
-class SeeAllClickedState extends JobsLandingPageState {
-  SeeAllClickedState();
+class GetTopIndustriesState extends JobsLandingPageState {
+  GetTopIndustriesState();
 }

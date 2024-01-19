@@ -3,7 +3,7 @@ import 'package:pickme/base_classes/base_usecase.dart';
 import 'package:injectable/injectable.dart';
 
 import '../entities/my_job_listings_page_entity.dart';
-import '../repository/get_my_job_listings_repository.dart';
+import '../repositories/get_my_job_listings_repository.dart';
 
 
 @Injectable()

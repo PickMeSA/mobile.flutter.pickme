@@ -26,7 +26,9 @@ class OTPWorkExperienceListEntity{
           startDate: element.startDate.toString(),
           endDate: element.endDate.toString(),
           isCurrent: element.isCurrent,
-          industryId: element.industryId).toJson());
+          industryId: element.industryId,
+        files: []
+      ));
     });
 
     return otpWorkExperienceModelResponseList;

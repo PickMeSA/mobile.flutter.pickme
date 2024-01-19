@@ -7,7 +7,8 @@ class SeeAllClickedEvent extends MyJobListingsEvent{
   SeeAllClickedEvent();
 }
 class MyJobListingsPageEnteredEvent extends MyJobListingsEvent{
-  MyJobListingsPageEnteredEvent();
+  final MyJobListingsPageEntity? jobListingsPageEntity;
+  MyJobListingsPageEnteredEvent({this.jobListingsPageEntity});
 }
 
 class SelectedTabChangedEvent extends MyJobListingsEvent{

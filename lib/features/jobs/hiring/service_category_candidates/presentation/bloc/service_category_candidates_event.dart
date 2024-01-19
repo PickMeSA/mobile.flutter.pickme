@@ -4,7 +4,7 @@ part of 'service_category_candidates_bloc.dart';
 abstract class ServiceCategoryCandidatesEvent extends BaseEvent {}
 
 class ServiceCategoryCandidatesPageEnteredEvent extends ServiceCategoryCandidatesEvent{
-  final int? serviceCategoryId;
+  final String? serviceCategoryId;
   ServiceCategoryCandidatesPageEnteredEvent({this.serviceCategoryId});
 }
 
@@ -15,4 +15,7 @@ class LoadMoreClickedEvent extends ServiceCategoryCandidatesEvent{
   LoadMoreClickedEvent({required this.paginationEntity, this.serviceCategoryId});
 }
 
-
+class FilterChangedEvent extends ServiceCategoryCandidatesEvent{
+  final FilterEntity filterEntity;
+  FilterChangedEvent({required this.filterEntity});
+}

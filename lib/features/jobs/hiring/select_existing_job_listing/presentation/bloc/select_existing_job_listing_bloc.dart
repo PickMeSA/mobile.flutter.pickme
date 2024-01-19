@@ -49,7 +49,7 @@ class SelectExistingJobBloc extends BaseBloc<SelectExistingJobEvent, SelectExist
         emit(SendJobOfferClickedState()..dataState=DataState.error);
       }
     }catch(ex){
-      emit(SendJobOfferClickedState()..dataState=DataState.error);
+      emit(SendJobOfferClickedState(error: "An error occurred while parsing your data. Can you please check it for validation")..dataState=DataState.error);
       logger.e(ex);
     }
   }

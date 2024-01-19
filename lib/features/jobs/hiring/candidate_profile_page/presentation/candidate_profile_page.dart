@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -9,9 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/FileEntity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/candidate_profile_page_bloc.dart';
@@ -26,31 +31,61 @@ class CandidateProfilePage extends BasePage {
 }
 
 class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, CandidateProfilePageBloc> {
-
+  @override
+  void initState() {
+    super.initState();
+    getBloc().add(CandidateProfilePageEnteredEvent(candidateProfile: widget.candidateProfile));
+  }
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
-    CandidateProfileEntity profile = widget.candidateProfile;
-    List<String> jobImages = profile.photos.isEmpty?[]:profile.photos.split(",");
+    CandidateProfileEntity? profile = widget.candidateProfile;
+    ProfileEntity? profileEntity = getBloc().candidateProfile;
+    List<AppFileEntity> jobImages = [];
+    if(profileEntity?.workExperience!=null && profileEntity!.workExperience!.isNotEmpty){
+      for (var experience in profileEntity.workExperience!) {
+        if(experience.files !=null){
+          for(AppFileEntity file in experience.files!){
+            jobImages.add(file);
+          }
+        }
 
+      }
+    }
     return BlocConsumer<CandidateProfilePageBloc, CandidateProfilePageState>(
-      listener: (context, state) {
+        listener: (context, state) {
+          //loading
+          if(state is CandidateProfilePageEnteredState && state.dataState == DataState.loading){
+            if(!getBloc().preloaderActive){
+              getBloc().preloaderActive = true;
+              preloader(context);
+            }
+          }
 
-      },
+          //loading
+          if(state is CandidateProfilePageEnteredState && state.dataState == DataState.success){
+            Navigator.pop(context);
+          }
+
+          if(state is CandidateProfilePageEnteredState && state.dataState == DataState.error){
+            Navigator.pop(context);
+            wErrorPopUp(message: "failed to get candidate details", type: getLocalization().error, context: context);
+          }
+        },
       builder: (context, state) {
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           child: Stack(
             children: [
-              SingleChildScrollView(
+              (profile !=null)? SingleChildScrollView(
                 padding: wPagePadding(top:0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppCandidateProfile(fullName: profile.fullName,
-                      jobTitle: profile.jobTitle,
-                      rating: profile.rating,
+                      jobTitle: profile.jobTitle??getLocalization().noJobDescription,
+                      rating: profile.rating??0,
                       hourlyRate: "R${profile.hourlyRate} p/h",
                       seeReviewsFunction: (){},
                       image: (profile.profilePicture!=null)?
@@ -60,20 +95,25 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     ),
                     wText(getLocalization().aboutMe, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    wText(profile.about),
+                    wText(profileEntity?.industry??getLocalization().noProfileDescription),
                     16.height,
                     const AppDivider(),
                     24.height,
                     wText(getLocalization().mySkills, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    ChipGroup(inputs: profile.skills.split(",").map((e) => ChipOption(label: e, id: 0)).toList()),
+                    (profileEntity?.skills!=null && profileEntity!.skills!.isNotEmpty)?ChipGroup(inputs: profileEntity!.skills!.map((e) => ChipOption(label: e["skill"], id: e["id"])).toList()): const SizedBox(),
                     16.height,
                     const AppDivider(),
                     24.height,
                     wText(getLocalization().workExperience, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    profile.workExperience.map((e) => AppProfileQualification(
-                        qualification: e)).first,
+                    profileEntity?.workExperience!=null && profileEntity!.workExperience!.isNotEmpty?profileEntity.workExperience!.map((e) => AppProfileQualification(
+                        qualification: WorkExperienceEntity(
+                          qualificationType: AppQualificationType.experience,
+                            name: e.title!,
+                            institutionName: e.company!,
+                            period: "${e.startDate?.toMonthYearString()} - ${(e.isCurrent!=null && e.isCurrent!)?'present':e.endDate?.toMonthYearString()}",
+                        ))).first: const SizedBox(),
                     16.height,
                     wText(getLocalization().photos, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
@@ -82,12 +122,12 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                       child: Row(
                         children: [
                           Expanded(child: ImageThumbnail(
-                            imagePath:  jobImages[0],
+                            imagePath:  jobImages[0].url,
                           )),
                           16.width, // Add some spacing between images
                           if(jobImages.length == 1) Expanded(child: Container(),),
                           if(jobImages.length >1)Expanded(child: ImageThumbnail(
-                            imagePath: jobImages[1],
+                            imagePath: jobImages[1].url,
                           )),
                         ],
                       ),
@@ -95,7 +135,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     150.height,
                   ],
                 ),
-              ),
+              ):SizedBox(),
               Positioned(
                   bottom: 0,
                   left: 0,

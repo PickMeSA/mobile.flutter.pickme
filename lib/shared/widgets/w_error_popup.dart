@@ -20,7 +20,7 @@ required BuildContext context}) {
                     width: 25,
                     height: 120,
                     decoration: BoxDecoration(
-                        color: Colors.red.shade700,
+                        color: dangerColor,
                         borderRadius: BorderRadius.all(Radius.circular(15))
                     ),
 
@@ -30,8 +30,8 @@ required BuildContext context}) {
                     height: 120,
                     width: 15,
                     decoration: BoxDecoration(
-                        color: Colors.red.shade200,
-                        borderRadius: BorderRadius.all(Radius.circular(10))
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: const BorderRadius.all(Radius.circular(10))
                     ),
                     child: Center(
                       child: SizedBox(
@@ -39,7 +39,7 @@ required BuildContext context}) {
                         width: MediaQuery.sizeOf(context).width* 0.9,
                         child: Row(
                           children: [
-                            Icon(Icons.error, color: Colors.red.shade700,size: 50,),
+                            const Icon(Icons.error, color: dangerColor,size: 50,),
                             15.width,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

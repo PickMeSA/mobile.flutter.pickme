@@ -12,13 +12,13 @@ final DateTime? startDate;
 final DateTime? endDate;
 final String? startTime;
 final double estimatedHours;
-final String lat;
-final String lng;
+final double? lat;
+final double? lng;
 final String images;
 final String skills;
 final String comments;
 final String id;
-final double distance;
+final double? distance;
 
   const JobEntity({
     required this.title,
@@ -36,7 +36,7 @@ final double distance;
     required this.skills,
     this.comments = "",
     required this.id,
-    required this.distance
+    this.distance
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     logger.e({"response": response.startDate});
@@ -49,8 +49,8 @@ final double distance;
         images: response.images??"",
         status: response.status??"",
         estimatedHours: response.estimatedHours??0,
-        lat: response.lat.toString()??"",
-        lng: response.lng.toString()??"",
+        lat: response.lat,
+        lng: response.lng,
         skills: response.skills??"",
         id: response.id!,
         distance: response.distance??0
@@ -67,7 +67,7 @@ final double distance;
         endDate: endDate!.toIso8601String(),
         startTime: startTime!,
         estimatedHours: estimatedHours,
-        lat: lat.toString(),
+        lat: lat,
         lng: lng,
         skills: skills,
         id: id,

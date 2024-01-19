@@ -13,6 +13,7 @@ import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_wo
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_full_profile_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_industry_model_model_response.dart';

@@ -3,6 +3,6 @@ part of 'jobs_landing_page_bloc.dart';
 @immutable
 abstract class JobsLandingPageEvent extends BaseEvent {}
 
-class SeeAllClickedEvent extends JobsLandingPageEvent{
-  SeeAllClickedEvent();
+class JobsLandingPageEnteredEvent extends JobsLandingPageEvent{
+  JobsLandingPageEnteredEvent();
 }
