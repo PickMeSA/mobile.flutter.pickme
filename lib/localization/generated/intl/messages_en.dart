@@ -190,6 +190,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "inYourArea": MessageLookupByLibrary.simpleMessage("In your area"),
         "inactiveListings":
             MessageLookupByLibrary.simpleMessage("Inactive listings"),
+        "incorrectOtpEntered": MessageLookupByLibrary.simpleMessage(
+            "Incorrect OTP entered. Please enter the correct OPT received."),
         "indicatesARequiredField":
             MessageLookupByLibrary.simpleMessage("*Indicates a required field"),
         "individual": MessageLookupByLibrary.simpleMessage("Individual"),

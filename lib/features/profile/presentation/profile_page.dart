@@ -122,13 +122,13 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                 ),
                 20.height,
                 wText(getBloc().profileEntity.description!),
-                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.isNotEmpty)
                 20.height,
-                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.isNotEmpty)
                 const AppDivider(),
-                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.isNotEmpty)
                 10.height,
-                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.isNotEmpty)
                 Row(
                   children: [
                     wText(getLocalization().mySkills, style: theme.textTheme.titleMedium),
@@ -140,9 +140,9 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
 
                   ],
                 ),
-                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.isNotEmpty)
                 20.height,
-                if(getBloc().profileEntity.skills!.skillIds!.isNotEmpty)
+                if(getBloc().profileEntity.skills!.isNotEmpty)
                 SizedBox(
                   height: 250 ,
                   child: Center(

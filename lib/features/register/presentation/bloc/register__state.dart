@@ -1,7 +1,11 @@
 part of 'register__bloc.dart';
 
 @immutable
-abstract class RegisterState extends BaseState {}
+abstract class RegisterState extends BaseState {
+  String? error;
+
+  RegisterState({this.error});
+}
 
 class RegisterInitial extends RegisterState {}
 
@@ -9,7 +13,7 @@ class ContinueClickedState extends RegisterState{
   UserEntity? userModel;
   String? verificationId;
   int? resendToken;
-  ContinueClickedState({this.userModel, this.verificationId, this.resendToken});
+  ContinueClickedState({super.error,this.userModel, this.verificationId, this.resendToken});
 }
 
 class PassportClickedState extends RegisterState{}

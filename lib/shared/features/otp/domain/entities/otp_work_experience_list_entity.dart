@@ -16,8 +16,8 @@ class OTPWorkExperienceListEntity{
     });
   }
 
-  List<OTPWorkExperienceModelResponse> toResponseList(){
-    List<OTPWorkExperienceModelResponse> otpWorkExperienceModelResponseList = [];
+  List<Map<String, dynamic>> toResponseList(){
+    List<Map<String, dynamic>> otpWorkExperienceModelResponseList = [];
 
     workExperience!.forEach((element) {
       otpWorkExperienceModelResponseList.add(OTPWorkExperienceModelResponse(
@@ -26,7 +26,7 @@ class OTPWorkExperienceListEntity{
           startDate: element.startDate.toString(),
           endDate: element.endDate.toString(),
           isCurrent: element.isCurrent,
-          industryId: element.industryId));
+          industryId: element.industryId).toJson());
     });
 
     return otpWorkExperienceModelResponseList;

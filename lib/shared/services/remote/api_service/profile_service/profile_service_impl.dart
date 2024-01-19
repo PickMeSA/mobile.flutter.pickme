@@ -5,6 +5,9 @@ import 'package:pickme/features/bank_details/data/response_models/qualification_
 import 'package:pickme/features/bank_details/domain/entities/bank_details_entities.dart';
 import 'package:pickme/features/final_details/data/response_models/submit_final_details_model_response/submit_final_details_model_response.dart';
 import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
+import 'package:pickme/features/otp/data/response_models/otp_model_response/location_model_response.dart';
+import 'package:pickme/features/otp/data/response_models/otp_model_response/payment_details_model_response.dart';
+import 'package:pickme/features/otp/data/response_models/otp_model_response/work_times_model_response.dart';
 import 'package:pickme/features/qualification/domain/entities/submit_qualification_and_experience_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
@@ -43,7 +46,7 @@ class ProfileServiceImpl extends ProfileService{
 
         UserModel userModel = boxUser.get(current);
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-      data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type));
+      data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type).toJson());
       return true;
     }catch(ex){
       rethrow;
@@ -65,10 +68,14 @@ class ProfileServiceImpl extends ProfileService{
   Future<ProfileEntity> submitWorkQualificationAndWorkExperience({required SubmitQualificationAndExperienceEntity submitQualificationAndExperienceEntity}) async {
     try{
       UserModel userModel = boxUser.get(current);
+      print(SubmitRemoteQualificationAndExperienceModelResponse(
+          qualifications: submitQualificationAndExperienceEntity.otpQualificationEntityList.toResponseList(),
+          workExperience: submitQualificationAndExperienceEntity.otpWorKExperienceEntityList.toResponseList()).toJson());
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+
         data: SubmitRemoteQualificationAndExperienceModelResponse(
-            otpQualificationResponseModelList: submitQualificationAndExperienceEntity.otpQualificationEntityList.toResponseList(),
-            otpWorKExperienceResponseModelList: submitQualificationAndExperienceEntity.otpWorKExperienceEntityList.toResponseList()));
+            qualifications: submitQualificationAndExperienceEntity.otpQualificationEntityList.toResponseList(),
+            workExperience: submitQualificationAndExperienceEntity.otpWorKExperienceEntityList.toResponseList()).toJson());
 
       return returnProfileEntity(response: response);
 
@@ -87,7 +94,7 @@ class ProfileServiceImpl extends ProfileService{
           data: skillsPageEntity.skillListEntity.toResponse());
 
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: skillsPageEntity.preferredIndustryEntity.toResponse());
+          data: skillsPageEntity.preferredIndustryEntity.toResponse().toJson());
 
       return returnProfileEntity(response: response);
 
@@ -101,12 +108,14 @@ class ProfileServiceImpl extends ProfileService{
     try{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: SubmittedBankDetailsModelResponse(
-              bankName: bankDetailsEntity.bank,
+          data: PaymentDetailsModelResponse(paymentDetails: OTPPaymentDetailsModelResponse(
+            bankName: bankDetailsEntity.bank,
             bankAccountType: bankDetailsEntity.accountType,
             bankAccountNumber: bankDetailsEntity.accountNumber,
             bankBranchCode: bankDetailsEntity.branchCode,
-          ).toJson());
+            taxNumber: '',
+            vatNumber: '',
+          )).toJson());
 
       return returnProfileEntity(response: response);
 
@@ -156,8 +165,8 @@ class ProfileServiceImpl extends ProfileService{
             bankBranchCode: "",
             taxNumber: "",
             vatNumber: "")),
-        qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualifications??[],
-        skills: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skills??SkillIdModelResponse(skillsId: [])),
+        qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualificationsEntityList??[],
+        skills: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skills??[]).skills,
         workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
   }
 
@@ -166,7 +175,7 @@ class ProfileServiceImpl extends ProfileService{
     try{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: ratesAndWorkTimesEntity.toResponse());
+          data: WorkTimesModelResponse(workTimes:  ratesAndWorkTimesEntity.toResponse()));
 
       return returnProfileEntity(response: response);
 
@@ -181,7 +190,7 @@ class ProfileServiceImpl extends ProfileService{
     try{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: otpLocationEntity.toResponse().toJson());
+          data: LocationModelResponse(location: otpLocationEntity.toResponse()).toJson());
       return returnProfileEntity(response: response);
     }catch(ex){
       rethrow;

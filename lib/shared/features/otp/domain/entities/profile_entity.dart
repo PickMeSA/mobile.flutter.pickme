@@ -19,7 +19,7 @@ class ProfileEntity {
   String? type;
   int? hourlyRate;
   String? description;
-  OTPSkillIdsEntity? skills;
+  List<OTPSkillIdsEntity>? skills;
   IndustryEntity? industry;
   OTPLocationEntity? location;
   List<OTPQualificationEntity>? qualifications;

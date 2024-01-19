@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
@@ -14,12 +15,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 
 @RoutePage()
 class RegisterPage extends BasePage {
-  const RegisterPage({super.key});
+
+   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+   RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -34,6 +38,10 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
   late TextEditingController passportNumberController = TextEditingController();
   late TextEditingController emailAddressController = TextEditingController();
   late TextEditingController workPermitController = TextEditingController();
+
+
+  String? verificationId;
+  int? resentToken;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -238,14 +246,11 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
 
                             onPressed: !getBloc().checked!?null:() {
                               if(_formKey.currentState!.validate()) {
-                                getBloc().add(SubmitClickedEvent(
-                                    user: getGetUserModel()));
-                                context.router.push(OTPRoute(
-                                    userModel: getGetUserModel(),
-                                    fromregister: true));
+                                authenticate(mobileNumber: "${getLocalization().phonePrefix}${phoneNumberController.text}");
+                              /*  */
                               }
                             },
-                            child: Text(getLocalization().submit),
+                            child: Text(getLocalization().ccontinue),
                           ),
                         ),
                       ],
@@ -263,6 +268,34 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
 );
   }
 
+  Future<void> authenticate({ required String mobileNumber})  async {
+    await widget.firebaseAuth.verifyPhoneNumber(
+      phoneNumber: mobileNumber,
+      timeout: const Duration(minutes: 1),
+      autoRetrievedSmsCodeForTesting:"984596",
+      verificationCompleted: (PhoneAuthCredential credential) async{
+        await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
+          await value.user!.getIdToken(true).then((value1) {
+
+          });
+        });
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+       final error =  await context.router.push(OTPRoute(
+         verificationId: verificationId,
+            userModel: getGetUserModel(),
+            fromregister: true));
+       if(error != null){
+         wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
+       }
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+
   @override
   RegisterBloc initBloc() {
     return locator<RegisterBloc>();
@@ -278,7 +311,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
         email: emailAddressController.text,
         surname: surnameController.text,
         firstName: firstNameController.text,
-        mobile: "+27${phoneNumberController.text}",
+        mobile: "${getLocalization().phonePrefix}${phoneNumberController.text}",
         workPermitNumber: workPermitController.text,
         passportNumber: passportNumberController.text,
         idNumber: idNumberController.text,

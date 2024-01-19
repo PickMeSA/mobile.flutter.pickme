@@ -276,6 +276,7 @@
   "oopsSomethingWentWrongWithYourPayment": "Ooops! Something went wrong with your payment, Please try again",
   "payNow": "Pay now",
   "editMyBankingDetails": "Edit my banking details",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "incorrectOtpEntered": "Incorrect OTP entered. Please enter the correct OPT received."
 
 }

@@ -92,7 +92,7 @@ class _LandingPageState extends BasePageState<LandingPage, LandingBloc> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20,left: 20,top: 10, bottom: 10),
                   child: SecondaryButtonDark(width: MediaQuery.sizeOf(context).width - 45 ,onPressed: () async {
-                     context.router.push(const RegisterRoute());
+                     context.router.push( RegisterRoute());
                     // ToDo: Change back to above
                     //context.router.push(const RegisterAccountStep1Route());
                   }, child: wText(getLocalization().newHereCreateAccount),color: theme.colorScheme.secondary),

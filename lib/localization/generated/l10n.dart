@@ -2829,6 +2829,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Incorrect OTP entered. Please enter the correct OPT received.`
+  String get incorrectOtpEntered {
+    return Intl.message(
+      'Incorrect OTP entered. Please enter the correct OPT received.',
+      name: 'incorrectOtpEntered',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

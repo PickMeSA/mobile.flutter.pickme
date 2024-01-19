@@ -19,7 +19,7 @@ class OTPWorkExperienceEntity {
 
   OTPWorkExperienceEntity.fromResponse(OTPWorkExperienceModelResponse response){
     title = response.title??"";
-    industryId = response.industryId??0;
+    industryId = response.industryId??7;
     endDate = DateTime.parse(response.endDate!);
     startDate = DateTime.parse(response.startDate!);
     company = response.company??"";
