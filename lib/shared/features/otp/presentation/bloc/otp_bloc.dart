@@ -76,6 +76,9 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         if(event.otp.length == 6) {
           checked = true;
           emit(OTPEnteredState());
+        }else{
+            checked = false;
+            emit(OTPEnteredState());
         }
 
     }
@@ -112,15 +115,15 @@ class otpBloc extends BaseBloc<otpPageEvent, otpPageState> {
         OTPGetTokenEvent event,
         Emitter<otpPageState> emit
         )async{
-        emit(OTPGetTokenState()..dataState = DataState.loading);
-        try{
-            emit(OTPGetTokenState(
-                tokenModel: await otpGetTokenUseCase.call(
-                    params: OTPGetTokenUseCaseParams(
-                        smsCode: event.smsCode,
-                        verificationID: event.verificationId)))..dataState = DataState.success);
-        }catch(ex){
-            emit(OTPGetTokenState()..dataState = DataState.error);
+        switch(event.stage){
+            case 0 : emit(OTPGetTokenState()..dataState = DataState.loading);
+            break;
+            case 1 : emit(OTPGetTokenState()..dataState = DataState.success);
+            break;
+            case -1 : emit(OTPGetTokenState()..dataState = DataState.error);
+            break;
+            case 2 : emit(OTPGetTokenState()..dataState = DataState.init);
         }
+
     }
 } 

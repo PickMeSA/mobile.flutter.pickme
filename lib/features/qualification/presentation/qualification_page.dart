@@ -48,7 +48,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-         if(state.profileEntity!.skillIds!.isEmpty){
+         if(state.profileEntity!.skills!.isEmpty){
             context.router.push(const AddSkillsRoute());
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());

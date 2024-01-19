@@ -1,4 +1,6 @@
 
+import 'package:pickme/shared/domain/entities/industry_entity.dart';
+
 import 'otp_business_entity.dart';
 import 'otp_location_entity.dart';
 import 'otp_payment_details_entity.dart';
@@ -17,10 +19,8 @@ class ProfileEntity {
   String? type;
   int? hourlyRate;
   String? description;
-  String? industry;
-  List<int>? skillIds;
-  List<Map<String, dynamic>>? skills;
-  int? industryId;
+  List<OTPSkillIdsEntity>? skills;
+  IndustryEntity? industry;
   OTPLocationEntity? location;
   List<OTPQualificationEntity>? qualifications;
   List<OTPWorkExperienceEntity>? workExperience;
@@ -31,12 +31,12 @@ class ProfileEntity {
     this.id,
     this.firstName,
     this.idNumber,
-    this.surname, this.mobile,
+    this.surname,
+    this.mobile,
     this.passportNumber,
     this.email,
     this.type,
-    this.industryId,
-  this.skillIds,
+    this.industry,
   this.skills,
   this.paymentDetails,
   this.workExperience,
@@ -44,9 +44,9 @@ class ProfileEntity {
   this.hourlyRate,
   this.qualifications,
   this.business,
-  this.location,
-  this.industry,
-  });
+  this.location});
+
+
 
 
 

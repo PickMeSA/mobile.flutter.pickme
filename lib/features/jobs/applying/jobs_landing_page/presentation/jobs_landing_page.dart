@@ -151,7 +151,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                       child: Column(
                           children: [
                             AppSectionCard.small(
-                              title: industries!.industries[0].industry,
+                              title: industries!.industries[0].industry!,
                               color: const Color(0xFFF17E2C),
                               icon: const Icon(Iconsax.setting,
                                 color: Colors.white,
@@ -162,7 +162,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                             10.height,
                             AppSectionCard(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries!.industries[1].industry,
+                              title: industries!.industries[1].industry!,
                               color: const Color(0xFF23A8B3),
                               onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, categoryId: industries!.industries[1].id, pageTitle: industries!.industries[1].industry)),
                             ),
@@ -174,14 +174,14 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                           children: [
                             AppSectionCard(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries!.industries[2].industry,
+                              title: industries!.industries[2].industry!,
                               color: const Color(0xFF3EB62B),
                               onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, categoryId: industries!.industries[2].id, pageTitle: industries!.industries[2].industry)),
                             ),
                             10.height,
                             AppSectionCard.small(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries!.industries[3].industry,
+                              title: industries!.industries[3].industry!,
                               color: const Color(0xFFF44F4E),
                               onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, categoryId: industries!.industries[3].id, pageTitle: industries!.industries[3].industry)),
                             ),

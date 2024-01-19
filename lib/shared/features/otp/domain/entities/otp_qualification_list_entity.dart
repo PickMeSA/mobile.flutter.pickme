@@ -4,28 +4,28 @@ import 'otp_qualification_entity.dart';
 
 class OTPQualificationListEntity {
 
-  List<OTPQualificationEntity>? qualifications;
+  List<OTPQualificationEntity>? qualificationsEntityList;
 
 
-  OTPQualificationListEntity({required this.qualifications});
+  OTPQualificationListEntity({required this.qualificationsEntityList});
 
   OTPQualificationListEntity.fromResponse(List<OTPQualificationModelResponse> response){
-    qualifications = [];
+    qualificationsEntityList = [];
     response.forEach((element) {
-      qualifications!.add(OTPQualificationEntity.fromResponse(element));
+      qualificationsEntityList!.add(OTPQualificationEntity.fromResponse(element));
     });
   }
 
-  List<OTPQualificationModelResponse>toResponseList(){
-    List<OTPQualificationModelResponse> otpQualificationModelResponseList =  [];
-    qualifications!.forEach((element) {
-      otpQualificationModelResponseList.add(OTPQualificationModelResponse(
+  List<Map<String,dynamic>>toResponseList(){
+    List<Map<String, dynamic>> qualifications =  [];
+    qualificationsEntityList!.forEach((element) {
+      qualifications.add(OTPQualificationModelResponse(
           type: element.type,
           name: element.name,
           issuingOrganization: element.issuingOrganization,
-          issueDate: element.issueDate.toString()));
+          issueDate: element.issueDate.toString()).toJson());
     });
-    return otpQualificationModelResponseList;
+    return qualifications;
 
   }
 

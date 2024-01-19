@@ -2880,6 +2880,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Incorrect OTP entered. Please enter the correct OPT received.`
+  String get incorrectOtpEntered {
+    return Intl.message(
+      'Incorrect OTP entered. Please enter the correct OPT received.',
+      name: 'incorrectOtpEntered',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please note that there is no publication fee associated with each job\nlisting.`
   String get createJobListingInfoPublicationFeeDesc {
     return Intl.message(

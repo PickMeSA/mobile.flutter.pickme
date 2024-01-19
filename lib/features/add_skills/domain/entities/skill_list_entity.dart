@@ -20,14 +20,14 @@ class SkillListEntity{
 
   AddSkillsSkillsListModelResponse toResponse(){
     List<AddSkillsSkillsModelResponse>  addSkillsSkillsListModelResponse = [];
-    List<int> skillsIds = [];
+    List<int> skillIds = [];
 
     skillListEntity?.forEach((element) {
-      skillsIds.add(int.parse(element.id!));
+      skillIds.add(int.parse(element.id!));
       addSkillsSkillsListModelResponse.add(element.toResponse());
     });
     return AddSkillsSkillsListModelResponse(
         data: addSkillsSkillsListModelResponse,
-        skillIds: skillsIds);
+        skillIds: skillIds);
   }
 }
