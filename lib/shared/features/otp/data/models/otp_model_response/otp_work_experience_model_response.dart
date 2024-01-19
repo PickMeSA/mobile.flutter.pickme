@@ -12,7 +12,8 @@ class OTPWorkExperienceModelResponse with _$OTPWorkExperienceModelResponse {
     required String? startDate,
     required String? endDate,
     required bool? isCurrent,
-    required int? industryId
+    required int? industryId,
+    required List<Map<String, dynamic>> files
   }) = _OTPWorkExperienceModelResponse;
 
   factory OTPWorkExperienceModelResponse.fromJson(

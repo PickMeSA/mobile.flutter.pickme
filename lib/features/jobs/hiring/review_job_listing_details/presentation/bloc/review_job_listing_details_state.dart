@@ -2,7 +2,8 @@ part of 'review_job_listing_details_bloc.dart';
 
 @immutable
 abstract class ReviewJobListingState extends BaseState {
-  ReviewJobListingState();
+  String? error;
+  ReviewJobListingState({this.error});
 }
 
 class ReviewJobListingStatePageInitial extends ReviewJobListingState {
@@ -14,7 +15,7 @@ class ReviewJobListingInfoPageEnteredState extends ReviewJobListingState {
 }
 
 class ReviewJobPageSubmitJobState extends ReviewJobListingState {
-  ReviewJobPageSubmitJobState();
+  ReviewJobPageSubmitJobState({super.error});
 }
 
 class SendJobOfferState extends ReviewJobListingState {

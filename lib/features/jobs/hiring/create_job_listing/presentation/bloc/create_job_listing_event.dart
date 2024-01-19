@@ -51,3 +51,7 @@ class LocationSelectedEvent extends CreateJobListingsEvent{
 
   LocationSelectedEvent({required this.otpLocationEntity});
 }
+
+class DateChangedEvent extends CreateJobListingsEvent{
+  DateChangedEvent();
+}

@@ -123,6 +123,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create a new job listing"),
         "createAOneTimeListing":
             MessageLookupByLibrary.simpleMessage("Create a one-time listing"),
+        "createJobListingInfoPublicationFeeDesc":
+            MessageLookupByLibrary.simpleMessage(
+                "Please note that there is no publication fee associated with each job\nlisting."),
         "createProfile": MessageLookupByLibrary.simpleMessage("Create profile"),
         "dateAndTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
         "dateFormat": MessageLookupByLibrary.simpleMessage("DD/MM/YYYY *"),
@@ -261,6 +264,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
+        "noJobDescription":
+            MessageLookupByLibrary.simpleMessage("No job description"),
+        "noJobsFound": MessageLookupByLibrary.simpleMessage("No jobs found"),
+        "noProfileDescription":
+            MessageLookupByLibrary.simpleMessage("No profile description"),
+        "noProfilesAvailableForThisCategory":
+            MessageLookupByLibrary.simpleMessage(
+                "No profiles available for this category"),
+        "noRating": MessageLookupByLibrary.simpleMessage("No ratings yet"),
         "notSatisfiedWithTheProposedRescheduleDateAndTime":
             MessageLookupByLibrary.simpleMessage(
                 "Not satisfied with the proposed reschedule date & time? you can propose an alternative"),
@@ -274,6 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otherComments": MessageLookupByLibrary.simpleMessage("Other comments"),
         "otherCommentsOptional":
             MessageLookupByLibrary.simpleMessage("Other comments (optional)"),
+        "otherServices": MessageLookupByLibrary.simpleMessage("Other services"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),

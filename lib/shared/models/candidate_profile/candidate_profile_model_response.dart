@@ -10,15 +10,17 @@ part 'candidate_profile_model_response.g.dart';
 class CandidateProfileModelResponse with _$CandidateProfileModelResponse {
   const factory CandidateProfileModelResponse({
     required String id,
-    required String name,
-    required String job_title,
-    required String skills,
-    required String about,
-    required String photos,
-    required List<WorkExperienceModelResponse> workExperience,
-    required double hourly_rate,
-    required int rating,
-    required String? profile_picture,
+    required String userId,
+    required String firstName,
+    required String surname,
+    String? jobTitle,
+    String? skills,
+    String? description,
+    String? photos,
+    List<WorkExperienceModelResponse>? workExperience,
+    double? hourlyRate,
+    int? rating,
+    String? profilePictureUrl,
   }) = _CandidateProfileModelResponse;
 
   factory CandidateProfileModelResponse.fromJson(

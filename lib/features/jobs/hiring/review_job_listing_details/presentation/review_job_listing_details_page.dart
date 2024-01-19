@@ -13,6 +13,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -35,21 +36,19 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
     var theme = Theme.of(context);
     return BlocConsumer<ReviewJobListingInfoBloc, ReviewJobListingState>(
       listener: (context, state) {
-        //loading
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.loading){
-          if(!getBloc().preloaderActive){
             getBloc().preloaderActive = true;
             preloader(context);
-          }
-        }
 
-        //loading
+        }
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.success){
           Navigator.pop(context); //Remove loader
-        }          //loading
+          context.router.popUntilRouteWithName("JobsHiringLandingRoute");
+          context.router.push(MyJobListingsRoute());
+        }
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.error){
           Navigator.pop(context); //Remove loader
-          //   todo: Display error
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
       },
       builder: (context, state) {
@@ -67,7 +66,7 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
                   jobName: widget.jobEntity.title,
                     employerName: "Andrew",
                     locationName: widget.jobEntity.address,
-                    dateTime: widget.jobEntity.startDate!,
+                    dateTime: widget.jobEntity.startDate,
                     onNext: (){}, estimatedTime: widget.jobEntity.estimatedHours,
                   rate: "R ${widget.jobEntity.rate}",),
                 16.height,

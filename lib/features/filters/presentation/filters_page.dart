@@ -10,31 +10,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
-import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
+import 'package:pickme/shared/enums/app_mode_enum.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 
 import 'bloc/filter_candidates_bloc.dart';
 
-@RoutePage()
-class FilterCandidatesPage extends BasePage {
-  const FilterCandidatesPage({super.key, this.serviceCategoryId, });
+@RoutePage<FilterEntity>()
+class FiltersPage extends BasePage {
+  const FiltersPage({super.key, this.serviceCategoryId, this.filterEntity, this.appMode=AppMode.working});
   final String? serviceCategoryId;
+  final FilterEntity? filterEntity;
+  final AppMode appMode;
 
   @override
-  State<FilterCandidatesPage> createState() => _FilterCandidatesPage();
+  State<FiltersPage> createState() => _FilterCandidatesPage();
 }
 
-class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCandidatesBloc> {
+class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesBloc> {
 
   @override
   void initState() {
     super.initState();
-    getBloc().add(FilterCandidatesPageEnteredEvent(
-      maxDistance: 6,
-      priceRange: const RangeValues(0, 20) //Todo: Ask for the default values
-    ));
+    getBloc().add(FilterCandidatesPageEnteredEvent(filterEntity: widget.filterEntity));
   }
 
   @override
@@ -51,7 +50,7 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
           padding: wPagePadding(top:0),
           child: Column(
             children: [
-              Expanded(
+             if(getBloc().filter!=null) Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +60,7 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                           const FontVariation("wght", 600)
                         ]
                       ),),
-                      AppSlider(currentSliderValue: state.maxDistance,
+                      AppSlider(currentSliderValue: getBloc().filter!.distance!,
                         maximumSliderValue: defaultMaxDistance.toDouble(),
                         onChanged: (double newMaxDistance) => getBloc().add(MaxDistanceChangedEvent(maxDistance: newMaxDistance)),),
                       Align(
@@ -69,7 +68,19 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                         child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
-                            child: Text("${state.maxDistance.toStringAsFixed(2)}km",)),),
+                            child: Text("${getBloc().filter!.distance!.toStringAsFixed(2)}km",)),),
+                      24.height,
+                      if(widget.appMode == AppMode.working)Text(getLocalization().estHours, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontVariations: [
+                            const FontVariation("wght", 600)
+                          ]
+                      ),),
+                      if(widget.appMode == AppMode.working)AppSlider(
+                        currentSliderValue: getBloc().filter!.estimatedHours!,
+                        minimumSliderValue: 0,
+                        maximumSliderValue: defaultMaxPrice.toDouble(),
+                        onChanged: (double newValue) => getBloc().add(EstimatedHoursChangedEvent(estimatedHours: newValue))
+                        ,),
                       24.height,
                       Text(getLocalization().possiblePriceRange, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontVariations: [
@@ -77,22 +88,23 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                         ]
                       ),),
                       AppRangeSlider(
-                        rangeValues: state.priceRange,
+                        rangeValues: getBloc().filter!.priceRange!,
                         minimumSliderValue: 0,
                         maximumSliderValue: defaultMaxPrice.toDouble(),
                         onChanged: (RangeValues priceRange) => getBloc().add(PriceRangeChangedEvent(priceRange: priceRange))
-                        ,),
+                        ,),24.height,
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
-                            child: Text("R${state.priceRange.start.toStringAsFixed(2)}",)), //todo: Confirm precision
+                            child: Text("R${getBloc().filter!.priceRange!.start.toStringAsFixed(2)}",)), //todo: Confirm precision
                         Container(
-                            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
-                            child: Text("${state.priceRange.end.toStringAsFixed(2)}",))
+                            child: Text(getBloc().filter!.priceRange!.end.toStringAsFixed(2),))
                       ],
                     ),
                       48.height,
@@ -102,7 +114,10 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                           ]
                       ),),
                       20.height,
-                      AppStarRating()
+                      if(widget.appMode == AppMode.hiring)AppStarRating(
+                        rating: getBloc().filter!.rating!,
+                        onChanged: (int newRating)=>getBloc().add(RatingChangedEvent(rating: newRating)),
+                      ),
                     ],
                   ),
                 ),
@@ -112,7 +127,7 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                 children: [
                   Expanded(
                     child: SecondaryButtonDark(
-                      onPressed: (){},
+                      onPressed: ()=>getBloc().add(ResetClickedEvent()),
                       child: Text(
                         getLocalization().reset
                       ),),
@@ -120,7 +135,9 @@ class _FilterCandidatesPage extends BasePageState<FilterCandidatesPage, FilterCa
                   10.width,
                   Expanded(
                     child: PrimaryButtonDark(
-                      onPressed: (){},
+                      onPressed: ()=> Navigator.pop(context,
+                        getBloc().filter!,
+                      ),
                       child: Text(
                         getLocalization().applyFilters
                       ),),

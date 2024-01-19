@@ -2640,6 +2640,56 @@ class AppLocalizations {
     );
   }
 
+  /// `No jobs found`
+  String get noJobsFound {
+    return Intl.message(
+      'No jobs found',
+      name: 'noJobsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other services`
+  String get otherServices {
+    return Intl.message(
+      'Other services',
+      name: 'otherServices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No job description`
+  String get noJobDescription {
+    return Intl.message(
+      'No job description',
+      name: 'noJobDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No profile description`
+  String get noProfileDescription {
+    return Intl.message(
+      'No profile description',
+      name: 'noProfileDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No ratings yet`
+  String get noRating {
+    return Intl.message(
+      'No ratings yet',
+      name: 'noRating',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `+27`
   String get countryCode {
     return Intl.message(
@@ -2825,6 +2875,26 @@ class AppLocalizations {
     return Intl.message(
       'Cancel',
       name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please note that there is no publication fee associated with each job\nlisting.`
+  String get createJobListingInfoPublicationFeeDesc {
+    return Intl.message(
+      'Please note that there is no publication fee associated with each job\nlisting.',
+      name: 'createJobListingInfoPublicationFeeDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No profiles available for this category`
+  String get noProfilesAvailableForThisCategory {
+    return Intl.message(
+      'No profiles available for this category',
+      name: 'noProfilesAvailableForThisCategory',
       desc: '',
       args: [],
     );

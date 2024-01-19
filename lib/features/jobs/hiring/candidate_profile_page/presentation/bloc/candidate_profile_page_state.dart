@@ -8,3 +8,7 @@ abstract class CandidateProfilePageState extends BaseState {
 class CandidateProfileStatePageInitial extends CandidateProfilePageState {
   CandidateProfileStatePageInitial();
 }
+
+class CandidateProfilePageEnteredState extends CandidateProfilePageState {
+  CandidateProfilePageEnteredState();
+}

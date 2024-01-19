@@ -13,6 +13,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
@@ -45,6 +46,11 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
         if(state is JobsHiringLandingPageInitial && state.dataState == DataState.error){
           // error dialog
         }
+
+        if(state is GetTopIndustriesState && state.dataState == DataState.error){
+          Navigator.pop(context); //Remove loader
+          wErrorPopUp(message: "An error occurred while fetching your data.", type: getLocalization().error, context: context);
+        }
         //loading
         if(state is GetTopIndustriesState && state.dataState == DataState.loading){
           if(!getBloc().preloaderActive){
@@ -71,14 +77,14 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
               children: [
                 AppExplorationTile(
                   title: getLocalization().exploreAllServices,
-                  onClick: () => context.router.push(const AllServicesRoute()),
+                  onClick: () => context.router.push(AllServicesRoute()),
                 ),
                 10.height,
                 AppExplorationTile(
                   title: getLocalization().myJobListings,
-                  count: 0,
+                  count: getBloc().jobCount,
                   icon: const Icon(Iconsax.document_text_14),
-                  onClick: ()=>context.router.push(const MyJobListingsRoute()),
+                  onClick: ()=>context.router.push(MyJobListingsRoute(jobListingsPageEntity: getBloc().jobListingsPageEntity)),
                 ),
                 40.height,
                 Row(
@@ -88,7 +94,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: () => context.router.push(const AllServicesRoute()),
+                        onPressed: () => context.router.push(AllServicesRoute()),
                         child: Row(
                           children: [
                             Text(
@@ -157,7 +163,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: () => context.router.push(const AllServicesRoute()),
+                        onPressed: () => context.router.push(AllServicesRoute()),
                         child: Row(
                           children: [
                             Text(
@@ -178,13 +184,13 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                 SizedBox(
                   height: 450,
                   child: (state.paginatedCandidates!=null)? ListView.builder(
-                    itemCount: 3,
+                    itemCount: (state.paginatedCandidates!.candidates.length>3)?3:state.paginatedCandidates!.candidates.length,
                     itemBuilder: (BuildContext context, int index){
                       CandidateProfileEntity candidate = state.paginatedCandidates!.candidates[index];
                       return AppCandidateProfile(
                         fullName: candidate.fullName,
-                        jobTitle: candidate.jobTitle,
-                        rating: candidate.rating,
+                        jobTitle: candidate.jobTitle?? getLocalization().noJobDescription,
+                        rating: candidate.rating??0,
                         hourlyRate: "R${candidate.hourlyRate}p/h",
                         image: (candidate.profilePicture!=null)?
                         CachedNetworkImageProvider(
@@ -197,11 +203,6 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                     },
                   ):SizedBox(),
                 ),
-
-                PrimaryButton(onPressed:
-                    ()=>context.router.push(const PendingProfileRoute()),
-                    child: const Text("Pending profile"),
-                )
               ],
             ),
           ),

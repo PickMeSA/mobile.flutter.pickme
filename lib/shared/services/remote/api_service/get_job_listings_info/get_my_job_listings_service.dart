@@ -1,6 +1,6 @@
 import 'package:pickme/shared/remote/PickMeApiCore.dart';
+import 'package:pickme/features/jobs/shared/domain/entities/my_job_listings_page_entity.dart';
 
-import '../../../domain/entities/my_job_listings_page_entity.dart';
 
 
 

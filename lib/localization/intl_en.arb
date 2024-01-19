@@ -258,6 +258,11 @@
   "offerSentEx": "Offer sent!",
   "yourJobOfferHasBeenSent": "Your job offer has been sent. You'll receive a notification once the candidate accepts.",
   "bookings": "Bookings",
+  "noJobsFound": "No jobs found",
+  "otherServices": "Other services",
+  "noJobDescription": "No job description",
+  "noProfileDescription": "No profile description",
+  "noRating": "No ratings yet",
   "countryCode": "+27",
   "exampleNumber" : "800000000",
   "pleaseEnterValidCellNumber" : "Please enter a valid cell number.",
@@ -276,6 +281,7 @@
   "oopsSomethingWentWrongWithYourPayment": "Ooops! Something went wrong with your payment, Please try again",
   "payNow": "Pay now",
   "editMyBankingDetails": "Edit my banking details",
-  "cancel": "Cancel"
-
+  "cancel": "Cancel",
+  "createJobListingInfoPublicationFeeDesc": "Please note that there is no publication fee associated with each job\nlisting.",
+  "noProfilesAvailableForThisCategory": "No profiles available for this category"
 }

@@ -9,6 +9,7 @@ import 'package:pickme/features/qualification/domain/entities/submit_qualificati
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_full_profile_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_location_model_response_model_response.dart';
@@ -49,10 +50,18 @@ class ProfileServiceImpl extends ProfileService{
   }
 
   @override
-  Future<ProfileEntity> getRemoteProfileData() async{
+  Future<ProfileEntity> getRemoteProfileData({String? id}) async{
     try{
-      UserModel userModel = boxUser.get(current);
-      Response<dynamic> response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
+      String userId;
+      if(id!=null){
+        UserModel userModel = boxUser.get(current);
+        logger.e(userModel.id);
+        userId = userModel.id!;
+      }else{
+        userId = id!;
+      }
+
+      Response<dynamic> response = await apiService.get("$baseUrl$version/profiles/$userId");
       return returnProfileEntity(response: response);
     }catch(ex){
       rethrow;
@@ -132,6 +141,7 @@ class ProfileServiceImpl extends ProfileService{
   }
 
   returnProfileEntity({required Response<dynamic> response}){
+    logger.d(response.data["industry"]["industry"]);
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
         firstName: otpFullProfileModelResponse.firstName,
@@ -143,6 +153,8 @@ class ProfileServiceImpl extends ProfileService{
         passportNumber: otpFullProfileModelResponse.passportNumber,
         type: otpFullProfileModelResponse.type??"",
         description:  otpFullProfileModelResponse.description??"",
+        industry:  otpFullProfileModelResponse.industry?["industry"]??"",
+        skills:  otpFullProfileModelResponse.skills,
         business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? const OTPBusinessModelResponse(
             name: "",
             number: "",

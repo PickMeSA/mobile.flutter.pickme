@@ -94,7 +94,8 @@ class DioApiService extends ApiService{
 
   @override
   Future<Response<T>> post<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onSendProgress, ProgressCallback? onReceiveProgress}) async {
-   Response<T> response = await  dio.post(path,
+    logger.d(data.toString());
+    Response<T> response = await  dio.post(path,
    data: data,
    queryParameters: queryParameters,
    options: options);
