@@ -14,7 +14,7 @@ abstract class ProfileService extends PickMeCoreApi{
 
   Future<bool> submitProfileType(ProfileTypeEntity profileTypeEntity);
 
-  Future<ProfileEntity> getRemoteProfileData({String? id});
+  Future<ProfileEntity> getRemoteProfileData();
 
   Future<ProfileEntity> submitWorkQualificationAndWorkExperience({required SubmitQualificationAndExperienceEntity submitQualificationAndExperienceEntity});
 

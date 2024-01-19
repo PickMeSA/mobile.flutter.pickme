@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'otp_business_model_response.dart';
+import 'otp_industry_model_model_response.dart';
 import 'otp_location_model_response_model_response.dart';
 import 'otp_payment_details_model_response.dart';
 import 'otp_qualification_model_response_model_response.dart';

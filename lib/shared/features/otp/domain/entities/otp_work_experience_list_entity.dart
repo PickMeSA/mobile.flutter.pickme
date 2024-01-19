@@ -28,7 +28,7 @@ class OTPWorkExperienceListEntity{
           isCurrent: element.isCurrent,
           industryId: element.industryId,
         files: []
-      ));
+      ).toJson());
     });
 
     return otpWorkExperienceModelResponseList;
