@@ -263,6 +263,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
+        "noAddressSpecified":
+            MessageLookupByLibrary.simpleMessage("No address specified"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
         "noJobDescription":
             MessageLookupByLibrary.simpleMessage("No job description"),

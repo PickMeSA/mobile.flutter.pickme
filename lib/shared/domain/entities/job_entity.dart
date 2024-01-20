@@ -7,6 +7,7 @@ final String title;
 final String description;
 final String status;
 final String? address;
+final String? employerName;
 final double? hourlyRate;
 final DateTime? startDate;
 final DateTime? endDate;
@@ -24,6 +25,7 @@ final double? distance;
     required this.title,
     required this.description,
     required this.status,
+    this.employerName,
     this.address,
     this.hourlyRate,
     this.startDate,
@@ -42,8 +44,8 @@ final double? distance;
     logger.e({"response": response.startDate});
     return JobEntity(
         title: response.title??"",
-        startDate: response.startDate!=null && response.startDate!= ""?DateTime.parse(response.startDate!):DateTime.now(),
-        endDate: response.endDate!=null && response.endDate != ""?DateTime.parse(response.endDate!):DateTime.now(),
+        startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):DateTime.now(),
+        endDate: (response.endDate!=null && response.endDate != "")?DateTime.parse(response.endDate!):DateTime.now(),
         startTime: response.startTime,
         description: response.description??"",
         images: response.images??"",
@@ -52,7 +54,8 @@ final double? distance;
         lat: response.lat,
         lng: response.lng,
         skills: response.skills??"",
-        id: response.id!,
+        id: response.id.toString(),
+        employerName: response.employerName,
         distance: response.distance??0
     );
   }

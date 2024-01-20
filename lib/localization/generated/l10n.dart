@@ -2899,6 +2899,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No address specified`
+  String get noAddressSpecified {
+    return Intl.message(
+      'No address specified',
+      name: 'noAddressSpecified',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

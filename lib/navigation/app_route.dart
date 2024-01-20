@@ -84,7 +84,7 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes =>[
     AnimatedRoute(
       page: LandingRoute.page,
-      initial: true,
+      // initial: true,
     ),
     AnimatedRoute(page: LoginRoute.page,),
     AnimatedRoute(page: RegisterRoute.page,),
@@ -98,7 +98,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
-    AnimatedRoute(page: JobsLandingRoute.page,),
+    AnimatedRoute(page: JobsLandingRoute.page, initial: true),
     AnimatedRoute(page: JobsHiringLandingRoute.page),
     // AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page: AllServicesRoute.page),

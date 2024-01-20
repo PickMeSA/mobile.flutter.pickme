@@ -57,7 +57,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
         }
       },
       builder: (context, state) {
-        PaginatedIndustryEntity? industries = getBloc().paginatedIndustries;
+        PaginatedIndustryEntity? industries = getBloc().pageEntity?.services;
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
@@ -109,16 +109,14 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                         ))
                   ],
                 ),
-                Column(
-                  children: [
-                    AppJobAdvertCard.matching(
-                      jobName: "Job Name",
-                      employerName: "Employer Name",
-                      locationName: "location Name",
-                      dateTime: DateTime.now(),
-                      onNext: ()=>context.router.push(JobDetailsRoute(jobId: ""))
-                      ,)
-                  ],
+                if(getBloc().pageEntity!=null)Column(
+                  children: getBloc().pageEntity?.recommendedJobs.map((e) => AppJobAdvertCard.matching(
+                    jobName: e.title,
+                    employerName: e.employerName??"",
+                    locationName: e.address??getLocalization().noAddressSpecified,
+                    dateTime: DateTime.now(),
+                    onNext: ()=>context.router.push(JobDetailsRoute(jobId: ""))
+                    ,)).toList()??[],
                 ),
                 40.height,
                 Row(

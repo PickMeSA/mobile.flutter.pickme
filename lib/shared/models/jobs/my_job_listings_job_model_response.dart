@@ -19,6 +19,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     String? images,
     String? skills,
     String? id,
+    String? employerName,
     double? distance,
   }) = _MyJobListingsJobModelResponse;
 
