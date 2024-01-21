@@ -19,6 +19,7 @@ class ProfileEntity {
   String? passportNumber;
   String? workPermit;
   String? type;
+  int? averageRating;
   int? hourlyRate;
   String? description;
   RatesAndWorkTimesEntity? ratesAndWorkTimesEntity;
@@ -43,6 +44,7 @@ class ProfileEntity {
     this.passportNumber,
     this.email,
     this.type,
+    this.averageRating,
     this.industry,
   this.skills,
   this.paymentDetails,

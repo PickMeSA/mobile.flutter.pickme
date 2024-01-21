@@ -291,7 +291,7 @@
   "requestAReview": "Request a review",
   "allowYourClientsToLeaveAReview": "Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.",
   "copyLink": "Copy link",
-  "review": "Review"
+  "review": "Review",
   "noProfilesAvailableForThisCategory": "No profiles available for this category",
   "uploadCancelledByUser": "Upload cancelled by user",
   "editDetails": "Edit details",
@@ -301,6 +301,8 @@
   "myHourlyRateAndWorkingHours": "My hourly rate and working hours",
   "editSkills": "Edit Skills",
   "editWorkExperience": "Edit work experience",
-  "accountHolderName": "Account holder name"
+  "accountHolderName": "Account holder name",
+  "loadingDotDot": "loading...",
+  "howWouldYouRate": "How would you rate"
 
 }

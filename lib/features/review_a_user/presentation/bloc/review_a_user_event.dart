@@ -4,10 +4,21 @@ part of 'review_a_user_bloc.dart';
 abstract class ReviewAUserPageEvent extends BaseEvent {}
 
 class ReviewAUserPageEnteredEvent extends ReviewAUserPageEvent{
-  ReviewAUserPageEnteredEvent();
+  final String userId;
+  ReviewAUserPageEnteredEvent({required this.userId});
 }
 
-class SearchTextChangedEvent extends ReviewAUserPageEvent{
-  final String searchText;
-  SearchTextChangedEvent({required this.searchText});
+class RatingChangedEvent extends ReviewAUserPageEvent{
+  final int value;
+  RatingChangedEvent({required this.value});
+}
+
+class ReviewTextChangedEvent extends ReviewAUserPageEvent{
+  final String value;
+  ReviewTextChangedEvent({required this.value});
+}
+
+class SubmitClickedEvent extends ReviewAUserPageEvent{
+  String userId;
+  SubmitClickedEvent({required this.userId});
 }

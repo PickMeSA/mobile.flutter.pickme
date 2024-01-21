@@ -35,7 +35,7 @@ class MyReviewsServiceImpl extends MyReviewsService{
                 surname: e.reviewer.surname,
                 profilePictureUrl: e.reviewer.profilePictureUrl,
                 industry: IndustryEntity(
-                  id: e.reviewer.industry.id!,
+                  id: int.parse(e.reviewer.industry.id!),
                   industry: e.reviewer.industry.industry!,
                 ),
               ),

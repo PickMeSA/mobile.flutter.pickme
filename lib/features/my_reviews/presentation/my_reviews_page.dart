@@ -108,7 +108,7 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
                     return AppProfileReview(
                       fullName: "${review.reviewer!.firstName} ${review.reviewer!.surname}",
                       rating: review.rating,
-                      relationship: review.reviewer!.industry!.industry,
+                      relationship: review.reviewer!.industry!.industry!,
                       reviewDate: review.createdAt,
                       review: review.review,
                       // : ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().pageEntity!.reviews[index].id)),

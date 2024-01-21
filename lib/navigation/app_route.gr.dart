@@ -502,9 +502,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ReviewAUserRoute.name: (routeData) {
+      final args = routeData.argsAs<ReviewAUserRouteArgs>(
+          orElse: () => const ReviewAUserRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ReviewAUserPage(),
+        child: ReviewAUserPage(
+          key: args.key,
+          userId: args.userId,
+        ),
       );
     },
     ReviewJobListingInfoRoute.name: (routeData) {
@@ -2076,16 +2081,40 @@ class ResendOTPRouteArgs {
 
 /// generated route for
 /// [ReviewAUserPage]
-class ReviewAUserRoute extends PageRouteInfo<void> {
-  const ReviewAUserRoute({List<PageRouteInfo>? children})
-      : super(
+class ReviewAUserRoute extends PageRouteInfo<ReviewAUserRouteArgs> {
+  ReviewAUserRoute({
+    Key? key,
+    String userId = "tzondoD4WSQQkDVr0MoZviGOr9I3",
+    List<PageRouteInfo>? children,
+  }) : super(
           ReviewAUserRoute.name,
+          args: ReviewAUserRouteArgs(
+            key: key,
+            userId: userId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ReviewAUserRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ReviewAUserRouteArgs> page =
+      PageInfo<ReviewAUserRouteArgs>(name);
+}
+
+class ReviewAUserRouteArgs {
+  const ReviewAUserRouteArgs({
+    this.key,
+    this.userId = "tzondoD4WSQQkDVr0MoZviGOr9I3",
+  });
+
+  final Key? key;
+
+  final String userId;
+
+  @override
+  String toString() {
+    return 'ReviewAUserRouteArgs{key: $key, userId: $userId}';
+  }
 }
 
 /// generated route for

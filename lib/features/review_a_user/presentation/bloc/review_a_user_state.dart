@@ -13,4 +13,10 @@ class MyReviewsPageInitialState extends ReviewAUserState {
 class GetPageDataState extends ReviewAUserState {
   GetPageDataState({super.error});
 }
+class RatingChangedState extends ReviewAUserState {
+  RatingChangedState({super.error});
+}
+class SubmitClickedState extends ReviewAUserState {
+  SubmitClickedState({super.error});
+}
 
