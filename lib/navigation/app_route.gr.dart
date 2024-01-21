@@ -447,6 +447,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ReviewAUserRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ReviewAUserPage(),
+      );
+    },
     ReviewJobListingInfoRoute.name: (routeData) {
       final args = routeData.argsAs<ReviewJobListingInfoRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -1785,6 +1791,20 @@ class ResendOTPRouteArgs {
   String toString() {
     return 'ResendOTPRouteArgs{key: $key, userModel: $userModel}';
   }
+}
+
+/// generated route for
+/// [ReviewAUserPage]
+class ReviewAUserRoute extends PageRouteInfo<void> {
+  const ReviewAUserRoute({List<PageRouteInfo>? children})
+      : super(
+          ReviewAUserRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ReviewAUserRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

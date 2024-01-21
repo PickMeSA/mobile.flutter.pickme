@@ -390,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rescheduleRequestSent":
             MessageLookupByLibrary.simpleMessage("Reschedule request sent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
