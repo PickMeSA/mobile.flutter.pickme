@@ -9,7 +9,8 @@ part 'otp_skill_id_model_response.g.dart';
 @freezed
 class SkillIdModelResponse with _$SkillIdModelResponse {
   const factory SkillIdModelResponse({
-    required List<int> skillsId ,
+    required int? id ,
+    required String? skill
   }) = _SkillIdModelResponse;
 
   factory SkillIdModelResponse.fromJson(

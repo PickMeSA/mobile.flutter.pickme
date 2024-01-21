@@ -1,6 +1,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -10,12 +11,14 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/resend_otp_bloc.dart';
 
 @RoutePage()
 class ResendOTPPage extends BasePage {
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
    ResendOTPPage({super.key, required this.userModel});
    UserEntity userModel;
   @override
@@ -41,16 +44,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     return BlocConsumer<ResendOTPBloc, ResendOTPPageState>(
-      listener: (context, state){
-        if(state is NumberEnteredState && state.dataState == DataState.loading){
-          context.router.push(OTPRoute(
-              userModel: UserEntity(
-                  mobile:"+27${phoneNumberController.text}" ,
-                  email: '',
-                  surname: '',
-                  firstName: '')));
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return SizedBox(
           width: MediaQuery.sizeOf(context).width,
@@ -130,22 +124,15 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                                   }
                               )
                           ),
-                          onPressed: !getBloc().checked!?null:() {
-                            getBloc().add(NumberEnteredEvent(mobileNumber: phoneNumberController.text));
+                          onPressed: !getBloc().checked!?null:() async {
+                            await authenticate(mobileNumber: "${getLocalization().phonePrefix}${phoneNumberController}");
                           },
                           child: Text(getLocalization().submit),
                         ),
                         Padding(padding: EdgeInsets.only(top: 24, bottom: 14),
                           child: Center(
                               child: InkWell(
-                                onTap: (){
-                                  getBloc().add(ResendOTPSubmitClickedEvent(
-                                      userModel: UserEntity(
-                                          mobile:"+27${phoneNumberController.text}" ,
-                                          email: '',
-                                          surname: '',
-                                          firstName: '')));
-                                  } ,
+                                onTap: () {},
                                 child: wText(getLocalization().contactHelpCenter, style:
                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                               )
@@ -159,6 +146,37 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
           ),
         );
       },
+    );
+  }
+
+  Future<void> authenticate({ required String mobileNumber})  async {
+    await widget.firebaseAuth.verifyPhoneNumber(
+      phoneNumber: mobileNumber,
+      timeout: const Duration(minutes: 1),
+      autoRetrievedSmsCodeForTesting:"984596",
+      verificationCompleted: (PhoneAuthCredential credential) async{
+        await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
+          await value.user!.getIdToken(true).then((value1) {
+
+          });
+        });
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+        final error =  await context.router.push(OTPRoute(
+            userModel: UserEntity(
+                mobile:"+27${phoneNumberController.text}" ,
+                email: '',
+                surname: '',
+                firstName: ''),
+            fromregister: true, verificationId: verificationId));
+        if(error != null){
+          wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
+        }
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 

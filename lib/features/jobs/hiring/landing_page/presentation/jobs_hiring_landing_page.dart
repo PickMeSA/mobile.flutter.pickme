@@ -117,20 +117,20 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       child: Column(
                           children: [
                             AppSectionCard.small(
-                                title: industries!.industries[0].industry,
+                                title: industries!.industries[0].industry!,
                                 color: const Color(0xFFF17E2C),
                                 icon: const Icon(Iconsax.setting,
                                   color: Colors.white,
                                   size: 20,
                                 ),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[0].id)),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[0].id.toString())),
                             ),
                             10.height,
                             AppSectionCard(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries.industries[1].industry,
+                              title: industries.industries[1].industry!,
                               color: const Color(0xFF23A8B3),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[1].id)),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[1].id.toString())),
                             ),
                           ]),
                     ),
@@ -140,16 +140,16 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                           children: [
                             AppSectionCard(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries.industries[2].industry,
+                              title: industries.industries[2].industry!,
                               color: const Color(0xFF3EB62B),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[2].id)),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[2].id.toString())),
                             ),
                             10.height,
                             AppSectionCard.small(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries.industries[3].industry,
+                              title: industries.industries[3].industry!,
                               color: const Color(0xFFF44F4E),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[3].id)),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[3].id.toString())),
                             ),
                           ]),
                     ),

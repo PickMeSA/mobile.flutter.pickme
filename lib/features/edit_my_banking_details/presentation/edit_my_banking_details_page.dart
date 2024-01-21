@@ -26,7 +26,7 @@ class EditMyBankingDetailsPage extends BasePage {
 }
 
 class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsPage, EditMyBankingDetailsBloc> {
-
+  TextEditingController accountHolderNameController = TextEditingController();
   TextEditingController bankNameController = TextEditingController();
   TextEditingController accountTypeController = TextEditingController();
   TextEditingController accountNumberController = TextEditingController();
@@ -37,11 +37,11 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
     // TODO: implement initState
     super.initState();
     getBloc().add(BankDetailsPageEnteredEvent());
-
+    accountHolderNameController. text = widget.bankDetailsEntity.accountHolderName!;
     branchCodeController.text = widget.bankDetailsEntity.bankBranchCode!;
-accountTypeController.text = widget.bankDetailsEntity.bankAccountType!;
-accountNumberController.text = widget.bankDetailsEntity.bankAccountNumber!;
-bankNameController.text = widget.bankDetailsEntity.bankName!;
+  accountTypeController.text = widget.bankDetailsEntity.bankAccountType!;
+  accountNumberController.text = widget.bankDetailsEntity.bankAccountNumber!;
+  bankNameController.text = widget.bankDetailsEntity.bankName!;
   }
 
     @override
@@ -88,6 +88,13 @@ bankNameController.text = widget.bankDetailsEntity.bankName!;
                     ],
                   ),
                   30.height,
+                  AppTextFormField(
+                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                    controller: accountHolderNameController,
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    textFieldType: TextFieldType.NAME,
+                    labelText: getLocalization().accountHolderName,),
+                  20.height,
                   AppTextFormField(
                     onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
                     controller: bankNameController,
@@ -200,6 +207,7 @@ bankNameController.text = widget.bankDetailsEntity.bankName!;
 
   BankDetailsEntity getFormData (){
     return BankDetailsEntity(
+      accountHolderName: accountHolderNameController.text,
         accountNumber: accountNumberController.text,
         accountType: accountTypeController.text,
         bank: bankNameController.text,

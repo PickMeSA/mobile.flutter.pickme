@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/navigation/app_route.dart';
@@ -7,6 +8,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import '../../../shared/widgets/w_page_padding.dart';
@@ -28,126 +31,137 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
     var theme = Theme.of(context);
     return BlocConsumer<RegisterAccountStep1Bloc, RegisterAccountStep1State>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state.dataState == DataState.loading && state is SubmitAcceptedTermsAndConditionsState){
+          preloader(context);
+        }
+        if(state.dataState == DataState.success && state is SubmitAcceptedTermsAndConditionsState){
+          Navigator.pop(context);
+          context.router.push(const QualificationsRoute());
+        }
+        if(state.dataState == DataState.error && state is SubmitAcceptedTermsAndConditionsState){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
       },
       builder: (context, state) {
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           padding: wPagePadding(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              wText(
-                getLocalization().step1,
-                style: theme.textTheme.headlineLarge!.copyWith(
-                  color: theme.primaryColor,
-                  // fontWeight: FontWeight.bold
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                wText(
+                  getLocalization().step1,
+                  style: theme.textTheme.headlineLarge!.copyWith(
+                    color: theme.primaryColor,
+                    // fontWeight: FontWeight.bold
+                  ),
                 ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: wText(
-                      getLocalization().selectMembership,
-                      style: theme.textTheme.headlineLarge!.copyWith(
-                        fontWeight: FontWeight.w300
+                Row(
+                  children: [
+                    Expanded(
+                      child: wText(
+                        getLocalization().selectMembership,
+                        style: theme.textTheme.headlineLarge!.copyWith(
+                          fontWeight: FontWeight.w300
+                        ),
                       ),
                     ),
-                  ),
-                  TertiaryButton(onPressed: (){
-                    context.router.push(const MembershipInformationRoute());
-                  },
-                      child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,)
-                  )
-                ],
-              ),
-              30.height,
-              Column(
-                children: mockSubscriptionPlans.map((plan) =>
-                    AppSubscriptionPlan(
-                  price: "${getLocalization().r}${plan.price}",
-                  subscriptionType: plan.subscriptionType,
-                  entityType: plan.entityType,
-                  selected: true,
-                  includedItems: plan.includedItems,
-                )).toList(),
-              ),
-              const Expanded(child: SizedBox()),
-              Row(
-                children: [
-                  AppCheckbox(value: state.checked, onChanged: (bool? checked){
-                    getBloc().add(TermsAndConditionsToggledEvent());
-                  }),
-                  16.width,
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                          children: [
-                            TextSpan(
-                                text: "${getLocalization().iHaveReadThe} ",
-                                style: theme.textTheme.bodyMedium
-                            ),
+                    TertiaryButton(onPressed: (){
+                      context.router.push(const MembershipInformationRoute());
+                    },
+                        child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,)
+                    )
+                  ],
+                ),
+                30.height,
+                Column(
+                  children: mockSubscriptionPlans.map((plan) =>
+                      AppSubscriptionPlan(
+                    price: "${getLocalization().r}${plan.price}",
+                    subscriptionType: plan.subscriptionType,
+                    entityType: plan.entityType,
+                    selected: true,
+                    includedItems: plan.includedItems,
+                  )).toList(),
+                ),
+                Row(
+                  children: [
+                    AppCheckbox(value: state.checked, onChanged: (bool? checked){
+                      getBloc().add(TermsAndConditionsToggledEvent());
+                    }),
+                    16.width,
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: "${getLocalization().iHaveReadThe} ",
+                                  style: theme.textTheme.bodyMedium
+                              ),
 
-                            TextSpan(
-                                text: getLocalization().termsAndConditions,
-                                style: theme.textTheme.bodyMedium!.copyWith(
-                                  decoration: TextDecoration.underline,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    context.router.push(const TermsAndConditionsRoute());
-                                  }
-                            ),
-                          ]
+                              TextSpan(
+                                  text: getLocalization().termsAndConditions,
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      context.router.push(const TermsAndConditionsRoute());
+                                    }
+                              ),
+                            ]
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              40.height,
-              Row(
-                children: [
-                  Container(
-                    height: 56,
-                    width: 56,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2,
-                            color: Colors.black),
-                        borderRadius: const BorderRadius.all(Radius.circular(10))),
-                    child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
+                  ],
+                ),
+                40.height,
+                Row(
+                  children: [
+                    Container(
+                      height: 56,
+                      width: 56,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2,
+                              color: Colors.black),
+                          borderRadius: const BorderRadius.all(Radius.circular(10))),
+                      child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
 
-                  ),
-                  const SizedBox(width: 10,),
-                  Expanded(
-                    child: PrimaryButton(
-                      style: ButtonStyle(
-                          side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                            return BorderSide(
-                              color: states.contains(MaterialState.disabled)?
-                              theme.colorScheme.secondary.withOpacity(0):
-                              theme.colorScheme.secondary,
-                              width: 2,
-                            );
-                          }
-                          ),
-                          backgroundColor: MaterialStateProperty.resolveWith(
-                                  (Set<MaterialState> states){
-                                return states.contains(MaterialState.disabled)?
-                                theme.colorScheme.secondary.withOpacity(0.3):
-                                theme.colorScheme.secondary;
-                              }
-                          )
-                      ),
-                      onPressed: !state.checked?null:() {
-                        context.router.push(const QualificationsRoute());
-                      },
-                      child: Text(getLocalization().nextStep),
                     ),
-                  ),
-                ],
-              )
-            ],
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: PrimaryButton(
+                        style: ButtonStyle(
+                            side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                              return BorderSide(
+                                color: states.contains(MaterialState.disabled)?
+                                theme.colorScheme.secondary.withOpacity(0):
+                                theme.colorScheme.secondary,
+                                width: 2,
+                              );
+                            }
+                            ),
+                            backgroundColor: MaterialStateProperty.resolveWith(
+                                    (Set<MaterialState> states){
+                                  return states.contains(MaterialState.disabled)?
+                                  theme.colorScheme.secondary.withOpacity(0.3):
+                                  theme.colorScheme.secondary;
+                                }
+                            )
+                        ),
+                        onPressed: !state.checked?null:() {
+                          getBloc().add(SubmitAcceptedTermsAndConditionsEvent());
+                        },
+                        child: Text(getLocalization().nextStep),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         );
       },

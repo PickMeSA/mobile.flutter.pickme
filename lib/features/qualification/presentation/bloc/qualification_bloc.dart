@@ -42,7 +42,7 @@ class QualificationsBloc
                 profileEntity: await submitRemoteQualificationAndExperienceUseCase.call(
                 params: SubmitRemoteQualificationAndExperienceUseCaseParams(
                     submitQualificationAndExperienceEntity: SubmitQualificationAndExperienceEntity(
-                        otpQualificationEntityList: OTPQualificationListEntity(qualifications: otpQualificationEntityList),
+                        otpQualificationEntityList: OTPQualificationListEntity(qualificationsEntityList: otpQualificationEntityList),
                         otpWorKExperienceEntityList: OTPWorkExperienceListEntity(workExperience: otpWorKExperienceEntityList)
                     )) ))..dataState = DataState.success
             );

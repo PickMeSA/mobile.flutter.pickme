@@ -2880,6 +2880,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Incorrect OTP entered. Please enter the correct OPT received.`
+  String get incorrectOtpEntered {
+    return Intl.message(
+      'Incorrect OTP entered. Please enter the correct OPT received.',
+      name: 'incorrectOtpEntered',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please note that there is no publication fee associated with each job\nlisting.`
   String get createJobListingInfoPublicationFeeDesc {
     return Intl.message(
@@ -2900,81 +2910,91 @@ class AppLocalizations {
     );
   }
 
-  /// `No address specified`
-  String get noAddressSpecified {
+  /// `Upload cancelled by user`
+  String get uploadCancelledByUser {
     return Intl.message(
-      'No address specified',
-      name: 'noAddressSpecified',
+      'Upload cancelled by user',
+      name: 'uploadCancelledByUser',
       desc: '',
       args: [],
     );
   }
 
-  /// `My Reviews`
-  String get myReviews {
+  /// `Edit details`
+  String get editDetails {
     return Intl.message(
-      'My Reviews',
-      name: 'myReviews',
+      'Edit details',
+      name: 'editDetails',
       desc: '',
       args: [],
     );
   }
 
-  /// `You don’t have any reviews yet`
-  String get youDontHaveAnyReviewsYet {
+  /// `Edit about me`
+  String get editAboutMe {
     return Intl.message(
-      'You don’t have any reviews yet',
-      name: 'youDontHaveAnyReviewsYet',
+      'Edit about me',
+      name: 'editAboutMe',
       desc: '',
       args: [],
     );
   }
 
-  /// `Get reviews to boost your profile and increase your chances of getting hired`
-  String get getReviewsToBoostProfile {
+  /// `Personal details`
+  String get personalDetails {
     return Intl.message(
-      'Get reviews to boost your profile and increase your chances of getting hired',
-      name: 'getReviewsToBoostProfile',
+      'Personal details',
+      name: 'personalDetails',
       desc: '',
       args: [],
     );
   }
 
-  /// `Request a review`
-  String get requestAReview {
+  /// `My location`
+  String get myLocation {
     return Intl.message(
-      'Request a review',
-      name: 'requestAReview',
+      'My location',
+      name: 'myLocation',
       desc: '',
       args: [],
     );
   }
 
-  /// `Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.`
-  String get allowYourClientsToLeaveAReview {
+  /// `My hourly rate and working hours`
+  String get myHourlyRateAndWorkingHours {
     return Intl.message(
-      'Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.',
-      name: 'allowYourClientsToLeaveAReview',
+      'My hourly rate and working hours',
+      name: 'myHourlyRateAndWorkingHours',
       desc: '',
       args: [],
     );
   }
 
-  /// `Copy link`
-  String get copyLink {
+  /// `Edit Skills`
+  String get editSkills {
     return Intl.message(
-      'Copy link',
-      name: 'copyLink',
+      'Edit Skills',
+      name: 'editSkills',
       desc: '',
       args: [],
     );
   }
 
-  /// `Review`
-  String get review {
+  /// `Edit work experience`
+  String get editWorkExperience {
     return Intl.message(
-      'Review',
-      name: 'review',
+      'Edit work experience',
+      name: 'editWorkExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account holder name`
+  String get accountHolderName {
+    return Intl.message(
+      'Account holder name',
+      name: 'accountHolderName',
       desc: '',
       args: [],
     );

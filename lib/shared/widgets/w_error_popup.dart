@@ -44,7 +44,7 @@ required BuildContext context}) {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                wText(type),
+                                wText(type, style: TextStyle(fontSize: 16)),
                                 SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.6,
                                     height: 67 ,

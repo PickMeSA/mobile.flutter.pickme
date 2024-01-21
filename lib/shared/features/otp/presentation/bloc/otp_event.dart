@@ -3,10 +3,9 @@ part of 'otp_bloc.dart';
 abstract class otpPageEvent extends BaseEvent {}
 
 class OTPGetTokenEvent extends otpPageEvent{
-  String verificationId;
-  String smsCode;
+  final int stage;
 
-  OTPGetTokenEvent({required this.verificationId, required this.smsCode});
+  OTPGetTokenEvent({required this.stage});
 }
 
 class RegisterOTPCompleteEvent extends otpPageEvent{

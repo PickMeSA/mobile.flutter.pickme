@@ -16,8 +16,8 @@ class OTPWorkExperienceListEntity{
     });
   }
 
-  List<OTPWorkExperienceModelResponse> toResponseList(){
-    List<OTPWorkExperienceModelResponse> otpWorkExperienceModelResponseList = [];
+  List<Map<String, dynamic>> toResponseList(){
+    List<Map<String, dynamic>> otpWorkExperienceModelResponseList = [];
 
     workExperience!.forEach((element) {
       otpWorkExperienceModelResponseList.add(OTPWorkExperienceModelResponse(
@@ -28,7 +28,7 @@ class OTPWorkExperienceListEntity{
           isCurrent: element.isCurrent,
           industryId: element.industryId,
         files: []
-      ));
+      ).toJson());
     });
 
     return otpWorkExperienceModelResponseList;

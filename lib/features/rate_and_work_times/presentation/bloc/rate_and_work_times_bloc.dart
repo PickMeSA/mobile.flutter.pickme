@@ -51,9 +51,9 @@ class RateAndWorkTimesBloc
         )async{
         emit(SubmitRemoteRateAndWorkTimesState()..dataState = DataState.loading);
         try{
-            WorkingDaysListEntity workingDaysListEntity = WorkingDaysListEntity(workingDays: []);
+            WorkingDaysListEntity workingDaysListEntity = WorkingDaysListEntity(workingDaysEntityList: []);
                 chipOptions.forEach((element) {
-                    workingDaysListEntity.workingDays?.add(WorkingDaysEntity(id: element.id.toString(), day: element.label));
+                    workingDaysListEntity.workingDaysEntityList?.add(WorkingDaysEntity(id: element.id.toString(), day: element.label));
                 });
             emit(SubmitRemoteRateAndWorkTimesState(
                 profileEntity: await submitRemoteRateAndWorkTimesUseCase.call(
@@ -87,9 +87,12 @@ class RateAndWorkTimesBloc
         checked = false;
         if(
         //event.hourRateTimes.workingTimes.isNotEmpty &&
-            event.hourRateTimes.hourlyRate.isNotEmpty &&
-            event.hourRateTimes.startTime.isNotEmpty &&
-            event.hourRateTimes.endTime.isNotEmpty &&
+            event.hourRateTimes.hourlyRate != null &&
+            event.hourRateTimes.startTime != null &&
+            event.hourRateTimes.endTime != null &&
+                event.hourRateTimes.hourlyRate!.isNotEmpty&&
+                event.hourRateTimes.startTime!.isNotEmpty &&
+                event.hourRateTimes.endTime!.isNotEmpty &&
             chipOptions.isNotEmpty) {
             checked = true;
           emit(FormValueChangedState());

@@ -1,15 +1,20 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
@@ -17,10 +22,11 @@ import 'bloc/otp_bloc.dart';
 
 @RoutePage()
 class OTPPage extends BasePage {
-
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final String verificationId;
   UserEntity? userModel;
   bool? fromregister;
-   OTPPage({super.key, this.userModel, this.fromregister = false});
+   OTPPage({required this.verificationId,super.key, this.userModel, this.fromregister = false});
 
   @override
   _otpPageState createState() => _otpPageState();
@@ -51,7 +57,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //success
         if(state is OTPGetTokenState && state.dataState == DataState.success){
           if(widget.fromregister!) {
-            getBloc().add(RegisterOTPCompleteEvent());
+            getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
           }else{
             context.router.push(const MyReviewsRoute());
             // getBloc().add(GetProfileProgressEvent());
@@ -61,6 +67,10 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //error
         if(state is OTPGetTokenState && state.dataState == DataState.error){
         // error dialog
+          if(getBloc().preloaderActive) {
+            Navigator.pop(context);
+            getBloc().preloaderActive = false;
+          }
           print(state.error);
         }
         //loading
@@ -74,9 +84,34 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //RegisterOTPCompleteState/////////////////////////////////////
         //Success
         if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
-
-            getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
-
+          if(state.profileEntity!.type!.isEmpty){
+            context.router.pushAndPopUntil(const SetupProfileRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if (state.profileEntity!.acceptedTermsAndConditions == false){
+            context.router.pushAndPopUntil(const RegisterAccountStep1Route(),
+                predicate: (Route<dynamic> route) => false);
+          }else if (state.profileEntity!.qualifications!.isEmpty &&
+              state.profileEntity!.workExperience!.isEmpty){
+            context.router.pushAndPopUntil(const QualificationsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.skills!.isEmpty){
+            context.router.pushAndPopUntil(const AddSkillsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.hourlyRate! == 0){
+            context.router.pushAndPopUntil(const RateAndWorkTimesRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+            context.router.pushAndPopUntil(const BankDetailsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.location!.address == "" ){
+            context.router.pushAndPopUntil(const LocationRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else if(state.profileEntity!.description!.isEmpty){
+            context.router.pushAndPopUntil(const FinalDetailsRoute(),
+                predicate: (Route<dynamic> route) => false);
+          }else{
+           context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+         }
         }
         //loading
         if(state is RegisterOTPCompleteState && state.dataState == DataState.loading){
@@ -114,30 +149,14 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         if(state is GetProfileProgressState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(state.profileEntity!.type!.isEmpty){
-            context.router.pushAndPopUntil(SetupProfileRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if (state.profileEntity!.qualifications!.isEmpty &&
-                    state.profileEntity!.workExperience!.isEmpty){
-            context.router.pushAndPopUntil(QualificationsRoute(),
-                predicate: (Route<dynamic> route) => false);
-          // }else if(state.profileEntity!.skillIds!.skillIds!.isEmpty){
-          //
-          //   context.router.pushAndPopUntil(AddSkillsRoute(),
-          //       predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.pushAndPopUntil(RateAndWorkTimesRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.pushAndPopUntil(BankDetailsRoute(),
-                predicate: (Route<dynamic> route) => false);
-          // }else if(state.profileEntity!.location!.id!.isEmpty ){
-          //   context.router.pushAndPopUntil(LocationRoute(),
-          //       predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.description!.isEmpty){
-            context.router.pushAndPopUntil(FinalDetailsRoute(),
-                predicate: (Route<dynamic> route) => false);
-          }
+          getBloc().add(RegisterOTPCompleteEvent(userEntity: UserEntity(
+              mobile: state.profileEntity?.mobile??"",
+              surname: state.profileEntity?.surname??"",
+              firstName: state.profileEntity?.firstName??"",
+              email: state.profileEntity?.email??"",
+              idNumber: state.profileEntity?.email??"",
+              passportNumber: state.profileEntity?.passportNumber??""
+          ), profileEntity: state.profileEntity));
         }
 
         if(state is GetProfileProgressState && state.dataState == DataState.error){
@@ -204,8 +223,11 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                              length: 6,
                              onchange: (String pin){
                               getBloc().add(OTPEnteredEvent(otp: pin));
+                              getBloc().add(OTPGetTokenEvent(stage: 2));
                            },),
                          ),
+                         if(state.dataState == DataState.error && state is OTPGetTokenState)
+                         wText(getLocalization().incorrectOtpEntered, style: TextStyle(color: Colors.red)),
                          const Spacer(),
                          PrimaryButton(
                            width: MediaQuery.sizeOf(context).width,
@@ -228,7 +250,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
                                )
                            ),
                            onPressed: !getBloc().checked?null:() {
-                             getBloc().add(OTPGetTokenEvent(smsCode: getBloc().otp!,verificationId: "" ));
+                           //  getBloc().add(OTPGetTokenEvent(smsCode: getBloc().otp!,verificationId: "" ));
+                             getToken(otp: getBloc().otp!);
                            },
                            child: Text(getLocalization().ccontinue),
                          ),
@@ -251,6 +274,31 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
          );
       },
     );
+  }
+
+  Future<TokenModel> getToken({required String otp}) async {
+    try {
+      getBloc().add(OTPGetTokenEvent(stage: 0));
+      PhoneAuthCredential credential =  PhoneAuthProvider.credential(
+          verificationId: widget.verificationId!, smsCode: otp);
+      UserCredential userCredential = await widget.firebaseAuth.signInWithCredential(credential);
+      String? token = await userCredential.user?.getIdToken();
+      TokenModel tokenModel =
+      TokenModel(
+          refreshToken: token??"",
+          accessToken: token??"",
+          tokenID: token??"");
+      boxTokens.put(current, tokenModel);
+
+      UserModel userModel = UserModel(id: "");
+      userModel.id = userCredential.user?.uid;
+      boxUser.put(current, userModel);
+      getBloc().add(OTPGetTokenEvent(stage: 1));
+      return tokenModel;
+    } catch (ex) {
+      getBloc().add(OTPGetTokenEvent(stage: -1));
+      return TokenModel(refreshToken: "", accessToken: "", tokenID: "");
+    }
   }
 
 

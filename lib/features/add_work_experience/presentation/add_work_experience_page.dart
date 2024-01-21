@@ -2,12 +2,15 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/add_skills/domain/entities/preferred_industry_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
 
@@ -27,7 +30,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
   late TextEditingController companyController = TextEditingController();
   late TextEditingController startDateController = TextEditingController();
   late TextEditingController endDateController = TextEditingController();
-  late TextEditingController industry = TextEditingController();
+  late TextEditingController dropdownIndustryController = TextEditingController();
   late DateTime startDate = DateTime.now();
   late DateTime endDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
@@ -36,6 +39,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
   void initState() {
     // TODO: implement initState
     super.initState();
+    getBloc().add(AddWorkExperienceGetPreferredIndustryListEvent());
 
   }
 
@@ -47,11 +51,27 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
   @override
   Widget buildView(BuildContext context) {
     return BlocConsumer<AddWorkExperienceBloc, AddWorkExperiencePageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.success){
+
+        }
+
+        if(state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.loading){
+
+        }
+
+        if(state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.error){
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+
+      },
       builder: (context, state) {
-         return Padding(
+        ThemeData theme = Theme.of(context);
+         return state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.loading ?
+         const Center(child: CircularProgressIndicator(),):
+         Padding(
            padding: const EdgeInsets.all(20.0),
-           child: Container(
+           child: SizedBox(
              width: MediaQuery.sizeOf(context).width,
              height: MediaQuery.sizeOf(context).height- 100,
              child: SingleChildScrollView(
@@ -132,8 +152,16 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10),
-                       child: AppTextFormField(controller: industry,textFieldType: TextFieldType.NAME,
-                         labelText: getLocalization().industry,),
+                       child: AppDropdownMenu<PreferredIndustryEntity>(
+                           onSelected: (selected){
+                             getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
+                           },
+                           width: MediaQuery.sizeOf(context).width - 40,
+                           enableFilter: true,
+                           dropdownMenuEntries: getBloc().industryEntries,
+                           controller: dropdownIndustryController,
+                           label: wText(getLocalization().preferredIndustry,
+                               style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
                      ),
                      const SizedBox(height: 75,),
                      PrimaryButtonDark(
@@ -171,10 +199,9 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
         startDate: startDate,
         endDate: endDate,
         company: companyController.text,
-        industryId: 0,
+        industryId: int.parse(getBloc().selectedIndustry.id!),
         isCurrent: getBloc().current,
-      files: []
-    );
+        files: []);
   }
 
 }

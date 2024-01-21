@@ -166,7 +166,7 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
   }
 
   OTPLocationEntity getLocation(PickResult result){
-    return OTPLocationEntity(address: result.adrAddress, latitude: result.geometry?.location.lat, longitude: result.geometry?.location.lng);
+    return OTPLocationEntity(address: result.formattedAddress, latitude: result.geometry?.location.lat, longitude: result.geometry?.location.lng);
   }
 
 }

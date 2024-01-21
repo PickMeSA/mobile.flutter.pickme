@@ -9,8 +9,8 @@ part 'submit_remote_qualification_and_experience_model_response.g.dart';
 @freezed
 class SubmitRemoteQualificationAndExperienceModelResponse with _$SubmitRemoteQualificationAndExperienceModelResponse {
   const factory SubmitRemoteQualificationAndExperienceModelResponse({
-    required List<OTPQualificationModelResponse>? otpQualificationResponseModelList,
-    required List<OTPWorkExperienceModelResponse> otpWorKExperienceResponseModelList
+    required List<Map<String, dynamic>>? qualifications,
+    required List<Map<String, dynamic>>? workExperience
   }) = _SubmitRemoteQualificationAndExperienceModelResponse;
 
   factory SubmitRemoteQualificationAndExperienceModelResponse.fromJson(

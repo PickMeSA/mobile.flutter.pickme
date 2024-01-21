@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -20,7 +21,8 @@ class ProfileBloc
         on<GetProfileDetailsEvent>((event, emit)=> _onGetProfileDetailsEvent(event, emit));
     }
 
-    late ProfileEntity profileEntity;
+     late ProfileEntity profileEntity ;
+    late List<ChipOption> skills;
 
 
 
@@ -31,6 +33,10 @@ class ProfileBloc
         emit(GetProfileDetailsState()..dataState = DataState.loading);
         try{
             profileEntity = await getRemoteProfileUseCase.call();
+            skills = [];
+            profileEntity.skills!.forEach((element) {
+                skills.add(ChipOption(label: element.skill!, id: element.id!));
+            });
             emit(GetProfileDetailsState()..dataState = DataState.success);
         }catch(ex){
             emit(GetProfileDetailsState(error:ex.toString())..dataState = DataState.error);

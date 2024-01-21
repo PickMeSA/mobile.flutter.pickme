@@ -7,12 +7,14 @@ class OTPQualificationEntity{
   String? issuingOrganization;
   DateTime? issueDate;
   List<OTPQualificationEntity>? qualifications;
+  String? supportingDocuments;
 
   OTPQualificationEntity({
     required this.type,
   required this.name,
   required this.issueDate,
-  required this.issuingOrganization});
+  required this.issuingOrganization,
+  this.supportingDocuments});
 
   OTPQualificationEntity.fromResponse( OTPQualificationModelResponse response){
     type = response.type??"";
@@ -30,6 +32,7 @@ class OTPQualificationEntity{
 
   OTPQualificationModelResponse toResponse(){
     return OTPQualificationModelResponse(
+        supportedDocumentId: supportingDocuments,
         type: type,
         name: name,
         issuingOrganization: issuingOrganization,
