@@ -284,5 +284,9 @@
   "cancel": "Cancel",
   "createJobListingInfoPublicationFeeDesc": "Please note that there is no publication fee associated with each job\nlisting.",
   "noProfilesAvailableForThisCategory": "No profiles available for this category",
-  "noAddressSpecified": "No address specified"
+  "noAddressSpecified": "No address specified",
+  "myReviews": "My Reviews",
+  "youDontHaveAnyReviewsYet": "You don’t have any reviews yet",
+  "getReviewsToBoostProfile": "Get reviews to boost your profile and increase your chances of getting hired",
+  "requestAReview": "Request a review"
 }

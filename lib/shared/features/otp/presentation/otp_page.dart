@@ -10,7 +10,6 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
@@ -54,7 +53,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           if(widget.fromregister!) {
             getBloc().add(RegisterOTPCompleteEvent());
           }else{
-            context.router.push(const JobsHiringLandingRoute());
+            context.router.push(const MyReviewsRoute());
             // getBloc().add(GetProfileProgressEvent());
         }
         }

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 
-class JobEntity extends Equatable{
+class JobInterestEntity extends Equatable{
 final String title;
 final String description;
 final String status;
@@ -20,7 +20,7 @@ final String comments;
 final String id;
 final double? distance;
 
-  const JobEntity({
+  const JobInterestEntity({
     required this.title,
     required this.description,
     required this.status,
@@ -39,8 +39,8 @@ final double? distance;
     required this.id,
     this.distance
   });
-  factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
-    return JobEntity(
+  factory JobInterestEntity.fromResponse(MyJobListingsJobModelResponse response){
+    return JobInterestEntity(
         title: response.title??"",
         startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):DateTime.now(),
         endDate: (response.endDate!=null && response.endDate != "")?DateTime.parse(response.endDate!):DateTime.now(),

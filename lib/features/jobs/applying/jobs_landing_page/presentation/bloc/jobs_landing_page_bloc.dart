@@ -9,7 +9,6 @@ import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/usecases/
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
-import '../../../../shared/domain/usecases/get_industries_usecase.dart';
 import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
 part 'jobs_landing_page_event.dart';
@@ -34,9 +33,11 @@ class JobsLandingPageBloc extends BaseBloc<JobsLandingPageEvent, JobsLandingPage
     emit(GetTopIndustriesState()..dataState = DataState.loading);
     try{
       pageEntity = await getJobLandingPageDataUseCase.call();
+      logger.d(pageEntity?.recommendedJobs.length);
       emit(GetTopIndustriesState()..dataState = DataState.success);
     }catch(ex){
-      emit(GetTopIndustriesState()..dataState = DataState.error);
+      logger.d(ex);
+      emit(GetTopIndustriesState(error: ex.toString())..dataState = DataState.error);
     }
   }
 }

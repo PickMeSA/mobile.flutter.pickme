@@ -293,6 +293,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    MyReviewsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MyReviewsPage(),
+      );
+    },
     MyWalletRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -1294,6 +1300,20 @@ class MyJobListingsRouteArgs {
   String toString() {
     return 'MyJobListingsRouteArgs{key: $key, jobListingsPageEntity: $jobListingsPageEntity}';
   }
+}
+
+/// generated route for
+/// [MyReviewsPage]
+class MyReviewsRoute extends PageRouteInfo<void> {
+  const MyReviewsRoute({List<PageRouteInfo>? children})
+      : super(
+          MyReviewsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MyReviewsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

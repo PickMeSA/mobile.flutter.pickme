@@ -2909,6 +2909,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `My Reviews`
+  String get myReviews {
+    return Intl.message(
+      'My Reviews',
+      name: 'myReviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don’t have any reviews yet`
+  String get youDontHaveAnyReviewsYet {
+    return Intl.message(
+      'You don’t have any reviews yet',
+      name: 'youDontHaveAnyReviewsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get reviews to boost your profile and increase your chances of getting hired`
+  String get getReviewsToBoostProfile {
+    return Intl.message(
+      'Get reviews to boost your profile and increase your chances of getting hired',
+      name: 'getReviewsToBoostProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request a review`
+  String get requestAReview {
+    return Intl.message(
+      'Request a review',
+      name: 'requestAReview',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

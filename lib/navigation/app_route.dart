@@ -39,6 +39,7 @@ import 'package:pickme/features/jobs/hiring/service_category_candidates/presenta
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
 import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/features/my_reviews/presentation/my_reviews_page.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/features/my_banking_details/presentation/my_banking_details_page.dart';
 import 'package:pickme/features/my_wallet/presentation/my_wallet_page.dart';
@@ -98,7 +99,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: RegisterAccountStep1Route.page,),
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
-    AnimatedRoute(page: JobsLandingRoute.page, initial: true),
+    AnimatedRoute(page: JobsLandingRoute.page),
     AnimatedRoute(page: JobsHiringLandingRoute.page),
     // AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page: AllServicesRoute.page),
@@ -150,6 +151,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: ProfileRoute.page),
     AnimatedRoute(page: CancelBookingRoute.page),
     AnimatedRoute(page: JobListRoute.page),
+    AnimatedRoute(page: MyReviewsRoute.page, initial: true),
   ];
 }
 

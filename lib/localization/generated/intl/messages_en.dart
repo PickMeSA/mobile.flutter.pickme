@@ -159,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "forYou": MessageLookupByLibrary.simpleMessage("For you"),
+        "getReviewsToBoostProfile": MessageLookupByLibrary.simpleMessage(
+            "Get reviews to boost your profile and increase your chances of getting hired"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "goToAlternativeRequest":
             MessageLookupByLibrary.simpleMessage("Go to alternative Request"),
@@ -246,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
             MessageLookupByLibrary.simpleMessage("My Job Requests"),
+        "myReviews": MessageLookupByLibrary.simpleMessage("My Reviews"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
         "mySkills": MessageLookupByLibrary.simpleMessage("My skills"),
         "myWallet": MessageLookupByLibrary.simpleMessage("My Wallet"),
@@ -371,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Recommended for you"),
         "registrationFee":
             MessageLookupByLibrary.simpleMessage("Registration fee"),
+        "requestAReview":
+            MessageLookupByLibrary.simpleMessage("Request a review"),
         "requestAccepted":
             MessageLookupByLibrary.simpleMessage("Request approved"),
         "requestDeclined":
@@ -478,6 +483,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have any active listings"),
         "youDontHaveAnyInactiveListings": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any active listings"),
+        "youDontHaveAnyReviewsYet": MessageLookupByLibrary.simpleMessage(
+            "You don’t have any reviews yet"),
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
                 "You have the flexibility to set your own hourly rate"),
