@@ -159,6 +159,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    EditAboutMeRoute.name: (routeData) {
+      final args = routeData.argsAs<EditAboutMeRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditAboutMePage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
+      );
+    },
     EditMyBankingDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<EditMyBankingDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -166,6 +176,46 @@ abstract class _$AppRouter extends RootStackRouter {
         child: EditMyBankingDetailsPage(
           key: args.key,
           bankDetailsEntity: args.bankDetailsEntity,
+        ),
+      );
+    },
+    EditPersonalDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<EditPersonalDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditPersonalDetailsPage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
+      );
+    },
+    EditSkillsRoute.name: (routeData) {
+      final args = routeData.argsAs<EditSkillsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditSkillsPage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
+      );
+    },
+    EditWorkExperienceDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<EditWorkExperienceDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditWorkExperienceDetailsPage(
+          otpWorkExperienceEntity: args.otpWorkExperienceEntity,
+          key: args.key,
+        ),
+      );
+    },
+    EditWorkExperienceRoute.name: (routeData) {
+      final args = routeData.argsAs<EditWorkExperienceRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditWorkExperiencePage(
+          profileEntity: args.profileEntity,
+          key: args.key,
         ),
       );
     },
@@ -888,6 +938,44 @@ class CreateJobListingRouteArgs {
 }
 
 /// generated route for
+/// [EditAboutMePage]
+class EditAboutMeRoute extends PageRouteInfo<EditAboutMeRouteArgs> {
+  EditAboutMeRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditAboutMeRoute.name,
+          args: EditAboutMeRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditAboutMeRoute';
+
+  static const PageInfo<EditAboutMeRouteArgs> page =
+      PageInfo<EditAboutMeRouteArgs>(name);
+}
+
+class EditAboutMeRouteArgs {
+  const EditAboutMeRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditAboutMeRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
+}
+
+/// generated route for
 /// [EditMyBankingDetailsPage]
 class EditMyBankingDetailsRoute
     extends PageRouteInfo<EditMyBankingDetailsRouteArgs> {
@@ -923,6 +1011,161 @@ class EditMyBankingDetailsRouteArgs {
   @override
   String toString() {
     return 'EditMyBankingDetailsRouteArgs{key: $key, bankDetailsEntity: $bankDetailsEntity}';
+  }
+}
+
+/// generated route for
+/// [EditPersonalDetailsPage]
+class EditPersonalDetailsRoute
+    extends PageRouteInfo<EditPersonalDetailsRouteArgs> {
+  EditPersonalDetailsRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditPersonalDetailsRoute.name,
+          args: EditPersonalDetailsRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditPersonalDetailsRoute';
+
+  static const PageInfo<EditPersonalDetailsRouteArgs> page =
+      PageInfo<EditPersonalDetailsRouteArgs>(name);
+}
+
+class EditPersonalDetailsRouteArgs {
+  const EditPersonalDetailsRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditPersonalDetailsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditSkillsPage]
+class EditSkillsRoute extends PageRouteInfo<EditSkillsRouteArgs> {
+  EditSkillsRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditSkillsRoute.name,
+          args: EditSkillsRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditSkillsRoute';
+
+  static const PageInfo<EditSkillsRouteArgs> page =
+      PageInfo<EditSkillsRouteArgs>(name);
+}
+
+class EditSkillsRouteArgs {
+  const EditSkillsRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditSkillsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditWorkExperienceDetailsPage]
+class EditWorkExperienceDetailsRoute
+    extends PageRouteInfo<EditWorkExperienceDetailsRouteArgs> {
+  EditWorkExperienceDetailsRoute({
+    required OTPWorkExperienceEntity otpWorkExperienceEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditWorkExperienceDetailsRoute.name,
+          args: EditWorkExperienceDetailsRouteArgs(
+            otpWorkExperienceEntity: otpWorkExperienceEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditWorkExperienceDetailsRoute';
+
+  static const PageInfo<EditWorkExperienceDetailsRouteArgs> page =
+      PageInfo<EditWorkExperienceDetailsRouteArgs>(name);
+}
+
+class EditWorkExperienceDetailsRouteArgs {
+  const EditWorkExperienceDetailsRouteArgs({
+    required this.otpWorkExperienceEntity,
+    this.key,
+  });
+
+  final OTPWorkExperienceEntity otpWorkExperienceEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditWorkExperienceDetailsRouteArgs{otpWorkExperienceEntity: $otpWorkExperienceEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditWorkExperiencePage]
+class EditWorkExperienceRoute
+    extends PageRouteInfo<EditWorkExperienceRouteArgs> {
+  EditWorkExperienceRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditWorkExperienceRoute.name,
+          args: EditWorkExperienceRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditWorkExperienceRoute';
+
+  static const PageInfo<EditWorkExperienceRouteArgs> page =
+      PageInfo<EditWorkExperienceRouteArgs>(name);
+}
+
+class EditWorkExperienceRouteArgs {
+  const EditWorkExperienceRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditWorkExperienceRouteArgs{profileEntity: $profileEntity, key: $key}';
   }
 }
 

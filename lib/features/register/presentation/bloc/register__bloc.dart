@@ -16,7 +16,7 @@ part 'register__state.dart';
 
 @injectable
 class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
-
+  bool preloader = false;
   bool checked = false;
   int index = 0;
 

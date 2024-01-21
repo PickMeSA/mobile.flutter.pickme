@@ -111,9 +111,15 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                            size: 24,),
                          caption: getLocalization().qualificationMembership,
                        buttonCaption: getLocalization().addAQualificationMembership,
-                       onClick: () async{
+                       onClick: () async {
+                         try {
                            getBloc().add(AddQualificationEvent(
-                               otpQualificationEntity: await context.router.push(const AddQualificationRoute()) as OTPQualificationEntity));
+                               otpQualificationEntity: await context.router
+                                   .push(
+                                   const AddQualificationRoute()) as OTPQualificationEntity));
+                         }catch(ex){
+                           // user cancelled the add qualification
+                         }
                        }
                      )
                    ),
@@ -129,8 +135,14 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                            caption: getLocalization().workExperience,
                            buttonCaption: getLocalization().addWorkExperience,
                          onClick: () async {
-                           getBloc().add(AddWorkExperienceEvent(otpWorkExperienceEntity: await context.router.push(const AddWorkExperienceRoute()) as OTPWorkExperienceEntity))
-                             ;
+                           try {
+                             getBloc().add(AddWorkExperienceEvent(
+                                 otpWorkExperienceEntity: await context.router
+                                     .push(
+                                     const AddWorkExperienceRoute()) as OTPWorkExperienceEntity));
+                           }catch(ex){
+
+                           }
                          }
                        )
                    ),

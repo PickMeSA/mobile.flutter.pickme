@@ -7,8 +7,8 @@ part 'industries_model_response.g.dart';
 @freezed
 class IndustriesModelResponse with _$IndustriesModelResponse {
   const factory IndustriesModelResponse({
-    required String id,
-    required String industry,
+    required int? id,
+    required String? industry,
   }) = _IndustriesModelResponse;
 
   factory IndustriesModelResponse.fromJson(

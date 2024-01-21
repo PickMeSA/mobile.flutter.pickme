@@ -103,7 +103,7 @@ class _AllServicesPageState extends BasePageState<AllJobsPage, AllJobsPageBloc> 
                     return ListTile(
                       title: Text(getBloc().paginatedIndustries!.industries[index].industry!),
                       trailing: const Icon(Iconsax.arrow_right_3),
-                      onTap: ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[3].id)),
+                      onTap: ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[3].id.toString())),
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {

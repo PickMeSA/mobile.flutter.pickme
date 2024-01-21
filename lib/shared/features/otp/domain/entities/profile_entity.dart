@@ -1,4 +1,5 @@
 
+import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
 
 import 'otp_business_entity.dart';
@@ -16,9 +17,11 @@ class ProfileEntity {
   String? mobile;
   String? idNumber;
   String? passportNumber;
+  String? workPermit;
   String? type;
   int? hourlyRate;
   String? description;
+  RatesAndWorkTimesEntity? ratesAndWorkTimesEntity;
   List<OTPSkillIdsEntity>? skills;
   IndustryEntity? industry;
   OTPLocationEntity? location;
@@ -26,8 +29,12 @@ class ProfileEntity {
   List<OTPWorkExperienceEntity>? workExperience;
   OTPPaymentDetailsEntity? paymentDetails;
   OTPBusinessEntity? business;
+  bool? acceptedTermsAndConditions = false;
+
+  ProfileEntity.blank();
 
   ProfileEntity({
+    this.acceptedTermsAndConditions,
     this.id,
     this.firstName,
     this.idNumber,
@@ -44,7 +51,10 @@ class ProfileEntity {
   this.hourlyRate,
   this.qualifications,
   this.business,
-  this.location});
+  this.location,
+  this.ratesAndWorkTimesEntity,
+  this.workPermit});
+
 
 
 

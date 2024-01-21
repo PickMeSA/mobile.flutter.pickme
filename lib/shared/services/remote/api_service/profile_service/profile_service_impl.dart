@@ -10,6 +10,7 @@ import 'package:pickme/features/otp/data/response_models/otp_model_response/paym
 import 'package:pickme/features/otp/data/response_models/otp_model_response/work_times_model_response.dart';
 import 'package:pickme/features/qualification/domain/entities/submit_qualification_and_experience_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
+import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_list_entity.dart';
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
@@ -33,6 +34,7 @@ import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_m
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
 import '../../../../../features/qualification/data/response_models/qualification_model_response/submit_remote_qualification_and_experience_model_response.dart';
+import '../../../../../features/rate_and_work_times/data/response_models/rate_and_work_times_model_response/submit_remote_rate_and_work_times_model_response.dart';
 
 @Singleton(as: ProfileService)
 
@@ -110,6 +112,7 @@ class ProfileServiceImpl extends ProfileService{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: PaymentDetailsModelResponse(paymentDetails: OTPPaymentDetailsModelResponse(
+            accountHolderName: bankDetailsEntity.accountHolderName,
             bankName: bankDetailsEntity.bank,
             bankAccountType: bankDetailsEntity.accountType,
             bankAccountNumber: bankDetailsEntity.accountNumber,
@@ -146,26 +149,38 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
+
+      ratesAndWorkTimesEntity: RatesAndWorkTimesEntity.fromResponse(otpFullProfileModelResponse.workTimes??const WorkTimesModelResponse(startTime: "", endTime: "", workingDays:  [])),
+      acceptedTermsAndConditions: otpFullProfileModelResponse.acceptedTermsAndConditions?? false,
+      firstName: otpFullProfileModelResponse.firstName??"",
+        email: otpFullProfileModelResponse.email??"",
+        id: otpFullProfileModelResponse.id??0,
+        passportNumber: otpFullProfileModelResponse.passportNumber??"",
+        idNumber: otpFullProfileModelResponse.idNumber??"",
+        surname: otpFullProfileModelResponse.surname??"",
+        mobile: otpFullProfileModelResponse.mobile??"",
+        workPermit: otpFullProfileModelResponse.workPermit,
         type: otpFullProfileModelResponse.type??"",
         description:  otpFullProfileModelResponse.description??"",
-        business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business?? const OTPBusinessModelResponse(
-            name: "",
-            number: "",
-            cipc: "",
+        business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business??  OTPBusinessModelResponse(
+            name: otpFullProfileModelResponse.business?.name??"",
+            number: otpFullProfileModelResponse.business?.name??"",
+            cipc: otpFullProfileModelResponse.business?.name??"",
             website:false)
         ),
         hourlyRate: otpFullProfileModelResponse.hourlyRate??0,
-        industry: IndustryEntity.fromResponse(otpFullProfileModelResponse.industry??OTPIndustryModelModelResponse(id: "0", industry: "")),
+        industry: IndustryEntity.fromResponse(otpFullProfileModelResponse.industry??OTPIndustryModelModelResponse(id: 0, industry: "")),
         location: OTPLocationEntity.fromResponse(otpFullProfileModelResponse.location??const OTPLocationModelResponse(
             latitude: 0,
             longitude: 0, address: '')),
-        paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails??const OTPPaymentDetailsModelResponse(
-            bankName: "",
-            bankAccountType: "",
-            bankAccountNumber: "",
-            bankBranchCode: "",
-            taxNumber: "",
-            vatNumber: "")),
+        paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails?? OTPPaymentDetailsModelResponse(
+          accountHolderName:  otpFullProfileModelResponse.paymentDetails?.accountHolderName??"",
+            bankName: otpFullProfileModelResponse.paymentDetails?.bankName??"",
+            bankAccountType: otpFullProfileModelResponse.paymentDetails?.bankAccountType??"",
+            bankAccountNumber: otpFullProfileModelResponse.paymentDetails?.bankAccountNumber??"",
+            bankBranchCode: otpFullProfileModelResponse.paymentDetails?.bankBranchCode??"",
+            taxNumber: otpFullProfileModelResponse.paymentDetails?.taxNumber??"",
+            vatNumber: otpFullProfileModelResponse.paymentDetails?.vatNumber??"")),
         qualifications: OTPQualificationListEntity.fromResponse(otpFullProfileModelResponse.qualifications!).qualificationsEntityList??[],
         skills: OTPSkillIdsEntity.fromResponse(otpFullProfileModelResponse.skills??[]).skills,
         workExperience: OTPWorkExperienceListEntity.fromResponse(otpFullProfileModelResponse.workExperience!).workExperience??[]);
@@ -175,8 +190,12 @@ class ProfileServiceImpl extends ProfileService{
   Future<ProfileEntity> submitRemoteRateAndWorkTimes({required RatesAndWorkTimesEntity ratesAndWorkTimesEntity}) async {
     try{
       UserModel userModel = boxUser.get(current);
+      print(SubmitRemoteRateAndWorkTimesModelResponse(
+          hourlyRate: int.parse(ratesAndWorkTimesEntity.hourlyRate!),workingtimes: ratesAndWorkTimesEntity.toResponse()).toJson());
+
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: WorkTimesModelResponse(workTimes:  ratesAndWorkTimesEntity.toResponse()));
+          data: SubmitRemoteRateAndWorkTimesModelResponse(
+              hourlyRate: int.parse(ratesAndWorkTimesEntity.hourlyRate!),workingtimes: ratesAndWorkTimesEntity.toResponse()).toJson());
 
       return returnProfileEntity(response: response);
 
@@ -202,6 +221,16 @@ class ProfileServiceImpl extends ProfileService{
   Future<OTPPaymentDetailsEntity> getBankDetails() {
     // TODO: implement getBankDetails
     throw UnimplementedError();
+  }
+
+  @override
+  Future<ProfileEntity> submitAcceptTermsAndConditions() async{
+    UserModel userModel = boxUser.get(current);
+    Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
+        data: {
+      "acceptedTermsAndConditions": true
+        });
+    return returnProfileEntity(response: response);
   }
 
 

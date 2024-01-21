@@ -8,3 +8,5 @@ class TermsAndConditionsToggledEvent extends RegisterAccountStep1Event{
 }
 
 class RegisterAccountRemoteSubmitStep1Event extends RegisterAccountStep1Event{}
+
+class SubmitAcceptedTermsAndConditionsEvent extends RegisterAccountStep1Event{}

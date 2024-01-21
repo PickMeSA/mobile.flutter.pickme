@@ -13,6 +13,7 @@ part 'login_state.dart';
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
 
   LoginContinueClickedUseCase loginContinueClickedUsecase;
+  bool preloader = false;
   LoginBloc({
     required this.loginContinueClickedUsecase
   }) : super(LoginInitial(checked: false)) {
@@ -39,19 +40,5 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
       LoginContinueClickedEvent event,
       Emitter<LoginState> emit
       )async{
-    emit(LoginContinueClickedState(checked: true)..dataState = DataState.loading);
-    try{
-      await loginContinueClickedUsecase.callBack(
-        mobileNumber: "${event.countryCode}${event!.mobileNumber}",
-        onError: (error)async {
-          //emit(LoginContinueClickedState(checked: false, error: error)..dataState = DataState.error);
-        },
-        onSuccesss:(verificationId, resentCode)async{
-          //emit(LoginContinueClickedState(checked: true)..dataState = DataState.success);
-        }
-      );
-    }catch(ex){
-      emit(LoginContinueClickedState(checked: false)..dataState = DataState.error);
-    }
   }
 }

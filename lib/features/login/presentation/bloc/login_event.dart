@@ -5,12 +5,10 @@ abstract class LoginEvent extends BaseEvent{
 }
 
 class LoginContinueClickedEvent extends LoginEvent{
-  final String mobileNumber;
-  final String countryCode;
+  final int state;
 
   LoginContinueClickedEvent({
-    required this.mobileNumber,
-  required this.countryCode});
+    required this.state});
 }
 
 class NumberChangedEvent extends LoginEvent{

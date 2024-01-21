@@ -10,7 +10,9 @@ part 'work_times_model_response.g.dart';
 @freezed
 class WorkTimesModelResponse with _$WorkTimesModelResponse {
   const factory WorkTimesModelResponse({
-    required SubmitRemoteRateAndWorkTimesModelResponse workTimes,
+    required String? startTime,
+    required String? endTime,
+    required List<String>? workingDays
   }) = _WorkTimesModelResponse;
 
   factory WorkTimesModelResponse.fromJson(

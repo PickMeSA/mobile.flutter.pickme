@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accept": MessageLookupByLibrary.simpleMessage("Accept"),
         "acceptAndContinue":
             MessageLookupByLibrary.simpleMessage("Accept & continue"),
+        "accountHolderName":
+            MessageLookupByLibrary.simpleMessage("Account holder name"),
         "accountNumberA":
             MessageLookupByLibrary.simpleMessage("Account number *"),
         "accountTypeA": MessageLookupByLibrary.simpleMessage("Account type *"),
@@ -138,8 +140,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
         "ePWP": MessageLookupByLibrary.simpleMessage("EPWP"),
+        "editAboutMe": MessageLookupByLibrary.simpleMessage("Edit about me"),
+        "editDetails": MessageLookupByLibrary.simpleMessage("Edit details"),
         "editMyBankingDetails":
             MessageLookupByLibrary.simpleMessage("Edit my banking details"),
+        "editSkills": MessageLookupByLibrary.simpleMessage("Edit Skills"),
+        "editWorkExperience":
+            MessageLookupByLibrary.simpleMessage("Edit work experience"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "endDateCannotBeBeforeStartDate": MessageLookupByLibrary.simpleMessage(
@@ -244,10 +251,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("My banking details"),
         "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
         "myCalendar": MessageLookupByLibrary.simpleMessage("My Calendar"),
+        "myHourlyRateAndWorkingHours": MessageLookupByLibrary.simpleMessage(
+            "My hourly rate and working hours"),
         "myJobListings":
             MessageLookupByLibrary.simpleMessage("My job listings"),
         "myJobRequests":
             MessageLookupByLibrary.simpleMessage("My Job Requests"),
+        "myLocation": MessageLookupByLibrary.simpleMessage("My location"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
         "mySkills": MessageLookupByLibrary.simpleMessage("My skills"),
         "myWallet": MessageLookupByLibrary.simpleMessage("My Wallet"),
@@ -299,6 +309,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Payment Successful"),
         "paymentUnsuccessful":
             MessageLookupByLibrary.simpleMessage("Payment Unsuccessful"),
+        "personalDetails":
+            MessageLookupByLibrary.simpleMessage("Personal details"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
@@ -439,6 +451,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transaction fees"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+        "uploadCancelledByUser":
+            MessageLookupByLibrary.simpleMessage("Upload cancelled by user"),
         "useMyCurrentLocation":
             MessageLookupByLibrary.simpleMessage("Use my current location"),
         "viewProfile": MessageLookupByLibrary.simpleMessage("view Profile"),

@@ -1,6 +1,7 @@
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_payment_details_model_response.dart';
 
 class OTPPaymentDetailsEntity{
+  String? accountHolderName;
   String? bankName;
   String? bankAccountType;
   String? bankAccountNumber;
@@ -9,6 +10,7 @@ class OTPPaymentDetailsEntity{
   String? vatNumber;
 
   OTPPaymentDetailsEntity({
+    required this.accountHolderName,
     required this.bankAccountNumber,
   required this.bankAccountType,
   required this.bankBranchCode,

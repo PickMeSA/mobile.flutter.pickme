@@ -12,6 +12,7 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/shared/widgets/w_time_picker.dart';
@@ -70,7 +71,9 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
           preloader(context);
         }
         if( state is SubmitRemoteRateAndWorkTimesState && state.dataState == DataState.error){
-
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
       },
       builder: (context, state) {
@@ -170,15 +173,16 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
 
                      Padding(
                        padding: const EdgeInsets.only(top: 10, bottom: 30),
-                       child: AppDropdownMenu<WorkingDaysEntity>(
+                       child: MultiAppDropdownMenu<WorkingDaysEntity>(
+
                            onSelected: (selected){
                              getBloc().add(WorkingDaySelectedEvent( workingDaysEntity: selected!));
                              getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails()));
                            },
                            width: MediaQuery.sizeOf(context).width - 40,
-                           enableFilter: true,
+                           enableFilter: false,
+                           filled: true,
                            dropdownMenuEntries: getBloc().workingDayEntries,
-
                            label: wText(getLocalization().workingDaysA, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16,color: Colors.grey))),
                      ),
 
