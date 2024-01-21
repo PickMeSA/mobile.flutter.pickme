@@ -30,6 +30,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
   TextEditingController accountTypeController = TextEditingController();
   TextEditingController accountNumberController = TextEditingController();
   TextEditingController branchCodeController = TextEditingController();
+  TextEditingController bankAccountHolderController = TextEditingController();
 
   @override
   void initState() {
@@ -87,6 +88,13 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                   const SizedBox(height: 10,),
                   wText(getLocalization().bankDetails,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
               30.height,
+                  AppTextFormField(
+                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                    controller: bankAccountHolderController,
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    textFieldType: TextFieldType.NAME,
+                    labelText: getLocalization().accountHolderName,),
+                  20.height,
             AppTextFormField(
               onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
               controller: bankNameController,
@@ -175,6 +183,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
 
   BankDetailsEntity getFormData (){
     return BankDetailsEntity(
+      accountHolderName: bankAccountHolderController.text,
         accountNumber: accountNumberController.text,
         accountType: accountTypeController.text,
         bank: bankNameController.text,

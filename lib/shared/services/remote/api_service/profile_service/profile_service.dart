@@ -30,4 +30,5 @@ abstract class ProfileService extends PickMeCoreApi{
 
   Future<OTPPaymentDetailsEntity> getBankDetails();
 
+  Future<ProfileEntity> submitAcceptTermsAndConditions();
 }

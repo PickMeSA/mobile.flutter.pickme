@@ -7,8 +7,8 @@ part 'otp_industry_model_model_response.g.dart';
 @freezed
 class OTPIndustryModelModelResponse with _$OTPIndustryModelModelResponse {
   const factory OTPIndustryModelModelResponse({
-    required String? id,
-  required String industry
+    required int? id,
+  required String? industry
   }) = _OTPIndustryModelModelResponse;
 
   factory OTPIndustryModelModelResponse.fromJson(

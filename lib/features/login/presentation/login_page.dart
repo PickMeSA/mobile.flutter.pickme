@@ -13,6 +13,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
@@ -165,16 +166,18 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
      );
    },
        listener: (context , state){
-       if(state is LoginContinueClickedState && state.dataState == DataState.loading){
-       }
+
    });
   }
 
   Future<void> authenticate({ required String mobileNumber})  async {
+    if(!getBloc().preloader) {
+      preloader(context);
+      getBloc().preloader = true;
+    }
     await widget.firebaseAuth.verifyPhoneNumber(
       phoneNumber: mobileNumber,
       timeout: const Duration(minutes: 1),
-      autoRetrievedSmsCodeForTesting:"984596",
       verificationCompleted: (PhoneAuthCredential credential) async{
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
           await value.user!.getIdToken(true).then((value1) {
@@ -186,6 +189,10 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
         wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
       },
       codeSent: (String verificationId, int? resendToken) async {
+        if(getBloc().preloader) {
+          Navigator.pop(context);
+          getBloc().preloader = false;
+        }
         final error =  await context.router.push(OTPRoute(
             verificationId: verificationId,
             userModel: UserEntity(
@@ -196,6 +203,10 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
             ),
             fromregister: false));
         if(error != null){
+          if(getBloc().preloader) {
+            Navigator.pop(context);
+            getBloc().preloader = false;
+          }
           wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
         }
       },

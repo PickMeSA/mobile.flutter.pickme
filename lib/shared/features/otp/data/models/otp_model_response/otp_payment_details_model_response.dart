@@ -7,6 +7,7 @@ part 'otp_payment_details_model_response.g.dart';
 @freezed
 class OTPPaymentDetailsModelResponse with _$OTPPaymentDetailsModelResponse {
   const factory OTPPaymentDetailsModelResponse({
+    required String? accountHolderName,
     required String? bankName,
     required String? bankAccountType,
     required String? bankAccountNumber,

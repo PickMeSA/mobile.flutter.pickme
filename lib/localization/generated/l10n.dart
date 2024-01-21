@@ -2909,6 +2909,96 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Upload cancelled by user`
+  String get uploadCancelledByUser {
+    return Intl.message(
+      'Upload cancelled by user',
+      name: 'uploadCancelledByUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit details`
+  String get editDetails {
+    return Intl.message(
+      'Edit details',
+      name: 'editDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit about me`
+  String get editAboutMe {
+    return Intl.message(
+      'Edit about me',
+      name: 'editAboutMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal details`
+  String get personalDetails {
+    return Intl.message(
+      'Personal details',
+      name: 'personalDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My location`
+  String get myLocation {
+    return Intl.message(
+      'My location',
+      name: 'myLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My hourly rate and working hours`
+  String get myHourlyRateAndWorkingHours {
+    return Intl.message(
+      'My hourly rate and working hours',
+      name: 'myHourlyRateAndWorkingHours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Skills`
+  String get editSkills {
+    return Intl.message(
+      'Edit Skills',
+      name: 'editSkills',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit work experience`
+  String get editWorkExperience {
+    return Intl.message(
+      'Edit work experience',
+      name: 'editWorkExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account holder name`
+  String get accountHolderName {
+    return Intl.message(
+      'Account holder name',
+      name: 'accountHolderName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

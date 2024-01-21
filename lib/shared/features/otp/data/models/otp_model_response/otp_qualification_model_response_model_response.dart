@@ -7,6 +7,7 @@ part 'otp_qualification_model_response_model_response.g.dart';
 @freezed
 class OTPQualificationModelResponse with _$OTPQualificationModelResponse {
   const factory OTPQualificationModelResponse({
+    required String? supportedDocumentId,
     required String? type,
     required String? name,
     required String? issuingOrganization,

@@ -20,6 +20,7 @@ class OTPQualificationListEntity {
     List<Map<String, dynamic>> qualifications =  [];
     qualificationsEntityList!.forEach((element) {
       qualifications.add(OTPQualificationModelResponse(
+          supportedDocumentId: element.supportingDocuments,
           type: element.type,
           name: element.name,
           issuingOrganization: element.issuingOrganization,

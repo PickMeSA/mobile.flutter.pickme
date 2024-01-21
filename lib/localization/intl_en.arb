@@ -284,5 +284,15 @@
   "cancel": "Cancel",
   "incorrectOtpEntered": "Incorrect OTP entered. Please enter the correct OPT received.",
   "createJobListingInfoPublicationFeeDesc": "Please note that there is no publication fee associated with each job\nlisting.",
-  "noProfilesAvailableForThisCategory": "No profiles available for this category"
+  "noProfilesAvailableForThisCategory": "No profiles available for this category",
+  "uploadCancelledByUser": "Upload cancelled by user",
+  "editDetails": "Edit details",
+  "editAboutMe": "Edit about me",
+  "personalDetails": "Personal details",
+  "myLocation": "My location",
+  "myHourlyRateAndWorkingHours": "My hourly rate and working hours",
+  "editSkills": "Edit Skills",
+  "editWorkExperience": "Edit work experience",
+  "accountHolderName": "Account holder name"
+
 }

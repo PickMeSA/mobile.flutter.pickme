@@ -4,22 +4,21 @@ import 'package:pickme/features/rate_and_work_times/domain/entities/working_days
 
 
 class WorkingDaysListEntity{
-  List<WorkingDaysEntity>? workingDays;
+  List<WorkingDaysEntity>? workingDaysEntityList;
 
-  WorkingDaysListEntity({ this.workingDays});
+  WorkingDaysListEntity({ this.workingDaysEntityList});
 
-  WorkDaysListModelResponse toResponse(){
+  List<String> toResponse(){
 
-    List<WorkDaysModelResponse> workDays =  [];
+    List<String> workingDays =  [];
 
-    workingDays?.forEach((element) {
-      workDays.add(element.toResponse());
+    workingDaysEntityList?.forEach((element) {
+      workingDays.add(element.day);
 
     });
 
-    WorkDaysListModelResponse workDaysListModelResponse = WorkDaysListModelResponse(workDays: workDays);
 
-    return workDaysListModelResponse;
+    return workingDays;
   }
 }
 

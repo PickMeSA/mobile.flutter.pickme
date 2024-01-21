@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pickme/features/otp/data/response_models/otp_model_response/work_times_model_response.dart';
 
 import 'otp_business_model_response.dart';
 import 'otp_industry_model_model_response.dart';
@@ -22,11 +23,14 @@ class OTPFullProfileModelResponse with _$OTPFullProfileModelResponse {
     required String? email,
     required String? mobile,
     required String? idNumber,
+    required String? workPermit,
     required String? passportNumber,
     required String? type,
+    required bool? acceptedTermsAndConditions,
     required int? hourlyRate,
     required String? description,
     required List<SkillIdModelResponse>? skills,
+    required WorkTimesModelResponse? workTimes,
     required bool? subscriptionPaid,
     required bool? isActive,
     required int? profilePictureId,

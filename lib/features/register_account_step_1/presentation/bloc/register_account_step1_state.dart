@@ -3,8 +3,8 @@ part of 'register_account_step1_bloc.dart';
 @immutable
 abstract class RegisterAccountStep1State extends BaseState {
   final bool checked;
-
-  RegisterAccountStep1State({super.dataState, required this.checked});
+  String? error;
+  RegisterAccountStep1State({this.error,super.dataState, required this.checked});
 
 }
 
@@ -18,5 +18,10 @@ class TermsAndConditionsToggledState extends RegisterAccountStep1State {
 
 class RegisterAccountRemoteSubmitStep1State extends RegisterAccountStep1State{
   RegisterAccountRemoteSubmitStep1State({required super.checked});
+
+}
+
+class SubmitAcceptedTermsAndConditionsState extends RegisterAccountStep1State{
+  SubmitAcceptedTermsAndConditionsState({required super.checked, super.error});
 
 }

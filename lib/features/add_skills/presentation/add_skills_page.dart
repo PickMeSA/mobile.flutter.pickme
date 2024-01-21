@@ -153,12 +153,13 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
                    Padding(
                      padding: const EdgeInsets.only(top: 10, bottom: 30),
-                     child: AppDropdownMenu<SkillEntity>(
+                     child: MultiAppDropdownMenu<SkillEntity>(
                         onSelected: (selected){
                           getBloc().add(SkillSelectedEvent(skill: selected!));
                         },
                          width: MediaQuery.sizeOf(context).width - 40,
-                         enableFilter: true,
+                         enableFilter: false,
+                         filled: true,
                          dropdownMenuEntries: getBloc().skillEntries,
                          label: wText(getLocalization().skillsA,
                              style: theme.textTheme.bodyMedium?.copyWith(

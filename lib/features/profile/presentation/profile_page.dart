@@ -8,6 +8,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/widgets/w_award.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
@@ -42,7 +43,10 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
       listener: (context, state){},
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
-        return state.dataState == DataState.loading? const Center(child: CircularProgressIndicator(),): Padding(
+        return state.dataState == DataState.loading && state is GetProfileDetailsState?
+        const Center(child: CircularProgressIndicator(),):
+        state.dataState == DataState.init ?const Center(child: CircularProgressIndicator(),)
+        :Padding(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
@@ -78,7 +82,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                 ),
                                 const Spacer(),
                                   InkWell(
-                                    onTap: ()=> print("Profile"),
+                                    onTap: ()=> context.router.push(EditPersonalDetailsRoute(profileEntity: getBloc().profileEntity)),
                                     child: const Icon(Iconsax.edit),
                                   )
                               ],
@@ -88,7 +92,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                               children: [
                                 wText(getBloc().profileEntity.location!.address.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
 
-                                  wText("occupation"!),
+                                  wText(getBloc().profileEntity.industry?.industry??""),
                                 Row(
                                   children: [
                                     AppStarRating(rating: 3, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
@@ -114,7 +118,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     wText(getLocalization().aboutMe, style: theme.textTheme.titleMedium),
                     const Spacer(),
                     InkWell(
-                      onTap: ()=> print("object"),
+                      onTap: ()=> context.router.push(EditAboutMeRoute(profileEntity: getBloc().profileEntity)),
                       child: const Icon(Iconsax.edit),
                     ),
 
@@ -134,7 +138,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     wText(getLocalization().mySkills, style: theme.textTheme.titleMedium),
                     const Spacer(),
                     InkWell(
-                      onTap: ()=> print("object"),
+                      onTap: ()=> context.router.push(EditSkillsRoute(profileEntity: getBloc().profileEntity)),
                       child: const Icon(Iconsax.edit),
                     ),
 
@@ -144,10 +148,10 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                 20.height,
                 if(getBloc().profileEntity.skills!.isNotEmpty)
                 SizedBox(
-                  height: 250 ,
+                  height: 150 ,
                   child: Center(
                     child: ChipGroup(
-                      inputs: [],
+                      inputs: getBloc().skills,
                       onDeleted: (int index){
                       //  getBloc().add(SkillChipDeletedEvent(index: 0));
                       },
@@ -165,38 +169,64 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     wText(getLocalization().workExperience, style: theme.textTheme.titleMedium),
                     const Spacer(),
                     InkWell(
-                      onTap: ()=> print("object"),
+                      onTap: ()=> context.router.push(EditWorkExperienceRoute(profileEntity: getBloc().profileEntity)),
                       child: const Icon(Iconsax.edit),
                     ),
 
                   ],
                 ),
+
                 if(getBloc().profileEntity.workExperience!.isNotEmpty)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     10.height,
-                    Container(
-                      height: 300,
-                      child: ListView.builder(
-                        itemCount: getBloc().profileEntity.workExperience!.length,
-                        itemBuilder:(context, index) {
-                          return AppProfileQualification(
-                              qualification: Award(
-                                  name: getBloc().profileEntity.workExperience![index].title!,
-                                  //otpWorkExperienceEntityList![index].title!,
-                                  institutionName: getBloc().profileEntity.workExperience![index].company!,
-                                  //otpWorkExperienceEntityList![index].company!,
-                                  qualificationType: AppQualificationType
-                                      .experience,
-                                  dateStarted: getBloc().profileEntity.workExperience![index].startDate,
-                                  //otpWorkExperienceEntityList![index].startDate!,
-                                  dateEnded: getBloc().profileEntity.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
-                              ));
-                        }
-                      ),
+                    ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: getBloc().profileEntity.workExperience!.length,
+                      itemBuilder:(context, index) {
+                        return AppProfileQualification(
+                            qualification: Award(
+                                name: getBloc().profileEntity.workExperience![index].title!,
+                                //otpWorkExperienceEntityList![index].title!,
+                                institutionName: getBloc().profileEntity.workExperience![index].company!,
+                                //otpWorkExperienceEntityList![index].company!,
+                                qualificationType: AppQualificationType
+                                    .experience,
+                                dateStarted: getBloc().profileEntity.workExperience![index].startDate,
+                                //otpWorkExperienceEntityList![index].startDate!,
+                                dateEnded: getBloc().profileEntity.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
+                            ));
+                      }
                     ),
                     wText(getLocalization().photosOfWork),
+                    20.height,
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                    itemCount: getBloc().profileEntity.workExperience?.length,
+                    itemBuilder: (context, index){
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: Row(
+                          children: [
+                            Expanded(child: ImageThumbnail(
+                              imagePath:  getBloc().profileEntity.workExperience?[index].files?[0].url,
+                              //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: 0)),
+                            )),
+                            16.width, // Add some spacing between images
+                            if(getBloc().profileEntity.workExperience?[index].files?.length == 1)
+                              Expanded(child: Container(),),
+                            if(getBloc().profileEntity.workExperience![index].files!.length! > 1)
+                              Expanded(child: ImageThumbnail(
+                              imagePath:  getBloc().profileEntity.workExperience?[index].files?[0].url,
+                              //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: 1)),
+                            )),
+                          ],
+                        ),
+                      );
+                    }),
                   ],
                 ),
                 20.height,
@@ -214,29 +244,29 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   ],
                 ),
                 20  .height,
-                Container(
-                  height: 300,
-                  child: ListView.builder(
-                      itemCount: getBloc().profileEntity.qualifications!.length,
-                      itemBuilder:(context, index) {
-                        return AppProfileQualification(
-                            qualification: Award(
-                              issuedOn: getBloc().profileEntity.qualifications![index].issueDate,
-                                educationType: getBloc().profileEntity.qualifications![index].type,
-                                name: getBloc().profileEntity.qualifications![index].name!,
-                                //otpWorkExperienceEntityList![index].title!,
-                                institutionName: getBloc().profileEntity.qualifications![index].issuingOrganization!,
-                                //otpWorkExperienceEntityList![index].company!,
-                                qualificationType: AppQualificationType
-                                    .education,
-                                dateStarted: getBloc().profileEntity.qualifications![index].issueDate,
-                                //otpWorkExperienceEntityList![index].startDate!,
-                                dateEnded: getBloc().profileEntity.qualifications![index].issueDate
-                                     //otpWorkExperienceEntityList![index].endDate!
-                            ));
-                      }
-                  ),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: getBloc().profileEntity.qualifications!.length,
+                    itemBuilder:(context, index) {
+                      return AppProfileQualification(
+                          qualification: Award(
+                            issuedOn: getBloc().profileEntity.qualifications![index].issueDate,
+                              educationType: getBloc().profileEntity.qualifications![index].type,
+                              name: getBloc().profileEntity.qualifications![index].name!,
+                              //otpWorkExperienceEntityList![index].title!,
+                              institutionName: getBloc().profileEntity.qualifications![index].issuingOrganization!,
+                              //otpWorkExperienceEntityList![index].company!,
+                              qualificationType: AppQualificationType
+                                  .education,
+                              dateStarted: getBloc().profileEntity.qualifications![index].issueDate,
+                              //otpWorkExperienceEntityList![index].startDate!,
+                              dateEnded: getBloc().profileEntity.qualifications![index].issueDate
+                                   //otpWorkExperienceEntityList![index].endDate!
+                          ));
+                    }
                 ),
+
               ],
             ),
           ),

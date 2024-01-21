@@ -8,7 +8,7 @@ part 'work_days_list_model_response.g.dart';
 @freezed
 class WorkDaysListModelResponse with _$WorkDaysListModelResponse {
   const factory WorkDaysListModelResponse({
-    required List<WorkDaysModelResponse>? workDays,
+    required List<Map<String,dynamic>>? workingDays,
   }) = _WorkDaysListModelResponse;
 
   factory WorkDaysListModelResponse.fromJson(
