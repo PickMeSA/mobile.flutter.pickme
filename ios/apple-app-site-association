@@ -1,0 +1,24 @@
+{
+  "applinks":{
+    "apps":[
+
+    ],
+    "details":[
+      {
+        "appIDs":[
+          "MRNGX9ZB2K.mobile.flutter.pickme2"
+        ],
+        "components":[
+          {
+            "/":"/login",
+            "comment":"Matches URL with a path /login"
+          },
+          {
+            "/":"/reviews/*",
+            "comment":"Matches any URL with a path that starts with /product/."
+          }
+        ]
+      }
+    ]
+  }
+}

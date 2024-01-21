@@ -391,6 +391,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterPage(),
       );
     },
+    RequestAReviewRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RequestAReviewPage(),
+      );
+    },
     RescheduleBookingRoute.name: (routeData) {
       final args = routeData.argsAs<RescheduleBookingRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -1571,6 +1577,20 @@ class RegisterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RequestAReviewPage]
+class RequestAReviewRoute extends PageRouteInfo<void> {
+  const RequestAReviewRoute({List<PageRouteInfo>? children})
+      : super(
+          RequestAReviewRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RequestAReviewRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

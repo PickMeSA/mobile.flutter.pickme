@@ -288,5 +288,7 @@
   "myReviews": "My Reviews",
   "youDontHaveAnyReviewsYet": "You don’t have any reviews yet",
   "getReviewsToBoostProfile": "Get reviews to boost your profile and increase your chances of getting hired",
-  "requestAReview": "Request a review"
+  "requestAReview": "Request a review",
+  "allowYourClientsToLeaveAReview": "Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.",
+  "copyLink": "Copy link"
 }

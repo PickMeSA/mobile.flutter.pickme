@@ -40,6 +40,7 @@ import 'package:pickme/features/bank_details/presentation/bank_details_page.dart
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
 import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
 import 'package:pickme/features/my_reviews/presentation/my_reviews_page.dart';
+import 'package:pickme/features/request_a_review/presentation/request_a_review.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/features/my_banking_details/presentation/my_banking_details_page.dart';
 import 'package:pickme/features/my_wallet/presentation/my_wallet_page.dart';
@@ -152,6 +153,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: CancelBookingRoute.page),
     AnimatedRoute(page: JobListRoute.page),
     AnimatedRoute(page: MyReviewsRoute.page, initial: true),
+    AnimatedRoute(page: RequestAReviewRoute.page),
   ];
 }
 

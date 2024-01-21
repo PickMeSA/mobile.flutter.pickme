@@ -2949,6 +2949,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.`
+  String get allowYourClientsToLeaveAReview {
+    return Intl.message(
+      'Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.',
+      name: 'allowYourClientsToLeaveAReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy link`
+  String get copyLink {
+    return Intl.message(
+      'Copy link',
+      name: 'copyLink',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

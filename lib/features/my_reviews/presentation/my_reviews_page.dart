@@ -8,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/review_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
@@ -88,10 +89,14 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
                           Text(getLocalization().getReviewsToBoostProfile,
                             style: theme.textTheme.bodyMedium,
                             textAlign: TextAlign.center,
-                          )
+                          ),
+                          24.height,
                         ],
                       )),
-                      PrimaryButton.fullWidth(onPressed: (){}, child: Text(getLocalization().requestAReview)),
+                      PrimaryButton.fullWidth(
+                        onPressed: ()=>context.router.push(RequestAReviewRoute()),
+                        child: Text(getLocalization().requestAReview),
+                      ),
                       16.height
                     ],
                   )):

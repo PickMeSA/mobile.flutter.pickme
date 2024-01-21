@@ -66,6 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "additionalInformation":
             MessageLookupByLibrary.simpleMessage("Additional information"),
         "allServices": MessageLookupByLibrary.simpleMessage("All services"),
+        "allowYourClientsToLeaveAReview": MessageLookupByLibrary.simpleMessage(
+            "Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them."),
         "alternativeDateAndTime":
             MessageLookupByLibrary.simpleMessage("Alternative date & time"),
         "alternativeRequest":
@@ -116,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactHelpCenter":
             MessageLookupByLibrary.simpleMessage("Contact help center"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "copyLink": MessageLookupByLibrary.simpleMessage("Copy link"),
         "countryCode": MessageLookupByLibrary.simpleMessage("+27"),
         "createAJobListing":
             MessageLookupByLibrary.simpleMessage("Create a job listing"),
