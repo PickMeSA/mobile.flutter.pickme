@@ -4,7 +4,8 @@ part of 'my_reviews_bloc.dart';
 abstract class MyReviewsPageEvent extends BaseEvent {}
 
 class MyReviewsPageEnteredEvent extends MyReviewsPageEvent{
-  MyReviewsPageEnteredEvent();
+  final String? userId;
+  MyReviewsPageEnteredEvent({this.userId});
 }
 
 class SearchTextChangedEvent extends MyReviewsPageEvent{

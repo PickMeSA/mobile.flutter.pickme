@@ -59,7 +59,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           if(widget.fromregister!) {
             getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
           }else{
-            context.router.push(const MyReviewsRoute());
+            context.router.push(MyReviewsRoute());
             // getBloc().add(GetProfileProgressEvent());
         }
         }

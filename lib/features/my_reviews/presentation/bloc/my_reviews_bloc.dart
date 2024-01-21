@@ -25,18 +25,19 @@ class MyReviewsPageBloc extends BaseBloc<MyReviewsPageEvent, MyReviewsPageState>
 
   MyReviewsPageBloc({
     required this.getMyReviewsUseCase,}) : super(MyReviewsPageInitialState()) {
-    on<MyReviewsPageEnteredEvent>((event, emit) => _onAllServicesPageEnteredEvent(event, emit));
+    on<MyReviewsPageEnteredEvent>((event, emit) => _onMyReviewsPageEnteredEvent(event, emit));
   }
 
-  _onAllServicesPageEnteredEvent(
+  _onMyReviewsPageEnteredEvent(
       MyReviewsPageEnteredEvent event,
       Emitter<MyReviewsPageState> emit
       )async{
     emit(GetPageDataState()..dataState = DataState.loading);
     try{
       UserModel userModel = boxUser.get(current);
+      String userId = event.userId??userModel.id!;
       pageEntity = await getMyReviewsUseCase.call(
-          params: GetMyReviewsUseCaseParams(userId: userModel.id!));
+          params: GetMyReviewsUseCaseParams(userId: userId));
       emit(GetPageDataState()..dataState = DataState.success);
     }catch(ex){
       emit(GetPageDataState(error: ex.toString())..dataState = DataState.error);

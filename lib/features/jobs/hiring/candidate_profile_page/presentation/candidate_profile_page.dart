@@ -89,7 +89,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                       jobTitle: profile.jobTitle??getLocalization().noJobDescription,
                       rating: profile.rating??0,
                       hourlyRate: "R${profile.hourlyRate} p/h",
-                      seeReviewsFunction: (){},
+                      seeReviewsFunction: ()=>context.router.push(MyReviewsRoute(isHiring: true, userId: profile.id)),
                       image: (profile.profilePicture!=null)?
                       CachedNetworkImageProvider(
                           profile.profilePicture!

@@ -346,9 +346,15 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MyReviewsRoute.name: (routeData) {
+      final args = routeData.argsAs<MyReviewsRouteArgs>(
+          orElse: () => const MyReviewsRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MyReviewsPage(),
+        child: MyReviewsPage(
+          key: args.key,
+          isHiring: args.isHiring,
+          userId: args.userId,
+        ),
       );
     },
     MyWalletRoute.name: (routeData) {
@@ -1582,16 +1588,45 @@ class MyJobListingsRouteArgs {
 
 /// generated route for
 /// [MyReviewsPage]
-class MyReviewsRoute extends PageRouteInfo<void> {
-  const MyReviewsRoute({List<PageRouteInfo>? children})
-      : super(
+class MyReviewsRoute extends PageRouteInfo<MyReviewsRouteArgs> {
+  MyReviewsRoute({
+    Key? key,
+    bool isHiring = false,
+    String? userId,
+    List<PageRouteInfo>? children,
+  }) : super(
           MyReviewsRoute.name,
+          args: MyReviewsRouteArgs(
+            key: key,
+            isHiring: isHiring,
+            userId: userId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MyReviewsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<MyReviewsRouteArgs> page =
+      PageInfo<MyReviewsRouteArgs>(name);
+}
+
+class MyReviewsRouteArgs {
+  const MyReviewsRouteArgs({
+    this.key,
+    this.isHiring = false,
+    this.userId,
+  });
+
+  final Key? key;
+
+  final bool isHiring;
+
+  final String? userId;
+
+  @override
+  String toString() {
+    return 'MyReviewsRouteArgs{key: $key, isHiring: $isHiring, userId: $userId}';
+  }
 }
 
 /// generated route for

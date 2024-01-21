@@ -166,7 +166,7 @@ class ProfileServiceImpl extends ProfileService{
         mobile: otpFullProfileModelResponse.mobile??"",
         workPermit: otpFullProfileModelResponse.workPermit,
         type: otpFullProfileModelResponse.type??"",
-        averageRating: otpFullProfileModelResponse.averageRating==null?null:int.parse(otpFullProfileModelResponse.averageRating!),
+        averageRating: otpFullProfileModelResponse.averageRating==null?null:otpFullProfileModelResponse.averageRating!,
         description:  otpFullProfileModelResponse.description??"",
         business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business??  OTPBusinessModelResponse(
             name: otpFullProfileModelResponse.business?.name??"",

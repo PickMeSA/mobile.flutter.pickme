@@ -412,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
+        "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "seeReviews": MessageLookupByLibrary.simpleMessage("See reviews"),

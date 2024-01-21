@@ -20,8 +20,9 @@ import 'bloc/my_reviews_bloc.dart';
 
 @RoutePage()
 class MyReviewsPage extends BasePage {
-  const MyReviewsPage({super.key});
-
+  const MyReviewsPage({super.key, this.isHiring=false, this.userId}) : assert(isHiring==false || (isHiring==true && userId!=null));
+  final bool isHiring;
+  final String? userId;
 
   @override
   State<MyReviewsPage> createState() => _MyReviewsPageState();
@@ -31,7 +32,7 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
   @override
   void initState() {
     super.initState();
-    getBloc().add(MyReviewsPageEnteredEvent());
+    getBloc().add(MyReviewsPageEnteredEvent(userId: widget.userId));
   }
 
   @override
@@ -115,7 +116,10 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {
-                    return const AppDivider();
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: AppDivider(),
+                    );
                   },
                 ),
               )
@@ -140,7 +144,12 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().myReviews),
+      title: Text(widget.isHiring?getLocalization().reviews:getLocalization().myReviews),
+      actions: widget.isHiring?null:[
+        TertiaryButton(
+          onPressed: (){},
+          child: Text(getLocalization().requestAReview),)
+      ]
     );
   }
 
