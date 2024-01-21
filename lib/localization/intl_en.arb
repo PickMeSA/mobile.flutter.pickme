@@ -303,6 +303,7 @@
   "editWorkExperience": "Edit work experience",
   "accountHolderName": "Account holder name",
   "loadingDotDot": "loading...",
-  "howWouldYouRate": "How would you rate"
+  "howWouldYouRate": "How would you rate",
+  "noIndustrySpecified": "No industry specified"
 
 }

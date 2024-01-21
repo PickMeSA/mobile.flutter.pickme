@@ -10,7 +10,7 @@ class ReviewerModelResponse with _$ReviewerModelResponse {
     required String reviewerId,
     required String firstName,
     required String surname,
-    required String profilePictureUrl,
+    required String? profilePictureUrl,
     required AddSkillsIndustryModelResponse industry,
   }) = _ReviewerModelResponse;
 

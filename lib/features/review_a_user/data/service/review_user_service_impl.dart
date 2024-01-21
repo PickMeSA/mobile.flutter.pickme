@@ -27,6 +27,7 @@ class SubmitReviewServiceImpl extends SubmitReviewService{
       if(response.statusCode==201){
         return true;
       }else if(response.data["message"]!=null){
+        logger.e(response.data);
         throw response.data["message"];
       }
       throw "An error occurred";

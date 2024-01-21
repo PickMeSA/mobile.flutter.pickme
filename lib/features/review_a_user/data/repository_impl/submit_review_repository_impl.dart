@@ -9,11 +9,10 @@ class SubmitReviewRepositoryImpl extends SubmitReviewRepository{
   final SubmitReviewService service;
   SubmitReviewRepositoryImpl({required this.service});
   @override
-  Future<bool> call({SubmitReviewRepositoryParams? params}) {
+  Future<bool> call({SubmitReviewRepositoryParams? params}) async {
     try{
-      return service.submitReview(params: params!);
+      return await service.submitReview(params: params!);
     }catch(ex){
-      logger.e(ex);
       rethrow;
     }
   }

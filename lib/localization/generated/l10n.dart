@@ -3099,6 +3099,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No industry specified`
+  String get noIndustrySpecified {
+    return Intl.message(
+      'No industry specified',
+      name: 'noIndustrySpecified',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

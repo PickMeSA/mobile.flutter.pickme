@@ -77,7 +77,6 @@ class _ReviewAUserPageState extends BasePageState<ReviewAUserPage, ReviewAUserBl
           Navigator.pop(context);
           wErrorPopUp(message: state.error!, type: "Error", context: context);
         }
-        logger.e(state is SubmitClickedState);
         if(state is SubmitClickedState && state.dataState == DataState.loading){
           if(!getBloc().preloaderActive){
             getBloc().preloaderActive = true;

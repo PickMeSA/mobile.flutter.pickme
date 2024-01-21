@@ -12,9 +12,9 @@ class SubmitReviewUseCase extends BaseUseCase<SubmitReviewUseCaseParams, bool>{
   SubmitReviewUseCase({required this.repository});
 
   @override
-  Future<bool> call({SubmitReviewUseCaseParams? params}) {
+  Future<bool> call({SubmitReviewUseCaseParams? params})async {
     try{
-      return repository.call(
+      return await repository.call(
         params: SubmitReviewRepositoryParams(
           userId: params!.userId,
           review: params.review,
@@ -23,7 +23,6 @@ class SubmitReviewUseCase extends BaseUseCase<SubmitReviewUseCaseParams, bool>{
         ),
       );
     }catch(ex){
-      logger.e(ex);
       rethrow;
     }
 

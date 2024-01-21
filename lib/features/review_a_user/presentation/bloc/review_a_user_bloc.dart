@@ -80,13 +80,17 @@ class ReviewAUserBloc extends BaseBloc<ReviewAUserPageEvent, ReviewAUserState> {
     emit(SubmitClickedState()..dataState = DataState.loading);
     try{
       UserModel userModel = boxUser.get(current);
-      submitReviewUseCase.call(params: SubmitReviewUseCaseParams(
+      bool result = await submitReviewUseCase.call(params: SubmitReviewUseCaseParams(
         reviewerId: userModel.id!,
         userId: event.userId,
         review: reviewText,
         rating: rating
       ));
-      emit(SubmitClickedState()..dataState = DataState.success);
+      if(result){
+        emit(SubmitClickedState()..dataState = DataState.success);
+      }else{
+        emit(SubmitClickedState(error: "An error occurred")..dataState = DataState.error);
+      }
     }catch(ex){
       emit(SubmitClickedState(error: ex.toString())..dataState = DataState.error);
     }

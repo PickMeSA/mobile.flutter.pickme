@@ -3,7 +3,7 @@ import 'package:pickme/shared/domain/entities/review_user_entity.dart';
 import 'package:pickme/shared/domain/entities/reviewer_entity.dart';
 
 class ReviewEntity extends Equatable{
-  final String id;
+  final int id;
   final int rating;
   final String review;
   final DateTime createdAt;

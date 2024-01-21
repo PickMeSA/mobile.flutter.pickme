@@ -9,7 +9,7 @@ class ReviewUserModelResponse with _$ReviewUserModelResponse {
     required String userId,
     required String firstName,
     required String surname,
-    required String profilePictureUrl,
+    required String? profilePictureUrl,
   }) = _ReviewUserModelResponse;
 
   factory ReviewUserModelResponse.fromJson(

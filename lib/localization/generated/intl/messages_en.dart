@@ -287,6 +287,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAddressSpecified":
             MessageLookupByLibrary.simpleMessage("No address specified"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
+        "noIndustrySpecified":
+            MessageLookupByLibrary.simpleMessage("No industry specified"),
         "noJobDescription":
             MessageLookupByLibrary.simpleMessage("No job description"),
         "noJobsFound": MessageLookupByLibrary.simpleMessage("No jobs found"),

@@ -8,7 +8,7 @@ part 'review_response_model.g.dart';
 @freezed
 class ReviewModelResponse with _$ReviewModelResponse {
   const factory ReviewModelResponse({
-    required String id,
+    required int id,
     required int rating,
     required String review,
     required DateTime createdAt,
