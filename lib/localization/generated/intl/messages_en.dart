@@ -107,7 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
-        "chat": MessageLookupByLibrary.simpleMessage("chat"),
+        "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "choosePickupPoint":
             MessageLookupByLibrary.simpleMessage("Choose pickup point"),
         "client": MessageLookupByLibrary.simpleMessage("Client"),
@@ -356,7 +356,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Possible price range"),
         "preferredIndustry":
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
-        "profile": MessageLookupByLibrary.simpleMessage("profile"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "proposeAlternative":
             MessageLookupByLibrary.simpleMessage("Propose Alternative"),
         "proposeAnotherTime":

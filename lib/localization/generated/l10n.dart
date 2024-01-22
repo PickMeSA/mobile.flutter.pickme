@@ -2240,20 +2240,20 @@ class AppLocalizations {
     );
   }
 
-  /// `chat`
+  /// `Chat`
   String get chat {
     return Intl.message(
-      'chat',
+      'Chat',
       name: 'chat',
       desc: '',
       args: [],
     );
   }
 
-  /// `profile`
+  /// `Profile`
   String get profile {
     return Intl.message(
-      'profile',
+      'Profile',
       name: 'profile',
       desc: '',
       args: [],

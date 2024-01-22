@@ -148,7 +148,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                 20.height,
                 if(getBloc().profileEntity.skills!.isNotEmpty)
                 SizedBox(
-                  height: 150 ,
+                  height: 100 ,
                   child: Center(
                     child: ChipGroup(
                       inputs: getBloc().skills,
@@ -159,11 +159,8 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   ),
                 ),
                 20.height,
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
                 const AppDivider(),
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
-                10.height,
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
+                2.height,
                 Row(
                   children: [
                     wText(getLocalization().workExperience, style: theme.textTheme.titleMedium),
@@ -175,8 +172,6 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
 
                   ],
                 ),
-
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
