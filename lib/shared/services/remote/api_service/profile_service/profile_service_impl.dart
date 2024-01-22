@@ -112,7 +112,7 @@ class ProfileServiceImpl extends ProfileService{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: PaymentDetailsModelResponse(paymentDetails: OTPPaymentDetailsModelResponse(
-            accountHolderName: bankDetailsEntity.accountHolderName,
+            bankAccountHolder: bankDetailsEntity.accountHolderName,
             bankName: bankDetailsEntity.bank,
             bankAccountType: bankDetailsEntity.accountType,
             bankAccountNumber: bankDetailsEntity.accountNumber,
@@ -174,7 +174,7 @@ class ProfileServiceImpl extends ProfileService{
             latitude: 0,
             longitude: 0, address: '')),
         paymentDetails: OTPPaymentDetailsEntity.fromResponse(otpFullProfileModelResponse.paymentDetails?? OTPPaymentDetailsModelResponse(
-          accountHolderName:  otpFullProfileModelResponse.paymentDetails?.accountHolderName??"",
+          bankAccountHolder:  otpFullProfileModelResponse.paymentDetails?.bankAccountHolder??"",
             bankName: otpFullProfileModelResponse.paymentDetails?.bankName??"",
             bankAccountType: otpFullProfileModelResponse.paymentDetails?.bankAccountType??"",
             bankAccountNumber: otpFullProfileModelResponse.paymentDetails?.bankAccountNumber??"",
