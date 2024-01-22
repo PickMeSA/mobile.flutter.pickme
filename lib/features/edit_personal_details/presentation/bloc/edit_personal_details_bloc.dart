@@ -36,6 +36,8 @@ class EditPersonalDetailsBloc
     required this.submitRemoteRateAndWorkTimesUseCase}): super(EditPersonalDetailsPageInitState()) {
         workingDayEntries = getWorkingDayEntries();
         on<UpdatePersonalDetailsEvent>((event, emit)=> _onUpdatePersonalDetailsEvent(event,emit));
+        on<SkillChipDeletedEvent>((event,emit) => _onSkillChipDeletedEvent(event,emit));
+        on<WorkingDaySelectedEvent>((event, emit)=> _onWorkingDaySelectedEvent(event,emit));
     }
 
     List<DropdownMenuEntry<WorkingDaysEntity>> getWorkingDayEntries(){
@@ -46,12 +48,34 @@ class EditPersonalDetailsBloc
         return workingDaysEntries;
     }
 
+    Future<void> _onWorkingDaySelectedEvent(
+        WorkingDaySelectedEvent event,
+        Emitter<EditPersonalDetailsPageState> emit
+        )async{
+
+            event.profileEntity?.ratesAndWorkTimesEntity?.workingDaysListEntity
+                ?.workingDaysEntityList!.add(event.workingDaysEntity);
+
+        chipOptions.add(ChipOption(label: event.workingDaysEntity.day, id: int.parse(event.workingDaysEntity.id)));
+        emit(WorkingDaySelectedState()..dataState = DataState.success);
+    }
+
+    Future<void> _onSkillChipDeletedEvent(
+            SkillChipDeletedEvent event,
+        Emitter<EditPersonalDetailsPageState> emit
+        )async{
+        chipOptions.removeAt(event.index!);
+        event.profileEntity!.ratesAndWorkTimesEntity!.workingDaysListEntity!.workingDaysEntityList!.removeAt(event.index!);
+        emit(SkillsUpdateState()..dataState = DataState.success);
+
+    }
+
     Future<void>_onUpdatePersonalDetailsEvent(
         UpdatePersonalDetailsEvent event,
         Emitter<EditPersonalDetailsPageState> emit)async {
         emit(UpdatePersonalDetailsState()..dataState = DataState.loading);
         try{
-            //upload personal details
+
             await otpSaveRemoteProfileDataUseCase.call(
                 params: OTPSaveRemoteProfileDataUseCaseParams(
                     userModel: UserEntity(
