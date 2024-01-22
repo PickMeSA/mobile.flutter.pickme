@@ -94,7 +94,7 @@ class ProfileServiceImpl extends ProfileService{
     try{
       UserModel userModel = boxUser.get(current);
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: skillsPageEntity.skillListEntity.toResponse());
+          data: skillsPageEntity.skillListEntity.toResponse().toJson());
 
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: skillsPageEntity.preferredIndustryEntity.toResponse().toJson());
@@ -149,7 +149,7 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
-
+      subscriptionPaid: otpFullProfileModelResponse.subscriptionPaid,
       ratesAndWorkTimesEntity: RatesAndWorkTimesEntity.fromResponse(otpFullProfileModelResponse.workTimes??const WorkTimesModelResponse(startTime: "", endTime: "", workingDays:  [])),
       acceptedTermsAndConditions: otpFullProfileModelResponse.acceptedTermsAndConditions?? false,
       firstName: otpFullProfileModelResponse.firstName??"",

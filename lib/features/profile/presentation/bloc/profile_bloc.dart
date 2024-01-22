@@ -17,13 +17,19 @@ class ProfileBloc
 
     final GetRemoteProfileUseCase getRemoteProfileUseCase;
     ProfileBloc({required this.getRemoteProfileUseCase}): super(ProfilePageInitState()) {
-
+        on<UpdateUIEvent>((event, emit)=> _onUpdateUIEvent(event,emit));
         on<GetProfileDetailsEvent>((event, emit)=> _onGetProfileDetailsEvent(event, emit));
     }
 
      late ProfileEntity profileEntity ;
     late List<ChipOption> skills;
 
+    Future<void> _onUpdateUIEvent(
+        UpdateUIEvent event,
+        Emitter<ProfilePageState> emit
+        )async{
+        emit(UpdateUIState()..dataState = DataState.success);
+    }
 
 
     Future<void> _onGetProfileDetailsEvent(

@@ -47,6 +47,7 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
     element.id == widget.otpWorkExperienceEntity.industryId).toString();
     startDate = widget.otpWorkExperienceEntity.startDate!;
     endDate = widget.otpWorkExperienceEntity.endDate?? DateTime.now();
+    getBloc().current = widget.otpWorkExperienceEntity.isCurrent?? false;
   }
 
     @override
@@ -148,10 +149,9 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                          enableFilter: true,
                          dropdownMenuEntries: getBloc().industryEntries,
                          controller: dropdownIndustryController,
-                         label: wText(getLocalization().preferredIndustry,
+                         label: wText(getLocalization().industry,
                              style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
                    ),
-
                  ],
                ),
              ),

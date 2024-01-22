@@ -11,11 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'bloc/my_bookings_upcoming_bloc.dart';
 
 @RoutePage()
 class MyBookingsUpcomingPage extends BasePage {
+
   const MyBookingsUpcomingPage({super.key});
 
   @override
@@ -156,6 +158,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                       bookingId: getBloc().upcomingBookingsList[index].id));
                                 }else {
                                   context.router.push(JobDetailsRoute(
+
                                       fromIndex: 1,
                                       jobId: getBloc().upcomingBookingsList[index].jobId,
                                       bookingId: getBloc().upcomingBookingsList[index].id));
@@ -185,7 +188,9 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                              Column(
                                children: [
                                  InkWell(
-                                   onTap:()=> context.router.push(JobDetailsRoute(fromIndex: 2, jobId: getBloc().completeBookingsList[index].jobId)),
+                                   onTap:()=> context.router.push(JobDetailsRoute(
+                                       fromIndex: 2,
+                                       jobId: getBloc().completeBookingsList[index].jobId)),
                                    child: AppJobCard(
                                      jobName: 'Tax Preparation',
                                      employerName: 'DVT',

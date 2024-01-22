@@ -189,6 +189,26 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    EditQualificationDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<EditQualificationDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditQualificationDetailsPage(
+          otpQualificationEntity: args.otpQualificationEntity,
+          key: args.key,
+        ),
+      );
+    },
+    EditQualificationRoute.name: (routeData) {
+      final args = routeData.argsAs<EditQualificationRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditQualificationPage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
+      );
+    },
     EditSkillsRoute.name: (routeData) {
       final args = routeData.argsAs<EditSkillsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -1050,6 +1070,83 @@ class EditPersonalDetailsRouteArgs {
   @override
   String toString() {
     return 'EditPersonalDetailsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditQualificationDetailsPage]
+class EditQualificationDetailsRoute
+    extends PageRouteInfo<EditQualificationDetailsRouteArgs> {
+  EditQualificationDetailsRoute({
+    required OTPQualificationEntity otpQualificationEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditQualificationDetailsRoute.name,
+          args: EditQualificationDetailsRouteArgs(
+            otpQualificationEntity: otpQualificationEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditQualificationDetailsRoute';
+
+  static const PageInfo<EditQualificationDetailsRouteArgs> page =
+      PageInfo<EditQualificationDetailsRouteArgs>(name);
+}
+
+class EditQualificationDetailsRouteArgs {
+  const EditQualificationDetailsRouteArgs({
+    required this.otpQualificationEntity,
+    this.key,
+  });
+
+  final OTPQualificationEntity otpQualificationEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditQualificationDetailsRouteArgs{otpQualificationEntity: $otpQualificationEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditQualificationPage]
+class EditQualificationRoute extends PageRouteInfo<EditQualificationRouteArgs> {
+  EditQualificationRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditQualificationRoute.name,
+          args: EditQualificationRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditQualificationRoute';
+
+  static const PageInfo<EditQualificationRouteArgs> page =
+      PageInfo<EditQualificationRouteArgs>(name);
+}
+
+class EditQualificationRouteArgs {
+  const EditQualificationRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditQualificationRouteArgs{profileEntity: $profileEntity, key: $key}';
   }
 }
 

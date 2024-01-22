@@ -1940,13 +1940,13 @@ class AppLocalizations {
     );
   }
 
-  /// `Hi, `
-  String get hi {
+  /// `Hi, {name} {surname}`
+  String hi(Object name, Object surname) {
     return Intl.message(
-      'Hi, ',
+      'Hi, $name $surname',
       name: 'hi',
       desc: '',
-      args: [],
+      args: [name, surname],
     );
   }
 
@@ -2995,6 +2995,16 @@ class AppLocalizations {
     return Intl.message(
       'Account holder name',
       name: 'accountHolderName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete booking`
+  String get completeBooking {
+    return Intl.message(
+      'Complete booking',
+      name: 'completeBooking',
       desc: '',
       args: [],
     );

@@ -83,9 +83,10 @@ class EditPersonalDetailsBloc
                     workingDaysListEntity: event.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity
                 )));
 
+            emit(UpdatePersonalDetailsState(profileEntity:  profileEntity)..dataState = DataState.success);
 
         }catch(ex){
-            emit(UpdatePersonalDetailsState(error: ex.toString())..dataState = DataState.loading);
+            emit(UpdatePersonalDetailsState(error: ex.toString())..dataState = DataState.error);
 
         }
     }

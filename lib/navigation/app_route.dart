@@ -19,6 +19,8 @@ import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
+import 'package:pickme/features/edit_qualification/presentation/edit_qualification_page.dart';
+import 'package:pickme/features/edit_qualification_details/presentation/edit_qualification_details_page.dart';
 import 'package:pickme/features/edit_skills/presentation/edit_skills_page.dart';
 import 'package:pickme/features/edit_work_experience/presentation/edit_work_experience_page.dart';
 import 'package:pickme/features/edit_work_experience_details/presentation/edit_work_experience_details_page.dart';
@@ -72,6 +74,7 @@ import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_payment_details_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
@@ -161,7 +164,9 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: EditAboutMeRoute.page),
     AnimatedRoute(page: EditSkillsRoute.page),
     AnimatedRoute(page: EditWorkExperienceRoute.page),
-    AnimatedRoute(page: EditWorkExperienceDetailsRoute.page)
+    AnimatedRoute(page: EditWorkExperienceDetailsRoute.page),
+    AnimatedRoute(page: EditQualificationDetailsRoute.page),
+    AnimatedRoute(page: EditQualificationRoute.page)
   ];
 }
 

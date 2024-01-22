@@ -22,7 +22,7 @@ class QualificationsBloc
     bool? preloaderActive;
     List<OTPQualificationEntity> otpQualificationEntityList = [];
     List<OTPWorkExperienceEntity> otpWorKExperienceEntityList = [];
-    SubmitRemoteQualificationAndExperienceUseCase submitRemoteQualificationAndExperienceUseCase;
+    final SubmitRemoteQualificationAndExperienceUseCase submitRemoteQualificationAndExperienceUseCase;
     QualificationsBloc(
     {required this.submitRemoteQualificationAndExperienceUseCase}
         ): super(QualificationsPageInitState()) {

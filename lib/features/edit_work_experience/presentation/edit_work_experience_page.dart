@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/edit_work_experience/presentation/bloc/edit_work_experience_bloc.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -9,9 +10,14 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_award.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:iconsax/iconsax.dart';
+
 
 @RoutePage()
 class EditWorkExperiencePage extends BasePage {
@@ -39,7 +45,21 @@ class _EditWorkExperiencePageState extends BasePageState<EditWorkExperiencePage,
   @override
   Widget buildView(BuildContext context) {
     return BlocConsumer<EditWorkExperienceBloc, EditWorkExperiencePageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state.dataState == DataState.success && state is SubmitWorkExperienceStatus ){
+          Navigator.pop(context);
+          context.router.pop();
+        }
+
+        if(state.dataState == DataState.loading && state is SubmitWorkExperienceStatus ){
+          preloader(context);
+        }
+
+        if(state.dataState == DataState.error && state is SubmitWorkExperienceStatus ){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+      },
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
          return SizedBox(
@@ -56,10 +76,27 @@ class _EditWorkExperiencePageState extends BasePageState<EditWorkExperiencePage,
                            ,child: const Icon(Icons.arrow_back_rounded)),
                        20.width,
                        wText(getLocalization().workExperience, style: theme.textTheme.titleLarge),
+                       const Spacer(),
+                       InkWell(
+                         onTap:()async{
+                           try {
+                             OTPWorkExperienceEntity? otpWorkExperienceEntity =
+                             (await context.router.push(
+                                 const AddWorkExperienceRoute()) as OTPWorkExperienceEntity);
+                             if (otpWorkExperienceEntity != null) {
+                               widget.profileEntity.workExperience?.add(
+                                   otpWorkExperienceEntity);
+                               getBloc().add(EditWorkExperienceAddWorkEvent());
+                             }
+                           }catch(ex){
+                             //empty object
+                           }
+                         } ,
+                           child: const Icon(Iconsax.add, color: Colors.black,))
                      ],
                    ),
 
-                   20.height,
+                   30.height,
                    ListView.builder(
                        physics: NeverScrollableScrollPhysics(),
                        shrinkWrap: true,
@@ -80,6 +117,40 @@ class _EditWorkExperiencePageState extends BasePageState<EditWorkExperiencePage,
                              ));
                        }
                    ),
+                   if(widget.profileEntity.workExperience!.isNotEmpty)
+                   20.height,
+                   if(widget.profileEntity.workExperience!.isNotEmpty)
+                   Row(
+                     children: [
+
+                       Expanded(
+                         child: PrimaryButton(
+                           style: ButtonStyle(
+                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                 return BorderSide(
+                                   color: states.contains(MaterialState.disabled)?
+                                   theme.colorScheme.primary.withOpacity(0):
+                                   theme.colorScheme.primary,
+                                   width: 2,
+                                 );
+                               }
+                               ),
+                               backgroundColor: MaterialStateProperty.resolveWith(
+                                       (Set<MaterialState> states){
+                                     return states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.primary.withOpacity(0.3):
+                                     theme.colorScheme.primary;
+                                   }
+                               )
+                           ),
+                           onPressed: () {
+                             getBloc().add(SubmitWorkExperienceEvent(profileEntity: widget.profileEntity));
+                           },
+                           child: Text(getLocalization().save),
+                         ),
+                       ),
+                     ],
+                   )
                  ],
                ),
              ),

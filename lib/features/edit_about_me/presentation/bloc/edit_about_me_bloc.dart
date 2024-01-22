@@ -26,15 +26,11 @@ class EditAboutMeBloc
 
 
     _onSubmitClickedEvent(SubmitClickedEvent event, Emitter<EditAboutMePageState> emit) async{
-        if(event.description.isEmpty){
-            emit(SubmitClickedState()..dataState = DataState.error);
-        }else{
+
             emit(SubmitClickedState()..dataState = DataState.loading);
 
             finalDetailsEntity = finalDetailsEntity.copyWith(newDescription: event.description);
             try{
-                await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
-
                 emit(SubmitClickedState(profileEntity:await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity))
                 )..dataState = DataState.success);
 
@@ -42,5 +38,5 @@ class EditAboutMeBloc
                 emit(SubmitClickedState(error: ex.toString())..dataState = DataState.error);
             }
         }
-    }
+
 } 

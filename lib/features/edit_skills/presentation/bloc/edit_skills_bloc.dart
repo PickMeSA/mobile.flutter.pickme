@@ -50,7 +50,7 @@ class EditSkillsBloc
             await addSkillsSubmitRemoteSkillsAndIndustryUseCase(
                 params : AddSkillsSubmitRemoteSkillsAndIndustryUseCaseParams(
                     skillsPageEntity: SkillsPageEntity(
-                        skillListEntity: skillListEntity,
+                        skillListEntity: selectedSkills,
                         preferredIndustryEntity: PreferredIndustryEntity(
                             id: event.profileEntity?.industry?.id.toString()??"",
                             industry: event.profileEntity?.industry?.industry??""
@@ -70,11 +70,13 @@ class EditSkillsBloc
         emit(EditSkillsGetSkillsListState()..dataState = DataState.loading);
             try{
                 event.profileEntity?.skills?.forEach((element) {
+                    selectedSkills.skillListEntity!.add(SkillEntity(skill: element.skill, id: element.id.toString()));
                    chipOptions.add(ChipOption(label: element.skill!, id: element.id!));
                 });
                 skillEntries.clear();
                 SkillListEntity skillListEntity = await addSkillsGetSkillsListUseCase.call();
                 skillListEntity.skillListEntity!.forEach((element) {
+
                     skillEntries.add(DropdownMenuEntry(value: element, label: element.skill!));
                 });
                 emit(EditSkillsGetSkillsListState()..dataState = DataState.success);
@@ -91,7 +93,9 @@ class EditSkillsBloc
         Emitter<EditSkillsPageState> emit
         )async{
         chipOptions.removeAt(event.index);
+        selectedSkills.skillListEntity!.removeAt(event.index);
         if(chipOptions.isEmpty){
+
             checked = false;
         }
 

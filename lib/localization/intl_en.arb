@@ -188,7 +188,7 @@
   "myCalendar": "My Calendar",
   "myWallet": "My Wallet",
   "needAnAmbulance": "Need an \nambulance?",
-  "hi": "Hi, ",
+  "hi": "Hi, {name} {surname}",
   "iWouldLikeTo": "I would like to",
   "contactUs": "Contact us",
   "iAmLookingFor": "I am looking for",
@@ -293,6 +293,7 @@
   "myHourlyRateAndWorkingHours": "My hourly rate and working hours",
   "editSkills": "Edit Skills",
   "editWorkExperience": "Edit work experience",
-  "accountHolderName": "Account holder name"
+  "accountHolderName": "Account holder name",
+  "completeBooking": "Complete booking"
 
 }

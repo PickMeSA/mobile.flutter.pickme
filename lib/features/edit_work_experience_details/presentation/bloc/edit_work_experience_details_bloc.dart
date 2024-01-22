@@ -21,7 +21,7 @@ class EditWorkExperienceDetailsBloc
     bool current = false;
     List<DropdownMenuEntry<PreferredIndustryEntity>> industryEntries
     = <DropdownMenuEntry<PreferredIndustryEntity>>[];
-    late PreferredIndustryListEntity preferredIndustryListEntity;
+    late PreferredIndustryListEntity preferredIndustryListEntity = PreferredIndustryListEntity(preferredIndustryListEntity: []);
     late PreferredIndustryEntity selectedIndustry;
     final AddSkillsGetIndustryListUseCase addSkillsGetIndustryListUseCase;
 

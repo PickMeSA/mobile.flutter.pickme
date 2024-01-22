@@ -11,7 +11,12 @@ class SubmitFinalDetailsRepositoryImpl extends SubmitFinalDetailsRepository{
   SubmitFinalDetailsRepositoryImpl({required this.profileService});
 
   @override
-  Future<ProfileEntity> call({SubmitFinalDetailsRepositoryParams? params}) {
-    return profileService.submitFinalDetails(finalDetailsEntity: params!.finalDetailsEntity);
+  Future<ProfileEntity> call({SubmitFinalDetailsRepositoryParams? params})async {
+    try {
+      return await profileService.submitFinalDetails(
+          finalDetailsEntity: params!.finalDetailsEntity);
+    }catch(ex){
+      rethrow;
+    }
   }
 }

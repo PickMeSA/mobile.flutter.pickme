@@ -91,7 +91,7 @@ class _BookingRescheduleSentPageState extends BasePageState<BookingRescheduleSen
                                )
                            ),
                            onPressed: () {
-                             context.router.push(const BottomNavigationBarRoute());
+                            // context.router.push(const BottomNavigationBarRoute());
                            },
                            child: Text(getLocalization().backToBooking, style: TextStyle(color: theme.colorScheme.secondary),),
                          ),

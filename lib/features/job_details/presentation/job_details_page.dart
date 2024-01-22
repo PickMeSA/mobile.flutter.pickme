@@ -225,6 +225,29 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            AppDivider(),
                            20.height,
+                           SecondaryButtonDark(
+                             width: MediaQuery.sizeOf(context).width,
+                             style: ButtonStyle(
+                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                   return BorderSide(
+                                     color: theme.colorScheme.secondary,
+                                     width: 2,
+                                   );
+                                 }
+                                 ),
+                                 backgroundColor: MaterialStateProperty.resolveWith(
+                                         (Set<MaterialState> states){
+                                       return theme.colorScheme.secondary;
+                                     }
+                                 )
+                             ),
+                             onPressed:() {
+                               context.router.push(PaySomeoneWebViewRoute());
+                             },
+                             child: Text(getLocalization().apply),
+                           ),
+                           20.height,
+
                            widget.fromIndex == 0 ?
                            PrimaryButton(
                              width: MediaQuery.sizeOf(context).width,
@@ -248,30 +271,26 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              child: Text(getLocalization().apply),
                            ):
                            widget.fromIndex == 1?
-                           Column(
-                             children: [
-                               SecondaryButtonDark(
-                                 width: MediaQuery.sizeOf(context).width,
-                                 style: ButtonStyle(
-                                     side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                       return BorderSide(
-                                         color: theme.colorScheme.secondary,
-                                         width: 2,
-                                       );
-                                     }
-                                     ),
-                                     backgroundColor: MaterialStateProperty.resolveWith(
-                                             (Set<MaterialState> states){
-                                           return theme.colorScheme.secondary;
-                                         }
-                                     )
+                           SecondaryButtonDark(
+                             width: MediaQuery.sizeOf(context).width,
+                             style: ButtonStyle(
+                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                   return BorderSide(
+                                     color: theme.colorScheme.secondary,
+                                     width: 2,
+                                   );
+                                 }
                                  ),
-                                 onPressed:() {
-                                   context.router.push(ApplyForJobRoute());
-                                 },
-                                 child: Text(getLocalization().apply),
-                               )
-                             ],
+                                 backgroundColor: MaterialStateProperty.resolveWith(
+                                         (Set<MaterialState> states){
+                                       return theme.colorScheme.secondary;
+                                     }
+                                 )
+                             ),
+                             onPressed:() {
+                               context.router.push(ApplyForJobRoute());
+                             },
+                             child: Text(getLocalization().apply),
                            ):SizedBox(),
 
                          ],

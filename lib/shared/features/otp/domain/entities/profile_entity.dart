@@ -30,6 +30,7 @@ class ProfileEntity {
   OTPPaymentDetailsEntity? paymentDetails;
   OTPBusinessEntity? business;
   bool? acceptedTermsAndConditions = false;
+  bool? subscriptionPaid = false;
 
   ProfileEntity.blank();
 
@@ -53,7 +54,8 @@ class ProfileEntity {
   this.business,
   this.location,
   this.ratesAndWorkTimesEntity,
-  this.workPermit});
+  this.workPermit,
+  required this.subscriptionPaid});
 
 
 
