@@ -53,8 +53,8 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
     startTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.startTime??"";
     endTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.endTime??"";
     workPermitController.text = widget.profileEntity.workPermit??"";
-    widget.profileEntity.skills?.forEach((element) {
-      getBloc().chipOptions.add(ChipOption(label: element.skill!, id: element.id!));
+    widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity?.workingDaysEntityList?.forEach((element) {
+      getBloc().chipOptions.add(ChipOption(label: element.day, id: int.parse(element.id!)));
     });
   }
 
@@ -257,9 +257,8 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    Padding(
                      padding: const EdgeInsets.only(top: 10, bottom: 30),
                      child: MultiAppDropdownMenu<WorkingDaysEntity>(
-
                          onSelected: (selected){
-                           getBloc().add(WorkingDaySelectedEvent( workingDaysEntity: selected!));
+                           getBloc().add(WorkingDaySelectedEvent(profileEntity: widget.profileEntity, workingDaysEntity: selected!));
                            //getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails()));
                          },
                          width: MediaQuery.sizeOf(context).width - 40,
@@ -270,7 +269,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    ),
 
                    SizedBox(
-                     height: 100 ,
+                     height: 150 ,
                      child: Center(
                        child: ChipGroup(
                          inputs: getBloc().chipOptions,
