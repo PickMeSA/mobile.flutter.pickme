@@ -9,10 +9,11 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
-
+import 'package:iconsax/iconsax.dart';
 import 'bloc/edit_work_experience_details_bloc.dart';
 
 @RoutePage()
@@ -69,6 +70,7 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
              child: Padding(
                padding: const EdgeInsets.all(20.0),
                child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
                    Row(
                      children: [
@@ -140,18 +142,58 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                          },),
                      ),
                    Padding(
-                     padding: const EdgeInsets.only(bottom: 10),
+                     padding: const EdgeInsets.only(bottom: 20),
                      child: AppDropdownMenu<PreferredIndustryEntity>(
                          onSelected: (selected){
                            getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
                          },
                          width: MediaQuery.sizeOf(context).width - 40,
-                         enableFilter: true,
+                         enableFilter: false,
+                         filled: true,
                          dropdownMenuEntries: getBloc().industryEntries,
                          controller: dropdownIndustryController,
                          label: wText(getLocalization().industry,
                              style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
                    ),
+
+                   Row(
+                     children: [
+                       wText(getLocalization().photosOfWorkOptional),
+                       const Spacer(),
+                       InkWell(
+        onTap: (){
+          context.router.push(EditPhotosOfWorkRoute(files: widget.otpWorkExperienceEntity.files));
+        },
+        child: const Icon(Iconsax.edit))
+                     ],
+                   ),
+                   30.height,
+                   ListView.builder(
+                       shrinkWrap: true,
+                       physics: const NeverScrollableScrollPhysics(),
+                       itemCount: widget.otpWorkExperienceEntity.files?.length,
+                       itemBuilder: (context, index){
+                         return
+                         Padding(
+                           padding: const EdgeInsets.only(top: 16.0),
+                           child: Row(
+                             children: [
+                               Expanded(child: ImageThumbnail(
+                                 imagePath:  widget.otpWorkExperienceEntity.files?[0].url,
+                                 //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: 0)),
+                               )),
+                               16.width, // Add some spacing between images
+                               if(widget.otpWorkExperienceEntity.files?.length == 1)
+                                 Expanded(child: Container(),),
+                               if(widget.otpWorkExperienceEntity.files!.length! > 1)
+                                 Expanded(child: ImageThumbnail(
+                                   imagePath:  widget.otpWorkExperienceEntity.files?[0].url,
+                                   //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: 1)),
+                                 )),
+                             ],
+                           ),
+                         );
+                       }),
                  ],
                ),
              ),

@@ -37,11 +37,11 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
     // TODO: implement initState
     super.initState();
     getBloc().add(BankDetailsPageEnteredEvent());
-    accountHolderNameController. text = widget.bankDetailsEntity.accountHolderName!;
-    branchCodeController.text = widget.bankDetailsEntity.bankBranchCode!;
-  accountTypeController.text = widget.bankDetailsEntity.bankAccountType!;
-  accountNumberController.text = widget.bankDetailsEntity.bankAccountNumber!;
-  bankNameController.text = widget.bankDetailsEntity.bankName!;
+    accountHolderNameController. text = widget.bankDetailsEntity.accountHolderName??"";
+    branchCodeController.text = widget.bankDetailsEntity.bankBranchCode??"";
+  accountTypeController.text = widget.bankDetailsEntity.bankAccountType??"";
+  accountNumberController.text = widget.bankDetailsEntity.bankAccountNumber??"";
+  bankNameController.text = widget.bankDetailsEntity.bankName??"";
   }
 
     @override

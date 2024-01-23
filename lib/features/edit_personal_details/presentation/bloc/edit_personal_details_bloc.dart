@@ -10,6 +10,7 @@ import 'package:pickme/features/bank_details/domain/entities/bank_details_entiti
 import 'package:pickme/features/bank_details/domain/usecases/bank_details_submitted_usecase.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_entity.dart';
+import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_list_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/use_cases/rate_and_work_times_usecase/submit_remote_rate_and_work_times_usecase.dart';
 import 'package:pickme/features/rate_and_work_times/presentation/bloc/rate_and_work_times_bloc.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
@@ -24,6 +25,7 @@ part 'edit_personal_details_state.dart';
 class EditPersonalDetailsBloc
     extends BaseBloc<EditPersonalDetailsPageEvent, EditPersonalDetailsPageState> {
     List<WorkingDaysEntity> workingDaysEntityList = getWorkingDays();
+    List<WorkingDaysEntity> selectedDays = [];
     List<DropdownMenuEntry<WorkingDaysEntity>> workingDayEntries =[];
     final OTPSaveRemoteProfileDataUseCase otpSaveRemoteProfileDataUseCase;
     //final BankDetailsSubmittedUseCase bankDetailsSubmittedUseCase;
@@ -52,11 +54,11 @@ class EditPersonalDetailsBloc
         WorkingDaySelectedEvent event,
         Emitter<EditPersonalDetailsPageState> emit
         )async{
-
             event.profileEntity?.ratesAndWorkTimesEntity?.workingDaysListEntity
                 ?.workingDaysEntityList!.add(event.workingDaysEntity);
+            selectedDays.add(event.workingDaysEntity);
 
-        chipOptions.add(ChipOption(label: event.workingDaysEntity.day, id: int.parse(event.workingDaysEntity.id)));
+        chipOptions.add(ChipOption(label: event.workingDaysEntity.day, id:0));
         emit(WorkingDaySelectedState()..dataState = DataState.success);
     }
 
@@ -64,6 +66,7 @@ class EditPersonalDetailsBloc
             SkillChipDeletedEvent event,
         Emitter<EditPersonalDetailsPageState> emit
         )async{
+        selectedDays.removeAt(event.index!);
         chipOptions.removeAt(event.index!);
         event.profileEntity!.ratesAndWorkTimesEntity!.workingDaysListEntity!.workingDaysEntityList!.removeAt(event.index!);
         emit(SkillsUpdateState()..dataState = DataState.success);
@@ -89,14 +92,14 @@ class EditPersonalDetailsBloc
                     profileType: event.profileEntity.type??"",
                     workPermitNumber: event.profileEntity.workPermit??"")));
 
-            /*await bankDetailsSubmittedUseCase.call(
+            /* await bankDetailsSubmittedUseCase.call(
                 params: BankDetailsSubmittedUseCaseParams(
                     bankDetailsEntity:BankDetailsEntity(
                         accountNumber: event.profileEntity.paymentDetails?.bankAccountNumber??"",
                         accountType:event.profileEntity.paymentDetails?.bankAccountType??"" ,
                         branchCode:event.profileEntity.paymentDetails?.bankBranchCode??"" ,
                         bank:event.profileEntity.paymentDetails?.bankName??"" ,
-                    ) ));*/
+                    ) )); */
 
             ProfileEntity profileEntity = await submitRemoteRateAndWorkTimesUseCase.call(
                 params: SubmitRemoteRateAndWorkTimesUseCaseParams(
@@ -104,7 +107,7 @@ class EditPersonalDetailsBloc
                     hourlyRate: event.profileEntity.ratesAndWorkTimesEntity?.hourlyRate??"",
                     endTime: event.profileEntity.ratesAndWorkTimesEntity?.endTime??"",
                     startTime:  event.profileEntity.ratesAndWorkTimesEntity?.startTime??"",
-                    workingDaysListEntity: event.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity
+                    workingDaysListEntity: WorkingDaysListEntity(workingDaysEntityList: selectedDays)
                 )));
 
             emit(UpdatePersonalDetailsState(profileEntity:  profileEntity)..dataState = DataState.success);

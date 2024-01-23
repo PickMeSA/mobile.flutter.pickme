@@ -150,7 +150,10 @@ class ProfileServiceImpl extends ProfileService{
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     return ProfileEntity(
       subscriptionPaid: otpFullProfileModelResponse.subscriptionPaid,
-      ratesAndWorkTimesEntity: RatesAndWorkTimesEntity.fromResponse(otpFullProfileModelResponse.workTimes??const WorkTimesModelResponse(startTime: "", endTime: "", workingDays:  [])),
+      ratesAndWorkTimesEntity: RatesAndWorkTimesEntity.fromResponse(
+          otpFullProfileModelResponse.hourlyRate.toString(),
+          otpFullProfileModelResponse.workTimes?? WorkTimesModelResponse(startTime: "", endTime: "",
+              workingDays:  otpFullProfileModelResponse.workTimes?.workingDays??[])),
       acceptedTermsAndConditions: otpFullProfileModelResponse.acceptedTermsAndConditions?? false,
       firstName: otpFullProfileModelResponse.firstName??"",
         email: otpFullProfileModelResponse.email??"",
@@ -191,11 +194,11 @@ class ProfileServiceImpl extends ProfileService{
     try{
       UserModel userModel = boxUser.get(current);
       print(SubmitRemoteRateAndWorkTimesModelResponse(
-          hourlyRate: int.parse(ratesAndWorkTimesEntity.hourlyRate!),workingtimes: ratesAndWorkTimesEntity.toResponse()).toJson());
+          hourlyRate: int.parse(ratesAndWorkTimesEntity.hourlyRate!),workTimes: ratesAndWorkTimesEntity.toResponse()).toJson());
 
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: SubmitRemoteRateAndWorkTimesModelResponse(
-              hourlyRate: int.parse(ratesAndWorkTimesEntity.hourlyRate!),workingtimes: ratesAndWorkTimesEntity.toResponse()).toJson());
+              hourlyRate: int.parse(ratesAndWorkTimesEntity.hourlyRate!),workTimes: ratesAndWorkTimesEntity.toResponse()).toJson());
 
       return returnProfileEntity(response: response);
 
@@ -218,9 +221,16 @@ class ProfileServiceImpl extends ProfileService{
   }
 
   @override
-  Future<OTPPaymentDetailsEntity> getBankDetails() {
-    // TODO: implement getBankDetails
-    throw UnimplementedError();
+  Future<OTPPaymentDetailsEntity> getBankDetails()async {
+    try {
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.get(
+          "$baseUrl$version/profiles/${userModel.id}");
+      ProfileEntity profileEntity = returnProfileEntity(response: response);
+      return profileEntity.paymentDetails!;
+    } catch (ex) {
+      rethrow;
+    }
   }
 
   @override
@@ -236,3 +246,4 @@ class ProfileServiceImpl extends ProfileService{
 
 
 }
+

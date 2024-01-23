@@ -9,7 +9,7 @@ part 'submit_remote_rate_and_work_times_model_response.g.dart';
 @freezed
 class SubmitRemoteRateAndWorkTimesModelResponse with _$SubmitRemoteRateAndWorkTimesModelResponse {
   const factory SubmitRemoteRateAndWorkTimesModelResponse({
-    required Map<String,dynamic>? workingtimes,
+    required Map<String,dynamic>? workTimes,
     required int? hourlyRate
   }) = _SubmitRemoteRateAndWorkTimesModelResponse;
 

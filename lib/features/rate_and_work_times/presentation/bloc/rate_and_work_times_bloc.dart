@@ -32,6 +32,7 @@ class RateAndWorkTimesBloc
     final SubmitRemoteRateAndWorkTimesUseCase submitRemoteRateAndWorkTimesUseCase;
     List<WorkingDaysEntity> workingDaysEntityList = getWorkingDays();
     List<DropdownMenuEntry<WorkingDaysEntity>> workingDayEntries =[];
+    List<WorkingDaysEntity> selectedDays = [];
     List<ChipOption> chipOptions = [];
     bool checked = false;
     bool? preloaderActive = false;
@@ -76,6 +77,7 @@ class RateAndWorkTimesBloc
         WorkingDaySelectedEvent event,
         Emitter<RateAndWorkTimesPageState> emit
         )async{
+        selectedDays.add(event.workingDaysEntity);
         chipOptions.add(ChipOption(label: event.workingDaysEntity.day, id: int.parse(event.workingDaysEntity.id)));
         emit(WorkingDaySelectedState());
     }
@@ -119,6 +121,7 @@ class RateAndWorkTimesBloc
         SkillChipDeletedEvent event,
         Emitter<RateAndWorkTimesPageState> emit
         )async{
+        selectedDays.removeAt(event.index!);
         chipOptions.removeAt(event.index!);
         emit(SkillChipDeletedState()..dataState = DataState.success);
     }

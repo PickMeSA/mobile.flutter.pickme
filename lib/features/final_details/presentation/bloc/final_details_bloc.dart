@@ -79,12 +79,14 @@ class FinalDetailsBloc
             emit(PoliceClearanceAddedState()..dataState = DataState.error);
         }
     }
-    void validateFile(File file){
-        // Limit the file size
-        const maxSizeInBytes = maxUploadSize * 1024 * 1024;
 
-        if (file.lengthSync() > maxSizeInBytes) {
-            throw('File size exceeds the limit of $maxUploadSize megabytes.');
-        }
+}
+
+void validateFile(File file){
+    // Limit the file size
+    const maxSizeInBytes = maxUploadSize * 1024 * 1024;
+
+    if (file.lengthSync() > maxSizeInBytes) {
+        throw('File size exceeds the limit of $maxUploadSize megabytes.');
     }
-} 
+}

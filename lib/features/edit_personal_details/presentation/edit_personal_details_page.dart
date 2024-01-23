@@ -6,6 +6,7 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/domain/entities/subscription_plan_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_entity.dart';
+import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_list_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -53,9 +54,12 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
     startTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.startTime??"";
     endTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.endTime??"";
     workPermitController.text = widget.profileEntity.workPermit??"";
+    int count = 0;
     widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity?.workingDaysEntityList?.forEach((element) {
-      getBloc().chipOptions.add(ChipOption(label: element.day, id: int.parse(element.id!)));
+      getBloc().selectedDays.add(WorkingDaysEntity(id: count.toString(), day: element.day));
+      getBloc().add(WorkingDaySelectedEvent(workingDaysEntity: element, profileEntity: widget.profileEntity));
     });
+
   }
 
     @override
@@ -344,6 +348,10 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                            ),
                            onPressed: getBloc().checked?null:() {
                               widget.profileEntity.email = emailAddressController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.startTime = startTimeTextController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.endTime = endTimeTextController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.hourlyRate = amountTextController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity = WorkingDaysListEntity(workingDaysEntityList: getBloc().selectedDays);
                               getBloc().add(UpdatePersonalDetailsEvent(profileEntity: widget.profileEntity));
                            },
                            child: Text(getLocalization().save),
