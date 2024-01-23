@@ -750,10 +750,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Photos of work (optional)`
+  /// `Photos of work`
   String get photosOfWork {
     return Intl.message(
-      'Photos of work (optional)',
+      'Photos of work',
       name: 'photosOfWork',
       desc: '',
       args: [],
@@ -1940,13 +1940,13 @@ class AppLocalizations {
     );
   }
 
-  /// `Hi, `
-  String get hi {
+  /// `Hi, {name} {surname}`
+  String hi(Object name, Object surname) {
     return Intl.message(
-      'Hi, ',
+      'Hi, $name $surname',
       name: 'hi',
       desc: '',
-      args: [],
+      args: [name, surname],
     );
   }
 
@@ -2240,20 +2240,20 @@ class AppLocalizations {
     );
   }
 
-  /// `chat`
+  /// `Chat`
   String get chat {
     return Intl.message(
-      'chat',
+      'Chat',
       name: 'chat',
       desc: '',
       args: [],
     );
   }
 
-  /// `profile`
+  /// `Profile`
   String get profile {
     return Intl.message(
-      'profile',
+      'Profile',
       name: 'profile',
       desc: '',
       args: [],
@@ -3115,6 +3115,16 @@ class AppLocalizations {
     return Intl.message(
       'Reviews',
       name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete booking`
+  String get completeBooking {
+    return Intl.message(
+      'Complete booking',
+      name: 'completeBooking',
       desc: '',
       args: [],
     );

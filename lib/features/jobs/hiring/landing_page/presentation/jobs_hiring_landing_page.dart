@@ -16,6 +16,7 @@ import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
 class JobsHiringLandingPage extends BasePage {
@@ -75,6 +76,18 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    const Icon(Iconsax.briefcase),
+                    10.width,
+                    wText(getLocalization().services, style: theme.textTheme.headlineSmall?.copyWith()),
+                    const Spacer(),
+                    const InkWell(
+                      child: Icon(Iconsax.menu),
+                    ),
+                  ],
+                ),
+                30.height,
                 AppExplorationTile(
                   title: getLocalization().exploreAllServices,
                   onClick: () => context.router.push(AllServicesRoute()),
@@ -220,16 +233,9 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
   @override
-  PreferredSizeWidget buildAppbar(){
-    return getAppBar(
-      leading: const Icon(Iconsax.setting),
-      title: Text(getLocalization().services,),
-      actions: [
-        TextButton(onPressed: (){}, child: Icon(Iconsax.menu_1, color: Theme.of(context).colorScheme.secondary,))
-      ],
-    );
+  PreferredSizeWidget? buildAppbar() {
+    return null;
   }
 
 }

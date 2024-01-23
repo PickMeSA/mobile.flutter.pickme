@@ -15,6 +15,7 @@ import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
 class JobsLandingPage extends BasePage {
@@ -47,12 +48,12 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
         //loading
         if(state is GetTopIndustriesState && state.dataState == DataState.success){
           getBloc().preloaderActive = false;
-          Navigator.pop(context);
+          Navigator.of(context, rootNavigator: true).pop();
         }
         //error
         if(state is GetTopIndustriesState && state.dataState == DataState.error){
           getBloc().preloaderActive = false;
-          Navigator.pop(context);
+          Navigator.of(context, rootNavigator: true).pop();
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
       },
@@ -66,6 +67,18 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    const Icon(Iconsax.briefcase),
+                    10.width,
+                    wText(getLocalization().jobs, style: theme.textTheme.headlineSmall?.copyWith()),
+                    const Spacer(),
+                    const InkWell(
+                      child: Icon(Iconsax.menu),
+                    ),
+                  ],
+                ),
+                30.height,
                 AppExplorationTile(
                   title: getLocalization().exploreAllJobs,
                   onClick: ()=>context.router.push(const AllJobsRoute()),
@@ -205,5 +218,8 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
+  @override
+  PreferredSizeWidget? buildAppbar() {
+    return null;
+  }
 }
