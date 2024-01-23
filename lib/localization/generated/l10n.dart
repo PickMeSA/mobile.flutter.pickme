@@ -750,10 +750,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Photos of work (optional)`
+  /// `Photos of work`
   String get photosOfWork {
     return Intl.message(
-      'Photos of work (optional)',
+      'Photos of work',
       name: 'photosOfWork',
       desc: '',
       args: [],

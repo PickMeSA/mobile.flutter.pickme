@@ -13,9 +13,9 @@ class GetBankingDetailsUseCase extends BaseUseCase<GetBankingDetailsUseCaseParam
   GetBankingDetailsUseCase({required this.getBankingDetailsRepository});
 
   @override
-  Future<OTPPaymentDetailsEntity> call({GetBankingDetailsUseCaseParams? params}) {
+  Future<OTPPaymentDetailsEntity> call({GetBankingDetailsUseCaseParams? params})async {
   try{
-    return getBankingDetailsRepository.call();
+    return await getBankingDetailsRepository.call();
   }catch(ex){
     rethrow;
   }

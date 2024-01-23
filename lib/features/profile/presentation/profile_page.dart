@@ -236,6 +236,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                             ));
                       }
                     ),
+
                     wText(getLocalization().photosOfWork),
                     20.height,
                     ListView.builder(
@@ -281,7 +282,6 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                               .push(EditQualificationRoute(
                               profileEntity: getBloc()
                                   .profileEntity));
-                          getBloc().add(GetProfileDetailsEvent());
                         }catch(ex){
 
                         }

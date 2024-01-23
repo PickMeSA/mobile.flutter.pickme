@@ -26,11 +26,11 @@ class RatesAndWorkTimesEntity {
         workingDays: workingDaysListEntity?.toResponse()).toJson();
   }
 
-  RatesAndWorkTimesEntity.fromResponse(WorkTimesModelResponse workTimesModelResponse){
-    hourlyRate = "0";
+  RatesAndWorkTimesEntity.fromResponse(String rate,WorkTimesModelResponse workTimesModelResponse){
+    hourlyRate = rate;
     startTime = workTimesModelResponse?.startTime??"";
     endTime = workTimesModelResponse?.endTime??"";
-    workingDaysListEntity?.workingDaysEntityList = [];
+    workingDaysListEntity = WorkingDaysListEntity(workingDaysEntityList: []);
     workTimesModelResponse?.workingDays?.forEach((element) {
       workingDaysListEntity?.workingDaysEntityList?.add(WorkingDaysEntity(id:"" , day: element.toString()));
     });

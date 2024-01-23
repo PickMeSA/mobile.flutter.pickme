@@ -318,8 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
-        "photosOfWork":
-            MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
+        "photosOfWork": MessageLookupByLibrary.simpleMessage("Photos of work"),
         "photosOfWorkOptional":
             MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
         "photosOptional":

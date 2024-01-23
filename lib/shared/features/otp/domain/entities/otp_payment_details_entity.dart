@@ -19,6 +19,7 @@ class OTPPaymentDetailsEntity{
   required this.vatNumber});
 
   OTPPaymentDetailsEntity.fromResponse(OTPPaymentDetailsModelResponse response){
+    accountHolderName = response.bankAccountHolder;
     bankName = response.bankName??"";
     bankBranchCode = response.bankBranchCode??"";
     bankAccountType = response.bankAccountType??"";
