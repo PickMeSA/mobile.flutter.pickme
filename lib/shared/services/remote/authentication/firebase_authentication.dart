@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'authentication.dart';
 
 @Singleton(as: Authentication)
@@ -20,19 +22,22 @@ class PFirebaseAuthentication extends Authentication {
   @override
   Future<void> authenticate({ required String mobileNumber})  async {
     await firebaseAuth.verifyPhoneNumber(
-      phoneNumber: '+27810434369',
+      phoneNumber: mobileNumber,
       timeout: const Duration(minutes: 1),
       autoRetrievedSmsCodeForTesting:"984596",
       verificationCompleted: (PhoneAuthCredential credential) async{
-        final fCredential = credential;
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
-          await value.user!.getIdToken(true).then((value1) => print(value1));
+          await value.user!.getIdToken(true).then((value1) {
+
+          });
         });
       },
       verificationFailed: (FirebaseAuthException e) {
         final fFailure = e;
       },
-      codeSent: (String verificationId, int? resendToken) {},
+      codeSent: (String verificationId, int? resendToken) {
+        this.verificationId = verificationId;
+      },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
@@ -66,7 +71,9 @@ class PFirebaseAuthentication extends Authentication {
           phoneNumber: mobileNumber,
           codeAutoRetrievalTimeout: (verificationId) {},
           timeout: const Duration(seconds: 120),
-          verificationCompleted: (credential) {},
+          verificationCompleted: (credential) {
+
+          },
           verificationFailed: (e) =>
            throw(e),
           codeSent: (String verificationId, int? resentToken){
@@ -87,12 +94,24 @@ class PFirebaseAuthentication extends Authentication {
 
   Future<TokenModel> getToken({required String otp}) async {
     try {
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: this.verificationId!, smsCode: otp);
-      return TokenModel(
-          refreshToken: credential.token.toString(),
-          accessToken: credential.accessToken!,
-          tokenID: "");
+      PhoneAuthCredential credential =  PhoneAuthProvider.credential(
+          verificationId: verificationId!, smsCode: otp);
+      UserCredential userCredential = await firebaseAuth.signInWithCredential(credential);
+      String? token = await userCredential.user?.getIdToken();
+
+      TokenModel tokenModel =
+       TokenModel(
+          refreshToken: token??"",
+          accessToken: token??"",
+          tokenID: token??"");
+      boxTokens.put(current, tokenModel);
+
+        UserModel userModel = UserModel(id: "");
+        userModel.id = userCredential.user?.uid;
+        boxUser.put(current, userModel);
+
+
+      return tokenModel;
     } catch (ex) {
       rethrow;
     }

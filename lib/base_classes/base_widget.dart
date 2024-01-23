@@ -26,6 +26,7 @@ abstract class BaseWidgetState<T extends BaseWidget , B extends BaseBloc > exten
 
   B initBloc();
 
+
   AppLocalizations initLocalization();
 
   AppLocalizations getLocalization() => baseLocalization;

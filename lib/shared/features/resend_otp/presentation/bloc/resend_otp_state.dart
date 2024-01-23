@@ -4,3 +4,6 @@ abstract class ResendOTPPageState extends BaseState {}
 
 class ResendOTPPageInitState extends ResendOTPPageState  {}
 
+class NumberEnteredState extends ResendOTPPageState{
+}
+

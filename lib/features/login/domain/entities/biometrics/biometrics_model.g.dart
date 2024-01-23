@@ -8,7 +8,7 @@ part of 'biometrics_model.dart';
 
 class BiometricsModelAdapter extends TypeAdapter<BiometricsModel> {
   @override
-  final int typeId = 6;
+  final int typeId = 1;
 
   @override
   BiometricsModel read(BinaryReader reader) {

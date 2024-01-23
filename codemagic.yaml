@@ -41,11 +41,13 @@ workflows:
           - asithole2@dvt.co.za
           - dbotha@dvt.co.za
           - zlagardien@dvtsoftware.com
-          - elrinaretief@icloud.com
-          - attie@pick-me.co.za
+         # - elrinaretief@icloud.com
+         # - attie@pick-me.co.za
+          - thando.mvula@gmail.com
+          - thandoh.maz@icloud.com
         notify:
           success: true # To not receive a notification when a build succeeds
-          failure: false # To not receive a notification when a build fails
+          failure: true # To not receive a notification when a build fails
       slack:
         channel: '#general'
         notify_on_build_start: true
@@ -54,7 +56,7 @@ workflows:
     name: iOS Workflow
     max_build_duration: 120
     integrations:
-      app_store_connect: Beam Application
+      app_store_connect: PickMe Application
     environment:
       ios_signing:
         provisioning_profiles:
@@ -90,7 +92,7 @@ workflows:
       - name: Flutter build ipa
         script: |
           flutter build ipa --release --no-tree-shake-icons -t lib/main.dart \
-            --build-name=1.0.0 \
+            --build-name=1.0.6 \
             --build-number=1 \
             --export-options-plist=/Users/builder/export_options.plist
     artifacts:

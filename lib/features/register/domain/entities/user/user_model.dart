@@ -1,5 +1,5 @@
-class UserModel{
-
+class UserEntity{
+  String? id;
   final String firstName;
   final String surname;
   String mobile;
@@ -10,7 +10,8 @@ class UserModel{
   final String? profileType;
   final String email;
 
-  UserModel({
+  UserEntity({
+    this.id,
     required this.email,
      this.idNumber,
     required this.surname,

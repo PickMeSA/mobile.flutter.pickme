@@ -13,7 +13,7 @@ abstract class ContinueClickedRepository extends BaseRepository<ContinueClickedR
 }
 
 class ContinueClickedRepositoryParams extends BaseRepositoryParams{
-  final UserModel user;
+  final UserEntity user;
 
   ContinueClickedRepositoryParams({required this.user});
 }

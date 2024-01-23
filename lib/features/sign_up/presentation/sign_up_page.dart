@@ -52,4 +52,5 @@ class _SignUpPageState extends BasePageState<SignUpPage, SignUpBloc> {
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
 }

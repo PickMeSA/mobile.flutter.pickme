@@ -1,12 +1,15 @@
 
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:pickme/firebase_options.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/main.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +28,9 @@ class PickMeApp{
     await configFlavor(await readEnvironment(selectEnvironment(env)));
     await initHive();
     setupLocators();
+    if(Platform.isAndroid) {
+      AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+    }
     PickMeApp.run();
   }
 
@@ -41,10 +47,7 @@ class PickMeApp{
         darkTheme: ThemeData(
 
         ),
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-
-        ),
+        theme: AppTheme().defaultTheme,
 
 
       )

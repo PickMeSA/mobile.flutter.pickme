@@ -19,7 +19,7 @@ bool isPasswordValid(String inputPassword){
     if(value.isEmpty)
       return "Phone number is required";
     String pattern =
-        r'^\+27[0-9]{9}$';
+        r'^[0-9]{9}$';
     RegExp regex =  RegExp(pattern);
     if(!regex.hasMatch(value))
       return "Please enter a valid phone number";

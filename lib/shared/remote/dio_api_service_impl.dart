@@ -1,15 +1,29 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
+import 'package:pickme/features/login/domain/entities/token/token_model.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'api-service.dart';
-
 
 @Singleton(as:ApiService)
 class DioApiService extends ApiService{
 
   final Dio dio;
+  Logger logger = Logger();
+
 
   DioApiService({
-    required this.dio});
+    required this.dio}){
+   dio.interceptors.add(InterceptorsWrapper(onRequest:
+       (RequestOptions options, RequestInterceptorHandler handler){
+         logger.d(options);
+  TokenModel tokenModel = boxTokens.get(current);
+         logger.d(tokenModel.accessToken);
+         options.headers['Content-Type'] = 'application/json';
+     options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
+     return handler.next(options);
+   }));
+  }
 
   @override
   Future<Response<T>> delete<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) {
@@ -37,8 +51,14 @@ class DioApiService extends ApiService{
 
   @override
   Future<Response<T>> get<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onReceiveProgress}) async {
-    Response<T> response = await dio.get(path, data: data, queryParameters: queryParameters, options: options);
-    return response;
+    logger.d(path);
+    Response<T> response = await dio.get(
+          path, data: data, queryParameters: queryParameters, options: options);
+      logger.d(response);
+      return response;
+
+
+
   }
 
   @override
@@ -62,6 +82,7 @@ class DioApiService extends ApiService{
   @override
   Future<Response<T>> patch<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onSendProgress, ProgressCallback? onReceiveProgress}) async {
     Response<T> response = await dio.patch(path, data: data, queryParameters: queryParameters, options: options);
+    logger.d(response);
     return response;
   }
 
@@ -73,10 +94,12 @@ class DioApiService extends ApiService{
 
   @override
   Future<Response<T>> post<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onSendProgress, ProgressCallback? onReceiveProgress}) async {
-   Response<T> response = await  dio.post(path,
+    logger.d(data.toString());
+    Response<T> response = await  dio.post(path,
    data: data,
    queryParameters: queryParameters,
    options: options);
+   logger.d(response);
    return response;
   }
 
@@ -89,6 +112,7 @@ class DioApiService extends ApiService{
   @override
   Future<Response<T>> put<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onSendProgress, ProgressCallback? onReceiveProgress}) async {
     Response<T> response = await dio.put(path, data: data, queryParameters: queryParameters, options: options);
+    logger.d(response);
     return response;
   }
 
