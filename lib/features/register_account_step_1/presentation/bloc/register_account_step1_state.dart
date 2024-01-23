@@ -22,6 +22,7 @@ class RegisterAccountRemoteSubmitStep1State extends RegisterAccountStep1State{
 }
 
 class SubmitAcceptedTermsAndConditionsState extends RegisterAccountStep1State{
-  SubmitAcceptedTermsAndConditionsState({required super.checked, super.error});
+  final ProfileEntity? profileEntity;
+  SubmitAcceptedTermsAndConditionsState({this.profileEntity,required super.checked, super.error});
 
 }

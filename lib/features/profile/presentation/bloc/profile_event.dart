@@ -3,3 +3,8 @@ part of 'profile_bloc.dart';
 abstract class ProfilePageEvent extends BaseEvent {}
 
 class GetProfileDetailsEvent extends ProfilePageEvent{}
+
+class UpdateUIEvent extends ProfilePageEvent{
+
+  UpdateUIEvent();
+}

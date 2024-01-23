@@ -13,3 +13,11 @@ class UpdatePersonalDetailsState extends EditPersonalDetailsPageState{
 
   UpdatePersonalDetailsState({this.profileEntity, super.error});
 }
+
+class SkillsUpdateState extends EditPersonalDetailsPageState{
+
+}
+
+class WorkingDaySelectedState extends EditPersonalDetailsPageState{
+
+}

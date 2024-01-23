@@ -2,14 +2,18 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/domain/entities/subscription_plan_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_entity.dart';
+import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_list_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
 import 'bloc/edit_personal_details_bloc.dart';
@@ -50,9 +54,12 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
     startTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.startTime??"";
     endTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.endTime??"";
     workPermitController.text = widget.profileEntity.workPermit??"";
-    widget.profileEntity.skills?.forEach((element) {
-      getBloc().chipOptions.add(ChipOption(label: element.skill!, id: element.id!));
+    int count = 0;
+    widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity?.workingDaysEntityList?.forEach((element) {
+      getBloc().selectedDays.add(WorkingDaysEntity(id: count.toString(), day: element.day));
+      getBloc().add(WorkingDaySelectedEvent(workingDaysEntity: element, profileEntity: widget.profileEntity));
     });
+
   }
 
     @override
@@ -63,7 +70,21 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
   @override
   Widget buildView(BuildContext context) {
     return BlocConsumer<EditPersonalDetailsBloc, EditPersonalDetailsPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is UpdatePersonalDetailsState && state.dataState == DataState.success){
+          Navigator.pop(context);
+          context.router.pop(state.profileEntity);
+        }
+
+        if(state is UpdatePersonalDetailsState && state.dataState == DataState.loading){
+          preloader(context);
+        }
+
+        if(state is UpdatePersonalDetailsState && state.dataState == DataState.error){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+      },
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
          return Padding(
@@ -240,9 +261,8 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    Padding(
                      padding: const EdgeInsets.only(top: 10, bottom: 30),
                      child: MultiAppDropdownMenu<WorkingDaysEntity>(
-
                          onSelected: (selected){
-                           getBloc().add(WorkingDaySelectedEvent( workingDaysEntity: selected!));
+                           getBloc().add(WorkingDaySelectedEvent(profileEntity: widget.profileEntity, workingDaysEntity: selected!));
                            //getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails()));
                          },
                          width: MediaQuery.sizeOf(context).width - 40,
@@ -253,7 +273,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    ),
 
                    SizedBox(
-                     height: 100 ,
+                     height: 150 ,
                      child: Center(
                        child: ChipGroup(
                          inputs: getBloc().chipOptions,
@@ -327,6 +347,11 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                                )
                            ),
                            onPressed: getBloc().checked?null:() {
+                              widget.profileEntity.email = emailAddressController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.startTime = startTimeTextController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.endTime = endTimeTextController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.hourlyRate = amountTextController.text;
+                              widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity = WorkingDaysListEntity(workingDaysEntityList: getBloc().selectedDays);
                               getBloc().add(UpdatePersonalDetailsEvent(profileEntity: widget.profileEntity));
                            },
                            child: Text(getLocalization().save),

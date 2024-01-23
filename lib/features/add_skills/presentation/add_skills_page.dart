@@ -88,6 +88,8 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
             context.router.push(const LocationRoute());
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.push(const FinalDetailsRoute());
+          }else if(!state.profileEntity!.subscriptionPaid!) {
+            context.router.push(const PaySomeoneWebViewRoute());
           }else{
             context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }

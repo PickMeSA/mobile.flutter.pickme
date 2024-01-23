@@ -11,3 +11,5 @@ class ProfilePageInitState extends ProfilePageState  {}
 class GetProfileDetailsState extends ProfilePageState{
   GetProfileDetailsState({super.error});
 }
+
+class UpdateUIState extends ProfilePageState{}

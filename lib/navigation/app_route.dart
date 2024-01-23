@@ -20,6 +20,9 @@ import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.
 import 'package:pickme/features/contact/presentation/contact_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
+import 'package:pickme/features/edit_photos_of_work/presentation/edit_photos_of_work_page.dart';
+import 'package:pickme/features/edit_qualification/presentation/edit_qualification_page.dart';
+import 'package:pickme/features/edit_qualification_details/presentation/edit_qualification_details_page.dart';
 import 'package:pickme/features/edit_skills/presentation/edit_skills_page.dart';
 import 'package:pickme/features/edit_work_experience/presentation/edit_work_experience_page.dart';
 import 'package:pickme/features/edit_work_experience_details/presentation/edit_work_experience_details_page.dart';
@@ -75,7 +78,9 @@ import 'package:pickme/features/register_account_step_1/presentation/register_ac
 import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup_page.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
+import 'package:pickme/shared/features/otp/domain/entities/FileEntity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_payment_details_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
@@ -169,7 +174,11 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: EditSkillsRoute.page),
     AnimatedRoute(page: EditWorkExperienceRoute.page),
     AnimatedRoute(page: EditWorkExperienceDetailsRoute.page),
-    AnimatedRoute(page: ContactRoute.page, initial: true)
+    AnimatedRoute(page: ContactRoute.page),
+    AnimatedRoute(page: EditWorkExperienceDetailsRoute.page),
+    AnimatedRoute(page: EditQualificationDetailsRoute.page),
+    AnimatedRoute(page: EditQualificationRoute.page),
+    AnimatedRoute(page: EditPhotosOfWorkRoute.page)
   ];
 }
 

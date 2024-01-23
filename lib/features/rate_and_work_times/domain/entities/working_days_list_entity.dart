@@ -4,7 +4,7 @@ import 'package:pickme/features/rate_and_work_times/domain/entities/working_days
 
 
 class WorkingDaysListEntity{
-  List<WorkingDaysEntity>? workingDaysEntityList;
+  List<WorkingDaysEntity>? workingDaysEntityList = [];
 
   WorkingDaysListEntity({ this.workingDaysEntityList});
 
@@ -20,6 +20,8 @@ class WorkingDaysListEntity{
 
     return workingDays;
   }
+
+
 }
 
 

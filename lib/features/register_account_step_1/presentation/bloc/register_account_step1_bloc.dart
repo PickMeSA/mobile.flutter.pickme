@@ -5,6 +5,7 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/register_account_step_1/domain/use_cases/register_account_step_1_usecase/accept_terms_and_conditions_usecase.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 
 part 'register_account_step1_event.dart';
 part 'register_account_step1_state.dart';
@@ -27,8 +28,8 @@ class RegisterAccountStep1Bloc extends BaseBloc<RegisterAccountStep1Event, Regis
       )async{
       emit(SubmitAcceptedTermsAndConditionsState(checked: true)..dataState = DataState.loading);
       try{
-        await acceptTermsAndConditionsUseCase.call();
-        emit(SubmitAcceptedTermsAndConditionsState(checked: true,)..dataState = DataState.success);
+
+        emit(SubmitAcceptedTermsAndConditionsState(checked: true,profileEntity: await acceptTermsAndConditionsUseCase.call())..dataState = DataState.success);
 
       }catch(ex){
         emit(SubmitAcceptedTermsAndConditionsState(checked: true,error: ex.toString())..dataState = DataState.error);

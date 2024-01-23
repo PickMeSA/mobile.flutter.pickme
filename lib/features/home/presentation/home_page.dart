@@ -88,7 +88,7 @@ late ProfileModel profileModel;
                              ),
                              SizedBox(height: 20,),
                              wText(
-                                 getLocalization().hi
+                                 getLocalization().hi(profileModel.firstName!, profileModel.surname!)
                                  ,style: theme.textTheme.headlineSmall?.copyWith(
                                  color: Colors.white,
                                  fontWeight: FontWeight.w500)),

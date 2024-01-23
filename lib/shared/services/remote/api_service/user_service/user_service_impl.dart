@@ -24,21 +24,55 @@ class UserServiceImpl extends UserService{
 
   @override
   Future<UserEntity> saveRemoteProfileData({required UserEntity userModel}) async {
+    UserModel userBox = boxUser.get(current);
     try {
-      Response<dynamic> response = await
-      apiService.post("$baseUrl$version/users",
-          data: ProfileDataModelResponse(
-              email: userModel.email,
-              id: userModel.idNumber,
-              idNumber: userModel.idNumber ?? "not used",
-              surname: userModel.surname,
-              firstName: userModel.firstName,
-              mobile: userModel.mobile,
-              passportNumber: userModel.passportNumber ?? "not used",
-              profileType: userModel.profileType,
-              subscriptionType: userModel.subscriptionType,
-              workPermitNumber: userModel.workPermitNumber ?? "not used",
-              isActive: false));
+      Response<dynamic> response;
+
+      try {
+       response = await
+        apiService.post("$baseUrl$version/users",
+            data: ProfileDataModelResponse(
+                email: userModel.email,
+                id: userModel.idNumber,
+                idNumber: userModel.idNumber ?? "not used",
+                surname: userModel.surname,
+                firstName: userModel.firstName,
+                mobile: userModel.mobile,
+                passportNumber: userModel.passportNumber ?? "not used",
+                profileType: userModel.profileType,
+                subscriptionType: userModel.subscriptionType,
+                workPermitNumber: userModel.workPermitNumber ?? "not used",
+                isActive: false));
+      }catch(ex){
+      print(ProfileDataModelResponse(
+          email: userModel.email,
+          id: userModel.idNumber,
+          idNumber: userModel.idNumber ?? "not used",
+          surname: userModel.surname,
+          firstName: userModel.firstName,
+          mobile: userModel.mobile,
+          passportNumber: userModel.passportNumber ?? "not used",
+          profileType: userModel.profileType,
+          subscriptionType: userModel.subscriptionType,
+          workPermitNumber: userModel.workPermitNumber ?? "not used",
+          isActive: false).toJson());
+
+
+        response = await
+        apiService.put("$baseUrl$version/users/${userBox.id}",
+            data: ProfileDataModelResponse(
+                email: userModel.email,
+                id: userModel.idNumber,
+                idNumber: userModel.idNumber ?? "not used",
+                surname: userModel.surname,
+                firstName: userModel.firstName,
+                mobile: userModel.mobile,
+                passportNumber: userModel.passportNumber ?? "not used",
+                profileType: userModel.profileType,
+                subscriptionType: userModel.subscriptionType,
+                workPermitNumber: userModel.workPermitNumber ?? "not used",
+                isActive: false).toJson());
+      }
 
         ProfileDataModelResponse profileDataModelResponse = ProfileDataModelResponse.fromJson(response.data);
 

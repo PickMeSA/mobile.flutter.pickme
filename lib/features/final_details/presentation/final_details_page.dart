@@ -13,6 +13,7 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -51,7 +52,11 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       listener: (context, state){
         if(state is SubmitClickedState && state.dataState == DataState.success){
           Navigator.pop(context);
-          context.router.push(const YouAreAllSetupRoute());
+          if(!state.profileEntity!.subscriptionPaid!) {
+            context.router.push(const PaySomeoneWebViewRoute());
+          }else{
+            context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+          }
         }
 
         if(state is SubmitClickedState && state.dataState == DataState.loading ){
@@ -62,6 +67,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         if(state is SubmitClickedState && state.dataState == DataState.error ){
           if( getBloc().preloaderActive == true){
             Navigator.pop(context);
+            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
           }
         }
       },

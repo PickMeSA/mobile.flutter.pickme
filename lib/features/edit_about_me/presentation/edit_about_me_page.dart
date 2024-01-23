@@ -18,7 +18,7 @@ import 'bloc/edit_about_me_bloc.dart';
 @RoutePage()
 class EditAboutMePage extends BasePage {
    EditAboutMePage({required this.profileEntity, super.key});
-  final ProfileEntity profileEntity;
+   ProfileEntity profileEntity;
   @override
   _EditAboutMePageState createState() => _EditAboutMePageState();
 }
@@ -46,10 +46,12 @@ class _EditAboutMePageState extends BasePageState<EditAboutMePage, EditAboutMeBl
       listener: (context, state){
         if(state is SubmitClickedState && state.dataState == DataState.success){
           Navigator.pop(context);
-          context.router.pop(state.profileEntity);
+          widget.profileEntity = state.profileEntity!;
+          context.router.pop();
         }
 
         if(state is SubmitClickedState && state.dataState == DataState.error){
+          Navigator.pop(context);
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 

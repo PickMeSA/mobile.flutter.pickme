@@ -9,6 +9,8 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_list_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_award.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
@@ -62,7 +64,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     InkWell(onTap: (){context.router.pop();},child: const Icon(Iconsax.menu, size: 25,)),
                   ],
                 ),
-                10.height,
+                30.height,
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -82,7 +84,18 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                 ),
                                 const Spacer(),
                                   InkWell(
-                                    onTap: ()=> context.router.push(EditPersonalDetailsRoute(profileEntity: getBloc().profileEntity)),
+                                    onTap: ()async{
+                                      try {
+                                        await context
+                                            .router.push(
+                                            EditPersonalDetailsRoute(
+                                                profileEntity: getBloc()
+                                                    .profileEntity));
+                                        getBloc().add(GetProfileDetailsEvent());
+                                      }catch(ex){
+
+                                      }
+                                      },
                                     child: const Icon(Iconsax.edit),
                                   )
                               ],
@@ -90,6 +103,8 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                wText(getBloc().profileEntity.industry!.industry!.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
+
                                 wText(getBloc().profileEntity.location!.address.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
 
                                   wText(getBloc().profileEntity.industry?.industry??""),
@@ -118,10 +133,18 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     wText(getLocalization().aboutMe, style: theme.textTheme.titleMedium),
                     const Spacer(),
                     InkWell(
-                      onTap: ()=> context.router.push(EditAboutMeRoute(profileEntity: getBloc().profileEntity)),
+                      onTap: ()async{
+                        try {
+                          await context.router
+                              .push(EditAboutMeRoute(profileEntity: getBloc()
+                              .profileEntity));
+                          getBloc().add(GetProfileDetailsEvent());
+                        }catch(ex){
+                          print(ex.toString());
+                        }
+                        },
                       child: const Icon(Iconsax.edit),
                     ),
-
                   ],
                 ),
                 20.height,
@@ -138,10 +161,18 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     wText(getLocalization().mySkills, style: theme.textTheme.titleMedium),
                     const Spacer(),
                     InkWell(
-                      onTap: ()=> context.router.push(EditSkillsRoute(profileEntity: getBloc().profileEntity)),
+                      onTap: ()async{
+                        try {
+                          await context.router
+                              .push(EditSkillsRoute(profileEntity: getBloc()
+                              .profileEntity));
+                          getBloc().add(GetProfileDetailsEvent());
+                        }catch(ex){
+                          print(ex.toString());
+                        }
+                      } ,
                       child: const Icon(Iconsax.edit),
                     ),
-
                   ],
                 ),
                 if(getBloc().profileEntity.skills!.isNotEmpty)
@@ -159,24 +190,29 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   ),
                 ),
                 20.height,
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
                 const AppDivider(),
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
-                10.height,
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
+                2.height,
                 Row(
                   children: [
                     wText(getLocalization().workExperience, style: theme.textTheme.titleMedium),
                     const Spacer(),
                     InkWell(
-                      onTap: ()=> context.router.push(EditWorkExperienceRoute(profileEntity: getBloc().profileEntity)),
+                      onTap: ()async {
+                        try {
+                          await context.router
+                              .push(EditWorkExperienceRoute(
+                              profileEntity: getBloc()
+                                  .profileEntity));
+                          getBloc().add(GetProfileDetailsEvent());
+                        }catch(ex){
+                          print(ex.toString());
+                        }
+        } ,
                       child: const Icon(Iconsax.edit),
                     ),
 
                   ],
                 ),
-
-                if(getBloc().profileEntity.workExperience!.isNotEmpty)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -200,6 +236,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                             ));
                       }
                     ),
+
                     wText(getLocalization().photosOfWork),
                     20.height,
                     ListView.builder(
@@ -207,7 +244,9 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                       physics: const NeverScrollableScrollPhysics(),
                     itemCount: getBloc().profileEntity.workExperience?.length,
                     itemBuilder: (context, index){
-                      return Padding(
+
+                      return getBloc().profileEntity.workExperience![index].files!.isNotEmpty ?
+                       Padding(
                         padding: const EdgeInsets.only(top: 16.0),
                         child: Row(
                           children: [
@@ -225,7 +264,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                             )),
                           ],
                         ),
-                      );
+                      ):SizedBox();
                     }),
                   ],
                 ),
@@ -237,7 +276,16 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     wText(getLocalization().qualificationMembership, style: theme.textTheme.titleMedium),
                     const Spacer(),
                     InkWell(
-                      onTap: ()=> print("object"),
+                      onTap: ()async{
+                        try {
+                          await context.router
+                              .push(EditQualificationRoute(
+                              profileEntity: getBloc()
+                                  .profileEntity));
+                        }catch(ex){
+
+                        }
+                      } ,
                       child: const Icon(Iconsax.edit),
                     ),
 
@@ -262,7 +310,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                               dateStarted: getBloc().profileEntity.qualifications![index].issueDate,
                               //otpWorkExperienceEntityList![index].startDate!,
                               dateEnded: getBloc().profileEntity.qualifications![index].issueDate
-                                   //otpWorkExperienceEntityList![index].endDate!
+                            //otpWorkExperienceEntityList![index].endDate!
                           ));
                     }
                 ),

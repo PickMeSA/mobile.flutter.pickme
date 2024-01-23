@@ -69,7 +69,7 @@
   "addASkill": "Add a skill",
   "step3": "Step 3",
   "myJobRequests": "My Job Requests",
-  "photosOfWork": "Photos of work (optional)",
+  "photosOfWork": "Photos of work",
   "skillsA": "Skills *",
   "exploreAllJobs": "Explore all jobs",
   "exploreAllServices": "Explore all services",
@@ -188,7 +188,7 @@
   "myCalendar": "My Calendar",
   "myWallet": "My Wallet",
   "needAnAmbulance": "Need an \nambulance?",
-  "hi": "Hi, ",
+  "hi": "Hi, {name} {surname}",
   "iWouldLikeTo": "I would like to",
   "contactUs": "Contact us",
   "iAmLookingFor": "I am looking for",
@@ -218,8 +218,8 @@
   "backToBooking": "Back to bookings",
   "home": "Home",
   "jobs": "Jobs",
-  "chat": "chat",
-  "profile": "profile",
+  "chat": "Chat",
+  "profile": "Profile",
   "rescheduleRequest": "Reschedule Request",
   "aRescheduleRequestHasBeenSentToYou": "A reschedule request has been sent to you, Once you approve, your booking will be updated in your calendar to the proposed date and time",
   "goToRescheduleRequest": "Go to reschedule request",
@@ -305,6 +305,7 @@
   "loadingDotDot": "loading...",
   "howWouldYouRate": "How would you rate",
   "noIndustrySpecified": "No industry specified",
-  "reviews": "Reviews"
+  "reviews": "Reviews",
+  "completeBooking": "Complete booking"
 
 }

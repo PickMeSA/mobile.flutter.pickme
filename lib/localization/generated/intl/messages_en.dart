@@ -22,15 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(name) => "Hi, ${name}";
 
-  static String m1(name) =>
-      "${name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request";
+  static String m1(name, surname) => "Hi, ${name} ${surname}";
 
   static String m2(name) =>
+      "${name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request";
+
+  static String m3(name) =>
       "${name} sent an alternative request. You can approve, or decline this request";
 
-  static String m3(name) => "Welcome ${name}! Let\'s set up your profile";
+  static String m4(name) => "Welcome ${name}! Let\'s set up your profile";
 
-  static String m4(number) =>
+  static String m5(number) =>
       "We’ve sent a One-Time Pin (OTP) to your number ${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -109,11 +111,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
-        "chat": MessageLookupByLibrary.simpleMessage("chat"),
+        "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "choosePickupPoint":
             MessageLookupByLibrary.simpleMessage("Choose pickup point"),
         "client": MessageLookupByLibrary.simpleMessage("Client"),
         "company": MessageLookupByLibrary.simpleMessage("Company *"),
+        "completeBooking":
+            MessageLookupByLibrary.simpleMessage("Complete booking"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
@@ -178,7 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Go to dashboard"),
         "goToRescheduleRequest":
             MessageLookupByLibrary.simpleMessage("Go to reschedule request"),
-        "hi": MessageLookupByLibrary.simpleMessage("Hi, "),
+        "hi": m1,
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
         "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -278,7 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "needToRescheduleSelectAnAlternativeDate":
             MessageLookupByLibrary.simpleMessage(
                 "Need to reschedule? Select an alternative date and/or time and we\'ll let your client know."),
-        "needsToRescheduleThisBooking": m1,
+        "needsToRescheduleThisBooking": m2,
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
@@ -327,8 +331,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number *"),
         "phonePrefix": MessageLookupByLibrary.simpleMessage("+27"),
         "photos": MessageLookupByLibrary.simpleMessage("Photos"),
-        "photosOfWork":
-            MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
+        "photosOfWork": MessageLookupByLibrary.simpleMessage("Photos of work"),
         "photosOfWorkOptional":
             MessageLookupByLibrary.simpleMessage("Photos of work (optional)"),
         "photosOptional":
@@ -369,7 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Possible price range"),
         "preferredIndustry":
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
-        "profile": MessageLookupByLibrary.simpleMessage("profile"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "proposeAlternative":
             MessageLookupByLibrary.simpleMessage("Propose Alternative"),
         "proposeAnotherTime":
@@ -430,7 +433,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendApplication":
             MessageLookupByLibrary.simpleMessage("Send Application"),
         "sendJobOffer": MessageLookupByLibrary.simpleMessage("Send job offer"),
-        "sentAnAlternativeRequest": m2,
+        "sentAnAlternativeRequest": m3,
         "serviceCategory":
             MessageLookupByLibrary.simpleMessage("Service category"),
         "services": MessageLookupByLibrary.simpleMessage("Services"),
@@ -476,13 +479,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "weAreStillVerifyingYourAccount": MessageLookupByLibrary.simpleMessage(
             "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeLetsSetUpYourProfile": m3,
+        "welcomeLetsSetUpYourProfile": m4,
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
         "weveSentYourAlternativeDateAndTimeProposal":
             MessageLookupByLibrary.simpleMessage(
                 "We\'ve sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected"),
-        "weveSentaOneTimePine": m4,
+        "weveSentaOneTimePine": m5,
         "whatAreYouLookingFor":
             MessageLookupByLibrary.simpleMessage("What are you looking for?"),
         "whatIsYourHourlyRateAndWorkTimes":
