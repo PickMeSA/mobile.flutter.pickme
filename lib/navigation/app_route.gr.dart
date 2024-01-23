@@ -142,6 +142,18 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ContactRoute.name: (routeData) {
+      final args = routeData.argsAs<ContactRouteArgs>(
+          orElse: () => const ContactRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ContactPage(
+          key: args.key,
+          isHiring: args.isHiring,
+          userId: args.userId,
+        ),
+      );
+    },
     CreateJobListingInfoRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -911,6 +923,49 @@ class CandidateProfileRouteArgs {
   @override
   String toString() {
     return 'CandidateProfileRouteArgs{key: $key, candidateProfile: $candidateProfile}';
+  }
+}
+
+/// generated route for
+/// [ContactPage]
+class ContactRoute extends PageRouteInfo<ContactRouteArgs> {
+  ContactRoute({
+    Key? key,
+    bool isHiring = false,
+    String? userId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ContactRoute.name,
+          args: ContactRouteArgs(
+            key: key,
+            isHiring: isHiring,
+            userId: userId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ContactRoute';
+
+  static const PageInfo<ContactRouteArgs> page =
+      PageInfo<ContactRouteArgs>(name);
+}
+
+class ContactRouteArgs {
+  const ContactRouteArgs({
+    this.key,
+    this.isHiring = false,
+    this.userId,
+  });
+
+  final Key? key;
+
+  final bool isHiring;
+
+  final String? userId;
+
+  @override
+  String toString() {
+    return 'ContactRouteArgs{key: $key, isHiring: $isHiring, userId: $userId}';
   }
 }
 

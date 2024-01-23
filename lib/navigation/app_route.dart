@@ -17,6 +17,7 @@ import 'package:pickme/features/booking_reschedule_sent/presentation/booking_res
 import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_navigation_bar_page.dart';
 import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.dart';
+import 'package:pickme/features/contact/presentation/contact_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
 import 'package:pickme/features/edit_skills/presentation/edit_skills_page.dart';
@@ -94,7 +95,7 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes =>[
     AnimatedRoute(
       page: LandingRoute.page,
-      // initial: true,
+      initial: true,
     ),
     AnimatedRoute(page: LoginRoute.page,),
     AnimatedRoute(page: RegisterRoute.page,),
@@ -109,7 +110,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: TermsAndConditionsRoute.page,),
     AnimatedRoute(page: MembershipInformationRoute.page,),
     AnimatedRoute(page: JobsLandingRoute.page),
-    AnimatedRoute(page: JobsHiringLandingRoute.page, initial: true),
+    AnimatedRoute(page: JobsHiringLandingRoute.page),
     // AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page: AllServicesRoute.page),
     AnimatedRoute(page: ServiceCategoryCandidatesRoute.page),
@@ -167,7 +168,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: EditAboutMeRoute.page),
     AnimatedRoute(page: EditSkillsRoute.page),
     AnimatedRoute(page: EditWorkExperienceRoute.page),
-    AnimatedRoute(page: EditWorkExperienceDetailsRoute.page)
+    AnimatedRoute(page: EditWorkExperienceDetailsRoute.page),
+    AnimatedRoute(page: ContactRoute.page, initial: true)
   ];
 }
 

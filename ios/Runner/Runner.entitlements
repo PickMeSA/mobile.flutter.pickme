@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>pickMeApp:pick-me.co.za</string>
+		<string>applinks:www.pick-me.co.za</string>
 	</array>
 </dict>
 </plist>

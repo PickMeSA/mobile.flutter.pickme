@@ -6,16 +6,12 @@
     "details":[
       {
         "appIDs":[
-          "MRNGX9ZB2K.mobile.flutter.pickme2"
+          "JMA78HR73M.mobile.flutter.pickme"
         ],
         "components":[
           {
-            "/":"/login",
-            "comment":"Matches URL with a path /login"
-          },
-          {
             "/":"/reviews/*",
-            "comment":"Matches any URL with a path that starts with /product/."
+            "comment":"Matches any URL with a path that starts with /reviews/."
           }
         ]
       }
