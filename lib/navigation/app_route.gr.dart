@@ -189,6 +189,17 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    EditPhotosOfWorkRoute.name: (routeData) {
+      final args = routeData.argsAs<EditPhotosOfWorkRouteArgs>(
+          orElse: () => const EditPhotosOfWorkRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: EditPhotosOfWorkPage(
+          files: args.files,
+          key: args.key,
+        ),
+      );
+    },
     EditQualificationDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<EditQualificationDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -1070,6 +1081,44 @@ class EditPersonalDetailsRouteArgs {
   @override
   String toString() {
     return 'EditPersonalDetailsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditPhotosOfWorkPage]
+class EditPhotosOfWorkRoute extends PageRouteInfo<EditPhotosOfWorkRouteArgs> {
+  EditPhotosOfWorkRoute({
+    List<AppFileEntity>? files,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditPhotosOfWorkRoute.name,
+          args: EditPhotosOfWorkRouteArgs(
+            files: files,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditPhotosOfWorkRoute';
+
+  static const PageInfo<EditPhotosOfWorkRouteArgs> page =
+      PageInfo<EditPhotosOfWorkRouteArgs>(name);
+}
+
+class EditPhotosOfWorkRouteArgs {
+  const EditPhotosOfWorkRouteArgs({
+    this.files,
+    this.key,
+  });
+
+  final List<AppFileEntity>? files;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditPhotosOfWorkRouteArgs{files: $files, key: $key}';
   }
 }
 

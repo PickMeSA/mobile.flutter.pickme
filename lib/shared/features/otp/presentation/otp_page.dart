@@ -83,6 +83,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //RegisterOTPCompleteState/////////////////////////////////////
         //Success
         if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
+
           if(state.profileEntity!.type!.isEmpty){
             context.router.pushAndPopUntil(const SetupProfileRoute(),
                 predicate: (Route<dynamic> route) => false);
@@ -105,10 +106,13 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           }else if(state.profileEntity!.location!.address == "" ){
             context.router.pushAndPopUntil(const LocationRoute(),
                 predicate: (Route<dynamic> route) => false);
-          }else if(state.profileEntity!.description!.isEmpty){
+          }else if(state.profileEntity!.description!.isEmpty) {
             context.router.pushAndPopUntil(const FinalDetailsRoute(),
                 predicate: (Route<dynamic> route) => false);
-          }else{
+          }else if(!state.profileEntity!.subscriptionPaid!){
+            context.router.pushAndPopUntil(const PaySomeoneWebViewRoute(),
+                predicate: (Route<dynamic> route) => false);}else{
+
            context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
          }
         }
