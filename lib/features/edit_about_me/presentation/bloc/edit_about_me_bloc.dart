@@ -16,7 +16,7 @@ class EditAboutMeBloc
     extends BaseBloc<EditAboutMePageEvent, EditAboutMePageState> {
 
     final SubmitFinalDetailsUseCase submitFinalDetailsUseCase;
-    FinalDetailsEntity finalDetailsEntity = const FinalDetailsEntity();
+    FinalDetailsEntity finalDetailsEntity =  FinalDetailsEntity();
 
     EditAboutMeBloc({required this.submitFinalDetailsUseCase}): super(EditAboutMePageInitState()) {
         on<SubmitClickedEvent>((event, emit)=> _onSubmitClickedEvent(event, emit));

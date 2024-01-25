@@ -36,9 +36,8 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
         }
         if(state.dataState == DataState.success && state is SubmitAcceptedTermsAndConditionsState){
           Navigator.pop(context);
-          if( state.profileEntity!.qualifications! != null
-              && state.profileEntity!.workExperience != null
-              && state.profileEntity!.qualifications!.isEmpty
+          if(
+               state.profileEntity!.qualifications!.isEmpty
               && state.profileEntity!.workExperience!.isEmpty) {
             context.router.push(const QualificationsRoute());
           }if(state.profileEntity!.skills!.isEmpty){

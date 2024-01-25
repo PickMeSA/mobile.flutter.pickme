@@ -109,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "candidateRating":
             MessageLookupByLibrary.simpleMessage("Candidate rating"),
         "ccontinue": MessageLookupByLibrary.simpleMessage("Continue"),
+        "certificate": MessageLookupByLibrary.simpleMessage("Certificate"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "choosePickupPoint":
             MessageLookupByLibrary.simpleMessage("Choose pickup point"),
@@ -148,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editDetails": MessageLookupByLibrary.simpleMessage("Edit details"),
         "editMyBankingDetails":
             MessageLookupByLibrary.simpleMessage("Edit my banking details"),
+        "editPhotosOfWork":
+            MessageLookupByLibrary.simpleMessage("Edit photos of work"),
         "editSkills": MessageLookupByLibrary.simpleMessage("Edit Skills"),
         "editWorkExperience":
             MessageLookupByLibrary.simpleMessage("Edit work experience"),
@@ -283,6 +286,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noJobDescription":
             MessageLookupByLibrary.simpleMessage("No job description"),
         "noJobsFound": MessageLookupByLibrary.simpleMessage("No jobs found"),
+        "noMoreThan6ImagesCanBeUploadedForEachExperience":
+            MessageLookupByLibrary.simpleMessage(
+                "No more than 6 Images can be uploaded for each experience"),
         "noProfileDescription":
             MessageLookupByLibrary.simpleMessage("No profile description"),
         "noProfilesAvailableForThisCategory":
@@ -453,6 +459,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
         "uploadCancelledByUser":
             MessageLookupByLibrary.simpleMessage("Upload cancelled by user"),

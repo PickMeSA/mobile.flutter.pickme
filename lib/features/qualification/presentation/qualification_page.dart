@@ -142,7 +142,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                              getBloc().add(AddWorkExperienceEvent(
                                  otpWorkExperienceEntity: await context.router
                                      .push(
-                                     const AddWorkExperienceRoute()) as OTPWorkExperienceEntity));
+                                      AddWorkExperienceRoute()) as OTPWorkExperienceEntity));
                            }catch(ex){
                            }
                          }

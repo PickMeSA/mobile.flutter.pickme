@@ -5,6 +5,7 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -20,8 +21,8 @@ import 'bloc/home_bloc.dart';
 
 @RoutePage()
 class HomePage extends BasePage {
-  const HomePage({super.key});
-
+   HomePage({required this.controller,super.key});
+  final  PersistentTabController controller ;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -65,7 +66,9 @@ late ProfileModel profileModel;
                    child: Stack(
 
                      children: [
-                       Positioned(bottom: 0, right :0,child: SvgPicture.asset("assets/dashboard_man.svg",)),
+                       Positioned(bottom: 0, right :0,child: Image.asset("assets/Vector.png",)),
+
+                       Positioned(bottom: 0, right :0,child: Image.asset("assets/dashboard_man.png",)),
 
                        Padding(
                          padding: const EdgeInsets.only(left: 20.0, right: 20, top :70),
@@ -123,7 +126,7 @@ late ProfileModel profileModel;
                                height: 230,
                                width: (MediaQuery.sizeOf(context).width/ 2) - 25,
                                child: AppSectionCard(title: getLocalization().myBookings,
-                                 onClick: ()=> context.router.push(MyWalletRoute()),
+                                 onClick: ()=> widget.controller.jumpToTab(1),
                                  color: WColors.pickMeBlue,
                                  icon:Icon(Iconsax.calendar, color: Colors.white,size: 20) ,
                                ),

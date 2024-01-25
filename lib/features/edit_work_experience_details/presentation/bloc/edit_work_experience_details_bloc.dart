@@ -29,8 +29,15 @@ class EditWorkExperienceDetailsBloc
         on<AddWorkExperienceCurrentSelectedEvent>((event, emit)=> _onAddWorkExperienceCurrentSelectedEvent(event, emit));
         on<AddWorkExperienceGetPreferredIndustryListEvent>((event, emit) => _onAddWorkGetPreferredIndustryListEvent(event, emit));
         on<PreferredIndustrySelectedEvent>((event, emit) => _onPreferredIndustrySelectedEvent(event,emit));
+        on<RefreshImagesEvent>((event, emit) => _onRefreshImagesEvent(event,emit));
     }
 
+    _onRefreshImagesEvent(
+        RefreshImagesEvent event,
+        Emitter<EditWorkExperienceDetailsPageState> emit
+        ){
+        emit(RefreshImagesState()..dataState = DataState.success);
+}
 
     _onAddWorkExperienceCurrentSelectedEvent(
         AddWorkExperienceCurrentSelectedEvent event,

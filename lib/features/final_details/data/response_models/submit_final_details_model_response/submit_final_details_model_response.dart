@@ -10,6 +10,8 @@ class SubmittedFinalDetailsModelResponse with _$SubmittedFinalDetailsModelRespon
     final String? profilePicture,
     final String? policeClearance,
     final String? description,
+    final int? policeClearanceId,
+    final int? profilePictureId
   }) = _SubmittedFinalDetailsModelResponse;
 
   factory SubmittedFinalDetailsModelResponse.fromJson(

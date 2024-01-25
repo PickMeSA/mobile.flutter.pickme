@@ -161,8 +161,9 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                        wText(getLocalization().photosOfWorkOptional),
                        const Spacer(),
                        InkWell(
-        onTap: (){
-          context.router.push(EditPhotosOfWorkRoute(files: widget.otpWorkExperienceEntity.files));
+        onTap: ()async  {
+          await context.router.push(EditPhotosOfWorkRoute(files: widget.otpWorkExperienceEntity.files));
+          getBloc().add(RefreshImagesEvent());
         },
         child: const Icon(Iconsax.edit))
                      ],
@@ -173,27 +174,64 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                        physics: const NeverScrollableScrollPhysics(),
                        itemCount: widget.otpWorkExperienceEntity.files?.length,
                        itemBuilder: (context, index){
-                         return
-                         Padding(
-                           padding: const EdgeInsets.only(top: 16.0),
-                           child: Row(
-                             children: [
-                               Expanded(child: ImageThumbnail(
-                                 imagePath:  widget.otpWorkExperienceEntity.files?[0].url,
-                                 //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: 0)),
-                               )),
-                               16.width, // Add some spacing between images
-                               if(widget.otpWorkExperienceEntity.files?.length == 1)
-                                 Expanded(child: Container(),),
-                               if(widget.otpWorkExperienceEntity.files!.length! > 1)
-                                 Expanded(child: ImageThumbnail(
-                                   imagePath:  widget.otpWorkExperienceEntity.files?[0].url,
-                                   //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: 1)),
-                                 )),
-                             ],
-                           ),
+                         return widget.otpWorkExperienceEntity.files == null && widget.otpWorkExperienceEntity.files!.isEmpty && index != 0 && !index.isOdd ?
+                         const SizedBox():
+                         Column(
+                           children: [
+                             Padding(
+                               padding: const EdgeInsets.only(top: 16.0),
+                               child: Row(
+                                 children: [
+                                   if(index.isEven || index == 0)
+                                     Expanded(child: ImageThumbnail(
+                                       imagePath:  widget.otpWorkExperienceEntity.files?[index].url,
+                                       //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
+                                     )),
+
+                                   16.width, // Add some spacing between images
+                                   if(widget.otpWorkExperienceEntity.files?.length == index + 1)
+                                     Expanded(child: Container(),),
+                                   if(widget.otpWorkExperienceEntity.files!.length > index + 1 && index.isEven)
+                                     Expanded(child: ImageThumbnail(
+                                       imagePath:  widget.otpWorkExperienceEntity.files?[index + 1].url,
+                                     //  onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
+                                     )),
+                                 ],
+                               ),
+                             ),
+                           ],
                          );
                        }),
+                   Row(
+                     children: [
+                       Expanded(
+                         child: PrimaryButton(
+                           style: ButtonStyle(
+                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                 return BorderSide(
+                                   color: states.contains(MaterialState.disabled)?
+                                   theme.colorScheme.primary.withOpacity(0):
+                                   theme.colorScheme.primary,
+                                   width: 2,
+                                 );
+                               }
+                               ),
+                               backgroundColor: MaterialStateProperty.resolveWith(
+                                       (Set<MaterialState> states){
+                                     return states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.primary.withOpacity(0.3):
+                                     theme.colorScheme.primary;
+                                   }
+                               )
+                           ),
+                           onPressed: () {
+                             Navigator.pop(context);
+                           },
+                           child: Text(getLocalization().save),
+                         ),
+                       ),
+                     ],
+                   )
                  ],
                ),
              ),
@@ -202,6 +240,8 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
       },
     );
   }
+
+
 
 
   @override
