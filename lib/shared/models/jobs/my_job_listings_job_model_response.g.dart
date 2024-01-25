@@ -24,6 +24,14 @@ _$MyJobListingsJobModelResponseImpl
               ?.map((e) =>
                   SkillsModelResponse.fromJson(e as Map<String, dynamic>))
               .toList(),
+          industries: (json['industries'] as List<dynamic>?)
+              ?.map((e) => OTPIndustryModelModelResponse.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          customer: json['customer'] == null
+              ? null
+              : JobCustomerModelResponse.fromJson(
+                  json['customer'] as Map<String, dynamic>),
           id: json['id'] as String?,
           employerName: json['employerName'] as String?,
           distance: (json['distance'] as num?)?.toDouble(),
@@ -44,6 +52,8 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'lng': instance.lng,
       'images': instance.images,
       'skills': instance.skills,
+      'industries': instance.industries,
+      'customer': instance.customer,
       'id': instance.id,
       'employerName': instance.employerName,
       'distance': instance.distance,

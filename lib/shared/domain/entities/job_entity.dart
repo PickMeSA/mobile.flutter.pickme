@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
+import 'package:pickme/shared/domain/entities/industry_entity.dart';
+import 'package:pickme/shared/domain/entities/job_customer_entity.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 
 class JobEntity extends Equatable{
@@ -21,6 +23,8 @@ final List<SkillEntity> skills;
 final String comments;
 final String id;
 final double? distance;
+final IndustryEntity? industry;
+final JobCustomerEntity? customer;
 
   const JobEntity({
     required this.title,
@@ -37,9 +41,11 @@ final double? distance;
     required this.lng,
     required this.images,
     required this.skills,
+    this.industry,
     this.comments = "",
     required this.id,
-    this.distance
+    this.distance,
+    this.customer
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     return JobEntity(
@@ -56,7 +62,15 @@ final double? distance;
         skills: response.skills?.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList()??[],
         id: response.id.toString(),
         employerName: response.employerName,
-        distance: response.distance??0
+        distance: response.distance??0,
+      industry: (response.industries!=null && response.industries!.isNotEmpty)?IndustryEntity(id:response.industries![0].id, industry: response.industries![0].industry):null,
+        customer: response.customer==null?null:JobCustomerEntity(
+          firstName: response.customer!.firstName,
+          surname: response.customer!.surname,
+          averageRating: response.customer!.averageRating,
+          profileImage: response.customer!.profileImage,
+          address: response.customer!.address,
+        )
     );
   }
 

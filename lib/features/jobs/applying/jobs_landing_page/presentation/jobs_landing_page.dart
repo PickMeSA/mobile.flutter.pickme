@@ -125,8 +125,8 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                 if(getBloc().pageEntity!=null)Column(
                   children: getBloc().pageEntity?.recommendedJobs.map((e) => AppJobAdvertCard.matching(
                     jobName: e.title,
-                    employerName: e.employerName??"",
-                    locationName: e.address??getLocalization().noAddressSpecified,
+                    employerName: "${e.customer?.firstName} ${e.customer?.surname}",
+                    locationName: e.customer?.address??getLocalization().noAddressSpecified,
                     dateTime: DateTime.now(),
                     onNext: ()=>context.router.push(JobDetailsRoute(jobId: ""))
                     ,)).toList()??[],
