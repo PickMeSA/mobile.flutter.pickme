@@ -8,6 +8,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_list_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/usecases/get_skills_list_usecase.dart';
@@ -32,7 +33,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   LocationSource locationSource = LocationSource.profile;
   List<DropdownMenuItem<JobsSkillEntity>> skillEntries = [];
   JobsSkillListEntity selectedSkills = JobsSkillListEntity(skillListEntity: []);
-  List<ChipOption> chipOptions = [];
+  List<SkillEntity> chipOptions = [];
   bool preloaderActive = false;
   OTPLocationEntity? otpLocationEntity;
 
@@ -101,7 +102,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
       Emitter<CreateJobListingState> emit){
     bool alreadyExists = false;
       for(int i=0; i<chipOptions.length; i++){
-        ChipOption option = chipOptions[i];
+        SkillEntity option = chipOptions[i];
         if(option.id.toString() == event.skill.id) {
           alreadyExists = true;
           chipOptions.removeAt(i);
@@ -110,7 +111,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
       }
       if(!alreadyExists && chipOptions.length<5) {
         chipOptions.add(
-            ChipOption(label: event.skill.skill!, id: int.parse(event.skill.id!)));
+            SkillEntity(skill: event.skill.skill!, id: event.skill.id!));
         selectedSkills.skillListEntity?.add(event.skill);
         // checked = true;
       }

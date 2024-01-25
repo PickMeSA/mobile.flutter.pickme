@@ -27,8 +27,8 @@ class GetJobsLandingPageDataServiceImpl extends GetJobsLandingPageDataService{
       }
         List<JobEntity> recommended = [];
         MyJobListingsModelResponse jobsResponseModel = MyJobListingsModelResponse
-            .fromJson({"jobs": jobsResponse.data});
-        for (var value in jobsResponseModel.jobs) {
+            .fromJson(jobsResponse.data);
+        for (var value in jobsResponseModel.data) {
           recommended.add(JobEntity.fromResponse(value));
         }
 

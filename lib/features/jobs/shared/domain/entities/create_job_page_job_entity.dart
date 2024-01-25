@@ -1,4 +1,5 @@
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
 
 class CreateJobPageJobEntity {
   final String title;
@@ -14,7 +15,7 @@ class CreateJobPageJobEntity {
   final String lng;
   final double rate;
   final List<String> images;
-  final List<ChipOption> skills;
+  final List<SkillEntity> skills;
 
   CreateJobPageJobEntity({required this.title, required this.description, required this.address, required this.status, this.startDate, this.endDate, this.startTime, required this.imFlexible, required this.estimatedHours, required this.rate, required this.lat, required this.lng, required this.images, required this.skills});
 }

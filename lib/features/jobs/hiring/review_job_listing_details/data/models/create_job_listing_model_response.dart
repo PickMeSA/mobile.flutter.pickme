@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
 
 part 'create_job_listing_model_response.freezed.dart';
 part 'create_job_listing_model_response.g.dart';
@@ -17,7 +18,7 @@ class CreateJobListingModelResponse with _$CreateJobListingModelResponse {
     required double lat,
     required double lng,
     required String images,
-    required String skills,
+    required List<SkillsModelResponse> skills,
     String? id,
     double? distance,
   }) = _CreateJobListingModelResponse;

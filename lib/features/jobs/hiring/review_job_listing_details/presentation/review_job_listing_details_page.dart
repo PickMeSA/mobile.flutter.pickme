@@ -80,7 +80,7 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
                 24.height,
                 wText(getLocalization().skillsRequired, style: Theme.of(context).textTheme.titleMedium),
                 16.height,
-                ChipGroup(inputs: widget.jobEntity.skills.map((e) => ChipOption(label: e.label, id: e.id)).toList()),
+                ChipGroup(inputs: widget.jobEntity.skills.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList()),
                 16.height,
                 const AppDivider(),
                 24.height,

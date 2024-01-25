@@ -5,6 +5,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:www.pick-me.co.za</string>
+		<string>applinks:pick-me.co.za</string>
 	</array>
 </dict>
 </plist>

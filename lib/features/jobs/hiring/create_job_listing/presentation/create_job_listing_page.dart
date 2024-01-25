@@ -362,7 +362,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       Padding(
                         padding: const EdgeInsets.only(top:16, bottom: 140.0),
                         child: ChipGroup(
-                          inputs: getBloc().chipOptions,
+                          inputs: getBloc().chipOptions.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList(),
                           onDeleted: (int index){
                             getBloc().add(SkillChipDeletedEvent(index: index));
                           },

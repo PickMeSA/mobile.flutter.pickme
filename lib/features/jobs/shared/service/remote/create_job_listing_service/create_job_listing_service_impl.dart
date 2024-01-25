@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
 import 'package:pickme/features/jobs/hiring/review_job_listing_details/data/models/create_job_listing_model_response.dart';
 import 'package:pickme/features/jobs/hiring/review_job_listing_details/domain/repository/create_job_listing_repository.dart';
+import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/features/jobs/shared/service/remote/create_job_listing_service/create_job_listing_service.dart';
@@ -28,7 +30,7 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
         lat: double.parse(jobListingRepositoryParams.jobEntity.lat),
         lng: double.parse(jobListingRepositoryParams.jobEntity.lng),
         images: jobListingRepositoryParams.jobEntity.images.join(","),
-        skills: jobListingRepositoryParams.jobEntity.skills.map((e) => e.label).toList().join(","),
+        skills: jobListingRepositoryParams.jobEntity.skills.map((e) => SkillsModelResponse(id: e.id, skill: e.skill)).toList(),
 
       ).toJson());
 
@@ -44,7 +46,7 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
           lat: createJobListingModelResponse.lat,
           lng: createJobListingModelResponse.lng,
           images: createJobListingModelResponse.images,
-          skills: createJobListingModelResponse.skills,
+          skills: createJobListingModelResponse.skills.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList(),
           id: createJobListingModelResponse.id!,
           distance: createJobListingModelResponse.distance);
     // }catch(ex){

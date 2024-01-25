@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
+import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 
 class JobInterestEntity extends Equatable{
@@ -15,7 +17,7 @@ final double estimatedHours;
 final double? lat;
 final double? lng;
 final String images;
-final String skills;
+final List<SkillEntity> skills;
 final String comments;
 final String id;
 final double? distance;
@@ -51,7 +53,7 @@ final double? distance;
         estimatedHours: response.estimatedHours??0,
         lat: response.lat,
         lng: response.lng,
-        skills: response.skills??"",
+        skills: response.skills?.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList()??[],
         id: response.id.toString(),
         employerName: response.employerName,
         distance: response.distance??0
@@ -70,7 +72,7 @@ final double? distance;
         estimatedHours: estimatedHours,
         lat: lat,
         lng: lng,
-        skills: skills,
+        skills: skills.map((e) => SkillsModelResponse(id: e.id, skill: e.skill)).toList(),
         id: id,
         distance: distance
     );
