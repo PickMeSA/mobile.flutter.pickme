@@ -22,6 +22,7 @@ class EditPhotosOfWorkBloc
 
     EditPhotosOfWorkBloc({required this.uploadFileUseCase}): super(EditPhotosOfWorkPageInitState()) {
         on<ProfilePictureAddedEvent>((event, emit) => _onProfilePictureAddedEvent(event, emit));
+        on<RemoveImageClickedEvent>((event, emit) => _onRemoveImageClickedEvent(event, emit));
     }
 
     _onProfilePictureAddedEvent(
@@ -37,5 +38,12 @@ class EditPhotosOfWorkBloc
         }catch(ex){
             emit(ProfilePictureAddedState(error: ex.toString())..dataState = DataState.error);
         }
+    }
+
+    _onRemoveImageClickedEvent(
+        RemoveImageClickedEvent event,
+        Emitter<EditPhotosOfWorkPageState> emit
+        )async{
+        emit(RemoveImageClickedState(index: event.index)..dataState = DataState.success);
     }
 } 

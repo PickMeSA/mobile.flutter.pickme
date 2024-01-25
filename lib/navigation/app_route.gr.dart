@@ -34,9 +34,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     AddWorkExperienceRoute.name: (routeData) {
+      final args = routeData.argsAs<AddWorkExperienceRouteArgs>(
+          orElse: () => const AddWorkExperienceRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AddWorkExperiencePage(),
+        child: AddWorkExperiencePage(key: args.key),
       );
     },
     AllJobsRoute.name: (routeData) {
@@ -280,9 +282,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     HomeRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const HomePage(),
+        child: HomePage(
+          controller: args.controller,
+          key: args.key,
+        ),
       );
     },
     JobDetailsRoute.name: (routeData) {
@@ -622,16 +628,31 @@ class AddSkillsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AddWorkExperiencePage]
-class AddWorkExperienceRoute extends PageRouteInfo<void> {
-  const AddWorkExperienceRoute({List<PageRouteInfo>? children})
-      : super(
+class AddWorkExperienceRoute extends PageRouteInfo<AddWorkExperienceRouteArgs> {
+  AddWorkExperienceRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           AddWorkExperienceRoute.name,
+          args: AddWorkExperienceRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'AddWorkExperienceRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AddWorkExperienceRouteArgs> page =
+      PageInfo<AddWorkExperienceRouteArgs>(name);
+}
+
+class AddWorkExperienceRouteArgs {
+  const AddWorkExperienceRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AddWorkExperienceRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -1417,16 +1438,39 @@ class HirerJobDetailsRouteArgs {
 
 /// generated route for
 /// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(
+class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({
+    required PersistentTabController controller,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           HomeRoute.name,
+          args: HomeRouteArgs(
+            controller: controller,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<HomeRouteArgs> page = PageInfo<HomeRouteArgs>(name);
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({
+    required this.controller,
+    this.key,
+  });
+
+  final PersistentTabController controller;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{controller: $controller, key: $key}';
+  }
 }
 
 /// generated route for

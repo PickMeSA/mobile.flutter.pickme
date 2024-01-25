@@ -3009,6 +3009,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit photos of work`
+  String get editPhotosOfWork {
+    return Intl.message(
+      'Edit photos of work',
+      name: 'editPhotosOfWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certificate`
+  String get certificate {
+    return Intl.message(
+      'Certificate',
+      name: 'certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more than 6 Images can be uploaded for each experience`
+  String get noMoreThan6ImagesCanBeUploadedForEachExperience {
+    return Intl.message(
+      'No more than 6 Images can be uploaded for each experience',
+      name: 'noMoreThan6ImagesCanBeUploadedForEachExperience',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

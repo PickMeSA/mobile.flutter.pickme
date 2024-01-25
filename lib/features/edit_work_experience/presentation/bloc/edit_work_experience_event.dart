@@ -11,3 +11,7 @@ class SubmitWorkExperienceEvent extends EditWorkExperiencePageEvent{
 
   SubmitWorkExperienceEvent({required this.profileEntity});
 }
+
+class UpdateUIEvent extends EditWorkExperiencePageEvent{
+
+}

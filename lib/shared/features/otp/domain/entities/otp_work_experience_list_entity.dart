@@ -20,6 +20,10 @@ class OTPWorkExperienceListEntity{
     List<Map<String, dynamic>> otpWorkExperienceModelResponseList = [];
 
     workExperience!.forEach((element) {
+      List<int> fileIds =[];
+      element.files!.forEach((element) {
+        fileIds.add(element.id);
+      });
       otpWorkExperienceModelResponseList.add(OTPWorkExperienceModelResponse(
           title: element.title,
           company: element.company,
@@ -27,6 +31,7 @@ class OTPWorkExperienceListEntity{
           endDate: element.endDate.toString(),
           isCurrent: element.isCurrent,
           industryId: element.industryId,
+          fileIds: fileIds,
         files: []
       ).toJson());
     });

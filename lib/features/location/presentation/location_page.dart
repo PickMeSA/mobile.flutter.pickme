@@ -53,8 +53,13 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
         if(state is LocationRemoteSubmitLocationState && state.dataState == DataState.success){
 
             Navigator.pop(context);
-            getBloc().preloaderActive = false;
-            context.router.push(const FinalDetailsRoute());
+         if(state.profileEntity!.description!.isEmpty) {
+              context.router.push(const FinalDetailsRoute());
+            }else if(!state.profileEntity!.subscriptionPaid!){
+              context.router.push(const PaySomeoneWebViewRoute());}
+            else{
+              context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+            }
 
         }
 

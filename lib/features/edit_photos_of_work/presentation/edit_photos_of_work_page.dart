@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/shared/features/otp/domain/entities/FileEntity.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
@@ -44,22 +45,18 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
     return BlocConsumer<EditPhotosOfWorkBloc, EditPhotosOfWorkPageState>(
       listener: (context, state){
         if(state.dataState == DataState.success && state is ProfilePictureAddedState){
+          widget.files!.add(AppFileEntity(id: state.uploadFileEntity!.id, name: state.uploadFileEntity!.ref, url: state.uploadFileEntity!.url));
           Navigator.pop(context);
-          widget.files!.add(AppFileEntity(
-              id: state.uploadFileEntity!.id,
-              name: state.uploadFileEntity!.ref,
-              url: state.uploadFileEntity!.url));
-          context.router.pop();
 
         }
 
         if(state.dataState == DataState.loading && state is ProfilePictureAddedState){
-
+          preloader(context);
         }
 
         if(state.dataState == DataState.error && state is ProfilePictureAddedState){
           Navigator.pop(context);
-          wErrorPopUp(message: state. toString(), type: getLocalization().error, context: context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
         if(state.dataState == DataState.success && state is RemoveImageClickedState){
@@ -87,10 +84,10 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
                  children: [
                    Row(
                      children: [
-                       InkWell(onTap: ()=> context.router.pop()
+                       InkWell(onTap: ()=> Navigator.pop(context)
                            ,child: const Icon(Icons.arrow_back_rounded)),
                        20.width,
-                       wText(getLocalization().editWorkExperience, style: theme.textTheme.titleLarge),
+                       wText(getLocalization().editPhotosOfWork, style: theme.textTheme.titleLarge),
                      ],
                    ),
                    ListView.builder(
@@ -98,7 +95,7 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
                        physics: const NeverScrollableScrollPhysics(),
                        itemCount: widget.files?.length,
                        itemBuilder: (context, index){
-                         return widget.files != null && widget.files!.isNotEmpty?
+                         return widget.files == null && widget.files!.isEmpty && index != 0 && !index.isOdd ?
                              const SizedBox():
                            Column(
                              children: [
@@ -106,17 +103,19 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
                                  padding: const EdgeInsets.only(top: 16.0),
                                  child: Row(
                                    children: [
+                                     if(index.isEven || index == 0)
                                      Expanded(child: ImageThumbnail(
-                                       imagePath:  widget.files?[0].url,
-                                       onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: 0)),
+                                       imagePath:  widget.files?[index].url,
+                                       onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
                                      )),
+
                                      16.width, // Add some spacing between images
-                                     if(widget.files?.length == 1)
+                                     if(widget.files?.length == index + 1)
                                        Expanded(child: Container(),),
-                                     if(widget.files!.length > 1)
+                                     if(widget.files!.length > index + 1 && index.isEven)
                                        Expanded(child: ImageThumbnail(
-                                         imagePath:  widget.files?[0].url,
-                                         //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: 1)),
+                                         imagePath:  widget.files?[index + 1].url,
+                                         onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
                                        )),
                                    ],
                                  ),
@@ -128,7 +127,12 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
                    Padding(padding: const EdgeInsets.only(bottom: 30, top: 15),
                        child:InkWell(
                          onTap: (){
-                           _pickFile();
+                           if(widget.files?.length == 6) {
+                             wErrorPopUp(message: getLocalization().noMoreThan6ImagesCanBeUploadedForEachExperience,
+                                 type: getLocalization().error, context: context);
+                           }else{
+                             _pickFile();
+                           }
                          },
                          child: Container(
                            height: 130,
@@ -165,31 +169,6 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
                            style: ButtonStyle(
                                side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
                                  return BorderSide(
-                                   color:
-                                   theme.colorScheme.secondary,
-                                   width: 2,
-                                 );
-                               }
-                               ),
-                               backgroundColor: MaterialStateProperty.resolveWith(
-                                       (Set<MaterialState> states) {
-                                     return Colors.white;
-                                   }
-                               )
-                           ),
-                           onPressed: () {
-                             context.router.pop();
-                           },
-                           child: Text(getLocalization().cancel,style: TextStyle(color: Colors.black)),
-                         ),
-                       ),
-                       10.width,
-
-                       Expanded(
-                         child: PrimaryButton(
-                           style: ButtonStyle(
-                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                 return BorderSide(
                                    color: states.contains(MaterialState.disabled)?
                                    theme.colorScheme.primary.withOpacity(0):
                                    theme.colorScheme.primary,
@@ -206,7 +185,7 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
                                )
                            ),
                            onPressed: () {
-                          //   getBloc().add(SubmitRemoteSkillsListEvent(profileEntity: widget.profileEntity));
+                          context.router.pop();
                            },
                            child: Text(getLocalization().save),
                          ),

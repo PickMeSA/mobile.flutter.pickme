@@ -21,6 +21,7 @@ class EditWorkExperienceBloc
     EditWorkExperienceBloc({required this.submitRemoteQualificationAndExperienceUseCase}): super(EditWorkExperiencePageInitState()) {
         on<EditWorkExperienceAddWorkEvent>((event, emit)=> _onEditWorkExperienceAddWorkEvent(event, emit));
         on<SubmitWorkExperienceEvent>((event,emit)=> _onSubmitWorkExperienceEvent(event, emit));
+        on<UpdateUIEvent>((event, emit)=> _onUpdateUIEvent(event,emit));
     }
 
    Future<void> _onEditWorkExperienceAddWorkEvent(
@@ -35,21 +36,27 @@ class EditWorkExperienceBloc
         Emitter<EditWorkExperiencePageState> emit
         )async{
 
-        emit(SubmitWorkExperienceStatus()..dataState = DataState.loading);
+        emit(SubmitWorkExperienceState()..dataState = DataState.loading);
 
         try{
             await submitRemoteQualificationAndExperienceUseCase.call(params: SubmitRemoteQualificationAndExperienceUseCaseParams(
                 submitQualificationAndExperienceEntity: SubmitQualificationAndExperienceEntity(
                     otpQualificationEntityList: OTPQualificationListEntity(qualificationsEntityList: event.profileEntity.qualifications??[]),
                     otpWorKExperienceEntityList: OTPWorkExperienceListEntity(workExperience: event.profileEntity.workExperience??[]),)));
-            emit(SubmitWorkExperienceStatus()..dataState = DataState.success);
+            emit(SubmitWorkExperienceState()..dataState = DataState.success);
 
         }catch(ex){
-            emit(SubmitWorkExperienceStatus()..dataState = DataState.error);
+            emit(SubmitWorkExperienceState()..dataState = DataState.error);
 
         }
 
     }
 
+    Future<void> _onUpdateUIEvent(
+        UpdateUIEvent event,
+        Emitter<EditWorkExperiencePageState> emit
+        )async{
+      emit(UpdateUIState()..dataState = DataState.success);
+    }
 
 } 

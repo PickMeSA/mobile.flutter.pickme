@@ -54,8 +54,10 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                children: [
                  Row(
                    children: [
-                     wText("${getLocalization().hi}${profileModel?.firstName}",
-                         style: theme.textTheme.headlineMedium),
+                    SizedBox(width: MediaQuery.sizeOf(context).width*0.8,
+                      child: wText(getLocalization().hi(profileModel!.firstName!, profileModel!.surname!),
+                          style: theme.textTheme.headlineMedium),
+                    ),
                      const Spacer(),
                      InkWell(onTap: (){context.router.pop();},child: const Icon(Icons.close))
                    ],
@@ -64,16 +66,18 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                  30.height,
                  wText(getLocalization().iWouldLikeTo),
                  15.height,
-                 ProfileToggle(
-                   onPressed: (int index) {
-                     getBloc().add(ToggleSelectedEvent(selectedIndex: index));
-                     print("Clicked $index");
-                   },
-                   selected: getBloc().selectedToggleButtons,
-                   children: [
-                     Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().work))),
-                     Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().hire))),
-                   ],
+                 SizedBox(
+                   width: MediaQuery.sizeOf(context).width,
+                   child: ProfileToggle(
+                     onPressed: (int index) {
+                       getBloc().add(ToggleSelectedEvent(selectedIndex: index));
+                     },
+                     selected: getBloc().selectedToggleButtons,
+                     children: [
+                       Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().work))),
+                       Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().hire))),
+                     ],
+                   ),
                  ),
                  30.height,
                  InkWell(
