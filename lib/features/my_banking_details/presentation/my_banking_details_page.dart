@@ -72,7 +72,7 @@ class _MyBankingDetailsPageState extends BasePageState<MyBankingDetailsPage, MyB
               10.height,
               getBloc().otpPaymentDetailsEntity != null?
               wBankDetailsCard(
-                onTap: (){ context.router.push(EditMyBankingDetailsRoute(bankDetailsEntity: getBloc().otpPaymentDetailsEntity!));
+                onTap: ()async{await context.router.push(EditMyBankingDetailsRoute(bankDetailsEntity: getBloc().otpPaymentDetailsEntity!));
                             getBloc().add(GetBankingDetailsEvent());},
                 theme: theme,
                   accountName: getBloc().otpPaymentDetailsEntity!.accountHolderName!,

@@ -29,7 +29,6 @@ class FinalDetailsPage extends BasePage {
 }
 
 class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
-  String _filePath = '';
   bool isSelectingProfilePicture = false;
   final TextEditingController aboutYouController = TextEditingController();
 
@@ -81,7 +80,6 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   wText(getLocalization().step7,style:theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 32,

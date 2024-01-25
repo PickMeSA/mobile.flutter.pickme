@@ -102,38 +102,7 @@ class _EditQualificationPageState extends BasePageState<EditQualificationPage, E
                   ),
                   if(widget.profileEntity.workExperience!.isNotEmpty)
                     20.height,
-                  if(widget.profileEntity.workExperience!.isNotEmpty)
-                    Row(
-                      children: [
 
-                        Expanded(
-                          child: PrimaryButton(
-                            style: ButtonStyle(
-                                side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                  return BorderSide(
-                                    color: states.contains(MaterialState.disabled)?
-                                    theme.colorScheme.primary.withOpacity(0):
-                                    theme.colorScheme.primary,
-                                    width: 2,
-                                  );
-                                }
-                                ),
-                                backgroundColor: MaterialStateProperty.resolveWith(
-                                        (Set<MaterialState> states){
-                                      return states.contains(MaterialState.disabled)?
-                                      theme.colorScheme.primary.withOpacity(0.3):
-                                      theme.colorScheme.primary;
-                                    }
-                                )
-                            ),
-                            onPressed: () {
-                              getBloc().add(SubmitQualificationEvent(profileEntity: widget.profileEntity));
-                            },
-                            child: Text(getLocalization().save),
-                          ),
-                        ),
-                      ],
-                    ),
                   if(widget.profileEntity.qualifications!.isNotEmpty)
                     Row(
                       children: [

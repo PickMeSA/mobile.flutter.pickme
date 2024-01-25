@@ -76,9 +76,9 @@ class SetupProfileBloc
         Emitter<SetupProfilePageState> emit
         )async{
             // The button that is tapped is set to true, and the others to false.
-            for (int i = 0; i < selectedToggleButtons.length; i++) {
-                selectedToggleButtons[i] = i == event.selectedIndex;
-            }
+        for (int i = 0; i < selectedToggleButtons.length; i++) {
+            selectedToggleButtons[i] = i == event.selectedIndex;
+        }
 
             emit(SetUpProfileToggleSelectedState(profileModel: profileModel!)..dataState = DataState.success);
 

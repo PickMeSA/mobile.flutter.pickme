@@ -62,113 +62,114 @@ class _EditQualificationDetailsPageState extends BasePageState<EditQualification
            child: SizedBox(
              width: MediaQuery.sizeOf(context).width,
              height: MediaQuery.sizeOf(context).height- 100,
-             child: Form(
-               key: _formKey,
-               child: Column(
-                 children: [
-                   Padding(
-                     padding: const EdgeInsets.only(top: 20, bottom: 50),
-                     child: Row(
-                       children: [
-                         wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
-                             fontSize: 20, fontWeight: FontWeight.w400
-                         )),
-                         const Spacer(),
-                         InkWell(
-                             onTap: ()=>context.router.pop(),
-                             child: const Icon(Icons.close, size: 24,))
-                       ],
+             child: SingleChildScrollView(
+               child: Form(
+                 key: _formKey,
+                 child: Column(
+                   children: [
+                     Padding(
+                       padding: const EdgeInsets.only(top: 20, bottom: 50),
+                       child: Row(
+                         children: [
+                           wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
+                               fontSize: 20, fontWeight: FontWeight.w400
+                           )),
+                           const Spacer(),
+                           InkWell(
+                               onTap: ()=>context.router.pop(),
+                               child: const Icon(Icons.close, size: 24,))
+                         ],
+                       ),
                      ),
-                   ),
-                   Padding(
-                     padding: const EdgeInsets.only(bottom:20 , right: 40),
-                     child: AppDropdownMenu<Qualifications>(
-                       label: wText(getLocalization().qualificationType),
-                       enableFilter: true,
-                       dropdownMenuEntries: state.entries??[],
-                       width: MediaQuery.of(context).size.width-40,
-                       controller: qualificationTypeController,),
-                   ),
-                   Padding(
-                     padding: const EdgeInsets.only(bottom: 10),
-                     child: AppTextFormField(
+                     Padding(
+                       padding: const EdgeInsets.only(bottom:20 , right: 40),
+                       child: AppDropdownMenu<Qualifications>(
+                         label: wText(getLocalization().qualificationType),
+                         enableFilter: true,
+                         dropdownMenuEntries: state.entries??[],
+                         width: MediaQuery.of(context).size.width-40,
+                         controller: qualificationTypeController,),
+                     ),
+                     Padding(
+                       padding: const EdgeInsets.only(bottom: 10),
+                       child: AppTextFormField(
+                           validator: (value){
+                             if(value!.isEmpty){
+                               return getLocalization().pleaseEnterQualificationName;
+                             }
+                           },
+                           textFieldType: TextFieldType.NAME,
+                           labelText: getLocalization().qualificationName,
+                           controller: qualificationNameController),
+                     ),
+                     Padding(
+                       padding: const EdgeInsets.only(bottom: 10),
+                       child: AppTextFormField(
                          validator: (value){
                            if(value!.isEmpty){
-                             return getLocalization().pleaseEnterQualificationName;
+                             return getLocalization().pleaseEnterIssuingOrganization;
                            }
                          },
                          textFieldType: TextFieldType.NAME,
-                         labelText: getLocalization().qualificationName,
-                         controller: qualificationNameController),
-                   ),
-                   Padding(
-                     padding: const EdgeInsets.only(bottom: 10),
-                     child: AppTextFormField(
-                       validator: (value){
-                         if(value!.isEmpty){
-                           return getLocalization().pleaseEnterIssuingOrganization;
-                         }
-                       },
-                       textFieldType: TextFieldType.NAME,
-                       labelText: getLocalization().issuingOrganisations,
-                       controller: issuingOrganisationController,),
-                   ),
+                         labelText: getLocalization().issuingOrganisations,
+                         controller: issuingOrganisationController,),
+                     ),
 
 
-                   DateTextBox(
-                       labelText: getLocalization().issueDate,
-                       controller: issueDateController,
-                       onDateSelected: (DateTime dateTime){
-                         selectedDateTime = dateTime;
-                         issueDateController.text = DateFormatters.getWordDate(dateTime);
-                       }),
-                   Padding(padding: const EdgeInsets.only(bottom: 30, top: 15),
-                       child:InkWell(
-                         onTap: (){
-                           _pickFile();
-                         },
-                         child: Container(
-                           height: 130,
-                           child: Stack(
-                               children:<Widget> [
-                                 Positioned(top: 10,
-                                   child: Container(
-                                     height: 100,
-                                     width: MediaQuery.sizeOf(context).width- 40,
-
-                                     decoration:  BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(10)), border: Border.all(color:Colors.black )),
-                                     child: Center(
-                                       child: SizedBox(
-                                         width: 90,
-                                         child: Row(
-                                           children: [
-                                             SvgPicture.asset("assets/upload_icon.svg",width: 25),
-                                             Spacer(),
-                                             wText(getLocalization().upload,
-                                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400,fontSize: 16))
-                                           ],
+                     DateTextBox(
+                         labelText: getLocalization().issueDate,
+                         controller: issueDateController,
+                         onDateSelected: (DateTime dateTime){
+                           selectedDateTime = dateTime;
+                           issueDateController.text = DateFormatters.getWordDate(dateTime);
+                         }),
+                     Padding(padding: const EdgeInsets.only(bottom: 30, top: 15),
+                         child:InkWell(
+                           onTap: (){
+                             _pickFile();
+                           },
+                           child: Container(
+                             height: 130,
+                             child: Stack(
+                                 children:<Widget> [
+                                   Positioned(top: 10,
+                                     child: Container(
+                                       height: 100,
+                                       width: MediaQuery.sizeOf(context).width- 40,
+                                       decoration:  BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(10)), border: Border.all(color:Colors.black )),
+                                       child: Center(
+                                         child: SizedBox(
+                                           width: 90,
+                                           child: Row(
+                                             children: [
+                                               SvgPicture.asset("assets/upload_icon.svg",width: 25),
+                                               Spacer(),
+                                               wText(getLocalization().upload,
+                                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400,fontSize: 16))
+                                             ],
+                                           ),
                                          ),
                                        ),
+
+
                                      ),
-
-
                                    ),
-                                 ),
-                                 Positioned(left: 20, top: 0,child: Container(
-                                   width: 220,
-                                   decoration: BoxDecoration(color: Colors.white) ,
-                                   child: Center(child: wText(getLocalization().photosOfWork)),
-                                 )),
-                               ]),
-                         ),
-                       )),
-                   const Spacer(),
-                   PrimaryButtonDark(width: MediaQuery.sizeOf(context).width,onPressed: (){
-                     if(_formKey.currentState!.validate()){
-                       Navigator.pop(context, getQualification());
-                     }
-                   }, child: wText(getLocalization().add))
-                 ],
+                                   Positioned(left: 20, top: 0,child: Container(
+                                     width: 100,
+                                     decoration: BoxDecoration(color: Colors.white) ,
+                                     child: Center(child: wText(getLocalization().certificate)),
+                                   )),
+                                 ]),
+                           ),
+                         )),
+                     wText(widget.otpQualificationEntity.supportingDocuments??""),
+                     PrimaryButtonDark(width: MediaQuery.sizeOf(context).width,onPressed: (){
+                       if(_formKey.currentState!.validate()){
+                         Navigator.pop(context, getQualification());
+                       }
+                     }, child: wText(getLocalization().add))
+                   ],
+                 ),
                ),
              ),
            ),

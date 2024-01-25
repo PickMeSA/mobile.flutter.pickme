@@ -186,6 +186,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
         });
       },
       verificationFailed: (FirebaseAuthException e) {
+        Navigator.pop(context);
         wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
       },
       codeSent: (String verificationId, int? resendToken) async {

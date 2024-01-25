@@ -140,8 +140,8 @@ class ProfileServiceImpl extends ProfileService{
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: SubmittedFinalDetailsModelResponse(
             description: finalDetailsEntity.description,
-            profilePicture: finalDetailsEntity.profilePicture?.url??"",
-            policeClearance: finalDetailsEntity.policeClearance?.url??""
+            profilePictureId: finalDetailsEntity.profilePicture?.id,
+            policeClearanceId: finalDetailsEntity.policeClearance?.id
           ).toJson());
 
       return returnProfileEntity(response: response);

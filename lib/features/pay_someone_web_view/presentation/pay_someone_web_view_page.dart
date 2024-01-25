@@ -51,7 +51,7 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
                     context.router.pushAndPopUntil(const YouAreAllSetupRoute(),
                         predicate: (Route<dynamic> route) => false);
                   }else if(message.message == "failed"){
-
+                      context.router.pop();
                   }else{
                     context.router.pop();
                     wErrorPopUp(message: message.message, type: getLocalization().error, context: context);

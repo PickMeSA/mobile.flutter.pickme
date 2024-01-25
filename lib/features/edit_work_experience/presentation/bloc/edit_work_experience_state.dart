@@ -12,6 +12,10 @@ class EditWorkExperienceAddWorkState extends EditWorkExperiencePageState{
 
 }
 
-class SubmitWorkExperienceStatus extends EditWorkExperiencePageState{
-  SubmitWorkExperienceStatus({super.error});
+class SubmitWorkExperienceState extends EditWorkExperiencePageState{
+  SubmitWorkExperienceState({super.error});
+}
+
+class UpdateUIState extends EditWorkExperiencePageState{
+
 }

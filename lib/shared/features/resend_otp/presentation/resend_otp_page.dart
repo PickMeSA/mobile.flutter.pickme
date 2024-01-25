@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/resend_otp_bloc.dart';
@@ -93,6 +94,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                         Padding(
                           padding: const EdgeInsets.only(top: 20, bottom:  10),
                           child: AppTextFormField(
+                            controller: phoneNumberController,
                             // validator: (value)=> validatePhoneNumber(value??""),
                             onChanged: (value)=> getBloc().add(NumberEnteredEvent(mobileNumber: value)),
                             prefixIcon: SizedBox(width: 50,
@@ -125,7 +127,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                               )
                           ),
                           onPressed: !getBloc().checked!?null:() async {
-                            await authenticate(mobileNumber: "${getLocalization().phonePrefix}${phoneNumberController}");
+                            await authenticate(mobileNumber: "${getLocalization().phonePrefix}${phoneNumberController.text}");
                           },
                           child: Text(getLocalization().submit),
                         ),
@@ -150,35 +152,43 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
   }
 
   Future<void> authenticate({ required String mobileNumber})  async {
+
+      preloader(context);
     await widget.firebaseAuth.verifyPhoneNumber(
       phoneNumber: mobileNumber,
       timeout: const Duration(minutes: 1),
-      autoRetrievedSmsCodeForTesting:"984596",
       verificationCompleted: (PhoneAuthCredential credential) async{
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
           await value.user!.getIdToken(true).then((value1) {
-
           });
         });
       },
       verificationFailed: (FirebaseAuthException e) {
+        Navigator.pop(context);
         wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
       },
       codeSent: (String verificationId, int? resendToken) async {
+
+          Navigator.pop(context);
+
         final error =  await context.router.push(OTPRoute(
+            verificationId: verificationId,
             userModel: UserEntity(
-                mobile:"+27${phoneNumberController.text}" ,
-                email: '',
-                surname: '',
-                firstName: ''),
-            fromregister: true, verificationId: verificationId));
+              email: "",
+              surname: '',
+              firstName: '',
+              mobile: mobileNumber,
+            ),
+            fromregister: false));
         if(error != null){
+            Navigator.pop(context);
           wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
         }
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
+
 
 
   @override

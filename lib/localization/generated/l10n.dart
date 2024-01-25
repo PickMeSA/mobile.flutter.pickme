@@ -2900,86 +2900,6 @@ class AppLocalizations {
     );
   }
 
-  /// `No address specified`
-  String get noAddressSpecified {
-    return Intl.message(
-      'No address specified',
-      name: 'noAddressSpecified',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `My Reviews`
-  String get myReviews {
-    return Intl.message(
-      'My Reviews',
-      name: 'myReviews',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `You don’t have any reviews yet`
-  String get youDontHaveAnyReviewsYet {
-    return Intl.message(
-      'You don’t have any reviews yet',
-      name: 'youDontHaveAnyReviewsYet',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Get reviews to boost your profile and increase your chances of getting hired`
-  String get getReviewsToBoostProfile {
-    return Intl.message(
-      'Get reviews to boost your profile and increase your chances of getting hired',
-      name: 'getReviewsToBoostProfile',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Request a review`
-  String get requestAReview {
-    return Intl.message(
-      'Request a review',
-      name: 'requestAReview',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.`
-  String get allowYourClientsToLeaveAReview {
-    return Intl.message(
-      'Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.',
-      name: 'allowYourClientsToLeaveAReview',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Copy link`
-  String get copyLink {
-    return Intl.message(
-      'Copy link',
-      name: 'copyLink',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Review`
-  String get review {
-    return Intl.message(
-      'Review',
-      name: 'review',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `No profiles available for this category`
   String get noProfilesAvailableForThisCategory {
     return Intl.message(
@@ -3080,46 +3000,6 @@ class AppLocalizations {
     );
   }
 
-  /// `loading...`
-  String get loadingDotDot {
-    return Intl.message(
-      'loading...',
-      name: 'loadingDotDot',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `How would you rate`
-  String get howWouldYouRate {
-    return Intl.message(
-      'How would you rate',
-      name: 'howWouldYouRate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No industry specified`
-  String get noIndustrySpecified {
-    return Intl.message(
-      'No industry specified',
-      name: 'noIndustrySpecified',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reviews`
-  String get reviews {
-    return Intl.message(
-      'Reviews',
-      name: 'reviews',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Complete booking`
   String get completeBooking {
     return Intl.message(
@@ -3130,11 +3010,41 @@ class AppLocalizations {
     );
   }
 
-  /// `No reviews found`
-  String get noReviewsFound {
+  /// `Update`
+  String get update {
     return Intl.message(
-      'No reviews found',
-      name: 'noReviewsFound',
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit photos of work`
+  String get editPhotosOfWork {
+    return Intl.message(
+      'Edit photos of work',
+      name: 'editPhotosOfWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certificate`
+  String get certificate {
+    return Intl.message(
+      'Certificate',
+      name: 'certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more than 6 Images can be uploaded for each experience`
+  String get noMoreThan6ImagesCanBeUploadedForEachExperience {
+    return Intl.message(
+      'No more than 6 Images can be uploaded for each experience',
+      name: 'noMoreThan6ImagesCanBeUploadedForEachExperience',
       desc: '',
       args: [],
     );

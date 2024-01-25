@@ -10,4 +10,8 @@ class UploadedFileEntity extends Equatable{
   @override
   List<Object?> get props => [id];
 
+  int toResponse(){
+    return id;
+  }
+
 }

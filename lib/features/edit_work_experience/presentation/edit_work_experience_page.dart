@@ -46,16 +46,16 @@ class _EditWorkExperiencePageState extends BasePageState<EditWorkExperiencePage,
   Widget buildView(BuildContext context) {
     return BlocConsumer<EditWorkExperienceBloc, EditWorkExperiencePageState>(
       listener: (context, state){
-        if(state.dataState == DataState.success && state is SubmitWorkExperienceStatus ){
+        if(state.dataState == DataState.success && state is SubmitWorkExperienceState ){
           Navigator.pop(context);
           context.router.pop();
         }
 
-        if(state.dataState == DataState.loading && state is SubmitWorkExperienceStatus ){
+        if(state.dataState == DataState.loading && state is SubmitWorkExperienceState ){
           preloader(context);
         }
 
-        if(state.dataState == DataState.error && state is SubmitWorkExperienceStatus ){
+        if(state.dataState == DataState.error && state is SubmitWorkExperienceState ){
           Navigator.pop(context);
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
@@ -82,7 +82,7 @@ class _EditWorkExperiencePageState extends BasePageState<EditWorkExperiencePage,
                            try {
                              OTPWorkExperienceEntity? otpWorkExperienceEntity =
                              (await context.router.push(
-                                 const AddWorkExperienceRoute()) as OTPWorkExperienceEntity);
+                                  AddWorkExperienceRoute()) as OTPWorkExperienceEntity);
                              if (otpWorkExperienceEntity != null) {
                                widget.profileEntity.workExperience?.add(
                                    otpWorkExperienceEntity);
@@ -103,7 +103,11 @@ class _EditWorkExperiencePageState extends BasePageState<EditWorkExperiencePage,
                        itemCount: widget.profileEntity.workExperience!.length,
                        itemBuilder:(context, index) {
                          return AppProfileQualification(
-                           onEdit: ()=> context.router.push(EditWorkExperienceDetailsRoute(otpWorkExperienceEntity: widget.profileEntity.workExperience![index])),
+                           onEdit: ()async{
+                             await context.router.push(EditWorkExperienceDetailsRoute(
+                                 otpWorkExperienceEntity: widget.profileEntity.workExperience![index]));
+
+                             },
                              qualification: Award(
                                  name: widget.profileEntity.workExperience![index].title!,
                                  //otpWorkExperienceEntityList![index].title!,
@@ -146,7 +150,7 @@ class _EditWorkExperiencePageState extends BasePageState<EditWorkExperiencePage,
                            onPressed: () {
                              getBloc().add(SubmitWorkExperienceEvent(profileEntity: widget.profileEntity));
                            },
-                           child: Text(getLocalization().save),
+                           child: Text(getLocalization().update),
                          ),
                        ),
                      ],
