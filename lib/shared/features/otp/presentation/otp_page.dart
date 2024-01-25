@@ -102,7 +102,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           }else if(state.profileEntity!.description!.isEmpty) {
             context.router.push(const FinalDetailsRoute());
           }else if(!state.profileEntity!.subscriptionPaid!){
-            context.router.push(const PaySomeoneWebViewRoute());}else{
+            context.router.push(const PaySomeoneWebViewRoute());}
+          else{
            context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
          }
         }
