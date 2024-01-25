@@ -77,9 +77,13 @@ class RateAndWorkTimesBloc
         WorkingDaySelectedEvent event,
         Emitter<RateAndWorkTimesPageState> emit
         )async{
-        selectedDays.add(event.workingDaysEntity);
-        chipOptions.add(ChipOption(label: event.workingDaysEntity.day, id: int.parse(event.workingDaysEntity.id)));
-        emit(WorkingDaySelectedState());
+
+        if(!selectedDays.contains(event.workingDaysEntity)) {
+            selectedDays.add(event.workingDaysEntity);
+            chipOptions.add(ChipOption(label: event.workingDaysEntity.day,
+                id: int.parse(event.workingDaysEntity.id)));
+            emit(WorkingDaySelectedState());
+        }
     }
 
     _onFormValueChangedEvent(
@@ -121,11 +125,11 @@ class RateAndWorkTimesBloc
         SkillChipDeletedEvent event,
         Emitter<RateAndWorkTimesPageState> emit
         )async{
-        selectedDays.removeAt(event.index!);
-        chipOptions.removeAt(event.index!);
-        emit(SkillChipDeletedState()..dataState = DataState.success);
+            selectedDays.removeAt(event.index!);
+            chipOptions.removeAt(event.index!);
+            emit(SkillChipDeletedState()..dataState = DataState.success);
+        }
     }
-}
 
 List<WorkingDaysEntity> getWorkingDays(){
     List<WorkingDaysEntity> list = [];

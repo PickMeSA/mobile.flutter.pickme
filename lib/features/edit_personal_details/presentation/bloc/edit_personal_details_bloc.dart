@@ -54,12 +54,15 @@ class EditPersonalDetailsBloc
         WorkingDaySelectedEvent event,
         Emitter<EditPersonalDetailsPageState> emit
         )async{
-            event.profileEntity?.ratesAndWorkTimesEntity?.workingDaysListEntity
-                ?.workingDaysEntityList!.add(event.workingDaysEntity);
-            selectedDays.add(event.workingDaysEntity);
 
-        chipOptions.add(ChipOption(label: event.workingDaysEntity.day, id:0));
-        emit(WorkingDaySelectedState()..dataState = DataState.success);
+
+            if(!selectedDays.contains(event.workingDaysEntity)){
+                event.profileEntity?.ratesAndWorkTimesEntity?.workingDaysListEntity
+                    ?.workingDaysEntityList!.add(event.workingDaysEntity);
+                selectedDays.add(event.workingDaysEntity);
+                chipOptions.add(ChipOption(label: event.workingDaysEntity.day, id:0));
+                emit(WorkingDaySelectedState()..dataState = DataState.success);
+            }
     }
 
     Future<void> _onSkillChipDeletedEvent(
@@ -68,7 +71,7 @@ class EditPersonalDetailsBloc
         )async{
         selectedDays.removeAt(event.index!);
         chipOptions.removeAt(event.index!);
-        event.profileEntity!.ratesAndWorkTimesEntity!.workingDaysListEntity!.workingDaysEntityList!.removeAt(event.index!);
+        //event.profileEntity!.ratesAndWorkTimesEntity!.workingDaysListEntity!.workingDaysEntityList!.removeAt(event.index!);
         emit(SkillsUpdateState()..dataState = DataState.success);
 
     }

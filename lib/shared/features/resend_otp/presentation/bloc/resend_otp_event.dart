@@ -13,3 +13,4 @@ class ResendOTPSubmitClickedEvent extends ResendOTPPageEvent{
 
    ResendOTPSubmitClickedEvent({required this.userModel});
 }
+
