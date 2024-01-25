@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/review_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
@@ -82,19 +83,21 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
                             ),
                           ),
                           24.height,
-                          Text(getLocalization().youDontHaveAnyReviewsYet,
+                          Text(getBloc().isMyProfile?
+                          getLocalization().youDontHaveAnyReviewsYet:
+                          getLocalization().noReviewsFound,
                             style: theme.textTheme.headlineSmall,
                             textAlign: TextAlign.center,
                           ),
                           16.height,
-                          Text(getLocalization().getReviewsToBoostProfile,
+                          if(getBloc().isMyProfile)Text(getLocalization().getReviewsToBoostProfile,
                             style: theme.textTheme.bodyMedium,
                             textAlign: TextAlign.center,
                           ),
                           24.height,
                         ],
                       )),
-                      PrimaryButton.fullWidth(
+                      if(getBloc().isMyProfile)PrimaryButton.fullWidth(
                         onPressed: ()=>context.router.push(RequestAReviewRoute()),
                         child: Text(getLocalization().requestAReview),
                       ),
@@ -144,12 +147,12 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(widget.isHiring?getLocalization().reviews:getLocalization().myReviews),
-      actions: widget.isHiring?null:[
+      title: Text(getBloc().isMyProfile?getLocalization().myReviews:getLocalization().reviews),
+      actions: getBloc().isMyProfile?[
         TertiaryButton(
           onPressed: (){},
           child: Text(getLocalization().requestAReview),)
-      ]
+      ]:null
     );
   }
 

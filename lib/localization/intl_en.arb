@@ -306,6 +306,7 @@
   "howWouldYouRate": "How would you rate",
   "noIndustrySpecified": "No industry specified",
   "reviews": "Reviews",
-  "completeBooking": "Complete booking"
+  "completeBooking": "Complete booking",
+  "noReviewsFound": "No reviews found"
 
 }

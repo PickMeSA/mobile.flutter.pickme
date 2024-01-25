@@ -11,6 +11,7 @@ required int rating,
 required BuildContext context,
   required String seeReviews,
   Function? onEdit,
+  VoidCallback? onSeeReviews,
   String? hourlyRate,
   String? occupation
 }
@@ -21,7 +22,7 @@ required BuildContext context,
       borderRadius: BorderRadius.circular(8),
     ),
     child: Padding(
-      padding:const EdgeInsets.all(16.0),
+      padding:const EdgeInsets.only(left: 10, right: 0.0, top:16, bottom: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -60,10 +61,17 @@ required BuildContext context,
                         ),
                         Row(
                           children: [
-                            AppStarRating(rating: rating, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
-                            wText(rating.toDouble().toString()),
-                            const Spacer(),
-                            wText(seeReviews,style: TextStyle(decoration: TextDecoration.underline)),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  AppStarRating(rating: rating,),
+                                  wText(rating.toDouble().toString()),
+                                ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: onSeeReviews,
+                                child: wText(seeReviews,style: TextStyle(decoration: TextDecoration.underline))),
                           ],
                         ),
                         if(hourlyRate!= null)

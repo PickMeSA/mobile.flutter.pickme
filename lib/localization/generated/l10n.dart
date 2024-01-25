@@ -3129,6 +3129,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No reviews found`
+  String get noReviewsFound {
+    return Intl.message(
+      'No reviews found',
+      name: 'noReviewsFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

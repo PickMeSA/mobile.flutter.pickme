@@ -22,6 +22,7 @@ class MyReviewsPageBloc extends BaseBloc<MyReviewsPageEvent, MyReviewsPageState>
   MyReviewsPageEntity? pageEntity;
   bool preloaderActive = false;
   final Logger logger = Logger();
+  bool isMyProfile = false;
 
   MyReviewsPageBloc({
     required this.getMyReviewsUseCase,}) : super(MyReviewsPageInitialState()) {

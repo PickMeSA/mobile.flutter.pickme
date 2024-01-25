@@ -128,7 +128,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                     employerName: "${e.customer?.firstName} ${e.customer?.surname}",
                     locationName: e.customer?.address??getLocalization().noAddressSpecified,
                     dateTime: DateTime.now(),
-                    onNext: ()=>context.router.push(JobDetailsRoute(jobId: ""))
+                    onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
                     ,)).toList()??[],
                 ),
                 40.height,
