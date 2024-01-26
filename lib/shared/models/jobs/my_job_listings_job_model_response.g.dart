@@ -12,6 +12,7 @@ _$MyJobListingsJobModelResponseImpl
           title: json['title'] as String?,
           description: json['description'] as String?,
           status: json['status'] as String?,
+          address: json['address'] as String?,
           startDate: json['startDate'] as String?,
           endDate: json['endDate'] as String?,
           startTime: json['startTime'] as String?,
@@ -19,8 +20,20 @@ _$MyJobListingsJobModelResponseImpl
           lat: (json['lat'] as num?)?.toDouble(),
           lng: (json['lng'] as num?)?.toDouble(),
           images: json['images'] as String?,
-          skills: json['skills'] as String?,
+          skills: (json['skills'] as List<dynamic>?)
+              ?.map((e) =>
+                  SkillsModelResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
+          industries: (json['industries'] as List<dynamic>?)
+              ?.map((e) => OTPIndustryModelModelResponse.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+          customer: json['customer'] == null
+              ? null
+              : JobCustomerModelResponse.fromJson(
+                  json['customer'] as Map<String, dynamic>),
           id: json['id'] as String?,
+          employerName: json['employerName'] as String?,
           distance: (json['distance'] as num?)?.toDouble(),
         );
 
@@ -30,6 +43,7 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'title': instance.title,
       'description': instance.description,
       'status': instance.status,
+      'address': instance.address,
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'startTime': instance.startTime,
@@ -38,6 +52,9 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'lng': instance.lng,
       'images': instance.images,
       'skills': instance.skills,
+      'industries': instance.industries,
+      'customer': instance.customer,
       'id': instance.id,
+      'employerName': instance.employerName,
       'distance': instance.distance,
     };

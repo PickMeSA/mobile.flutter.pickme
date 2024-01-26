@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/shared/domain/entities/create_job_page_job_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +80,7 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
                 24.height,
                 wText(getLocalization().skillsRequired, style: Theme.of(context).textTheme.titleMedium),
                 16.height,
-                ChipGroup(inputs: widget.jobEntity.skills.map((e) => ChipOption(label: e.label, id: e.id)).toList()),
+                ChipGroup(inputs: widget.jobEntity.skills.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList()),
                 16.height,
                 const AppDivider(),
                 24.height,

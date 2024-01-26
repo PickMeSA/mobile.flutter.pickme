@@ -9,7 +9,7 @@ import 'package:pickme/features/jobs/hiring/candidate_profile_page/domain/usecas
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 
-import '../../../../shared/domain/entities/create_job_page_job_entity.dart';
+import '../../../../../../shared/domain/entities/create_job_page_job_entity.dart';
 
 part 'candidate_profile_page_event.dart';
 part 'candidate_profile_page_state.dart';

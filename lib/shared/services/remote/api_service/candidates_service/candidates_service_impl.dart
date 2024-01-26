@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:auto_route/annotations.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pickme/features/jobs/shared/domain/repositories/get_paginated_candidates_repository.dart';
+import 'package:pickme/shared/domain/repository/get_paginated_candidates_repository.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';

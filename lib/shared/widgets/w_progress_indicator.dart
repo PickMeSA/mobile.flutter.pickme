@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
  preloader(BuildContext context){
    showDialog(
+       barrierDismissible:false,
      context: context,
      builder: (BuildContext context){
       return const SizedBox(

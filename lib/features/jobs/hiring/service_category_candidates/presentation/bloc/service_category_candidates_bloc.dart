@@ -9,7 +9,7 @@ import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/pagination_entity.dart';
 
-import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
 part 'service_category_candidates_event.dart';
 part 'service_category_candidates_state.dart';

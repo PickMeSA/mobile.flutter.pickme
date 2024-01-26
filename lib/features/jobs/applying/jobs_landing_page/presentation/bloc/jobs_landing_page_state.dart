@@ -2,8 +2,8 @@ part of 'jobs_landing_page_bloc.dart';
 
 @immutable
 abstract class JobsLandingPageState extends BaseState {
-  JobsLandingPageState({super.dataState});
-
+  final String? error;
+  JobsLandingPageState({super.dataState, this.error});
 }
 
 class JobsLandingPageInitial extends JobsLandingPageState {
@@ -11,5 +11,5 @@ class JobsLandingPageInitial extends JobsLandingPageState {
 }
 
 class GetTopIndustriesState extends JobsLandingPageState {
-  GetTopIndustriesState();
+  GetTopIndustriesState({super.error});
 }

@@ -70,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "additionalInformation":
             MessageLookupByLibrary.simpleMessage("Additional information"),
         "allServices": MessageLookupByLibrary.simpleMessage("All services"),
+        "allowYourClientsToLeaveAReview": MessageLookupByLibrary.simpleMessage(
+            "Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them."),
         "alternativeDateAndTime":
             MessageLookupByLibrary.simpleMessage("Alternative date & time"),
         "alternativeRequest":
@@ -123,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactHelpCenter":
             MessageLookupByLibrary.simpleMessage("Contact help center"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "copyLink": MessageLookupByLibrary.simpleMessage("Copy link"),
         "countryCode": MessageLookupByLibrary.simpleMessage("+27"),
         "createAJobListing":
             MessageLookupByLibrary.simpleMessage("Create a job listing"),
@@ -173,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "forYou": MessageLookupByLibrary.simpleMessage("For you"),
+        "getReviewsToBoostProfile": MessageLookupByLibrary.simpleMessage(
+            "Get reviews to boost your profile and increase your chances of getting hired"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "goToAlternativeRequest":
             MessageLookupByLibrary.simpleMessage("Go to alternative Request"),
@@ -189,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hours & total fee"),
         "hoursTotalFee":
             MessageLookupByLibrary.simpleMessage("hours & total fee"),
+        "howWouldYouRate":
+            MessageLookupByLibrary.simpleMessage("How would you rate"),
         "iAmFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
             "I am flexible (open to discuss)"),
         "iAmLookingFor":
@@ -230,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
         "loadMore": MessageLookupByLibrary.simpleMessage("Load more"),
+        "loadingDotDot": MessageLookupByLibrary.simpleMessage("loading..."),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "locationAreaBasedOnProfile": MessageLookupByLibrary.simpleMessage(
             "Location/area based on profile"),
@@ -265,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myJobRequests":
             MessageLookupByLibrary.simpleMessage("My Job Requests"),
         "myLocation": MessageLookupByLibrary.simpleMessage("My location"),
+        "myReviews": MessageLookupByLibrary.simpleMessage("My Reviews"),
         "mySavedJobs": MessageLookupByLibrary.simpleMessage("My saved jobs"),
         "mySkills": MessageLookupByLibrary.simpleMessage("My skills"),
         "myWallet": MessageLookupByLibrary.simpleMessage("My Wallet"),
@@ -282,7 +291,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
+        "noAddressSpecified":
+            MessageLookupByLibrary.simpleMessage("No address specified"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
+        "noIndustrySpecified":
+            MessageLookupByLibrary.simpleMessage("No industry specified"),
         "noJobDescription":
             MessageLookupByLibrary.simpleMessage("No job description"),
         "noJobsFound": MessageLookupByLibrary.simpleMessage("No jobs found"),
@@ -295,6 +308,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "No profiles available for this category"),
         "noRating": MessageLookupByLibrary.simpleMessage("No ratings yet"),
+        "noReviewsFound":
+            MessageLookupByLibrary.simpleMessage("No reviews found"),
         "notSatisfiedWithTheProposedRescheduleDateAndTime":
             MessageLookupByLibrary.simpleMessage(
                 "Not satisfied with the proposed reschedule date & time? you can propose an alternative"),
@@ -392,6 +407,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Recommended for you"),
         "registrationFee":
             MessageLookupByLibrary.simpleMessage("Registration fee"),
+        "requestAReview":
+            MessageLookupByLibrary.simpleMessage("Request a review"),
         "requestAccepted":
             MessageLookupByLibrary.simpleMessage("Request approved"),
         "requestDeclined":
@@ -403,8 +420,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "rescheduleRequestSent":
             MessageLookupByLibrary.simpleMessage("Reschedule request sent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
+        "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "seeReviews": MessageLookupByLibrary.simpleMessage("See reviews"),
@@ -502,6 +521,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have any active listings"),
         "youDontHaveAnyInactiveListings": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any active listings"),
+        "youDontHaveAnyReviewsYet": MessageLookupByLibrary.simpleMessage(
+            "You don’t have any reviews yet"),
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
                 "You have the flexibility to set your own hourly rate"),

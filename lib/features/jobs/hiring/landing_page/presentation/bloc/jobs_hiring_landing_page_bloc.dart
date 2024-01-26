@@ -4,14 +4,14 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:pickme/features/jobs/shared/domain/usecases/get_my_job_listings_usecase.dart';
-import 'package:pickme/features/jobs/shared/domain/usecases/get_industries_usecase.dart';
+import 'package:pickme/shared/domain/usecases/get_my_job_listings_usecase.dart';
+import 'package:pickme/shared/domain/usecases/get_industries_usecase.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:logger/logger.dart';
 
-import '../../../../shared/domain/entities/my_job_listings_page_entity.dart';
-import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+import '../../../../../../shared/domain/entities/my_job_listings_page_entity.dart';
+import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
 part 'jobs_hiring_landing_page_event.dart';
 part 'jobs_hiring_landing_page_state.dart';

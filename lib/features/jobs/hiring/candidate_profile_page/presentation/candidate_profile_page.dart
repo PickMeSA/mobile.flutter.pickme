@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/domain/entities/FileEntity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
@@ -44,6 +45,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
     List<AppFileEntity> jobImages = [];
     if(profileEntity?.workExperience!=null && profileEntity!.workExperience!.isNotEmpty){
       for (var experience in profileEntity.workExperience!) {
+        logger.i(experience.company);
         if(experience.files !=null){
           for(AppFileEntity file in experience.files!){
             jobImages.add(file);
@@ -87,7 +89,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                       jobTitle: profile.jobTitle??getLocalization().noJobDescription,
                       rating: profile.rating??0,
                       hourlyRate: "R${profile.hourlyRate} p/h",
-                      seeReviewsFunction: (){},
+                      seeReviewsFunction: ()=>context.router.push(MyReviewsRoute(isHiring: true, userId: profile.id)),
                       image: (profile.profilePicture!=null)?
                       CachedNetworkImageProvider(
                           profile.profilePicture!
