@@ -36,24 +36,22 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
         }
         if(state.dataState == DataState.success && state is SubmitAcceptedTermsAndConditionsState){
           Navigator.pop(context);
-          if( state.profileEntity!.qualifications! != null
-              && state.profileEntity!.workExperience != null
-              && state.profileEntity!.qualifications!.isEmpty
-              && state.profileEntity!.workExperience!.isEmpty) {
+         if (state.profileEntity!.qualifications!.isEmpty &&
+              state.profileEntity!.workExperience!.isEmpty){
             context.router.push(const QualificationsRoute());
-          }if(state.profileEntity!.skills!.isEmpty){
+          }else if(state.profileEntity!.skills!.isEmpty){
             context.router.push(const AddSkillsRoute());
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
             context.router.push(const BankDetailsRoute());
           }else if(state.profileEntity!.location!.address == "" ){
-            context.router.push(const LocationRoute());
-          }else if(state.profileEntity!.description!.isEmpty){
+            context.router.push(const LocationRoute(),);
+          }else if(state.profileEntity!.description!.isEmpty) {
             context.router.push(const FinalDetailsRoute());
-          }else if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push(const PaySomeoneWebViewRoute());
-          }else{
+          }else if(!state.profileEntity!.subscriptionPaid!){
+            context.router.push(const PaySomeoneWebViewRoute());}
+          else{
             context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }
         }

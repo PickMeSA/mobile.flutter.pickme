@@ -27,7 +27,7 @@ class OTPWorkExperienceEntity {
     startDate = DateTime.parse(response.startDate!);
     company = response.company??"";
     isCurrent = response.isCurrent??false;
-    files = response.files.map((e) => AppFileEntity(id: e["id"], name: e["name"], url: e["url"])).toList();
+    files = response.files?.map((e) => AppFileEntity(id: e["id"], name: e["name"], url: e["url"])).toList();
   }
 
   OTPWorkExperienceModelResponse toResponse(){
@@ -39,6 +39,7 @@ class OTPWorkExperienceEntity {
         isCurrent: isCurrent,
         industryId: industryId,
         files: files?.map((e) => {"id": e.id, "name": e.name, "url":e.url}).toList()??[],
+        fileIds: []
     );
   }
 }

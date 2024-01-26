@@ -15,3 +15,16 @@ class PreferredIndustrySelectedEvent extends AddWorkExperiencePageEvent{
 
  PreferredIndustrySelectedEvent({required this.preferredIndustry});
 }
+
+class ProfilePictureAddedEvent extends AddWorkExperiencePageEvent{
+ final String filePath;
+
+ ProfilePictureAddedEvent({required this.filePath});
+}
+
+class RemoveImageClickedEvent extends AddWorkExperiencePageEvent{
+ final int? index;
+
+ RemoveImageClickedEvent({required this.index});
+}
+

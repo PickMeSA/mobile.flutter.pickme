@@ -103,13 +103,12 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
                   padding: const EdgeInsets.only(right: 15,left: 15,top: 10.0, bottom: 10),
                   child: ProfileToggle(
                     onPressed: (int index) {
-                      print("Clicked $index");
                       getBloc().add(SetUpProfileToggleSelectedEvent(selectedIndex: index));
                     },
                     selected: getBloc().selectedToggleButtons,
                     children: [
-                      Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().work))),
-                      Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().hire))),
+                      SizedBox(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().work))),
+                      SizedBox(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().hire))),
                     ],
                   ),
                 ),
@@ -117,9 +116,7 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
 
               Positioned(
                 top: 210,
-                child: Container(
-                  child: SvgPicture.asset("assets/landing_screen_lady.svg"),
-                ),
+                child: SvgPicture.asset("assets/landing_screen_lady.svg"),
               ),
 
 

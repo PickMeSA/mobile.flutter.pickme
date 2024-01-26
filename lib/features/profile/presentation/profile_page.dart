@@ -244,27 +244,34 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                       physics: const NeverScrollableScrollPhysics(),
                     itemCount: getBloc().profileEntity.workExperience?.length,
                     itemBuilder: (context, index){
-
-                      return getBloc().profileEntity.workExperience![index].files!.isNotEmpty ?
-                       Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: Row(
-                          children: [
-                            Expanded(child: ImageThumbnail(
-                              imagePath:  getBloc().profileEntity.workExperience?[index].files?[0].url,
-                              //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: 0)),
-                            )),
-                            16.width, // Add some spacing between images
-                            if(getBloc().profileEntity.workExperience?[index].files?.length == 1)
-                              Expanded(child: Container(),),
-                            if(getBloc().profileEntity.workExperience![index].files!.length! > 1)
-                              Expanded(child: ImageThumbnail(
-                              imagePath:  getBloc().profileEntity.workExperience?[index].files?[0].url,
-                              //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: 1)),
-                            )),
-                          ],
-                        ),
-                      ):SizedBox();
+                      return
+                        getBloc().profileEntity.workExperience?[index].files == null &&
+                            getBloc().profileEntity.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
+                      const SizedBox():
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: Row(
+                              children: [
+                                if(index.isEven || index == 0)
+                                  Expanded(child: ImageThumbnail(
+                                    imagePath:  getBloc().profileEntity.workExperience?[index].files?[index].url,
+                                    //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
+                                  )),
+                                16.width, // Add some spacing between images
+                                if(getBloc().profileEntity.workExperience?[index].files?.length == index + 1)
+                                  Expanded(child: Container(),),
+                                if(getBloc().profileEntity.workExperience![index].files!.length > index + 1 && index.isEven)
+                                  Expanded(child: ImageThumbnail(
+                                    imagePath:  getBloc().profileEntity.workExperience?[index].files?[index + 1].url,
+                                    //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
+                                  )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
                     }),
                   ],
                 ),
@@ -283,12 +290,10 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                               profileEntity: getBloc()
                                   .profileEntity));
                         }catch(ex){
-
                         }
                       } ,
                       child: const Icon(Iconsax.edit),
                     ),
-
                   ],
                 ),
                 20  .height,

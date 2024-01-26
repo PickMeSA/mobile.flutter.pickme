@@ -24,7 +24,7 @@ class FinalDetailsBloc
     String uploadErrorMessage = "";
     UploadFileUseCase uploadFileUseCase;
     SubmitFinalDetailsUseCase submitFinalDetailsUseCase;
-    FinalDetailsEntity finalDetailsEntity = const FinalDetailsEntity();
+    FinalDetailsEntity finalDetailsEntity =  FinalDetailsEntity();
     String? policeClearancePath;
     FinalDetailsBloc({required this.uploadFileUseCase, required this.submitFinalDetailsUseCase}): super(FinalDetailsPageInitState()) {
         on<ProfilePictureAddedEvent>((event, emit) => _onProfilePictureAddedEvent(event, emit));
@@ -33,7 +33,7 @@ class FinalDetailsBloc
     }
     _onSubmitClickedEvent(SubmitClickedEvent event, Emitter<FinalDetailsPageState> emit) async{
         if(event.description.isEmpty){
-            emit(SubmitClickedState()..dataState = DataState.error);
+            emit(SubmitClickedState(error: "Please enter valid description")..dataState = DataState.error);
         }else{
             emit(SubmitClickedState()..dataState = DataState.loading);
 
@@ -44,8 +44,8 @@ class FinalDetailsBloc
                 emit(SubmitClickedState()..dataState = DataState.success);
 
             }catch(ex){
-                uploadErrorMessage = ex.toString();
-                emit(ProfilePictureAddedState()..dataState = DataState.error);
+
+                emit(SubmitClickedState(error: ex.toString())..dataState = DataState.error);
             }
         }
     }
@@ -79,12 +79,14 @@ class FinalDetailsBloc
             emit(PoliceClearanceAddedState()..dataState = DataState.error);
         }
     }
-    void validateFile(File file){
-        // Limit the file size
-        const maxSizeInBytes = maxUploadSize * 1024 * 1024;
 
-        if (file.lengthSync() > maxSizeInBytes) {
-            throw('File size exceeds the limit of $maxUploadSize megabytes.');
-        }
+}
+
+void validateFile(File file){
+    // Limit the file size
+    const maxSizeInBytes = maxUploadSize * 1024 * 1024;
+
+    if (file.lengthSync() > maxSizeInBytes) {
+        throw('File size exceeds the limit of $maxUploadSize megabytes.');
     }
-} 
+}

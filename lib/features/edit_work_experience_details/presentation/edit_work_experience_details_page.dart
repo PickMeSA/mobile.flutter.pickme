@@ -9,10 +9,11 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
-
+import 'package:iconsax/iconsax.dart';
 import 'bloc/edit_work_experience_details_bloc.dart';
 
 @RoutePage()
@@ -69,6 +70,7 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
              child: Padding(
                padding: const EdgeInsets.all(20.0),
                child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
                    Row(
                      children: [
@@ -140,18 +142,96 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                          },),
                      ),
                    Padding(
-                     padding: const EdgeInsets.only(bottom: 10),
+                     padding: const EdgeInsets.only(bottom: 20),
                      child: AppDropdownMenu<PreferredIndustryEntity>(
                          onSelected: (selected){
                            getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
                          },
                          width: MediaQuery.sizeOf(context).width - 40,
-                         enableFilter: true,
+                         enableFilter: false,
+                         filled: true,
                          dropdownMenuEntries: getBloc().industryEntries,
                          controller: dropdownIndustryController,
                          label: wText(getLocalization().industry,
                              style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
                    ),
+
+                   Row(
+                     children: [
+                       wText(getLocalization().photosOfWorkOptional),
+                       const Spacer(),
+                       InkWell(
+        onTap: ()async  {
+          await context.router.push(EditPhotosOfWorkRoute(files: widget.otpWorkExperienceEntity.files));
+          getBloc().add(RefreshImagesEvent());
+        },
+        child: const Icon(Iconsax.edit))
+                     ],
+                   ),
+                   30.height,
+                   ListView.builder(
+                       shrinkWrap: true,
+                       physics: const NeverScrollableScrollPhysics(),
+                       itemCount: widget.otpWorkExperienceEntity.files?.length,
+                       itemBuilder: (context, index){
+                         return widget.otpWorkExperienceEntity.files == null && widget.otpWorkExperienceEntity.files!.isEmpty && index != 0 && !index.isOdd ?
+                         const SizedBox():
+                         Column(
+                           children: [
+                             Padding(
+                               padding: const EdgeInsets.only(top: 16.0),
+                               child: Row(
+                                 children: [
+                                   if(index.isEven || index == 0)
+                                     Expanded(child: ImageThumbnail(
+                                       imagePath:  widget.otpWorkExperienceEntity.files?[index].url,
+                                       //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
+                                     )),
+
+                                   16.width, // Add some spacing between images
+                                   if(widget.otpWorkExperienceEntity.files?.length == index + 1)
+                                     Expanded(child: Container(),),
+                                   if(widget.otpWorkExperienceEntity.files!.length > index + 1 && index.isEven)
+                                     Expanded(child: ImageThumbnail(
+                                       imagePath:  widget.otpWorkExperienceEntity.files?[index + 1].url,
+                                     //  onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
+                                     )),
+                                 ],
+                               ),
+                             ),
+                           ],
+                         );
+                       }),
+                   Row(
+                     children: [
+                       Expanded(
+                         child: PrimaryButton(
+                           style: ButtonStyle(
+                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                 return BorderSide(
+                                   color: states.contains(MaterialState.disabled)?
+                                   theme.colorScheme.primary.withOpacity(0):
+                                   theme.colorScheme.primary,
+                                   width: 2,
+                                 );
+                               }
+                               ),
+                               backgroundColor: MaterialStateProperty.resolveWith(
+                                       (Set<MaterialState> states){
+                                     return states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.primary.withOpacity(0.3):
+                                     theme.colorScheme.primary;
+                                   }
+                               )
+                           ),
+                           onPressed: () {
+                             Navigator.pop(context);
+                           },
+                           child: Text(getLocalization().save),
+                         ),
+                       ),
+                     ],
+                   )
                  ],
                ),
              ),
@@ -160,6 +240,8 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
       },
     );
   }
+
+
 
 
   @override

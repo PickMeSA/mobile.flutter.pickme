@@ -2,6 +2,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pickme/features/add_memberships/presentation/add_memberships_page.dart';
 import 'package:pickme/features/add_qualification/presentation/add_qualification_page.dart';
 import 'package:pickme/features/add_skills/presentation/add_skills_page.dart';
@@ -19,6 +20,7 @@ import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
+import 'package:pickme/features/edit_photos_of_work/presentation/edit_photos_of_work_page.dart';
 import 'package:pickme/features/edit_qualification/presentation/edit_qualification_page.dart';
 import 'package:pickme/features/edit_qualification_details/presentation/edit_qualification_details_page.dart';
 import 'package:pickme/features/edit_skills/presentation/edit_skills_page.dart';
@@ -73,6 +75,7 @@ import 'package:pickme/features/register_account_step_1/presentation/register_ac
 import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup_page.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
+import 'package:pickme/shared/features/otp/domain/entities/FileEntity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_payment_details_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
@@ -166,7 +169,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: EditWorkExperienceRoute.page),
     AnimatedRoute(page: EditWorkExperienceDetailsRoute.page),
     AnimatedRoute(page: EditQualificationDetailsRoute.page),
-    AnimatedRoute(page: EditQualificationRoute.page)
+    AnimatedRoute(page: EditQualificationRoute.page),
+    AnimatedRoute(page: EditPhotosOfWorkRoute.page)
   ];
 }
 

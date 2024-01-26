@@ -123,7 +123,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
 
   List<Widget> _buildScreens() {
     return [
-        const HomePage(),
+        HomePage(controller: _controller),
         const MyBookingsUpcomingPage(),
         const JobsLandingPage(),
         const ProfilePage()

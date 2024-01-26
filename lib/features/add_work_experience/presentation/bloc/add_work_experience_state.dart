@@ -15,3 +15,18 @@ class AddWorkExperienceCurrentSelectedState extends AddWorkExperiencePageState{
 class AddWorkGetPreferredIndustryListState extends AddWorkExperiencePageState{
   AddWorkGetPreferredIndustryListState({super.error});
 }
+
+
+class ProfilePictureAddedState extends AddWorkExperiencePageState{
+  UploadedFileEntity? uploadFileEntity;
+  ProfilePictureAddedState({this.uploadFileEntity,super.error});
+
+
+}
+
+
+class RemoveImageClickedState extends AddWorkExperiencePageState{
+  final int? index;
+
+  RemoveImageClickedState({required this.index});
+}

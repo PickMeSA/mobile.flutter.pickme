@@ -18,3 +18,7 @@ class AddWorkGetPreferredIndustryListState extends EditWorkExperienceDetailsPage
   AddWorkGetPreferredIndustryListState({super.error});
 }
 
+class RefreshImagesState extends EditWorkExperienceDetailsPageState {
+
+}
+

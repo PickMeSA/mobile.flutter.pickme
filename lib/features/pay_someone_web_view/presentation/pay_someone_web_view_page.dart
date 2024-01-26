@@ -3,10 +3,13 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -38,15 +41,17 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
   Widget buildView(BuildContext context) {
     return BlocConsumer<PaySomeoneWebViewBloc, PaySomeoneWebViewPageState>(
       listener: (context, state){
+        TokenModel tokenModel = boxTokens.get(current);
         if(state is MakePaymentState && state.dataState == DataState.success){
           webViewController = WebViewController()
             ..setJavaScriptMode(JavaScriptMode.unrestricted)
             ..addJavaScriptChannel("Payment",
                 onMessageReceived: (message){
                   if(message.message == "success"){
-
+                    context.router.pushAndPopUntil(const YouAreAllSetupRoute(),
+                        predicate: (Route<dynamic> route) => false);
                   }else if(message.message == "failed"){
-
+                      context.router.pop();
                   }else{
                     context.router.pop();
                     wErrorPopUp(message: message.message, type: getLocalization().error, context: context);

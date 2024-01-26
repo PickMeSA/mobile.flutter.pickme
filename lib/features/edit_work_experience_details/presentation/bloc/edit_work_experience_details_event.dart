@@ -14,3 +14,7 @@ class PreferredIndustrySelectedEvent extends EditWorkExperienceDetailsPageEvent{
 
  PreferredIndustrySelectedEvent({required this.preferredIndustry});
 }
+
+class RefreshImagesEvent extends EditWorkExperienceDetailsPageEvent{
+
+}
