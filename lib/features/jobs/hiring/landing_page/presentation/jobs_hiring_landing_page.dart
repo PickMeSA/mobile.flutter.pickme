@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -76,18 +77,6 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    const Icon(Iconsax.briefcase),
-                    10.width,
-                    wText(getLocalization().services, style: theme.textTheme.headlineSmall?.copyWith()),
-                    const Spacer(),
-                    const InkWell(
-                      child: Icon(Iconsax.menu),
-                    ),
-                  ],
-                ),
-                30.height,
                 AppExplorationTile(
                   title: getLocalization().exploreAllServices,
                   onClick: () => context.router.push(AllServicesRoute()),
@@ -234,8 +223,14 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
     return locator<AppLocalizations>();
   }
   @override
-  PreferredSizeWidget? buildAppbar() {
-    return null;
+  PreferredSizeWidget buildAppbar(){
+    return getAppBar(
+      title:   wText(getLocalization().jobs),
+      leading: const Icon(Iconsax.briefcase),
+      actions: [
+        TextButton(onPressed: ()=> context.router.push(const BurgerMenuRoute()), child: SvgPicture.asset("assets/menu.svg"))
+      ],
+    );
   }
 
 }

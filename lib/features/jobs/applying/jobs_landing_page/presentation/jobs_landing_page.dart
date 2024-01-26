@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
+import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -68,18 +70,6 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    const Icon(Iconsax.briefcase),
-                    10.width,
-                    wText(getLocalization().jobs, style: theme.textTheme.headlineSmall?.copyWith()),
-                    const Spacer(),
-                    const InkWell(
-                      child: Icon(Iconsax.menu),
-                    ),
-                  ],
-                ),
-                30.height,
                 AppExplorationTile(
                   title: getLocalization().exploreAllJobs,
                   onClick: ()=>context.router.push(const AllJobsRoute()),
@@ -221,8 +211,15 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
   @override
-  PreferredSizeWidget? buildAppbar() {
-    return null;
+  PreferredSizeWidget buildAppbar(){
+    return getAppBar(
+      title:   wText(getLocalization().jobs),
+      leading: const Icon(Iconsax.briefcase),
+      actions: [
+        TextButton(onPressed: ()=> context.router.push(const BurgerMenuRoute()), child: SvgPicture.asset("assets/menu.svg"))
+      ],
+    );
   }
 }
