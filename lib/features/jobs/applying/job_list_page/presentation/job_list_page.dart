@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
@@ -41,7 +42,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
   @override
   void initState() {
     super.initState();
-    getBloc().add(MyJobListingsPageEnteredEvent());
+    getBloc().add(MyJobListingsPageEnteredEvent(industryId: widget.categoryId));
   }
 
   @override
@@ -50,20 +51,30 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
     return BlocConsumer<JobListBloc, JobListPageState>(
       listener: (context, state) {
         //loading
-        if(state is SelectExistingJobPageEnteredState && state.dataState == DataState.loading){
+        if(state is MyJobListingsPageEnteredState && state.dataState == DataState.loading){
           if(!getBloc().preloaderActive){
             getBloc().preloaderActive = true;
             preloader(context);
           }
         }
-
         //loading
-        if(state is SelectExistingJobPageEnteredState && state.dataState == DataState.success){
+        if(state is MyJobListingsPageEnteredState && state.dataState == DataState.success){
           Navigator.pop(context); //Remove loader
         }          //loading
-        if(state is SelectExistingJobPageEnteredState && state.dataState == DataState.error){
+        if(state is MyJobListingsPageEnteredState && state.dataState == DataState.error){
           Navigator.pop(context); //Remove loader
-          //   todo: Display error
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }//loading
+        if(state is FilterChangedState && state.dataState == DataState.loading){
+          preloader(context);
+        }
+        //loading
+        if(state is FilterChangedState && state.dataState == DataState.success){
+          Navigator.pop(context); //Remove loader
+        }          //loading
+        if(state is FilterChangedState && state.dataState == DataState.error){
+          Navigator.pop(context); //Remove loader
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
         if(state is SendJobOfferClickedState && state.dataState == DataState.loading){
           if(!getBloc().preloaderActive){
@@ -150,7 +161,6 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
       actions: [
         TextButton(onPressed: () async{
           FilterEntity? filter = await context.router.push<FilterEntity>(FiltersRoute());
-          logger.i(filter);
           if(filter!=null){
             getBloc().add(FilterChangedEvent(filterEntity: filter));
           }

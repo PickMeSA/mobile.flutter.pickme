@@ -13,7 +13,7 @@ class GetMyJobListingsRepositoryImpl extends GetMyJobListingsRepository {
   @override
   Future<MyJobListingsPageEntity> call({GetMyJobListingsRepositoryParams? params}) async{
     try{
-      return await getMyJobListingsService.getMyJobListings();
+      return await getMyJobListingsService.getMyJobListings(getMyJobListingsRepositoryParams: params!);
     }catch(ex){
       rethrow;
     }

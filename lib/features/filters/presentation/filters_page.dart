@@ -78,11 +78,16 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
                       if(widget.appMode == AppMode.working)AppSlider(
                         currentSliderValue: getBloc().filter!.estimatedHours!,
                         minimumSliderValue: 0,
-                        maximumSliderValue: defaultMaxPrice.toDouble(),
+                        maximumSliderValue: defaultEstimatedHours.toDouble(),
                         onChanged: (double newValue) => getBloc().add(EstimatedHoursChangedEvent(estimatedHours: newValue))
                         ,),
-                      24.height,
-                      Text(getLocalization().possiblePriceRange, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            color: neutrals100Color,
+                            child: Text("${getBloc().filter!.estimatedHours!.toInt()} hours",)),),
+                      24.height,                      Text(getLocalization().possiblePriceRange, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontVariations: [
                           const FontVariation("wght", 600)
                         ]

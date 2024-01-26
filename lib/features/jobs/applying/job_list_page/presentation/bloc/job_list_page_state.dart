@@ -12,13 +12,16 @@ class MyJobListingsPageInitial extends JobListPageState {
 class SelectedJobChangedState extends JobListPageState {
   SelectedJobChangedState();
 }
-class SelectExistingJobPageEnteredState extends JobListPageState {
-  SelectExistingJobPageEnteredState();
+class MyJobListingsPageEnteredState extends JobListPageState {
+  final String? error;
+  MyJobListingsPageEnteredState({this.error});
 }
 
 class SendJobOfferClickedState extends JobListPageState {
-  SendJobOfferClickedState();
+  final String? error;
+  SendJobOfferClickedState({this.error});
 }
 class FilterChangedState extends JobListPageState {
-  FilterChangedState();
+  final String? error;
+  FilterChangedState({this.error});
 }

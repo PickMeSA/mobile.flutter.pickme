@@ -7,7 +7,8 @@ class SeeAllClickedEvent extends JobListPageEvent{
   SeeAllClickedEvent();
 }
 class MyJobListingsPageEnteredEvent extends JobListPageEvent{
-  MyJobListingsPageEnteredEvent();
+  String? industryId;
+  MyJobListingsPageEnteredEvent({this.industryId});
 }
 
 class JobSelectedEvent extends JobListPageEvent{
