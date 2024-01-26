@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
 
 part 'create_job_listing_model_response.freezed.dart';
 part 'create_job_listing_model_response.g.dart';

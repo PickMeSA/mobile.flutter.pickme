@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
-import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 
 class JobInterestEntity extends Equatable{

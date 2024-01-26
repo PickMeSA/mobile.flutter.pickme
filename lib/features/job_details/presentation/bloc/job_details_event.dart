@@ -7,3 +7,7 @@ class GetFullJobDetailsEvent extends JobDetailsPageEvent{
   JobEntity? job;
   GetFullJobDetailsEvent({required this.jobId, this.job});
 }
+
+class ApplyForJobEvent extends JobDetailsPageEvent{
+  ApplyForJobEvent();
+}

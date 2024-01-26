@@ -7,6 +7,7 @@ part 'job_customer_model_response.g.dart';
 @freezed
 class JobCustomerModelResponse with _$JobCustomerModelResponse {
   const factory JobCustomerModelResponse({
+  String? id,
   String? firstName,
   String? surname,
   int? averageRating,

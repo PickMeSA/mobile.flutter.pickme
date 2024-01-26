@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
@@ -7,6 +8,7 @@ import 'package:pickme/shared/widgets/w_text.dart';
 Widget WClientWidget({
 required String clientName,
 required String areaLocation,
+String? profileImage,
 required int rating,
 required BuildContext context,
   required String seeReviews,
@@ -26,7 +28,8 @@ required BuildContext context,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppImageAvatar.small(),
+          AppImageAvatar.small(image: (profileImage!=null)?
+          CachedNetworkImageProvider(profileImage):null,),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

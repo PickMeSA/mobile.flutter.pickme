@@ -311,6 +311,7 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           fromIndex: args.fromIndex,
           jobId: args.jobId,
+          pageMode: args.pageMode,
           bookingId: args.bookingId,
           job: args.job,
         ),
@@ -1565,6 +1566,7 @@ class JobDetailsRoute extends PageRouteInfo<JobDetailsRouteArgs> {
     Key? key,
     int? fromIndex = 0,
     required String jobId,
+    PageMode pageMode = PageMode.searching,
     String? bookingId,
     JobEntity? job,
     List<PageRouteInfo>? children,
@@ -1574,6 +1576,7 @@ class JobDetailsRoute extends PageRouteInfo<JobDetailsRouteArgs> {
             key: key,
             fromIndex: fromIndex,
             jobId: jobId,
+            pageMode: pageMode,
             bookingId: bookingId,
             job: job,
           ),
@@ -1591,6 +1594,7 @@ class JobDetailsRouteArgs {
     this.key,
     this.fromIndex = 0,
     required this.jobId,
+    this.pageMode = PageMode.searching,
     this.bookingId,
     this.job,
   });
@@ -1601,13 +1605,15 @@ class JobDetailsRouteArgs {
 
   final String jobId;
 
+  final PageMode pageMode;
+
   final String? bookingId;
 
   final JobEntity? job;
 
   @override
   String toString() {
-    return 'JobDetailsRouteArgs{key: $key, fromIndex: $fromIndex, jobId: $jobId, bookingId: $bookingId, job: $job}';
+    return 'JobDetailsRouteArgs{key: $key, fromIndex: $fromIndex, jobId: $jobId, pageMode: $pageMode, bookingId: $bookingId, job: $job}';
   }
 }
 

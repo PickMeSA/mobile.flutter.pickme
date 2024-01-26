@@ -2,7 +2,7 @@ import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 
-import '../../../../../shared/models/jobs/my_job_listings_job_model_response.dart';
+import '../../models/jobs/my_job_listings_job_model_response.dart';
 
 class MyJobListingsPageEntity {
   final List<JobEntity> activeJobs;

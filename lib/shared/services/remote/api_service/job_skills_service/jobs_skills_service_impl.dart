@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_list_model_response.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_list_model_response.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_list_entity.dart';
-import 'package:pickme/features/jobs/shared/service/remote/skills_service/jobs_skills_service.dart';
 import 'package:pickme/shared/remote/api-service.dart';
+import 'package:pickme/shared/services/remote/api_service/job_skills_service/jobs_skills_service.dart';
 @Singleton(as:  JobsSkillsService)
 class SkillsServiceImpl extends JobsSkillsService{
 

@@ -8,8 +8,8 @@ import 'package:meta/meta.dart';
 import 'package:pickme/shared/classes/debouncer.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
-import '../../../../shared/domain/usecases/get_industries_usecase.dart';
-import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+import '../../../../../../shared/domain/usecases/get_industries_usecase.dart';
+import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
 part 'all_jobs_page_event.dart';
 part 'all_jobs_page_state.dart';

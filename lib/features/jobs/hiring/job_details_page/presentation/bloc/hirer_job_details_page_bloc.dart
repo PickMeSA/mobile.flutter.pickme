@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 
-import '../../../../shared/domain/entities/create_job_page_job_entity.dart';
+import '../../../../../../shared/domain/entities/create_job_page_job_entity.dart';
 
 part 'hirer_job_details_page_event.dart';
 part 'hirer_job_details_page_state.dart';

@@ -24,7 +24,6 @@ dynamic _idFromJson(dynamic id) {
     return null;
   }
 }
-
 // A custom function that converts the id value to a string
 String _idToJson(dynamic id) {
   return id.toString();

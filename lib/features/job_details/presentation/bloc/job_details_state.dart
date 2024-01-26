@@ -8,4 +8,8 @@ class GetFullJobDetailsState extends JobDetailsPageState{
   final String? error;
   GetFullJobDetailsState({this.error});
 }
+class ApplyForJobState extends JobDetailsPageState{
+  final String? error;
+  ApplyForJobState({this.error});
+}
 

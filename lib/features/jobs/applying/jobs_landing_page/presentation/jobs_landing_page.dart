@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -128,6 +129,8 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                     employerName: "${e.customer?.firstName} ${e.customer?.surname}",
                     locationName: e.customer?.address??getLocalization().noAddressSpecified,
                     dateTime: DateTime.now(),
+                    image: (e.customer?.profileImage!=null)?
+                      CachedNetworkImageProvider(e.customer!.profileImage!):null,
                     onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
                     ,)).toList()??[],
                 ),

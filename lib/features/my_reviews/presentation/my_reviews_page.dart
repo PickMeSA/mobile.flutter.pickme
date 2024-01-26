@@ -72,30 +72,32 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
               Expanded(
                   child: Column(
                     children: [
-                      Expanded(child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 200,
-                            width: 200,
-                            child: Image(
-                              image: AssetImage("assets/no_items_found.png"),
+                      Expanded(child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 200,
+                              width: 200,
+                              child: Image(
+                                image: AssetImage("assets/no_items_found.png"),
+                              ),
                             ),
-                          ),
-                          24.height,
-                          Text(getBloc().isMyProfile?
-                          getLocalization().youDontHaveAnyReviewsYet:
-                          getLocalization().noReviewsFound,
-                            style: theme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
-                          ),
-                          16.height,
-                          if(getBloc().isMyProfile)Text(getLocalization().getReviewsToBoostProfile,
-                            style: theme.textTheme.bodyMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                          24.height,
-                        ],
+                            24.height,
+                            Text(getBloc().isMyProfile?
+                            getLocalization().youDontHaveAnyReviewsYet:
+                            getLocalization().noReviewsFound,
+                              style: theme.textTheme.headlineSmall,
+                              textAlign: TextAlign.center,
+                            ),
+                            16.height,
+                            if(getBloc().isMyProfile)Text(getLocalization().getReviewsToBoostProfile,
+                              style: theme.textTheme.bodyMedium,
+                              textAlign: TextAlign.center,
+                            ),
+                            24.height,
+                          ],
+                        ),
                       )),
                       if(getBloc().isMyProfile)PrimaryButton.fullWidth(
                         onPressed: ()=>context.router.push(RequestAReviewRoute()),

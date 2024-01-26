@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:pickme/features/jobs/shared/domain/repositories/send_job_offer_repository.dart';
+import 'package:pickme/shared/domain/repository/send_job_offer_repository.dart';
 import 'package:pickme/shared/services/remote/api_service/send_job_offer/send_job_offer_service.dart';
 
 

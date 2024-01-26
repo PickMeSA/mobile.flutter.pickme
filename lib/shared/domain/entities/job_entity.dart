@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
-import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/domain/entities/job_customer_entity.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
@@ -65,6 +65,7 @@ final JobCustomerEntity? customer;
         distance: response.distance??0,
       industry: (response.industries!=null && response.industries!.isNotEmpty)?IndustryEntity(id:response.industries![0].id, industry: response.industries![0].industry):null,
         customer: response.customer==null?null:JobCustomerEntity(
+          id: response.customer!.id,
           firstName: response.customer!.firstName,
           surname: response.customer!.surname,
           averageRating: response.customer!.averageRating,

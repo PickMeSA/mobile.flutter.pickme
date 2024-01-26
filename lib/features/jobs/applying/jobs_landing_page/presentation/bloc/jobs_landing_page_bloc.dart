@@ -9,7 +9,7 @@ import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/usecases/
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
-import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
 part 'jobs_landing_page_event.dart';
 part 'jobs_landing_page_state.dart';

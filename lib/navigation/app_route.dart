@@ -48,7 +48,7 @@ import 'package:pickme/features/jobs/hiring/select_existing_job_listing/presenta
 import 'package:pickme/features/jobs/hiring/service_category_candidates/presentation/service_category_candidates_page.dart';
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/shared/domain/entities/create_job_page_job_entity.dart';
 import 'package:pickme/features/my_reviews/presentation/my_reviews_page.dart';
 import 'package:pickme/features/request_a_review/presentation/request_a_review.dart';
 import 'package:pickme/features/review_a_user/presentation/review_a_user_page.dart';
@@ -86,7 +86,7 @@ import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/presentation/otp_page.dart';
 import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/my_job_listings_page_entity.dart';
+import 'package:pickme/shared/domain/entities/my_job_listings_page_entity.dart';
 import 'package:pickme/features/login/presentation/login_page.dart';
 import 'package:pickme/features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
 import 'package:pickme/features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
@@ -101,7 +101,7 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes =>[
     AnimatedRoute(
       page: LandingRoute.page,
-      initial: true,
+      // initial: true,
     ),
     AnimatedRoute(page: LoginRoute.page,),
     AnimatedRoute(page: RegisterRoute.page,),
@@ -131,7 +131,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: LocationRoute.page),
     AnimatedRoute(page: FinalDetailsRoute.page),
     AnimatedRoute(page: YouAreAllSetupRoute.page),
-    AnimatedRoute(page: BottomNavigationBarRoute.page),
+    AnimatedRoute(page: BottomNavigationBarRoute.page, initial: true),
     AnimatedRoute(page: MyBookingsUpcomingRoute.page),
     AnimatedRoute(page: JobDetailsRoute.page),
     AnimatedRoute(page: CreateJobListingInfoRoute.page),

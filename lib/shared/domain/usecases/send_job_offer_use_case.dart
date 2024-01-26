@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 
-import '../repositories/send_job_offer_repository.dart';
+import '../repository/send_job_offer_repository.dart';
 
 @Injectable()
 class SendJobOfferUseCase extends BaseUseCase<SendJobOfferUseCaseParams, bool>{

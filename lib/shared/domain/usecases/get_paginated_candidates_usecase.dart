@@ -3,7 +3,7 @@ import 'package:pickme/base_classes/base_usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 
-import '../repositories/get_paginated_candidates_repository.dart';
+import '../repository/get_paginated_candidates_repository.dart';
 
 
 @Injectable()

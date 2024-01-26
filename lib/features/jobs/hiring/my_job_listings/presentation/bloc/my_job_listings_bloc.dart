@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 
-import '../../../../shared/domain/entities/my_job_listings_page_entity.dart';
-import '../../../../shared/domain/usecases/get_my_job_listings_usecase.dart';
+import '../../../../../../shared/domain/entities/my_job_listings_page_entity.dart';
+import '../../../../../../shared/domain/usecases/get_my_job_listings_usecase.dart';
 part 'my_job_listings_event.dart';
 part 'my_job_listings_state.dart';
 
