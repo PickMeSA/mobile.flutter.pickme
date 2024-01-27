@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/data/service/get_jobs_landing_page_data_service.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/entities/jobs_landing_page_entity.dart';
 import 'package:pickme/features/jobs/hiring/my_job_listings/data/models/my_job_listings_model_response.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
@@ -11,6 +9,9 @@ import 'package:pickme/shared/domain/entities/pagination_entity.dart';
 import 'package:pickme/shared/models/industries/data/response_models/industries_model_response/industries_model_response.dart';
 import 'package:pickme/shared/models/pagination/data/response_models/pagination_model_response/pagination_model_response.dart';
 import 'package:pickme/shared/remote/api-service.dart';
+
+import '../../domain/entities/jobs_landing_page_entity.dart';
+import 'get_jobs_landing_page_data_service.dart';
 
 @Injectable(as: GetJobsLandingPageDataService)
 class GetJobsLandingPageDataServiceImpl extends GetJobsLandingPageDataService{

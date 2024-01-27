@@ -4,12 +4,12 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/entities/jobs_landing_page_entity.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/usecases/get_landing_page_data.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
 import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+import '../../domain/entities/jobs_landing_page_entity.dart';
+import '../../domain/usecases/get_landing_page_data.dart';
 
 part 'jobs_landing_page_event.dart';
 part 'jobs_landing_page_state.dart';

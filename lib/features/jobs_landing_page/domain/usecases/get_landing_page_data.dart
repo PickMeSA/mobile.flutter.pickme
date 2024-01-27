@@ -1,8 +1,9 @@
 
 import 'package:injectable/injectable.dart';
 import 'package:pickme/base_classes/base_usecase.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/entities/jobs_landing_page_entity.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/repository/get_job_landing_page_data_repository.dart';
+
+import '../entities/jobs_landing_page_entity.dart';
+import '../repository/get_job_landing_page_data_repository.dart';
 
 @Injectable()
 class GetJobLandingPageDataUseCase extends BaseUseCase<GetJobLandingPageDataUseCaseParams, JobsLandingPageEntity>{
