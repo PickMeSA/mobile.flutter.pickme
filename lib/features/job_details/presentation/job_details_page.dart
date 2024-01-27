@@ -127,7 +127,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            PrimaryButton.fullWidth(
                              onPressed:() {
                                if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(const ApplyForJobRoute());
+                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
                                  getBloc().add(ApplyForJobEvent());
                                }
@@ -279,7 +279,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              ),
                              onPressed:() {
                                if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(const ApplyForJobRoute());
+                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
                                  getBloc().add(ApplyForJobEvent());
                                }
@@ -305,7 +305,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              ),
                              onPressed:() {
                                if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(const ApplyForJobRoute());
+                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
                                  getBloc().add(ApplyForJobEvent());
                                }

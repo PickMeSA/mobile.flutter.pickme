@@ -109,7 +109,7 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
                         if(widget.pageMode == ServicesPageMode.hiring){
                           context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[index].id.toString()));
                         }else{
-                          context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getBloc().paginatedIndustries!.industries[index].industry, categoryId: getBloc().paginatedIndustries!.industries[3].id.toString()));
+                          context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getBloc().paginatedIndustries!.industries[index].industry, filter: FilterEntity(industryId: getBloc().paginatedIndustries!.industries[3].id.toString())));
                         }
                       },
                     );

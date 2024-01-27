@@ -25,7 +25,7 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
   Logger logger = Logger();
   bool preloaderActive = false;
   JobEntity? selectedJob;
-  final FilterEntity filterEntity = FilterEntity();
+  FilterEntity filterEntity = FilterEntity();
 
   JobListBloc({required this.getMyJobListingsUseCase, required this.sendJobOfferUseCase}) : super(MyJobListingsPageInitial()) {
     on<MyJobListingsPageEnteredEvent>((event, emit) => _onMyJobListingsPageEnteredEvent(event, emit));
@@ -68,7 +68,7 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
       )async{
     emit(MyJobListingsPageEnteredState()..dataState=DataState.loading);
     try{
-      filterEntity.industryId = event.industryId;
+      filterEntity = event.filter;
       myJobs = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(
         lat: filterEntity.lat,
         lng: filterEntity.lng,

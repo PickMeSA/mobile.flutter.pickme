@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/jobs/hiring/landing_page/presentation/bloc/jobs_hiring_landing_page_bloc.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,8 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+
+import 'bloc/jobs_hiring_landing_page_bloc.dart';
 
 @RoutePage()
 class JobsHiringLandingPage extends BasePage {
@@ -50,7 +51,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
         }
 
         if(state is GetTopIndustriesState && state.dataState == DataState.error){
-          Navigator.pop(context); //Remove loader
+          Navigator.of(context, rootNavigator: true).pop();
           wErrorPopUp(message: "An error occurred while fetching your data.", type: getLocalization().error, context: context);
         }
         //loading
@@ -62,7 +63,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
         }
         //loading
         if(state is GetTopIndustriesState && state.dataState == DataState.success){
-          Navigator.pop(context);
+          Navigator.of(context, rootNavigator: true).pop();
         }
       },
       builder: (context, state) {

@@ -50,8 +50,8 @@ final JobCustomerEntity? customer;
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     return JobEntity(
         title: response.title??"",
-        startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):DateTime.now(),
-        endDate: (response.endDate!=null && response.endDate != "")?DateTime.parse(response.endDate!):DateTime.now(),
+        startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):null,
+        endDate: (response.endDate!=null && response.endDate != "")?DateTime.parse(response.endDate!):null,
         startTime: response.startTime,
         description: response.description??"",
         images: response.images??"",

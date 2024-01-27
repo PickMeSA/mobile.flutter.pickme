@@ -24,14 +24,14 @@ enum JobListMode { categoryJobs, recommendedJobs, inYourArea }
 class JobListPage extends BasePage {
   const JobListPage({super.key,
     required this.pageMode,
-    this.categoryId,
+    required this.filter,
     this.pageTitle,
   }):assert(
-  (pageMode==JobListMode.categoryJobs && categoryId!=null) ||
-      (pageMode!=JobListMode.categoryJobs && categoryId==null)
+  (pageMode==JobListMode.categoryJobs && filter!=null) ||
+      (pageMode!=JobListMode.categoryJobs)
   );
   final JobListMode pageMode;
-  final String? categoryId;
+  final FilterEntity filter;
   final String? pageTitle;
   @override
   State<JobListPage> createState() => _JobListPageState();
@@ -42,7 +42,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
   @override
   void initState() {
     super.initState();
-    getBloc().add(MyJobListingsPageEnteredEvent(industryId: widget.categoryId));
+    getBloc().add(MyJobListingsPageEnteredEvent(filter: widget.filter));
   }
 
   @override

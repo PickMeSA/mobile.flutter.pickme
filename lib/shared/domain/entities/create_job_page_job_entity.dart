@@ -11,8 +11,8 @@ class CreateJobPageJobEntity {
   final String? startTime;
   final bool imFlexible;
   final String estimatedHours;
-  final String lat;
-  final String lng;
+  final String? lat;
+  final String? lng;
   final double rate;
   final List<String> images;
   final List<SkillEntity> skills;

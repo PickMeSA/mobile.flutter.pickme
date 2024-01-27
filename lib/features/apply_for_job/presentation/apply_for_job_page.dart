@@ -9,13 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/apply_for_job_bloc.dart';
 
 @RoutePage()
 class ApplyForJobPage extends BasePage {
-  const ApplyForJobPage({super.key});
+  const ApplyForJobPage({super.key, required this.job});
+  final JobEntity job;
 
   @override
   _ApplyForJobPageState createState() => _ApplyForJobPageState();
@@ -30,7 +32,6 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
   DateTime endDate = DateTime.now();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
   }

@@ -38,7 +38,6 @@ import 'package:pickme/features/jobs/hiring/candidate_profile_page/presentation/
 import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing_info/presentation/create_job_listing_info_page.dart';
 import 'package:pickme/features/jobs/hiring/job_details_page/presentation/hirer_job_details_page.dart';
-import 'package:pickme/features/jobs/hiring/landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/features/jobs/hiring/my_job_listings/presentation/my_job_listings_page.dart';
 import 'package:pickme/features/jobs/hiring/offer_a_job/presentation/offer_a_job_page.dart';
 import 'package:pickme/features/jobs/hiring/offer_sent/presentation/offer_sent_page.dart';
@@ -48,6 +47,7 @@ import 'package:pickme/features/jobs/hiring/select_existing_job_listing/presenta
 import 'package:pickme/features/jobs/hiring/service_category_candidates/presentation/service_category_candidates_page.dart';
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
+import 'package:pickme/features/jobs_hiring_landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/shared/domain/entities/create_job_page_job_entity.dart';
 import 'package:pickme/features/my_reviews/presentation/my_reviews_page.dart';
 import 'package:pickme/features/request_a_review/presentation/request_a_review.dart';

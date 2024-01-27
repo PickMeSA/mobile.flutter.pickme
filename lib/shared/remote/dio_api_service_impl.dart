@@ -9,7 +9,7 @@ import 'api-service.dart';
 class DioApiService extends ApiService{
 
   final Dio dio;
-  Logger logger = Logger();
+  Logger logger = Logger(printer: PrettyPrinter(lineLength: 100000));
 
 
   DioApiService({
@@ -99,7 +99,7 @@ class DioApiService extends ApiService{
    data: data,
    queryParameters: queryParameters,
    options: options);
-   logger.d(response);
+   logger.d({"response": response});
    return response;
   }
 

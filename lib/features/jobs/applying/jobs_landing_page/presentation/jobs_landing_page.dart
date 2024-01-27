@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
@@ -96,7 +97,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: ()=> context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs)),
+                        onPressed: ()=> context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs, filter: FilterEntity())),
                         child: Row(
                           children: [
                             Text(
@@ -161,14 +162,14 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                                 color: Colors.white,
                                 size: 20,
                               ),
-                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, categoryId: industries.industries[0].id.toString(), pageTitle: industries.industries[0].industry)),
+                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[0].id.toString()), pageTitle: industries.industries[0].industry)),
                             ),
                             10.height,
                             AppSectionCard(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
                               title: industries.industries[1].industry!,
                               color: const Color(0xFF23A8B3),
-                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, categoryId: industries.industries[1].id.toString(), pageTitle: industries.industries[1].industry)),
+                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[1].id.toString()), pageTitle: industries.industries[1].industry)),
                             ),
                           ]),
                     ),
@@ -180,14 +181,14 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
                               title: industries.industries[2].industry!,
                               color: const Color(0xFF3EB62B),
-                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, categoryId: industries.industries[2].id.toString(), pageTitle: industries.industries[2].industry)),
+                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[2].id.toString()), pageTitle: industries.industries[2].industry)),
                             ),
                             10.height,
                             AppSectionCard.small(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
                               title: industries.industries[3].industry!,
                               color: const Color(0xFFF44F4E),
-                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, categoryId: industries.industries[3].id.toString(), pageTitle: industries.industries[3].industry)),
+                              onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[3].id.toString()), pageTitle: industries.industries[3].industry)),
                             ),
                           ]),
                     ),
