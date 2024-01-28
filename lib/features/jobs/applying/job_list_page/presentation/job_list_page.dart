@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -126,8 +127,10 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                         jobName: job.title,
                         employerName: job.customer?.firstName??"",
                         locationName: job.customer?.address??"",
-                        dateTime: job.startDate!,
+                        dateTime: job.startDate,
                         selected: getBloc().selectedJob==job,
+                        image: (job.customer?.profileImage!=null)?
+                        CachedNetworkImageProvider(job.customer!.profileImage!):null,
                         onNext: ()=> context.router.push(JobDetailsRoute(jobId: job.id)),
                       );
                     }

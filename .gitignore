@@ -6,12 +6,14 @@
 /.fvm/
 /.idea/
 
+/lib/*/.g.dart
 /lib/*/*/.g.dart
 /lib/*/*/*/.g.dart
 /lib/*/*/*/*/.g.dart
 /lib/*/*/*/*/*/*.g.dart
 /lib/*/*/*/*/*/*/*.g.dart
 /lib/*/*/*/*/*/*/*/*.g.dart
+/lib/*/*.freezed.dart
 /lib/*/*/*.freezed.dart
 /lib/*/*/*/*.freezed.dart
 /lib/*/*/*/*/*.freezed.dart

@@ -34,6 +34,7 @@ _$MyJobListingsJobModelResponseImpl
                   json['customer'] as Map<String, dynamic>),
           id: json['id'] as String?,
           employerName: json['employerName'] as String?,
+          jobInterestStatus: json['jobInterestStatus'] as String?,
           distance: (json['distance'] as num?)?.toDouble(),
         );
 
@@ -56,5 +57,6 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'customer': instance.customer,
       'id': instance.id,
       'employerName': instance.employerName,
+      'jobInterestStatus': instance.jobInterestStatus,
       'distance': instance.distance,
     };

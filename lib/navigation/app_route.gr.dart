@@ -333,6 +333,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    JobOffersListRoute.name: (routeData) {
+      final args = routeData.argsAs<JobOffersListRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: JobOffersListPage(
+          key: args.key,
+          jobRequests: args.jobRequests,
+        ),
+      );
+    },
     JobsHiringLandingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -1690,6 +1700,44 @@ class JobListRouteArgs {
   @override
   String toString() {
     return 'JobListRouteArgs{key: $key, pageMode: $pageMode, filter: $filter, pageTitle: $pageTitle}';
+  }
+}
+
+/// generated route for
+/// [JobOffersListPage]
+class JobOffersListRoute extends PageRouteInfo<JobOffersListRouteArgs> {
+  JobOffersListRoute({
+    Key? key,
+    required List<JobOfferEntity> jobRequests,
+    List<PageRouteInfo>? children,
+  }) : super(
+          JobOffersListRoute.name,
+          args: JobOffersListRouteArgs(
+            key: key,
+            jobRequests: jobRequests,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'JobOffersListRoute';
+
+  static const PageInfo<JobOffersListRouteArgs> page =
+      PageInfo<JobOffersListRouteArgs>(name);
+}
+
+class JobOffersListRouteArgs {
+  const JobOffersListRouteArgs({
+    this.key,
+    required this.jobRequests,
+  });
+
+  final Key? key;
+
+  final List<JobOfferEntity> jobRequests;
+
+  @override
+  String toString() {
+    return 'JobOffersListRouteArgs{key: $key, jobRequests: $jobRequests}';
   }
 }
 

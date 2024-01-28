@@ -31,6 +31,7 @@ import 'package:pickme/features/filters/presentation/filters_page.dart';
 import 'package:pickme/features/edit_my_banking_details/presentation/edit_my_banking_details_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
+import 'package:pickme/features/job_offers_list_page/presentation/job_offers_list_page.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/presentation/all_jobs_page.dart';
 import 'package:pickme/features/jobs/applying/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
@@ -79,6 +80,7 @@ import 'package:pickme/features/sign_up/presentation/sign_up_page.dart';
 import 'package:pickme/features/register_account_step_1/presentation/register_account_step1_page.dart';
 import 'package:pickme/features/you_are_all_setup/presentation/you_are_all_setup_page.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/job_offer_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
 import 'package:pickme/shared/features/otp/domain/entities/FileEntity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_payment_details_entity.dart';
@@ -101,7 +103,7 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes =>[
     AnimatedRoute(
       page: LandingRoute.page,
-      // initial: true,
+      initial: true,
     ),
     AnimatedRoute(page: LoginRoute.page,),
     AnimatedRoute(page: RegisterRoute.page,),
@@ -131,7 +133,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: LocationRoute.page),
     AnimatedRoute(page: FinalDetailsRoute.page),
     AnimatedRoute(page: YouAreAllSetupRoute.page),
-    AnimatedRoute(page: BottomNavigationBarRoute.page, initial: true),
+    AnimatedRoute(page: BottomNavigationBarRoute.page),
     AnimatedRoute(page: MyBookingsUpcomingRoute.page),
     AnimatedRoute(page: JobDetailsRoute.page),
     AnimatedRoute(page: CreateJobListingInfoRoute.page),
@@ -179,7 +181,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: EditWorkExperienceDetailsRoute.page),
     AnimatedRoute(page: EditQualificationDetailsRoute.page),
     AnimatedRoute(page: EditQualificationRoute.page),
-    AnimatedRoute(page: EditPhotosOfWorkRoute.page)
+    AnimatedRoute(page: EditPhotosOfWorkRoute.page),
+    AnimatedRoute(page: JobOffersListRoute.page)
   ];
 }
 

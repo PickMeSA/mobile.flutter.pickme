@@ -25,6 +25,7 @@ final String id;
 final double? distance;
 final IndustryEntity? industry;
 final JobCustomerEntity? customer;
+final String? jobInterestStatus;
 
   const JobEntity({
     required this.title,
@@ -45,7 +46,8 @@ final JobCustomerEntity? customer;
     this.comments = "",
     required this.id,
     this.distance,
-    this.customer
+    this.customer,
+    this.jobInterestStatus
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     return JobEntity(
@@ -57,6 +59,7 @@ final JobCustomerEntity? customer;
         images: response.images??"",
         status: response.status??"",
         estimatedHours: response.estimatedHours??0,
+        jobInterestStatus: response.jobInterestStatus,
         lat: response.lat,
         lng: response.lng,
         skills: response.skills?.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList()??[],

@@ -26,6 +26,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     JobCustomerModelResponse? customer,
     String? id,
     String? employerName,
+    String? jobInterestStatus,
     double? distance,
   }) = _MyJobListingsJobModelResponse;
 

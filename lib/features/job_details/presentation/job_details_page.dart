@@ -125,14 +125,14 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            widget.fromIndex == 0 ?
                            PrimaryButton.fullWidth(
-                             onPressed:() {
+                             onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
                                if(getBloc().jobEntity?.startDate == null){
                                  context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
                                  getBloc().add(ApplyForJobEvent());
                                }
                                },
-                             child: Text(getLocalization().apply),
+                             child: Text(getBloc().jobEntity!.jobInterestStatus==null?getLocalization().apply:getLocalization().applied),
                            ):
                            widget.fromIndex == 1?
                            Column(

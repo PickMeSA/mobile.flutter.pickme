@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
@@ -79,9 +80,15 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                 10.height,
                 AppExplorationTile(
                   title: getLocalization().myJobRequests,
-                  count: 0,
+                  count: getBloc().pageEntity?.jobRequests.length,
                   icon: const Icon(Iconsax.document_text_14),
-                  onClick: (){},
+                  onClick: (){
+                    try{
+                      context.router.push(JobOffersListRoute(jobRequests: getBloc().pageEntity?.jobRequests??[]));
+                    }catch(ex){
+                      logger.e(ex);
+                    }
+                    },
                 ),
                 // 10.height,
                 // AppExplorationTile(
@@ -117,6 +124,42 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                 ),
                 if(getBloc().pageEntity!=null)Column(
                   children: getBloc().pageEntity?.recommendedJobs.map((e) => AppJobAdvertCard.matching(
+                    jobName: e.title,
+                    employerName: "${e.customer?.firstName} ${e.customer?.surname}",
+                    locationName: e.customer?.address??getLocalization().noAddressSpecified,
+                    dateTime: DateTime.now(),
+                    image: (e.customer?.profileImage!=null)?
+                      CachedNetworkImageProvider(e.customer!.profileImage!):null,
+                    onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
+                    ,)).toList()??[],
+                ),
+                40.height,
+                Row(
+                  children: [
+                    Expanded(child: Text(
+                      getLocalization().inYourArea,
+                      style: theme.textTheme.titleMedium,
+                    )),
+                    TextButton(
+                        onPressed: ()=> context.router.push(JobListRoute(pageMode: JobListMode.inYourArea, filter: FilterEntity(distance: 20))),
+                        child: Row(
+                          children: [
+                            Text(
+                              getLocalization().seeAll,
+                              style: theme.textTheme.labelMedium,
+                            ),
+                            10.width,
+                            const Icon(
+                              Iconsax.arrow_right_1,
+                              size: 16,
+                              color: neutrals500Color,
+                            )
+                          ],
+                        ))
+                  ],
+                ),
+                if(getBloc().pageEntity!=null)Column(
+                  children: getBloc().pageEntity?.jobsNearMe.map((e) => AppJobAdvertCard.matching(
                     jobName: e.title,
                     employerName: "${e.customer?.firstName} ${e.customer?.surname}",
                     locationName: e.customer?.address??getLocalization().noAddressSpecified,
