@@ -19,7 +19,7 @@ class FilterCandidatesBloc extends BaseBloc<FilterCandidatesEvent, FilterCandida
   final FilterEntity defaultFilter = FilterEntity(
       distance: defaultDistance.toDouble(),
       priceRange: defaultPriceRange,
-      estimatedHours: defaultEstimatedHours,
+      estimatedHours: defaultEstimatedHours.toDouble(),
       rating: defaultRating
   );
   // double maxDistance = defaultDistance.toDouble();

@@ -61,6 +61,7 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
                         ]
                       ),),
                       AppSlider(currentSliderValue: getBloc().filter!.distance!,
+                        divisions: defaultMaxDistance,
                         maximumSliderValue: defaultMaxDistance.toDouble(),
                         onChanged: (double newMaxDistance) => getBloc().add(MaxDistanceChangedEvent(maxDistance: newMaxDistance)),),
                       Align(
@@ -68,7 +69,7 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
                         child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
-                            child: Text("${getBloc().filter!.distance!.toStringAsFixed(2)}km",)),),
+                            child: Text("${getBloc().filter!.distance!.toStringAsFixed(0)} km",)),),
                       24.height,
                       if(widget.appMode == AppMode.working)Text(getLocalization().estHours, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontVariations: [
@@ -79,6 +80,7 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
                         currentSliderValue: getBloc().filter!.estimatedHours!,
                         minimumSliderValue: 0,
                         maximumSliderValue: defaultEstimatedHours.toDouble(),
+                        divisions: defaultEstimatedHours,
                         onChanged: (double newValue) => getBloc().add(EstimatedHoursChangedEvent(estimatedHours: newValue))
                         ,),
                       Align(
