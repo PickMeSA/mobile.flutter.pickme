@@ -8,7 +8,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/shared/domain/entities/create_job_page_job_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -362,7 +362,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       Padding(
                         padding: const EdgeInsets.only(top:16, bottom: 140.0),
                         child: ChipGroup(
-                          inputs: getBloc().chipOptions,
+                          inputs: getBloc().chipOptions.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList(),
                           onDeleted: (int index){
                             getBloc().add(SkillChipDeletedEvent(index: index));
                           },

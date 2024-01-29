@@ -14,7 +14,7 @@ import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
-import 'package:pickme/features/jobs/shared/domain/entities/my_job_listings_page_entity.dart';
+import 'package:pickme/shared/domain/entities/my_job_listings_page_entity.dart';
 import 'bloc/my_job_listings_bloc.dart';
 
 @RoutePage()

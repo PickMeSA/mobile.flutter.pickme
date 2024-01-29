@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -16,6 +17,7 @@ import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
 class JobsHiringLandingPage extends BasePage {
@@ -220,14 +222,13 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      leading: const Icon(Iconsax.setting),
-      title: Text(getLocalization().services,),
+      title:   wText(getLocalization().jobs),
+      leading: const Icon(Iconsax.briefcase),
       actions: [
-        TextButton(onPressed: (){}, child: Icon(Iconsax.menu_1, color: Theme.of(context).colorScheme.secondary,))
+        TextButton(onPressed: ()=> context.router.push(const BurgerMenuRoute()), child: SvgPicture.asset("assets/menu.svg"))
       ],
     );
   }

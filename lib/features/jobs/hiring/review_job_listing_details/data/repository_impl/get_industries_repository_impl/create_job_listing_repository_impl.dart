@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
-import 'package:pickme/features/jobs/shared/service/remote/create_job_listing_service/create_job_listing_service.dart';
+import 'package:pickme/shared/services/remote/api_service/create_job_listing_service/create_job_listing_service.dart';
 
 import '../../../domain/repository/create_job_listing_repository.dart';
 

@@ -112,12 +112,12 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                     itemBuilder: (BuildContext context, int index){
                       JobEntity job = getBloc().myJobs!.activeJobs[index];
                       return AppJobCard(
-                        jobName: job.title!,
-                        employerName: "Andrew Test Employer",
-                        locationName: "Melrose Arch. South Africa",
+                        jobName: job.title,
+                        employerName: job.customer?.firstName??"",
+                        locationName: job.customer?.address??"",
                         dateTime: job.startDate!,
                         selected: getBloc().selectedJob==job,
-                        onNext: ()=> context.router.push(JobDetailsRoute(jobId: job.id!)),
+                        onNext: ()=> context.router.push(JobDetailsRoute(jobId: job.id)),
                       );
                     }
                 ),

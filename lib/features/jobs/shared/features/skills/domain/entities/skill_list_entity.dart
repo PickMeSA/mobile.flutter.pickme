@@ -1,7 +1,7 @@
 
 
-import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_list_model_response.dart';
-import 'package:pickme/features/jobs/shared/features/skills/data/models/skills_model_response.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_list_model_response.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 
 class JobsSkillListEntity{

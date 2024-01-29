@@ -4,23 +4,25 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/entities/jobs_landing_page_entity.dart';
+import 'package:pickme/features/jobs/applying/jobs_landing_page/domain/usecases/get_landing_page_data.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
-import '../../../../shared/domain/usecases/get_industries_usecase.dart';
-import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
 part 'jobs_landing_page_event.dart';
 part 'jobs_landing_page_state.dart';
 
 @injectable
 class JobsLandingPageBloc extends BaseBloc<JobsLandingPageEvent, JobsLandingPageState> {
-  final GetIndustriesUseCase getIndustriesUseCase;
+  final GetJobLandingPageDataUseCase getJobLandingPageDataUseCase;
+  JobsLandingPageEntity? pageEntity;
   final GetPaginatedCandidatesByIndustryUseCase getPaginatedCandidatesByIndustryUseCase;
   PaginatedIndustryEntity? paginatedIndustries;
   bool preloaderActive = false;
   JobsLandingPageBloc(
-      {required this.getIndustriesUseCase,
+      {required this.getJobLandingPageDataUseCase,
       required this.getPaginatedCandidatesByIndustryUseCase}) : super(JobsLandingPageInitial()) {
     on<JobsLandingPageEnteredEvent>((event, emit) => _onJobsLandingPageEnteredEvent(event, emit));
   }
@@ -30,13 +32,12 @@ class JobsLandingPageBloc extends BaseBloc<JobsLandingPageEvent, JobsLandingPage
       ) async{
     emit(GetTopIndustriesState()..dataState = DataState.loading);
     try{
-      PaginatedIndustryEntity paginatedIndustryEntity = await getIndustriesUseCase.call(
-          params: GetIndustriesUseCaseParams());
-      paginatedIndustries = paginatedIndustryEntity;
-      logger.i(paginatedIndustries);
+      pageEntity = await getJobLandingPageDataUseCase.call();
+      logger.d(pageEntity?.recommendedJobs.length);
       emit(GetTopIndustriesState()..dataState = DataState.success);
     }catch(ex){
-      emit(GetTopIndustriesState()..dataState = DataState.error);
+      logger.d(ex);
+      emit(GetTopIndustriesState(error: ex.toString())..dataState = DataState.error);
     }
   }
 }

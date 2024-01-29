@@ -114,7 +114,8 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                     AppStarRating(rating: 3, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
                                     wText(3.toDouble().toString()),
                                     const Spacer(),
-                                    wText(getLocalization().seeReviews,style: const TextStyle(decoration: TextDecoration.underline)),
+                                    GestureDetector(onTap: ()=>context.router.push(MyReviewsRoute()),
+                                      child: wText(getLocalization().seeReviews,style: const TextStyle(decoration: TextDecoration.underline)),)
                                   ],
                                 ),
                                   wText("R${getBloc().profileEntity!.hourlyRate} p/h"),
