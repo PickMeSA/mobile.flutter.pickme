@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,8 @@ import 'bloc/reschedule_request_bloc.dart';
 @RoutePage()
 class RescheduleRequestPage extends BasePage {
 
-  final String bookingId;
-  const RescheduleRequestPage({super.key, required this.bookingId});
+  final BookingEntity bookingEntity;
+  const RescheduleRequestPage({super.key, required this.bookingEntity});
 
   @override
   _RescheduleRequestPageState createState() => _RescheduleRequestPageState();
@@ -93,7 +94,7 @@ class _RescheduleRequestPageState extends BasePageState<RescheduleRequestPage, R
     )
     ),
     onPressed: () {
-    context.router.push( RescheduleRequestDetailsRoute(bookingId: widget.bookingId ));
+    context.router.push( RescheduleRequestDetailsRoute(bookingEntity: widget.bookingEntity ));
     },
     child: Text(getLocalization().goToRescheduleRequest, style: TextStyle(color: theme.colorScheme.secondary),),
     ),

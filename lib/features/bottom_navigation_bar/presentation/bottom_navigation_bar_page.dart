@@ -16,10 +16,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 
 @RoutePage()
 class BottomNavigationBarPage extends BasePage {
-  const BottomNavigationBarPage({super.key});
+  ProfileEntity? profileEntity;
+   BottomNavigationBarPage({super.key, required this.profileEntity});
 
   @override
   _BottomNavigationBarPageState createState() => _BottomNavigationBarPageState();
@@ -33,6 +35,8 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
   void initState() {
     // TODO: implement initState
     super.initState();
+    getBloc().add(GetProfileDetailsEvent());
+
 
   }
 

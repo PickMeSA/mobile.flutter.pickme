@@ -20,6 +20,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     String? skills,
     String? id,
     double? distance,
+    String? address
   }) = _MyJobListingsJobModelResponse;
 
   factory MyJobListingsJobModelResponse.fromJson(

@@ -102,7 +102,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                           itemBuilder: (BuildContext context, int index){
                             JobEntity job = getBloc().myJobs!.activeJobs[index];
                             return AppJobAdvertCard(
-                                jobName: job.title,
+                                jobName: job.title!,
                                 employerName: "Andrew Test Employer",
                                 locationName: "Melrose Arch. South Africa",
                                 dateTime: job.startDate!,
@@ -140,7 +140,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                           itemBuilder: (BuildContext context, int index){
                             JobEntity job = getBloc().myJobs!.inactiveJobs[index];
                             return AppJobCard(
-                                jobName: job.title,
+                                jobName: job.title!,
                                 employerName: "Andrew Test Employer",
                                 locationName: "Jo'burg South Africa",
                                 dateTime: job.startDate??DateTime.now(),

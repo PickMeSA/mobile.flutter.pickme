@@ -9,13 +9,15 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/you_are_all_setup_bloc.dart';
 
 @RoutePage()
 class YouAreAllSetupPage extends BasePage {
-  const YouAreAllSetupPage({super.key});
+  ProfileEntity? profileEntity;
+   YouAreAllSetupPage({ this.profileEntity,super.key});
 
   @override
   _YouAreAllSetupPageState createState() => _YouAreAllSetupPageState();
@@ -65,7 +67,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   40.height,
                   PrimaryButton(fullWidth: true,onPressed: (){
-                    context.router.pushAndPopUntil(BottomNavigationBarRoute(),
+                    context.router.pushAndPopUntil(BottomNavigationBarRoute(profileEntity: widget.profileEntity),
                     predicate: (Route<dynamic> route) => false);
                   }, child: wText(getLocalization().goToDashboard))
                 ],

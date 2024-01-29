@@ -3,24 +3,26 @@ import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dar
 import 'package:pickme/shared/constants/default_values.dart';
 
 class JobEntity extends Equatable{
-final String title;
-final String description;
-final String status;
-final String? address;
-final double? hourlyRate;
-final DateTime? startDate;
-final DateTime? endDate;
-final String? startTime;
-final double estimatedHours;
-final double? lat;
-final double? lng;
-final String images;
-final String skills;
-final String comments;
-final String id;
-final double? distance;
+ String? title;
+ String? description;
+ String? status;
+ String? address;
+ double? hourlyRate;
+ DateTime? startDate;
+ DateTime? endDate;
+ String? startTime;
+ double? estimatedHours;
+ double? lat;
+ double? lng;
+ String? images;
+ String? skills;
+ String? comments;
+ String? id;
+ double? distance;
 
-  const JobEntity({
+JobEntity.blank();
+
+   JobEntity({
     required this.title,
     required this.description,
     required this.status,
@@ -52,8 +54,10 @@ final double? distance;
         lat: response.lat,
         lng: response.lng,
         skills: response.skills??"",
-        id: response.id!,
-        distance: response.distance??0
+        id: response.id??"",
+        distance: response.distance??0,
+      address: response.address??"",
+
     );
   }
 

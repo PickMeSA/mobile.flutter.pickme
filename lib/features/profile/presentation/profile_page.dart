@@ -45,7 +45,8 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
       listener: (context, state){},
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
-        return state.dataState == DataState.loading && state is GetProfileDetailsState?
+        return state.dataState == DataState.loading && state is GetProfileDetailsState
+            || state.dataState == DataState.init?
         const Center(child: CircularProgressIndicator(),):
         state.dataState == DataState.init ?const Center(child: CircularProgressIndicator(),)
         :Padding(
@@ -77,7 +78,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                           children: [
                             Row(
                               children: [
-                                wText("${getBloc().profileEntity.firstName} ${getBloc().profileEntity.surname}",
+                                wText("${getBloc().profileEntity!.firstName} ${getBloc().profileEntity!.surname}",
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                       fontWeight: FontWeight.w600
                                   ),
@@ -90,7 +91,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                             .router.push(
                                             EditPersonalDetailsRoute(
                                                 profileEntity: getBloc()
-                                                    .profileEntity));
+                                                    .profileEntity!));
                                         getBloc().add(GetProfileDetailsEvent());
                                       }catch(ex){
 
@@ -103,11 +104,11 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                wText(getBloc().profileEntity.industry!.industry!.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
+                                wText(getBloc().profileEntity!.industry!.industry!.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
 
-                                wText(getBloc().profileEntity.location!.address.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
+                                wText(getBloc().profileEntity!.location!.address.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
 
-                                  wText(getBloc().profileEntity.industry?.industry??""),
+                                  wText(getBloc().profileEntity!.industry?.industry??""),
                                 Row(
                                   children: [
                                     AppStarRating(rating: 3, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
@@ -116,7 +117,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                     wText(getLocalization().seeReviews,style: const TextStyle(decoration: TextDecoration.underline)),
                                   ],
                                 ),
-                                  wText("R${getBloc().profileEntity.hourlyRate} p/h"),
+                                  wText("R${getBloc().profileEntity!.hourlyRate} p/h"),
                               ],
                             ),
                           ],
@@ -137,7 +138,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                         try {
                           await context.router
                               .push(EditAboutMeRoute(profileEntity: getBloc()
-                              .profileEntity));
+                              .profileEntity!));
                           getBloc().add(GetProfileDetailsEvent());
                         }catch(ex){
                           print(ex.toString());
@@ -148,14 +149,14 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   ],
                 ),
                 20.height,
-                wText(getBloc().profileEntity.description!),
-                if(getBloc().profileEntity.skills!.isNotEmpty)
+                wText(getBloc().profileEntity!.description!),
+                if(getBloc().profileEntity!.skills!.isNotEmpty)
                 20.height,
-                if(getBloc().profileEntity.skills!.isNotEmpty)
+                if(getBloc().profileEntity!.skills!.isNotEmpty)
                 const AppDivider(),
-                if(getBloc().profileEntity.skills!.isNotEmpty)
+                if(getBloc().profileEntity!.skills!.isNotEmpty)
                 10.height,
-                if(getBloc().profileEntity.skills!.isNotEmpty)
+                if(getBloc().profileEntity!.skills!.isNotEmpty)
                 Row(
                   children: [
                     wText(getLocalization().mySkills, style: theme.textTheme.titleMedium),
@@ -165,7 +166,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                         try {
                           await context.router
                               .push(EditSkillsRoute(profileEntity: getBloc()
-                              .profileEntity));
+                              .profileEntity!));
                           getBloc().add(GetProfileDetailsEvent());
                         }catch(ex){
                           print(ex.toString());
@@ -175,9 +176,9 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     ),
                   ],
                 ),
-                if(getBloc().profileEntity.skills!.isNotEmpty)
+                if(getBloc().profileEntity!.skills!.isNotEmpty)
                 20.height,
-                if(getBloc().profileEntity.skills!.isNotEmpty)
+                if(getBloc().profileEntity!.skills!.isNotEmpty)
                 SizedBox(
                   height: 150 ,
                   child: Center(
@@ -202,7 +203,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                           await context.router
                               .push(EditWorkExperienceRoute(
                               profileEntity: getBloc()
-                                  .profileEntity));
+                                  .profileEntity!));
                           getBloc().add(GetProfileDetailsEvent());
                         }catch(ex){
                           print(ex.toString());
@@ -220,19 +221,19 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: getBloc().profileEntity.workExperience!.length,
+                      itemCount: getBloc().profileEntity!.workExperience!.length,
                       itemBuilder:(context, index) {
                         return AppProfileQualification(
                             qualification: Award(
-                                name: getBloc().profileEntity.workExperience![index].title!,
+                                name: getBloc().profileEntity!.workExperience![index].title!,
                                 //otpWorkExperienceEntityList![index].title!,
-                                institutionName: getBloc().profileEntity.workExperience![index].company!,
+                                institutionName: getBloc().profileEntity!.workExperience![index].company!,
                                 //otpWorkExperienceEntityList![index].company!,
                                 qualificationType: AppQualificationType
                                     .experience,
-                                dateStarted: getBloc().profileEntity.workExperience![index].startDate,
+                                dateStarted: getBloc().profileEntity!.workExperience![index].startDate,
                                 //otpWorkExperienceEntityList![index].startDate!,
-                                dateEnded: getBloc().profileEntity.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
+                                dateEnded: getBloc().profileEntity!.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
                             ));
                       }
                     ),
@@ -242,11 +243,11 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                    itemCount: getBloc().profileEntity.workExperience?.length,
+                    itemCount: getBloc().profileEntity!.workExperience?.length,
                     itemBuilder: (context, index){
                       return
-                        getBloc().profileEntity.workExperience?[index].files == null &&
-                            getBloc().profileEntity.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
+                        getBloc().profileEntity!.workExperience?[index].files == null &&
+                            getBloc().profileEntity!.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
                       const SizedBox():
                       Column(
                         children: [
@@ -256,15 +257,15 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                               children: [
                                 if(index.isEven || index == 0)
                                   Expanded(child: ImageThumbnail(
-                                    imagePath:  getBloc().profileEntity.workExperience?[index].files?[index].url,
+                                    imagePath:  getBloc().profileEntity!.workExperience?[index].files?[index].url,
                                     //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
                                   )),
                                 16.width, // Add some spacing between images
-                                if(getBloc().profileEntity.workExperience?[index].files?.length == index + 1)
+                                if(getBloc().profileEntity!.workExperience?[index].files?.length == index + 1)
                                   Expanded(child: Container(),),
-                                if(getBloc().profileEntity.workExperience![index].files!.length > index + 1 && index.isEven)
+                                if(getBloc().profileEntity!.workExperience![index].files!.length > index + 1 && index.isEven)
                                   Expanded(child: ImageThumbnail(
-                                    imagePath:  getBloc().profileEntity.workExperience?[index].files?[index + 1].url,
+                                    imagePath:  getBloc().profileEntity!.workExperience?[index].files?[index + 1].url,
                                     //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
                                   )),
                               ],
@@ -288,7 +289,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                           await context.router
                               .push(EditQualificationRoute(
                               profileEntity: getBloc()
-                                  .profileEntity));
+                                  .profileEntity!));
                         }catch(ex){
                         }
                       } ,
@@ -300,21 +301,21 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                 ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: getBloc().profileEntity.qualifications!.length,
+                    itemCount: getBloc().profileEntity!.qualifications!.length,
                     itemBuilder:(context, index) {
                       return AppProfileQualification(
                           qualification: Award(
-                            issuedOn: getBloc().profileEntity.qualifications![index].issueDate,
-                              educationType: getBloc().profileEntity.qualifications![index].type,
-                              name: getBloc().profileEntity.qualifications![index].name!,
+                            issuedOn: getBloc().profileEntity!.qualifications![index].issueDate,
+                              educationType: getBloc().profileEntity!.qualifications![index].type,
+                              name: getBloc().profileEntity!.qualifications![index].name!,
                               //otpWorkExperienceEntityList![index].title!,
-                              institutionName: getBloc().profileEntity.qualifications![index].issuingOrganization!,
+                              institutionName: getBloc().profileEntity!.qualifications![index].issuingOrganization!,
                               //otpWorkExperienceEntityList![index].company!,
                               qualificationType: AppQualificationType
                                   .education,
-                              dateStarted: getBloc().profileEntity.qualifications![index].issueDate,
+                              dateStarted: getBloc().profileEntity!.qualifications![index].issueDate,
                               //otpWorkExperienceEntityList![index].startDate!,
-                              dateEnded: getBloc().profileEntity.qualifications![index].issueDate
+                              dateEnded: getBloc().profileEntity!.qualifications![index].issueDate
                             //otpWorkExperienceEntityList![index].endDate!
                           ));
                     }

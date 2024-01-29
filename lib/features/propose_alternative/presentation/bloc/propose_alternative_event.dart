@@ -8,3 +8,9 @@ class ProposeAlternativeClickedEvent extends ProposeAlternativePageEvent{
 
   ProposeAlternativeClickedEvent({required this.rescheduleEntity});
 }
+
+class RescheduleBookingEvent extends ProposeAlternativePageEvent{
+  RescheduleEntity rescheduleEntity;
+
+  RescheduleBookingEvent({required this.rescheduleEntity});
+}

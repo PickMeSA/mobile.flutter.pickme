@@ -241,7 +241,7 @@ late ProfileModel profileModel;
                                    Column(
                                      children: [
                                        InkWell(
-                                         onTap: ()=> context.router.push(JobDetailsRoute(jobId: getBloc().JobsInAreaList[index].id)),
+                                         onTap: ()=> context.router.push(JobDetailsRoute(jobId: getBloc().JobsInAreaList[index].id??"")),
                                          child: AppJobAdvertCard(
                                            jobName: 'Tax Preparation',
                                            employerName: 'DVT',

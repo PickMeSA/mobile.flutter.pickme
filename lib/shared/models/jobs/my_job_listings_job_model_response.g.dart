@@ -22,6 +22,7 @@ _$MyJobListingsJobModelResponseImpl
           skills: json['skills'] as String?,
           id: json['id'] as String?,
           distance: (json['distance'] as num?)?.toDouble(),
+          address: json['address'] as String?,
         );
 
 Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
@@ -40,4 +41,5 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'skills': instance.skills,
       'id': instance.id,
       'distance': instance.distance,
+      'address': instance.address,
     };

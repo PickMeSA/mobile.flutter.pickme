@@ -48,6 +48,7 @@ import 'package:pickme/features/jobs/hiring/service_category_candidates/presenta
 import 'package:pickme/features/bank_details/presentation/bank_details_page.dart';
 import 'package:pickme/features/final_details/presentation/final_details_page.dart';
 import 'package:pickme/features/jobs/shared/domain/entities/create_job_page_job_entity.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/features/my_banking_details/presentation/my_banking_details_page.dart';
 import 'package:pickme/features/my_wallet/presentation/my_wallet_page.dart';

@@ -520,7 +520,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time."),
         "youveAcceptedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
             "You\'ve approved the reschedule request and it has been updated in your calendar."),
+        "youveApprovedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
+            "You\'ve approved the reschedule request and it has updated in your calender."),
         "youveDeclinedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
-            "You,ve declined the reschedule request. You can still propose an alternative date & time")
+            "You\'ve declined the reschedule request. you can still propose and alternative date and time.")
       };
 }

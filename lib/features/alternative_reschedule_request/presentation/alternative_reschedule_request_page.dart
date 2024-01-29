@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ import 'bloc/alternative_reschedule_request_bloc.dart';
 
 @RoutePage()
 class AlternativeRescheduleRequestPage extends BasePage {
-  const AlternativeRescheduleRequestPage({super.key});
+  final BookingEntity bookingEntity;
+  const AlternativeRescheduleRequestPage({required this.bookingEntity,super.key});
 
   @override
   _AlternativeRescheduleRequestPageState createState() => _AlternativeRescheduleRequestPageState();
@@ -91,7 +93,7 @@ class _AlternativeRescheduleRequestPageState extends BasePageState<AlternativeRe
                               )
                           ),
                           onPressed: () {
-                            context.router.push(const AlternativeRequestDetailsRoute());
+                            context.router.push( AlternativeRequestDetailsRoute(bookingEntity:  widget.bookingEntity));
                           },
                           child: Text(getLocalization().goToAlternativeRequest, style: TextStyle(color: theme.colorScheme.secondary),),
                         ),

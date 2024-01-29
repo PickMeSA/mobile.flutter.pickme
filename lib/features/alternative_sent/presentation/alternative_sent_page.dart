@@ -91,7 +91,7 @@ class _AlternativeSentPageState extends BasePageState<AlternativeSentPage, Alter
                               )
                           ),
                           onPressed: () {
-                            context.router.push(const BottomNavigationBarRoute());
+                          //  context.router.push(const BottomNavigationBarRoute());
                           },
                           child: Text(getLocalization().backToBooking, style: TextStyle(color: theme.colorScheme.secondary),),
                         ),
