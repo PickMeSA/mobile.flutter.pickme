@@ -163,7 +163,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
       title: Text(pageTitle,),
       actions: [
         TextButton(onPressed: () async{
-          FilterEntity? filter = await context.router.push<FilterEntity>(FiltersRoute());
+          FilterEntity? filter = await context.router.push<FilterEntity>(FiltersRoute(filterEntity: getBloc().filterEntity));
           if(filter!=null){
             getBloc().add(FilterChangedEvent(filterEntity: filter));
           }
