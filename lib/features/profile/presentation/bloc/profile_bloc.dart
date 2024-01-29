@@ -21,7 +21,7 @@ class ProfileBloc
         on<GetProfileDetailsEvent>((event, emit)=> _onGetProfileDetailsEvent(event, emit));
     }
 
-     late ProfileEntity profileEntity ;
+
     late List<ChipOption> skills;
 
     Future<void> _onUpdateUIEvent(
@@ -40,7 +40,7 @@ class ProfileBloc
         try{
             profileEntity = await getRemoteProfileUseCase.call();
             skills = [];
-            profileEntity.skills!.forEach((element) {
+            profileEntity!.skills!.forEach((element) {
                 skills.add(ChipOption(label: element.skill!, id: element.id!));
             });
             emit(GetProfileDetailsState()..dataState = DataState.success);

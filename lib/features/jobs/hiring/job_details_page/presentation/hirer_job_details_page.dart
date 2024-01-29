@@ -33,7 +33,7 @@ class _HirerJobDetailsPageState extends BasePageState<HirerJobDetailsPage, Hirer
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
-    List<String> jobImages = widget.jobEntity.images.isEmpty?[]:widget.jobEntity.images.split(",");
+    List<String> jobImages = widget.jobEntity.images!.isEmpty?[]:widget.jobEntity.images!.split(",");
     logger.d(widget.jobEntity.id);
     return BlocConsumer<HirerJobDetailsPageBloc, HirerJobDetailsPageState>(
       listener: (context, state) {
@@ -66,7 +66,7 @@ class _HirerJobDetailsPageState extends BasePageState<HirerJobDetailsPage, Hirer
                 AppJobDetailCard(
                   elevation: 0,
                   padding: EdgeInsets.zero,
-                  jobName: widget.jobEntity.title,
+                  jobName: widget.jobEntity.title!,
                     employerName: "Andrew",
                     locationName: widget.jobEntity.address??"Melrose Arch. Johannesburg",
                     dateTime: widget.jobEntity.startDate!,
@@ -77,13 +77,13 @@ class _HirerJobDetailsPageState extends BasePageState<HirerJobDetailsPage, Hirer
                 24.height,
                 wText(getLocalization().jobDescription, style: Theme.of(context).textTheme.titleMedium),
                 16.height,
-                wText(widget.jobEntity.description),
+                wText(widget.jobEntity.description!),
                 16.height,
                 const AppDivider(),
                 24.height,
                 wText(getLocalization().skillsRequired, style: Theme.of(context).textTheme.titleMedium),
                 16.height,
-                ChipGroup(inputs: widget.jobEntity.skills.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList()),
+                ChipGroup(inputs: widget.jobEntity.skills!.map((e) => ChipOption(label: e.skill!, id: 0)).toList()),
                 16.height,
                 const AppDivider(),
                 24.height,

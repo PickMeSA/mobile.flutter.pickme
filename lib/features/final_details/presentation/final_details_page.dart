@@ -52,9 +52,9 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         if(state is SubmitClickedState && state.dataState == DataState.success){
           Navigator.pop(context);
           if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push(const PaySomeoneWebViewRoute());
+            context.router.push( PaySomeoneWebViewRoute());
           }else{
-            context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+            context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
           }
         }
 

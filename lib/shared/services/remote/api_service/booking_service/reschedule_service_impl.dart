@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/my_bookings_upcoming/data/response_models/my_bookings_upcoming_model_response/booking_model_response.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/reschedule_booking/data/response_models/reschedule_booking_model_response/reschedule_booking_model_response.dart';
 import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_entity.dart';
 import 'package:pickme/shared/remote/api-service.dart';
@@ -12,12 +14,12 @@ class RescheduleServiceImpl extends  RescheduleService{
 
   RescheduleServiceImpl({required this.apiService});
   @override
-  Future<bool> rescheduleBooking({required RescheduleEntity rescheduleEntity}) async {
+  Future<BookingEntity> rescheduleBooking({required RescheduleEntity rescheduleEntity}) async {
     try {
-      await apiService.post(
-          "$baseUrl$version/jobs/booking/reschedule",
+     Response response =  await apiService.post(
+          "$baseUrl$version/jobs/booking/reschedule/${rescheduleEntity.jobInterestId}",
           data: rescheduleEntity.toResponse().toJson());
-      return true;
+      return BookingEntity.fromResponse(element : BookingsModelResponse.fromJson(response.data));
     }catch(ex){
       rethrow;
     }

@@ -2360,10 +2360,10 @@ class AppLocalizations {
     );
   }
 
-  /// `You,ve declined the reschedule request. You can still propose an alternative date & time`
+  /// `You've declined the reschedule request. you can still propose and alternative date and time.`
   String get youveDeclinedTheRescheduleRequest {
     return Intl.message(
-      'You,ve declined the reschedule request. You can still propose an alternative date & time',
+      'You\'ve declined the reschedule request. you can still propose and alternative date and time.',
       name: 'youveDeclinedTheRescheduleRequest',
       desc: '',
       args: [],
@@ -3195,6 +3195,16 @@ class AppLocalizations {
     return Intl.message(
       'No more than 6 Images can be uploaded for each experience',
       name: 'noMoreThan6ImagesCanBeUploadedForEachExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've approved the reschedule request and it has updated in your calender.`
+  String get youveApprovedTheRescheduleRequest {
+    return Intl.message(
+      'You\'ve approved the reschedule request and it has updated in your calender.',
+      name: 'youveApprovedTheRescheduleRequest',
       desc: '',
       args: [],
     );

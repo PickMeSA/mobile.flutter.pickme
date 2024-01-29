@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
-import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
-import 'package:pickme/shared/domain/entities/job_customer_entity.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
+import 'package:pickme/shared/constants/default_values.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
+
+import 'job_customer_entity.dart';
 
 class JobEntity extends Equatable{
 final String title;
@@ -50,6 +52,7 @@ final String? jobInterestStatus;
     this.jobInterestStatus
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
+    logger.e({"response": response.startDate});
     return JobEntity(
         title: response.title??"",
         startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):null,
@@ -73,8 +76,9 @@ final String? jobInterestStatus;
           surname: response.customer!.surname,
           averageRating: response.customer!.averageRating,
           profileImage: response.customer!.profileImage,
-          address: response.customer!.address,
-        )
+          address: response.customer!.address,),
+      address: response.address??"",
+
     );
   }
 
