@@ -341,7 +341,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().jobDetails,),
+      title: Text(getLocalization().jobDetails.toLowerCase().capitalizeFirstLetter(),),
     );
   }
 
