@@ -31,9 +31,9 @@ import 'package:pickme/features/filters/presentation/filters_page.dart';
 import 'package:pickme/features/edit_my_banking_details/presentation/edit_my_banking_details_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
+import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/job_offers_list_page/presentation/job_offers_list_page.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/presentation/all_jobs_page.dart';
-import 'package:pickme/features/jobs/applying/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
 import 'package:pickme/features/jobs/hiring/candidate_profile_page/presentation/candidate_profile_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
@@ -103,7 +103,7 @@ class AppRouter extends _$AppRouter{
   List<AutoRoute> get routes =>[
     AnimatedRoute(
       page: LandingRoute.page,
-      initial: true,
+      // initial: true,
     ),
     AnimatedRoute(page: LoginRoute.page,),
     AnimatedRoute(page: RegisterRoute.page,),
@@ -119,7 +119,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MembershipInformationRoute.page,),
     AnimatedRoute(page: JobsLandingRoute.page),
     AnimatedRoute(page: JobsHiringLandingRoute.page),
-    // AnimatedRoute(page: AddSkillsRoute.page),
+    AnimatedRoute(page: AddSkillsRoute.page),
     AnimatedRoute(page: AllServicesRoute.page),
     AnimatedRoute(page: ServiceCategoryCandidatesRoute.page),
     AnimatedRoute(page: FiltersRoute.page),
@@ -133,7 +133,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: LocationRoute.page),
     AnimatedRoute(page: FinalDetailsRoute.page),
     AnimatedRoute(page: YouAreAllSetupRoute.page),
-    AnimatedRoute(page: BottomNavigationBarRoute.page),
+    AnimatedRoute(page: BottomNavigationBarRoute.page, initial: true),
     AnimatedRoute(page: MyBookingsUpcomingRoute.page),
     AnimatedRoute(page: JobDetailsRoute.page),
     AnimatedRoute(page: CreateJobListingInfoRoute.page),

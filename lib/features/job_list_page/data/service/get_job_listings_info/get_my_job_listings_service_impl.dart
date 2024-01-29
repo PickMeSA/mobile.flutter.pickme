@@ -1,18 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pickme/features/jobs/applying/job_list_page/domain/repository/get_my_job_listings_repository.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing_info/domain/entities/create_job_listing_info_page_entity.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing_info/domain/entities/info_item_entity.dart';
-import 'package:pickme/features/jobs/hiring/my_job_listings/data/models/my_job_listings_model_response.dart';
 import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/job_entity.dart';
-import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
-import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
-import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
 import '../../../domain/entities/my_job_listings_page_entity.dart';
+import '../../../domain/repository/get_my_job_listings_repository.dart';
 import 'get_my_job_listings_service.dart';
 
 @Singleton(as: GetMyJobListingsService)
