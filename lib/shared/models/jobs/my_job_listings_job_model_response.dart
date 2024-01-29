@@ -27,7 +27,6 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     String? id,
     String? employerName,
     double? distance,
-    String? address
   }) = _MyJobListingsJobModelResponse;
 
   factory MyJobListingsJobModelResponse.fromJson(

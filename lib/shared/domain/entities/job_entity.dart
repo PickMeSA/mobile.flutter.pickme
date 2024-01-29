@@ -1,6 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
+import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 import 'package:pickme/shared/constants/default_values.dart';
+import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
+
+import 'job_customer_entity.dart';
 
 class JobEntity extends Equatable{
 final String title;
@@ -68,11 +73,7 @@ final JobCustomerEntity? customer;
           surname: response.customer!.surname,
           averageRating: response.customer!.averageRating,
           profileImage: response.customer!.profileImage,
-          address: response.customer!.address,
-        )
-        skills: response.skills??"",
-        id: response.id??"",
-        distance: response.distance??0,
+          address: response.customer!.address,),
       address: response.address??"",
 
     );
