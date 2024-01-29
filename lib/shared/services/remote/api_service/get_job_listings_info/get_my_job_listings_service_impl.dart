@@ -21,13 +21,10 @@ class GetMyJobListingsServiceImpl extends GetMyJobListingsService{
   Future<MyJobListingsPageEntity> getMyJobListings() async{
     try{
       UserModel userModel = boxUser.get(current);
-      Response<dynamic> response = await apiService.get("$baseUrl$version/jobs?creatorId=${userModel.id}");
-      ProfileEntity? profileEntity;
+      Response<dynamic> response = await apiService.get("$baseUrl$version/jobs/location/filters?customerUid=${userModel.id}");
       if(response.statusCode==200){
-        profileEntity = await profileService.getRemoteProfileData();
         return MyJobListingsPageEntity.fromResponse(
-            listingsResponse: response.data,
-            profile: profileEntity
+            listingsResponse: response.data["data"],
         );
       }
       throw "An error occurred";

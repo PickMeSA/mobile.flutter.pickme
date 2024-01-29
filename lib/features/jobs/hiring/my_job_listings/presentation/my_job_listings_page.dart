@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -59,7 +60,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
-          padding: wPagePadding(top:0),
+          padding: wPagePadding(top:0, left: 16, right: 16),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -103,8 +104,8 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             JobEntity job = getBloc().myJobs!.activeJobs[index];
                             return AppJobAdvertCard(
                                 jobName: job.title!,
-                                employerName: "Andrew Test Employer",
-                                locationName: "Melrose Arch. South Africa",
+                                employerName: "${job.customer!.firstName} ${job.customer!.surname}",
+                                locationName: "${job.customer!.address}",
                                 dateTime: job.startDate!,
                                 status: JobStatus.active,
                                 onNext: ()=>context.router.push(HirerJobDetailsRoute(jobEntity: job)),
@@ -112,6 +113,8 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                               matchesString: "possible Matches",
                               totalApplications: 0,
                               applicationsString: "applications",
+                              image: (job.customer?.profileImage!=null)?
+                            CachedNetworkImageProvider(job.customer!.profileImage!):null,
                             );
                           }
                       ),
@@ -141,10 +144,12 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             JobEntity job = getBloc().myJobs!.inactiveJobs[index];
                             return AppJobCard(
                                 jobName: job.title!,
-                                employerName: "Andrew Test Employer",
-                                locationName: "Jo'burg South Africa",
+                                employerName: "${job.customer!.firstName} ${job.customer!.surname}",
+                                locationName: "${job.customer!.address}",
                                 dateTime: job.startDate??DateTime.now(),
                                 status: JobStatus.inactive,
+                              image: (job.customer?.profileImage!=null)?
+                              CachedNetworkImageProvider(job.customer!.profileImage!):null,
                               onNext: (){
                                   logger.i(job.title);
                                   context.router.push(HirerJobDetailsRoute(jobEntity: job));

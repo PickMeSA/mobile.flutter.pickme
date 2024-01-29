@@ -6,7 +6,6 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
 import 'package:pickme/features/profile/presentation/profile_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -17,6 +16,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+
+import '../../jobs_landing_page/presentation/jobs_landing_page.dart';
 
 @RoutePage()
 class BottomNavigationBarPage extends BasePage {

@@ -27,6 +27,7 @@ final String id;
 final double? distance;
 final IndustryEntity? industry;
 final JobCustomerEntity? customer;
+final String? jobInterestStatus;
 
   const JobEntity({
     required this.title,
@@ -47,19 +48,21 @@ final JobCustomerEntity? customer;
     this.comments = "",
     required this.id,
     this.distance,
-    this.customer
+    this.customer,
+    this.jobInterestStatus
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     logger.e({"response": response.startDate});
     return JobEntity(
         title: response.title??"",
-        startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):DateTime.now(),
-        endDate: (response.endDate!=null && response.endDate != "")?DateTime.parse(response.endDate!):DateTime.now(),
+        startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):null,
+        endDate: (response.endDate!=null && response.endDate != "")?DateTime.parse(response.endDate!):null,
         startTime: response.startTime,
         description: response.description??"",
         images: response.images??"",
         status: response.status??"",
         estimatedHours: response.estimatedHours??0,
+        jobInterestStatus: response.jobInterestStatus,
         lat: response.lat,
         lng: response.lng,
         skills: response.skills?.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList()??[],
@@ -96,6 +99,73 @@ final JobCustomerEntity? customer;
         distance: distance
     );
   }
+
+JobEntity copyWith({
+  String? title,
+  String? description,
+  String? status,
+  String? address,
+  String? employerName,
+  double? hourlyRate,
+  DateTime? startDate,
+  DateTime? endDate,
+  String? startTime,
+  double? estimatedHours,
+  double? lat,
+  double? lng,
+  String? images,
+  List<SkillEntity>? skills,
+  String? comments,
+  String? id,
+  double? distance,
+  IndustryEntity? industry,
+  JobCustomerEntity? customer,
+}) {
+  return JobEntity(
+    title: title ?? this.title,
+    description: description ?? this.description,
+    status: status ?? this.status,
+    address: address ?? this.address,
+    employerName: employerName ?? this.employerName,
+    hourlyRate: hourlyRate ?? this.hourlyRate,
+    startDate: startDate ?? this.startDate,
+    endDate: endDate ?? this.endDate,
+    startTime: startTime ?? this.startTime,
+    estimatedHours: estimatedHours ?? this.estimatedHours,
+    lat: lat ?? this.lat,
+    lng: lng ?? this.lng,
+    images: images ?? this.images,
+    skills: skills ?? this.skills,
+    comments: comments ?? this.comments,
+    id: id ?? this.id,
+    distance: distance ?? this.distance,
+    industry: industry ?? this.industry,
+    customer: customer ?? this.customer,
+  );
+}
+@override
+String toString() {
+  return 'JobEntity('
+      'title: $title, '
+      'description: $description, '
+      'status: $status, '
+      'address: $address, '
+      'employerName: $employerName, '
+      'hourlyRate: $hourlyRate, '
+      'startDate: $startDate, '
+      'endDate: $endDate, '
+      'startTime: $startTime, '
+      'estimatedHours: $estimatedHours, '
+      'lat: $lat, '
+      'lng: $lng, '
+      'images: $images, '
+      'skills: $skills, '
+      'comments: $comments, '
+      'id: $id, '
+      'distance: $distance, '
+      'industry: $industry, '
+      'customer: $customer)';
+}
   @override
   List<Object?> get props => [id];
 }

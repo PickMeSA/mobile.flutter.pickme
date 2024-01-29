@@ -3170,6 +3170,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Jobs near me`
+  String get jobsNearMe {
+    return Intl.message(
+      'Jobs near me',
+      name: 'jobsNearMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Applied`
+  String get applied {
+    return Intl.message(
+      'Applied',
+      name: 'applied',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No more than 6 Images can be uploaded for each experience`
   String get noMoreThan6ImagesCanBeUploadedForEachExperience {
     return Intl.message(

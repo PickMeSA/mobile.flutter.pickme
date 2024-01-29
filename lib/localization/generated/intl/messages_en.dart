@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Application sent"),
         "applicationSenttext": MessageLookupByLibrary.simpleMessage(
             "We\'ve seen your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\""),
+        "applied": MessageLookupByLibrary.simpleMessage("Applied"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
         "atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects":
@@ -233,6 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Job listing details"),
         "jobName": MessageLookupByLibrary.simpleMessage("Job name"),
         "jobs": MessageLookupByLibrary.simpleMessage("Jobs"),
+        "jobsNearMe": MessageLookupByLibrary.simpleMessage("Jobs near me"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),

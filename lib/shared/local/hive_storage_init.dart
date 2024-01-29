@@ -5,6 +5,7 @@ import 'package:pickme/features/login/domain/entities/biometrics/biometrics_mode
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/services/local/Hive/user_type_local_storage/user_type_model.dart';
 
 
 initHive() async {
@@ -19,6 +20,7 @@ registerAdapters() {
   Hive.registerAdapter(BiometricsModelAdapter());
   Hive.registerAdapter(ProfileModelAdapter());
   Hive.registerAdapter(UserModelAdapter());
+  // Hive.registerAdapter(UserTypeModelAdapter());
 }
 
 openBoxes() async {
@@ -28,6 +30,7 @@ openBoxes() async {
   boxProfile = await Hive.openBox(profileBox);
   boxUser = await Hive.openBox(userBox);
   boxSyncData = await Hive.openBox(syncBox);
+  boxUserType = await Hive.openBox(userTypeBox);
 }
 
 late Box boxTokens;
@@ -36,6 +39,7 @@ late Box boxBiometrics;
 late Box boxProfile;
 late Box boxUser;
 late Box boxSyncData;
+late Box boxUserType;
 
 const String tokenBox = "TokenBox";
 const String appStateBox = "AppStateBox";
@@ -44,3 +48,4 @@ const String biometricsBox = "BiometricsBox";
 const String profileBox = "ProfileBox";
 const String syncBox = "SyncBox";
 const String userBox = "UserBox";
+const String userTypeBox = "UserTypeBox";

@@ -7,13 +7,11 @@ import '../../models/jobs/my_job_listings_job_model_response.dart';
 class MyJobListingsPageEntity {
   final List<JobEntity> activeJobs;
   final List<JobEntity> inactiveJobs;
-  final ProfileEntity? profile;
 
-  MyJobListingsPageEntity({required this.activeJobs, required this.inactiveJobs, this.profile});
+  MyJobListingsPageEntity({required this.activeJobs, required this.inactiveJobs});
 
   factory MyJobListingsPageEntity.fromResponse({
     required List<dynamic> listingsResponse,
-    required ProfileEntity? profile,
       }){
     try{
       return MyJobListingsPageEntity(
@@ -21,7 +19,6 @@ class MyJobListingsPageEntity {
                   (e) => JobEntity.fromResponse(MyJobListingsJobModelResponse.fromJson(e))).toList(),
           inactiveJobs: listingsResponse.where((element) => element['status']!="active").map(
                   (e)=>JobEntity.fromResponse(MyJobListingsJobModelResponse.fromJson(e))).toList(),
-          profile: profile
       );
     }catch(ex){
       logger.e(ex);

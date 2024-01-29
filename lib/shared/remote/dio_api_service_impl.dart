@@ -9,14 +9,14 @@ import 'api-service.dart';
 class DioApiService extends ApiService{
 
   final Dio dio;
-  Logger logger = Logger();
+  Logger logger = Logger(printer: PrettyPrinter(lineLength: 100000));
 
 
   DioApiService({
     required this.dio}){
    dio.interceptors.add(InterceptorsWrapper(onRequest:
        (RequestOptions options, RequestInterceptorHandler handler){
-         logger.d(options);
+         logger.d(options.queryParameters);
   TokenModel tokenModel = boxTokens.get(current);
          logger.d(tokenModel.accessToken);
          options.headers['Content-Type'] = 'application/json';
@@ -99,7 +99,7 @@ class DioApiService extends ApiService{
    data: data,
    queryParameters: queryParameters,
    options: options);
-   logger.d(response);
+   logger.d({"response": response});
    return response;
   }
 

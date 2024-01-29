@@ -31,8 +31,8 @@ class ApplyForJobServiceImpl extends ApplyForJobService{
         startTime: jobListingRepositoryParams.jobEntity.startTime!=null?jobListingRepositoryParams.jobEntity.startTime!:null,
         estimatedHours: double.parse(jobListingRepositoryParams.jobEntity.estimatedHours),
         distance: 0,
-        lat: double.parse(jobListingRepositoryParams.jobEntity.lat),
-        lng: double.parse(jobListingRepositoryParams.jobEntity.lng),
+        lat: double.parse(jobListingRepositoryParams.jobEntity.lat!),
+        lng: double.parse(jobListingRepositoryParams.jobEntity.lng!),
         images: jobListingRepositoryParams.jobEntity.images.join(","),
         skills: jobListingRepositoryParams.jobEntity.skills.map((e) => SkillsModelResponse(id: e.id, skill: e.skill)).toList(),
 
@@ -49,7 +49,7 @@ class ApplyForJobServiceImpl extends ApplyForJobService{
           estimatedHours: double.parse(createJobListingModelResponse.estimatedHours.toString()),
           lat: createJobListingModelResponse.lat,
           lng: createJobListingModelResponse.lng,
-          images: createJobListingModelResponse.images,
+          images: createJobListingModelResponse.images??"",
           skills: createJobListingModelResponse.skills.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList(),
           id: createJobListingModelResponse.id!,
           distance: createJobListingModelResponse.distance);

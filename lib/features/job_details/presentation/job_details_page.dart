@@ -125,14 +125,14 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            widget.fromIndex == 0 ?
                            PrimaryButton.fullWidth(
-                             onPressed:() {
+                             onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
                                if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(const ApplyForJobRoute());
+                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
                                  getBloc().add(ApplyForJobEvent());
                                }
                                },
-                             child: Text(getLocalization().apply),
+                             child: Text(getBloc().jobEntity!.jobInterestStatus==null?getLocalization().apply:getLocalization().applied),
                            ):
                            widget.fromIndex == 1?
                            Column(
@@ -279,7 +279,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              ),
                              onPressed:() {
                                if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(const ApplyForJobRoute());
+                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
                                  getBloc().add(ApplyForJobEvent());
                                }
@@ -305,7 +305,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              ),
                              onPressed:() {
                                if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(const ApplyForJobRoute());
+                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
                                  getBloc().add(ApplyForJobEvent());
                                }
@@ -341,7 +341,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().jobDetails,),
+      title: Text(getLocalization().jobDetails.toLowerCase().capitalizeFirstLetter(),),
     );
   }
 

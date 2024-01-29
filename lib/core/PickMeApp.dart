@@ -44,9 +44,7 @@ class PickMeApp{
           AppLocalizations.delegate,
         ],
         themeMode: ThemeMode.system,
-        darkTheme: ThemeData(
-
-        ),
+        darkTheme: AppTheme().defaultTheme,
         theme: AppTheme().defaultTheme,
 
 

@@ -311,6 +311,8 @@
   "update": "Update",
   "editPhotosOfWork": "Edit photos of work",
   "certificate":"Certificate",
+  "jobsNearMe":"Jobs near me",
+  "applied":"Applied",
   "noMoreThan6ImagesCanBeUploadedForEachExperience": "No more than 6 Images can be uploaded for each experience",
   "youveApprovedTheRescheduleRequest": "You've approved the reschedule request and it has updated in your calender.",
   "youveDeclinedTheRescheduleRequest": "You've declined the reschedule request. you can still propose and alternative date and time."

@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/jobs/applying/job_list_page/presentation/job_list_page.dart';
+import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/bloc/all_services_page_bloc.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -109,7 +109,7 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
                         if(widget.pageMode == ServicesPageMode.hiring){
                           context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[index].id.toString()));
                         }else{
-                          context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getBloc().paginatedIndustries!.industries[index].industry, categoryId: getBloc().paginatedIndustries!.industries[3].id.toString()));
+                          context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getBloc().paginatedIndustries!.industries[index].industry, filter: FilterEntity(industryId: getBloc().paginatedIndustries!.industries[3].id.toString())));
                         }
                       },
                     );
