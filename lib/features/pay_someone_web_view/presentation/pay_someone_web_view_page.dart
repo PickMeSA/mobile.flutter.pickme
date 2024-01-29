@@ -9,6 +9,7 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -17,7 +18,8 @@ import 'bloc/pay_someone_web_view_bloc.dart';
 
 @RoutePage()
 class PaySomeoneWebViewPage extends BasePage {
-  const PaySomeoneWebViewPage({super.key});
+  ProfileEntity? profileEntity;
+   PaySomeoneWebViewPage({ this.profileEntity, super.key});
 
   @override
   _PaySomeoneWebViewPageState createState() => _PaySomeoneWebViewPageState();
@@ -48,7 +50,7 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
             ..addJavaScriptChannel("Payment",
                 onMessageReceived: (message){
                   if(message.message == "success"){
-                    context.router.pushAndPopUntil(const YouAreAllSetupRoute(),
+                    context.router.pushAndPopUntil( YouAreAllSetupRoute(),
                         predicate: (Route<dynamic> route) => false);
                   }else if(message.message == "failed"){
                       context.router.pop();

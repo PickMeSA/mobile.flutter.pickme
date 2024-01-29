@@ -10,5 +10,6 @@ part 'alternative_request_details_state.dart';
 @injectable
 class AlternativeRequestDetailsBloc
     extends BaseBloc<AlternativeRequestDetailsPageEvent, AlternativeRequestDetailsPageState> {
-    AlternativeRequestDetailsBloc(): super(AlternativeRequestDetailsPageInitState()) {}
+    AlternativeRequestDetailsBloc(): super(AlternativeRequestDetailsPageInitState()) {
+    }
 } 

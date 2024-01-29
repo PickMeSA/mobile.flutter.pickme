@@ -1,5 +1,6 @@
 import 'package:pickme/base_classes/back_end_calls.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/reschedule_booking/domain/repository/reschedule_booking_repository/reschedule_booking_clicked_repository.dart';
 import 'package:pickme/shared/services/remote/api_service/booking_service/reschedule_service.dart';
 
@@ -9,9 +10,9 @@ class RescheduleBookingClickedRepositoryImpl extends RescheduleBookingClickedRep
   RescheduleBookingClickedRepositoryImpl({required this.rescheduleService});
 
   @override
-  Future<bool> call({RescheduleBookingClickedRepositoryParams? params}) async{
+  Future<BookingEntity> call({RescheduleBookingClickedRepositoryParams? params}) async{
     try{
-      return await rescheduleService.rescheduleBooking(rescheduleEntity: params!.rescheduleEntity);
+      return await rescheduleService.rescheduleBooking(rescheduleEntity: params!.rescheduleEntity!);
     }catch(ex){
       rethrow;
     }

@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -10,6 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/propose_alternative_bloc.dart';
@@ -51,7 +56,21 @@ class _ProposeAlternativePageState extends BasePageState<ProposeAlternativePage,
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<ProposeAlternativeBloc, ProposeAlternativePageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is RescheduleBookingState && state.dataState ==DataState.success){
+          Navigator.pop(context);
+          context.router.push(const AlternativeSentRoute());
+        }
+
+        if(state is RescheduleBookingState && state.dataState ==DataState.error){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+
+        if(state is RescheduleBookingState && state.dataState ==DataState.loading){
+          preloader(context);
+        }
+      },
       builder: (context, state) {
          return  Padding(
            padding: const EdgeInsets.all(20.0),
@@ -132,13 +151,15 @@ class _ProposeAlternativePageState extends BasePageState<ProposeAlternativePage,
                                  )
                              ),
                              onPressed: getBloc().checked?null:() {
+                               UserModel userModel = boxUser.get(current);
                                if(_key.currentState!.validate()){
                                  getBloc().add(ProposeAlternativeClickedEvent(rescheduleEntity: RescheduleEntity(comments: commentController.text,
                                   jobInterestId: widget.bookingId,
                                   reasonForChange: commentController.text,
-                                  status: JobStatus.requestedReschedule,
+                                  status: JobStatus.alternativeProposed,
                                   startDate: dateTime.toString(),
-                                  startTime: timeTextController.text)));
+                                  startTime: timeTextController.text,
+                                  proposerUid: userModel.id)));
                                }
                              },
                              child: Text(getLocalization().sendAlternative),

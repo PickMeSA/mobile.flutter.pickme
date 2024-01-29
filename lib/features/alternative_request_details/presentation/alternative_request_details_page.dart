@@ -3,6 +3,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,16 @@ import 'bloc/alternative_request_details_bloc.dart';
 
 @RoutePage()
 class AlternativeRequestDetailsPage extends BasePage {
-  const AlternativeRequestDetailsPage({super.key});
+
+  BookingEntity bookingEntity;
+   AlternativeRequestDetailsPage({required this.bookingEntity ,super.key});
 
   @override
   _AlternativeRequestDetailsPageState createState() => _AlternativeRequestDetailsPageState();
 }
 
 class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeRequestDetailsPage, AlternativeRequestDetailsBloc> {
-
+  String? name;
   @override
   void initState() {
     // TODO: implement initState
@@ -40,6 +43,11 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
       listener: (context, state){},
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
+        if(widget.bookingEntity.proposerUid == widget.bookingEntity.labourerUid){
+          name = "Laborer";
+        }else{
+          name = widget.bookingEntity.customer?.firstName??"";
+        }
         return Container(
           height: MediaQuery.sizeOf(context).height,
           width: MediaQuery.sizeOf(context).width,
@@ -59,7 +67,7 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                     ],
                   ),
                   30.height,
-                  wText(getLocalization().sentAnAlternativeRequest("Freedom")),
+                  wText(getLocalization().sentAnAlternativeRequest(name!)),
                   50.height,
                   wText(getLocalization().alternativeDateAndTime,
                       style: theme.textTheme.titleMedium),
@@ -70,21 +78,22 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                     child: Padding(padding: EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          wText(DateFormatters.getDayMonthYear(DateTime.now()), style: theme.textTheme.titleLarge),
+                          wText(DateFormatters.getDayMonthYear(widget.bookingEntity!.job!.startDate!), style: theme.textTheme.titleLarge),
                           Spacer(),
-                          wText(DateFormatters.getHMTime(DateTime.now()), style: theme.textTheme.titleLarge),
+                          wText(widget.bookingEntity!.job.startTime!),
                         ],
                       ),),
                   ),
                   40.height,
                   const AppDivider(),
                   30.height,
-                  wText(getLocalization().otherComments,style: theme.textTheme.titleMedium),
+                  wText(widget.bookingEntity.comments,style: theme.textTheme.titleMedium),
+
                   20.height,
-                  wText(getLocalization().exampleText),
+                  wText(widget.bookingEntity.reasonForChange),
                   20.height,
 
-                  AppDivider(),
+                  const AppDivider(),
                   50.height,
                   Row(
                     children: [
