@@ -35,6 +35,7 @@ _$MyJobListingsJobModelResponseImpl
           id: json['id'] as String?,
           employerName: json['employerName'] as String?,
           jobInterestStatus: json['jobInterestStatus'] as String?,
+          jobInterestId: json['jobInterestId'] as String?,
           distance: (json['distance'] as num?)?.toDouble(),
           jobApplicationsCount: json['jobApplicationsCount'] as int?,
           possibleApplicantMatchesCount:
@@ -64,6 +65,7 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'id': instance.id,
       'employerName': instance.employerName,
       'jobInterestStatus': instance.jobInterestStatus,
+      'jobInterestId': instance.jobInterestId,
       'distance': instance.distance,
       'jobApplicationsCount': instance.jobApplicationsCount,
       'possibleApplicantMatchesCount': instance.possibleApplicantMatchesCount,

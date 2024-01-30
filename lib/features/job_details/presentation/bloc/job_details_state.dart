@@ -13,3 +13,8 @@ class ApplyForJobState extends JobDetailsPageState{
   ApplyForJobState({this.error});
 }
 
+class RespondToJobInterestState extends JobDetailsPageState{
+  final String? error;
+  RespondToJobInterestState({this.error});
+}
+

@@ -128,7 +128,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
   }
 
   List<Widget> _buildScreens() {
-    bool isHiring = true;
+    bool isHiring = false;
     return [
         HomePage(controller: _controller),
         const MyBookingsUpcomingPage(),

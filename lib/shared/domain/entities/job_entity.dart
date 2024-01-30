@@ -32,6 +32,7 @@ final double? distance;
 final IndustryEntity? industry;
 final JobCustomerEntity? customer;
 final String? jobInterestStatus;
+final String? jobInterestId;
 final int? jobApplicationsCount;
 final int? possibleApplicantMatchesCount;
 final List<CandidateProfileEntity>? profiles;
@@ -57,6 +58,7 @@ final List<CandidateProfileEntity>? profiles;
     this.distance,
     this.customer,
     this.jobInterestStatus,
+    this.jobInterestId,
     this.profiles,
     this.possibleApplicantMatchesCount,
     this.jobApplicationsCount,
@@ -72,6 +74,7 @@ final List<CandidateProfileEntity>? profiles;
         status: response.status??"",
         estimatedHours: response.estimatedHours??0,
         jobInterestStatus: response.jobInterestStatus,
+      jobInterestId: response.jobInterestId,
       jobApplicationsCount: response.jobApplicationsCount,
       possibleApplicantMatchesCount: response.possibleApplicantMatchesCount,
         lat: response.lat,

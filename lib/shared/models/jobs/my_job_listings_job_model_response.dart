@@ -28,6 +28,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     String? id,
     String? employerName,
     String? jobInterestStatus,
+    String? jobInterestId,
     double? distance,
     int? jobApplicationsCount,
     int? possibleApplicantMatchesCount,
