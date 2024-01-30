@@ -186,28 +186,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                  child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
                                )
                              ],
-                           ):widget.fromIndex == 2?
-                           SecondaryButtonDark(
-                               width: MediaQuery.sizeOf(context).width,
-                               style: ButtonStyle(
-                                   side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                     return BorderSide(
-                                       color: theme.colorScheme.secondary,
-                                       width: 2,
-                                     );
-                                   }
-                                   ),
-                                   backgroundColor: MaterialStateProperty.resolveWith(
-                                           (Set<MaterialState> states){
-                                         return Colors.white;
-                                       }
-                                   )
-                               ),
-                               onPressed:() {
-                                 context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
-
-                               },
-                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
+                           ):const SizedBox(),
                            getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
                              padding: const EdgeInsets.all(16.0),
                              child: Row(
@@ -344,14 +323,10 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    )
                                ),
                                onPressed:() {
-                                 if(getBloc().jobEntity?.startDate == null){
-                                   context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
-                                 }else{
-                                   getBloc().add(ApplyForJobEvent());
-                                 }
+                                 context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
+
                                },
-                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)): const SizedBox()
-                           ):const SizedBox(),
+                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
                            getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
                              padding: const EdgeInsets.all(16.0),
                              child: Row(
@@ -394,9 +369,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                },
                              );
                            }),
-                     ], onTap: (int index) {
-                       context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
-                   },
+                     ], onTap: (int index) {  },
                    ),
 
 

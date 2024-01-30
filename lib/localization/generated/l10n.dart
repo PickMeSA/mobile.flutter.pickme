@@ -3070,6 +3070,46 @@ class AppLocalizations {
     );
   }
 
+  /// `Alternative request declined`
+  String get alternativeRequestDeclined {
+    return Intl.message(
+      'Alternative request declined',
+      name: 'alternativeRequestDeclined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alternative request accepted`
+  String get alternativeRequestAccepted {
+    return Intl.message(
+      'Alternative request accepted',
+      name: 'alternativeRequestAccepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've approved the Alternative request and it has updated in your calender.`
+  String get youveApprovedTheAlternativeRequest {
+    return Intl.message(
+      'You\'ve approved the Alternative request and it has updated in your calender.',
+      name: 'youveApprovedTheAlternativeRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've declined the Alternative request.`
+  String get youveDeclinedTheAlternativeRequest {
+    return Intl.message(
+      'You\'ve declined the Alternative request.',
+      name: 'youveDeclinedTheAlternativeRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account holder name`
   String get accountHolderName {
     return Intl.message(
@@ -3245,6 +3285,46 @@ class AppLocalizations {
     return Intl.message(
       'Keep tabs on this job in \'My Bookings\'.',
       name: 'keepTabsOnThisJobInMyBookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See cancellation details`
+  String get seeCancellationDetails {
+    return Intl.message(
+      'See cancellation details',
+      name: 'seeCancellationDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancellation details`
+  String get cancellationDetails {
+    return Intl.message(
+      'Cancellation details',
+      name: 'cancellationDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{name} cancelled this booking. See details below`
+  String cancelledThisBooking(Object name) {
+    return Intl.message(
+      '$name cancelled this booking. See details below',
+      name: 'cancelledThisBooking',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Reason`
+  String get reason {
+    return Intl.message(
+      'Reason',
+      name: 'reason',
       desc: '',
       args: [],
     );
