@@ -22,10 +22,11 @@ import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/candidate_profile_page_bloc.dart';
 
-@RoutePage()
+@RoutePage<bool?>()
 class CandidateProfilePage extends BasePage {
-  const CandidateProfilePage({super.key, required this.candidateProfile});
+  const CandidateProfilePage({super.key, required this.candidateProfile, this.jobInterestId});
   final CandidateProfileEntity candidateProfile;
+  final String? jobInterestId;
 
   @override
   State<CandidateProfilePage> createState() => _CandidateProfilePageState();
@@ -35,7 +36,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
   @override
   void initState() {
     super.initState();
-    getBloc().add(CandidateProfilePageEnteredEvent(candidateProfile: widget.candidateProfile));
+    getBloc().add(CandidateProfilePageEnteredEvent(candidateProfile: widget.candidateProfile, jobInterestId: widget.jobInterestId));
   }
   @override
   Widget buildView(BuildContext context) {
@@ -66,12 +67,37 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
 
           //loading
           if(state is CandidateProfilePageEnteredState && state.dataState == DataState.success){
+            getBloc().preloaderActive = false;
             Navigator.pop(context);
           }
 
           if(state is CandidateProfilePageEnteredState && state.dataState == DataState.error){
+            getBloc().preloaderActive = false;
             Navigator.pop(context);
             wErrorPopUp(message: "failed to get candidate details", type: getLocalization().error, context: context);
+          }
+          if(state is RespondToJobInterestState && state.dataState == DataState.loading){
+            if(!getBloc().preloaderActive){
+              getBloc().preloaderActive = true;
+              preloader(context);
+            }
+          }
+
+          //loading
+          if(state is RespondToJobInterestState && state.dataState == DataState.success){
+            getBloc().preloaderActive = false;
+            Navigator.pop(context);
+            if(getBloc().response == "booked"){
+              context.router.push(const BookingSuccessRoute());
+            }else{
+              context.router.pop(true);
+            }
+          }
+
+          if(state is RespondToJobInterestState && state.dataState == DataState.error){
+            getBloc().preloaderActive = false;
+            Navigator.pop(context);
+            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
           }
         },
       builder: (context, state) {
@@ -155,11 +181,30 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                         ),
                       ],
                     ),
-                    child: Padding(
+                    child: widget.jobInterestId==null?Padding(
                       padding: EdgeInsets.all(24),
                       child: PrimaryButtonDark.fullWidth(
                           child: Text(getLocalization().offerAJob),
                           onPressed: () => context.router.push(OfferAJobRoute(candidateProfileEntity: widget.candidateProfile))
+                      ),
+                    ):Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SecondaryButtonDark(
+                                child: Text(getLocalization().decline),
+                                onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                            ),
+                          ),
+                          16.width,
+                          Expanded(
+                            child: PrimaryButtonDark(
+                                child: Text(getLocalization().accept),
+                                onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )

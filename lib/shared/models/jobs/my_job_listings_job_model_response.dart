@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pickme/shared/features/otp/data/models/otp_model_response/profile_data_model_response.dart';
 import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_industry_model_model_response.dart';
 import 'package:pickme/shared/models/job_customer_model_response/job_customer_model_response.dart';
@@ -28,9 +29,40 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     String? employerName,
     String? jobInterestStatus,
     double? distance,
+    int? jobApplicationsCount,
+    int? possibleApplicantMatchesCount,
+    List<JobInterestModel>? applications,
   }) = _MyJobListingsJobModelResponse;
 
   factory MyJobListingsJobModelResponse.fromJson(
           Map<String, Object?> json) =>
       _$MyJobListingsJobModelResponseFromJson(json);
+}
+
+@freezed
+class JobInterestModel with _$JobInterestModel {
+  factory JobInterestModel({
+    required Applicant applicant,
+    required String jobInterestId,
+  }) = _JobInterestModel;
+
+  factory JobInterestModel.fromJson(Map<String, dynamic> json) =>
+      _$JobInterestModelFromJson(json);
+}
+
+@freezed
+class Applicant with _$Applicant {
+  factory Applicant({
+    required String userId,
+    required String firstName,
+    required String surname,
+    required String profileImage,
+    required int averageRating,
+    required String address,
+    required double hourlyRate,
+    required String jobTitle,
+  }) = _Applicant;
+
+  factory Applicant.fromJson(Map<String, dynamic> json) =>
+      _$ApplicantFromJson(json);
 }

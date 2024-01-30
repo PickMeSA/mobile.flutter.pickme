@@ -12,9 +12,11 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/review_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:iconsax/iconsax.dart';
 
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'bloc/contact_bloc.dart';
 
@@ -32,33 +34,20 @@ class _ContactPageState extends BasePageState<ContactPage, ContactPageBloc> {
   @override
   void initState() {
     super.initState();
-    getBloc().add(ContactPageEnteredEvent(userId: widget.userId));
   }
-
+  _launchUrl(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     return BlocConsumer<ContactPageBloc, ContactPageState>(
-      listener: (context, state) {
-        //loading GetIndustriesState
-        if(state is GetPageDataState && state.dataState == DataState.loading){
-          if(!getBloc().preloaderActive){
-            getBloc().preloaderActive = true;
-            preloader(context);
-          }
-        }
-        //loading
-        if(state is GetPageDataState && state.dataState == DataState.success){
-          getBloc().preloaderActive = false;
-          Navigator.pop(context);
-        }
-        //loading
-        if(state is GetPageDataState && state.dataState == DataState.error){
-          getBloc().preloaderActive = false;
-          Navigator.pop(context);
-          wErrorPopUp(message: state.error!, type: "Error", context: context);
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Container(
           width: MediaQuery.sizeOf(context).width,
@@ -67,63 +56,36 @@ class _ContactPageState extends BasePageState<ContactPage, ContactPageBloc> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              (getBloc().pageEntity== null || getBloc().pageEntity!.reviews.isEmpty)?
-              Expanded(
-                  child: Column(
+              Text(getLocalization().needSupporWithPickme,
+                style: theme.textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
+              24.height,
+              InkWell(
+                onTap: () async =>_launchUrl("tel://+27660033804"),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
                     children: [
-                      Expanded(child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 200,
-                            width: 200,
-                            child: Image(
-                              image: AssetImage("assets/no_items_found.png"),
-                            ),
-                          ),
-                          24.height,
-                          Text(getLocalization().youDontHaveAnyReviewsYet,
-                            style: theme.textTheme.headlineSmall,
-                            textAlign: TextAlign.center,
-                          ),
-                          16.height,
-                          Text(getLocalization().getReviewsToBoostProfile,
-                            style: theme.textTheme.bodyMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                          24.height,
-                        ],
-                      )),
-                      PrimaryButton.fullWidth(
-                        onPressed: ()=>context.router.push(RequestAReviewRoute()),
-                        child: Text(getLocalization().requestAReview),
-                      ),
-                      16.height
+                      Expanded(child: Text("0660033804")),
+                      Icon(Iconsax.call)
                     ],
-                  )):
-                Expanded(
-                child: ListView.separated(
-                  itemCount: getBloc().pageEntity!.reviews.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    ReviewEntity review = getBloc().pageEntity!.reviews[index];
-                    return AppProfileReview(
-                      fullName: "${review.reviewer?.firstName} ${review.reviewer?.surname}",
-                      rating: review.rating,
-                      relationship: review.reviewer!.industry?.industry??getLocalization().noIndustrySpecified,
-                      reviewDate: review.createdAt,
-                      review: review.review,
-                      // : ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().pageEntity!.reviews[index].id)),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: AppDivider(),
-                    );
-                  },
+                  ),
+                ),
+              ),
+              24.height,
+              InkWell(
+                onTap: () async =>_launchUrl("mailto:info@pick-me.co.za?subject=Pick-me%20support"),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Expanded(child: Text("info@pick-me.co.za")),
+                      Icon(Iconsax.sms)
+                    ],
+                  ),
                 ),
               )
-
             ],
           ),
         );
@@ -144,12 +106,7 @@ class _ContactPageState extends BasePageState<ContactPage, ContactPageBloc> {
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(widget.isHiring?getLocalization().reviews:getLocalization().myReviews),
-      actions: widget.isHiring?null:[
-        TertiaryButton(
-          onPressed: (){},
-          child: Text(getLocalization().requestAReview),)
-      ]
+      title: Text(getLocalization().contactUs),
     );
   }
 

@@ -16,7 +16,6 @@ class DioApiService extends ApiService{
     required this.dio}){
    dio.interceptors.add(InterceptorsWrapper(onRequest:
        (RequestOptions options, RequestInterceptorHandler handler){
-         logger.d(options.queryParameters);
   TokenModel tokenModel = boxTokens.get(current);
          logger.d(tokenModel.accessToken);
          options.headers['Content-Type'] = 'application/json';
@@ -111,6 +110,7 @@ class DioApiService extends ApiService{
 
   @override
   Future<Response<T>> put<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken, ProgressCallback? onSendProgress, ProgressCallback? onReceiveProgress}) async {
+    logger.d(path);
     Response<T> response = await dio.put(path, data: data, queryParameters: queryParameters, options: options);
     logger.d(response);
     return response;

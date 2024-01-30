@@ -4,4 +4,5 @@ import 'package:pickme/shared/remote/PickMeApiCore.dart';
 abstract class ApplyForJobService extends PickMeCoreApi{
 
   Future<bool> applyForJob({required ApplyForJobRepositoryParams params});
+  Future<bool> updateJobInterestStatus({required String jobInterestId, required String status});
 }

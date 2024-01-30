@@ -6,6 +6,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
+import 'package:pickme/features/jobs_hiring_landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
 import 'package:pickme/features/profile/presentation/profile_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -127,10 +128,12 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
   }
 
   List<Widget> _buildScreens() {
+    bool isHiring = true;
     return [
         HomePage(controller: _controller),
         const MyBookingsUpcomingPage(),
-        const JobsLandingPage(),
+        if(!isHiring)const JobsLandingPage(),
+      if(isHiring)const JobsHiringLandingPage(),
         const ProfilePage()
     ];
   }

@@ -6,8 +6,8 @@ abstract class ContactPageState extends BaseState {
   ContactPageState({super.dataState, this.error});
 }
 
-class MyReviewsPageInitialState extends ContactPageState {
-  MyReviewsPageInitialState({super.error});
+class ContactPageInitialState extends ContactPageState {
+  ContactPageInitialState({super.error});
 }
 
 class GetPageDataState extends ContactPageState {

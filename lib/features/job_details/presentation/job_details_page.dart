@@ -12,6 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/default_values.dart';
+import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/job_applicant_entity.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_client_widget.dart';
@@ -19,7 +21,7 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'bloc/job_details_bloc.dart';
-enum PageMode { booking, searching, jobRequest}
+enum PageMode { booking, searching, jobRequest, hiring}
 @RoutePage()
 class JobDetailsPage extends BasePage {
   final int? fromIndex ;
@@ -99,12 +101,13 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                    ):AppTabBar(
                      viewHeight:1500,
                      tabs: <Widget>[
-                       Text(getLocalization().client, style: theme.textTheme.bodySmall,),
+                       if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
                        Text(getLocalization().description, style: theme.textTheme.bodySmall,),
+                       if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
                        // if(getBloc().currentUserId == getBloc().jobEntity!.customer.id)
                      ],
                      views:  <Widget>[
-                       Column(
+                       if(widget.pageMode != PageMode.hiring) Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
                            WClientWidget(
@@ -260,7 +263,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            const AppDivider(),
                            20.height,
-                           widget.fromIndex == 0 ?
+                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring?
                            PrimaryButton(
                              width: MediaQuery.sizeOf(context).width,
                              style: ButtonStyle(
@@ -314,7 +317,27 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            ):const SizedBox(),
 
                          ],
-                       )
+                       ),
+                       if(widget.pageMode == PageMode.hiring)ListView.builder(
+                           physics: const NeverScrollableScrollPhysics(),
+                           shrinkWrap: true,
+                           itemCount: getBloc().jobEntity!.profiles?.length??0,
+                           itemBuilder: (context, index){
+                             CandidateProfileEntity candidate = getBloc().jobEntity!.profiles![index];
+                             return AppCandidateProfile(
+                               fullName: candidate.fullName??"",
+                               jobTitle: getBloc().jobEntity!.title,
+                               rating: candidate.rating??0,
+                               hourlyRate: "R${candidate.hourlyRate}p/h",
+                               image: (candidate.profilePicture!=null)?
+                               CachedNetworkImageProvider(
+                                   candidate.profilePicture!
+                               ):null,
+                               viewProfileFunction: (){
+                                 context.router.push(CandidateProfileRoute(candidateProfile: candidate, jobInterestId: getBloc().jobEntity!.profiles![index].jobInterestId)).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
+                               },
+                             );
+                           }),
                      ], onTap: (int index) {  },
                    ),
 

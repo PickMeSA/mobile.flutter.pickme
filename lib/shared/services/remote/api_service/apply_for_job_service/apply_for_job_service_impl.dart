@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
@@ -75,6 +77,23 @@ class ApplyForJobServiceImpl extends ApplyForJobService{
        bookingId: null,
      ).toJson());
      if(response.statusCode==200){
+       return true;
+     }else{
+       throw "an error occurred";
+     }
+   }catch(ex){
+     rethrow;
+   }
+  }
+
+  @override
+  Future<bool> updateJobInterestStatus({required String jobInterestId, required String status}) async {
+   try{
+     Response<dynamic> response = await apiService.put("$baseUrl$version/jobs/jobInterests/$jobInterestId", data: {
+       "status": status,
+     });
+     logger.d({"responsE": response.data});
+     if(response.statusCode==201 || response.statusCode==200){
        return true;
      }else{
        throw "an error occurred";

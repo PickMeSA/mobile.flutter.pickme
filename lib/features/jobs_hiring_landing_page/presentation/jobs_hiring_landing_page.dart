@@ -187,6 +187,8 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                 SizedBox(
                   height: 450,
                   child: (state.paginatedCandidates!=null)? ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
                     itemCount: (state.paginatedCandidates!.candidates.length>3)?3:state.paginatedCandidates!.candidates.length,
                     itemBuilder: (BuildContext context, int index){
                       CandidateProfileEntity candidate = state.paginatedCandidates!.candidates[index];
