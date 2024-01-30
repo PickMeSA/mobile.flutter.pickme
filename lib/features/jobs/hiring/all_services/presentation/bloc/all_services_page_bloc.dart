@@ -9,8 +9,8 @@ import 'package:pickme/shared/classes/debouncer.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 
-import '../../../../shared/domain/usecases/get_industries_usecase.dart';
-import '../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
+import '../../../../../../shared/domain/usecases/get_industries_usecase.dart';
+import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
 part 'all_services_page_event.dart';
 part 'all_services_page_state.dart';

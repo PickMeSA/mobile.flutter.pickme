@@ -5,6 +5,8 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/cancel_booking/domain/entites/cancel_entity.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
+import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +20,8 @@ import 'bloc/cancel_booking_bloc.dart';
 
 @RoutePage()
 class CancelBookingPage extends BasePage {
-  const CancelBookingPage({super.key, required this.bookingId});
-  final String bookingId;
+  const CancelBookingPage({super.key, required this.booking});
+  final BookingEntity booking;
 
   @override
   _CancelBookingPageState createState() => _CancelBookingPageState();
@@ -126,15 +128,19 @@ class _CancelBookingPageState extends BasePageState<CancelBookingPage, CancelBoo
                             ),
                             onPressed: () {
                               if(_key.currentState!.validate()){
-                                getBloc().add(CancelBookingClickedEvent(cancelEntity: CancelEntity(
-                                  reasonForChange: reasonController.text,
-                                  jobInterestId: widget.bookingId,
-                                  comments: commentController.text
-                                )));
+                                getBloc().add(CancelBookingClickedEvent(rescheduleEntity: RescheduleEntity(
+                                    startTime: widget.booking?.job.startTime??"",
+                                    jobInterestId: widget.booking?.id??"",
+                                    reasonForChange: reasonController.text??"",
+                                    startDate: widget.booking!.startDate!,
+                                    comments: commentController.text??"",
+                                    status: JobStatus.cancelled,
+                                    proposerUid: widget.booking!.proposerUid
+                                ) ));
                               }
                               //context.router.push(const AlternativeRequestDetailsRoute());
                             },
-                            child: Text(getLocalization().cancelBooking, style: TextStyle(color: Colors.white),),
+                            child: Text(getLocalization().cancelBooking, style: const TextStyle(color: Colors.white),),
                           ),
                         ),
                       ],

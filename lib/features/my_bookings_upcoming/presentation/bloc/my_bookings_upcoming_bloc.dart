@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:intl/intl.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
@@ -42,10 +43,10 @@ class MyBookingsUpcomingBloc
         try{
             await loadBookingsUpcomingUseCase.call().then((profileBookings){
                 profileBookings.forEach((element) {
-                   switch(element.type){
-                       case "cancelled": cancelledBookingsList.add(element);
+                   switch(element.status){
+                       case JobStatus.cancelled: cancelledBookingsList.add(element);
                         break;
-                       case "completed": completeBookingsList.add(element);
+                       case JobStatus.completed: completeBookingsList.add(element);
                         break;
                        default: upcomingBookingsList.add(element);
                    }

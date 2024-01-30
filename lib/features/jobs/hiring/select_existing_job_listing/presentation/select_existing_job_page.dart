@@ -105,7 +105,7 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
                     itemBuilder: (BuildContext context, int index){
                       JobEntity job = getBloc().myJobs!.activeJobs[index];
                       return AppJobCard(
-                        jobName: job.title,
+                        jobName: job.title!,
                         employerName: "Andrew Test Employer",
                         locationName: "Melrose Arch. South Africa",
                         dateTime: job.startDate!,

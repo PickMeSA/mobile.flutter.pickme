@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -9,13 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/apply_for_job_bloc.dart';
 
 @RoutePage()
 class ApplyForJobPage extends BasePage {
-  const ApplyForJobPage({super.key});
+  const ApplyForJobPage({super.key, required this.job});
+  final JobEntity job;
 
   @override
   _ApplyForJobPageState createState() => _ApplyForJobPageState();
@@ -30,9 +35,8 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
   DateTime endDate = DateTime.now();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
+    getBloc().add(ApplyForJobPageEnteredEvent(jobEntity: widget.job));
   }
 
     @override
@@ -44,7 +48,27 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<ApplyForJobBloc, ApplyForJobPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is ApplyForJobClickedState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //loading
+        if(state is ApplyForJobClickedState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          context.router.pushAndPopUntil(const ApplicationSentRoute(),
+              predicate: (Route<dynamic> route) => false);
+        }
+        //error
+        if(state is ApplyForJobClickedState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+      },
       builder: (context, state) {
          return Padding(
            padding: const EdgeInsets.all(20.0),
@@ -135,8 +159,20 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
                      )
                  ),
                  onPressed:() {
-                   context.router.pushAndPopUntil(ApplicationSentRoute(),
-                       predicate: (Route<dynamic> route) => false);
+                   if(startDateController.text.isEmpty || endDateController.text.isEmpty || startTimeTextController.text.isEmpty){
+                     wErrorPopUp(message: "Please ensure all fields are populated", type: "Error", context: context);
+                   }else{
+                     if(startDate.isAfter(endDate)){
+                       wErrorPopUp(message: "Start date should be before end date", type: "Error", context: context);
+                     }else{
+                       getBloc().add(ApplyForJobClickedEvent(
+                         startDate: startDate,
+                         endDate: endDate,
+                         startTime: startTimeTextController.text,
+                         comments: commentController.text,
+                       ));
+                     }
+                   }
                  },
                  child: Text(getLocalization().apply),
                ),

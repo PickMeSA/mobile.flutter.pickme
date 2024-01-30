@@ -46,7 +46,6 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<bool> submitProfileType(ProfileTypeEntity profileTypeEntity) async  {
     try{
-
         UserModel userModel = boxUser.get(current);
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
       data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type).toJson());
@@ -57,11 +56,12 @@ class ProfileServiceImpl extends ProfileService{
   }
 
   @override
-  Future<ProfileEntity> getRemoteProfileData() async{
+  Future<ProfileEntity> getRemoteProfileData({String? userId}) async{
     try{
-      UserModel userModel = boxUser.get(current);
-      Response<dynamic> response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
-      return returnProfileEntity(response: response);
+          UserModel userModel = boxUser.get(current);
+          Response<dynamic> response = await
+          apiService.get("$baseUrl$version/profiles/${userModel.id}");
+        return returnProfileEntity(response: response);
     }catch(ex){
       rethrow;
     }
@@ -164,6 +164,7 @@ class ProfileServiceImpl extends ProfileService{
         mobile: otpFullProfileModelResponse.mobile??"",
         workPermit: otpFullProfileModelResponse.workPermit,
         type: otpFullProfileModelResponse.type??"",
+        averageRating: otpFullProfileModelResponse.averageRating==null?null:otpFullProfileModelResponse.averageRating!,
         description:  otpFullProfileModelResponse.description??"",
         business:  OTPBusinessEntity.fromResponse(otpFullProfileModelResponse.business??  OTPBusinessModelResponse(
             name: otpFullProfileModelResponse.business?.name??"",

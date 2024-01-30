@@ -2,7 +2,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/features/reschedule_booking/data/response_models/reschedule_booking_model_response/reschedule_booking_model_response.dart';
 
 class RescheduleEntity{
-
+  late  String? proposerUid;
   final String jobInterestId;
   final String startDate;
   final String startTime;
@@ -12,6 +12,7 @@ class RescheduleEntity{
 
 
   RescheduleEntity({
+    this.proposerUid,
     required this.reasonForChange,
     required this.startTime,
     required this.comments,
@@ -27,7 +28,7 @@ class RescheduleEntity{
       break;
       case "applied" : status = JobStatus.applied;
       break;
-      case "Rejected" : status = JobStatus.Rejected;
+      case "Rejected" : status = JobStatus.rejected;
       break;
       case "booked" : status = JobStatus.booked;
       break;
@@ -47,7 +48,7 @@ class RescheduleEntity{
 
        case JobStatus.applied : return "applied";
 
-       case JobStatus.Rejected: return "Rejected";
+       case JobStatus.rejected: return "Rejected";
 
        case JobStatus.booked : return "booked";
 
@@ -65,23 +66,28 @@ class RescheduleEntity{
 
        case JobStatus.requestedReschedule: return "reschedule_requested";
 
+       case JobStatus.rescheduleDeclined: return "reschedule_declined";
+         // TODO: Handle this case.
+       case JobStatus.alternativeProposed: return "alternative_proposed";
+         // TODO: Handle this case.
+       case JobStatus.alternativeDeclined: return "alternative_declined";
+         // TODO: Handle this case.
+       case JobStatus.alternativeAccepted: return "alternative_accepted";
+         // TODO: Handle this case.
      }
   }
 
 
   RescheduleBookingModelResponse toResponse(){
      return RescheduleBookingModelResponse(
+      proposerUid: proposerUid,
        startTime: startTime,
        comments: comments,
-       jobInterestId: jobInterestId,
        reasonForChange: reasonForChange,
        startDate: startDate,
        status: fromJobStatus()
      );
   }
-
-
-
 
 }
 

@@ -1,21 +1,38 @@
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/features/my_bookings_upcoming/data/response_models/my_bookings_upcoming_model_response/booking_model_response.dart';
+import 'package:pickme/features/my_bookings_upcoming/data/response_models/my_bookings_upcoming_model_response/customer_model_response.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/customer_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 
 class BookingEntity{
-  final String id;
-  final String customerUid;
-  final String labourerUid;
-  final String startDate;
-  final String endDate;
-  final int estimatedHours;
-  final String comments;
-  final String type;
-  final String applied;
-  final String bookingId;
-  final String jobId;
+  late String id;
+  late String customerUid;
+  late String labourerUid;
+  late String startDate;
+  late String endDate;
+  late int estimatedHours;
+  late String comments;
+  late String type;
+  late String applied;
+  late String bookingId;
+  late String jobId;
   late JobStatus status;
-  final String statusString;
+  late JobStatus previousStatus;
+  late String previousStatusString;
+  late String statusString;
+  late String reasonForChange;
+  late String proposedAltStartDate;
+  late String proposedAltEndDate;
+  late String proposedAltStartTime;
+  late String proposerUid;
+  late JobEntity job;
+  late CustomerEntity? customer;
+  late String? startTime;
 
   BookingEntity({
+    required this.startTime,
+    required this.previousStatusString,
     required this.statusString,
     required this.id,
     required this.endDate,
@@ -27,9 +44,41 @@ class BookingEntity{
     required this.customerUid,
     required this.estimatedHours,
     required this.labourerUid,
-    required this.jobId
+    required this.jobId,
+    required this.reasonForChange,
+    required this.customer,
+    required this.job,
+    required this.proposedAltEndDate,
+    required this.proposedAltStartDate,
+    required this.proposedAltStartTime,
+    required this.proposerUid
+
 }){
     toJobStatus(statusString: statusString);
+  }
+  
+  BookingEntity.fromResponse ({required BookingsModelResponse element}){
+        startTime = element.startTime??"";
+        previousStatusString= element.previousStatus??"";
+        statusString= element.status??"";
+        jobId= element.jobId??"";
+        id= element.id??"";
+        endDate= element.endDate??DateTime.now().toString();
+        startDate= element.startDate?? DateTime.now().toString();
+        type= element.type??"Unknown";
+        applied= element.applied??"";
+        bookingId= element.bookingId??"";
+        comments= element.comments??"";
+        customerUid= element.customerUid??"";
+        estimatedHours= element.estimatedHours??0;
+        labourerUid= element.labourerUid??"";
+        reasonForChange= element.reasonForChange!;
+        customer= CustomerEntity.fromResponse(element.customer??CustomerModelResponse());
+        job= JobEntity.fromResponse(element.job??MyJobListingsJobModelResponse());
+        proposedAltEndDate= element.proposedAltEndDate??DateTime.now().toString();
+        proposedAltStartDate= element.proposedAltStartDate??DateTime.now().toString();
+        proposedAltStartTime= element.proposedAltStartTime??DateTime.now().toString();
+        proposerUid= element.proposerUid!;
   }
 
   toJobStatus ({required String statusString}){
@@ -38,7 +87,7 @@ class BookingEntity{
       break;
       case "applied" : status = JobStatus.applied;
       break;
-      case "Rejected" : status = JobStatus.Rejected;
+      case "Rejected" : status = JobStatus.rejected;
       break;
       case "booked" : status = JobStatus.booked;
       break;
@@ -49,6 +98,14 @@ class BookingEntity{
       case "cancelled" : status = JobStatus.cancelled;
       break;
       case "completed" : status = JobStatus.completed;
+      break;
+      case "reschedule_declined": status = JobStatus.rescheduleDeclined;
+      break;
+      case "alternative_proposed": status = JobStatus.alternativeProposed;
+      break;
+      case "alternative_declined" : status = JobStatus.alternativeDeclined;
+      break;
+      case "alternative_accepted": status = JobStatus.alternativeAccepted;
     }
   }
 }

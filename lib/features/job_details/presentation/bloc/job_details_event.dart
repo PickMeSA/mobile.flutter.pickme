@@ -4,6 +4,14 @@ abstract class JobDetailsPageEvent extends BaseEvent {}
 
 class GetFullJobDetailsEvent extends JobDetailsPageEvent{
   final String jobId;
+  JobEntity? job;
+  GetFullJobDetailsEvent({required this.jobId, this.job});
+}
 
-  GetFullJobDetailsEvent({required this.jobId});
+class ApplyForJobEvent extends JobDetailsPageEvent{
+  ApplyForJobEvent();
+}
+class RespondToJobInterestEvent extends JobDetailsPageEvent{
+  final String status;
+  RespondToJobInterestEvent({required this.status});
 }

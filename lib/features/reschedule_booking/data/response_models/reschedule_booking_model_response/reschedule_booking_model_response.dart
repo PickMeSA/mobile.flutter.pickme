@@ -7,7 +7,7 @@ part 'reschedule_booking_model_response.g.dart';
 @freezed
 class RescheduleBookingModelResponse with _$RescheduleBookingModelResponse {
   const factory RescheduleBookingModelResponse({
-    String? jobInterestId,
+    String? proposerUid,
     String? startDate,
     String? startTime,
     String? status,

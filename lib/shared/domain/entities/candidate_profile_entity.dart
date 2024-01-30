@@ -11,6 +11,7 @@ class CandidateProfileEntity extends Equatable{
   final int? rating;
   final String? profilePicture;
   final String? photos;
+  final String? jobInterestId;
   final double? hourlyRate;
   final List<WorkExperienceEntity>? workExperience;
   const CandidateProfileEntity({
@@ -22,8 +23,9 @@ class CandidateProfileEntity extends Equatable{
     this.rating,
     this.profilePicture,
     this.hourlyRate,
-    this.photos,
     this.workExperience,
+    this.photos,
+    this.jobInterestId,
   });
   @override
   List<Object?> get props => [id];

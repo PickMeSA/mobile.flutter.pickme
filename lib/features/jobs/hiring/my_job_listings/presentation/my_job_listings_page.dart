@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -14,7 +16,7 @@ import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
-import 'package:pickme/features/jobs/shared/domain/entities/my_job_listings_page_entity.dart';
+import 'package:pickme/shared/domain/entities/my_job_listings_page_entity.dart';
 import 'bloc/my_job_listings_bloc.dart';
 
 @RoutePage()
@@ -59,7 +61,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
-          padding: wPagePadding(top:0),
+          padding: wPagePadding(top:0, left: 16, right: 16),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -103,15 +105,17 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             JobEntity job = getBloc().myJobs!.activeJobs[index];
                             return AppJobAdvertCard(
                                 jobName: job.title,
-                                employerName: "Andrew Test Employer",
-                                locationName: "Melrose Arch. South Africa",
-                                dateTime: job.startDate!,
+                                employerName: "${job.customer!.firstName} ${job.customer!.surname}",
+                                locationName: "${job.customer!.address}",
+                                dateTime: job.startDate,
                                 status: JobStatus.active,
-                                onNext: ()=>context.router.push(HirerJobDetailsRoute(jobEntity: job)),
-                              totalMatches: 0,
+                                onNext: ()=>context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)),
+                              totalMatches: job.possibleApplicantMatchesCount,
                               matchesString: "possible Matches",
-                              totalApplications: 0,
+                              totalApplications: job.jobApplicationsCount,
                               applicationsString: "applications",
+                              image: (job.customer?.profileImage!=null)?
+                            CachedNetworkImageProvider(job.customer!.profileImage!):null,
                             );
                           }
                       ),
@@ -140,14 +144,16 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                           itemBuilder: (BuildContext context, int index){
                             JobEntity job = getBloc().myJobs!.inactiveJobs[index];
                             return AppJobCard(
-                                jobName: job.title,
-                                employerName: "Andrew Test Employer",
-                                locationName: "Jo'burg South Africa",
+                                jobName: job.title!,
+                                employerName: "${job.customer!.firstName} ${job.customer!.surname}",
+                                locationName: "${job.customer!.address}",
                                 dateTime: job.startDate??DateTime.now(),
                                 status: JobStatus.inactive,
+                              image: (job.customer?.profileImage!=null)?
+                              CachedNetworkImageProvider(job.customer!.profileImage!):null,
                               onNext: (){
                                   logger.i(job.title);
-                                  context.router.push(HirerJobDetailsRoute(jobEntity: job));
+                                  context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring));
                                   },
                             );
                           }

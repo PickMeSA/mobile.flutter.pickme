@@ -63,8 +63,8 @@ class _ApplicationSentPageState extends BasePageState<ApplicationSentPage, Appli
                 ),
                 Spacer(),
                 SecondaryButtonDark(fullWidth: true,onPressed: (){
-                  context.router.pushAndPopUntil(BottomNavigationBarRoute(),
-                      predicate: (Route<dynamic> route) => false);
+                //  context.router.pushAndPopUntil(BottomNavigationBarRoute(profileEntity: state),
+                  //    predicate: (Route<dynamic> route) => false);
                 }, child: wText(getLocalization().backToJobs))
               ],
             ),

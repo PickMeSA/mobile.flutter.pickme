@@ -6,7 +6,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
-import 'package:pickme/features/jobs/applying/jobs_landing_page/presentation/jobs_landing_page.dart';
+import 'package:pickme/features/jobs_hiring_landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
 import 'package:pickme/features/profile/presentation/profile_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -16,10 +16,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+
+import '../../jobs_landing_page/presentation/jobs_landing_page.dart';
 
 @RoutePage()
 class BottomNavigationBarPage extends BasePage {
-  const BottomNavigationBarPage({super.key});
+  ProfileEntity? profileEntity;
+  int? initialIndex = 0;
+   BottomNavigationBarPage({ this.initialIndex, super.key, required this.profileEntity});
 
   @override
   _BottomNavigationBarPageState createState() => _BottomNavigationBarPageState();
@@ -33,6 +38,8 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
   void initState() {
     // TODO: implement initState
     super.initState();
+    getBloc().add(GetProfileDetailsEvent());
+
 
   }
 
@@ -48,6 +55,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     return BlocConsumer<BottomNavigationBarBloc, BottomNavigationBarPageState>(
       listener: (context, state){},
       builder: (context, state) {
+        _controller.index = widget.initialIndex??0;
          return PersistentTabView(
            context,
            controller: _controller,
@@ -122,10 +130,12 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
   }
 
   List<Widget> _buildScreens() {
+    bool isHiring = false;
     return [
         HomePage(controller: _controller),
         const MyBookingsUpcomingPage(),
-        const JobsLandingPage(),
+        if(!isHiring)const JobsLandingPage(),
+      if(isHiring)const JobsHiringLandingPage(),
         const ProfilePage()
     ];
   }

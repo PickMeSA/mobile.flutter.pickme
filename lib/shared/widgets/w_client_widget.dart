@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
@@ -7,10 +8,12 @@ import 'package:pickme/shared/widgets/w_text.dart';
 Widget WClientWidget({
 required String clientName,
 required String areaLocation,
+String? profileImage,
 required int rating,
 required BuildContext context,
   required String seeReviews,
   Function? onEdit,
+  VoidCallback? onSeeReviews,
   String? hourlyRate,
   String? occupation
 }
@@ -21,11 +24,12 @@ required BuildContext context,
       borderRadius: BorderRadius.circular(8),
     ),
     child: Padding(
-      padding:const EdgeInsets.all(16.0),
+      padding:const EdgeInsets.only(left: 10, right: 0.0, top:16, bottom: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppImageAvatar.small(),
+          AppImageAvatar.small(image: (profileImage!=null)?
+          CachedNetworkImageProvider(profileImage):null,),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -60,10 +64,17 @@ required BuildContext context,
                         ),
                         Row(
                           children: [
-                            AppStarRating(rating: rating, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
-                            wText(rating.toDouble().toString()),
-                            const Spacer(),
-                            wText(seeReviews,style: TextStyle(decoration: TextDecoration.underline)),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  AppStarRating(rating: rating,),
+                                  wText(rating.toDouble().toString()),
+                                ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: onSeeReviews,
+                                child: wText(seeReviews,style: TextStyle(decoration: TextDecoration.underline))),
                           ],
                         ),
                         if(hourlyRate!= null)

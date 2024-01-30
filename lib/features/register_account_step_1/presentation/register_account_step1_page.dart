@@ -50,9 +50,9 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
           }else if(state.profileEntity!.description!.isEmpty) {
             context.router.push(const FinalDetailsRoute());
           }else if(!state.profileEntity!.subscriptionPaid!){
-            context.router.push(const PaySomeoneWebViewRoute());}
+            context.router.push( PaySomeoneWebViewRoute());}
           else{
-            context.router.pushAndPopUntil(const BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+            context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
           }
         }
         if(state.dataState == DataState.error && state is SubmitAcceptedTermsAndConditionsState){

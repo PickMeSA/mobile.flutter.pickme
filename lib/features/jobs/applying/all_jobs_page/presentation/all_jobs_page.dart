@@ -37,7 +37,6 @@ class _AllServicesPageState extends BasePageState<AllJobsPage, AllJobsPageBloc> 
 
   @override
   Widget buildView(BuildContext context) {
-    var theme = Theme.of(context);
     return BlocConsumer<AllJobsPageBloc, AllJobsPageState>(
       listener: (context, state) {
         //loading GetIndustriesState
@@ -103,7 +102,7 @@ class _AllServicesPageState extends BasePageState<AllJobsPage, AllJobsPageBloc> 
                     return ListTile(
                       title: Text(getBloc().paginatedIndustries!.industries[index].industry!),
                       trailing: const Icon(Iconsax.arrow_right_3),
-                      onTap: ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[3].id.toString())),
+                      onTap: ()=>context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[index].id.toString())),
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {

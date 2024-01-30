@@ -17,7 +17,7 @@ part 'otp_full_profile_model_response.g.dart';
 class OTPFullProfileModelResponse with _$OTPFullProfileModelResponse {
   const factory OTPFullProfileModelResponse({
     required int? id,
-    required String? averageRating,
+    @JsonKey(fromJson: _idFromJson, toJson: _idToJson) required dynamic  averageRating,
     required String? firstName,
     required String? surname,
     required String? email,
@@ -46,4 +46,18 @@ class OTPFullProfileModelResponse with _$OTPFullProfileModelResponse {
   factory OTPFullProfileModelResponse.fromJson(
           Map<String, Object?> json) =>
       _$OTPFullProfileModelResponseFromJson(json);
+}
+dynamic _idFromJson(dynamic id) {
+  if (id is int) {
+    return id;
+  } else if (id is String) {
+    return int.tryParse(id) ?? id;
+  } else {
+    return null;
+  }
+}
+
+// A custom function that converts the id value to a string
+String _idToJson(dynamic id) {
+  return id.toString();
 }

@@ -3,7 +3,6 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
-import 'package:intl/intl.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -11,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/my_bookings_upcoming_bloc.dart';
 
 @RoutePage()
@@ -25,7 +26,7 @@ class MyBookingsUpcomingPage extends BasePage {
 }
 
 class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage, MyBookingsUpcomingBloc> {
-
+    int? date = 0;
 
       @override
   void initState() {
@@ -116,18 +117,18 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                    height: 270.0,
                    selectedDateTime: getBloc().currentDate2,
                    targetDateTime: getBloc().targetDateTime,
-                   customGridViewPhysics: NeverScrollableScrollPhysics(),
+                   customGridViewPhysics: const NeverScrollableScrollPhysics(),
 
                    showHeader: false,
                    selectedDayTextStyle: const TextStyle(
                      color: Colors.white,
                    ),
-                   minSelectedDate: getBloc().currentDate.subtract(Duration(days: 360)),
-                   maxSelectedDate: getBloc().currentDate.add(Duration(days: 360)),
+                   minSelectedDate: getBloc().currentDate.subtract(const Duration(days: 360)),
+                   maxSelectedDate: getBloc().currentDate.add(const Duration(days: 360)),
                    onCalendarChanged: (DateTime date) {
                      getBloc().add(CalendarChangedEvent(dateTime: date));
                    },
-                 weekendTextStyle: TextStyle(color: Colors.black),
+                 weekendTextStyle: const TextStyle(color: Colors.black),
                    ), //
                  ],
                ),
@@ -147,28 +148,48 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                    views:  <Widget>[
                       ListView.builder(
                         itemCount: getBloc().upcomingBookingsList.length,
-                      //  physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
                           itemBuilder: (context , index){
                             return
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  if (index == 0)
+                                    wText(DateFormatters.toMonthFullWord(getBloc().upcomingBookingsList[index].job.startDate!)),
+                                  if(index != 0)
+                                  if(getBloc().upcomingBookingsList[index].job.startDate?.month != getBloc().upcomingBookingsList[index -1].job.startDate?.month)
+                                    wText(DateFormatters.toMonthFullWord(getBloc().upcomingBookingsList[index].job.startDate!)),
                                   InkWell(
-                                onTap: (){ if(getBloc().upcomingBookingsList[index].status == JobStatus.requestedReschedule){
-                                  context.router.push(RescheduleRequestRoute(
-                                      bookingId: getBloc().upcomingBookingsList[index].id));
-                                }else {
-                                  context.router.push(JobDetailsRoute(
+                                onTap: (){ UserModel userModel = boxUser.get(current);
+                                  if(
+                                getBloc().upcomingBookingsList[index].status == JobStatus.requestedReschedule
+                                && getBloc().upcomingBookingsList[index].proposerUid != userModel.id){
+                                    context.router.push(RescheduleRequestRoute(
+                                        bookingEntity: getBloc()
+                                            .upcomingBookingsList[index]));
 
+                                } else if(getBloc().upcomingBookingsList[index].status == JobStatus.alternativeProposed
+                               && getBloc().upcomingBookingsList[index].proposerUid != userModel.id){
+                                  context.router.push(AlternativeRescheduleRequestRoute(
+                                      bookingEntity: getBloc()
+                                          .upcomingBookingsList[index]));
+                                } else {
+                                  context.router.push(JobDetailsRoute(
                                       fromIndex: 1,
                                       jobId: getBloc().upcomingBookingsList[index].jobId,
-                                      bookingId: getBloc().upcomingBookingsList[index].id));
+                                      bookingId: getBloc().upcomingBookingsList[index]));
                                 }
                                 },
                                     child: AppJobCard(
-                                      jobName: "Job name",
-                                      employerName: 'DVT',
-                                      locationName: 'PickMe',
-                                      dateTime: DateTime.now().add(const Duration(days: 5)),
+
+                                      jobName: getBloc().upcomingBookingsList[index].job.title!,
+                                      employerName: getBloc().profileEntity?.type == "Worker"?
+                                        getBloc().upcomingBookingsList[index].job.title??"":
+                                      "${getBloc().upcomingBookingsList[index].customer?.firstName} "
+                                          "${getBloc().upcomingBookingsList[index].customer?.surname}",
+                                      locationName: getBloc().upcomingBookingsList[index].job.address??"",
+                                      dateTime: getBloc().upcomingBookingsList[index].job.startDate!,
                                       status: getBloc().upcomingBookingsList[index].status,
                                       onNext: () {
                                         //context.router.push(JobDetailsRoute(fromIndex: 1));
@@ -182,21 +203,30 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                       }),
                      ListView.builder(
                          itemCount: getBloc().completeBookingsList.length,
-                         //physics: NeverScrollableScrollPhysics(),
+                         physics: const NeverScrollableScrollPhysics(),
+                         shrinkWrap: true,
                          itemBuilder: (context , index){
                            return
                              Column(
+                               crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
+                                 if (index == 0)
+                                   wText(DateFormatters.toMonthFullWord(getBloc().completeBookingsList[index].job.startDate!)),
+                                 if(index != 0)
+                                   if(getBloc().completeBookingsList[index].job.startDate?.month != getBloc().completeBookingsList[index -1].job.startDate?.month)
+                                     wText(DateFormatters.toMonthFullWord(getBloc().completeBookingsList[index].job.startDate!)),
                                  InkWell(
                                    onTap:()=> context.router.push(JobDetailsRoute(
                                        fromIndex: 2,
                                        jobId: getBloc().completeBookingsList[index].jobId)),
                                    child: AppJobCard(
-                                     jobName: 'Tax Preparation',
-                                     employerName: 'DVT',
-                                     locationName: 'PickMe',
+                                     jobName: getBloc().completeBookingsList[index].job.title!,
+                                     employerName: getBloc().profileEntity?.type == "Worker"?
+                                     getBloc().completeBookingsList[index].job.title??"":
+                                     "${getBloc().completeBookingsList[index].customer?.firstName} "
+                                         "${getBloc().completeBookingsList[index].customer?.surname}",
+                                     locationName: getBloc().completeBookingsList[index].job.address??"",
                                      dateTime: DateTime.now().add(const Duration(days: 5)),
-
                                      onNext: () {  },
                                    ),
                                  ),
@@ -207,21 +237,32 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                          }),
                      ListView.builder(
                          itemCount: getBloc().cancelledBookingsList.length,
-                         //physics: const NeverScrollableScrollPhysics(),
+                         physics: const NeverScrollableScrollPhysics(),
+                         shrinkWrap: true,
                          itemBuilder: (context , index){
                            return
                              Column(
+                               crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
+                                 if (index == 0)
+                                   wText(DateFormatters.toMonthFullWord(getBloc().cancelledBookingsList[index].job.startDate!)),
+                                 if(index != 0)
+                                   if(getBloc().cancelledBookingsList[index].job.startDate?.month != getBloc().cancelledBookingsList[index -1].job.startDate?.month)
+                                     wText(DateFormatters.toMonthFullWord(getBloc().cancelledBookingsList[index].job.startDate!)),
                                  InkWell(
-                                   onTap:()=> context.router.push(JobDetailsRoute(
+                                   onTap:()=> context.router.push(
+                                       JobDetailsRoute(
                                        fromIndex: 2,
                                        jobId: getBloc().cancelledBookingsList[index].jobId,
+                                         bookingId: getBloc().cancelledBookingsList[index]
                                    )),
-
                                    child: AppJobCard(
-                                     jobName: 'Tax Preparation',
-                                     employerName: 'DVT',
-                                     locationName: 'PickMe',
+                                     jobName: getBloc().cancelledBookingsList[index].job.title!,
+                                     employerName: getBloc().profileEntity?.type == "Worker"?
+                                     getBloc().cancelledBookingsList[index].job.title??"":
+                                     "${getBloc().cancelledBookingsList[index].customer?.firstName} "
+                                         "${getBloc().cancelledBookingsList[index].customer?.surname}",
+                                     locationName: getBloc().cancelledBookingsList[index].job.address??"",
                                      dateTime: DateTime.now().add(const Duration(days: 5)),
                                      status: JobStatus.cancelled,
                                      onNext: () {  },

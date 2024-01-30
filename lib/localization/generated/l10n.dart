@@ -2900,6 +2900,86 @@ class AppLocalizations {
     );
   }
 
+  /// `No address specified`
+  String get noAddressSpecified {
+    return Intl.message(
+      'No address specified',
+      name: 'noAddressSpecified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Reviews`
+  String get myReviews {
+    return Intl.message(
+      'My Reviews',
+      name: 'myReviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don’t have any reviews yet`
+  String get youDontHaveAnyReviewsYet {
+    return Intl.message(
+      'You don’t have any reviews yet',
+      name: 'youDontHaveAnyReviewsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get reviews to boost your profile and increase your chances of getting hired`
+  String get getReviewsToBoostProfile {
+    return Intl.message(
+      'Get reviews to boost your profile and increase your chances of getting hired',
+      name: 'getReviewsToBoostProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request a review`
+  String get requestAReview {
+    return Intl.message(
+      'Request a review',
+      name: 'requestAReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.`
+  String get allowYourClientsToLeaveAReview {
+    return Intl.message(
+      'Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them.',
+      name: 'allowYourClientsToLeaveAReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy link`
+  String get copyLink {
+    return Intl.message(
+      'Copy link',
+      name: 'copyLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review`
+  String get review {
+    return Intl.message(
+      'Review',
+      name: 'review',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No profiles available for this category`
   String get noProfilesAvailableForThisCategory {
     return Intl.message(
@@ -2990,6 +3070,46 @@ class AppLocalizations {
     );
   }
 
+  /// `Alternative request declined`
+  String get alternativeRequestDeclined {
+    return Intl.message(
+      'Alternative request declined',
+      name: 'alternativeRequestDeclined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alternative request accepted`
+  String get alternativeRequestAccepted {
+    return Intl.message(
+      'Alternative request accepted',
+      name: 'alternativeRequestAccepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've approved the Alternative request and it has updated in your calender.`
+  String get youveApprovedTheAlternativeRequest {
+    return Intl.message(
+      'You\'ve approved the Alternative request and it has updated in your calender.',
+      name: 'youveApprovedTheAlternativeRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've declined the Alternative request.`
+  String get youveDeclinedTheAlternativeRequest {
+    return Intl.message(
+      'You\'ve declined the Alternative request.',
+      name: 'youveDeclinedTheAlternativeRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account holder name`
   String get accountHolderName {
     return Intl.message(
@@ -3000,11 +3120,61 @@ class AppLocalizations {
     );
   }
 
+  /// `loading...`
+  String get loadingDotDot {
+    return Intl.message(
+      'loading...',
+      name: 'loadingDotDot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How would you rate`
+  String get howWouldYouRate {
+    return Intl.message(
+      'How would you rate',
+      name: 'howWouldYouRate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No industry specified`
+  String get noIndustrySpecified {
+    return Intl.message(
+      'No industry specified',
+      name: 'noIndustrySpecified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviews`
+  String get reviews {
+    return Intl.message(
+      'Reviews',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Complete booking`
   String get completeBooking {
     return Intl.message(
       'Complete booking',
       name: 'completeBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No reviews found`
+  String get noReviewsFound {
+    return Intl.message(
+      'No reviews found',
+      name: 'noReviewsFound',
       desc: '',
       args: [],
     );
@@ -3040,11 +3210,121 @@ class AppLocalizations {
     );
   }
 
+  /// `Jobs near me`
+  String get jobsNearMe {
+    return Intl.message(
+      'Jobs near me',
+      name: 'jobsNearMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Applied`
+  String get applied {
+    return Intl.message(
+      'Applied',
+      name: 'applied',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No more than 6 Images can be uploaded for each experience`
   String get noMoreThan6ImagesCanBeUploadedForEachExperience {
     return Intl.message(
       'No more than 6 Images can be uploaded for each experience',
       name: 'noMoreThan6ImagesCanBeUploadedForEachExperience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've approved the reschedule request and it has updated in your calender.`
+  String get youveApprovedTheRescheduleRequest {
+    return Intl.message(
+      'You\'ve approved the reschedule request and it has updated in your calender.',
+      name: 'youveApprovedTheRescheduleRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need support with PickMe? Reach out to our Help Center for assistance.`
+  String get needSupporWithPickme {
+    return Intl.message(
+      'Need support with PickMe? Reach out to our Help Center for assistance.',
+      name: 'needSupporWithPickme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Applications`
+  String get applications {
+    return Intl.message(
+      'Applications',
+      name: 'applications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You found someone for the job!`
+  String get youFoundSomeoneForTheJob {
+    return Intl.message(
+      'You found someone for the job!',
+      name: 'youFoundSomeoneForTheJob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keep tabs on this job in 'My Bookings'.`
+  String get keepTabsOnThisJobInMyBookings {
+    return Intl.message(
+      'Keep tabs on this job in \'My Bookings\'.',
+      name: 'keepTabsOnThisJobInMyBookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See cancellation details`
+  String get seeCancellationDetails {
+    return Intl.message(
+      'See cancellation details',
+      name: 'seeCancellationDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancellation details`
+  String get cancellationDetails {
+    return Intl.message(
+      'Cancellation details',
+      name: 'cancellationDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{name} cancelled this booking. See details below`
+  String cancelledThisBooking(Object name) {
+    return Intl.message(
+      '$name cancelled this booking. See details below',
+      name: 'cancelledThisBooking',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Reason`
+  String get reason {
+    return Intl.message(
+      'Reason',
+      name: 'reason',
       desc: '',
       args: [],
     );
