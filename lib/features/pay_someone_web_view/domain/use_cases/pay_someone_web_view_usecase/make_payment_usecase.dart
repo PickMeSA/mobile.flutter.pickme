@@ -22,4 +22,6 @@ class MakePaymentUseCase extends BaseUseCase<MakePaymentUseCaseParams, String>{
 
 }
 
-class MakePaymentUseCaseParams extends BaseUseCaseParams{}
+class MakePaymentUseCaseParams extends BaseUseCaseParams{
+
+}

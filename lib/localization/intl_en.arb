@@ -324,6 +324,7 @@
   "cancellationDetails": "Cancellation details",
   "cancelledThisBooking": "{name} cancelled this booking. See details below",
   "reasonForCancellation": "Reason for cancellation",
-  "reason": "Reason"
+  "reason": "Reason",
+  "backToPaySomeone": "Back to pay someone"
 
 }

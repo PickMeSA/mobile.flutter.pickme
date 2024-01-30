@@ -496,9 +496,18 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: PaySomeoneWebViewPage(
+          bookingEntity: args.bookingEntity,
           profileEntity: args.profileEntity,
           key: args.key,
         ),
+      );
+    },
+    PaymentOutcomeRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentOutcomeRouteArgs>(
+          orElse: () => const PaymentOutcomeRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PaymentOutcomePage(key: args.key),
       );
     },
     PendingProfileRoute.name: (routeData) {
@@ -2281,12 +2290,14 @@ class PaySomeoneRoute extends PageRouteInfo<void> {
 /// [PaySomeoneWebViewPage]
 class PaySomeoneWebViewRoute extends PageRouteInfo<PaySomeoneWebViewRouteArgs> {
   PaySomeoneWebViewRoute({
+    BookingEntity? bookingEntity,
     ProfileEntity? profileEntity,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           PaySomeoneWebViewRoute.name,
           args: PaySomeoneWebViewRouteArgs(
+            bookingEntity: bookingEntity,
             profileEntity: profileEntity,
             key: key,
           ),
@@ -2301,9 +2312,12 @@ class PaySomeoneWebViewRoute extends PageRouteInfo<PaySomeoneWebViewRouteArgs> {
 
 class PaySomeoneWebViewRouteArgs {
   const PaySomeoneWebViewRouteArgs({
+    this.bookingEntity,
     this.profileEntity,
     this.key,
   });
+
+  final BookingEntity? bookingEntity;
 
   final ProfileEntity? profileEntity;
 
@@ -2311,7 +2325,36 @@ class PaySomeoneWebViewRouteArgs {
 
   @override
   String toString() {
-    return 'PaySomeoneWebViewRouteArgs{profileEntity: $profileEntity, key: $key}';
+    return 'PaySomeoneWebViewRouteArgs{bookingEntity: $bookingEntity, profileEntity: $profileEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [PaymentOutcomePage]
+class PaymentOutcomeRoute extends PageRouteInfo<PaymentOutcomeRouteArgs> {
+  PaymentOutcomeRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PaymentOutcomeRoute.name,
+          args: PaymentOutcomeRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentOutcomeRoute';
+
+  static const PageInfo<PaymentOutcomeRouteArgs> page =
+      PageInfo<PaymentOutcomeRouteArgs>(name);
+}
+
+class PaymentOutcomeRouteArgs {
+  const PaymentOutcomeRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PaymentOutcomeRouteArgs{key: $key}';
   }
 }
 

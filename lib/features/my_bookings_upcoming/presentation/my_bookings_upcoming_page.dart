@@ -217,7 +217,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                      wText(DateFormatters.toMonthFullWord(getBloc().completeBookingsList[index].job.startDate!)),
                                  InkWell(
                                    onTap:()=> context.router.push(JobDetailsRoute(
-                                       fromIndex: 2,
+                                       fromIndex: 3,
                                        jobId: getBloc().completeBookingsList[index].jobId)),
                                    child: AppJobCard(
                                      jobName: getBloc().completeBookingsList[index].job.title!,

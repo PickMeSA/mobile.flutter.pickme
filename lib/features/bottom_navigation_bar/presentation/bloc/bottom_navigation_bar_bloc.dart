@@ -6,6 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remote_profile_usecase.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
 part 'bottom_navigation_bar_event.dart';
 part 'bottom_navigation_bar_state.dart';
@@ -27,6 +29,8 @@ class BottomNavigationBarBloc
 
         try{
 
+            UserModel userModel = boxUser.get(current);
+            this.profileEntity!.userId = userModel.id;
             ProfileEntity profileEntity = await getRemoteProfileUseCase.call();
             this.profileEntity = profileEntity;
             emit(GetProfileDetailsState(

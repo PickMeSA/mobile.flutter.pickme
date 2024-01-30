@@ -104,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "backToJobs": MessageLookupByLibrary.simpleMessage("Back to Jobs"),
         "backToMyWallet":
             MessageLookupByLibrary.simpleMessage("Back to my wallet"),
+        "backToPaySomeone":
+            MessageLookupByLibrary.simpleMessage("Back to pay someone"),
         "bankA": MessageLookupByLibrary.simpleMessage("Bank *"),
         "bankDetails": MessageLookupByLibrary.simpleMessage("Bank details"),
         "bookings": MessageLookupByLibrary.simpleMessage("Bookings"),

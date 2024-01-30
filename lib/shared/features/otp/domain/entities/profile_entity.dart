@@ -32,7 +32,7 @@ class ProfileEntity {
   OTPBusinessEntity? business;
   bool? acceptedTermsAndConditions = false;
   bool? subscriptionPaid = false;
-
+  String? userId;
   ProfileEntity.blank();
 
   ProfileEntity({

@@ -3289,6 +3289,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Back to pay someone`
+  String get backToPaySomeone {
+    return Intl.message(
+      'Back to pay someone',
+      name: 'backToPaySomeone',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
