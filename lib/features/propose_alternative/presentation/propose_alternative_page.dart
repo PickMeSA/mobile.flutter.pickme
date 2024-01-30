@@ -153,7 +153,9 @@ class _ProposeAlternativePageState extends BasePageState<ProposeAlternativePage,
                              onPressed: getBloc().checked?null:() {
                                UserModel userModel = boxUser.get(current);
                                if(_key.currentState!.validate()){
-                                 getBloc().add(ProposeAlternativeClickedEvent(rescheduleEntity: RescheduleEntity(comments: commentController.text,
+                                 getBloc().add(RescheduleBookingEvent(
+                                     rescheduleEntity: RescheduleEntity(
+                                         comments: commentController.text,
                                   jobInterestId: widget.bookingId,
                                   reasonForChange: commentController.text,
                                   status: JobStatus.alternativeProposed,

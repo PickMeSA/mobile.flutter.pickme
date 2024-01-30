@@ -51,7 +51,9 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
         }
 
         if(state is RescheduleBookingState && state.dataState == DataState.success){
-          Navigator.pop(context);
+          context.router.pushAndPopUntil(
+              BottomNavigationBarRoute(profileEntity: getBloc().profileEntity,
+                  initialIndex: 1), predicate: (Route<dynamic> route) => false);
         }
 
         if(state is RescheduleBookingState && state.dataState == DataState.loading){
@@ -88,7 +90,7 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                       )
                   ),
                   40.height,
-                  if(!widget.approved)
+                  !widget.approved?
                   Column(
                     children: [
                       Row(
@@ -112,7 +114,7 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                                   )
                               ),
                               onPressed: () {
-                                context.router.push( ProposeAlternativeRoute(bookingId: widget.booking!.bookingId!));
+                                context.router.push( ProposeAlternativeRoute(bookingId: widget.booking!.id!));
                               },
                               child: Text(getLocalization().proposeAlternative, style: TextStyle(color: Colors.white),),
                             ),
@@ -141,14 +143,15 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                                   )
                               ),
                               onPressed: () {
+
                                 getBloc().add(RescheduleBookingEvent(rescheduleEntity:
                                 RescheduleEntity(
                                   startTime: widget.booking?.job.startTime??"",
-                                  jobInterestId: widget.booking?.jobId??"",
+                                  jobInterestId: widget.booking?.id??"",
                                   reasonForChange: widget.booking?.reasonForChange??"",
                                   startDate: widget.booking!.startDate!,
                                   comments: widget.booking!.comments,
-                                  status: widget.booking!.status,
+                                  status: JobStatus.rescheduled,
                                   proposerUid: widget.booking!.proposerUid
                                 )));
                               },
@@ -157,6 +160,44 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                             ),
                           ),
                         ],
+                      ),
+                    ],
+                  ):
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          style: ButtonStyle(
+                              side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                return BorderSide(
+                                  color:
+                                  theme.colorScheme.secondary,
+                                  width: 2,
+                                );
+                              }
+                              ),
+                              backgroundColor: MaterialStateProperty.resolveWith(
+                                      (Set<MaterialState> states){
+                                    return
+                                      Colors.white;
+                                  }
+                              )
+                          ),
+                          onPressed: () {
+                            getBloc().add(RescheduleBookingEvent(rescheduleEntity:
+                            RescheduleEntity(
+                                startTime: widget.booking?.job.startTime??"",
+                                jobInterestId: widget.booking?.id??"",
+                                reasonForChange: widget.booking?.reasonForChange??"",
+                                startDate: widget.booking!.startDate!,
+                                comments: widget.booking!.comments,
+                                status: widget.booking!.status,
+                                proposerUid: widget.booking!.proposerUid
+                            )));
+                          },
+                          child: Text(getLocalization().backToBooking,
+                            style: TextStyle(color: theme.colorScheme.secondary),),
+                        ),
                       ),
                     ],
                   ),

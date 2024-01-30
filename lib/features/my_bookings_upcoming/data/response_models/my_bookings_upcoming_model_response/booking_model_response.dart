@@ -10,7 +10,8 @@ part 'booking_model_response.g.dart';
 @freezed
 class BookingsModelResponse with _$BookingsModelResponse {
   const factory BookingsModelResponse({
-    required String previousStatus,
+    required String? startTime,
+    required String? previousStatus,
     required String? name,
     required String? id,
     required String? endDate,

@@ -7,14 +7,14 @@ import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_en
 import 'package:pickme/features/reschedule_booking/domain/repository/reschedule_booking_repository/reschedule_booking_clicked_repository.dart';
 
 @Injectable()
-class RescheduleBookingClickedUseCase extends BaseUseCase<RescheduleBookingClickedUseCaseParams, BookingEntity>{
+class RescheduleBookingClickedUseCase extends BaseUseCase<RescheduleBookingClickedUseCaseParams, String>{
 
   final RescheduleBookingClickedRepository rescheduleBookingClickedRepository;
 
   RescheduleBookingClickedUseCase({required this.rescheduleBookingClickedRepository});
 
   @override
-  Future<BookingEntity> call({RescheduleBookingClickedUseCaseParams? params}) async {
+  Future<String> call({RescheduleBookingClickedUseCaseParams? params}) async {
     try{
       return await rescheduleBookingClickedRepository.call(
           params: RescheduleBookingClickedRepositoryParams(

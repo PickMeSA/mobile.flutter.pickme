@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -194,13 +196,16 @@ class _RescheduleBookingPageState extends BasePageState<RescheduleBookingPage, R
   }
 
   RescheduleEntity getForm(){
+    UserModel userModel = boxUser.get(current);
     return RescheduleEntity(
+
         reasonForChange: reasonTextController.text,
         startTime: timeTextController.text,
         comments: commentController.text,
         startDate: dateTime.toString(),
         jobInterestId: widget.bookingId,
-        status: JobStatus.requestedReschedule);
+        status: JobStatus.requestedReschedule,
+        proposerUid: userModel.id );
   }
 
 
