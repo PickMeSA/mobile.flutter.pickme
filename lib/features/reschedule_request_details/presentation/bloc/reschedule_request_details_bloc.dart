@@ -27,12 +27,11 @@ class RescheduleRequestDetailsBloc
 
         emit(RescheduleBookingState()..dataState = DataState.loading);
         try{
-
+            await rescheduleBookingClickedUseCase.call(
+                params: RescheduleBookingClickedUseCaseParams(
+                    rescheduleEntity: event.rescheduleEntity));
 
             emit(RescheduleBookingState(
-                bookingEntity: await rescheduleBookingClickedUseCase.call(
-                    params: RescheduleBookingClickedUseCaseParams(
-                        rescheduleEntity: event.rescheduleEntity))
             )..dataState = DataState.success);
         }catch(ex){
             emit(RescheduleBookingState(error: ex.toString())..dataState = DataState.error);

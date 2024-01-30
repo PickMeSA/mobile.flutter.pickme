@@ -23,6 +23,7 @@ class BookingServiceImpl extends BookingService{
       List<dynamic> bookingsList = response.data;
       List<BookingsModelResponse> bookingsModelList = bookingsList.map((e) =>
           BookingsModelResponse(
+            startTime: e['startTime'],
             previousStatus: e["previousStatus"],
             customer: CustomerModelResponse.fromJson(e!["customer"]),
               job: MyJobListingsJobModelResponse.fromJson(e['job']),
@@ -48,6 +49,7 @@ class BookingServiceImpl extends BookingService{
 
       bookingsModelList.forEach((element) {
         bookingEntityList.add(BookingEntity(
+          startTime: element.startTime,
           previousStatusString: element.previousStatus??"",
           statusString: element.status??"",
             jobId: element.jobId??"",

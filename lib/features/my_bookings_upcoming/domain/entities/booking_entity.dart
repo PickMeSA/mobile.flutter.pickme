@@ -28,8 +28,10 @@ class BookingEntity{
   late String proposerUid;
   late JobEntity job;
   late CustomerEntity? customer;
+  late String? startTime;
 
   BookingEntity({
+    required this.startTime,
     required this.previousStatusString,
     required this.statusString,
     required this.id,
@@ -56,6 +58,7 @@ class BookingEntity{
   }
   
   BookingEntity.fromResponse ({required BookingsModelResponse element}){
+        startTime = element.startTime??"";
         previousStatusString= element.previousStatus??"";
         statusString= element.status??"";
         jobId= element.jobId??"";
@@ -72,9 +75,9 @@ class BookingEntity{
         reasonForChange= element.reasonForChange!;
         customer= CustomerEntity.fromResponse(element.customer??CustomerModelResponse());
         job= JobEntity.fromResponse(element.job??MyJobListingsJobModelResponse());
-        proposedAltEndDate= element.proposedAltEndDate!;
-        proposedAltStartDate= element.proposedAltStartDate!;
-        proposedAltStartTime= element.proposedAltStartTime!;
+        proposedAltEndDate= element.proposedAltEndDate??DateTime.now().toString();
+        proposedAltStartDate= element.proposedAltStartDate??DateTime.now().toString();
+        proposedAltStartTime= element.proposedAltStartTime??DateTime.now().toString();
         proposerUid= element.proposerUid!;
   }
 

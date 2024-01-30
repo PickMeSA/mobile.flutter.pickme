@@ -2,7 +2,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/features/reschedule_booking/data/response_models/reschedule_booking_model_response/reschedule_booking_model_response.dart';
 
 class RescheduleEntity{
-  final String? proposerUid;
+  late  String? proposerUid;
   final String jobInterestId;
   final String startDate;
   final String startTime;
@@ -83,7 +83,6 @@ class RescheduleEntity{
       proposerUid: proposerUid,
        startTime: startTime,
        comments: comments,
-       jobInterestId: jobInterestId,
        reasonForChange: reasonForChange,
        startDate: startDate,
        status: fromJobStatus()

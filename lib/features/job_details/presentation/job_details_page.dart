@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ enum PageMode { booking, searching, jobRequest}
 class JobDetailsPage extends BasePage {
   final int? fromIndex ;
   final String jobId;
-  final String? bookingId;
+  final BookingEntity? bookingId;
   final JobEntity? job;
   final PageMode pageMode;
 
@@ -155,7 +156,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                  ),
                                  onPressed:() {
                                     context.router.push( RescheduleBookingRoute(
-                                        bookingId: widget.bookingId!));
+                                        bookingId: widget.bookingId!.bookingId!));
                                  },
                                  child: Text(getLocalization().rescheduleBooking, style: const TextStyle(color: Colors.white)),
                                ),
@@ -177,12 +178,33 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                      )
                                  ),
                                  onPressed:() {
-                                    context.router.push(CancelBookingRoute(bookingId: widget.bookingId!));
+                                    context.router.push(CancelBookingRoute(booking:widget.bookingId!));
                                  },
                                  child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
                                )
                              ],
-                           ):const SizedBox(),
+                           ):widget.fromIndex == 2?
+                           SecondaryButtonDark(
+                               width: MediaQuery.sizeOf(context).width,
+                               style: ButtonStyle(
+                                   side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                     return BorderSide(
+                                       color: theme.colorScheme.secondary,
+                                       width: 2,
+                                     );
+                                   }
+                                   ),
+                                   backgroundColor: MaterialStateProperty.resolveWith(
+                                           (Set<MaterialState> states){
+                                         return Colors.white;
+                                       }
+                                   )
+                               ),
+                               onPressed:() {
+                                 context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
+
+                               },
+                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
                          ],
                        ),
                        ListView(
@@ -311,11 +333,36 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                }
                              },
                              child: Text(getLocalization().apply),
-                           ):const SizedBox(),
-
+                           ):widget.fromIndex == 2?
+                           SecondaryButtonDark(
+                               width: MediaQuery.sizeOf(context).width,
+                               style: ButtonStyle(
+                                   side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                     return BorderSide(
+                                       color: theme.colorScheme.secondary,
+                                       width: 2,
+                                     );
+                                   }
+                                   ),
+                                   backgroundColor: MaterialStateProperty.resolveWith(
+                                           (Set<MaterialState> states){
+                                         return Colors.white;
+                                       }
+                                   )
+                               ),
+                               onPressed:() {
+                                 if(getBloc().jobEntity?.startDate == null){
+                                   context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
+                                 }else{
+                                   getBloc().add(ApplyForJobEvent());
+                                 }
+                               },
+                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)): const SizedBox()
                          ],
                        )
-                     ], onTap: (int index) {  },
+                     ], onTap: (int index) {
+                       context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
+                   },
                    ),
 
 

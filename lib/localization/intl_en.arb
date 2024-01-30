@@ -301,6 +301,10 @@
   "myHourlyRateAndWorkingHours": "My hourly rate and working hours",
   "editSkills": "Edit Skills",
   "editWorkExperience": "Edit work experience",
+  "alternativeRequestDeclined": "Alternative request declined",
+  "alternativeRequestAccepted": "Alternative request accepted",
+  "youveApprovedTheAlternativeRequest": "You've approved the Alternative request and it has updated in your calender.",
+  "youveDeclinedTheAlternativeRequest": "You've declined the Alternative request.",
   "accountHolderName": "Account holder name",
   "loadingDotDot": "loading...",
   "howWouldYouRate": "How would you rate",
@@ -315,5 +319,11 @@
   "applied":"Applied",
   "noMoreThan6ImagesCanBeUploadedForEachExperience": "No more than 6 Images can be uploaded for each experience",
   "youveApprovedTheRescheduleRequest": "You've approved the reschedule request and it has updated in your calender.",
-  "youveDeclinedTheRescheduleRequest": "You've declined the reschedule request. you can still propose and alternative date and time."
+  "youveDeclinedTheRescheduleRequest": "You've declined the reschedule request. you can still propose and alternative date and time.",
+  "seeCancellationDetails": "See cancellation details",
+  "cancellationDetails": "Cancellation details",
+  "cancelledThisBooking": "{name} cancelled this booking. See details below",
+  "reasonForCancellation": "Reason for cancellation",
+  "reason": "Reason"
+
 }

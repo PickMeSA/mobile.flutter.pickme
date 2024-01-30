@@ -3,7 +3,7 @@ part of 'cancel_booking_bloc.dart';
 abstract class CancelBookingPageEvent extends BaseEvent {}
 
 class CancelBookingClickedEvent extends CancelBookingPageEvent{
-  final CancelEntity cancelEntity;
+  final RescheduleEntity rescheduleEntity;
 
-  CancelBookingClickedEvent({required this.cancelEntity});
+  CancelBookingClickedEvent({required this.rescheduleEntity});
 }

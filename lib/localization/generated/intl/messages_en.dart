@@ -22,17 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(name) => "Hi, ${name}";
 
-  static String m1(name, surname) => "Hi, ${name} ${surname}";
+  static String m1(name) => "${name} cancelled this booking. See details below";
 
-  static String m2(name) =>
-      "${name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request";
+  static String m2(name, surname) => "Hi, ${name} ${surname}";
 
   static String m3(name) =>
+      "${name} needs to reschedule this booking. You can  approve , provide an alternative date and/or time, or decline this request";
+
+  static String m4(name) =>
       "${name} sent an alternative request. You can approve, or decline this request";
 
-  static String m4(name) => "Welcome ${name}! Let\'s set up your profile";
+  static String m5(name) => "Welcome ${name}! Let\'s set up your profile";
 
-  static String m5(number) =>
+  static String m6(number) =>
       "We’ve sent a One-Time Pin (OTP) to your number ${number}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -76,6 +78,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Alternative date & time"),
         "alternativeRequest":
             MessageLookupByLibrary.simpleMessage("Alternative request"),
+        "alternativeRequestAccepted": MessageLookupByLibrary.simpleMessage(
+            "Alternative request accepted"),
+        "alternativeRequestDeclined": MessageLookupByLibrary.simpleMessage(
+            "Alternative request declined"),
         "alternativeRescheduleRequest": MessageLookupByLibrary.simpleMessage(
             "Alternative reschedule request"),
         "alternativeSent":
@@ -106,7 +112,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Browse categories"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel booking"),
+        "cancellationDetails":
+            MessageLookupByLibrary.simpleMessage("Cancellation details"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
+        "cancelledThisBooking": m1,
         "candidateProfile":
             MessageLookupByLibrary.simpleMessage("Candidate profile"),
         "candidateRating":
@@ -186,7 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Go to dashboard"),
         "goToRescheduleRequest":
             MessageLookupByLibrary.simpleMessage("Go to reschedule request"),
-        "hi": m1,
+        "hi": m2,
         "hiThere": MessageLookupByLibrary.simpleMessage("Hi there!"),
         "hire": MessageLookupByLibrary.simpleMessage("Hire"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -287,7 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "needToRescheduleSelectAnAlternativeDate":
             MessageLookupByLibrary.simpleMessage(
                 "Need to reschedule? Select an alternative date and/or time and we\'ll let your client know."),
-        "needsToRescheduleThisBooking": m2,
+        "needsToRescheduleThisBooking": m3,
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
@@ -401,6 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Qualifications"),
         "r": MessageLookupByLibrary.simpleMessage("R"),
         "r00": MessageLookupByLibrary.simpleMessage("R00.00"),
+        "reason": MessageLookupByLibrary.simpleMessage("Reason"),
         "reasonForCancellation":
             MessageLookupByLibrary.simpleMessage("Reason for cancellation"),
         "reasonForReschedule":
@@ -428,6 +438,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
+        "seeCancellationDetails":
+            MessageLookupByLibrary.simpleMessage("See cancellation details"),
         "seeReviews": MessageLookupByLibrary.simpleMessage("See reviews"),
         "selectAReason":
             MessageLookupByLibrary.simpleMessage("Select a reason *"),
@@ -443,7 +455,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendApplication":
             MessageLookupByLibrary.simpleMessage("Send Application"),
         "sendJobOffer": MessageLookupByLibrary.simpleMessage("Send job offer"),
-        "sentAnAlternativeRequest": m3,
+        "sentAnAlternativeRequest": m4,
         "serviceCategory":
             MessageLookupByLibrary.simpleMessage("Service category"),
         "services": MessageLookupByLibrary.simpleMessage("Services"),
@@ -490,13 +502,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "weAreStillVerifyingYourAccount": MessageLookupByLibrary.simpleMessage(
             "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeLetsSetUpYourProfile": m4,
+        "welcomeLetsSetUpYourProfile": m5,
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
         "weveSentYourAlternativeDateAndTimeProposal":
             MessageLookupByLibrary.simpleMessage(
                 "We\'ve sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected"),
-        "weveSentaOneTimePine": m5,
+        "weveSentaOneTimePine": m6,
         "whatAreYouLookingFor":
             MessageLookupByLibrary.simpleMessage("What are you looking for?"),
         "whatIsYourHourlyRateAndWorkTimes":
@@ -543,8 +555,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time."),
         "youveAcceptedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
             "You\'ve approved the reschedule request and it has been updated in your calendar."),
+        "youveApprovedTheAlternativeRequest": MessageLookupByLibrary.simpleMessage(
+            "You\'ve approved the Alternative request and it has updated in your calender."),
         "youveApprovedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
             "You\'ve approved the reschedule request and it has updated in your calender."),
+        "youveDeclinedTheAlternativeRequest":
+            MessageLookupByLibrary.simpleMessage(
+                "You\'ve declined the Alternative request."),
         "youveDeclinedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
             "You\'ve declined the reschedule request. you can still propose and alternative date and time.")
       };
