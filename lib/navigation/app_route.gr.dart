@@ -69,9 +69,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     AlternativeRequestResponseRoute.name: (routeData) {
+      final args = routeData.argsAs<AlternativeRequestResponseRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AlternativeRequestResponsePage(),
+        child: AlternativeRequestResponsePage(
+          approved: args.approved,
+          booking: args.booking,
+          key: args.key,
+        ),
       );
     },
     AlternativeRescheduleRequestRoute.name: (routeData) {
@@ -135,6 +140,7 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: BottomNavigationBarPage(
+          initialIndex: args.initialIndex,
           key: args.key,
           profileEntity: args.profileEntity,
         ),
@@ -152,7 +158,17 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: CancelBookingPage(
           key: args.key,
-          bookingId: args.bookingId,
+          booking: args.booking,
+        ),
+      );
+    },
+    CancellationDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<CancellationDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CancellationDetailsPage(
+          bookingEntity: args.bookingEntity,
+          key: args.key,
         ),
       );
     },
@@ -825,16 +841,46 @@ class AlternativeRequestDetailsRouteArgs {
 
 /// generated route for
 /// [AlternativeRequestResponsePage]
-class AlternativeRequestResponseRoute extends PageRouteInfo<void> {
-  const AlternativeRequestResponseRoute({List<PageRouteInfo>? children})
-      : super(
+class AlternativeRequestResponseRoute
+    extends PageRouteInfo<AlternativeRequestResponseRouteArgs> {
+  AlternativeRequestResponseRoute({
+    required bool approved,
+    required BookingEntity booking,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           AlternativeRequestResponseRoute.name,
+          args: AlternativeRequestResponseRouteArgs(
+            approved: approved,
+            booking: booking,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AlternativeRequestResponseRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AlternativeRequestResponseRouteArgs> page =
+      PageInfo<AlternativeRequestResponseRouteArgs>(name);
+}
+
+class AlternativeRequestResponseRouteArgs {
+  const AlternativeRequestResponseRouteArgs({
+    required this.approved,
+    required this.booking,
+    this.key,
+  });
+
+  final bool approved;
+
+  final BookingEntity booking;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AlternativeRequestResponseRouteArgs{approved: $approved, booking: $booking, key: $key}';
+  }
 }
 
 /// generated route for
@@ -1003,12 +1049,14 @@ class BookingSuccessRoute extends PageRouteInfo<void> {
 class BottomNavigationBarRoute
     extends PageRouteInfo<BottomNavigationBarRouteArgs> {
   BottomNavigationBarRoute({
+    int? initialIndex,
     Key? key,
     required ProfileEntity? profileEntity,
     List<PageRouteInfo>? children,
   }) : super(
           BottomNavigationBarRoute.name,
           args: BottomNavigationBarRouteArgs(
+            initialIndex: initialIndex,
             key: key,
             profileEntity: profileEntity,
           ),
@@ -1023,9 +1071,12 @@ class BottomNavigationBarRoute
 
 class BottomNavigationBarRouteArgs {
   const BottomNavigationBarRouteArgs({
+    this.initialIndex,
     this.key,
     required this.profileEntity,
   });
+
+  final int? initialIndex;
 
   final Key? key;
 
@@ -1033,7 +1084,7 @@ class BottomNavigationBarRouteArgs {
 
   @override
   String toString() {
-    return 'BottomNavigationBarRouteArgs{key: $key, profileEntity: $profileEntity}';
+    return 'BottomNavigationBarRouteArgs{initialIndex: $initialIndex, key: $key, profileEntity: $profileEntity}';
   }
 }
 
@@ -1056,13 +1107,13 @@ class BurgerMenuRoute extends PageRouteInfo<void> {
 class CancelBookingRoute extends PageRouteInfo<CancelBookingRouteArgs> {
   CancelBookingRoute({
     Key? key,
-    required String bookingId,
+    required BookingEntity booking,
     List<PageRouteInfo>? children,
   }) : super(
           CancelBookingRoute.name,
           args: CancelBookingRouteArgs(
             key: key,
-            bookingId: bookingId,
+            booking: booking,
           ),
           initialChildren: children,
         );
@@ -1076,16 +1127,55 @@ class CancelBookingRoute extends PageRouteInfo<CancelBookingRouteArgs> {
 class CancelBookingRouteArgs {
   const CancelBookingRouteArgs({
     this.key,
-    required this.bookingId,
+    required this.booking,
   });
 
   final Key? key;
 
-  final String bookingId;
+  final BookingEntity booking;
 
   @override
   String toString() {
-    return 'CancelBookingRouteArgs{key: $key, bookingId: $bookingId}';
+    return 'CancelBookingRouteArgs{key: $key, booking: $booking}';
+  }
+}
+
+/// generated route for
+/// [CancellationDetailsPage]
+class CancellationDetailsRoute
+    extends PageRouteInfo<CancellationDetailsRouteArgs> {
+  CancellationDetailsRoute({
+    required BookingEntity bookingEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CancellationDetailsRoute.name,
+          args: CancellationDetailsRouteArgs(
+            bookingEntity: bookingEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'CancellationDetailsRoute';
+
+  static const PageInfo<CancellationDetailsRouteArgs> page =
+      PageInfo<CancellationDetailsRouteArgs>(name);
+}
+
+class CancellationDetailsRouteArgs {
+  const CancellationDetailsRouteArgs({
+    required this.bookingEntity,
+    this.key,
+  });
+
+  final BookingEntity bookingEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CancellationDetailsRouteArgs{bookingEntity: $bookingEntity, key: $key}';
   }
 }
 
@@ -1681,7 +1771,7 @@ class JobDetailsRoute extends PageRouteInfo<JobDetailsRouteArgs> {
     int? fromIndex = 0,
     required String jobId,
     PageMode pageMode = PageMode.searching,
-    String? bookingId,
+    BookingEntity? bookingId,
     JobEntity? job,
     List<PageRouteInfo>? children,
   }) : super(
@@ -1721,7 +1811,7 @@ class JobDetailsRouteArgs {
 
   final PageMode pageMode;
 
-  final String? bookingId;
+  final BookingEntity? bookingId;
 
   final JobEntity? job;
 

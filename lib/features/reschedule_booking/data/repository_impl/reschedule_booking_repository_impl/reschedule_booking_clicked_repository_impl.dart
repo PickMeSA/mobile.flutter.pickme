@@ -10,7 +10,7 @@ class RescheduleBookingClickedRepositoryImpl extends RescheduleBookingClickedRep
   RescheduleBookingClickedRepositoryImpl({required this.rescheduleService});
 
   @override
-  Future<BookingEntity> call({RescheduleBookingClickedRepositoryParams? params}) async{
+  Future<String> call({RescheduleBookingClickedRepositoryParams? params}) async{
     try{
       return await rescheduleService.rescheduleBooking(rescheduleEntity: params!.rescheduleEntity!);
     }catch(ex){

@@ -20,6 +20,7 @@ import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_naviga
 import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.dart';
 import 'package:pickme/features/candidate_profile_page/presentation/candidate_profile_page.dart';
+import 'package:pickme/features/cancellation_details/presentation/cancellation_details_page.dart';
 import 'package:pickme/features/contact/presentation/contact_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
@@ -181,6 +182,11 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MyReviewsRoute.page),
     AnimatedRoute(page: ContactRoute.page),
     AnimatedRoute(page: BookingSuccessRoute.page),
+
+    AnimatedRoute(page: JobOffersListRoute.page),
+    AnimatedRoute(page: AlternativeRequestResponseRoute.page),
+    AnimatedRoute(page: MyReviewsRoute.page),
+    AnimatedRoute(page:  CancellationDetailsRoute.page),
 
   ];
 }

@@ -4,5 +4,5 @@ import 'package:pickme/shared/remote/PickMeApiCore.dart';
 
 abstract class RescheduleService extends PickMeCoreApi{
 
-  Future<BookingEntity> rescheduleBooking({required RescheduleEntity rescheduleEntity});
+  Future<String> rescheduleBooking({required RescheduleEntity rescheduleEntity});
 }

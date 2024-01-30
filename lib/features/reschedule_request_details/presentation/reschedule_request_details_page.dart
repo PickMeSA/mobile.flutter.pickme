@@ -99,9 +99,9 @@ class _RescheduleRequestDetailsPageState extends BasePageState<RescheduleRequest
                      child: Padding(padding: EdgeInsets.all(20),
                      child: Row(
                        children: [
-                         wText(DateFormatters.getDayMonthYear(DateTime.parse(widget.bookingEntity.startDate)), style: theme.textTheme.titleLarge),
+                         wText(DateFormatters.getDayMonthYear(DateTime.parse(widget.bookingEntity.proposedAltStartDate)), style: theme.textTheme.titleLarge),
                          Spacer(),
-                         wText(widget.bookingEntity!.job.startTime!, style: theme.textTheme.titleLarge),
+                         wText(widget.bookingEntity!.proposedAltStartTime!, style: theme.textTheme.titleLarge),
                        ],
                      ),),
                    ),
@@ -119,7 +119,7 @@ class _RescheduleRequestDetailsPageState extends BasePageState<RescheduleRequest
                    wText(getLocalization().notSatisfiedWithTheProposedRescheduleDateAndTime),
                    20.height,
                    InkWell(
-                     onTap: ()=> context.router.push(ProposeAlternativeRoute(bookingId: widget.bookingEntity.bookingId)),
+                     onTap: ()=> context.router.push(ProposeAlternativeRoute(bookingId: widget.bookingEntity.id)),
                      child: Row(
                        children: [
                          wText(getLocalization().proposeAlternative, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
@@ -184,7 +184,7 @@ class _RescheduleRequestDetailsPageState extends BasePageState<RescheduleRequest
                                  startTime: widget.bookingEntity.proposedAltStartTime,
                                  startDate: widget.bookingEntity.proposedAltStartDate,
                                  reasonForChange: widget.bookingEntity.reasonForChange,
-                                 jobInterestId: widget.bookingEntity.jobId,
+                                 jobInterestId: widget.bookingEntity.id,
                                proposerUid: userModel.id
                              )));
                              //  context.router.push(const BottomNavigationBarRoute());

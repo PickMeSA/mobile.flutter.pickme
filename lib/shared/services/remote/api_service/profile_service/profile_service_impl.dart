@@ -46,7 +46,6 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<bool> submitProfileType(ProfileTypeEntity profileTypeEntity) async  {
     try{
-
         UserModel userModel = boxUser.get(current);
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
       data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type).toJson());
@@ -59,14 +58,10 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> getRemoteProfileData({String? userId}) async{
     try{
-      Response<dynamic> response;
-      if(userId==null){
-        UserModel userModel = boxUser.get(current);
-        response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
-      }else{
-        response = await apiService.get("$baseUrl$version/profiles/$userId");
-      }
-      return returnProfileEntity(response: response);
+          UserModel userModel = boxUser.get(current);
+          Response<dynamic> response = await
+          apiService.get("$baseUrl$version/profiles/${userModel.id}");
+        return returnProfileEntity(response: response);
     }catch(ex){
       rethrow;
     }

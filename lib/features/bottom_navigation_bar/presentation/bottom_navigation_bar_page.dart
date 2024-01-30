@@ -23,7 +23,8 @@ import '../../jobs_landing_page/presentation/jobs_landing_page.dart';
 @RoutePage()
 class BottomNavigationBarPage extends BasePage {
   ProfileEntity? profileEntity;
-   BottomNavigationBarPage({super.key, required this.profileEntity});
+  int? initialIndex = 0;
+   BottomNavigationBarPage({ this.initialIndex, super.key, required this.profileEntity});
 
   @override
   _BottomNavigationBarPageState createState() => _BottomNavigationBarPageState();
@@ -54,6 +55,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     return BlocConsumer<BottomNavigationBarBloc, BottomNavigationBarPageState>(
       listener: (context, state){},
       builder: (context, state) {
+        _controller.index = widget.initialIndex??0;
          return PersistentTabView(
            context,
            controller: _controller,

@@ -2,12 +2,19 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
+import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
 
@@ -40,7 +47,23 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
   @override
   Widget buildView(BuildContext context) {
     return BlocConsumer<AlternativeRequestDetailsBloc, AlternativeRequestDetailsPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is RescheduleBookingState && state.dataState == DataState.success){
+          Navigator.pop(context);
+          context.router.push( AlternativeRequestResponseRoute(booking: widget.bookingEntity, approved: true));
+
+
+        }
+
+        if(state is RescheduleBookingState && state.dataState == DataState.loading){
+          preloader(context);
+        }
+
+        if(state is RescheduleBookingState && state.dataState == DataState.error){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+      },
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
         if(widget.bookingEntity.proposerUid == widget.bookingEntity.labourerUid){
@@ -78,9 +101,9 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                     child: Padding(padding: EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          wText(DateFormatters.getDayMonthYear(widget.bookingEntity!.job!.startDate!), style: theme.textTheme.titleLarge),
+                          wText(DateFormatters.getDayMonthYear(DateTime.parse(widget.bookingEntity.startDate!)), style: theme.textTheme.titleLarge),
                           Spacer(),
-                          wText(widget.bookingEntity!.job.startTime!),
+                          wText(widget.bookingEntity!.startTime!),
                         ],
                       ),),
                   ),
@@ -117,7 +140,7 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                               )
                           ),
                           onPressed: () {
-                            //context.router.push(const AlternativeRequestDetailsRoute());
+                            context.router.push( AlternativeRequestResponseRoute(booking: widget.bookingEntity, approved: false));
                           },
                           child: Text(getLocalization().decline, style: TextStyle(color: theme.colorScheme.secondary),),
                         ),
@@ -137,14 +160,23 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                               backgroundColor: MaterialStateProperty.resolveWith(
                                       (Set<MaterialState> states){
                                     return
-                                      theme.colorScheme.primary;
+                                      Colors.white;
                                   }
                               )
                           ),
                           onPressed: () {
-                            //context.router.push(const AlternativeRequestDetailsRoute());
+                            UserModel userModel = boxUser.get(current);
+                            getBloc().add(RescheduleBookingEvent(rescheduleEntity: RescheduleEntity(
+                                status: JobStatus.rescheduled,
+                                comments: widget.bookingEntity.comments,
+                                startTime: widget.bookingEntity.proposedAltStartTime,
+                                startDate: widget.bookingEntity.proposedAltStartDate,
+                                reasonForChange: widget.bookingEntity.reasonForChange,
+                                jobInterestId: widget.bookingEntity.id,
+                                proposerUid: userModel.id
+                            )));
                           },
-                          child: Text(getLocalization().accept, style: TextStyle(color: Colors.white),),
+                          child: Text(getLocalization().accept, style: const TextStyle(color: Colors.white),),
                         ),
                       ),
                     ],

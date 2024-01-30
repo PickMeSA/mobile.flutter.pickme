@@ -301,6 +301,10 @@
   "myHourlyRateAndWorkingHours": "My hourly rate and working hours",
   "editSkills": "Edit Skills",
   "editWorkExperience": "Edit work experience",
+  "alternativeRequestDeclined": "Alternative request declined",
+  "alternativeRequestAccepted": "Alternative request accepted",
+  "youveApprovedTheAlternativeRequest": "You've approved the Alternative request and it has updated in your calender.",
+  "youveDeclinedTheAlternativeRequest": "You've declined the Alternative request.",
   "accountHolderName": "Account holder name",
   "loadingDotDot": "loading...",
   "howWouldYouRate": "How would you rate",
@@ -318,5 +322,11 @@
   "needSupporWithPickme": "Need support with PickMe? Reach out to our Help Center for assistance.",
   "applications": "Applications",
   "youFoundSomeoneForTheJob": "You found someone for the job!",
-  "keepTabsOnThisJobInMyBookings": "Keep tabs on this job in 'My Bookings'."
+  "keepTabsOnThisJobInMyBookings": "Keep tabs on this job in 'My Bookings'.",
+  "seeCancellationDetails": "See cancellation details",
+  "cancellationDetails": "Cancellation details",
+  "cancelledThisBooking": "{name} cancelled this booking. See details below",
+  "reasonForCancellation": "Reason for cancellation",
+  "reason": "Reason"
+
 }
