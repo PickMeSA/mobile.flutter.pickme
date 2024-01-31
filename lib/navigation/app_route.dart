@@ -185,7 +185,7 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MyReviewsRoute.page),
     AnimatedRoute(page: ContactRoute.page),
     AnimatedRoute(page: BookingSuccessRoute.page),
-
+    AnimatedRoute(page: PaySomeoneRoute.page),
     AnimatedRoute(page: JobOffersListRoute.page),
     AnimatedRoute(page: AlternativeRequestResponseRoute.page),
     AnimatedRoute(page: MyReviewsRoute.page),

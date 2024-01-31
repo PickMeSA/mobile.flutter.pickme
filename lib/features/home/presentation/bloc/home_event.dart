@@ -26,3 +26,11 @@ class LoadJobsInAreaEvent extends HomePageEvent{
 
  LoadJobsInAreaEvent();
 }
+
+class JobsHiringLandingPageEnteredEvent extends HomePageEvent{
+ JobsHiringLandingPageEnteredEvent();
+}
+
+class NextAppointmentCardClickedEvent extends HomePageEvent{
+
+}

@@ -24,9 +24,7 @@ class MyBookingsUpcomingBloc
     List<BookingEntity> upcomingHireBookingsList = [];
     List<BookingEntity> completeHireBookingsList = [];
     List<BookingEntity> cancelledHireBookingsList = [];
-    List<BookingEntity> upcomingWorkerBookingsList = [];
-    List<BookingEntity> completeWorkerBookingsList = [];
-    List<BookingEntity> cancelledWorkerBookingsList = [];
+
 
     final LoadBookingsUpcomingUseCase loadBookingsUpcomingUseCase;
 
@@ -43,6 +41,9 @@ class MyBookingsUpcomingBloc
 
     _onLoadBookingsUpcomingEvent(event,emit) async{
         emit(LoadBookingUpcomingState()..dataState = DataState.loading);
+        upcomingHireBookingsList.clear();
+        cancelledHireBookingsList.clear();
+        completeHireBookingsList.clear();
         try{
             await loadBookingsUpcomingUseCase.call().then((profileBookings){
                 profileBookings.forEach((element) {

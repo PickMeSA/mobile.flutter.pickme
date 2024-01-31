@@ -107,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Back to my wallet"),
         "backToPaySomeone":
             MessageLookupByLibrary.simpleMessage("Back to pay someone"),
+        "backToSetUpProfile":
+            MessageLookupByLibrary.simpleMessage("back to setup profile"),
         "bankA": MessageLookupByLibrary.simpleMessage("Bank *"),
         "bankDetails": MessageLookupByLibrary.simpleMessage("Bank details"),
         "bookings": MessageLookupByLibrary.simpleMessage("Bookings"),
@@ -233,6 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("*Indicates a required field"),
         "individual": MessageLookupByLibrary.simpleMessage("Individual"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry *"),
+        "information": MessageLookupByLibrary.simpleMessage("Information"),
         "investmentFund":
             MessageLookupByLibrary.simpleMessage("Investment fund"),
         "issueDate": MessageLookupByLibrary.simpleMessage("Issue date *"),
@@ -249,6 +252,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "jobsNearMe": MessageLookupByLibrary.simpleMessage("Jobs near me"),
         "keepTabsOnThisJobInMyBookings": MessageLookupByLibrary.simpleMessage(
             "Keep tabs on this job in \'My Bookings\'."),
+        "laterThisMonth":
+            MessageLookupByLibrary.simpleMessage("Later this month"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
@@ -508,6 +513,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
+        "today": MessageLookupByLibrary.simpleMessage("Today"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),

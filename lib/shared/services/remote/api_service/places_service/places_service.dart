@@ -5,4 +5,7 @@ abstract class PlacesService {
   String ApiKey = "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8";
 
   Future<OTPLocationEntity> getPlace({required String placeId});
+
+
+  Future<OTPLocationEntity>  getLocation();
 }

@@ -19,9 +19,10 @@ import 'bloc/pay_someone_web_view_bloc.dart';
 
 @RoutePage()
 class PaySomeoneWebViewPage extends BasePage {
+  int? from = 0;
   ProfileEntity? profileEntity;
   BookingEntity? bookingEntity;
-   PaySomeoneWebViewPage({ this.bookingEntity,this.profileEntity, super.key});
+   PaySomeoneWebViewPage({ required this.from ,this.bookingEntity,this.profileEntity, super.key});
 
   @override
   _PaySomeoneWebViewPageState createState() => _PaySomeoneWebViewPageState();
@@ -53,10 +54,9 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
             ..addJavaScriptChannel("Payment",
                 onMessageReceived: (message){
                   if(message.message == "success"){
-                    context.router.pushAndPopUntil( YouAreAllSetupRoute(),
-                        predicate: (Route<dynamic> route) => false);
+                    context.router.push(PaymentOutcomeRoute(from: widget.from!, paymentSuccess: true));
                   }else if(message.message == "failed"){
-                      context.router.pop();
+                    context.router.push(PaymentOutcomeRoute(from: widget.from!, paymentSuccess: false));
                   }else{
                     context.router.pop();
                     wErrorPopUp(message: message.message, type: getLocalization().error, context: context);
@@ -71,6 +71,7 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
                 onPageStarted: (String url) {},
                 onPageFinished: (String url) {},
                 onWebResourceError: (WebResourceError error) {
+
                   context.router.pop();
                   wErrorPopUp(message: error.description, type: getLocalization().error, context: context);
 
@@ -90,14 +91,18 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
 
         }
         if(state is MakePaymentState && state.dataState == DataState.error){
+          context.router.pop();
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
       },
       builder: (context, state) {
          return state.dataState == DataState.loading || state.dataState == DataState.init?
          const Center(child: CircularProgressIndicator(),)
-             : WebViewWidget(
-           controller: webViewController,);
+             : Stack(
+               children:[ WebViewWidget(
+           controller: webViewController,),
+                 Positioned(right: 20,child: InkWell(onTap: ()=> context.router.pop(), child: Icon(Icons.close),))
+            ] );
       },
     );
   }

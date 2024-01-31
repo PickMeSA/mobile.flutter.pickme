@@ -146,7 +146,7 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
 
                                 getBloc().add(RescheduleBookingEvent(rescheduleEntity:
                                 RescheduleEntity(
-                                  previousStatus: widget.booking!.previousStatus,
+                                  previousStatus: widget.booking?.previousStatus??JobStatus.booked,
                                   proposedAltStartTime: "",
                                   proposedAltStartDate: "",
                                   startTime: widget.booking?.job.startTime??"",

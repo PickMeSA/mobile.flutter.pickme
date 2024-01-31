@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -63,7 +64,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     wText(getLocalization().profile,
                         style: theme.textTheme.headlineMedium),
                     const Spacer(),
-                    InkWell(onTap: (){context.router.pop();},child: const Icon(Iconsax.menu, size: 25,)),
+                    TextButton(onPressed: ()=> context.router.push(const BurgerMenuRoute()), child: SvgPicture.asset("assets/menu.svg"))
                   ],
                 ),
                 30.height,
