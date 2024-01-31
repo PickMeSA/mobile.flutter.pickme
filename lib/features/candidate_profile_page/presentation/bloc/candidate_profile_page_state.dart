@@ -17,3 +17,8 @@ class RespondToJobInterestState extends CandidateProfilePageState {
   String? error;
   RespondToJobInterestState({this.error});
 }
+
+class RemoveCandidateFromMatchesState extends CandidateProfilePageState {
+  String? error;
+  RemoveCandidateFromMatchesState({this.error});
+}

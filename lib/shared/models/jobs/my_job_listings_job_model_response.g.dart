@@ -43,6 +43,10 @@ _$MyJobListingsJobModelResponseImpl
           applications: (json['applications'] as List<dynamic>?)
               ?.map((e) => JobInterestModel.fromJson(e as Map<String, dynamic>))
               .toList(),
+          potentialMatches: (json['potentialMatches'] as List<dynamic>?)
+              ?.map((e) => JobInterestModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+          potentialMatchesRemoved: json['potentialMatchesRemoved'] as String?,
         );
 
 Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
@@ -70,13 +74,15 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'jobApplicationsCount': instance.jobApplicationsCount,
       'possibleApplicantMatchesCount': instance.possibleApplicantMatchesCount,
       'applications': instance.applications,
+      'potentialMatches': instance.potentialMatches,
+      'potentialMatchesRemoved': instance.potentialMatchesRemoved,
     };
 
 _$JobInterestModelImpl _$$JobInterestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$JobInterestModelImpl(
       applicant: Applicant.fromJson(json['applicant'] as Map<String, dynamic>),
-      jobInterestId: json['jobInterestId'] as String,
+      jobInterestId: json['jobInterestId'] as String?,
     );
 
 Map<String, dynamic> _$$JobInterestModelImplToJson(

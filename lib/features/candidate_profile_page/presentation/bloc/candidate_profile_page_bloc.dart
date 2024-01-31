@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -6,7 +7,9 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/features/candidate_profile_page/domain/usecases/get_candidate_profile_use_case.dart';
+import 'package:pickme/features/candidate_profile_page/domain/usecases/remove_match_usecase.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/usecases/respond_to_job_interest_use_case.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 
@@ -25,9 +28,13 @@ class CandidateProfilePageBloc extends BaseBloc<CandidateProfilePageEvent, Candi
 
   GetCandidateProfileUseCase getCandidateProfileUseCase;
   RespondToJobInterestUseCase respondToJobInterestUseCase;
-  CandidateProfilePageBloc({required this.getCandidateProfileUseCase, required this.respondToJobInterestUseCase}) : super(CandidateProfileStatePageInitial()) {
+  RemoveMatchUseCase removeMatchUseCase;
+  CandidateProfilePageBloc({required this.getCandidateProfileUseCase,
+    required this.respondToJobInterestUseCase,
+    required this.removeMatchUseCase}) : super(CandidateProfileStatePageInitial()) {
 on<CandidateProfilePageEnteredEvent>((event, emit) => _onCandidateProfilePageEnteredEvent(event, emit));
 on<RespondToJobInterestEvent>((event, emit) => _onRespondToJobInterestEvent(event, emit));
+on<RemoveCandidateFromMatchesEvent>((event, emit) => _onRemoveCandidateFromMatchesEvent(event, emit));
 }
 _onCandidateProfilePageEnteredEvent(CandidateProfilePageEnteredEvent event,
     Emitter<CandidateProfilePageState> emit) async{
@@ -49,6 +56,23 @@ _onCandidateProfilePageEnteredEvent(CandidateProfilePageEnteredEvent event,
     emit(RespondToJobInterestState()..dataState=DataState.success);
   }catch(ex){
     emit(RespondToJobInterestState(error: ex.toString())..dataState=DataState.error);
+    logger.e(ex);
+  }
+}
+
+  _onRemoveCandidateFromMatchesEvent(RemoveCandidateFromMatchesEvent event,
+    Emitter<CandidateProfilePageState> emit) async{
+    emit(RemoveCandidateFromMatchesState()..dataState=DataState.loading);
+  try{
+    await removeMatchUseCase.call(
+      params: RemoveMatchUseCaseParams(
+        jobId: event.job.id,
+        userIds: (event.job.potentialMatchesRemoved.isEmptyOrNull)?"${profileEntity!.id}": ",${profileEntity!.id}"
+      ),
+    );
+    emit(RemoveCandidateFromMatchesState()..dataState=DataState.success);
+  }catch(ex){
+    emit(RemoveCandidateFromMatchesState(error: ex.toString())..dataState=DataState.error);
     logger.e(ex);
   }
 }

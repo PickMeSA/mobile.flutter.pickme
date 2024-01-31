@@ -14,7 +14,7 @@ class GetRemoteProfileRepositoryImpl extends GetRemoteProfileRepository {
   @override
   Future<ProfileEntity> call({GetRemoteProfileRepositoryParams? params}) async {
     try{
-      return await profileService.getRemoteProfileData();
+      return await profileService.getRemoteProfileData(userId: params?.id);
     }catch(ex){
       rethrow;
     }

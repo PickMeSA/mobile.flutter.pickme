@@ -16,7 +16,11 @@ import 'package:pickme/features/jobs/shared/features/skills/domain/usecases/get_
 import 'package:pickme/shared/constants/numerical.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remote_profile_usecase.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
 import '../../../../../../shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 part 'create_job_listing_event.dart';
@@ -36,9 +40,12 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   List<SkillEntity> chipOptions = [];
   bool preloaderActive = false;
   OTPLocationEntity? otpLocationEntity;
+  final GetRemoteProfileUseCase getRemoteProfileUseCase;
+  ProfileEntity? currentUser;
 
   CreateJobListingBloc({required this.uploadFileUseCase,
-    required this.getSkillsListUseCase}) : super(CreateJobListingInitial()) {
+    required this.getSkillsListUseCase,
+    required this.getRemoteProfileUseCase}) : super(CreateJobListingInitial()) {
     on<CreateJobListingPageEnteredEvent>((event, emit) => _onCreateJobListingPageEnteredEvent(event, emit));
     on<JobImageAddedClickedEvent>((event, emit) => _onAddJobImageClickedEvent(event, emit));
     on<FlexibleHoursCheckboxChangedEvent>((event, emit) => _onFlexibleHoursCheckboxChangedEvent(event, emit));
@@ -90,6 +97,9 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
       )async{
     emit(GetSkillsListState()..dataState = DataState.loading);
     try{
+
+      UserModel user = boxUser.get(current);
+      currentUser = await getRemoteProfileUseCase.call(params: GetRemoteProfileUseCaseParams(id: user.id));
       JobsSkillListEntity skillListEntity = await getSkillsListUseCase.call();
       skillEntries = skillListEntity.skillListEntity!.map((e) => DropdownMenuItem(value: e, child: Text(e.skill!))).toList();
       emit(GetSkillsListState()..dataState = DataState.success);

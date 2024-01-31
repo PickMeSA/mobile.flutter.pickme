@@ -269,6 +269,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Looking for job opportunities as a single individual?"),
         "loremIpsumDescriptionField": MessageLookupByLibrary.simpleMessage(
             "Ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\n\n"),
+        "matchingProfiles":
+            MessageLookupByLibrary.simpleMessage("Matching profiles"),
         "maxDistance": MessageLookupByLibrary.simpleMessage("Max. distance"),
         "membership": MessageLookupByLibrary.simpleMessage("Membership"),
         "membershipAwardName":
@@ -427,6 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Recommended for you"),
         "registrationFee":
             MessageLookupByLibrary.simpleMessage("Registration fee"),
+        "removeMatch": MessageLookupByLibrary.simpleMessage("Remove match"),
         "requestAReview":
             MessageLookupByLibrary.simpleMessage("Request a review"),
         "requestAccepted":
@@ -443,6 +446,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
+        "reviewUser": MessageLookupByLibrary.simpleMessage("Review user"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
@@ -507,6 +511,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
         "transactionFees":
             MessageLookupByLibrary.simpleMessage("Transaction fees"),
+        "unpublishListing":
+            MessageLookupByLibrary.simpleMessage("Unpublish listing"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upload": MessageLookupByLibrary.simpleMessage("Upload"),
@@ -548,6 +554,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "yesSwitch": MessageLookupByLibrary.simpleMessage("Yes, switch"),
         "youAreAllSetup":
             MessageLookupByLibrary.simpleMessage("You\'re all set up!"),
+        "youCanKeepTrackOfThisJobInMyBookings":
+            MessageLookupByLibrary.simpleMessage(
+                "You can keep track of this job in \'My Bookings\'."),
         "youDontHaveAnyActiveListings": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any active listings"),
         "youDontHaveAnyInactiveListings": MessageLookupByLibrary.simpleMessage(
@@ -572,6 +581,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your profile is still pending"),
         "yourRescheduleRequestHasBeenSent": MessageLookupByLibrary.simpleMessage(
             "Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time."),
+        "youreBookedForTheJob":
+            MessageLookupByLibrary.simpleMessage("You\'re booked for the job!"),
         "youveAcceptedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
             "You\'ve approved the reschedule request and it has been updated in your calendar."),
         "youveApprovedTheAlternativeRequest": MessageLookupByLibrary.simpleMessage(

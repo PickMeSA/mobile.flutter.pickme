@@ -3389,6 +3389,66 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `You're booked for the job!`
+  String get youreBookedForTheJob {
+    return Intl.message(
+      'You\'re booked for the job!',
+      name: 'youreBookedForTheJob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can keep track of this job in 'My Bookings'.`
+  String get youCanKeepTrackOfThisJobInMyBookings {
+    return Intl.message(
+      'You can keep track of this job in \'My Bookings\'.',
+      name: 'youCanKeepTrackOfThisJobInMyBookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Matching profiles`
+  String get matchingProfiles {
+    return Intl.message(
+      'Matching profiles',
+      name: 'matchingProfiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove match`
+  String get removeMatch {
+    return Intl.message(
+      'Remove match',
+      name: 'removeMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review user`
+  String get reviewUser {
+    return Intl.message(
+      'Review user',
+      name: 'reviewUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unpublish listing`
+  String get unpublishListing {
+    return Intl.message(
+      'Unpublish listing',
+      name: 'unpublishListing',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
