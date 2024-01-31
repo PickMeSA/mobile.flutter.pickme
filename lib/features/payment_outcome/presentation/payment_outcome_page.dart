@@ -105,7 +105,7 @@ class _PaymentOutcomePageState extends BasePageState<PaymentOutcomePage, Payment
                       ),
                       onPressed: () {
                         context.router.pushAndPopUntil(
-                            BottomNavigationBarRoute(profileEntity: getBloc().profileEntity,
+                            BottomNavigationBarRoute(
                                 initialIndex: 1), predicate: (Route<dynamic> route) => false);
                       },
                       child: Text(widget.paymentSuccess?getLocalization().backToMyWallet: getLocalization().backToPaySomeone, style: TextStyle(color: theme.colorScheme.secondary),),

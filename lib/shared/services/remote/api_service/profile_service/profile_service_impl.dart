@@ -28,6 +28,8 @@ import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_lis
 import 'package:pickme/shared/features/otp/domain/entities/otp_skill_ids_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experience_list_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/features/upload_file/data/models/upload_file_response/upload_file_response.dart';
+import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
@@ -154,7 +156,12 @@ class ProfileServiceImpl extends ProfileService{
 
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
+    UserModel userModel = boxUser.get(current);
+    userModel.type = otpFullProfileModelResponse.type??"";
+    boxUser.put(current, userModel);
     return ProfileEntity(
+      pictureEntity: UploadedFileEntity.fromResponse(response: otpFullProfileModelResponse?.profilePicture??
+          const UploadFileResponse(url: "", ref: "", id: -1)),
       subscriptionPaid: otpFullProfileModelResponse.subscriptionPaid,
       ratesAndWorkTimesEntity: RatesAndWorkTimesEntity.fromResponse(
           otpFullProfileModelResponse.hourlyRate.toString(),

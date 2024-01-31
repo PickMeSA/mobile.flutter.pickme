@@ -1,17 +1,25 @@
 import 'package:equatable/equatable.dart';
+import 'package:pickme/shared/features/upload_file/data/models/upload_file_response/upload_file_response.dart';
 
 class UploadedFileEntity extends Equatable{
-  final int id;
-  final String url;
-  final String ref;
+   int? id;
+   String? url;
+   String? ref;
 
-  const UploadedFileEntity({required this.id, required this.url, required this.ref});
+   UploadedFileEntity({required this.id, required this.url, required this.ref});
 
   @override
   List<Object?> get props => [id];
 
   int toResponse(){
-    return id;
+    return id!;
+  }
+
+  UploadedFileEntity.fromResponse({required UploadFileResponse response}){
+    url = response.url;
+    id = response.id;
+    ref = response.ref;
+
   }
 
 }

@@ -53,7 +53,7 @@ class _CancelBookingPageState extends BasePageState<CancelBookingPage, CancelBoo
         if(state is CancelBookingClickedState && state.dataState == DataState.success){
           Navigator.pop(context);
           context.router.pushAndPopUntil(
-              BottomNavigationBarRoute(profileEntity: getBloc().profileEntity,
+              BottomNavigationBarRoute(
                   initialIndex: 1), predicate: (Route<dynamic> route) => false);
         }
         if(state is CancelBookingClickedState && state.dataState == DataState.loading){

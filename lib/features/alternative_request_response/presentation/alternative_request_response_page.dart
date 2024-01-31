@@ -47,7 +47,7 @@ class _AlternativeRequestResponsePageState extends BasePageState<AlternativeRequ
       listener: (context, state){
         if( state is RescheduleBookingState && state.dataState == DataState.success){
           context.router.pushAndPopUntil(
-              BottomNavigationBarRoute(profileEntity: getBloc().profileEntity,
+              BottomNavigationBarRoute(
               initialIndex: 1), predicate: (Route<dynamic> route) => false);
 
         }

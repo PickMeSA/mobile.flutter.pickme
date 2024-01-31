@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pickme/features/otp/data/response_models/otp_model_response/work_times_model_response.dart';
+import 'package:pickme/shared/features/upload_file/data/models/upload_file_response/upload_file_response.dart';
 
 import 'otp_business_model_response.dart';
 import 'otp_industry_model_model_response.dart';
@@ -40,7 +41,8 @@ class OTPFullProfileModelResponse with _$OTPFullProfileModelResponse {
     required List<OTPQualificationModelResponse>? qualifications,
     required List<OTPWorkExperienceModelResponse>? workExperience,
     required OTPPaymentDetailsModelResponse? paymentDetails,
-    required OTPBusinessModelResponse? business
+    required OTPBusinessModelResponse? business,
+    required UploadFileResponse? profilePicture,
   }) = _OTPFullProfileModelResponse;
 
   factory OTPFullProfileModelResponse.fromJson(

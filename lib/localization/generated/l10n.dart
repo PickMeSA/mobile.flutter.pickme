@@ -3299,6 +3299,56 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No, cancel`
+  String get noCancel {
+    return Intl.message(
+      'No, cancel',
+      name: 'noCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, switch`
+  String get yesSwitch {
+    return Intl.message(
+      'Yes, switch',
+      name: 'yesSwitch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switching profiles`
+  String get switchingProfiles {
+    return Intl.message(
+      'Switching profiles',
+      name: 'switchingProfiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switching your profile from 'Hiring' to 'Working'. Confirm your choice?`
+  String get switchingYourProfileFromHireToWorking {
+    return Intl.message(
+      'Switching your profile from \'Hiring\' to \'Working\'. Confirm your choice?',
+      name: 'switchingYourProfileFromHireToWorking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switching your profile from 'Working' to 'Hiring'. Confirm your choice?`
+  String get switchingYourProfileFromWorkerToHire {
+    return Intl.message(
+      'Switching your profile from \'Working\' to \'Hiring\'. Confirm your choice?',
+      name: 'switchingYourProfileFromWorkerToHire',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

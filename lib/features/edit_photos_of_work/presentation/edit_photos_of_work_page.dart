@@ -45,7 +45,7 @@ class _EditPhotosOfWorkPageState extends BasePageState<EditPhotosOfWorkPage, Edi
     return BlocConsumer<EditPhotosOfWorkBloc, EditPhotosOfWorkPageState>(
       listener: (context, state){
         if(state.dataState == DataState.success && state is ProfilePictureAddedState){
-          widget.files!.add(AppFileEntity(id: state.uploadFileEntity!.id, name: state.uploadFileEntity!.ref, url: state.uploadFileEntity!.url));
+          widget.files!.add(AppFileEntity(id: state.uploadFileEntity!.id!, name: state.uploadFileEntity!.ref!, url: state.uploadFileEntity!.url!));
           Navigator.pop(context);
 
         }

@@ -69,7 +69,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
         }
 
         if(state.dataState == DataState.success && state is ProfilePictureAddedState){
-          widget.files!.add(AppFileEntity(id: state.uploadFileEntity!.id, name: state.uploadFileEntity!.ref, url: state.uploadFileEntity!.url));
+          widget.files!.add(AppFileEntity(id: state.uploadFileEntity!.id!, name: state.uploadFileEntity!.ref!, url: state.uploadFileEntity!.url!));
           Navigator.pop(context);
 
         }

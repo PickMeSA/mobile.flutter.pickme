@@ -130,7 +130,8 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     BottomNavigationBarRoute.name: (routeData) {
-      final args = routeData.argsAs<BottomNavigationBarRouteArgs>();
+      final args = routeData.argsAs<BottomNavigationBarRouteArgs>(
+          orElse: () => const BottomNavigationBarRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: BottomNavigationBarPage(
@@ -1049,7 +1050,7 @@ class BottomNavigationBarRoute
   BottomNavigationBarRoute({
     int? initialIndex,
     Key? key,
-    required ProfileEntity? profileEntity,
+    ProfileEntity? profileEntity,
     List<PageRouteInfo>? children,
   }) : super(
           BottomNavigationBarRoute.name,
@@ -1071,7 +1072,7 @@ class BottomNavigationBarRouteArgs {
   const BottomNavigationBarRouteArgs({
     this.initialIndex,
     this.key,
-    required this.profileEntity,
+    this.profileEntity,
   });
 
   final int? initialIndex;

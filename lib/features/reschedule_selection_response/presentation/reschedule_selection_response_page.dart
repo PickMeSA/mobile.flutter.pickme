@@ -52,7 +52,7 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
 
         if(state is RescheduleBookingState && state.dataState == DataState.success){
           context.router.pushAndPopUntil(
-              BottomNavigationBarRoute(profileEntity: getBloc().profileEntity,
+              BottomNavigationBarRoute(
                   initialIndex: 1), predicate: (Route<dynamic> route) => false);
         }
 
