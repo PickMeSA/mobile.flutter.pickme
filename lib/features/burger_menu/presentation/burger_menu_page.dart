@@ -130,6 +130,9 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                    leading: Icon(Iconsax.call),
                    title: wText(getLocalization().contactUs),
                    trailing: Icon(Icons.arrow_forward_ios),
+                   onTap: (){
+                     context.router.pop().then((value) => context.router.push(ContactRoute()));
+                   },
                  ),
                  
                  Spacer(),

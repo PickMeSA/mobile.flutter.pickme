@@ -17,31 +17,5 @@ part 'contact_state.dart';
 
 @injectable
 class ContactPageBloc extends BaseBloc<ContactPageEvent, ContactPageState> {
-
-  final GetContactPageEntityUseCase getMyReviewsUseCase;
-  ContactPageEntity? pageEntity;
-  bool preloaderActive = false;
-  final Logger logger = Logger();
-
-  ContactPageBloc({
-    required this.getMyReviewsUseCase,}) : super(MyReviewsPageInitialState()) {
-    on<ContactPageEnteredEvent>((event, emit) => _onMyReviewsPageEnteredEvent(event, emit));
-  }
-
-  _onMyReviewsPageEnteredEvent(
-      ContactPageEnteredEvent event,
-      Emitter<ContactPageState> emit
-      )async{
-    emit(GetPageDataState()..dataState = DataState.loading);
-    try{
-      UserModel userModel = boxUser.get(current);
-      String userId = event.userId??userModel.id!;
-      pageEntity = await getMyReviewsUseCase.call(
-          params: GetContactPageEntityUseCaseParams(userId: userId));
-      emit(GetPageDataState()..dataState = DataState.success);
-    }catch(ex){
-      emit(GetPageDataState(error: ex.toString())..dataState = DataState.error);
-    }
-  }
-
+  ContactPageBloc() : super(ContactPageInitialState());
 }

@@ -129,6 +129,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BookingRescheduleSentPage(),
       );
     },
+    BookingSuccessRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BookingSuccessPage(),
+      );
+    },
     BottomNavigationBarRoute.name: (routeData) {
       final args = routeData.argsAs<BottomNavigationBarRouteArgs>(
           orElse: () => const BottomNavigationBarRouteArgs());
@@ -169,11 +175,12 @@ abstract class _$AppRouter extends RootStackRouter {
     },
     CandidateProfileRoute.name: (routeData) {
       final args = routeData.argsAs<CandidateProfileRouteArgs>();
-      return AutoRoutePage<dynamic>(
+      return AutoRoutePage<bool?>(
         routeData: routeData,
         child: CandidateProfilePage(
           key: args.key,
           candidateProfile: args.candidateProfile,
+          jobInterestId: args.jobInterestId,
         ),
       );
     },
@@ -314,16 +321,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const FinalDetailsPage(),
-      );
-    },
-    HirerJobDetailsRoute.name: (routeData) {
-      final args = routeData.argsAs<HirerJobDetailsRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: HirerJobDetailsPage(
-          key: args.key,
-          jobEntity: args.jobEntity,
-        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -1044,6 +1041,20 @@ class BookingRescheduleSentRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BookingSuccessPage]
+class BookingSuccessRoute extends PageRouteInfo<void> {
+  const BookingSuccessRoute({List<PageRouteInfo>? children})
+      : super(
+          BookingSuccessRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BookingSuccessRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [BottomNavigationBarPage]
 class BottomNavigationBarRoute
     extends PageRouteInfo<BottomNavigationBarRouteArgs> {
@@ -1184,12 +1195,14 @@ class CandidateProfileRoute extends PageRouteInfo<CandidateProfileRouteArgs> {
   CandidateProfileRoute({
     Key? key,
     required CandidateProfileEntity candidateProfile,
+    String? jobInterestId,
     List<PageRouteInfo>? children,
   }) : super(
           CandidateProfileRoute.name,
           args: CandidateProfileRouteArgs(
             key: key,
             candidateProfile: candidateProfile,
+            jobInterestId: jobInterestId,
           ),
           initialChildren: children,
         );
@@ -1204,15 +1217,18 @@ class CandidateProfileRouteArgs {
   const CandidateProfileRouteArgs({
     this.key,
     required this.candidateProfile,
+    this.jobInterestId,
   });
 
   final Key? key;
 
   final CandidateProfileEntity candidateProfile;
 
+  final String? jobInterestId;
+
   @override
   String toString() {
-    return 'CandidateProfileRouteArgs{key: $key, candidateProfile: $candidateProfile}';
+    return 'CandidateProfileRouteArgs{key: $key, candidateProfile: $candidateProfile, jobInterestId: $jobInterestId}';
   }
 }
 
@@ -1718,44 +1734,6 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
   static const String name = 'FinalDetailsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [HirerJobDetailsPage]
-class HirerJobDetailsRoute extends PageRouteInfo<HirerJobDetailsRouteArgs> {
-  HirerJobDetailsRoute({
-    Key? key,
-    required JobEntity jobEntity,
-    List<PageRouteInfo>? children,
-  }) : super(
-          HirerJobDetailsRoute.name,
-          args: HirerJobDetailsRouteArgs(
-            key: key,
-            jobEntity: jobEntity,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'HirerJobDetailsRoute';
-
-  static const PageInfo<HirerJobDetailsRouteArgs> page =
-      PageInfo<HirerJobDetailsRouteArgs>(name);
-}
-
-class HirerJobDetailsRouteArgs {
-  const HirerJobDetailsRouteArgs({
-    this.key,
-    required this.jobEntity,
-  });
-
-  final Key? key;
-
-  final JobEntity jobEntity;
-
-  @override
-  String toString() {
-    return 'HirerJobDetailsRouteArgs{key: $key, jobEntity: $jobEntity}';
-  }
 }
 
 /// generated route for

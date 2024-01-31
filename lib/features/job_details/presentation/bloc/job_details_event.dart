@@ -11,3 +11,7 @@ class GetFullJobDetailsEvent extends JobDetailsPageEvent{
 class ApplyForJobEvent extends JobDetailsPageEvent{
   ApplyForJobEvent();
 }
+class RespondToJobInterestEvent extends JobDetailsPageEvent{
+  final String status;
+  RespondToJobInterestEvent({required this.status});
+}

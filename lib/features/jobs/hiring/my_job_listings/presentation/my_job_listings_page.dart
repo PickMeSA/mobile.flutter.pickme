@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
@@ -103,15 +104,15 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                           itemBuilder: (BuildContext context, int index){
                             JobEntity job = getBloc().myJobs!.activeJobs[index];
                             return AppJobAdvertCard(
-                                jobName: job.title!,
+                                jobName: job.title,
                                 employerName: "${job.customer!.firstName} ${job.customer!.surname}",
                                 locationName: "${job.customer!.address}",
-                                dateTime: job.startDate!,
+                                dateTime: job.startDate,
                                 status: JobStatus.active,
-                                onNext: ()=>context.router.push(HirerJobDetailsRoute(jobEntity: job)),
-                              totalMatches: 0,
+                                onNext: ()=>context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)),
+                              totalMatches: job.possibleApplicantMatchesCount,
                               matchesString: "possible Matches",
-                              totalApplications: 0,
+                              totalApplications: job.jobApplicationsCount,
                               applicationsString: "applications",
                               image: (job.customer?.profileImage!=null)?
                             CachedNetworkImageProvider(job.customer!.profileImage!):null,
@@ -152,7 +153,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                               CachedNetworkImageProvider(job.customer!.profileImage!):null,
                               onNext: (){
                                   logger.i(job.title);
-                                  context.router.push(HirerJobDetailsRoute(jobEntity: job));
+                                  context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring));
                                   },
                             );
                           }

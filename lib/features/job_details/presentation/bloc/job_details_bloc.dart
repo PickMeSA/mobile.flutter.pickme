@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:pickme/features/job_details/domain/use_cases/job_details_usecase/get_full_job_details_usecase.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/usecases/apply_for_job_usecase.dart';
+import 'package:pickme/shared/domain/usecases/respond_to_job_interest_use_case.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
@@ -21,8 +22,9 @@ class JobDetailsBloc
     bool preloaderActive = false;
     final GetJobFullDetailsUseCase getJobFullDetailsUseCase;
     final ApplyForJobUseCase applyForJobEvent;
-    JobDetailsBloc({required this.getJobFullDetailsUseCase, required this.applyForJobEvent}): super(JobDetailsPageInitState()) {
-
+    RespondToJobInterestUseCase respondToJobInterestUseCase;
+    JobDetailsBloc({required this.getJobFullDetailsUseCase, required this.respondToJobInterestUseCase, required this.applyForJobEvent}): super(JobDetailsPageInitState()) {
+        on<RespondToJobInterestEvent>((event, emit) => _onRespondToJobInterestEvent(event, emit));
         on<GetFullJobDetailsEvent>((event, emit)=> _onGetFullJobDetailsEvents(event, emit));
         on<ApplyForJobEvent>((event, emit)=> _onApplyForJobEvent(event, emit));
     }
@@ -59,5 +61,17 @@ class JobDetailsBloc
             emit(ApplyForJobState(error: ex.toString())..dataState = DataState.error);
         }
 
+    }
+
+    _onRespondToJobInterestEvent(RespondToJobInterestEvent event,
+        Emitter<JobDetailsPageState> emit) async{
+
+        emit(RespondToJobInterestState()..dataState=DataState.loading);
+        try{
+            await respondToJobInterestUseCase.call(params: RespondToJobInterestUseCaseParams(jobInterestId: jobEntity!.jobInterestId!, status: event.status));
+            emit(RespondToJobInterestState()..dataState=DataState.success);
+        }catch(ex){
+            emit(RespondToJobInterestState(error: ex.toString())..dataState=DataState.error);
+        }
     }
 } 

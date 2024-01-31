@@ -15,11 +15,14 @@ import 'package:pickme/features/application_sent/presentation/application_sent_p
 import 'package:pickme/features/apply_for_job/presentation/apply_for_job_page.dart';
 import 'package:pickme/features/apply_for_job_tool_tip/presentation/apply_for_job_tool_tip_page.dart';
 import 'package:pickme/features/booking_reschedule_sent/presentation/booking_reschedule_sent_page.dart';
+import 'package:pickme/features/booking_success/presentation/booking_reschedule_sent_page.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bottom_navigation_bar_page.dart';
 import 'package:pickme/features/burger_menu/presentation/burger_menu_page.dart';
 import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.dart';
+import 'package:pickme/features/candidate_profile_page/presentation/candidate_profile_page.dart';
 import 'package:pickme/features/cancellation_details/presentation/cancellation_details_page.dart';
 import 'package:pickme/features/contact/presentation/contact_page.dart';
+import 'package:pickme/features/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
 import 'package:pickme/features/edit_photos_of_work/presentation/edit_photos_of_work_page.dart';
@@ -36,10 +39,7 @@ import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/job_offers_list_page/presentation/job_offers_list_page.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/presentation/all_jobs_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
-import 'package:pickme/features/jobs/hiring/candidate_profile_page/presentation/candidate_profile_page.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing_info/presentation/create_job_listing_info_page.dart';
-import 'package:pickme/features/jobs/hiring/job_details_page/presentation/hirer_job_details_page.dart';
 import 'package:pickme/features/jobs/hiring/my_job_listings/presentation/my_job_listings_page.dart';
 import 'package:pickme/features/jobs/hiring/offer_a_job/presentation/offer_a_job_page.dart';
 import 'package:pickme/features/jobs/hiring/offer_sent/presentation/offer_sent_page.dart';
@@ -142,10 +142,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: JobDetailsRoute.page),
     AnimatedRoute(page: CreateJobListingInfoRoute.page),
     AnimatedRoute(page: ReviewJobListingInfoRoute.page),
-    AnimatedRoute(page: HirerJobDetailsRoute.page),
     AnimatedRoute(page: CandidateProfileRoute.page),
     AnimatedRoute(page: OfferAJobRoute.page),
-    AnimatedRoute(page: HirerJobDetailsRoute.page),
     AnimatedRoute(page: JobDetailsRoute.page),
     AnimatedRoute(page: HomeRoute.page),
     AnimatedRoute(page: BurgerMenuRoute.page),
@@ -181,6 +179,11 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: EditQualificationDetailsRoute.page),
     AnimatedRoute(page: EditQualificationRoute.page),
     AnimatedRoute(page: EditPhotosOfWorkRoute.page),
+    AnimatedRoute(page: JobOffersListRoute.page),
+    AnimatedRoute(page: MyReviewsRoute.page),
+    AnimatedRoute(page: ContactRoute.page),
+    AnimatedRoute(page: BookingSuccessRoute.page),
+
     AnimatedRoute(page: JobOffersListRoute.page),
     AnimatedRoute(page: AlternativeRequestResponseRoute.page),
     AnimatedRoute(page: MyReviewsRoute.page),

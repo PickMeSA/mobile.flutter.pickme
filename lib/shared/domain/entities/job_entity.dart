@@ -1,11 +1,15 @@
 import 'package:equatable/equatable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
+import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
+import 'package:pickme/shared/domain/entities/job_applicant_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/models/skills_list_model_response/skills_model_response.dart';
 
 import 'job_customer_entity.dart';
+import 'work_times_entity.dart';
 
 class JobEntity extends Equatable{
 final String title;
@@ -28,6 +32,10 @@ final double? distance;
 final IndustryEntity? industry;
 final JobCustomerEntity? customer;
 final String? jobInterestStatus;
+final String? jobInterestId;
+final int? jobApplicationsCount;
+final int? possibleApplicantMatchesCount;
+final List<CandidateProfileEntity>? profiles;
 
   const JobEntity({
     required this.title,
@@ -49,10 +57,13 @@ final String? jobInterestStatus;
     required this.id,
     this.distance,
     this.customer,
-    this.jobInterestStatus
+    this.jobInterestStatus,
+    this.jobInterestId,
+    this.profiles,
+    this.possibleApplicantMatchesCount,
+    this.jobApplicationsCount,
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
-    logger.e({"response": response.startDate});
     return JobEntity(
         title: response.title??"",
         startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):DateTime.now(),
@@ -63,6 +74,9 @@ final String? jobInterestStatus;
         status: response.status??"",
         estimatedHours: response.estimatedHours??0,
         jobInterestStatus: response.jobInterestStatus,
+      jobInterestId: response.jobInterestId,
+      jobApplicationsCount: response.jobApplicationsCount,
+      possibleApplicantMatchesCount: response.possibleApplicantMatchesCount,
         lat: response.lat,
         lng: response.lng,
         skills: response.skills?.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList()??[],
@@ -78,6 +92,15 @@ final String? jobInterestStatus;
           profileImage: response.customer!.profileImage,
           address: response.customer!.address,),
       address: response.address??"",
+      profiles: response.applications?.map((jobInterest)=>CandidateProfileEntity(
+          id: jobInterest.applicant.userId,
+          fullName: "${jobInterest.applicant.firstName} ${jobInterest.applicant.surname}",
+          jobTitle: jobInterest.applicant.jobTitle,
+          hourlyRate: jobInterest.applicant.hourlyRate,
+          rating: jobInterest.applicant.averageRating,
+          profilePicture: jobInterest.applicant.profileImage,
+          jobInterestId: jobInterest.jobInterestId
+      )).toList() ?? [],
 
     );
   }
@@ -120,6 +143,7 @@ JobEntity copyWith({
   double? distance,
   IndustryEntity? industry,
   JobCustomerEntity? customer,
+  List<CandidateProfileEntity>? profiles,
 }) {
   return JobEntity(
     title: title ?? this.title,
@@ -141,6 +165,7 @@ JobEntity copyWith({
     distance: distance ?? this.distance,
     industry: industry ?? this.industry,
     customer: customer ?? this.customer,
+    profiles: profiles ?? this.profiles,
   );
 }
 @override
@@ -164,6 +189,7 @@ String toString() {
       'id: $id, '
       'distance: $distance, '
       'industry: $industry, '
+      'profiles: $profiles, '
       'customer: $customer)';
 }
   @override

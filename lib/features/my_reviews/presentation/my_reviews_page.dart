@@ -100,7 +100,7 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
                         ),
                       )),
                       if(getBloc().isMyProfile)PrimaryButton.fullWidth(
-                        onPressed: ()=>context.router.push(RequestAReviewRoute()),
+                        onPressed: ()=>context.router.push(const RequestAReviewRoute()),
                         child: Text(getLocalization().requestAReview),
                       ),
                       16.height
@@ -152,7 +152,7 @@ class _MyReviewsPageState extends BasePageState<MyReviewsPage, MyReviewsPageBloc
       title: Text(getBloc().isMyProfile?getLocalization().myReviews:getLocalization().reviews),
       actions: getBloc().isMyProfile?[
         TertiaryButton(
-          onPressed: (){},
+          onPressed: ()=>context.router.push(const RequestAReviewRoute()),
           child: Text(getLocalization().requestAReview),)
       ]:null
     );

@@ -8,7 +8,12 @@ class SeeAllClickedEvent extends CandidateProfilePageEvent{
 }
 class CandidateProfilePageEnteredEvent extends CandidateProfilePageEvent{
   final CandidateProfileEntity candidateProfile;
-  CandidateProfilePageEnteredEvent({required this.candidateProfile});
+  final String? jobInterestId;
+  CandidateProfilePageEnteredEvent({required this.candidateProfile, this.jobInterestId});
+}
+class RespondToJobInterestEvent extends CandidateProfilePageEvent{
+  final String status;
+  RespondToJobInterestEvent({required this.status});
 }
 
 class SelectedTabChangedEvent extends CandidateProfilePageEvent{

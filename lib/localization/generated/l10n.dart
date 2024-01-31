@@ -2360,10 +2360,10 @@ class AppLocalizations {
     );
   }
 
-  /// `You've declined the reschedule request. you can still propose and alternative date and time.`
+  /// `You,ve declined the reschedule request. You can still propose an alternative date & time`
   String get youveDeclinedTheRescheduleRequest {
     return Intl.message(
-      'You\'ve declined the reschedule request. you can still propose and alternative date and time.',
+      'You,ve declined the reschedule request. You can still propose an alternative date & time',
       name: 'youveDeclinedTheRescheduleRequest',
       desc: '',
       args: [],
@@ -3245,6 +3245,46 @@ class AppLocalizations {
     return Intl.message(
       'You\'ve approved the reschedule request and it has updated in your calender.',
       name: 'youveApprovedTheRescheduleRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need support with PickMe? Reach out to our Help Center for assistance.`
+  String get needSupporWithPickme {
+    return Intl.message(
+      'Need support with PickMe? Reach out to our Help Center for assistance.',
+      name: 'needSupporWithPickme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Applications`
+  String get applications {
+    return Intl.message(
+      'Applications',
+      name: 'applications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You found someone for the job!`
+  String get youFoundSomeoneForTheJob {
+    return Intl.message(
+      'You found someone for the job!',
+      name: 'youFoundSomeoneForTheJob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keep tabs on this job in 'My Bookings'.`
+  String get keepTabsOnThisJobInMyBookings {
+    return Intl.message(
+      'Keep tabs on this job in \'My Bookings\'.',
+      name: 'keepTabsOnThisJobInMyBookings',
       desc: '',
       args: [],
     );

@@ -13,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/default_values.dart';
+import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/job_applicant_entity.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_client_widget.dart';
@@ -20,7 +22,7 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'bloc/job_details_bloc.dart';
-enum PageMode { booking, searching, jobRequest}
+enum PageMode { booking, searching, jobRequest, hiring}
 @RoutePage()
 class JobDetailsPage extends BasePage {
   final int? fromIndex ;
@@ -100,12 +102,13 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                    ):AppTabBar(
                      viewHeight:1500,
                      tabs: <Widget>[
-                       Text(getLocalization().client, style: theme.textTheme.bodySmall,),
+                       if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
                        Text(getLocalization().description, style: theme.textTheme.bodySmall,),
+                       if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
                        // if(getBloc().currentUserId == getBloc().jobEntity!.customer.id)
                      ],
                      views:  <Widget>[
-                       Column(
+                       if(widget.pageMode != PageMode.hiring) Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
                            WClientWidget(
@@ -124,7 +127,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            wText(getBloc().jobEntity!.description,),
                            20.height,
-                           widget.fromIndex == 0 ?
+                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null || getBloc().jobEntity!.jobInterestStatus!="applied")?
                            PrimaryButton.fullWidth(
                              onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
                                if(getBloc().jobEntity?.startDate == null){
@@ -210,28 +213,27 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                  child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
                                )
                              ],
-                           ):widget.fromIndex == 2?
-                           SecondaryButtonDark(
-                               width: MediaQuery.sizeOf(context).width,
-                               style: ButtonStyle(
-                                   side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                     return BorderSide(
-                                       color: theme.colorScheme.secondary,
-                                       width: 2,
-                                     );
-                                   }
+                           ):const SizedBox(),
+                           getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
+                             padding: const EdgeInsets.all(16.0),
+                             child: Row(
+                               children: [
+                                 Expanded(
+                                   child: SecondaryButtonDark(
+                                       child: Text(getLocalization().decline),
+                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
                                    ),
-                                   backgroundColor: MaterialStateProperty.resolveWith(
-                                           (Set<MaterialState> states){
-                                         return Colors.white;
-                                       }
-                                   )
-                               ),
-                               onPressed:() {
-                                 context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
-
-                               },
-                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
+                                 ),
+                                 16.width,
+                                 Expanded(
+                                   child: PrimaryButtonDark(
+                                       child: Text(getLocalization().accept),
+                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                                   ),
+                                 ),
+                               ],
+                             ),
+                           ):SizedBox()
                          ],
                        ),
                        ListView(
@@ -309,24 +311,9 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            const AppDivider(),
                            20.height,
-                           widget.fromIndex == 0 ?
-                           PrimaryButton(
-                             width: MediaQuery.sizeOf(context).width,
-                             style: ButtonStyle(
-                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                   return BorderSide(
-                                     color: theme.colorScheme.primary,
-                                     width: 2,
-                                   );
-                                 }
-                                 ),
-                                 backgroundColor: MaterialStateProperty.resolveWith(
-                                         (Set<MaterialState> states){
-                                       return theme.colorScheme.primary;
-                                     }
-                                 )
-                             ),
-                             onPressed:() {
+                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null || getBloc().jobEntity!.jobInterestStatus!="applied")?
+                           PrimaryButton.fullWidth(
+                             onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
                                if(getBloc().jobEntity?.startDate == null){
                                  context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
                                }else{
@@ -336,22 +323,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              child: Text(getLocalization().apply),
                            ):
                            widget.fromIndex == 1?
-                           SecondaryButtonDark(
-                             width: MediaQuery.sizeOf(context).width,
-                             style: ButtonStyle(
-                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                   return BorderSide(
-                                     color: theme.colorScheme.secondary,
-                                     width: 2,
-                                   );
-                                 }
-                                 ),
-                                 backgroundColor: MaterialStateProperty.resolveWith(
-                                         (Set<MaterialState> states){
-                                       return theme.colorScheme.secondary;
-                                     }
-                                 )
-                             ),
+                           SecondaryButtonDark.fullWidth(
                              onPressed:() {
                                if(getBloc().jobEntity?.startDate == null){
                                  context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
@@ -381,9 +353,49 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                  context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
 
                                },
-                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)): const SizedBox()
+                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
+                           getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
+                             padding: const EdgeInsets.all(16.0),
+                             child: Row(
+                               children: [
+                                 Expanded(
+                                   child: SecondaryButtonDark(
+                                       child: Text(getLocalization().decline),
+                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                                   ),
+                                 ),
+                                 16.width,
+                                 Expanded(
+                                   child: PrimaryButtonDark(
+                                       child: Text(getLocalization().accept),
+                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                                   ),
+                                 ),
+                               ],
+                             ),
+                           ):SizedBox()
                          ],
-                       )
+                       ),
+                       if(widget.pageMode == PageMode.hiring)ListView.builder(
+                           physics: const NeverScrollableScrollPhysics(),
+                           shrinkWrap: true,
+                           itemCount: getBloc().jobEntity!.profiles?.length??0,
+                           itemBuilder: (context, index){
+                             CandidateProfileEntity candidate = getBloc().jobEntity!.profiles![index];
+                             return AppCandidateProfile(
+                               fullName: candidate.fullName??"",
+                               jobTitle: getBloc().jobEntity!.title,
+                               rating: candidate.rating??0,
+                               hourlyRate: "R${candidate.hourlyRate}p/h",
+                               image: (candidate.profilePicture!=null)?
+                               CachedNetworkImageProvider(
+                                   candidate.profilePicture!
+                               ):null,
+                               viewProfileFunction: (){
+                                 context.router.push(CandidateProfileRoute(candidateProfile: candidate, jobInterestId: getBloc().jobEntity!.profiles![index].jobInterestId)).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
+                               },
+                             );
+                           }),
                      ], onTap: (int index) {  },
                    ),
 

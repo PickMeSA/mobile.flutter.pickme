@@ -12,3 +12,8 @@ class CandidateProfileStatePageInitial extends CandidateProfilePageState {
 class CandidateProfilePageEnteredState extends CandidateProfilePageState {
   CandidateProfilePageEnteredState();
 }
+
+class RespondToJobInterestState extends CandidateProfilePageState {
+  String? error;
+  RespondToJobInterestState({this.error});
+}

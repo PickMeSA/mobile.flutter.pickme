@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Application sent"),
         "applicationSenttext": MessageLookupByLibrary.simpleMessage(
             "We\'ve seen your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\""),
+        "applications": MessageLookupByLibrary.simpleMessage("Applications"),
         "applied": MessageLookupByLibrary.simpleMessage("Applied"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
@@ -246,6 +247,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "jobName": MessageLookupByLibrary.simpleMessage("Job name"),
         "jobs": MessageLookupByLibrary.simpleMessage("Jobs"),
         "jobsNearMe": MessageLookupByLibrary.simpleMessage("Jobs near me"),
+        "keepTabsOnThisJobInMyBookings": MessageLookupByLibrary.simpleMessage(
+            "Keep tabs on this job in \'My Bookings\'."),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
@@ -293,6 +296,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Name *"),
         "needAnAmbulance":
             MessageLookupByLibrary.simpleMessage("Need an \nambulance?"),
+        "needSupporWithPickme": MessageLookupByLibrary.simpleMessage(
+            "Need support with PickMe? Reach out to our Help Center for assistance."),
         "needToCancelYourBooking": MessageLookupByLibrary.simpleMessage(
             "Need to cancel your booking? Fill in the cancellation form and we\'ll inform your client."),
         "needToRescheduleSelectAnAlternativeDate":
@@ -549,6 +554,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have any active listings"),
         "youDontHaveAnyReviewsYet": MessageLookupByLibrary.simpleMessage(
             "You don’t have any reviews yet"),
+        "youFoundSomeoneForTheJob": MessageLookupByLibrary.simpleMessage(
+            "You found someone for the job!"),
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
                 "You have the flexibility to set your own hourly rate"),
@@ -575,6 +582,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "You\'ve declined the Alternative request."),
         "youveDeclinedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
-            "You\'ve declined the reschedule request. you can still propose and alternative date and time.")
+            "You,ve declined the reschedule request. You can still propose an alternative date & time")
       };
 }
