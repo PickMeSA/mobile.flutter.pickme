@@ -5,6 +5,7 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/job_details/domain/use_cases/job_details_usecase/get_full_job_details_usecase.dart';
+import 'package:pickme/features/job_details/domain/use_cases/job_details_usecase/toggle_job_status_usecase.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/usecases/apply_for_job_usecase.dart';
 import 'package:pickme/shared/domain/usecases/respond_to_job_interest_use_case.dart';
@@ -24,10 +25,15 @@ class JobDetailsBloc
     final GetJobFullDetailsUseCase getJobFullDetailsUseCase;
     final ApplyForJobUseCase applyForJobEvent;
     RespondToJobInterestUseCase respondToJobInterestUseCase;
-    JobDetailsBloc({required this.getJobFullDetailsUseCase, required this.respondToJobInterestUseCase, required this.applyForJobEvent}): super(JobDetailsPageInitState()) {
+    ToggleJobStatusUseCase toggleJobStatusUseCase;
+    JobDetailsBloc({required this.getJobFullDetailsUseCase,
+        required this.respondToJobInterestUseCase,
+        required this.applyForJobEvent,
+        required this.toggleJobStatusUseCase}): super(JobDetailsPageInitState()) {
         on<RespondToJobInterestEvent>((event, emit) => _onRespondToJobInterestEvent(event, emit));
         on<GetFullJobDetailsEvent>((event, emit)=> _onGetFullJobDetailsEvents(event, emit));
         on<ApplyForJobEvent>((event, emit)=> _onApplyForJobEvent(event, emit));
+        on<UpdateJobPublishedStatusEvent>((event, emit)=> _onUpdateJobPublishedStatusEvent(event, emit));
     }
 
     Future<void> _onGetFullJobDetailsEvents( GetFullJobDetailsEvent event,
@@ -74,6 +80,19 @@ class JobDetailsBloc
             emit(RespondToJobInterestState()..dataState=DataState.success);
         }catch(ex){
             emit(RespondToJobInterestState(error: ex.toString())..dataState=DataState.error);
+        }
+    }
+    _onUpdateJobPublishedStatusEvent(UpdateJobPublishedStatusEvent event,
+        Emitter<JobDetailsPageState> emit) async{
+
+        emit(UpdateJobPublishedStatusState()..dataState=DataState.loading);
+        try{
+            await toggleJobStatusUseCase.call(
+                params: ToggleJobStatusUseCaseParams(status: jobEntity!.status=="active"?"inactive":"active", jobId: jobEntity!.id)
+            );
+            emit(UpdateJobPublishedStatusState()..dataState=DataState.success);
+        }catch(ex){
+            emit(UpdateJobPublishedStatusState(error: ex.toString())..dataState=DataState.error);
         }
     }
 } 

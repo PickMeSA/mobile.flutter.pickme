@@ -118,24 +118,32 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                  ),
                  30.height,
                  InkWell(
-                   onTap: ()=> context.router.push(MyWalletRoute()),
+                   onTap: ()=> context.router.push(const MyWalletRoute()),
                    child: ListTile(
-                     leading: Icon(Iconsax.wallet_1),
+                     leading: const Icon(Iconsax.wallet_1),
                      title: wText(getLocalization().myWallet),
-                     trailing: Icon(Icons.arrow_forward_ios),
+                     trailing: const Icon(Icons.arrow_forward_ios),
                    ),
                  ),
-                 AppDivider(),
                  ListTile(
-                   leading: Icon(Iconsax.call),
+                   leading: const Icon(Iconsax.call),
                    title: wText(getLocalization().contactUs),
-                   trailing: Icon(Icons.arrow_forward_ios),
+                   trailing: const Icon(Icons.arrow_forward_ios),
                    onTap: (){
                      context.router.pop().then((value) => context.router.push(ContactRoute()));
                    },
                  ),
-                 
-                 Spacer(),
+                 const AppDivider(),
+                 ListTile(
+                   leading: const Icon(Iconsax.star_1),
+                   title: wText(getLocalization().reviewUser),
+                   trailing: const Icon(Icons.arrow_forward_ios),
+                   onTap: (){
+                     context.router.pop().then((value) => context.router.push(const ScanQrCodeRoute()));
+                   },
+                 ),
+
+                 const Spacer(),
 
                  Row(
                    children: [
@@ -156,7 +164,7 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                              )
                          ),
                          onPressed:() {
-                           context.router.pushAndPopUntil(LandingRoute(),
+                           context.router.pushAndPopUntil(const LandingRoute(),
                            predicate: (Route<dynamic> route) => false);
         },
                          child: Text(getLocalization().logOut),

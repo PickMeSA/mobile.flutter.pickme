@@ -8,4 +8,5 @@ abstract class JobService extends PickMeCoreApi{
 
   Future<List<JobEntity>> getJobsInArea({required LatLongEntity latLongEntity});
   Future<bool> removePotentialMatches({required String jobId, required String commaSeparatedIds});
+  Future<bool> updateJobStatus({required String jobId, required String status});
 }

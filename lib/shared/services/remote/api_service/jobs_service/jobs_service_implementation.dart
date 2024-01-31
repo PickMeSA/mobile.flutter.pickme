@@ -15,6 +15,7 @@ class JobServiceImplementation extends JobService{
   final ApiService apiService;
 
   JobServiceImplementation({required this.apiService});
+
   @override
   Future<JobEntity> getJobFullDetails({required String jobid}) async{
   try{
@@ -25,13 +26,26 @@ class JobServiceImplementation extends JobService{
     rethrow;
   }
   }
+
   @override
   Future<bool> removePotentialMatches({required String jobId, required String commaSeparatedIds}) async{
     try{
     Response<dynamic> response = await apiService.put("$baseUrl$version/jobs/$jobId", data: {
       "potentialMatchesRemoved": commaSeparatedIds
     });
-    MyJobListingsJobModelResponse jobsModelResponse = MyJobListingsJobModelResponse.fromJson(response.data);
+
+    return response.statusCode==200 || response.statusCode==201;
+  }catch(ex){
+    rethrow;
+  }
+  }
+
+  @override
+  Future<bool> updateJobStatus({required String jobId, required String status}) async{
+    try{
+    Response<dynamic> response = await apiService.put("$baseUrl$version/jobs/$jobId", data: {
+      "status": status
+    });
     return response.statusCode==200 || response.statusCode==201;
   }catch(ex){
     rethrow;

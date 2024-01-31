@@ -22,7 +22,7 @@ import 'bloc/review_a_user_bloc.dart';
 
 @RoutePage()
 class ReviewAUserPage extends BasePage {
-  const ReviewAUserPage({super.key, this.userId = "tzondoD4WSQQkDVr0MoZviGOr9I3"});
+  const ReviewAUserPage({super.key, required this.userId});
   final String userId;
 
   @override

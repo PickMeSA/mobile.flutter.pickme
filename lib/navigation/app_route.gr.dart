@@ -629,8 +629,7 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ReviewAUserRoute.name: (routeData) {
-      final args = routeData.argsAs<ReviewAUserRouteArgs>(
-          orElse: () => const ReviewAUserRouteArgs());
+      final args = routeData.argsAs<ReviewAUserRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: ReviewAUserPage(
@@ -648,6 +647,12 @@ abstract class _$AppRouter extends RootStackRouter {
           jobEntity: args.jobEntity,
           profile: args.profile,
         ),
+      );
+    },
+    ScanQrCodeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ScanQrCodePage(),
       );
     },
     SelectExistingJobRoute.name: (routeData) {
@@ -2771,7 +2776,7 @@ class ReusableNotificationRouteArgs {
 class ReviewAUserRoute extends PageRouteInfo<ReviewAUserRouteArgs> {
   ReviewAUserRoute({
     Key? key,
-    String userId = "tzondoD4WSQQkDVr0MoZviGOr9I3",
+    required String userId,
     List<PageRouteInfo>? children,
   }) : super(
           ReviewAUserRoute.name,
@@ -2791,7 +2796,7 @@ class ReviewAUserRoute extends PageRouteInfo<ReviewAUserRouteArgs> {
 class ReviewAUserRouteArgs {
   const ReviewAUserRouteArgs({
     this.key,
-    this.userId = "tzondoD4WSQQkDVr0MoZviGOr9I3",
+    required this.userId,
   });
 
   final Key? key;
@@ -2846,6 +2851,20 @@ class ReviewJobListingInfoRouteArgs {
   String toString() {
     return 'ReviewJobListingInfoRouteArgs{key: $key, jobEntity: $jobEntity, profile: $profile}';
   }
+}
+
+/// generated route for
+/// [ScanQrCodePage]
+class ScanQrCodeRoute extends PageRouteInfo<void> {
+  const ScanQrCodeRoute({List<PageRouteInfo>? children})
+      : super(
+          ScanQrCodeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ScanQrCodeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

@@ -336,5 +336,7 @@
   "youreBookedForTheJob": "You're booked for the job!",
   "youCanKeepTrackOfThisJobInMyBookings": "You can keep track of this job in 'My Bookings'.",
   "matchingProfiles": "Matching profiles",
-  "removeMatch": "Remove match"
+  "removeMatch": "Remove match",
+  "reviewUser": "Review user",
+  "unpublishListing": "Unpublish listing"
 }

@@ -3429,6 +3429,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Review user`
+  String get reviewUser {
+    return Intl.message(
+      'Review user',
+      name: 'reviewUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unpublish listing`
+  String get unpublishListing {
+    return Intl.message(
+      'Unpublish listing',
+      name: 'unpublishListing',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
