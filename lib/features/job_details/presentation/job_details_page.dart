@@ -279,7 +279,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            ListView.builder(
                                shrinkWrap: true,
                                physics: const NeverScrollableScrollPhysics(),
-                               itemCount: getBloc().jobEntity!.images.split(",").length??0,
+                               itemCount: getBloc().jobEntity!.images.isEmpty?0:getBloc().jobEntity!.images.split(",").length??0,
                                itemBuilder: (context, index){
                                  List<String> files = getBloc().jobEntity!.images.split(",")??[];
                                  return files == null && files.isEmpty && index != 0 && !index.isOdd ?

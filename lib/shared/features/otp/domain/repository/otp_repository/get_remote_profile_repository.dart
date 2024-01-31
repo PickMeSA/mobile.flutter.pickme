@@ -3,4 +3,7 @@ import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 
 abstract class GetRemoteProfileRepository  extends BaseRepository<GetRemoteProfileRepositoryParams, ProfileEntity>{}
 
-class GetRemoteProfileRepositoryParams extends BaseRepositoryParams{}
+class GetRemoteProfileRepositoryParams extends BaseRepositoryParams{
+  final String? id;
+  GetRemoteProfileRepositoryParams({this.id});
+}

@@ -631,6 +631,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: ReviewJobListingInfoPage(
           key: args.key,
           jobEntity: args.jobEntity,
+          profile: args.profile,
         ),
       );
     },
@@ -2731,12 +2732,14 @@ class ReviewJobListingInfoRoute
   ReviewJobListingInfoRoute({
     Key? key,
     required CreateJobPageJobEntity jobEntity,
+    required ProfileEntity profile,
     List<PageRouteInfo>? children,
   }) : super(
           ReviewJobListingInfoRoute.name,
           args: ReviewJobListingInfoRouteArgs(
             key: key,
             jobEntity: jobEntity,
+            profile: profile,
           ),
           initialChildren: children,
         );
@@ -2751,15 +2754,18 @@ class ReviewJobListingInfoRouteArgs {
   const ReviewJobListingInfoRouteArgs({
     this.key,
     required this.jobEntity,
+    required this.profile,
   });
 
   final Key? key;
 
   final CreateJobPageJobEntity jobEntity;
 
+  final ProfileEntity profile;
+
   @override
   String toString() {
-    return 'ReviewJobListingInfoRouteArgs{key: $key, jobEntity: $jobEntity}';
+    return 'ReviewJobListingInfoRouteArgs{key: $key, jobEntity: $jobEntity, profile: $profile}';
   }
 }
 

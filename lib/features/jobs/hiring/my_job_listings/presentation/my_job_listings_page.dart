@@ -69,7 +69,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                   icon: const Icon(Iconsax.add),
                   showNextIcon: false,
                   title: getLocalization().createANewJobListing,
-                  onClick: () => context.router.push(const CreateJobListingInfoRoute()),
+                  onClick: () => context.router.push(const CreateJobListingInfoRoute()).then((value) => getBloc().add(MyJobListingsPageEnteredEvent(jobListingsPageEntity: widget.jobListingsPageEntity))),
                 ),
                 24.height,
                 AppTabBar(
