@@ -3419,6 +3419,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Remove match`
+  String get removeMatch {
+    return Intl.message(
+      'Remove match',
+      name: 'removeMatch',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

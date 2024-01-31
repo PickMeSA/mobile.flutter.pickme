@@ -447,7 +447,11 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    candidate.profilePicture!
                                ):null,
                                viewProfileFunction: (){
-                                 context.router.push(CandidateProfileRoute(candidateProfile: candidate, jobInterestId: getBloc().jobEntity!.matches![index].jobInterestId)).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
+                                 context.router.push(CandidateProfileRoute(
+                                     candidateProfile: candidate,
+                                     job: getBloc().jobEntity,
+                                     jobInterestId: getBloc().jobEntity!.matches![index].jobInterestId
+                                 )).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
                                },
                              );
                            }),

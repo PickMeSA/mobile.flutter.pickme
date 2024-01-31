@@ -46,6 +46,7 @@ _$MyJobListingsJobModelResponseImpl
           potentialMatches: (json['potentialMatches'] as List<dynamic>?)
               ?.map((e) => JobInterestModel.fromJson(e as Map<String, dynamic>))
               .toList(),
+          potentialMatchesRemoved: json['potentialMatchesRemoved'] as String?,
         );
 
 Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
@@ -74,6 +75,7 @@ Map<String, dynamic> _$$MyJobListingsJobModelResponseImplToJson(
       'possibleApplicantMatchesCount': instance.possibleApplicantMatchesCount,
       'applications': instance.applications,
       'potentialMatches': instance.potentialMatches,
+      'potentialMatchesRemoved': instance.potentialMatchesRemoved,
     };
 
 _$JobInterestModelImpl _$$JobInterestModelImplFromJson(

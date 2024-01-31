@@ -429,6 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Recommended for you"),
         "registrationFee":
             MessageLookupByLibrary.simpleMessage("Registration fee"),
+        "removeMatch": MessageLookupByLibrary.simpleMessage("Remove match"),
         "requestAReview":
             MessageLookupByLibrary.simpleMessage("Request a review"),
         "requestAccepted":

@@ -25,6 +25,18 @@ class JobServiceImplementation extends JobService{
     rethrow;
   }
   }
+  @override
+  Future<bool> removePotentialMatches({required String jobId, required String commaSeparatedIds}) async{
+    try{
+    Response<dynamic> response = await apiService.put("$baseUrl$version/jobs/$jobId", data: {
+      "potentialMatchesRemoved": commaSeparatedIds
+    });
+    MyJobListingsJobModelResponse jobsModelResponse = MyJobListingsJobModelResponse.fromJson(response.data);
+    return response.statusCode==200 || response.statusCode==201;
+  }catch(ex){
+    rethrow;
+  }
+  }
 
   @override
   Future<List<JobEntity>> getJobsInArea({required LatLongEntity latLongEntity}) async {

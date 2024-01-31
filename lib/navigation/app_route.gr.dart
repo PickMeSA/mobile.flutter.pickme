@@ -181,6 +181,8 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           candidateProfile: args.candidateProfile,
           jobInterestId: args.jobInterestId,
+          job: args.job,
+          isMatch: args.isMatch,
         ),
       );
     },
@@ -1210,6 +1212,8 @@ class CandidateProfileRoute extends PageRouteInfo<CandidateProfileRouteArgs> {
     Key? key,
     required CandidateProfileEntity candidateProfile,
     String? jobInterestId,
+    JobEntity? job,
+    bool isMatch = false,
     List<PageRouteInfo>? children,
   }) : super(
           CandidateProfileRoute.name,
@@ -1217,6 +1221,8 @@ class CandidateProfileRoute extends PageRouteInfo<CandidateProfileRouteArgs> {
             key: key,
             candidateProfile: candidateProfile,
             jobInterestId: jobInterestId,
+            job: job,
+            isMatch: isMatch,
           ),
           initialChildren: children,
         );
@@ -1232,6 +1238,8 @@ class CandidateProfileRouteArgs {
     this.key,
     required this.candidateProfile,
     this.jobInterestId,
+    this.job,
+    this.isMatch = false,
   });
 
   final Key? key;
@@ -1240,9 +1248,13 @@ class CandidateProfileRouteArgs {
 
   final String? jobInterestId;
 
+  final JobEntity? job;
+
+  final bool isMatch;
+
   @override
   String toString() {
-    return 'CandidateProfileRouteArgs{key: $key, candidateProfile: $candidateProfile, jobInterestId: $jobInterestId}';
+    return 'CandidateProfileRouteArgs{key: $key, candidateProfile: $candidateProfile, jobInterestId: $jobInterestId, job: $job, isMatch: $isMatch}';
   }
 }
 

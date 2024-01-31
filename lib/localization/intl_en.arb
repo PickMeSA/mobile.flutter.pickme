@@ -335,5 +335,6 @@
   "switchingYourProfileFromWorkerToHire" : "Switching your profile from 'Working' to 'Hiring'. Confirm your choice?",
   "youreBookedForTheJob": "You're booked for the job!",
   "youCanKeepTrackOfThisJobInMyBookings": "You can keep track of this job in 'My Bookings'.",
-  "matchingProfiles": "Matching profiles"
+  "matchingProfiles": "Matching profiles",
+  "removeMatch": "Remove match"
 }

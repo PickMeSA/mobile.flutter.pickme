@@ -37,6 +37,7 @@ final int? jobApplicationsCount;
 final int? possibleApplicantMatchesCount;
 final List<CandidateProfileEntity>? profiles;
 final List<CandidateProfileEntity>? matches;
+final String? potentialMatchesRemoved;
 
   const JobEntity({
     required this.title,
@@ -64,6 +65,7 @@ final List<CandidateProfileEntity>? matches;
     this.matches,
     this.possibleApplicantMatchesCount,
     this.jobApplicationsCount,
+    this.potentialMatchesRemoved,
   });
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     return JobEntity(
@@ -79,6 +81,7 @@ final List<CandidateProfileEntity>? matches;
       jobInterestId: response.jobInterestId,
       jobApplicationsCount: response.jobApplicationsCount,
       possibleApplicantMatchesCount: response.possibleApplicantMatchesCount,
+      potentialMatchesRemoved: response.potentialMatchesRemoved,
         lat: response.lat,
         lng: response.lng,
         skills: response.skills?.map((e) => SkillEntity(skill: e.skill, id: e.id)).toList()??[],

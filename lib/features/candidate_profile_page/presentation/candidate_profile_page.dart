@@ -20,13 +20,21 @@ import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/domain/entities/job_entity.dart';
 import 'bloc/candidate_profile_page_bloc.dart';
 
 @RoutePage<bool?>()
 class CandidateProfilePage extends BasePage {
-  const CandidateProfilePage({super.key, required this.candidateProfile, this.jobInterestId});
+  const CandidateProfilePage({super.key,
+    required this.candidateProfile,
+    this.jobInterestId,
+    this.job,
+    this.isMatch = false
+  }): assert(!isMatch || (isMatch && job!=null));
   final CandidateProfileEntity candidateProfile;
   final String? jobInterestId;
+  final JobEntity? job;
+  final bool isMatch;
 
   @override
   State<CandidateProfilePage> createState() => _CandidateProfilePageState();
@@ -184,9 +192,22 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     ),
                     child: widget.jobInterestId==null?Padding(
                       padding: EdgeInsets.all(24),
-                      child: PrimaryButtonDark.fullWidth(
-                          child: Text(getLocalization().offerAJob),
-                          onPressed: () => context.router.push(OfferAJobRoute(candidateProfileEntity: widget.candidateProfile))
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: PrimaryButtonDark.fullWidth(
+                                child: Text(getLocalization().offerAJob),
+                                onPressed: () => context.router.push(OfferAJobRoute(candidateProfileEntity: widget.candidateProfile))
+                            ),
+                          ),
+                          if(widget.isMatch)16.width,
+                          if(widget.isMatch)Expanded(
+                            child: SecondaryButtonDark.fullWidth(
+                                child: Text(getLocalization().removeMatch),
+                                onPressed: () => getBloc().add(RemoveCandidateFromMatchesEvent(userId: widget.candidateProfile.id, job: widget.job!))
+                            ),
+                          ),
+                        ],
                       ),
                     ):Padding(
                       padding: const EdgeInsets.all(16.0),

@@ -34,6 +34,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     int? possibleApplicantMatchesCount,
     List<JobInterestModel>? applications,
     List<JobInterestModel>? potentialMatches,
+    String? potentialMatchesRemoved,
   }) = _MyJobListingsJobModelResponse;
 
   factory MyJobListingsJobModelResponse.fromJson(
