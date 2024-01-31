@@ -181,7 +181,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                  ),
                                  onPressed:() {
                                     context.router.push( RescheduleBookingRoute(
-                                        bookingId: widget.bookingId!.bookingId!));
+                                        bookingId: widget.bookingId!));
                                  },
                                  child: Text(getLocalization().rescheduleBooking, style:  TextStyle(color:
                                  widget.bookingId?.customer?.id == getBloc().currentUserId?

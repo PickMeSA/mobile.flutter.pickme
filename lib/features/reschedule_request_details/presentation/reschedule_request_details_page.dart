@@ -50,6 +50,9 @@ class _RescheduleRequestDetailsPageState extends BasePageState<RescheduleRequest
       listener: (context, state){
         if(state is RescheduleBookingState && state.dataState == DataState.success){
           Navigator.pop(context);
+          context.router.pushAndPopUntil(
+              BottomNavigationBarRoute(profileEntity: getBloc().profileEntity,
+                  initialIndex: 1), predicate: (Route<dynamic> route) => false);
         }
 
         if(state is RescheduleBookingState && state.dataState == DataState.error){
@@ -119,7 +122,7 @@ class _RescheduleRequestDetailsPageState extends BasePageState<RescheduleRequest
                    wText(getLocalization().notSatisfiedWithTheProposedRescheduleDateAndTime),
                    20.height,
                    InkWell(
-                     onTap: ()=> context.router.push(ProposeAlternativeRoute(bookingId: widget.bookingEntity.id)),
+                     onTap: ()=> context.router.push(ProposeAlternativeRoute(bookingId: widget.bookingEntity)),
                      child: Row(
                        children: [
                          wText(getLocalization().proposeAlternative, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
@@ -178,7 +181,11 @@ class _RescheduleRequestDetailsPageState extends BasePageState<RescheduleRequest
                            ),
                            onPressed: () {
                              UserModel userModel = boxUser.get(current);
-                             getBloc().add(RescheduleBookingEvent(rescheduleEntity: RescheduleEntity(
+                             getBloc().add(RescheduleBookingEvent(rescheduleEntity:
+                             RescheduleEntity(
+                               previousStatus: JobStatus.rescheduled ,
+                               proposedAltStartTime: "",
+                                 proposedAltStartDate: "",
                                  status: JobStatus.rescheduled,
                                  comments: widget.bookingEntity.comments,
                                  startTime: widget.bookingEntity.proposedAltStartTime,

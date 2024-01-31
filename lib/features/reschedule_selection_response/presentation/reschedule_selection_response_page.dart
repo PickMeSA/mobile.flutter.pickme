@@ -114,7 +114,7 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                                   )
                               ),
                               onPressed: () {
-                                context.router.push( ProposeAlternativeRoute(bookingId: widget.booking!.id!));
+                                context.router.push( ProposeAlternativeRoute(bookingId: widget.booking!));
                               },
                               child: Text(getLocalization().proposeAlternative, style: TextStyle(color: Colors.white),),
                             ),
@@ -146,12 +146,15 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
 
                                 getBloc().add(RescheduleBookingEvent(rescheduleEntity:
                                 RescheduleEntity(
+                                  previousStatus: widget.booking!.previousStatus,
+                                  proposedAltStartTime: "",
+                                  proposedAltStartDate: "",
                                   startTime: widget.booking?.job.startTime??"",
                                   jobInterestId: widget.booking?.id??"",
                                   reasonForChange: widget.booking?.reasonForChange??"",
                                   startDate: widget.booking!.startDate!,
                                   comments: widget.booking!.comments,
-                                  status: JobStatus.rescheduled,
+                                  status: widget.booking!.previousStatus,
                                   proposerUid: widget.booking!.proposerUid
                                 )));
                               },
@@ -186,12 +189,15 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                           onPressed: () {
                             getBloc().add(RescheduleBookingEvent(rescheduleEntity:
                             RescheduleEntity(
+                              previousStatus: widget.booking!.previousStatus,
+                              proposedAltStartDate: "",
+                                proposedAltStartTime: "",
                                 startTime: widget.booking?.job.startTime??"",
                                 jobInterestId: widget.booking?.id??"",
                                 reasonForChange: widget.booking?.reasonForChange??"",
                                 startDate: widget.booking!.startDate!,
                                 comments: widget.booking!.comments,
-                                status: widget.booking!.status,
+                                status: widget.booking!.previousStatus,
                                 proposerUid: widget.booking!.proposerUid
                             )));
                           },

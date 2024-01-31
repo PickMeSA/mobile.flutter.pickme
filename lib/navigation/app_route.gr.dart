@@ -2392,7 +2392,7 @@ class ProposeAlternativeRoute
     extends PageRouteInfo<ProposeAlternativeRouteArgs> {
   ProposeAlternativeRoute({
     Key? key,
-    required String bookingId,
+    required BookingEntity bookingId,
     List<PageRouteInfo>? children,
   }) : super(
           ProposeAlternativeRoute.name,
@@ -2417,7 +2417,7 @@ class ProposeAlternativeRouteArgs {
 
   final Key? key;
 
-  final String bookingId;
+  final BookingEntity bookingId;
 
   @override
   String toString() {
@@ -2515,7 +2515,7 @@ class RequestAReviewRoute extends PageRouteInfo<void> {
 class RescheduleBookingRoute extends PageRouteInfo<RescheduleBookingRouteArgs> {
   RescheduleBookingRoute({
     Key? key,
-    required String bookingId,
+    required BookingEntity bookingId,
     List<PageRouteInfo>? children,
   }) : super(
           RescheduleBookingRoute.name,
@@ -2540,7 +2540,7 @@ class RescheduleBookingRouteArgs {
 
   final Key? key;
 
-  final String bookingId;
+  final BookingEntity bookingId;
 
   @override
   String toString() {

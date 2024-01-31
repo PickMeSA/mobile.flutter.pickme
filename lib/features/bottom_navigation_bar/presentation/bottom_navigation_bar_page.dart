@@ -6,6 +6,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
+import 'package:pickme/features/jobs_hiring_landing_page/presentation/jobs_hiring_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/presentation/my_bookings_upcoming_page.dart';
 import 'package:pickme/features/profile/presentation/profile_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -58,8 +59,8 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
          return PersistentTabView(
            context,
            controller: _controller,
-           screens: _buildScreens(),
-           items: _navBarsItems(theme: theme),
+           screens: _buildScreens(widget.profileEntity?.type??"hire"),
+           items: _navBarsItems(type: widget.profileEntity?.type??"hire",theme: theme),
            confineInSafeArea: true,
            backgroundColor: Colors.white, // Default is Colors.white.
            handleAndroidBackButtonPress: true, // Default is true.
@@ -98,7 +99,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     return locator<AppLocalizations>();
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems({required ThemeData theme}) {
+  List<PersistentBottomNavBarItem> _navBarsItems({required ThemeData theme, required String type}) {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.home),
@@ -112,12 +113,20 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
+      type == "hire"?
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.briefcase),
+        title: (getLocalization().services),
+        activeColorPrimary: theme.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ):
+      PersistentBottomNavBarItem(
+        icon: const Icon(Iconsax.setting),
         title: (getLocalization().jobs),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
+      )
+      ,
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.profile),
         title: (getLocalization().profile),
@@ -128,11 +137,12 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     ];
   }
 
-  List<Widget> _buildScreens() {
+  List<Widget> _buildScreens(String type) {
     return [
         HomePage(controller: _controller),
         const MyBookingsUpcomingPage(),
-        const JobsLandingPage(),
+        type != "hire"?const JobsLandingPage()
+            : const JobsHiringLandingPage(),
         const ProfilePage()
     ];
   }

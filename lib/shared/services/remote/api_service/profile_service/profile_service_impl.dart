@@ -130,6 +130,12 @@ class ProfileServiceImpl extends ProfileService{
 
   @override
   Future<ProfileEntity> submitFinalDetails({required FinalDetailsEntity finalDetailsEntity})async  {
+
+    print(SubmittedFinalDetailsModelResponse(
+        description: finalDetailsEntity.description,
+        profilePictureId: finalDetailsEntity.profilePicture?.id,
+        policeClearanceId: finalDetailsEntity.policeClearance?.id
+    ).toJson());
     try{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",

@@ -226,7 +226,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title:   wText(getLocalization().jobs),
+      title:   wText(getLocalization().services),
       leading: const Icon(Iconsax.briefcase),
       actions: [
         TextButton(onPressed: ()=> context.router.push(const BurgerMenuRoute()), child: SvgPicture.asset("assets/menu.svg"))
