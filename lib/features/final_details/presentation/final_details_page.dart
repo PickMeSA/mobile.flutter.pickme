@@ -54,7 +54,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
           if(!state.profileEntity!.subscriptionPaid!) {
             context.router.push( PaySomeoneWebViewRoute());
           }else{
-            context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
+            context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }
         }
 
@@ -108,7 +108,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                               left: 1,
                               child: AppImageAvatar(
                                   image: (getBloc().finalDetailsEntity.profilePicture==null)? null:
-                                  CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url),
+                                  CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url!),
                               ),
                             ),
                             if(state is ProfilePictureAddedState && state.dataState == DataState.loading) const Positioned(

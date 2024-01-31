@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/reschedule_booking/domain/entities/RescheduleReasonEntity.dart';
 import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -22,7 +23,7 @@ import 'bloc/reschedule_booking_bloc.dart';
 
 @RoutePage()
 class RescheduleBookingPage extends BasePage {
-  final String bookingId;
+  final BookingEntity bookingId;
   const RescheduleBookingPage({super.key, required this.bookingId});
 
   @override
@@ -65,7 +66,6 @@ class _RescheduleBookingPageState extends BasePageState<RescheduleBookingPage, R
         if(state is RescheduleBookingClickedState && state.dataState == DataState.error){
           Navigator.pop(context);
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
-          context.router.push(const BookingRescheduleSentRoute());
 
         }
 
@@ -138,7 +138,7 @@ class _RescheduleBookingPageState extends BasePageState<RescheduleBookingPage, R
                          controller: commentController,
                          keyboardType: TextInputType.multiline,
                          labelText: getLocalization().otherCommentsOptional,
-                         textFieldType: TextFieldType.USERNAME,
+                         textFieldType: TextFieldType.OTHER,
                          maxLines: 10,maxLength: 2000),
                      30.height,
                      Row(
@@ -198,12 +198,14 @@ class _RescheduleBookingPageState extends BasePageState<RescheduleBookingPage, R
   RescheduleEntity getForm(){
     UserModel userModel = boxUser.get(current);
     return RescheduleEntity(
-
+      previousStatus: widget.bookingId.status,
+        proposedAltStartTime: timeTextController.text,
+        proposedAltStartDate: dateTime.toString() ,
         reasonForChange: reasonTextController.text,
-        startTime: timeTextController.text,
+        startTime: widget.bookingId.startTime!,
         comments: commentController.text,
-        startDate: dateTime.toString(),
-        jobInterestId: widget.bookingId,
+        startDate: widget.bookingId.startDate,
+        jobInterestId: widget.bookingId.id,
         status: JobStatus.requestedReschedule,
         proposerUid: userModel.id );
   }

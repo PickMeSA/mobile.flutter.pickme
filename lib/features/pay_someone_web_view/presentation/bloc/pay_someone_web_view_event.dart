@@ -3,4 +3,8 @@ part of 'pay_someone_web_view_bloc.dart';
 abstract class PaySomeoneWebViewPageEvent extends BaseEvent {}
 
 class MakePaymentEvent extends PaySomeoneWebViewPageEvent{
+
+  BookingEntity? bookingEntity;
+
+  MakePaymentEvent({this.bookingEntity});
 }

@@ -1,6 +1,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -69,7 +70,11 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppImageAvatar.small(),
+                    (getBloc().profileEntity?.pictureEntity?.url=="")?
+                    AppImageAvatar.small():
+                    AppImageAvatar.small(
+                      image: CachedNetworkImageProvider(getBloc().profileEntity!.pictureEntity!.url!),
+                    ),
                     10.width,
                     Expanded(
                       child: SingleChildScrollView(
@@ -107,8 +112,6 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                 wText(getBloc().profileEntity!.industry!.industry!.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
 
                                 wText(getBloc().profileEntity!.location!.address.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
-
-                                  wText(getBloc().profileEntity!.industry?.industry??""),
                                 Row(
                                   children: [
                                     AppStarRating(rating: 3, onChanged: (int index)=>debugPrint("Clicked index: $index"),),

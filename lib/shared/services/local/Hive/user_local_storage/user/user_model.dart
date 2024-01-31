@@ -7,7 +7,11 @@ class UserModel {
   @HiveField(0)
   late String? id;
 
+  @HiveField(1)
+  late String? type;
+
   UserModel({
-    required this.id});
+     this.id,
+     this.type});
 
 }

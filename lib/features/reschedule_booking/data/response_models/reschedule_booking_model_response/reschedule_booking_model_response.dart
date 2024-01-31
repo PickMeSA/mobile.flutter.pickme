@@ -13,6 +13,8 @@ class RescheduleBookingModelResponse with _$RescheduleBookingModelResponse {
     String? status,
     String? reasonForChange,
     String? comments,
+    String? proposedAltStartTime,
+    String? proposedAltStartDate
   }) = _RescheduleBookingModelResponse;
 
   factory RescheduleBookingModelResponse.fromJson(

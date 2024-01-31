@@ -136,7 +136,8 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     BottomNavigationBarRoute.name: (routeData) {
-      final args = routeData.argsAs<BottomNavigationBarRouteArgs>();
+      final args = routeData.argsAs<BottomNavigationBarRouteArgs>(
+          orElse: () => const BottomNavigationBarRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: BottomNavigationBarPage(
@@ -493,9 +494,18 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: PaySomeoneWebViewPage(
+          bookingEntity: args.bookingEntity,
           profileEntity: args.profileEntity,
           key: args.key,
         ),
+      );
+    },
+    PaymentOutcomeRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentOutcomeRouteArgs>(
+          orElse: () => const PaymentOutcomeRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PaymentOutcomePage(key: args.key),
       );
     },
     PendingProfileRoute.name: (routeData) {
@@ -1051,7 +1061,7 @@ class BottomNavigationBarRoute
   BottomNavigationBarRoute({
     int? initialIndex,
     Key? key,
-    required ProfileEntity? profileEntity,
+    ProfileEntity? profileEntity,
     List<PageRouteInfo>? children,
   }) : super(
           BottomNavigationBarRoute.name,
@@ -1073,7 +1083,7 @@ class BottomNavigationBarRouteArgs {
   const BottomNavigationBarRouteArgs({
     this.initialIndex,
     this.key,
-    required this.profileEntity,
+    this.profileEntity,
   });
 
   final int? initialIndex;
@@ -2259,12 +2269,14 @@ class PaySomeoneRoute extends PageRouteInfo<void> {
 /// [PaySomeoneWebViewPage]
 class PaySomeoneWebViewRoute extends PageRouteInfo<PaySomeoneWebViewRouteArgs> {
   PaySomeoneWebViewRoute({
+    BookingEntity? bookingEntity,
     ProfileEntity? profileEntity,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           PaySomeoneWebViewRoute.name,
           args: PaySomeoneWebViewRouteArgs(
+            bookingEntity: bookingEntity,
             profileEntity: profileEntity,
             key: key,
           ),
@@ -2279,9 +2291,12 @@ class PaySomeoneWebViewRoute extends PageRouteInfo<PaySomeoneWebViewRouteArgs> {
 
 class PaySomeoneWebViewRouteArgs {
   const PaySomeoneWebViewRouteArgs({
+    this.bookingEntity,
     this.profileEntity,
     this.key,
   });
+
+  final BookingEntity? bookingEntity;
 
   final ProfileEntity? profileEntity;
 
@@ -2289,7 +2304,36 @@ class PaySomeoneWebViewRouteArgs {
 
   @override
   String toString() {
-    return 'PaySomeoneWebViewRouteArgs{profileEntity: $profileEntity, key: $key}';
+    return 'PaySomeoneWebViewRouteArgs{bookingEntity: $bookingEntity, profileEntity: $profileEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [PaymentOutcomePage]
+class PaymentOutcomeRoute extends PageRouteInfo<PaymentOutcomeRouteArgs> {
+  PaymentOutcomeRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PaymentOutcomeRoute.name,
+          args: PaymentOutcomeRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentOutcomeRoute';
+
+  static const PageInfo<PaymentOutcomeRouteArgs> page =
+      PageInfo<PaymentOutcomeRouteArgs>(name);
+}
+
+class PaymentOutcomeRouteArgs {
+  const PaymentOutcomeRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PaymentOutcomeRouteArgs{key: $key}';
   }
 }
 
@@ -2327,7 +2371,7 @@ class ProposeAlternativeRoute
     extends PageRouteInfo<ProposeAlternativeRouteArgs> {
   ProposeAlternativeRoute({
     Key? key,
-    required String bookingId,
+    required BookingEntity bookingId,
     List<PageRouteInfo>? children,
   }) : super(
           ProposeAlternativeRoute.name,
@@ -2352,7 +2396,7 @@ class ProposeAlternativeRouteArgs {
 
   final Key? key;
 
-  final String bookingId;
+  final BookingEntity bookingId;
 
   @override
   String toString() {
@@ -2450,7 +2494,7 @@ class RequestAReviewRoute extends PageRouteInfo<void> {
 class RescheduleBookingRoute extends PageRouteInfo<RescheduleBookingRouteArgs> {
   RescheduleBookingRoute({
     Key? key,
-    required String bookingId,
+    required BookingEntity bookingId,
     List<PageRouteInfo>? children,
   }) : super(
           RescheduleBookingRoute.name,
@@ -2475,7 +2519,7 @@ class RescheduleBookingRouteArgs {
 
   final Key? key;
 
-  final String bookingId;
+  final BookingEntity bookingId;
 
   @override
   String toString() {

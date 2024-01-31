@@ -105,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "backToJobs": MessageLookupByLibrary.simpleMessage("Back to Jobs"),
         "backToMyWallet":
             MessageLookupByLibrary.simpleMessage("Back to my wallet"),
+        "backToPaySomeone":
+            MessageLookupByLibrary.simpleMessage("Back to pay someone"),
         "bankA": MessageLookupByLibrary.simpleMessage("Bank *"),
         "bankDetails": MessageLookupByLibrary.simpleMessage("Bank details"),
         "bookings": MessageLookupByLibrary.simpleMessage("Bookings"),
@@ -310,6 +312,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noAddressSpecified":
             MessageLookupByLibrary.simpleMessage("No address specified"),
         "noAmount": MessageLookupByLibrary.simpleMessage("0.00"),
+        "noCancel": MessageLookupByLibrary.simpleMessage("No, cancel"),
         "noIndustrySpecified":
             MessageLookupByLibrary.simpleMessage("No industry specified"),
         "noJobDescription":
@@ -488,6 +491,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscriptionFee":
             MessageLookupByLibrary.simpleMessage("Subscription fee"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
+        "switchingProfiles":
+            MessageLookupByLibrary.simpleMessage("Switching profiles"),
+        "switchingYourProfileFromHireToWorking":
+            MessageLookupByLibrary.simpleMessage(
+                "Switching your profile from \'Hiring\' to \'Working\'. Confirm your choice?"),
+        "switchingYourProfileFromWorkerToHire":
+            MessageLookupByLibrary.simpleMessage(
+                "Switching your profile from \'Working\' to \'Hiring\'. Confirm your choice?"),
         "tellUsAboutYourQualifications": MessageLookupByLibrary.simpleMessage(
             "Tell us about your qualifications"),
         "termsAndConditions":
@@ -534,6 +545,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "workingDays": MessageLookupByLibrary.simpleMessage("Working days"),
         "workingDaysA": MessageLookupByLibrary.simpleMessage("Working days *"),
         "workingHours": MessageLookupByLibrary.simpleMessage("Working hours"),
+        "yesSwitch": MessageLookupByLibrary.simpleMessage("Yes, switch"),
         "youAreAllSetup":
             MessageLookupByLibrary.simpleMessage("You\'re all set up!"),
         "youDontHaveAnyActiveListings": MessageLookupByLibrary.simpleMessage(

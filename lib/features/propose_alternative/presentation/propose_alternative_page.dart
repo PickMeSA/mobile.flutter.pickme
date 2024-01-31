@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/reschedule_booking/domain/entities/reschedule_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -22,7 +23,7 @@ import 'bloc/propose_alternative_bloc.dart';
 @RoutePage()
 class ProposeAlternativePage extends BasePage {
 
-  final String bookingId;
+  final BookingEntity bookingId;
   const ProposeAlternativePage({super.key, required this.bookingId});
 
   @override
@@ -155,12 +156,15 @@ class _ProposeAlternativePageState extends BasePageState<ProposeAlternativePage,
                                if(_key.currentState!.validate()){
                                  getBloc().add(RescheduleBookingEvent(
                                      rescheduleEntity: RescheduleEntity(
+                                       previousStatus: widget.bookingId!.status,
+                                       proposedAltStartDate:dateTime.toString(),
+                                         proposedAltStartTime:timeTextController.text ,
                                          comments: commentController.text,
-                                  jobInterestId: widget.bookingId,
+                                  jobInterestId: widget.bookingId.id,
                                   reasonForChange: commentController.text,
                                   status: JobStatus.alternativeProposed,
-                                  startDate: dateTime.toString(),
-                                  startTime: timeTextController.text,
+                                  startDate: widget.bookingId.startDate.toString(),
+                                  startTime: widget.bookingId.startTime!,
                                   proposerUid: userModel.id)));
                                }
                              },

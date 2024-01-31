@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -10,6 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/widgets/w_decision_widget.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
 import 'bloc/burger_menu_bloc.dart';
@@ -25,11 +30,13 @@ class BurgerMenuPage extends BasePage {
 class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc> {
 
   ProfileModel? profileModel;
+  UserModel userModel = UserModel();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    userModel = boxUser.get(current);
     profileModel = boxProfile.get(current);
   }
 
@@ -42,7 +49,25 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<BurgerMenuBloc, BurgerMenuPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+
+        if( state is SetupProfileSubmitProfileTypeState && state.dataState == DataState.success){
+          Navigator.pop(context);
+          context.router.pushAndPopUntil( BottomNavigationBarRoute(initialIndex: 0),
+              predicate: (Route<dynamic> route) => false);
+
+        }
+
+        if( state is SetupProfileSubmitProfileTypeState && state.dataState == DataState.error){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+
+        if( state is SetupProfileSubmitProfileTypeState && state.dataState == DataState.loading){
+          preloader(context);
+
+        }
+      },
       builder: (context, state) {
          return Padding(
            padding: const EdgeInsets.all(20.0),
@@ -66,18 +91,30 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                  30.height,
                  wText(getLocalization().iWouldLikeTo),
                  15.height,
-                 SizedBox(
-                   width: MediaQuery.sizeOf(context).width,
-                   child: ProfileToggle(
-                     onPressed: (int index) {
+
+                 ProfileToggle(
+
+                   onPressed: (int index) {
+
+                     wDecisionWidget(theme: theme, leftButton:
+                     ()=>Navigator.pop(context)
+                     , rightButton: (){
                        getBloc().add(ToggleSelectedEvent(selectedIndex: index));
-                     },
-                     selected: getBloc().selectedToggleButtons,
-                     children: [
-                       Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().work))),
-                       Container(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().hire))),
-                     ],
-                   ),
+                       getBloc().add(SetupProfileSubmitProfileTypeEvent());
+                       }
+                         , leftButtonCaption: getLocalization().noCancel,
+                         rightButtonCaption: getLocalization().yesSwitch,
+                         message: index == 0 ?
+                         getLocalization().switchingYourProfileFromHireToWorking:
+                         getLocalization().switchingYourProfileFromWorkerToHire,
+                         title: getLocalization().switchingProfiles,
+                         context: context);
+                   },
+                   selected: userModel.type == 'work'?[true,false]: [false,true],
+                   children: [
+                     Container(width: (MediaQuery.of(context).size.width - 50)/2, child:  Center(child: Text(getLocalization().work))),
+                     Container(width: (MediaQuery.of(context).size.width - 50)/2, child:  Center(child: Text(getLocalization().hire))),
+                   ],
                  ),
                  30.height,
                  InkWell(

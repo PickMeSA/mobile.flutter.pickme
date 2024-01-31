@@ -11,6 +11,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -51,6 +52,9 @@ class _CancelBookingPageState extends BasePageState<CancelBookingPage, CancelBoo
       listener: (context, state){
         if(state is CancelBookingClickedState && state.dataState == DataState.success){
           Navigator.pop(context);
+          context.router.pushAndPopUntil(
+              BottomNavigationBarRoute(
+                  initialIndex: 1), predicate: (Route<dynamic> route) => false);
         }
         if(state is CancelBookingClickedState && state.dataState == DataState.loading){
           preloader(context);
@@ -128,7 +132,11 @@ class _CancelBookingPageState extends BasePageState<CancelBookingPage, CancelBoo
                             ),
                             onPressed: () {
                               if(_key.currentState!.validate()){
-                                getBloc().add(CancelBookingClickedEvent(rescheduleEntity: RescheduleEntity(
+                                getBloc().add(CancelBookingClickedEvent(rescheduleEntity:
+                                RescheduleEntity(
+                                  previousStatus: JobStatus.cancelled,
+                                  proposedAltStartDate: "",
+                                    proposedAltStartTime: "",
                                     startTime: widget.booking?.job.startTime??"",
                                     jobInterestId: widget.booking?.id??"",
                                     reasonForChange: reasonController.text??"",
