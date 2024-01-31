@@ -80,6 +80,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
           getBloc().preloaderActive = false;
           Navigator.pop(context);
           context.router.push(const ApplicationSentRoute());
+          // if(state)
         }
         //error
         if(state is ApplyForJobState && state.dataState == DataState.error){
@@ -87,8 +88,42 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
           Navigator.pop(context);
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
+        
+        if(state is RespondToJobInterestState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //loading
+        if(state is RespondToJobInterestState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          if(getBloc().accepted){
+            context.router.push(ReusableNotificationRoute(
+                title: getLocalization().youreBookedForTheJob,
+                message: getLocalization().youCanKeepTrackOfThisJobInMyBookings,
+                button: PrimaryButtonDark.fullWidth(
+                    onPressed: ()=>context.router.replace(BottomNavigationBarRoute(initialIndex: 2)),
+                    child: Text(getLocalization().backToJobs)),
+                image: Image.asset("assets/man_and_woman_celebration.png")
+            ));
+          }else{
+            context.router.replace(BottomNavigationBarRoute(initialIndex: 2));
+          }
+
+        }
+        //error
+        if(state is RespondToJobInterestState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
       },
       builder: (context, state) {
+        if(getBloc().jobEntity != null){
+          logger.d(getBloc().jobEntity!.jobInterestStatus);
+        }
          return Padding(
            padding: const EdgeInsets.only(top:0, left: 20.0, right: 20.0, bottom: 20.0),
            child: SizedBox(
@@ -100,11 +135,11 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                    getBloc().jobEntity == null ?Center(
                      child: Text(getLocalization().loadingDotDot),
                    ):AppTabBar(
-                     viewHeight:1500,
                      tabs: <Widget>[
                        if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
                        Text(getLocalization().description, style: theme.textTheme.bodySmall,),
                        if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
+                       if(widget.pageMode == PageMode.hiring)Text("${getLocalization().matchingProfiles} (${getBloc().jobEntity?.matches?.length})", style: theme.textTheme.bodySmall,),
                        // if(getBloc().currentUserId == getBloc().jobEntity!.customer.id)
                      ],
                      views:  <Widget>[
@@ -127,7 +162,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            wText(getBloc().jobEntity!.description,),
                            20.height,
-                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null || getBloc().jobEntity!.jobInterestStatus!="applied")?
+                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null)?
                            PrimaryButton.fullWidth(
                              onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
                                if(getBloc().jobEntity?.startDate == null){
@@ -214,7 +249,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                )
                              ],
                            ):const SizedBox(),
-                           getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
+                           getBloc().jobEntity!.jobInterestStatus=="offered"?Padding(
                              padding: const EdgeInsets.all(16.0),
                              child: Row(
                                children: [
@@ -233,7 +268,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                  ),
                                ],
                              ),
-                           ):SizedBox()
+                           ):const SizedBox()
                          ],
                        ),
                        ListView(
@@ -311,7 +346,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            20.height,
                            const AppDivider(),
                            20.height,
-                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null || getBloc().jobEntity!.jobInterestStatus!="applied")?
+                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null)?
                            PrimaryButton.fullWidth(
                              onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
                                if(getBloc().jobEntity?.startDate == null){
@@ -354,7 +389,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
 
                                },
                                child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
-                           getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
+                           getBloc().jobEntity!.jobInterestStatus=="offered"?Padding(
                              padding: const EdgeInsets.all(16.0),
                              child: Row(
                                children: [
@@ -393,6 +428,26 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                ):null,
                                viewProfileFunction: (){
                                  context.router.push(CandidateProfileRoute(candidateProfile: candidate, jobInterestId: getBloc().jobEntity!.profiles![index].jobInterestId)).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
+                               },
+                             );
+                           }),
+                       if(widget.pageMode == PageMode.hiring)ListView.builder(
+                           physics: const NeverScrollableScrollPhysics(),
+                           shrinkWrap: true,
+                           itemCount: getBloc().jobEntity!.matches?.length??0,
+                           itemBuilder: (context, index){
+                             CandidateProfileEntity candidate = getBloc().jobEntity!.matches![index];
+                             return AppCandidateProfile(
+                               fullName: candidate.fullName??"",
+                               jobTitle: getBloc().jobEntity!.title,
+                               rating: candidate.rating??0,
+                               hourlyRate: "R${candidate.hourlyRate}p/h",
+                               image: (candidate.profilePicture!=null)?
+                               CachedNetworkImageProvider(
+                                   candidate.profilePicture!
+                               ):null,
+                               viewProfileFunction: (){
+                                 context.router.push(CandidateProfileRoute(candidateProfile: candidate, jobInterestId: getBloc().jobEntity!.matches![index].jobInterestId)).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
                                },
                              );
                            }),

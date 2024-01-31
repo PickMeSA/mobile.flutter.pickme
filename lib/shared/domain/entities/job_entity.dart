@@ -36,6 +36,7 @@ final String? jobInterestId;
 final int? jobApplicationsCount;
 final int? possibleApplicantMatchesCount;
 final List<CandidateProfileEntity>? profiles;
+final List<CandidateProfileEntity>? matches;
 
   const JobEntity({
     required this.title,
@@ -60,6 +61,7 @@ final List<CandidateProfileEntity>? profiles;
     this.jobInterestStatus,
     this.jobInterestId,
     this.profiles,
+    this.matches,
     this.possibleApplicantMatchesCount,
     this.jobApplicationsCount,
   });
@@ -93,6 +95,15 @@ final List<CandidateProfileEntity>? profiles;
           address: response.customer!.address,),
       address: response.address??"",
       profiles: response.applications?.map((jobInterest)=>CandidateProfileEntity(
+          id: jobInterest.applicant.userId,
+          fullName: "${jobInterest.applicant.firstName} ${jobInterest.applicant.surname}",
+          jobTitle: jobInterest.applicant.jobTitle,
+          hourlyRate: jobInterest.applicant.hourlyRate,
+          rating: jobInterest.applicant.averageRating,
+          profilePicture: jobInterest.applicant.profileImage,
+          jobInterestId: jobInterest.jobInterestId
+      )).toList() ?? [],
+      matches: response.potentialMatches?.map((jobInterest)=>CandidateProfileEntity(
           id: jobInterest.applicant.userId,
           fullName: "${jobInterest.applicant.firstName} ${jobInterest.applicant.surname}",
           jobTitle: jobInterest.applicant.jobTitle,

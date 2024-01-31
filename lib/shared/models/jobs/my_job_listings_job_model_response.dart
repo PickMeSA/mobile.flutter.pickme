@@ -33,6 +33,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
     int? jobApplicationsCount,
     int? possibleApplicantMatchesCount,
     List<JobInterestModel>? applications,
+    List<JobInterestModel>? potentialMatches,
   }) = _MyJobListingsJobModelResponse;
 
   factory MyJobListingsJobModelResponse.fromJson(
@@ -44,7 +45,7 @@ class MyJobListingsJobModelResponse with _$MyJobListingsJobModelResponse {
 class JobInterestModel with _$JobInterestModel {
   factory JobInterestModel({
     required Applicant applicant,
-    required String jobInterestId,
+    String? jobInterestId,
   }) = _JobInterestModel;
 
   factory JobInterestModel.fromJson(Map<String, dynamic> json) =>

@@ -269,6 +269,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Looking for job opportunities as a single individual?"),
         "loremIpsumDescriptionField": MessageLookupByLibrary.simpleMessage(
             "Ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.\n\n\n"),
+        "matchingProfiles":
+            MessageLookupByLibrary.simpleMessage("Matching profiles"),
         "maxDistance": MessageLookupByLibrary.simpleMessage("Max. distance"),
         "membership": MessageLookupByLibrary.simpleMessage("Membership"),
         "membershipAwardName":

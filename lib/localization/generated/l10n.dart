@@ -3409,6 +3409,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Matching profiles`
+  String get matchingProfiles {
+    return Intl.message(
+      'Matching profiles',
+      name: 'matchingProfiles',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
