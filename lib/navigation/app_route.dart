@@ -53,6 +53,7 @@ import 'package:pickme/features/jobs_hiring_landing_page/presentation/jobs_hirin
 import 'package:pickme/features/jobs_landing_page/presentation/jobs_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/my_reviews/presentation/my_reviews_page.dart';
+import 'package:pickme/features/offer_accepted/presentation/reusable_notification_page.dart';
 import 'package:pickme/features/payment_outcome/presentation/payment_outcome_page.dart';
 import 'package:pickme/features/request_a_review/presentation/request_a_review.dart';
 import 'package:pickme/features/review_a_user/presentation/review_a_user_page.dart';
@@ -95,6 +96,7 @@ import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.d
 import 'package:pickme/features/login/presentation/login_page.dart';
 import 'package:pickme/features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
 
+import '../features/scan_qr_code/presentation/scan_qr_code_page.dart';
 import '../shared/domain/entities/my_job_listings_page_entity.dart';
 
 part 'app_route.gr.dart';
@@ -188,7 +190,11 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: AlternativeRequestResponseRoute.page),
     AnimatedRoute(page: MyReviewsRoute.page),
     AnimatedRoute(page:  CancellationDetailsRoute.page),
-    AnimatedRoute(page: PaymentOutcomeRoute.page)
+    AnimatedRoute(page: PaymentOutcomeRoute.page),
+    AnimatedRoute(page: ReusableNotificationRoute.page),
+    AnimatedRoute(page: ScanQrCodeRoute.page),
+    AnimatedRoute(page: RequestAReviewRoute.page),
+    AnimatedRoute(page: ReviewAUserRoute.page),
 
   ];
 }

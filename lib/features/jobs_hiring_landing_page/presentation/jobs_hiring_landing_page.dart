@@ -42,15 +42,8 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
     var theme = Theme.of(context);
     return BlocConsumer<JobsHiringLandingPageBloc, JobsHiringLandingPageState>(
       listener: (context, state) {
-        if(state is JobsHiringLandingPageInitial && state.dataState == DataState.success){
-        }
-
-        //error
-        if(state is JobsHiringLandingPageInitial && state.dataState == DataState.error){
-          // error dialog
-        }
-
         if(state is GetTopIndustriesState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
           Navigator.of(context, rootNavigator: true).pop();
           wErrorPopUp(message: "An error occurred while fetching your data.", type: getLocalization().error, context: context);
         }
@@ -63,6 +56,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
         }
         //loading
         if(state is GetTopIndustriesState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
           Navigator.of(context, rootNavigator: true).pop();
         }
       },
@@ -202,7 +196,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                             candidate.profilePicture!
                         ):null,
                         viewProfileFunction: (){
-                          context.router.push(CandidateProfileRoute(candidateProfile: candidate));
+                          context.router.push(CandidateProfileRoute(candidateProfile: candidate)).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent()));
                         },
                       );
                     },

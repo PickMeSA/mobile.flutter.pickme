@@ -54,8 +54,8 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
     if(pageSize!=null){
       map += "&pageSize=${pageSize.toString()}";
     }
-    if(maxDistance!=null){
-      map += "&maxDistance=${maxDistance.toString()}";
+    if(true){
+      map += "&maxDistance=10000000";
     }
     if(minHourlyRate!=null){
       map += "&minHourlyRate=${minHourlyRate.toString()}";

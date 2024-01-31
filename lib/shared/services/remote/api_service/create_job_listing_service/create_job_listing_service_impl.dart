@@ -17,34 +17,57 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
 
   @override
   Future<JobEntity> createJob({required CreateJobListingRepositoryParams jobListingRepositoryParams}) async {
-    // try{
-    logger.e({
-      "title": jobListingRepositoryParams.jobEntity.title,
-      "description": jobListingRepositoryParams.jobEntity.description,
-      "status": jobListingRepositoryParams.jobEntity.status,
-      "startDate": jobListingRepositoryParams.jobEntity.startDate!=null?jobListingRepositoryParams.jobEntity.startDate!.toIso8601String():null,
-      "endDate": jobListingRepositoryParams.jobEntity.endDate!=null?jobListingRepositoryParams.jobEntity.endDate!.toIso8601String():null,
-      "startTime": jobListingRepositoryParams.jobEntity.startTime!=null?jobListingRepositoryParams.jobEntity.startTime!:null,
-      "estimatedHours": double.parse(jobListingRepositoryParams.jobEntity.estimatedHours),
-      "distance": 0,
-      "lat": jobListingRepositoryParams.jobEntity.lat==null?null:double.parse(jobListingRepositoryParams.jobEntity.lat!),
-      "lng": jobListingRepositoryParams.jobEntity.lng==null?null:double.parse(jobListingRepositoryParams.jobEntity.lng!),
-      "images": jobListingRepositoryParams.jobEntity.images.join(","),
-      "skills": jobListingRepositoryParams.jobEntity.skills.map((e) => e.id).toList().join(","),
-    });
-      Response<dynamic> response = await apiService.post("$baseUrl$version/jobs", data: {
+    try {
+      logger.e({
         "title": jobListingRepositoryParams.jobEntity.title,
         "description": jobListingRepositoryParams.jobEntity.description,
         "status": jobListingRepositoryParams.jobEntity.status,
-        "startDate": jobListingRepositoryParams.jobEntity.startDate!=null?jobListingRepositoryParams.jobEntity.startDate!.toIso8601String():null,
-        "endDate": jobListingRepositoryParams.jobEntity.endDate!=null?jobListingRepositoryParams.jobEntity.endDate!.toIso8601String():null,
-        "startTime": jobListingRepositoryParams.jobEntity.startTime!=null?jobListingRepositoryParams.jobEntity.startTime!:null,
-        "estimatedHours": double.parse(jobListingRepositoryParams.jobEntity.estimatedHours),
+        "startDate": jobListingRepositoryParams.jobEntity.startDate != null
+            ? jobListingRepositoryParams.jobEntity.startDate!.toIso8601String()
+            : null,
+        "endDate": jobListingRepositoryParams.jobEntity.endDate != null
+            ? jobListingRepositoryParams.jobEntity.endDate!.toIso8601String()
+            : null,
+        "startTime": jobListingRepositoryParams.jobEntity.startTime != null
+            ? jobListingRepositoryParams.jobEntity.startTime!
+            : null,
+        "estimatedHours": double.parse(
+            jobListingRepositoryParams.jobEntity.estimatedHours),
         "distance": 0,
-        "lat": jobListingRepositoryParams.jobEntity.lat==null?null:double.parse(jobListingRepositoryParams.jobEntity.lat!),
-        "lng": jobListingRepositoryParams.jobEntity.lng==null?null:double.parse(jobListingRepositoryParams.jobEntity.lng!),
+        "lat": (jobListingRepositoryParams.jobEntity.lat == null || jobListingRepositoryParams.jobEntity.lat!.isEmpty) ? null : double
+            .parse(jobListingRepositoryParams.jobEntity.lat!),
+        "lng": jobListingRepositoryParams.jobEntity.lng == null || jobListingRepositoryParams.jobEntity.lng!.isEmpty ? null : double
+            .parse(jobListingRepositoryParams.jobEntity.lng!),
         "images": jobListingRepositoryParams.jobEntity.images.join(","),
-        "skills": jobListingRepositoryParams.jobEntity.skills.map((e) => e.id).toList().join(","),
+        "skills": jobListingRepositoryParams.jobEntity.skills.map((e) => e.id)
+            .toList()
+            .join(","),
+      });
+      Response<dynamic> response = await apiService.post(
+          "$baseUrl$version/jobs", data: {
+        "title": jobListingRepositoryParams.jobEntity.title,
+        "description": jobListingRepositoryParams.jobEntity.description,
+        "status": jobListingRepositoryParams.jobEntity.status,
+        "startDate": jobListingRepositoryParams.jobEntity.startDate != null
+            ? jobListingRepositoryParams.jobEntity.startDate!.toIso8601String()
+            : null,
+        "endDate": jobListingRepositoryParams.jobEntity.endDate != null
+            ? jobListingRepositoryParams.jobEntity.endDate!.toIso8601String()
+            : null,
+        "startTime": jobListingRepositoryParams.jobEntity.startTime != null
+            ? jobListingRepositoryParams.jobEntity.startTime!
+            : null,
+        "estimatedHours": double.parse(
+            jobListingRepositoryParams.jobEntity.estimatedHours),
+        "distance": 0,
+        "lat": (jobListingRepositoryParams.jobEntity.lat == null || jobListingRepositoryParams.jobEntity.lat!.isEmpty) ? null : double
+            .parse(jobListingRepositoryParams.jobEntity.lat!),
+        "lng": jobListingRepositoryParams.jobEntity.lng == null || jobListingRepositoryParams.jobEntity.lng!.isEmpty ? null : double
+            .parse(jobListingRepositoryParams.jobEntity.lng!),
+        "images": jobListingRepositoryParams.jobEntity.images.join(","),
+        "skills": jobListingRepositoryParams.jobEntity.skills.map((e) => e.id)
+            .toList()
+            .join(","),
       });
 
       CreateJobListingModelResponse createJobListingModelResponse = CreateJobListingModelResponse.fromJson(response.data);
@@ -62,6 +85,10 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
           skills: jobListingRepositoryParams.jobEntity.skills,
           id: createJobListingModelResponse.id!,
           distance: createJobListingModelResponse.distance);
+    }catch(ex){
+      logger.e(ex);
+      rethrow;
+    }
     // }catch(ex){
     //   rethrow;
     // }

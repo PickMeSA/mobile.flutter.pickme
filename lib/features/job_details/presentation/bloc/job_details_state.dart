@@ -18,3 +18,9 @@ class RespondToJobInterestState extends JobDetailsPageState{
   RespondToJobInterestState({this.error});
 }
 
+
+class UpdateJobPublishedStatusState extends JobDetailsPageState{
+  final String? error;
+  UpdateJobPublishedStatusState({this.error});
+}
+

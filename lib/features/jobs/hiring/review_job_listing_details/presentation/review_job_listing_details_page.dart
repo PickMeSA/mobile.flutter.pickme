@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
@@ -22,8 +23,9 @@ import 'bloc/review_job_listing_details_bloc.dart';
 
 @RoutePage()
 class ReviewJobListingInfoPage extends BasePage {
-  const ReviewJobListingInfoPage({super.key, required this.jobEntity});
+  const ReviewJobListingInfoPage({super.key, required this.jobEntity, required this.profile});
   final CreateJobPageJobEntity jobEntity;
+  final ProfileEntity profile;
 
   @override
   State<ReviewJobListingInfoPage> createState() => _MyJobListingsPageState();
@@ -43,8 +45,7 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
         }
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.success){
           Navigator.pop(context); //Remove loader
-          context.router.popUntilRouteWithName("JobsHiringLandingRoute");
-          context.router.push(MyJobListingsRoute());
+          context.router.popUntilRouteWithName("MyJobListingsRoute");
         }
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.error){
           Navigator.pop(context); //Remove loader
@@ -64,11 +65,11 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
                   elevation: 0,
                   padding: EdgeInsets.zero,
                   jobName: widget.jobEntity.title,
-                    employerName: "Andrew",
+                    employerName: "${widget.profile.firstName} ${widget.profile.surname}",
                     locationName: widget.jobEntity.address,
                     dateTime: widget.jobEntity.startDate,
                     onNext: (){}, estimatedTime: widget.jobEntity.estimatedHours,
-                  rate: "R ${widget.jobEntity.rate}",),
+                  rate: "based on ${widget.jobEntity.estimatedHours} hours",),
                 16.height,
                 const AppDivider(),
                 24.height,

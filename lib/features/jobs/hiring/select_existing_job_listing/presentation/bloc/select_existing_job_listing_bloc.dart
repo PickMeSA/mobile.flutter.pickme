@@ -9,8 +9,9 @@ import 'package:pickme/shared/domain/usecases/send_job_offer_use_case.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 
-import '../../domain/entities/my_job_listings_page_entity.dart';
-import '../../domain/use_cases/get_my_job_listings_usecase.dart';
+import '../../../../../../shared/domain/entities/my_job_listings_page_entity.dart';
+import '../../../../../../shared/domain/usecases/get_my_job_listings_usecase.dart';
+
 part 'select_existing_job_listing_event.dart';
 part 'select_existing_job_listing_state.dart';
 
@@ -43,12 +44,14 @@ class SelectExistingJobBloc extends BaseBloc<SelectExistingJobEvent, SelectExist
     emit(SendJobOfferClickedState()..dataState=DataState.loading);
     try{
       bool result = await sendJobOfferUseCase.call(params: SendJobOfferUseCaseParams(candidateProfileEntity: event.candidateProfileEntity, jobEntity: selectedJob!));
+      preloaderActive = false;
       if(result){
         emit(SendJobOfferClickedState()..dataState=DataState.success);
       }else{
         emit(SendJobOfferClickedState()..dataState=DataState.error);
       }
     }catch(ex){
+      preloaderActive = false;
       emit(SendJobOfferClickedState(error: "An error occurred while parsing your data. Can you please check it for validation")..dataState=DataState.error);
       logger.e(ex);
     }
@@ -61,8 +64,10 @@ class SelectExistingJobBloc extends BaseBloc<SelectExistingJobEvent, SelectExist
     emit(SelectExistingJobPageEnteredState()..dataState=DataState.loading);
     try{
       myJobs = await getMyJobListingsUseCase.call();
+      preloaderActive = false;
       emit(SelectExistingJobPageEnteredState()..dataState=DataState.success);
     }catch(ex){
+      preloaderActive = false;
       emit(SelectExistingJobPageEnteredState()..dataState=DataState.error);
       logger.e(ex);
     }

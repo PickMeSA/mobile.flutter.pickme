@@ -3390,41 +3390,61 @@ class AppLocalizations {
     );
   }
 
-  /// `Today`
-  String get today {
+  /// `You're booked for the job!`
+  String get youreBookedForTheJob {
     return Intl.message(
-      'Today',
-      name: 'today',
+      'You\'re booked for the job!',
+      name: 'youreBookedForTheJob',
       desc: '',
       args: [],
     );
   }
 
-  /// `Later this month`
-  String get laterThisMonth {
+  /// `You can keep track of this job in 'My Bookings'.`
+  String get youCanKeepTrackOfThisJobInMyBookings {
     return Intl.message(
-      'Later this month',
-      name: 'laterThisMonth',
+      'You can keep track of this job in \'My Bookings\'.',
+      name: 'youCanKeepTrackOfThisJobInMyBookings',
       desc: '',
       args: [],
     );
   }
 
-  /// `Information`
-  String get information {
+  /// `Matching profiles`
+  String get matchingProfiles {
     return Intl.message(
-      'Information',
-      name: 'information',
+      'Matching profiles',
+      name: 'matchingProfiles',
       desc: '',
       args: [],
     );
   }
 
-  /// `back to setup profile`
-  String get backToSetUpProfile {
+  /// `Remove match`
+  String get removeMatch {
     return Intl.message(
-      'back to setup profile',
-      name: 'backToSetUpProfile',
+      'Remove match',
+      name: 'removeMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review user`
+  String get reviewUser {
+    return Intl.message(
+      'Review user',
+      name: 'reviewUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unpublish listing`
+  String get unpublishListing {
+    return Intl.message(
+      'Unpublish listing',
+      name: 'unpublishListing',
       desc: '',
       args: [],
     );

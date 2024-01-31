@@ -60,10 +60,14 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> getRemoteProfileData({String? userId}) async{
     try{
-          UserModel userModel = boxUser.get(current);
-          Response<dynamic> response = await
-          apiService.get("$baseUrl$version/profiles/${userModel.id}");
-        return returnProfileEntity(response: response);
+      Response<dynamic> response;
+      if(userId==null){
+        UserModel userModel = boxUser.get(current);
+        response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
+      }else{
+        response = await apiService.get("$baseUrl$version/profiles/$userId");
+      }
+      return returnProfileEntity(response: response);
     }catch(ex){
       rethrow;
     }
@@ -102,7 +106,6 @@ class ProfileServiceImpl extends ProfileService{
           data: skillsPageEntity.preferredIndustryEntity.toResponse().toJson());
 
       return returnProfileEntity(response: response);
-
     }catch(ex){
       rethrow;
     }
