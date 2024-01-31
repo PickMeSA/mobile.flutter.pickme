@@ -22,6 +22,7 @@ import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.
 import 'package:pickme/features/candidate_profile_page/presentation/candidate_profile_page.dart';
 import 'package:pickme/features/cancellation_details/presentation/cancellation_details_page.dart';
 import 'package:pickme/features/contact/presentation/contact_page.dart';
+import 'package:pickme/features/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
 import 'package:pickme/features/edit_photos_of_work/presentation/edit_photos_of_work_page.dart';
@@ -38,7 +39,6 @@ import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/job_offers_list_page/presentation/job_offers_list_page.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/presentation/all_jobs_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing_info/presentation/create_job_listing_info_page.dart';
 import 'package:pickme/features/jobs/hiring/my_job_listings/presentation/my_job_listings_page.dart';
 import 'package:pickme/features/jobs/hiring/offer_a_job/presentation/offer_a_job_page.dart';

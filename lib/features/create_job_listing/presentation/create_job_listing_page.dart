@@ -323,15 +323,6 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               textFieldType: TextFieldType.NUMBER,
                             ),
                           ),
-                          8.width,
-                          Expanded(
-                            child: AppTextField(
-                              labelText: getLocalization().totalFee,
-                              hint: getLocalization().r00,
-                              controller: totalFeeTextController,
-                              textFieldType: TextFieldType.NUMBER,
-                            ),
-                          ),
                         ],
                       ),
                       24.height,
