@@ -3389,6 +3389,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `You're booked for the job!`
+  String get youreBookedForTheJob {
+    return Intl.message(
+      'You\'re booked for the job!',
+      name: 'youreBookedForTheJob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can keep track of this job in 'My Bookings'.`
+  String get youCanKeepTrackOfThisJobInMyBookings {
+    return Intl.message(
+      'You can keep track of this job in \'My Bookings\'.',
+      name: 'youCanKeepTrackOfThisJobInMyBookings',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

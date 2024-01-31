@@ -548,6 +548,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "yesSwitch": MessageLookupByLibrary.simpleMessage("Yes, switch"),
         "youAreAllSetup":
             MessageLookupByLibrary.simpleMessage("You\'re all set up!"),
+        "youCanKeepTrackOfThisJobInMyBookings":
+            MessageLookupByLibrary.simpleMessage(
+                "You can keep track of this job in \'My Bookings\'."),
         "youDontHaveAnyActiveListings": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any active listings"),
         "youDontHaveAnyInactiveListings": MessageLookupByLibrary.simpleMessage(
@@ -572,6 +575,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your profile is still pending"),
         "yourRescheduleRequestHasBeenSent": MessageLookupByLibrary.simpleMessage(
             "Your reschedule request has been sent to your client. Once they approve, your booking will be updated in your calendar to the proposed date and time."),
+        "youreBookedForTheJob":
+            MessageLookupByLibrary.simpleMessage("You\'re booked for the job!"),
         "youveAcceptedTheRescheduleRequest": MessageLookupByLibrary.simpleMessage(
             "You\'ve approved the reschedule request and it has been updated in your calendar."),
         "youveApprovedTheAlternativeRequest": MessageLookupByLibrary.simpleMessage(

@@ -20,6 +20,7 @@ class JobDetailsBloc
     JobEntity? jobEntity;
     String? currentUserId;
     bool preloaderActive = false;
+    bool accepted = false;
     final GetJobFullDetailsUseCase getJobFullDetailsUseCase;
     final ApplyForJobUseCase applyForJobEvent;
     RespondToJobInterestUseCase respondToJobInterestUseCase;
@@ -68,6 +69,7 @@ class JobDetailsBloc
 
         emit(RespondToJobInterestState()..dataState=DataState.loading);
         try{
+            accepted = event.status=="booked";
             await respondToJobInterestUseCase.call(params: RespondToJobInterestUseCaseParams(jobInterestId: jobEntity!.jobInterestId!, status: event.status));
             emit(RespondToJobInterestState()..dataState=DataState.success);
         }catch(ex){

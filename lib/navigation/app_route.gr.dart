@@ -613,6 +613,19 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ReusableNotificationRoute.name: (routeData) {
+      final args = routeData.argsAs<ReusableNotificationRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ReusableNotificationPage(
+          key: args.key,
+          title: args.title,
+          message: args.message,
+          button: args.button,
+          image: args.image,
+        ),
+      );
+    },
     ReviewAUserRoute.name: (routeData) {
       final args = routeData.argsAs<ReviewAUserRouteArgs>(
           orElse: () => const ReviewAUserRouteArgs());
@@ -2684,6 +2697,60 @@ class ResendOTPRouteArgs {
   @override
   String toString() {
     return 'ResendOTPRouteArgs{key: $key, userModel: $userModel}';
+  }
+}
+
+/// generated route for
+/// [ReusableNotificationPage]
+class ReusableNotificationRoute
+    extends PageRouteInfo<ReusableNotificationRouteArgs> {
+  ReusableNotificationRoute({
+    Key? key,
+    required String title,
+    required String message,
+    required Widget button,
+    required Image image,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ReusableNotificationRoute.name,
+          args: ReusableNotificationRouteArgs(
+            key: key,
+            title: title,
+            message: message,
+            button: button,
+            image: image,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ReusableNotificationRoute';
+
+  static const PageInfo<ReusableNotificationRouteArgs> page =
+      PageInfo<ReusableNotificationRouteArgs>(name);
+}
+
+class ReusableNotificationRouteArgs {
+  const ReusableNotificationRouteArgs({
+    this.key,
+    required this.title,
+    required this.message,
+    required this.button,
+    required this.image,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final String message;
+
+  final Widget button;
+
+  final Image image;
+
+  @override
+  String toString() {
+    return 'ReusableNotificationRouteArgs{key: $key, title: $title, message: $message, button: $button, image: $image}';
   }
 }
 
