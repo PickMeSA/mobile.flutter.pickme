@@ -405,6 +405,22 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       padding: EdgeInsets.all(24),
                       child: PrimaryButtonDark.fullWidth(
                         onPressed: !isValid()?null:(){
+                          if(jobTitleController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Job title cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(jobDescriptionController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Job description cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(address.isEmptyOrNull){
+                            wErrorPopUp(message: "address cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(getBloc().chipOptions.isEmpty){
+                            wErrorPopUp(message: "skills cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(hoursTextController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Estimated hours cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }
                           CreateJobPageJobEntity job =  CreateJobPageJobEntity(
                               title: jobTitleController.text,
                               description: jobDescriptionController.text,
