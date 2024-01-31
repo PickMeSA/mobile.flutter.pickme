@@ -326,13 +326,18 @@
   "seeCancellationDetails": "See cancellation details",
   "cancellationDetails": "Cancellation details",
   "cancelledThisBooking": "{name} cancelled this booking. See details below",
-  "reasonForCancellation": "Reason for cancellation",
   "reason": "Reason",
   "backToPaySomeone": "Back to pay someone",
   "noCancel": "No, cancel",
   "yesSwitch" : "Yes, switch",
   "switchingProfiles" : "Switching profiles",
   "switchingYourProfileFromHireToWorking" : "Switching your profile from 'Hiring' to 'Working'. Confirm your choice?",
-  "switchingYourProfileFromWorkerToHire" : "Switching your profile from 'Working' to 'Hiring'. Confirm your choice?"
+  "switchingYourProfileFromWorkerToHire" : "Switching your profile from 'Working' to 'Hiring'. Confirm your choice?",
+  "today": "Today",
+  "laterThisMonth": "Later this month",
+  "information": "Information",
+  "backToSetUpProfile" : "back to setup profile"
+
+
 
 }

@@ -52,7 +52,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         if(state is SubmitClickedState && state.dataState == DataState.success){
           Navigator.pop(context);
           if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push( PaySomeoneWebViewRoute());
+            context.router.push( PaySomeoneWebViewRoute(from: 0));
           }else{
             context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }
@@ -157,7 +157,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                     controller: aboutYouController,
                       keyboardType: TextInputType.multiline,
                       labelText: getLocalization().aboutYouBasedOnYourProfile,
-                      textFieldType: TextFieldType.USERNAME,
+                      textFieldType: TextFieldType.OTHER,
                   maxLines: 10,maxLength: 2000),
                   GestureDetector(
                       onTap: () {

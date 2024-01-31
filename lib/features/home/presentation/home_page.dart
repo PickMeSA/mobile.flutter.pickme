@@ -1,12 +1,16 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/job_details/presentation/job_details_page.dart';
+import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +18,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/w_colors.dart';
+import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'bloc/home_bloc.dart';
 import 'bloc/home_bloc.dart';
 
 @RoutePage()
@@ -33,7 +43,7 @@ late ProfileModel profileModel;
   void initState() {
     super.initState();
   profileModel = boxProfile.get(current);
-  getBloc().add(LoadJobsInAreaEvent());
+  getBloc().add(JobsHiringLandingPageEnteredEvent());
   }
 
     @override
@@ -43,12 +53,42 @@ late ProfileModel profileModel;
 
   @override
   Widget buildView(BuildContext context) {
-
+  UserModel userMode = boxUser.get(current);
     ThemeData theme = Theme.of(context);
     return BlocConsumer<HomeBloc, HomePageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state.dataState == DataState.error && state is JobsHiringLandingPageEnteredState){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+
+        if(state is NextAppointmentCardClickedState && state.dataState == DataState.success){
+
+          state.bookingId!.isEmpty?
+          wErrorPopUp(message: state.error!, type: getLocalization().information, context: context):
+          context.router.push(JobDetailsRoute(   fromIndex: 1,
+              jobId: getBloc().upcomingHireBookingsList[0].jobId,
+              bookingId: getBloc().upcomingHireBookingsList[0]));
+        }
+
+        if(state is NextAppointmentCardClickedState && state.dataState == DataState.loading){
+          preloader(context);
+
+        }
+
+        if(state is NextAppointmentCardClickedState && state.dataState == DataState.error){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+
+      },
       builder: (context, state) {
-         return Container(
+
+         return state.dataState == DataState.init ?
+             Center(
+               child: CircularProgressIndicator(),
+             ):
+           Container(
            width: MediaQuery.sizeOf(context).width,
            height: MediaQuery.sizeOf(context).height,
            child: SingleChildScrollView(
@@ -83,10 +123,7 @@ late ProfileModel profileModel;
                                  ),
                                  const Spacer(),
 
-                                 InkWell(onTap: (){
-                                   context.router.push(const BurgerMenuRoute());
-                                 },
-                                 child: const Icon(Iconsax.menu_1,color: Colors.white,)),
+                                 TextButton(onPressed: ()=> context.router.push(const BurgerMenuRoute()), child: SvgPicture.asset("assets/menu.svg"))
                                ],
                              ),
                              SizedBox(height: 20,),
@@ -108,12 +145,16 @@ late ProfileModel profileModel;
                      child: Column(
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: [
-                         Card(
-                           elevation: 8,
-                           child: ListTile(
-                             leading: Icon(Iconsax.briefcase),
-                             title: wText(getLocalization().yourNextAppointment),
-                             trailing: Icon(Icons.arrow_forward,size: 20,),
+                         InkWell(
+                           onTap:()=> getBloc().add(NextAppointmentCardClickedEvent()),
+                           child: Card(
+
+                             elevation: 8,
+                             child: ListTile(
+                               leading: Icon(Iconsax.briefcase),
+                               title: wText(getLocalization().yourNextAppointment),
+                               trailing: Icon(Icons.arrow_forward,size: 20,),
+                             ),
                            ),
                          ),
                          const SizedBox(height: 20,),
@@ -218,48 +259,76 @@ late ProfileModel profileModel;
                          ),
                        ),),
                          30.height,
-                         getBloc().JobsInAreaList.isNotEmpty?
+
+
                          Row(
                            children: [
                              wText(getLocalization().inYourArea),
                              Spacer(),
-                             wText(getLocalization().seeAll,
-                                 style: theme.textTheme.labelSmall?.copyWith(
-                                     color: Colors.black)),
+                             InkWell(onTap:()=> userMode.type == 'work'?
+                             context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs, filter: FilterEntity()),):
+                             context.router.push(AllServicesRoute())
+                               ,
+                               child: wText(getLocalization().seeAll,
+                                   style: theme.textTheme.labelSmall?.copyWith(
+                                       color: Colors.black)),
+                             ),
                              10.width,
                              const Icon(Icons.arrow_forward,size: 15,color: Colors.grey,)
                            ],
-                         ):
+                         ),
                          20.height,
-                         getBloc().JobsInAreaList.isNotEmpty?
+                         getBloc().jobListingsPageEntity!.activeJobs.isNotEmpty&& userMode.type == 'work'?
                          SizedBox(
-                           height: 500,
+                           height: 400,
                            child: ListView.builder(
-                               itemCount: getBloc().JobsInAreaList.length,
+                               itemCount: getBloc().jobListingsPageEntity!.activeJobs.length,
                                itemBuilder: (context , index){
                                  return
                                    Column(
                                      children: [
-                                       InkWell(
-                                         onTap: ()=> context.router.push(JobDetailsRoute(jobId: getBloc().JobsInAreaList[index].id??"")),
-                                         child: AppJobAdvertCard(
-                                           jobName: 'Tax Preparation',
-                                           employerName: 'DVT',
-                                           locationName: 'PickMe',
-                                           dateTime: DateTime.now().add(const Duration(days: 5)),
-                                           status: JobStatus.applied,
-                                           onNext: () {
-                                             context.router.push(JobDetailsRoute(jobId: ""));
-                                           },
-                                         ),
-                                       ),
+                                       if(getBloc().jobListingsPageEntity!.activeJobs!=null)
+                                         AppJobAdvertCard.matching(
+                                           jobName: getBloc().jobListingsPageEntity!.activeJobs[index].title,
+                                           employerName: "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.firstName} "
+                                               "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.surname}",
+                                           locationName: getBloc().jobListingsPageEntity!.activeJobs[index].customer?.address??getLocalization().noAddressSpecified,
+                                           dateTime: DateTime.now(),
+                                           image: (getBloc().jobListingsPageEntity!.activeJobs[index].customer?.profileImage!=null)?
+                                           CachedNetworkImageProvider(getBloc().jobListingsPageEntity!.activeJobs[index].customer!.profileImage!):null,
+                                           onNext: ()=>context.router.push(JobDetailsRoute(jobId: getBloc().jobListingsPageEntity!.activeJobs[index].id,
+                                               job: getBloc().jobListingsPageEntity!.activeJobs[index]))
+                                           ,),
                                        10.height
                                      ],
                                    );
 
                                }),
-                         ):
-                             const SizedBox()
+                         ): const SizedBox(),
+                      if(userMode.type == 'hire')
+                       SizedBox(
+                       child: (getBloc().paginatedCandidates!=null)?
+                   ListView.builder(
+                     physics: const NeverScrollableScrollPhysics(),
+                     shrinkWrap: true,
+                     itemCount: (getBloc().paginatedCandidates!.candidates.length>3)?3:getBloc().paginatedCandidates!.candidates.length,
+                     itemBuilder: (BuildContext context, int index){
+                       CandidateProfileEntity candidate = getBloc().paginatedCandidates!.candidates[index];
+                       return AppCandidateProfile(
+                         fullName: candidate.fullName,
+                         jobTitle: candidate.jobTitle?? getLocalization().noJobDescription,
+                         rating: candidate.rating??0,
+                         hourlyRate: "R${candidate.hourlyRate}p/h",
+                         image: (candidate.profilePicture!=null)?
+                         CachedNetworkImageProvider(
+                             candidate.profilePicture!
+                         ):null,
+                         viewProfileFunction: (){
+                           context.router.push(CandidateProfileRoute(candidateProfile: candidate));
+                         },
+                       );
+                     },
+                   ):SizedBox(),)
 
 
 

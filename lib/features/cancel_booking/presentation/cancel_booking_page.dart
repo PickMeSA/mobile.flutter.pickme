@@ -106,7 +106,7 @@ class _CancelBookingPageState extends BasePageState<CancelBookingPage, CancelBoo
                         controller: commentController,
                         keyboardType: TextInputType.multiline,
                         labelText: getLocalization().otherCommentsOptional,
-                        textFieldType: TextFieldType.USERNAME,
+                        textFieldType: TextFieldType.OTHER,
                         maxLines: 10,maxLength: 2000),
                     50.height,
                     Row(

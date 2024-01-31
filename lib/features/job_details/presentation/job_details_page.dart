@@ -158,8 +158,9 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                            }
                                        )
                                    ),
-                                   onPressed:() {
-                                      context.router.push(PaySomeoneWebViewRoute(bookingEntity: widget.bookingId ));
+                                   onPressed:() async{
+                                      await context.router.push(PaySomeoneWebViewRoute(bookingEntity: widget.bookingId, from: 2 ));
+
                                    },
                                    child: Text(getLocalization().completeBooking, style: const TextStyle(color: Colors.white)),
                                  ),
