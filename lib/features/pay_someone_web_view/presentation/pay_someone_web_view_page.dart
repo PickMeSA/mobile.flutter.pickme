@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ import 'bloc/pay_someone_web_view_bloc.dart';
 @RoutePage()
 class PaySomeoneWebViewPage extends BasePage {
   ProfileEntity? profileEntity;
-   PaySomeoneWebViewPage({ this.profileEntity, super.key});
+  BookingEntity? bookingEntity;
+   PaySomeoneWebViewPage({ this.bookingEntity,this.profileEntity, super.key});
 
   @override
   _PaySomeoneWebViewPageState createState() => _PaySomeoneWebViewPageState();
@@ -31,7 +33,8 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
   void initState() {
     // TODO: implement initState
     super.initState();
-    getBloc().add(MakePaymentEvent());
+    getBloc().add(MakePaymentEvent(bookingEntity: widget.bookingEntity));
+
   }
 
     @override
@@ -83,9 +86,11 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
         }
         if(state is MakePaymentState && state.dataState == DataState.loading){
 
+
+
         }
         if(state is MakePaymentState && state.dataState == DataState.error){
-
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
       },
       builder: (context, state) {

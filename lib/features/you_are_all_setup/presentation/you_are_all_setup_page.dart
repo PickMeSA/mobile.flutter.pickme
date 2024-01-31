@@ -67,7 +67,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   40.height,
                   PrimaryButton(fullWidth: true,onPressed: (){
-                    context.router.pushAndPopUntil(BottomNavigationBarRoute(profileEntity: widget.profileEntity),
+                    context.router.pushAndPopUntil(BottomNavigationBarRoute(),
                     predicate: (Route<dynamic> route) => false);
                   }, child: wText(getLocalization().goToDashboard))
                 ],

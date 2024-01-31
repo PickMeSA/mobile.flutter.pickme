@@ -9,16 +9,22 @@ class RescheduleEntity{
   late  JobStatus status;
   final String reasonForChange;
   final String comments;
+   String? proposedAltStartTime;
+   String? proposedAltStartDate;
+   late JobStatus previousStatus;
 
 
   RescheduleEntity({
+    required this.proposedAltStartDate,
+    required this.proposedAltStartTime,
     this.proposerUid,
     required this.reasonForChange,
     required this.startTime,
     required this.comments,
     required this.startDate,
     required this.jobInterestId,
-    required this.status
+    required this.status,
+    required this.previousStatus
 });
 
 
@@ -39,6 +45,14 @@ class RescheduleEntity{
       case "cancelled" : status = JobStatus.cancelled;
       break;
       case "completed" : status = JobStatus.completed;
+      break;
+      case "reschedule_declined": JobStatus.rescheduleDeclined;
+      break;
+      case"alternative_proposed": JobStatus.alternativeProposed;
+      break;
+      case "alternative_declined": JobStatus.alternativeDeclined;
+      break;
+      case "alternative_accepted" : JobStatus.alternativeAccepted;
     }
   }
 
@@ -85,7 +99,9 @@ class RescheduleEntity{
        comments: comments,
        reasonForChange: reasonForChange,
        startDate: startDate,
-       status: fromJobStatus()
+       status: fromJobStatus(),
+       proposedAltStartDate: proposedAltStartDate,
+       proposedAltStartTime: proposedAltStartTime
      );
   }
 

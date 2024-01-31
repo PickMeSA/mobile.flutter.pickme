@@ -39,6 +39,7 @@ Widget qualificationSlab({
           itemBuilder: (context , index){
             return AppProfileQualification(
                 qualification: Award(
+
                     name:otpWorkExperienceEntityList![index].title!,
                     institutionName: otpWorkExperienceEntityList![index].company!,
                     qualificationType: AppQualificationType.experience,

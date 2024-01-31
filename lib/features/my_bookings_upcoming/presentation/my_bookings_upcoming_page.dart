@@ -147,7 +147,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                    ],
                    views:  <Widget>[
                       ListView.builder(
-                        itemCount: getBloc().upcomingBookingsList.length,
+                        itemCount: getBloc().upcomingHireBookingsList.length,
                         physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context , index){
@@ -156,41 +156,41 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   if (index == 0)
-                                    wText(DateFormatters.toMonthFullWord(getBloc().upcomingBookingsList[index].job.startDate!)),
+                                    wText(DateFormatters.toMonthFullWord(getBloc().upcomingHireBookingsList[index].job.startDate!)),
                                   if(index != 0)
-                                  if(getBloc().upcomingBookingsList[index].job.startDate?.month != getBloc().upcomingBookingsList[index -1].job.startDate?.month)
-                                    wText(DateFormatters.toMonthFullWord(getBloc().upcomingBookingsList[index].job.startDate!)),
+                                  if(getBloc().upcomingHireBookingsList[index].job.startDate?.month != getBloc().upcomingHireBookingsList[index -1].job.startDate?.month)
+                                    wText(DateFormatters.toMonthFullWord(getBloc().upcomingHireBookingsList[index].job.startDate!)),
                                   InkWell(
                                 onTap: (){ UserModel userModel = boxUser.get(current);
                                   if(
-                                getBloc().upcomingBookingsList[index].status == JobStatus.requestedReschedule
-                                && getBloc().upcomingBookingsList[index].proposerUid != userModel.id){
+                                getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
+                                && getBloc().upcomingHireBookingsList[index].proposerUid != userModel.id){
                                     context.router.push(RescheduleRequestRoute(
                                         bookingEntity: getBloc()
-                                            .upcomingBookingsList[index]));
+                                            .upcomingHireBookingsList[index]));
 
-                                } else if(getBloc().upcomingBookingsList[index].status == JobStatus.alternativeProposed
-                               && getBloc().upcomingBookingsList[index].proposerUid != userModel.id){
+                                } else if(getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
+                               && getBloc().upcomingHireBookingsList[index].proposerUid != userModel.id){
                                   context.router.push(AlternativeRescheduleRequestRoute(
                                       bookingEntity: getBloc()
-                                          .upcomingBookingsList[index]));
+                                          .upcomingHireBookingsList[index]));
                                 } else {
                                   context.router.push(JobDetailsRoute(
                                       fromIndex: 1,
-                                      jobId: getBloc().upcomingBookingsList[index].jobId,
-                                      bookingId: getBloc().upcomingBookingsList[index]));
+                                      jobId: getBloc().upcomingHireBookingsList[index].jobId,
+                                      bookingId: getBloc().upcomingHireBookingsList[index]));
                                 }
                                 },
                                     child: AppJobCard(
 
-                                      jobName: getBloc().upcomingBookingsList[index].job.title!,
+                                      jobName: getBloc().upcomingHireBookingsList[index].job.title!,
                                       employerName: getBloc().profileEntity?.type == "Worker"?
-                                        getBloc().upcomingBookingsList[index].job.title??"":
-                                      "${getBloc().upcomingBookingsList[index].customer?.firstName} "
-                                          "${getBloc().upcomingBookingsList[index].customer?.surname}",
-                                      locationName: getBloc().upcomingBookingsList[index].job.address??"",
-                                      dateTime: getBloc().upcomingBookingsList[index].job.startDate!,
-                                      status: getBloc().upcomingBookingsList[index].status,
+                                        getBloc().upcomingHireBookingsList[index].job.title??"":
+                                      "${getBloc().upcomingHireBookingsList[index].customer?.firstName} "
+                                          "${getBloc().upcomingHireBookingsList[index].customer?.surname}",
+                                      locationName: getBloc().upcomingHireBookingsList[index].job.address??"",
+                                      dateTime: getBloc().upcomingHireBookingsList[index].job.startDate!,
+                                      status: getBloc().upcomingHireBookingsList[index].status,
                                       onNext: () {
                                         //context.router.push(JobDetailsRoute(fromIndex: 1));
                                       },
@@ -202,7 +202,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
 
                       }),
                      ListView.builder(
-                         itemCount: getBloc().completeBookingsList.length,
+                         itemCount: getBloc().completeHireBookingsList.length,
                          physics: const NeverScrollableScrollPhysics(),
                          shrinkWrap: true,
                          itemBuilder: (context , index){
@@ -211,21 +211,21 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
                                  if (index == 0)
-                                   wText(DateFormatters.toMonthFullWord(getBloc().completeBookingsList[index].job.startDate!)),
+                                   wText(DateFormatters.toMonthFullWord(getBloc().completeHireBookingsList[index].job.startDate!)),
                                  if(index != 0)
-                                   if(getBloc().completeBookingsList[index].job.startDate?.month != getBloc().completeBookingsList[index -1].job.startDate?.month)
-                                     wText(DateFormatters.toMonthFullWord(getBloc().completeBookingsList[index].job.startDate!)),
+                                   if(getBloc().completeHireBookingsList[index].job.startDate?.month != getBloc().completeHireBookingsList[index -1].job.startDate?.month)
+                                     wText(DateFormatters.toMonthFullWord(getBloc().completeHireBookingsList[index].job.startDate!)),
                                  InkWell(
                                    onTap:()=> context.router.push(JobDetailsRoute(
-                                       fromIndex: 2,
-                                       jobId: getBloc().completeBookingsList[index].jobId)),
+                                       fromIndex: 3,
+                                       jobId: getBloc().completeHireBookingsList[index].jobId)),
                                    child: AppJobCard(
-                                     jobName: getBloc().completeBookingsList[index].job.title!,
+                                     jobName: getBloc().completeHireBookingsList[index].job.title!,
                                      employerName: getBloc().profileEntity?.type == "Worker"?
-                                     getBloc().completeBookingsList[index].job.title??"":
-                                     "${getBloc().completeBookingsList[index].customer?.firstName} "
-                                         "${getBloc().completeBookingsList[index].customer?.surname}",
-                                     locationName: getBloc().completeBookingsList[index].job.address??"",
+                                     getBloc().completeHireBookingsList[index].job.title??"":
+                                     "${getBloc().completeHireBookingsList[index].customer?.firstName} "
+                                         "${getBloc().completeHireBookingsList[index].customer?.surname}",
+                                     locationName: getBloc().completeHireBookingsList[index].job.address??"",
                                      dateTime: DateTime.now().add(const Duration(days: 5)),
                                      onNext: () {  },
                                    ),
@@ -236,7 +236,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
 
                          }),
                      ListView.builder(
-                         itemCount: getBloc().cancelledBookingsList.length,
+                         itemCount: getBloc().cancelledHireBookingsList.length,
                          physics: const NeverScrollableScrollPhysics(),
                          shrinkWrap: true,
                          itemBuilder: (context , index){
@@ -245,24 +245,24 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
                                  if (index == 0)
-                                   wText(DateFormatters.toMonthFullWord(getBloc().cancelledBookingsList[index].job.startDate!)),
+                                   wText(DateFormatters.toMonthFullWord(getBloc().cancelledHireBookingsList[index].job.startDate!)),
                                  if(index != 0)
-                                   if(getBloc().cancelledBookingsList[index].job.startDate?.month != getBloc().cancelledBookingsList[index -1].job.startDate?.month)
-                                     wText(DateFormatters.toMonthFullWord(getBloc().cancelledBookingsList[index].job.startDate!)),
+                                   if(getBloc().cancelledHireBookingsList[index].job.startDate?.month != getBloc().cancelledHireBookingsList[index -1].job.startDate?.month)
+                                     wText(DateFormatters.toMonthFullWord(getBloc().cancelledHireBookingsList[index].job.startDate!)),
                                  InkWell(
                                    onTap:()=> context.router.push(
                                        JobDetailsRoute(
                                        fromIndex: 2,
-                                       jobId: getBloc().cancelledBookingsList[index].jobId,
-                                         bookingId: getBloc().cancelledBookingsList[index]
+                                       jobId: getBloc().cancelledHireBookingsList[index].jobId,
+                                         bookingId: getBloc().cancelledHireBookingsList[index]
                                    )),
                                    child: AppJobCard(
-                                     jobName: getBloc().cancelledBookingsList[index].job.title!,
+                                     jobName: getBloc().cancelledHireBookingsList[index].job.title!,
                                      employerName: getBloc().profileEntity?.type == "Worker"?
-                                     getBloc().cancelledBookingsList[index].job.title??"":
-                                     "${getBloc().cancelledBookingsList[index].customer?.firstName} "
-                                         "${getBloc().cancelledBookingsList[index].customer?.surname}",
-                                     locationName: getBloc().cancelledBookingsList[index].job.address??"",
+                                     getBloc().cancelledHireBookingsList[index].job.title??"":
+                                     "${getBloc().cancelledHireBookingsList[index].customer?.firstName} "
+                                         "${getBloc().cancelledHireBookingsList[index].customer?.surname}",
+                                     locationName: getBloc().cancelledHireBookingsList[index].job.address??"",
                                      dateTime: DateTime.now().add(const Duration(days: 5)),
                                      status: JobStatus.cancelled,
                                      onNext: () {  },

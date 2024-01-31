@@ -21,9 +21,12 @@ class MyBookingsUpcomingBloc
     DateTime currentDate2 = DateTime.now();
     String currentMonth = DateFormat.yMMM().format(DateTime.now());
     DateTime targetDateTime = DateTime.now();
-    List<BookingEntity> upcomingBookingsList = [];
-    List<BookingEntity> completeBookingsList = [];
-    List<BookingEntity> cancelledBookingsList = [];
+    List<BookingEntity> upcomingHireBookingsList = [];
+    List<BookingEntity> completeHireBookingsList = [];
+    List<BookingEntity> cancelledHireBookingsList = [];
+    List<BookingEntity> upcomingWorkerBookingsList = [];
+    List<BookingEntity> completeWorkerBookingsList = [];
+    List<BookingEntity> cancelledWorkerBookingsList = [];
 
     final LoadBookingsUpcomingUseCase loadBookingsUpcomingUseCase;
 
@@ -44,11 +47,11 @@ class MyBookingsUpcomingBloc
             await loadBookingsUpcomingUseCase.call().then((profileBookings){
                 profileBookings.forEach((element) {
                    switch(element.status){
-                       case JobStatus.cancelled: cancelledBookingsList.add(element);
+                       case JobStatus.cancelled: cancelledHireBookingsList.add(element);
                         break;
-                       case JobStatus.completed: completeBookingsList.add(element);
+                       case JobStatus.completed: completeHireBookingsList.add(element);
                         break;
-                       default: upcomingBookingsList.add(element);
+                       default: upcomingHireBookingsList.add(element);
                    }
                 });
             });

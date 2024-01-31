@@ -28,7 +28,6 @@ class BottomNavigationBarBloc
         try{
 
             ProfileEntity profileEntity = await getRemoteProfileUseCase.call();
-            this.profileEntity = profileEntity;
             emit(GetProfileDetailsState(
                 profileEntity: profileEntity
             )..dataState = DataState.success);

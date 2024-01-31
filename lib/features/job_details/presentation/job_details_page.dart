@@ -138,6 +138,29 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            widget.fromIndex == 1?
                            Column(
                              children: [
+                               if(widget.bookingId?.customer?.id == getBloc().currentUserId)
+                                 SecondaryButtonDark(
+                                   width: MediaQuery.sizeOf(context).width,
+                                   style: ButtonStyle(
+                                       side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                         return BorderSide(
+                                           color: theme.colorScheme.secondary,
+                                           width: 2,
+                                         );
+                                       }
+                                       ),
+                                       backgroundColor: MaterialStateProperty.resolveWith(
+                                               (Set<MaterialState> states){
+                                             return theme.colorScheme.secondary;
+                                           }
+                                       )
+                                   ),
+                                   onPressed:() {
+                                      context.router.push(PaySomeoneWebViewRoute(bookingEntity: widget.bookingId ));
+                                   },
+                                   child: Text(getLocalization().completeBooking, style: const TextStyle(color: Colors.white)),
+                                 ),
+                                20.height,
                                SecondaryButtonDark(
                                  width: MediaQuery.sizeOf(context).width,
                                  style: ButtonStyle(
@@ -150,15 +173,19 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                      ),
                                      backgroundColor: MaterialStateProperty.resolveWith(
                                              (Set<MaterialState> states){
-                                           return theme.colorScheme.secondary;
+                                           return
+                                             widget.bookingId?.customer?.id == getBloc().currentUserId?
+                                             Colors.white: theme.colorScheme.secondary;
                                          }
                                      )
                                  ),
                                  onPressed:() {
                                     context.router.push( RescheduleBookingRoute(
-                                        bookingId: widget.bookingId!.bookingId!));
+                                        bookingId: widget.bookingId!));
                                  },
-                                 child: Text(getLocalization().rescheduleBooking, style: const TextStyle(color: Colors.white)),
+                                 child: Text(getLocalization().rescheduleBooking, style:  TextStyle(color:
+                                 widget.bookingId?.customer?.id == getBloc().currentUserId?
+                                 theme.colorScheme.secondary: Colors.white)),
                                ),
                                20.height,
                                SecondaryButtonDark(
@@ -351,18 +378,13 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    )
                                ),
                                onPressed:() {
-                                 if(getBloc().jobEntity?.startDate == null){
-                                   context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
-                                 }else{
-                                   getBloc().add(ApplyForJobEvent());
-                                 }
+                                 context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
+
                                },
                                child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)): const SizedBox()
                          ],
                        )
-                     ], onTap: (int index) {
-                       context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
-                   },
+                     ], onTap: (int index) {  },
                    ),
 
 

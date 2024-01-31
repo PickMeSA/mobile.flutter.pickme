@@ -7,3 +7,5 @@ class ToggleSelectedEvent extends BurgerMenuPageEvent{
 
  ToggleSelectedEvent({required this.selectedIndex});
 }
+
+class SetupProfileSubmitProfileTypeEvent extends BurgerMenuPageEvent{}

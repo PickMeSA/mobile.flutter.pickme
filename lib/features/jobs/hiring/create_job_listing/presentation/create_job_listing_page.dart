@@ -406,7 +406,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               lat: getBloc().otpLocationEntity?.latitude.toString()??"",
                               lng: getBloc().otpLocationEntity?.longitude.toString()??"",
                               rate: double.parse(totalFeeTextController.text),
-                              images: getBloc().photos.map((e) => e.url).toList(),
+                              images: getBloc().photos.map((e) => e.url!).toList(),
                               skills: getBloc().chipOptions
                           );
                           context.router.push(ReviewJobListingInfoRoute(jobEntity: job));

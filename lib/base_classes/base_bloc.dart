@@ -9,7 +9,7 @@ import 'base_state.dart';
 
 abstract class BaseBloc<T extends BaseEvent, S extends BaseState> extends Bloc<T,S>{
   final _stateController = StreamController<BaseBlocPrimaryState>();
-  ProfileEntity? profileEntity;
+  ProfileEntity? profileEntity = ProfileEntity();
 
   BaseBloc(S initialState,{this.profileEntity}) : super(initialState);
 

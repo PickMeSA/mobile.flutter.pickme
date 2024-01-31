@@ -128,7 +128,7 @@ late ProfileModel profileModel;
                                child: AppSectionCard(title: getLocalization().myBookings,
                                  onClick: ()=> widget.controller.jumpToTab(1),
                                  color: WColors.pickMeBlue,
-                                 icon:Icon(Iconsax.calendar, color: Colors.white,size: 20) ,
+                                 icon:const Icon(Iconsax.calendar, color: Colors.white,size: 20) ,
                                ),
                              ),
                              10.width,
@@ -139,7 +139,7 @@ late ProfileModel profileModel;
                                  width: (MediaQuery.sizeOf(context).width/ 2) - 25,
                                  child: AppSectionCard(title: getLocalization().myWallet,
                                    color: theme.primaryColor,
-                                   icon:Icon(Iconsax.wallet, color: Colors.white,size: 20) ,
+                                   icon:const Icon(Iconsax.wallet, color: Colors.white,size: 20) ,
                                    ),
                                ),
                              ),
@@ -150,7 +150,7 @@ late ProfileModel profileModel;
                      30.height,
                      Card(
                        child: Container(
-                         padding:EdgeInsets.all(20),
+                         padding:const EdgeInsets.all(20),
                          child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                            mainAxisAlignment: MainAxisAlignment.start,

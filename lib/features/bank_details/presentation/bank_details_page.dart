@@ -58,7 +58,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
           }else if(!state.profileEntity!.subscriptionPaid!) {
             context.router.push( PaySomeoneWebViewRoute());
           }else{
-            context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
+            context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }
         }
 
