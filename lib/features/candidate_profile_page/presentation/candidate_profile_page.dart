@@ -40,21 +40,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
   }
   @override
   Widget buildView(BuildContext context) {
-    var theme = Theme.of(context);
-    CandidateProfileEntity? profile = widget.candidateProfile;
-    ProfileEntity? profileEntity = getBloc().candidateProfile;
-    List<AppFileEntity> jobImages = [];
-    if(profileEntity?.workExperience!=null && profileEntity!.workExperience!.isNotEmpty){
-      for (var experience in profileEntity.workExperience!) {
-        logger.i(experience.company);
-        if(experience.files !=null){
-          for(AppFileEntity file in experience.files!){
-            jobImages.add(file);
-          }
-        }
 
-      }
-    }
     return BlocConsumer<CandidateProfilePageBloc, CandidateProfilePageState>(
         listener: (context, state) {
           //loading
@@ -101,6 +87,21 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
           }
         },
       builder: (context, state) {
+        var theme = Theme.of(context);
+        CandidateProfileEntity? profile = widget.candidateProfile;
+        ProfileEntity? profileEntity = getBloc().candidateProfile;
+        List<AppFileEntity> jobImages = [];
+        if(profileEntity?.workExperience!=null && profileEntity!.workExperience!.isNotEmpty){
+          for (var experience in profileEntity.workExperience!) {
+            logger.i(experience.company);
+            if(experience.files !=null){
+              for(AppFileEntity file in experience.files!){
+                jobImages.add(file);
+              }
+            }
+
+          }
+        }
         return Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
