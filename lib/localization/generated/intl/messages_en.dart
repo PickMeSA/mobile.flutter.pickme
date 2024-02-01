@@ -97,6 +97,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "applied": MessageLookupByLibrary.simpleMessage("Applied"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
+        "areYouSureYouWantToDeleteYourAccount":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you would like to delete your account."),
         "atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects":
             MessageLookupByLibrary.simpleMessage(
                 "At PickMe, we add additional costs to your rate to cover essential aspects:"),
@@ -161,6 +164,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you\'re available"),
         "dateTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
         "decline": MessageLookupByLibrary.simpleMessage("Decline"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
+        "deleteAccountQ":
+            MessageLookupByLibrary.simpleMessage("Delete account?"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
@@ -563,6 +569,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "workingDays": MessageLookupByLibrary.simpleMessage("Working days"),
         "workingDaysA": MessageLookupByLibrary.simpleMessage("Working days *"),
         "workingHours": MessageLookupByLibrary.simpleMessage("Working hours"),
+        "yesDelete": MessageLookupByLibrary.simpleMessage("Yes, Delete"),
         "yesSwitch": MessageLookupByLibrary.simpleMessage("Yes, switch"),
         "youAreAllSetup":
             MessageLookupByLibrary.simpleMessage("You\'re all set up!"),
