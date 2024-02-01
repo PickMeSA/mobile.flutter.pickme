@@ -338,5 +338,8 @@
   "matchingProfiles": "Matching profiles",
   "removeMatch": "Remove match",
   "reviewUser": "Review user",
-  "unpublishListing": "Unpublish listing"
+  "unpublishListing": "Unpublish listing",
+  "reviewSubmitted": "Review submitted",
+  "thanksForReviewingThisUser": "Thanks for reviewing this user. The information you have provided is very valuable to other users on Pick-me.",
+  "backToDashboard": "Back to dashboard"
 }

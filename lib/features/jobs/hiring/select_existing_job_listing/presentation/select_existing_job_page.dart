@@ -106,8 +106,8 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
                       JobEntity job = getBloc().myJobs!.activeJobs[index];
                       return AppJobCard(
                         jobName: job.title!,
-                        employerName: "Andrew Test Employer",
-                        locationName: "Melrose Arch. South Africa",
+                        employerName: "${job.customer!.firstName!} ${job.customer!.surname!}",
+                        locationName: job.customer!.address??"no location specified",
                         dateTime: job.startDate!,
                         selected: getBloc().selectedJob==job,
                         onClick: ()=>getBloc().add(JobSelectedEvent(job: job)),

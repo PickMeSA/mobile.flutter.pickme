@@ -82,7 +82,7 @@ class ReviewAUserBloc extends BaseBloc<ReviewAUserPageEvent, ReviewAUserState> {
       UserModel userModel = boxUser.get(current);
       bool result = await submitReviewUseCase.call(params: SubmitReviewUseCaseParams(
         reviewerId: userModel.id!,
-        userId: event.userId,
+        userId: "NVIHBgLbJxRGFP2WohQ7UXSHhVD3",
         review: reviewText,
         rating: rating
       ));

@@ -40,12 +40,13 @@ class MyJobListingsBloc extends BaseBloc<MyJobListingsEvent, MyJobListingsState>
     try{
       if(event.jobListingsPageEntity!=null){
         myJobs = event.jobListingsPageEntity;
-      }else{
-        myJobs = await getMyJobListingsUseCase.call();
+        emit(MyJobListingsPageEnteredState()..dataState=DataState.loading);
       }
+        myJobs = await getMyJobListingsUseCase.call();
+
       emit(MyJobListingsPageEnteredState()..dataState=DataState.success);
     }catch(ex){
-      emit(MyJobListingsPageEnteredState()..dataState=DataState.error);
+      emit(MyJobListingsPageEnteredState(error: ex.toString())..dataState=DataState.error);
       logger.e(ex);
     }
   }
