@@ -8,3 +8,7 @@ class UpdateUIEvent extends ProfilePageEvent{
 
   UpdateUIEvent();
 }
+
+class DeleteProfileEvent extends ProfilePageEvent{
+
+}
