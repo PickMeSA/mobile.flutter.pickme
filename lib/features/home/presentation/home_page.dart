@@ -20,6 +20,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/w_colors.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
@@ -31,6 +32,7 @@ import 'bloc/home_bloc.dart';
 
 @RoutePage()
 class HomePage extends BasePage {
+  ProfileEntity profileEntity;
    HomePage({required this.profileEntity,required this.controller,super.key});
   final  PersistentTabController controller ;
   @override
