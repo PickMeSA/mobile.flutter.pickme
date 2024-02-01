@@ -62,12 +62,13 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
       },
       builder: (context, state) {
          return state.dataState == DataState.loading || state.dataState == DataState.init?
+
          const Center(
            child: CircularProgressIndicator()
-         ):PersistentTabView(
+         ):state is GetProfileDetailsState && state.dataState == DataState.success? PersistentTabView(
            context,
            controller: _controller,
-           screens: _buildScreens(userModel.type??"hire"),
+           screens: _buildScreens(type: userModel.type??"hire", profileEntity: state.profileEntity!),
            items: _navBarsItems(type:userModel.type??"hire",theme: theme),
            confineInSafeArea: true,
            backgroundColor: Colors.white, // Default is Colors.white.
@@ -91,7 +92,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
              duration: Duration(milliseconds: 200),
            ),
            navBarStyle: NavBarStyle.style6, // Choose the nav bar style with this property.
-         );
+         ):SizedBox();
       },
     );
   }
@@ -145,9 +146,9 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     ];
   }
 
-  List<Widget> _buildScreens(String type) {
+  List<Widget> _buildScreens({required String type, required ProfileEntity profileEntity}) {
     return [
-        HomePage(controller: _controller),
+        HomePage(controller: _controller ,profileEntity:profileEntity ),
         const MyBookingsUpcomingPage(),
         type != "hire"?const JobsLandingPage()
             : const JobsHiringLandingPage(),

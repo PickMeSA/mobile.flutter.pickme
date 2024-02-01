@@ -330,6 +330,7 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: HomePage(
+          profileEntity: args.profileEntity,
           controller: args.controller,
           key: args.key,
         ),
@@ -1774,12 +1775,14 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
+    required ProfileEntity profileEntity,
     required PersistentTabController controller,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           HomeRoute.name,
           args: HomeRouteArgs(
+            profileEntity: profileEntity,
             controller: controller,
             key: key,
           ),
@@ -1793,9 +1796,12 @@ class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
 
 class HomeRouteArgs {
   const HomeRouteArgs({
+    required this.profileEntity,
     required this.controller,
     this.key,
   });
+
+  final ProfileEntity profileEntity;
 
   final PersistentTabController controller;
 
@@ -1803,7 +1809,7 @@ class HomeRouteArgs {
 
   @override
   String toString() {
-    return 'HomeRouteArgs{controller: $controller, key: $key}';
+    return 'HomeRouteArgs{profileEntity: $profileEntity, controller: $controller, key: $key}';
   }
 }
 

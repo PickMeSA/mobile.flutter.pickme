@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/review_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';

@@ -115,14 +115,14 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                 wText(getBloc().profileEntity!.location!.address.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
                                 Row(
                                   children: [
-                                    AppStarRating(rating: 3, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
-                                    wText(3.toDouble().toString()),
+                                    AppStarRating(rating: getBloc().profileEntity!.averageRating??0, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
+                                    wText(getBloc().profileEntity!.averageRating?.toString()??"0"),
                                     const Spacer(),
                                     GestureDetector(onTap: ()=>context.router.push(MyReviewsRoute()),
                                       child: wText(getLocalization().seeReviews,style: const TextStyle(decoration: TextDecoration.underline)),)
                                   ],
                                 ),
-                                  wText("R${getBloc().profileEntity!.hourlyRate} p/h"),
+                                  wText("${getLocalization().r}${getBloc().profileEntity!.hourlyRate} p/h"),
                               ],
                             ),
                           ],

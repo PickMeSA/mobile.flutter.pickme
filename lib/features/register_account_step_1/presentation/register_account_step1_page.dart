@@ -97,7 +97,7 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                 Column(
                   children: mockSubscriptionPlans.map((plan) =>
                       AppSubscriptionPlan(
-                    price: "${getLocalization().r}${plan.price}",
+                    price: "${getLocalization().r}${plan.price.toStringAsFixed(2)}",
                     subscriptionType: plan.subscriptionType,
                     entityType: plan.entityType,
                     selected: true,
