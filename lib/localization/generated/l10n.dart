@@ -3529,6 +3529,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Later this month`
+  String get laterThisMonth {
+    return Intl.message(
+      'Later this month',
+      name: 'laterThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Information`
+  String get information {
+    return Intl.message(
+      'Information',
+      name: 'information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `back to setup profile`
+  String get backToSetUpProfile {
+    return Intl.message(
+      'back to setup profile',
+      name: 'backToSetUpProfile',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

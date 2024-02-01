@@ -31,7 +31,7 @@ import 'bloc/home_bloc.dart';
 
 @RoutePage()
 class HomePage extends BasePage {
-   HomePage({required this.controller,super.key});
+   HomePage({required this.profileEntity,required this.controller,super.key});
   final  PersistentTabController controller ;
   @override
   _HomePageState createState() => _HomePageState();
@@ -78,6 +78,7 @@ late ProfileModel profileModel;
 
         if(state is NextAppointmentCardClickedState && state.dataState == DataState.loading){
 
+
         }
 
         if(state is NextAppointmentCardClickedState && state.dataState == DataState.error){
@@ -121,9 +122,10 @@ late ProfileModel profileModel;
                            children: [
                              Row(
                                children: [
-                                 const CircleAvatar(
-                                 radius: 25,
-                                 backgroundColor: Colors.white,
+                                 (widget.profileEntity?.pictureEntity?.url=="" || widget.profileEntity?.pictureEntity?.url== null)?
+                                 AppImageAvatar.small():
+                                 AppImageAvatar.small(
+                                   image: CachedNetworkImageProvider(widget.profileEntity!.pictureEntity!.url!),
                                  ),
                                  const Spacer(),
 

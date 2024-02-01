@@ -153,7 +153,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                  getBloc().jobEntity == null ?Center(
                    child: Text(getLocalization().loadingDotDot),
                  ):AppTabBar(
-                  // isScrollable:true,
+                   isScrollable:true,
                    tabs: <Widget>[
                      if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
                      Text(getLocalization().description, style: theme.textTheme.bodySmall,),
@@ -379,7 +379,6 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                  );
                              }),
                          20.height,
-                         if(getBloc().jobEntity!.images.isNotEmpty)
                          const AppDivider(),
                          20.height,
 
@@ -404,8 +403,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              }
                            },
                            child: Text(getLocalization().apply),
-                         ):
-                         widget.fromIndex == 2?
+                         ):widget.fromIndex == 2?
                          SecondaryButtonDark(
                              width: MediaQuery.sizeOf(context).width,
                              style: ButtonStyle(
