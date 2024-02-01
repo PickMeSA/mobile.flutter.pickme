@@ -223,7 +223,9 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                                   }
                               )
                           ),
-                          onPressed: (state.dataState == DataState.loading || aboutYouController.text =="")?null:() {
+                          onPressed: //(state.dataState == DataState.loading || aboutYouController.text =="")?null:
+                           ()
+                               {
                             getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
                           },
                           child: Text(getLocalization().createProfile),

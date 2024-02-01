@@ -41,7 +41,7 @@ class FinalDetailsBloc
             try{
                 ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
 
-                emit(SubmitClickedState(profileEntity: profileEntity)..dataState = DataState.success);
+                emit(SubmitClickedState(profileEntity:  profileEntity)..dataState = DataState.success);
 
             }catch(ex){
 

@@ -97,22 +97,6 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
                   ),
                 ),
               ),
-              Positioned(
-                top: 190,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 15,left: 15,top: 10.0, bottom: 10),
-                  child: ProfileToggle(
-                    onPressed: (int index) {
-                      getBloc().add(SetUpProfileToggleSelectedEvent(selectedIndex: index));
-                    },
-                    selected: getBloc().selectedToggleButtons,
-                    children: [
-                      SizedBox(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().work))),
-                      SizedBox(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().hire))),
-                    ],
-                  ),
-                ),
-              ),
 
               Positioned(
                 top: 210,
@@ -130,6 +114,23 @@ class _SetupProfilePageState extends BasePageState<SetupProfilePage, SetupProfil
                     getBloc().add(SetupProfileSubmitProfileTypeEvent());
                   },
                       child: wText(getLocalization().getStarted)),
+                ),
+              ),
+
+              Positioned(
+                top: 190,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 15,left: 15,top: 10.0, bottom: 10),
+                  child: ProfileToggle(
+                    onPressed: (int index) {
+                      getBloc().add(SetUpProfileToggleSelectedEvent(selectedIndex: index));
+                    },
+                    selected: getBloc().selectedToggleButtons,
+                    children: [
+                      SizedBox(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().work))),
+                      SizedBox(width: (MediaQuery.of(context).size.width - 36)/2, child:  Center(child: Text(getLocalization().hire))),
+                    ],
+                  ),
                 ),
               ),
 

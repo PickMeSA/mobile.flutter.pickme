@@ -20,7 +20,6 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/w_colors.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
-import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
@@ -34,7 +33,6 @@ import 'bloc/home_bloc.dart';
 class HomePage extends BasePage {
    HomePage({required this.profileEntity,required this.controller,super.key});
   final  PersistentTabController controller ;
-  final ProfileEntity profileEntity;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -64,17 +62,22 @@ late ProfileModel profileModel;
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
-        if(state is NextAppointmentCardClickedState && state.dataState == DataState.success){
+        if(state is NextAppointmentCardClickedState && state.dataState == DataState.success) {
+          if (state.bookingList!.isEmpty) {
+            wErrorPopUp(message: getLocalization().youDontHaveUpcomingAppointments,
+                type: getLocalization().information,
+                context: context);
+          } else {
+            context.router.push(JobDetailsRoute(fromIndex: 1,
+                jobId: getBloc().upcomingHireBookingsList[0].jobId,
+                bookingId: getBloc().upcomingHireBookingsList[0]));
+          }
 
-          state.bookingId!.isEmpty?
-          wErrorPopUp(message: state.error!, type: getLocalization().information, context: context):
-          context.router.push(JobDetailsRoute(  fromIndex: 1,
-              jobId: getBloc().upcomingHireBookingsList[0].jobId,
-              bookingId: getBloc().upcomingHireBookingsList[0]));
+
         }
 
         if(state is NextAppointmentCardClickedState && state.dataState == DataState.loading){
-          preloader(context);
+
 
         }
 

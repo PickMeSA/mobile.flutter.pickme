@@ -326,6 +326,7 @@
   "seeCancellationDetails": "See cancellation details",
   "cancellationDetails": "Cancellation details",
   "cancelledThisBooking": "{name} cancelled this booking. See details below",
+  "reasonForCancellation": "Reason for cancellation",
   "reason": "Reason",
   "backToPaySomeone": "Back to pay someone",
   "noCancel": "No, cancel",
@@ -339,6 +340,7 @@
   "removeMatch": "Remove match",
   "reviewUser": "Review user",
   "unpublishListing": "Unpublish listing",
+  "unpublishListing": "Unpublish listing",
   "reviewSubmitted": "Review submitted",
   "thanksForReviewingThisUser": "Thanks for reviewing this user. The information you have provided is very valuable to other users on Pick-me.",
   "backToDashboard": "Back to dashboard",
@@ -351,5 +353,11 @@
   "today": "Today",
   "laterThisMonth": "Later this month",
   "information": "Information",
-  "backToSetUpProfile" : "back to setup profile"
+  "backToSetUpProfile" : "back to setup profile",
+  "youDontHaveUpcomingAppointments": "You don't have upcoming appointments",
+  "reviewSubmitted": "Review submitted",
+  "thanksForReviewingThisUser" : "Thank you for reviewing this user",
+  "backToDashboard": "Back to dashboard"
+
+
 }

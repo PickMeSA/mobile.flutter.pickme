@@ -83,7 +83,7 @@ class HomeBloc
                         }
                     });
                 });
-                emit(NextAppointmentCardClickedState(bookingId: upcomingHireBookingsList[0].jobId??"")..dataState = DataState.success);
+                emit(NextAppointmentCardClickedState(bookingList: upcomingHireBookingsList, )..dataState = DataState.success);
             }catch(ex){
                 emit(NextAppointmentCardClickedState(error: ex.toString())..dataState = DataState.error);
             }
@@ -101,7 +101,7 @@ class HomeBloc
             OTPLocationEntity locationEntity = await getCurrentDeviceLocationUseCase.call();
             PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
                 params: GetPaginatedCandidatesByIndustryUseCaseParams(
-                    pageNumber: 1, pageSize: 5,
+                    pageNumber: 1, pageSize: 5,lat: locationEntity.latitude, lng: locationEntity.longitude
                 ));
             paginatedCandidates = paginatedCandidateProfileEntity;
             jobListingsPageEntity = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(

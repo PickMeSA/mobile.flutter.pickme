@@ -133,11 +133,11 @@ class _PaymentOutcomePageState extends BasePageState<PaymentOutcomePage, Payment
                       },
                       child:
                       widget.from == 0 ?
-                      Text(widget.paymentSuccess?getLocalization().goToDashboard: getLocalization().backToSetUpProfile, style: TextStyle(color: theme.colorScheme.secondary),):
+                      Text(widget.paymentSuccess?getLocalization().ccontinue: getLocalization().backToSetUpProfile, style: TextStyle(color: theme.colorScheme.secondary),):
                       widget.from == 1?
                       Text(widget.paymentSuccess?getLocalization().backToMyWallet: getLocalization().backToPaySomeone, style: TextStyle(color: theme.colorScheme.secondary),):
 
-                      Text(widget.paymentSuccess?getLocalization().backToMyWallet: getLocalization().backToPaySomeone, style: TextStyle(color: theme.colorScheme.secondary),)
+                      Text(widget.paymentSuccess?getLocalization().backToBooking: getLocalization().backToPaySomeone, style: TextStyle(color: theme.colorScheme.secondary),)
                       ,
                     ),
                   ),

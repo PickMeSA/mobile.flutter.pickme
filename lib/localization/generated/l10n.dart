@@ -3450,6 +3450,56 @@ class AppLocalizations {
     );
   }
 
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Later this month`
+  String get laterThisMonth {
+    return Intl.message(
+      'Later this month',
+      name: 'laterThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Information`
+  String get information {
+    return Intl.message(
+      'Information',
+      name: 'information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `back to setup profile`
+  String get backToSetUpProfile {
+    return Intl.message(
+      'back to setup profile',
+      name: 'backToSetUpProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have upcoming appointments`
+  String get youDontHaveUpcomingAppointments {
+    return Intl.message(
+      'You don\'t have upcoming appointments',
+      name: 'youDontHaveUpcomingAppointments',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Review submitted`
   String get reviewSubmitted {
     return Intl.message(
@@ -3460,10 +3510,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Thanks for reviewing this user. The information you have provided is very valuable to other users on Pick-me.`
+  /// `Thank you for reviewing this user`
   String get thanksForReviewingThisUser {
     return Intl.message(
-      'Thanks for reviewing this user. The information you have provided is very valuable to other users on Pick-me.',
+      'Thank you for reviewing this user',
       name: 'thanksForReviewingThisUser',
       desc: '',
       args: [],
