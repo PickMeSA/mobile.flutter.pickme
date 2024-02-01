@@ -517,7 +517,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
         "thanksForReviewingThisUser": MessageLookupByLibrary.simpleMessage(
-            "Thanks for reviewing this user. The information you have provided is very valuable to other users on Pick-me."),
+            "Thank you for reviewing this user"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),

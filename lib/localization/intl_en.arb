@@ -343,7 +343,10 @@
   "laterThisMonth": "Later this month",
   "information": "Information",
   "backToSetUpProfile" : "back to setup profile",
-  "youDontHaveUpcomingAppointments": "You don't have upcoming appointments"
+  "youDontHaveUpcomingAppointments": "You don't have upcoming appointments",
+  "reviewSubmitted": "Review submitted",
+  "thanksForReviewingThisUser" : "Thank you for reviewing this user",
+  "backToDashboard": "Back to dashboard"
 
 
 }

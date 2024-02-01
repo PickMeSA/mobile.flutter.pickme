@@ -3499,6 +3499,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Review submitted`
+  String get reviewSubmitted {
+    return Intl.message(
+      'Review submitted',
+      name: 'reviewSubmitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thank you for reviewing this user`
+  String get thanksForReviewingThisUser {
+    return Intl.message(
+      'Thank you for reviewing this user',
+      name: 'thanksForReviewingThisUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to dashboard`
+  String get backToDashboard {
+    return Intl.message(
+      'Back to dashboard',
+      name: 'backToDashboard',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
