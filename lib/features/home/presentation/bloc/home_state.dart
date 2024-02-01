@@ -28,8 +28,9 @@ class JobsHiringLandingPageEnteredState extends HomePageState{
 }
 
 class NextAppointmentCardClickedState extends HomePageState{
-  String? bookingId;
+  List<BookingEntity>? bookingList;
 
-  NextAppointmentCardClickedState({this.bookingId, super.error});
+
+  NextAppointmentCardClickedState({this.bookingList, super.error});
 }
 

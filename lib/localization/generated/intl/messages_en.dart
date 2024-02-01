@@ -569,6 +569,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have any active listings"),
         "youDontHaveAnyReviewsYet": MessageLookupByLibrary.simpleMessage(
             "You don’t have any reviews yet"),
+        "youDontHaveUpcomingAppointments": MessageLookupByLibrary.simpleMessage(
+            "You don\'t have upcoming appointments"),
         "youFoundSomeoneForTheJob": MessageLookupByLibrary.simpleMessage(
             "You found someone for the job!"),
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":

@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -162,8 +163,6 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                      views:  <Widget>[
                         ListView.builder(
                           itemCount: getBloc().upcomingHireBookingsList.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
                             itemBuilder: (context , index){
                               return
                                 Column(
@@ -192,6 +191,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                             .upcomingHireBookingsList[index]));
                                   } else {
                                     context.router.push(JobDetailsRoute(
+                                        pageMode: PageMode.booking,
                                         fromIndex: 1,
                                         jobId: getBloc().upcomingHireBookingsList[index].jobId,
                                         bookingId: getBloc().upcomingHireBookingsList[index]));
@@ -205,7 +205,10 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                         "${getBloc().upcomingHireBookingsList[index].customer?.firstName} "
                                             "${getBloc().upcomingHireBookingsList[index].customer?.surname}",
                                         locationName: getBloc().upcomingHireBookingsList[index].job.address??"",
-                                        dateTime: getBloc().upcomingHireBookingsList[index].job.startDate!,
+                                        dateTime: getBloc().upcomingHireBookingsList[index].status == JobStatus.rescheduled
+                                            || getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
+                              ?DateTime.parse(getBloc().upcomingHireBookingsList[index].proposedAltStartDate)
+                                            :getBloc().upcomingHireBookingsList[index].job.startDate!,
                                         status: getBloc().upcomingHireBookingsList[index].status,
                                         onNext: () { UserModel userModel = boxUser.get(current);
                                         if(
@@ -236,8 +239,6 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                         }),
                        ListView.builder(
                            itemCount: getBloc().completeHireBookingsList.length,
-                           physics: const NeverScrollableScrollPhysics(),
-                           shrinkWrap: true,
                            itemBuilder: (context , index){
                              return
                                Column(
@@ -250,6 +251,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                        wText(DateFormatters.toMonthFullWord(getBloc().completeHireBookingsList[index].job.startDate!)),
                                    InkWell(
                                      onTap:()=> context.router.push(JobDetailsRoute(
+                                         pageMode: PageMode.booking,
                                          fromIndex: 3,
                                          jobId: getBloc().completeHireBookingsList[index].jobId)),
                                      child: AppJobCard(
@@ -270,8 +272,6 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                            }),
                        ListView.builder(
                            itemCount: getBloc().cancelledHireBookingsList.length,
-                           physics: const NeverScrollableScrollPhysics(),
-                           shrinkWrap: true,
                            itemBuilder: (context , index){
                              return
                                Column(
@@ -281,6 +281,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                    InkWell(
                                      onTap:()=> context.router.push(
                                          JobDetailsRoute(
+                                           pageMode: PageMode.booking,
                                          fromIndex: 2,
                                          jobId: getBloc().cancelledHireBookingsList[index].jobId,
                                            bookingId: getBloc().cancelledHireBookingsList[index]

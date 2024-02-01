@@ -154,7 +154,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         }
 
         if(state is GetProfileProgressState && state.dataState == DataState.error){
-
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
         if(state is GetProfileProgressState && state.dataState == DataState.loading){
@@ -283,7 +284,6 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           accessToken: token??"",
           tokenID: token??"");
       boxTokens.put(current, tokenModel);
-
       UserModel userModel = UserModel(id: "");
       userModel.id = userCredential.user?.uid;
       boxUser.put(current, userModel);

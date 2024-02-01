@@ -62,17 +62,21 @@ late ProfileModel profileModel;
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
-        if(state is NextAppointmentCardClickedState && state.dataState == DataState.success){
+        if(state is NextAppointmentCardClickedState && state.dataState == DataState.success) {
+          if (state.bookingList!.isEmpty) {
+            wErrorPopUp(message: getLocalization().youDontHaveUpcomingAppointments,
+                type: getLocalization().information,
+                context: context);
+          } else {
+            context.router.push(JobDetailsRoute(fromIndex: 1,
+                jobId: getBloc().upcomingHireBookingsList[0].jobId,
+                bookingId: getBloc().upcomingHireBookingsList[0]));
+          }
 
-          state.bookingId!.isEmpty?
-          wErrorPopUp(message: state.error!, type: getLocalization().information, context: context):
-          context.router.push(JobDetailsRoute(   fromIndex: 1,
-              jobId: getBloc().upcomingHireBookingsList[0].jobId,
-              bookingId: getBloc().upcomingHireBookingsList[0]));
+
         }
 
         if(state is NextAppointmentCardClickedState && state.dataState == DataState.loading){
-          preloader(context);
 
         }
 

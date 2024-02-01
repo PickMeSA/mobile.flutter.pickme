@@ -8,6 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/pagination_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 
 import '../../../../../../shared/domain/usecases/get_paginated_candidates_usecase.dart';
 
@@ -33,6 +34,8 @@ class ServiceCategoryCandidatesBloc extends BaseBloc<ServiceCategoryCandidatesEv
       )async{
     emit(GetServiceCategoryCandidatesState()..dataState = DataState.loading);
     try{
+
+
       categoryId = event.serviceCategoryId;
       PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
           params: GetPaginatedCandidatesByIndustryUseCaseParams(industryId: categoryId));
