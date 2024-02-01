@@ -115,7 +115,7 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
                       ],
                     ),
                       48.height,
-                      Text(getLocalization().candidateRating, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      if(widget.appMode == AppMode.hiring)Text(getLocalization().candidateRating, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontVariations: [
                             const FontVariation("wght", 600)
                           ]
