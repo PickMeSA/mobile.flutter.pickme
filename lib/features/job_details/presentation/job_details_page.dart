@@ -153,6 +153,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                  getBloc().jobEntity == null ?Center(
                    child: Text(getLocalization().loadingDotDot),
                  ):AppTabBar(
+                   viewHeight:MediaQuery.sizeOf(context).height-300,
                    isScrollable:true,
                    tabs: <Widget>[
                      if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
@@ -349,9 +350,11 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              physics: const NeverScrollableScrollPhysics(),
                              itemCount: getBloc().jobEntity!.images.split(",").length??0,
                              itemBuilder: (context, index){
+                               var images = getBloc().jobEntity!.images.split(",");
+                               logger.e(images.length);
                                return
-                                 getBloc().jobEntity!.images.split(",")[index] == null &&
-                                     getBloc().jobEntity!.images.split(",")[index].isEmpty && index != 0 && !index.isOdd ?
+                                 images[index] == null &&
+                                     images[index].isEmpty && index != 0 && !index.isOdd ?
                                  const SizedBox():
                                  Column(
                                    children: [
@@ -360,16 +363,17 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                        child: Row(
                                          children: [
                                            if(index.isEven || index == 0)
+                                             if(!images[0].isEmptyOrNull)
                                              Expanded(child: ImageThumbnail(
-                                               imagePath:  getBloc().jobEntity!.images.split(",")[index],
+                                               imagePath:  images[index],
                                                //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
                                              )),
                                            16.width, // Add some spacing between images
-                                           if(getBloc().jobEntity!.images.split(",")[index].length == index + 1)
+                                           if(images.length == index + 1)
                                              Expanded(child: Container(),),
-                                           if(getBloc().jobEntity!.images.split(",")[index].length > index + 1 && index.isEven)
+                                           if(images.length > (index + 1) && index.isEven)
                                              Expanded(child: ImageThumbnail(
-                                               imagePath:  getBloc().jobEntity!.images.split(",")[index + 1],
+                                               imagePath:  images[index + 1],
                                                //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
                                              )),
                                          ],
@@ -381,7 +385,12 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                          20.height,
                          const AppDivider(),
                          20.height,
-
+                         if(getBloc().jobEntity != null && widget.pageMode==PageMode.hiring)PrimaryButton.fullWidth(onPressed: ()=>getBloc().add(
+                             UpdateJobPublishedStatusEvent()
+                         ),
+                           child: wText((getBloc().jobEntity!.status=="active")? getLocalization().unpublishListing: getLocalization().publishListing),
+                         ),
+                         100.height,
                          widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null)?
                          PrimaryButton.fullWidth(
                            onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
@@ -549,12 +558,6 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                    ], onTap: (int index) {  },
                  ),
                  ),
-                 if(getBloc().jobEntity != null && widget.pageMode==PageMode.hiring)PrimaryButton.fullWidth(onPressed: ()=>getBloc().add(
-                     UpdateJobPublishedStatusEvent()
-                 ),
-                   child: wText((getBloc().jobEntity!.status=="active")? getLocalization().unpublishListing: getLocalization().publishListing),
-                 ),
-                 24.height,
                ],
              ),
            ),
