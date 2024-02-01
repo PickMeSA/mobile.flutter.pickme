@@ -491,11 +491,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     PaySomeoneWebViewRoute.name: (routeData) {
-      final args = routeData.argsAs<PaySomeoneWebViewRouteArgs>(
-          orElse: () => const PaySomeoneWebViewRouteArgs());
+      final args = routeData.argsAs<PaySomeoneWebViewRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: PaySomeoneWebViewPage(
+          from: args.from,
           bookingEntity: args.bookingEntity,
           profileEntity: args.profileEntity,
           key: args.key,
@@ -503,11 +503,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     PaymentOutcomeRoute.name: (routeData) {
-      final args = routeData.argsAs<PaymentOutcomeRouteArgs>(
-          orElse: () => const PaymentOutcomeRouteArgs());
+      final args = routeData.argsAs<PaymentOutcomeRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: PaymentOutcomePage(key: args.key),
+        child: PaymentOutcomePage(
+          from: args.from,
+          paymentSuccess: args.paymentSuccess,
+          key: args.key,
+        ),
       );
     },
     PendingProfileRoute.name: (routeData) {
@@ -2300,6 +2303,7 @@ class PaySomeoneRoute extends PageRouteInfo<void> {
 /// [PaySomeoneWebViewPage]
 class PaySomeoneWebViewRoute extends PageRouteInfo<PaySomeoneWebViewRouteArgs> {
   PaySomeoneWebViewRoute({
+    required int? from,
     BookingEntity? bookingEntity,
     ProfileEntity? profileEntity,
     Key? key,
@@ -2307,6 +2311,7 @@ class PaySomeoneWebViewRoute extends PageRouteInfo<PaySomeoneWebViewRouteArgs> {
   }) : super(
           PaySomeoneWebViewRoute.name,
           args: PaySomeoneWebViewRouteArgs(
+            from: from,
             bookingEntity: bookingEntity,
             profileEntity: profileEntity,
             key: key,
@@ -2322,10 +2327,13 @@ class PaySomeoneWebViewRoute extends PageRouteInfo<PaySomeoneWebViewRouteArgs> {
 
 class PaySomeoneWebViewRouteArgs {
   const PaySomeoneWebViewRouteArgs({
+    required this.from,
     this.bookingEntity,
     this.profileEntity,
     this.key,
   });
+
+  final int? from;
 
   final BookingEntity? bookingEntity;
 
@@ -2335,7 +2343,7 @@ class PaySomeoneWebViewRouteArgs {
 
   @override
   String toString() {
-    return 'PaySomeoneWebViewRouteArgs{bookingEntity: $bookingEntity, profileEntity: $profileEntity, key: $key}';
+    return 'PaySomeoneWebViewRouteArgs{from: $from, bookingEntity: $bookingEntity, profileEntity: $profileEntity, key: $key}';
   }
 }
 
@@ -2343,11 +2351,17 @@ class PaySomeoneWebViewRouteArgs {
 /// [PaymentOutcomePage]
 class PaymentOutcomeRoute extends PageRouteInfo<PaymentOutcomeRouteArgs> {
   PaymentOutcomeRoute({
+    required int from,
+    required bool paymentSuccess,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           PaymentOutcomeRoute.name,
-          args: PaymentOutcomeRouteArgs(key: key),
+          args: PaymentOutcomeRouteArgs(
+            from: from,
+            paymentSuccess: paymentSuccess,
+            key: key,
+          ),
           initialChildren: children,
         );
 
@@ -2358,13 +2372,21 @@ class PaymentOutcomeRoute extends PageRouteInfo<PaymentOutcomeRouteArgs> {
 }
 
 class PaymentOutcomeRouteArgs {
-  const PaymentOutcomeRouteArgs({this.key});
+  const PaymentOutcomeRouteArgs({
+    required this.from,
+    required this.paymentSuccess,
+    this.key,
+  });
+
+  final int from;
+
+  final bool paymentSuccess;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'PaymentOutcomeRouteArgs{key: $key}';
+    return 'PaymentOutcomeRouteArgs{from: $from, paymentSuccess: $paymentSuccess, key: $key}';
   }
 }
 

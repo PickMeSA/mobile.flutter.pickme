@@ -3,6 +3,7 @@ import 'package:pickme/features/my_bookings_upcoming/data/response_models/my_boo
 import 'package:pickme/features/my_bookings_upcoming/data/response_models/my_bookings_upcoming_model_response/customer_model_response.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/customer_entity.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
+import 'package:pickme/shared/domain/entities/labourer_entity.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 
 class BookingEntity{
@@ -12,6 +13,7 @@ class BookingEntity{
   late String startDate;
   late String endDate;
   late int estimatedHours;
+  late int labourerHourlyRate;
   late String comments;
   late String type;
   late String applied;
@@ -29,8 +31,11 @@ class BookingEntity{
   late JobEntity job;
   late CustomerEntity? customer;
   late String? startTime;
+  late LabourerEntity labourerEntity;
 
   BookingEntity({
+    required this.labourerHourlyRate,
+    required this.labourerEntity,
     required this.startTime,
     required this.previousStatusString,
     required this.statusString,
@@ -51,13 +56,17 @@ class BookingEntity{
     required this.proposedAltEndDate,
     required this.proposedAltStartDate,
     required this.proposedAltStartTime,
-    required this.proposerUid
+    required this.proposerUid,
+
 
 }){
     toJobStatus(statusString: statusString);
+    toPreviousJobStatus(statusString: previousStatusString);
+
   }
   
   BookingEntity.fromResponse ({required BookingsModelResponse element}){
+    labourerHourlyRate = element.labourerHourlyRate??0;
         startTime = element.startTime??"";
         previousStatusString= element.previousStatus??"";
         statusString= element.status??"";
@@ -79,6 +88,35 @@ class BookingEntity{
         proposedAltStartDate= element.proposedAltStartDate??DateTime.now().toString();
         proposedAltStartTime= element.proposedAltStartTime??DateTime.now().toString();
         proposerUid= element.proposerUid!;
+  }
+  toPreviousJobStatus ({required String statusString}){
+    switch(statusString){
+      case "offered": previousStatus = JobStatus.offered;
+      break;
+      case "applied" : previousStatus = JobStatus.applied;
+      break;
+      case "Rejected" : previousStatus = JobStatus.rejected;
+      break;
+      case "booked" : previousStatus = JobStatus.booked;
+      break;
+      case "reschedule_requested" : previousStatus = JobStatus.requestedReschedule;
+      break;
+      case "rescheduled" : previousStatus = JobStatus.rescheduled;
+      break;
+      case "cancelled" : previousStatus = JobStatus.cancelled;
+      break;
+      case "completed" : previousStatus = JobStatus.completed;
+      break;
+      case "reschedule_declined": previousStatus = JobStatus.rescheduleDeclined;
+      break;
+      case "alternative_proposed": previousStatus = JobStatus.alternativeProposed;
+      break;
+      case "alternative_declined" : previousStatus = JobStatus.alternativeDeclined;
+      break;
+      case "alternative_accepted": previousStatus = JobStatus.alternativeAccepted;
+      break;
+      default :previousStatus = JobStatus.booked;
+    }
   }
 
   toJobStatus ({required String statusString}){
@@ -106,6 +144,8 @@ class BookingEntity{
       case "alternative_declined" : status = JobStatus.alternativeDeclined;
       break;
       case "alternative_accepted": status = JobStatus.alternativeAccepted;
+      break;
+      default: status = JobStatus.booked;
     }
   }
 }

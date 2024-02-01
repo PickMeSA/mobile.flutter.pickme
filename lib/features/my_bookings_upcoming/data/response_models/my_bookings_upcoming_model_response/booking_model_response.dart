@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pickme/features/pay_someone/data/response_models/pay_someone_model_response/labourer_model_response.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
 
 import 'customer_model_response.dart';
@@ -21,6 +22,7 @@ class BookingsModelResponse with _$BookingsModelResponse {
     required String? bookingId,
     required String? comments,
     required String? customerUid,
+    required int? labourerHourlyRate,
     required int? estimatedHours,
     required String? labourerUid,
     required String? jobId,
@@ -30,6 +32,7 @@ class BookingsModelResponse with _$BookingsModelResponse {
     required String? proposedAltEndDate,
     required String? proposedAltStartTime,
     required String? proposerUid,
+    required LabourerModelResponse? labourer,
   required MyJobListingsJobModelResponse? job,
     required CustomerModelResponse? customer
   }) = _BookingaModelResponse;

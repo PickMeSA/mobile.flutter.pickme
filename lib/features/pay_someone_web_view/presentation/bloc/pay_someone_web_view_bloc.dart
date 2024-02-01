@@ -14,6 +14,7 @@ part 'pay_someone_web_view_state.dart';
 @injectable
 class PaySomeoneWebViewBloc
     extends BaseBloc<PaySomeoneWebViewPageEvent, PaySomeoneWebViewPageState> {
+
     final MakePaymentUseCase makePaymentUseCase;
     final MakeJobPaymentUseCase makeJobPaymentUseCase;
     PaySomeoneWebViewBloc({required this.makeJobPaymentUseCase,required this.makePaymentUseCase}): super(PaySomeoneWebViewPageInitState()) {

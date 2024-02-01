@@ -14,8 +14,9 @@ import 'bloc/payment_outcome_bloc.dart';
 
 @RoutePage()
 class PaymentOutcomePage extends BasePage {
+  int from = 0;
   bool paymentSuccess = false;
-   PaymentOutcomePage({super.key});
+   PaymentOutcomePage({required this.from ,required this.paymentSuccess,super.key});
 
   @override
   _PaymentOutcomePageState createState() => _PaymentOutcomePageState();
@@ -77,7 +78,7 @@ class _PaymentOutcomePageState extends BasePageState<PaymentOutcomePage, Payment
                     children: [
                       Positioned(child: Image.asset('assets/payment_failure_pebble.png')),
                       Positioned(top: 50,right: 30 ,child: Image.asset('assets/payment_failure_vector.png')),
-                      Positioned(top: 50,right: 50,child: Image.asset('assets/payment_failure_tick.png')),
+                      Positioned(top: 50,right: 50,child: Image.asset('assets/payment_failure_cross.png')),
                       Positioned(right: 50 ,top: 100,child: Image.asset('assets/payment_failure_man.png')),
                     ],
                   )
@@ -104,11 +105,40 @@ class _PaymentOutcomePageState extends BasePageState<PaymentOutcomePage, Payment
                           )
                       ),
                       onPressed: () {
-                        context.router.pushAndPopUntil(
-                            BottomNavigationBarRoute(
-                                initialIndex: 1), predicate: (Route<dynamic> route) => false);
+                        // for setup profile route
+                       if(widget.from == 0  && widget.paymentSuccess){
+                         context.router.pushAndPopUntil( YouAreAllSetupRoute(), predicate: (Route<dynamic> route) => false);
+                       }else if ( widget.from == 0 && !widget.paymentSuccess){
+                         context.router.pop();
+                         context.router.pop();
+                       }
+
+                       //for my wallet pay someone route
+                       if(widget.from == 1  && widget.paymentSuccess){
+                         context.router.pop();
+                         context.router.pop();
+                         context.router.pop();
+                       }else if ( widget.from == 1 && !widget.paymentSuccess){
+                         context.router.pop();
+                         context.router.pop();
+                       }
+
+                       //for job details route
+                       if(widget.from == 2  && widget.paymentSuccess){
+                         context.router.pushAndPopUntil( BottomNavigationBarRoute(initialIndex: 1), predicate: (Route<dynamic> route) => false);
+                       }else if ( widget.from == 2 && !widget.paymentSuccess){
+                         context.router.pop();
+                         context.router.pop();
+                       }
                       },
-                      child: Text(widget.paymentSuccess?getLocalization().backToMyWallet: getLocalization().backToPaySomeone, style: TextStyle(color: theme.colorScheme.secondary),),
+                      child:
+                      widget.from == 0 ?
+                      Text(widget.paymentSuccess?getLocalization().goToDashboard: getLocalization().backToSetUpProfile, style: TextStyle(color: theme.colorScheme.secondary),):
+                      widget.from == 1?
+                      Text(widget.paymentSuccess?getLocalization().backToMyWallet: getLocalization().backToPaySomeone, style: TextStyle(color: theme.colorScheme.secondary),):
+
+                      Text(widget.paymentSuccess?getLocalization().backToMyWallet: getLocalization().backToPaySomeone, style: TextStyle(color: theme.colorScheme.secondary),)
+                      ,
                     ),
                   ),
                 ],
