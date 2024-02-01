@@ -13,5 +13,6 @@ class SelectedTabChangedState extends MyJobListingsState {
   SelectedTabChangedState();
 }
 class MyJobListingsPageEnteredState extends MyJobListingsState {
-  MyJobListingsPageEnteredState();
+  final String? error;
+  MyJobListingsPageEnteredState({this.error});
 }
