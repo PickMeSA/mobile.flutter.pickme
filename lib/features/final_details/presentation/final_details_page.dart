@@ -52,9 +52,9 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         if(state is SubmitClickedState && state.dataState == DataState.success){
           Navigator.pop(context);
           if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push( PaySomeoneWebViewRoute());
+            context.router.push( PaySomeoneWebViewRoute(from: 0));
           }else{
-            context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
+            context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }
         }
 
@@ -108,7 +108,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                               left: 1,
                               child: AppImageAvatar(
                                   image: (getBloc().finalDetailsEntity.profilePicture==null)? null:
-                                  CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url),
+                                  CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url!),
                               ),
                             ),
                             if(state is ProfilePictureAddedState && state.dataState == DataState.loading) const Positioned(
@@ -157,7 +157,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                     controller: aboutYouController,
                       keyboardType: TextInputType.multiline,
                       labelText: getLocalization().aboutYouBasedOnYourProfile,
-                      textFieldType: TextFieldType.USERNAME,
+                      textFieldType: TextFieldType.OTHER,
                   maxLines: 10,maxLength: 2000),
                   GestureDetector(
                       onTap: () {
@@ -223,7 +223,9 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                                   }
                               )
                           ),
-                          onPressed: (state.dataState == DataState.loading || aboutYouController.text =="")?null:() {
+                          onPressed: //(state.dataState == DataState.loading || aboutYouController.text =="")?null:
+                           ()
+                               {
                             getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
                           },
                           child: Text(getLocalization().createProfile),

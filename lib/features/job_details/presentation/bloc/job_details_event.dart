@@ -15,3 +15,6 @@ class RespondToJobInterestEvent extends JobDetailsPageEvent{
   final String status;
   RespondToJobInterestEvent({required this.status});
 }
+class UpdateJobPublishedStatusEvent extends JobDetailsPageEvent{
+  UpdateJobPublishedStatusEvent();
+}

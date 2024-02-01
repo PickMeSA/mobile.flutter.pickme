@@ -31,7 +31,6 @@ class CandidateProfilesImpl extends CandidatesService{
         List<CandidateProfileModelResponse> candidatesModelResponseList = [];
       decoded
             .forEach((data){
-              logger.i(data);
               candidatesModelResponseList.add(CandidateProfileModelResponse(
                 id: data["id"].toString(),
                 userId: data["userId"],

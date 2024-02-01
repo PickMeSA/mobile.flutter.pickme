@@ -22,6 +22,7 @@ import 'package:pickme/features/cancel_booking/presentation/cancel_booking_page.
 import 'package:pickme/features/candidate_profile_page/presentation/candidate_profile_page.dart';
 import 'package:pickme/features/cancellation_details/presentation/cancellation_details_page.dart';
 import 'package:pickme/features/contact/presentation/contact_page.dart';
+import 'package:pickme/features/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/edit_about_me/presentation/edit_about_me_page.dart';
 import 'package:pickme/features/edit_personal_details/presentation/edit_personal_details_page.dart';
 import 'package:pickme/features/edit_photos_of_work/presentation/edit_photos_of_work_page.dart';
@@ -38,7 +39,6 @@ import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
 import 'package:pickme/features/job_offers_list_page/presentation/job_offers_list_page.dart';
 import 'package:pickme/features/jobs/applying/all_jobs_page/presentation/all_jobs_page.dart';
 import 'package:pickme/features/jobs/hiring/all_services/presentation/all_services_page.dart';
-import 'package:pickme/features/jobs/hiring/create_job_listing/presentation/create_job_listing_page.dart';
 import 'package:pickme/features/jobs/hiring/create_job_listing_info/presentation/create_job_listing_info_page.dart';
 import 'package:pickme/features/jobs/hiring/my_job_listings/presentation/my_job_listings_page.dart';
 import 'package:pickme/features/jobs/hiring/offer_a_job/presentation/offer_a_job_page.dart';
@@ -53,6 +53,8 @@ import 'package:pickme/features/jobs_hiring_landing_page/presentation/jobs_hirin
 import 'package:pickme/features/jobs_landing_page/presentation/jobs_landing_page.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/my_reviews/presentation/my_reviews_page.dart';
+import 'package:pickme/features/offer_accepted/presentation/reusable_notification_page.dart';
+import 'package:pickme/features/payment_outcome/presentation/payment_outcome_page.dart';
 import 'package:pickme/features/request_a_review/presentation/request_a_review.dart';
 import 'package:pickme/features/review_a_user/presentation/review_a_user_page.dart';
 import 'package:pickme/shared/domain/entities/create_job_page_job_entity.dart';
@@ -94,6 +96,7 @@ import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.d
 import 'package:pickme/features/login/presentation/login_page.dart';
 import 'package:pickme/features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
 
+import '../features/scan_qr_code/presentation/scan_qr_code_page.dart';
 import '../shared/domain/entities/my_job_listings_page_entity.dart';
 
 part 'app_route.gr.dart';
@@ -182,11 +185,16 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: MyReviewsRoute.page),
     AnimatedRoute(page: ContactRoute.page),
     AnimatedRoute(page: BookingSuccessRoute.page),
-
+    AnimatedRoute(page: PaySomeoneRoute.page),
     AnimatedRoute(page: JobOffersListRoute.page),
     AnimatedRoute(page: AlternativeRequestResponseRoute.page),
     AnimatedRoute(page: MyReviewsRoute.page),
     AnimatedRoute(page:  CancellationDetailsRoute.page),
+    AnimatedRoute(page: PaymentOutcomeRoute.page),
+    AnimatedRoute(page: ReusableNotificationRoute.page),
+    AnimatedRoute(page: ScanQrCodeRoute.page),
+    AnimatedRoute(page: RequestAReviewRoute.page),
+    AnimatedRoute(page: ReviewAUserRoute.page),
 
   ];
 }

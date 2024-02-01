@@ -65,9 +65,10 @@ crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   40.height,
                   PrimaryButton(fullWidth: true,onPressed: (){
-                   // context.router.pushAndPopUntil(BottomNavigationBarRoute(),
-                  //   predicate: (Route<dynamic> route) => false);
-                  }, child: wText(getLocalization().goToDashboard))
+                    context.router.replace(
+                      BottomNavigationBarRoute(initialIndex: 0),
+                    );
+                    }, child: wText(getLocalization().goToDashboard))
                 ],
               ),
             ),

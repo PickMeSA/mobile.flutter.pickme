@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/remote/api_service/pay_someone_service/pay_someone_service.dart';
 
@@ -17,6 +18,16 @@ class PaySomeoneServiceImpl extends PaySomeoneService{
    }catch(ex){
      rethrow;
    }
+  }
+
+  @override
+  Future<String> makeJobPayment({required BookingEntity bookingEntity}) async{
+    try{
+      Response<dynamic> response = await apiService.get("$baseUrl$version/checkouts/booking/${bookingEntity.id}");
+      return response.data.toString();
+    }catch(ex){
+      rethrow;
+    }
   }
 
 }

@@ -18,6 +18,8 @@ class GetPaginatedCandidatesByIndustryUseCase extends BaseUseCase<GetPaginatedCa
    try{
      return await getPaginatedCandidateProfilesRepository.call(
          params: GetPaginatedCandidatesByIndustryRepositoryParams(
+           lat: params?.lat,
+           lng: params?.lng,
            pageNumber: params?.pageNumber,
            pageSize: params?.pageSize,
            maxDistance: params?.maxDistance,
@@ -40,7 +42,11 @@ class GetPaginatedCandidatesByIndustryUseCaseParams extends BaseUseCaseParams{
   final double? maxHourlyRate;
   final int? minRating;
   final String? industryId;
+  final double? lat;
+  final double? lng;
   GetPaginatedCandidatesByIndustryUseCaseParams({
+     this.lat,
+     this.lng,
     this.pageNumber,
     this.pageSize,
     this.maxDistance,

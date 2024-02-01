@@ -18,7 +18,7 @@ class CreateJobListingModelResponse with _$CreateJobListingModelResponse {
     double? lat,
     double? lng,
     String? images,
-    required List<SkillsModelResponse> skills,
+    @SkillsOrStringConverter() required List<SkillsModelResponse> skills,
     String? id,
     double? distance,
   }) = _CreateJobListingModelResponse;
@@ -26,4 +26,28 @@ class CreateJobListingModelResponse with _$CreateJobListingModelResponse {
   factory CreateJobListingModelResponse.fromJson(
           Map<String, Object?> json) =>
       _$CreateJobListingModelResponseFromJson(json);
+}
+// Custom converter to handle the Skills or String scenario
+class SkillsOrStringConverter
+    implements JsonConverter<List<SkillsModelResponse>, Object?> {
+  const SkillsOrStringConverter();
+
+  @override
+  List<SkillsModelResponse> fromJson(Object? json) {
+    if (json is List) {
+      return json
+          .map((dynamic e) => SkillsModelResponse.fromJson(
+          e as Map<String, dynamic>))
+          .toList();
+    } else if (json is String) {
+      // If the value is a string, treat it as an empty list
+      return [];
+    } else {
+      throw ArgumentError('Invalid value for SkillsModelResponse');
+    }
+  }
+
+  @override
+  Object? toJson(List<SkillsModelResponse> skills) =>
+      skills.map((e) => e.toJson()).toList();
 }

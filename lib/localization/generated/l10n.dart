@@ -3329,6 +3329,176 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Back to pay someone`
+  String get backToPaySomeone {
+    return Intl.message(
+      'Back to pay someone',
+      name: 'backToPaySomeone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No, cancel`
+  String get noCancel {
+    return Intl.message(
+      'No, cancel',
+      name: 'noCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, switch`
+  String get yesSwitch {
+    return Intl.message(
+      'Yes, switch',
+      name: 'yesSwitch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switching profiles`
+  String get switchingProfiles {
+    return Intl.message(
+      'Switching profiles',
+      name: 'switchingProfiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switching your profile from 'Hiring' to 'Working'. Confirm your choice?`
+  String get switchingYourProfileFromHireToWorking {
+    return Intl.message(
+      'Switching your profile from \'Hiring\' to \'Working\'. Confirm your choice?',
+      name: 'switchingYourProfileFromHireToWorking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switching your profile from 'Working' to 'Hiring'. Confirm your choice?`
+  String get switchingYourProfileFromWorkerToHire {
+    return Intl.message(
+      'Switching your profile from \'Working\' to \'Hiring\'. Confirm your choice?',
+      name: 'switchingYourProfileFromWorkerToHire',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You're booked for the job!`
+  String get youreBookedForTheJob {
+    return Intl.message(
+      'You\'re booked for the job!',
+      name: 'youreBookedForTheJob',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can keep track of this job in 'My Bookings'.`
+  String get youCanKeepTrackOfThisJobInMyBookings {
+    return Intl.message(
+      'You can keep track of this job in \'My Bookings\'.',
+      name: 'youCanKeepTrackOfThisJobInMyBookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Matching profiles`
+  String get matchingProfiles {
+    return Intl.message(
+      'Matching profiles',
+      name: 'matchingProfiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove match`
+  String get removeMatch {
+    return Intl.message(
+      'Remove match',
+      name: 'removeMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review user`
+  String get reviewUser {
+    return Intl.message(
+      'Review user',
+      name: 'reviewUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unpublish listing`
+  String get unpublishListing {
+    return Intl.message(
+      'Unpublish listing',
+      name: 'unpublishListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Later this month`
+  String get laterThisMonth {
+    return Intl.message(
+      'Later this month',
+      name: 'laterThisMonth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Information`
+  String get information {
+    return Intl.message(
+      'Information',
+      name: 'information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `back to setup profile`
+  String get backToSetUpProfile {
+    return Intl.message(
+      'back to setup profile',
+      name: 'backToSetUpProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have upcoming appointments`
+  String get youDontHaveUpcomingAppointments {
+    return Intl.message(
+      'You don\'t have upcoming appointments',
+      name: 'youDontHaveUpcomingAppointments',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

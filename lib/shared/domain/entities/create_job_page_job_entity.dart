@@ -13,9 +13,8 @@ class CreateJobPageJobEntity {
   final String estimatedHours;
   final String? lat;
   final String? lng;
-  final double rate;
   final List<String> images;
   final List<SkillEntity> skills;
 
-  CreateJobPageJobEntity({required this.title, required this.description, required this.address, required this.status, this.startDate, this.endDate, this.startTime, required this.imFlexible, required this.estimatedHours, required this.rate, required this.lat, required this.lng, required this.images, required this.skills});
+  CreateJobPageJobEntity({required this.title, required this.description, required this.address, required this.status, this.startDate, this.endDate, this.startTime, required this.imFlexible, required this.estimatedHours, required this.lat, required this.lng, required this.images, required this.skills});
 }

@@ -11,6 +11,8 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
   final double? maxHourlyRate;
   final int? minRating;
   final String? industryId;
+  final double? lat;
+  final double? lng;
   GetPaginatedCandidatesByIndustryRepositoryParams({
     this.pageNumber,
     this.pageSize,
@@ -19,6 +21,8 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
     this.maxHourlyRate,
     this.minRating,
     this.industryId,
+    required this.lng,
+    required this.lat
   });
 
   Map<String, dynamic> toMap(){
@@ -54,8 +58,8 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
     if(pageSize!=null){
       map += "&pageSize=${pageSize.toString()}";
     }
-    if(maxDistance!=null){
-      map += "&maxDistance=${maxDistance.toString()}";
+    if(true){
+      map += "&maxDistance=10000000";
     }
     if(minHourlyRate!=null){
       map += "&minHourlyRate=${minHourlyRate.toString()}";
@@ -68,6 +72,14 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
     }
     if(industryId!=null){
       map += "&industryId=${industryId.toString()}";
+    }
+
+    if(lat!=null){
+      map += "&lat=${lat.toString()}";
+    }
+
+    if(lng!=null){
+      map += "&lng=${lng.toString()}";
     }
     return map;
   }

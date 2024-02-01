@@ -1,6 +1,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -54,12 +55,12 @@ class _MyWalletPageState extends BasePageState<MyWalletPage, MyWalletBloc> {
                    wText(getLocalization().myWallet,
                        style: theme.textTheme.headlineMedium),
                    const Spacer(),
-                   InkWell(onTap: (){context.router.pop();},child: const Icon(Icons.menu)),
+                    InkWell(onTap: ()=> context.router.pop(),child: Icon(Icons.close),)
 
                  ]
                ),
                InkWell(
-                 onTap: ()=> context.router.push(PaySomeoneWebViewRoute()),
+                 onTap: ()=> context.router.push(PaySomeoneRoute()),
                  child: Padding(
                    padding: const EdgeInsets.all(20.0),
                    child: SizedBox(

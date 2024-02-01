@@ -8,6 +8,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/create_job_page_job_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -19,6 +20,8 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/functions/required_text_validator.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
@@ -63,6 +66,23 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
     var theme = Theme.of(context);
     return BlocConsumer<CreateJobListingBloc, CreateJobListingState>(
       listener: (context, state) {
+        //loading
+        if(state is GetSkillsListState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+
+        }
+        if(state is GetSkillsListState && state.dataState == DataState.success){
+          if(getBloc().preloaderActive){
+            getBloc().preloaderActive = false;
+            Navigator.pop(context);
+          }
+          setState(() {
+            address = getBloc().currentUser!.location?.address??"";
+          });
+        }
         //loading
         if(state is CreateJobPageSubmitJobState && state.dataState == DataState.loading){
           if(!getBloc().preloaderActive){
@@ -276,14 +296,15 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                                   8.width,
                                   Expanded(
                                     child: DateTextBox(
-                                      firstDate: startDate??DateTime.now(),
-                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime.now(),
+                                      initialDate: startDate?.add(const Duration(days: 1))??DateTime.now(),
                                       labelText: getLocalization().endDate,
                                       hint: getLocalization().endDate,
                                       controller: endDateController,
                                       onDateSelected: (DateTime dateTime){
                                         endDate = dateTime;
                                         endDateController.text = dateTime.toDDMMYYYY();
+                                        getBloc().add(DateChangedEvent());
                                       },),
                                   )
                                 ],
@@ -320,15 +341,6 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               labelText: "${getLocalization().estHours} *",
                               hint: "${getLocalization().estHours} *",
                               controller: hoursTextController,
-                              textFieldType: TextFieldType.NUMBER,
-                            ),
-                          ),
-                          8.width,
-                          Expanded(
-                            child: AppTextField(
-                              labelText: getLocalization().totalFee,
-                              hint: getLocalization().r00,
-                              controller: totalFeeTextController,
                               textFieldType: TextFieldType.NUMBER,
                             ),
                           ),
@@ -393,6 +405,22 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       padding: EdgeInsets.all(24),
                       child: PrimaryButtonDark.fullWidth(
                         onPressed: !isValid()?null:(){
+                          if(jobTitleController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Job title cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(jobDescriptionController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Job description cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(address.isEmptyOrNull){
+                            wErrorPopUp(message: "address cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(getBloc().chipOptions.isEmpty){
+                            wErrorPopUp(message: "skills cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }else if(hoursTextController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Estimated hours cannot be empty", type: getLocalization().error, context: context);
+                            return;
+                          }
                           CreateJobPageJobEntity job =  CreateJobPageJobEntity(
                               title: jobTitleController.text,
                               description: jobDescriptionController.text,
@@ -405,11 +433,10 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               estimatedHours: hoursTextController.text,
                               lat: getBloc().otpLocationEntity?.latitude.toString()??"",
                               lng: getBloc().otpLocationEntity?.longitude.toString()??"",
-                              rate: double.parse(totalFeeTextController.text),
-                              images: getBloc().photos.map((e) => e.url).toList(),
+                              images: getBloc().photos.map((e) => e.url!).toList(),
                               skills: getBloc().chipOptions
                           );
-                          context.router.push(ReviewJobListingInfoRoute(jobEntity: job));
+                          context.router.push(ReviewJobListingInfoRoute(jobEntity: job, profile: getBloc().currentUser!));
                         },
                         child: Text(getLocalization().ccontinue)
                       ),
@@ -522,12 +549,14 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   }
 
   OTPLocationEntity getLocation(PickResult result){
-    address = result.formattedAddress ?? "";
+    if(result.formattedAddress!=null){
+      address = result.formattedAddress!;
+    }
     ///change this back to string as location comes with id from api.
     return OTPLocationEntity(address: result.adrAddress , latitude: result.geometry?.location.lat, longitude: result.geometry?.location.lng);
   }
   bool isValid(){
-    if(_formKey.currentState==null) return true;
+    logger.d(_formKey.currentState);
     return
         jobTitleController.text.isNotEmpty &&
         jobDescriptionController.text.isNotEmpty &&

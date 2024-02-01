@@ -102,7 +102,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           }else if(state.profileEntity!.description!.isEmpty) {
             context.router.push(const FinalDetailsRoute());
           }else if(!state.profileEntity!.subscriptionPaid!){
-            context.router.push( PaySomeoneWebViewRoute());}
+            context.router.push( PaySomeoneWebViewRoute(from: 0));}
           else{
            context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
          }
@@ -154,7 +154,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         }
 
         if(state is GetProfileProgressState && state.dataState == DataState.error){
-
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
         if(state is GetProfileProgressState && state.dataState == DataState.loading){
@@ -283,7 +284,6 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           accessToken: token??"",
           tokenID: token??"");
       boxTokens.put(current, tokenModel);
-
       UserModel userModel = UserModel(id: "");
       userModel.id = userCredential.user?.uid;
       boxUser.put(current, userModel);

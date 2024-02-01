@@ -160,13 +160,16 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                               backgroundColor: MaterialStateProperty.resolveWith(
                                       (Set<MaterialState> states){
                                     return
-                                      Colors.white;
+                                      theme.colorScheme.primary;
                                   }
                               )
                           ),
                           onPressed: () {
                             UserModel userModel = boxUser.get(current);
                             getBloc().add(RescheduleBookingEvent(rescheduleEntity: RescheduleEntity(
+                              previousStatus: JobStatus.rescheduled,
+                              proposedAltStartTime: "",
+                                proposedAltStartDate: "",
                                 status: JobStatus.rescheduled,
                                 comments: widget.bookingEntity.comments,
                                 startTime: widget.bookingEntity.proposedAltStartTime,

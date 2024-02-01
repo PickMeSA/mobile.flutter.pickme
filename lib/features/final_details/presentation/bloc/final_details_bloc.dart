@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
@@ -41,7 +40,7 @@ class FinalDetailsBloc
             try{
                 ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
 
-                emit(SubmitClickedState()..dataState = DataState.success);
+                emit(SubmitClickedState(profileEntity:  profileEntity)..dataState = DataState.success);
 
             }catch(ex){
 

@@ -47,42 +47,23 @@ class RequestAReviewPageState extends BasePageState<RequestAReviewPage, RequestA
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           padding: wPagePadding(top:0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if(state.dataState == DataState.loading) const Center(
-                  child: Text("Loading..."),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if(state.dataState == DataState.loading) const Center(
+                child: Text("Loading..."),
+              ),
+              Text(getLocalization().allowYourClientsToLeaveAReview),
+              48.height,
+              Expanded(child: Center(
+                child: QrImageView(
+                  data: '${userModel.id}',
+                  version: QrVersions.auto,
+                  size: 200.0,
                 ),
-                Text(getLocalization().allowYourClientsToLeaveAReview),
-                48.height,
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    QrImageView(
-                      data: 'pickMeApp://reviews/${userModel.id}',
-                      version: QrVersions.auto,
-                      size: 200.0,
-                    ),
-                    24.height,
-                    GestureDetector(onTap: (){
-                      Clipboard.setData(ClipboardData(text: "https://www.pick-me.co.za/reviews/${userModel.id}"))
-                          .then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Copied!"))));
-                      logger.d("https://www.pick-me.co.za/reviews/${userModel.id}");
-                      _launchUrl("https://www.pick-me.co.za/reviews/${userModel.id}");
-                    }, child: Text(
-                        'https://www.pick-me.co.za/reviews/${userModel.id}'
-                    )),
-                    24.height,
-                    SecondaryButtonDark(onPressed: (){
-                      Clipboard.setData(ClipboardData(text: "https://www.pick-me.co.za/reviews/${userModel.id}"))
-                          .then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Copied!"))));
-                    }, child: Text(getLocalization().copyLink)),
 
-                  ],
-                ),
-              ],
-            ),
+              )),
+            ],
           ),
         );
       },

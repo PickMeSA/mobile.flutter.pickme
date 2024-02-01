@@ -60,10 +60,18 @@ class BankDetailsBloc
         BankDetailsSubmittedEvent event,
         Emitter<BankDetailsPageState> emit
         )async{
-
-        emit(BankDetailsSubmittedState()..dataState = DataState.loading);
-        ProfileEntity profileEntity = await bankDetailsSubmittedUseCase.call(params: BankDetailsSubmittedUseCaseParams(bankDetailsEntity: event.bankDetailsEntity));
-        emit(BankDetailsSubmittedState(profileEntity: profileEntity)..dataState = DataState.success);
+try {
+    emit(BankDetailsSubmittedState()
+        ..dataState = DataState.loading);
+    ProfileEntity profileEntity = await bankDetailsSubmittedUseCase.call(
+        params: BankDetailsSubmittedUseCaseParams(
+            bankDetailsEntity: event.bankDetailsEntity));
+    emit(BankDetailsSubmittedState(profileEntity: profileEntity)
+        ..dataState = DataState.success);
+}catch(ex){
+    emit(BankDetailsSubmittedState(profileEntity: profileEntity)
+        ..dataState = DataState.error);
+}
 
     }
 } 

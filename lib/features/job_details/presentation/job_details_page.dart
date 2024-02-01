@@ -80,6 +80,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
           getBloc().preloaderActive = false;
           Navigator.pop(context);
           context.router.push(const ApplicationSentRoute());
+          // if(state)
         }
         //error
         if(state is ApplyForJobState && state.dataState == DataState.error){
@@ -87,84 +88,188 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
           Navigator.pop(context);
           wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
+
+        if(state is RespondToJobInterestState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //loading
+        if(state is RespondToJobInterestState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          if(getBloc().accepted){
+            context.router.push(ReusableNotificationRoute(
+                title: getLocalization().youreBookedForTheJob,
+                message: getLocalization().youCanKeepTrackOfThisJobInMyBookings,
+                button: PrimaryButtonDark.fullWidth(
+                    onPressed: ()=>context.router.replace(BottomNavigationBarRoute(initialIndex: 2)),
+                    child: Text(getLocalization().backToJobs)),
+                image: Image.asset("assets/man_and_woman_celebration.png")
+            ));
+          }else{
+            context.router.replace(BottomNavigationBarRoute(initialIndex: 2));
+          }
+
+        }
+        //error
+        if(state is RespondToJobInterestState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+        if(state is UpdateJobPublishedStatusState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        //loading
+        if(state is UpdateJobPublishedStatusState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          Navigator.pop(context);
+        }
+        //error
+        if(state is UpdateJobPublishedStatusState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
       },
       builder: (context, state) {
+        if(getBloc().jobEntity != null){
+          logger.d(getBloc().jobEntity!.jobInterestStatus);
+        }
          return Padding(
            padding: const EdgeInsets.only(top:0, left: 20.0, right: 20.0, bottom: 20.0),
            child: SizedBox(
              width: MediaQuery.sizeOf(context).width,
              height: MediaQuery.sizeOf(context).height,
-             child: SingleChildScrollView(
-               child: Column(
-                 children: [
-                   getBloc().jobEntity == null ?Center(
-                     child: Text(getLocalization().loadingDotDot),
-                   ):AppTabBar(
-                     viewHeight:1500,
-                     tabs: <Widget>[
-                       if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
-                       Text(getLocalization().description, style: theme.textTheme.bodySmall,),
-                       if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
-                       // if(getBloc().currentUserId == getBloc().jobEntity!.customer.id)
-                     ],
-                     views:  <Widget>[
-                       if(widget.pageMode != PageMode.hiring) Column(
+             child: Column(
+               children: [
+                 Expanded(child:
+                 getBloc().jobEntity == null ?Center(
+                   child: Text(getLocalization().loadingDotDot),
+                 ):AppTabBar(
+                  // isScrollable:true,
+                   tabs: <Widget>[
+                     if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
+                     Text(getLocalization().description, style: theme.textTheme.bodySmall,),
+                     if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
+                     if(widget.pageMode == PageMode.hiring)Text("${getLocalization().matchingProfiles} (${getBloc().jobEntity?.matches?.length})", style: theme.textTheme.bodySmall,),
+                     // if(getBloc().currentUserId == getBloc().jobEntity!.customer.id)
+                   ],
+                   views:  <Widget>[
+                     if(widget.pageMode != PageMode.hiring)
+                       SingleChildScrollView(
+                         child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
                            WClientWidget(
-                             context: context,
-                             areaLocation: getBloc().jobEntity!.customer?.address??"",
-                             clientName: getBloc().jobEntity!.customer!=null?"${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}":"",
-                             rating: getBloc().jobEntity!.customer==null?0:getBloc().jobEntity!.customer!.averageRating??0,
-                             seeReviews: getLocalization().seeReviews,
-                            profileImage: getBloc().jobEntity!.customer!.profileImage,
-                             onSeeReviews: ()=>context.router.push(MyReviewsRoute(userId: getBloc().currentUserId))
+                               context: context,
+                               areaLocation: getBloc().jobEntity!.customer?.address??"",
+                               clientName: getBloc().jobEntity!.customer!=null?"${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}":"",
+                               rating: getBloc().jobEntity!.customer==null?0:getBloc().jobEntity!.customer!.averageRating??0,
+                               seeReviews: getLocalization().seeReviews,
+                               profileImage: getBloc().jobEntity!.customer!.profileImage,
+                               onSeeReviews: ()=>context.router.push(MyReviewsRoute(userId: getBloc().currentUserId))
                            ),
-
-                         const AppDivider(),
-                           20.height,
-                           wText(getLocalization().iAmLookingFor, style: theme.textTheme.titleMedium),
-                           20.height,
-                           wText(getBloc().jobEntity!.description,),
-                           20.height,
-                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null || getBloc().jobEntity!.jobInterestStatus!="applied")?
-                           PrimaryButton.fullWidth(
-                             onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
-                               if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
-                               }else{
-                                 getBloc().add(ApplyForJobEvent());
-                               }
-                               },
-                             child: Text(getBloc().jobEntity!.jobInterestStatus==null?getLocalization().apply:getLocalization().applied),
-                           ):
-                           widget.fromIndex == 1?
-                           Column(
-                             children: [
-                               SecondaryButtonDark(
-                                 width: MediaQuery.sizeOf(context).width,
-                                 style: ButtonStyle(
-                                     side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                       return BorderSide(
-                                         color: theme.colorScheme.secondary,
-                                         width: 2,
-                                       );
-                                     }
-                                     ),
-                                     backgroundColor: MaterialStateProperty.resolveWith(
-                                             (Set<MaterialState> states){
-                                           return theme.colorScheme.secondary;
-                                         }
-                                     )
-                                 ),
-                                 onPressed:() {
-                                    context.router.push( RescheduleBookingRoute(
-                                        bookingId: widget.bookingId!.bookingId!));
+                           const AppDivider(),
+                             20.height,
+                             wText(getLocalization().iAmLookingFor, style: theme.textTheme.titleMedium),
+                             20.height,
+                             wText(getBloc().jobEntity!.description,),
+                             20.height,
+                           if(widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null || getBloc().jobEntity!.jobInterestStatus!="applied"))
+                             PrimaryButton.fullWidth(
+                               onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
+                                 if(getBloc().jobEntity?.startDate == null){
+                                   context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
+                                 }else{
+                                   getBloc().add(ApplyForJobEvent());
+                                 }
                                  },
-                                 child: Text(getLocalization().rescheduleBooking, style: const TextStyle(color: Colors.white)),
-                               ),
-                               20.height,
-                               SecondaryButtonDark(
+                               child: Text(getBloc().jobEntity!.jobInterestStatus==null?getLocalization().apply:getLocalization().applied),
+                             ),
+                             widget.fromIndex == 1?
+                             Column(
+                               children: [
+                                 if(widget.bookingId?.customer?.id == getBloc().currentUserId)
+                                   SecondaryButtonDark(
+                                     width: MediaQuery.sizeOf(context).width,
+                                     style: ButtonStyle(
+                                         side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                           return BorderSide(
+                                             color: theme.colorScheme.secondary,
+                                             width: 2,
+                                           );
+                                         }
+                                         ),
+                                         backgroundColor: MaterialStateProperty.resolveWith(
+                                                 (Set<MaterialState> states){
+                                               return theme.colorScheme.secondary;
+                                             }
+                                         )
+                                     ),
+                                     onPressed:() {
+                                        context.router.push(PaySomeoneWebViewRoute(bookingEntity: widget.bookingId , from: 2));
+                                     },
+                                     child: Text(getLocalization().completeBooking, style: const TextStyle(color: Colors.white)),
+                                   ),
+                                  20.height,
+                                 SecondaryButtonDark(
+                                   width: MediaQuery.sizeOf(context).width,
+                                   style: ButtonStyle(
+                                       side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                         return BorderSide(
+                                           color: theme.colorScheme.secondary,
+                                           width: 2,
+                                         );
+                                       }
+                                       ),
+                                       backgroundColor: MaterialStateProperty.resolveWith(
+                                               (Set<MaterialState> states){
+                                             return
+                                               widget.bookingId?.customer?.id == getBloc().currentUserId?
+                                               Colors.white: theme.colorScheme.secondary;
+                                           }
+                                       )
+                                   ),
+                                   onPressed:() {
+                                      context.router.push( RescheduleBookingRoute(
+                                          bookingId: widget.bookingId!));
+                                   },
+                                   child: Text(getLocalization().rescheduleBooking, style:  TextStyle(color:
+                                   widget.bookingId?.customer?.id == getBloc().currentUserId?
+                                   theme.colorScheme.secondary: Colors.white)),
+                                 ),
+                                 20.height,
+                                 SecondaryButtonDark(
+                                   width: MediaQuery.sizeOf(context).width,
+                                   style: ButtonStyle(
+                                       side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                         return BorderSide(
+                                           color: theme.colorScheme.secondary,
+                                           width: 2,
+                                         );
+                                       }
+                                       ),
+                                       backgroundColor: MaterialStateProperty.resolveWith(
+                                               (Set<MaterialState> states){
+                                             return Colors.white;
+                                           }
+                                       )
+                                   ),
+                                   onPressed:() {
+                                      context.router.push(CancelBookingRoute(booking:widget.bookingId!));
+                                   },
+                                   child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
+                                 )
+                               ],
+                             ):                         widget.fromIndex == 2?
+                             SecondaryButtonDark(
                                  width: MediaQuery.sizeOf(context).width,
                                  style: ButtonStyle(
                                      side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
@@ -181,81 +286,72 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                      )
                                  ),
                                  onPressed:() {
-                                    context.router.push(CancelBookingRoute(booking:widget.bookingId!));
+                                   context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
+
                                  },
-                                 child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
-                               )
-                             ],
-                           ):const SizedBox(),
-                           getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
-                             padding: const EdgeInsets.all(16.0),
-                             child: Row(
-                               children: [
-                                 Expanded(
-                                   child: SecondaryButtonDark(
-                                       child: Text(getLocalization().decline),
-                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                                 child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
+                             getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
+                               padding: const EdgeInsets.all(16.0),
+                               child: Row(
+                                 children: [
+                                   Expanded(
+                                     child: SecondaryButtonDark(
+                                         child: Text(getLocalization().decline),
+                                         onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                                     ),
                                    ),
-                                 ),
-                                 16.width,
-                                 Expanded(
-                                   child: PrimaryButtonDark(
-                                       child: Text(getLocalization().accept),
-                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                                   16.width,
+                                   Expanded(
+                                     child: PrimaryButtonDark(
+                                         child: Text(getLocalization().accept),
+                                         onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                                     ),
                                    ),
-                                 ),
-                               ],
-                             ),
-                           ):SizedBox()
-                         ],
+                                 ],
+                               ),
+                             ):SizedBox()
+                           ],
+                         ),
                        ),
-                       ListView(
-                         physics: const NeverScrollableScrollPhysics(),
-                         children: [
-                           AppJobDetailCard(
-                             elevation: 0,
-                             padding: EdgeInsets.zero,
-                             jobName: getBloc().jobEntity!.title,
-                             employerName: "${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}",
-                             locationName: "${getBloc().jobEntity!.customer?.address}",
-                             dateTime: getBloc().jobEntity!.startDate,
-                             onNext: (){},
-                             estimatedTime: "${getBloc().jobEntity!.estimatedHours} hrs",
-                             rate: "R${getBloc().jobEntity!.hourlyRate} ph",
-                             image: (getBloc().jobEntity!.customer?.profileImage!=null)?
-                             CachedNetworkImageProvider(getBloc().jobEntity!.customer!.profileImage!):null,),
-                           const AppDivider(),
-                           20.height,
-                           wText(getLocalization().jobDescription, style: theme.textTheme.titleMedium),
-                           20.height,
-                           wText(getBloc().jobEntity!.description),
-                           20.height,
-                           const AppDivider(),
-                           20.height,
-                           wText(getLocalization().skillsRequired, style: theme.textTheme.titleMedium),
-                           20.height,
-                           ChipGroup(inputs: getBloc().jobEntity!.skills.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList()),
-                           const AppDivider(),
-                           20.height,
-                           wText(getLocalization().photos, style: theme.textTheme.titleMedium),
-                           20.height,
-                           // if(getBloc().jobEntity!.images.isNotEmpty)Padding(
-                           //   padding: const EdgeInsets.only(top: 16.0),
-                           //   child: Row(
-                           //       children: getBloc().jobEntity!.images.split(",").map((e){
-                           //         logger.e(e);
-                           //         return ImageThumbnail(
-                           //           imagePath:e,
-                           //         );
-                           //       }).toList()),
-                           // ),
-                           ListView.builder(
-                               shrinkWrap: true,
-                               physics: const NeverScrollableScrollPhysics(),
-                               itemCount: getBloc().jobEntity!.images.split(",").length??0,
-                               itemBuilder: (context, index){
-                                 List<String> files = getBloc().jobEntity!.images.split(",")??[];
-                                 return files == null && files.isEmpty && index != 0 && !index.isOdd ?
+                     ListView(
+                       children: [
+                         AppJobDetailCard(
+                           elevation: 0,
+                           padding: EdgeInsets.zero,
+                           jobName: getBloc().jobEntity!.title,
+                           employerName: "${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}",
+                           locationName: "${getBloc().jobEntity!.customer?.address}",
+                           dateTime: getBloc().jobEntity!.startDate,
+                           onNext: (){},
+                           estimatedTime: "${getBloc().jobEntity!.estimatedHours} hrs",
+                           rate: "R${getBloc().jobEntity!.hourlyRate} ph",
+                           image: (getBloc().jobEntity!.customer?.profileImage!=null)?
+                           CachedNetworkImageProvider(getBloc().jobEntity!.customer!.profileImage!):null,),
+                         const AppDivider(),
+                         20.height,
+                         wText(getLocalization().jobDescription, style: theme.textTheme.titleMedium),
+                         20.height,
+                         wText(getBloc().jobEntity!.description),
+                         20.height,
+                         const AppDivider(),
+                         20.height,
+                         wText(getLocalization().skillsRequired, style: theme.textTheme.titleMedium),
+                         20.height,
+                         ChipGroup(inputs: getBloc().jobEntity!.skills.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList()),
+                         const AppDivider(),
+                         20.height,
+                         if(getBloc().jobEntity!.images.isNotEmpty)
+                         wText(getLocalization().photos, style: theme.textTheme.titleMedium),
+                         20.height,
+                         if(getBloc().jobEntity!.images.isNotEmpty)
+                         ListView.builder(
+                             shrinkWrap: true,
+                             physics: const NeverScrollableScrollPhysics(),
+                             itemCount: getBloc().jobEntity!.images.split(",").length??0,
+                             itemBuilder: (context, index){
+                               return
+                                 getBloc().jobEntity!.images.split(",")[index] == null &&
+                                     getBloc().jobEntity!.images.split(",")[index].isEmpty && index != 0 && !index.isOdd ?
                                  const SizedBox():
                                  Column(
                                    children: [
@@ -265,116 +361,203 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                          children: [
                                            if(index.isEven || index == 0)
                                              Expanded(child: ImageThumbnail(
-                                               imagePath:  files?[index],
+                                               imagePath:  getBloc().jobEntity!.images.split(",")[index],
+                                               //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
                                              )),
-
                                            16.width, // Add some spacing between images
-                                           if(files.length == index + 1)
+                                           if(getBloc().jobEntity!.images.split(",")[index].length == index + 1)
                                              Expanded(child: Container(),),
-                                           if(files.length > index + 1 && index.isEven)
+                                           if(getBloc().jobEntity!.images.split(",")[index].length > index + 1 && index.isEven)
                                              Expanded(child: ImageThumbnail(
-                                               imagePath:  files[index + 1],
+                                               imagePath:  getBloc().jobEntity!.images.split(",")[index + 1],
+                                               //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
                                              )),
                                          ],
                                        ),
                                      ),
                                    ],
                                  );
-                               }),
-                           20.height,
-                           const AppDivider(),
-                           20.height,
-                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null || getBloc().jobEntity!.jobInterestStatus!="applied")?
-                           PrimaryButton.fullWidth(
-                             onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
-                               if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
-                               }else{
-                                 getBloc().add(ApplyForJobEvent());
-                               }
-                               },
-                             child: Text(getLocalization().apply),
-                           ):
-                           widget.fromIndex == 1?
-                           SecondaryButtonDark.fullWidth(
-                             onPressed:() {
-                               if(getBloc().jobEntity?.startDate == null){
-                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
-                               }else{
-                                 getBloc().add(ApplyForJobEvent());
-                               }
-                             },
-                             child: Text(getLocalization().apply),
-                           ):widget.fromIndex == 2?
-                           SecondaryButtonDark(
-                               width: MediaQuery.sizeOf(context).width,
-                               style: ButtonStyle(
-                                   side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                     return BorderSide(
-                                       color: theme.colorScheme.secondary,
-                                       width: 2,
-                                     );
-                                   }
-                                   ),
-                                   backgroundColor: MaterialStateProperty.resolveWith(
-                                           (Set<MaterialState> states){
-                                         return Colors.white;
-                                       }
-                                   )
-                               ),
-                               onPressed:() {
-                                 context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
+                             }),
+                         20.height,
+                         if(getBloc().jobEntity!.images.isNotEmpty)
+                         const AppDivider(),
+                         20.height,
 
-                               },
-                               child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
-                           getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
-                             padding: const EdgeInsets.all(16.0),
-                             child: Row(
-                               children: [
-                                 Expanded(
-                                   child: SecondaryButtonDark(
-                                       child: Text(getLocalization().decline),
-                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
-                                   ),
+                         widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null)?
+                         PrimaryButton.fullWidth(
+                           onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
+                             if(getBloc().jobEntity?.startDate == null){
+                               context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
+                             }else{
+                               getBloc().add(ApplyForJobEvent());
+                             }
+                           },
+                           child: Text(getLocalization().apply),
+                         ):
+                         widget.fromIndex == 1?
+                         SecondaryButtonDark.fullWidth(
+                           onPressed:() {
+                             if(getBloc().jobEntity?.startDate == null){
+                               context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
+                             }else{
+                               getBloc().add(ApplyForJobEvent());
+                             }
+                           },
+                           child: Text(getLocalization().apply),
+                         ):
+                         widget.fromIndex == 2?
+                         SecondaryButtonDark(
+                             width: MediaQuery.sizeOf(context).width,
+                             style: ButtonStyle(
+                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                   return BorderSide(
+                                     color: theme.colorScheme.secondary,
+                                     width: 2,
+                                   );
+                                 }
                                  ),
-                                 16.width,
-                                 Expanded(
-                                   child: PrimaryButtonDark(
-                                       child: Text(getLocalization().accept),
-                                       onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
-                                   ),
-                                 ),
-                               ],
+                                 backgroundColor: MaterialStateProperty.resolveWith(
+                                         (Set<MaterialState> states){
+                                       return Colors.white;
+                                     }
+                                 )
                              ),
-                           ):SizedBox()
-                         ],
-                       ),
-                       if(widget.pageMode == PageMode.hiring)ListView.builder(
-                           physics: const NeverScrollableScrollPhysics(),
-                           shrinkWrap: true,
-                           itemCount: getBloc().jobEntity!.profiles?.length??0,
-                           itemBuilder: (context, index){
-                             CandidateProfileEntity candidate = getBloc().jobEntity!.profiles![index];
-                             return AppCandidateProfile(
-                               fullName: candidate.fullName??"",
-                               jobTitle: getBloc().jobEntity!.title,
-                               rating: candidate.rating??0,
-                               hourlyRate: "R${candidate.hourlyRate}p/h",
-                               image: (candidate.profilePicture!=null)?
-                               CachedNetworkImageProvider(
-                                   candidate.profilePicture!
-                               ):null,
-                               viewProfileFunction: (){
-                                 context.router.push(CandidateProfileRoute(candidateProfile: candidate, jobInterestId: getBloc().jobEntity!.profiles![index].jobInterestId)).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
-                               },
+                             onPressed:() {
+                               context.router.push(CancellationDetailsRoute(bookingEntity: widget.bookingId!));
+
+                             },
+                             child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
+                         getBloc().jobEntity!.jobInterestStatus=="offered"?Padding(
+                           padding: const EdgeInsets.all(16.0),
+                           child: Row(
+                             children: [
+                               Expanded(
+                                 child: SecondaryButtonDark(
+                                     child: Text(getLocalization().decline),
+                                     onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                                 ),
+                               ),
+                               16.width,
+                               Expanded(
+                                 child: PrimaryButtonDark(
+                                     child: Text(getLocalization().accept),
+                                     onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                                 ),
+                               ),
+                             ],
+                           ),
+                         ):SizedBox()
+                       ],
+                     ),
+
+                     if(widget.pageMode == PageMode.hiring)
+                       Builder(
+                         builder: (context) {
+                           if(widget.pageMode != PageMode.hiring) {
+                             return const SizedBox();
+                           }
+                           if (getBloc().jobEntity!.profiles == null || getBloc().jobEntity!.profiles!.isEmpty) {
+                             return Column(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 const SizedBox(
+                                   height: 200,
+                                   width: 200,
+                                   child: Image(
+                                     image: AssetImage(
+                                         "assets/no_items_found.png"),
+                                   ),
+                                 ),
+                                 24.height,
+                                 Text(
+                                   "No profiles found",
+                                   style: theme.textTheme.headlineSmall,
+                                   textAlign: TextAlign.center,
+                                 )
+                               ],
                              );
-                           }),
-                     ], onTap: (int index) {  },
-                   ),
-
-
-                 ],
-               ),
+                           }
+                           return ListView.builder(
+                               itemCount: getBloc().jobEntity!.profiles?.length??0,
+                               itemBuilder: (context, index){
+                                 CandidateProfileEntity candidate = getBloc().jobEntity!.profiles![index];
+                                 return AppCandidateProfile(
+                                   fullName: candidate.fullName??"",
+                                   jobTitle: getBloc().jobEntity!.title,
+                                   rating: candidate.rating??0,
+                                   hourlyRate: "R${candidate.hourlyRate}p/h",
+                                   image: (candidate.profilePicture!=null)?
+                                   CachedNetworkImageProvider(
+                                       candidate.profilePicture!
+                                   ):null,
+                                   viewProfileFunction: (){
+                                     context.router.push(CandidateProfileRoute(candidateProfile: candidate, jobInterestId: getBloc().jobEntity!.profiles![index].jobInterestId)).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
+                                   },
+                                 );
+                               });
+                         }
+                     ),
+                     if(widget.pageMode == PageMode.hiring)
+                       Builder(
+                         builder: (context) {
+                           if(widget.pageMode != PageMode.hiring) {
+                             return const SizedBox();
+                           }
+                           if (getBloc().jobEntity!.matches == null || getBloc().jobEntity!.matches!.isEmpty) {
+                             return Column(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 const SizedBox(
+                                   height: 200,
+                                   width: 200,
+                                   child: Image(
+                                     image: AssetImage(
+                                         "assets/no_items_found.png"),
+                                   ),
+                                 ),
+                                 24.height,
+                                 Text(
+                                   "No profiles found",
+                                   style: theme.textTheme.headlineSmall,
+                                   textAlign: TextAlign.center,
+                                 )
+                               ],
+                             );
+                           }
+                           return ListView.builder(
+                               itemCount: getBloc().jobEntity!.matches?.length??0,
+                               itemBuilder: (context, index){
+                                 CandidateProfileEntity candidate = getBloc().jobEntity!.matches![index];
+                                 return AppCandidateProfile(
+                                   fullName: candidate.fullName??"",
+                                   jobTitle: getBloc().jobEntity!.title,
+                                   rating: candidate.rating??0,
+                                   hourlyRate: "R${candidate.hourlyRate}p/h",
+                                   image: (candidate.profilePicture!=null)?
+                                   CachedNetworkImageProvider(
+                                       candidate.profilePicture!
+                                   ):null,
+                                   viewProfileFunction: (){
+                                     context.router.push(CandidateProfileRoute(
+                                         candidateProfile: candidate,
+                                         job: getBloc().jobEntity,
+                                         jobInterestId: getBloc().jobEntity!.matches![index].jobInterestId
+                                     )).then((value) => getBloc().add(GetFullJobDetailsEvent(jobId: widget.jobId)));
+                                   },
+                                 );
+                               });
+                         }
+                     ),
+                   ], onTap: (int index) {  },
+                 ),
+                 ),
+                 if(getBloc().jobEntity != null && widget.pageMode==PageMode.hiring)PrimaryButton.fullWidth(onPressed: ()=>getBloc().add(
+                     UpdateJobPublishedStatusEvent()
+                 ),
+                   child: wText((getBloc().jobEntity!.status=="active")? getLocalization().unpublishListing: getLocalization().publishListing),
+                 ),
+                 24.height,
+               ],
              ),
            ),
          );

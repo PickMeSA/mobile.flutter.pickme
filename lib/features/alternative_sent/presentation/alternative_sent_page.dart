@@ -92,7 +92,7 @@ class _AlternativeSentPageState extends BasePageState<AlternativeSentPage, Alter
                           ),
                           onPressed: () {
                             context.router.pushAndPopUntil(
-                                BottomNavigationBarRoute(profileEntity: getBloc().profileEntity,
+                                BottomNavigationBarRoute(
                                     initialIndex: 1), predicate: (Route<dynamic> route) => false);
                           },
                           child: Text(getLocalization().backToBooking, style: TextStyle(color: theme.colorScheme.secondary),),

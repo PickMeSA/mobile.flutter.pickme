@@ -69,7 +69,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                   icon: const Icon(Iconsax.add),
                   showNextIcon: false,
                   title: getLocalization().createANewJobListing,
-                  onClick: () => context.router.push(const CreateJobListingInfoRoute()),
+                  onClick: () => context.router.push(const CreateJobListingInfoRoute()).then((value) => getBloc().add(MyJobListingsPageEnteredEvent(jobListingsPageEntity: widget.jobListingsPageEntity))),
                 ),
                 24.height,
                 AppTabBar(
@@ -109,7 +109,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                                 locationName: "${job.customer!.address}",
                                 dateTime: job.startDate,
                                 status: JobStatus.active,
-                                onNext: ()=>context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)),
+                                onNext: ()=>context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)).then((value) => getBloc().add(MyJobListingsPageEnteredEvent())),
                               totalMatches: job.possibleApplicantMatchesCount,
                               matchesString: "possible Matches",
                               totalApplications: job.jobApplicationsCount,
@@ -153,7 +153,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                               CachedNetworkImageProvider(job.customer!.profileImage!):null,
                               onNext: (){
                                   logger.i(job.title);
-                                  context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring));
+                                  context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)).then((value) => getBloc().add(MyJobListingsPageEnteredEvent()));
                                   },
                             );
                           }

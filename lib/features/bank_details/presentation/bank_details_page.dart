@@ -11,6 +11,7 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
@@ -56,9 +57,9 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
           }else if(state.profileEntity!.description!.isEmpty){
             context.router.push(const FinalDetailsRoute());
           }else if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push( PaySomeoneWebViewRoute());
+            context.router.push( PaySomeoneWebViewRoute(from: 0));
           }else{
-            context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
+            context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
           }
         }
 
@@ -68,7 +69,8 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
         }
 
         if(state is BankDetailsSubmittedState && state.dataState == DataState.error ){
-
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
       },
       builder: (context, state) {
@@ -108,7 +110,8 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                     child: AppDropdownMenu<AccountTypeEntity>(
                       controller: accountTypeController,
                       label: wText(getLocalization().accountTypeA),
-                      enableFilter: true,
+                      enableFilter: false,
+                      filled: true,
                       dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
                       width: MediaQuery.of(context).size.width-40,),
                   ),

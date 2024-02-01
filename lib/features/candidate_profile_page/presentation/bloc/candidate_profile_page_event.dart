@@ -27,4 +27,10 @@ class ReviewJobPageSubmitJobEvent extends CandidateProfilePageEvent{
 
   ReviewJobPageSubmitJobEvent({required this.job});
 }
+class RemoveCandidateFromMatchesEvent extends CandidateProfilePageEvent{
+  final String userId;
+  final JobEntity job;
+
+  RemoveCandidateFromMatchesEvent({required this.job, required this.userId});
+}
 

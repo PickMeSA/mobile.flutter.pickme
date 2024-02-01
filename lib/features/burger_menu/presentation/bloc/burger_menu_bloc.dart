@@ -4,6 +4,8 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
+import 'package:pickme/features/setup_profile/domain/use_cases/setup_profile_usecase/setup_profile_remote_submit_profile_type__usecase.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 
 part 'burger_menu_event.dart';
@@ -14,10 +16,13 @@ class BurgerMenuBloc
     extends BaseBloc<BurgerMenuPageEvent, BurgerMenuPageState> {
 
     List<bool> selectedToggleButtons = [true,false];
+    final SetupProfileRemoteSubmitProfileTypeUseCase setupProfileRemoteSubmitProfileTypeUseCase;
 
-    BurgerMenuBloc(): super(BurgerMenuPageInitState()) {
+    BurgerMenuBloc({required this.setupProfileRemoteSubmitProfileTypeUseCase}): super(BurgerMenuPageInitState()) {
 
         on<ToggleSelectedEvent>((event, emit) => _onToggleSelectedEvent(event, emit));
+        on<SetupProfileSubmitProfileTypeEvent>((event, emit) => _onSetupProfileSubmitProfileTypeEvent(event, emit));
+
 
     }
 
@@ -32,6 +37,32 @@ class BurgerMenuBloc
         }
 
         emit(ToggleSelectedState()..dataState = DataState.success);
+
+    }
+
+    _onSetupProfileSubmitProfileTypeEvent(
+        SetupProfileSubmitProfileTypeEvent event,
+        Emitter<BurgerMenuPageState> emit
+        ) async{
+        try {
+            String type= "";
+            emit(SetupProfileSubmitProfileTypeState()
+                ..dataState = DataState.loading);
+            if(selectedToggleButtons[0] == true){
+                type = 'work';
+            }else{
+                type = "hire";
+            }
+            await setupProfileRemoteSubmitProfileTypeUseCase.call(
+                params: SetupProfileRemoteSubmitProfileTypeUseCaseParams(
+                    profileTypeEntity: ProfileTypeEntity(type:type )));
+
+            emit(SetupProfileSubmitProfileTypeState()
+                ..dataState = DataState.success);
+        }catch(ex){
+            emit(SetupProfileSubmitProfileTypeState()
+                ..dataState = DataState.error);
+        }
 
     }
 } 

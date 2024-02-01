@@ -3,6 +3,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/bottom_navigation_bar/presentation/bloc/bottom_navigation_bar_bloc.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
@@ -17,6 +18,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
 import '../../jobs_landing_page/presentation/jobs_landing_page.dart';
 
@@ -24,7 +27,7 @@ import '../../jobs_landing_page/presentation/jobs_landing_page.dart';
 class BottomNavigationBarPage extends BasePage {
   ProfileEntity? profileEntity;
   int? initialIndex = 0;
-   BottomNavigationBarPage({ this.initialIndex, super.key, required this.profileEntity});
+   BottomNavigationBarPage({ this.initialIndex, super.key,  this.profileEntity});
 
   @override
   _BottomNavigationBarPageState createState() => _BottomNavigationBarPageState();
@@ -39,6 +42,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     // TODO: implement initState
     super.initState();
     getBloc().add(GetProfileDetailsEvent());
+    _controller.index = widget.initialIndex??0;
 
 
   }
@@ -52,15 +56,19 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
   Widget buildView(BuildContext context) {
 
     ThemeData theme = Theme.of(context);
+    UserModel userModel = boxUser.get(current);
     return BlocConsumer<BottomNavigationBarBloc, BottomNavigationBarPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+      },
       builder: (context, state) {
-        _controller.index = widget.initialIndex??0;
-         return PersistentTabView(
+         return state.dataState == DataState.loading || state.dataState == DataState.init?
+         const Center(
+           child: CircularProgressIndicator()
+         ):PersistentTabView(
            context,
            controller: _controller,
-           screens: _buildScreens(),
-           items: _navBarsItems(theme: theme),
+           screens: _buildScreens(userModel.type??"hire"),
+           items: _navBarsItems(type:userModel.type??"hire",theme: theme),
            confineInSafeArea: true,
            backgroundColor: Colors.white, // Default is Colors.white.
            handleAndroidBackButtonPress: true, // Default is true.
@@ -99,7 +107,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     return locator<AppLocalizations>();
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems({required ThemeData theme}) {
+  List<PersistentBottomNavBarItem> _navBarsItems({required ThemeData theme, required String type}) {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.home),
@@ -113,12 +121,20 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
+      type == "hire"?
+      PersistentBottomNavBarItem(
+        icon: const Icon(Iconsax.setting),
+        title: (getLocalization().services),
+        activeColorPrimary: theme.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ):
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.briefcase),
         title: (getLocalization().jobs),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
+      )
+      ,
       PersistentBottomNavBarItem(
         icon: const Icon(Iconsax.profile),
         title: (getLocalization().profile),
@@ -129,13 +145,12 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
     ];
   }
 
-  List<Widget> _buildScreens() {
-    bool isHiring = false;
+  List<Widget> _buildScreens(String type) {
     return [
         HomePage(controller: _controller),
         const MyBookingsUpcomingPage(),
-        if(!isHiring)const JobsLandingPage(),
-      if(isHiring)const JobsHiringLandingPage(),
+        type != "hire"?const JobsLandingPage()
+            : const JobsHiringLandingPage(),
         const ProfilePage()
     ];
   }

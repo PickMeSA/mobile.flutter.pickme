@@ -37,6 +37,7 @@ class MyReviewsPageBloc extends BaseBloc<MyReviewsPageEvent, MyReviewsPageState>
     try{
       UserModel userModel = boxUser.get(current);
       String userId = event.userId??userModel.id!;
+      isMyProfile = event.userId == null;
       pageEntity = await getMyReviewsUseCase.call(
           params: GetMyReviewsUseCaseParams(userId: userId));
       emit(GetPageDataState()..dataState = DataState.success);
