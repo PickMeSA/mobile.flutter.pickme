@@ -245,6 +245,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
 
                     wText(getLocalization().photosOfWork),
                     20.height,
+                    //if(getBloc().profileEntity?.workExperience?[index].files == null)
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -254,6 +255,8 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                         getBloc().profileEntity!.workExperience?[index].files == null &&
                             getBloc().profileEntity!.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
                       const SizedBox():
+                            getBloc().profileEntity!.workExperience![index].files!.isEmpty ?
+                            const SizedBox():
                       Column(
                         children: [
                           Padding(
