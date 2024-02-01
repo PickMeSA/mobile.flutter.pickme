@@ -49,25 +49,27 @@ class _ReusableNotificationPageState extends BasePageState<ReusableNotificationP
           width: MediaQuery.sizeOf(context).width,
           child:Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
-                wText(widget.title,style:theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 32,
-                    color: Colors.black
-                )),
-                20.height,
-                wText(widget.message),
-                20.height,
-                SizedBox(
-                  height: 400,
-                  child: widget.image,
-                ),
-                Spacer(),
-                widget.button
-              ],
+                  wText(widget.title,style:theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 32,
+                      color: Colors.black
+                  )),
+                  20.height,
+                  wText(widget.message),
+                  20.height,
+                  SizedBox(
+                    height: 400,
+                    child: widget.image,
+                  ),
+                  20.height,
+                  widget.button
+                ],
+              ),
             ),
           )  ,
         );

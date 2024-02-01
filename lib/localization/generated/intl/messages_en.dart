@@ -102,6 +102,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "At PickMe, we add additional costs to your rate to cover essential aspects:"),
         "backToBooking":
             MessageLookupByLibrary.simpleMessage("Back to bookings"),
+        "backToDashboard":
+            MessageLookupByLibrary.simpleMessage("Back to dashboard"),
         "backToJobs": MessageLookupByLibrary.simpleMessage("Back to Jobs"),
         "backToMyWallet":
             MessageLookupByLibrary.simpleMessage("Back to my wallet"),
@@ -451,6 +453,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
+        "reviewSubmitted":
+            MessageLookupByLibrary.simpleMessage("Review submitted"),
         "reviewUser": MessageLookupByLibrary.simpleMessage("Review user"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
@@ -512,6 +516,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tell us about your qualifications"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
+        "thanksForReviewingThisUser": MessageLookupByLibrary.simpleMessage(
+            "Thanks for reviewing this user. The information you have provided is very valuable to other users on Pick-me."),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),

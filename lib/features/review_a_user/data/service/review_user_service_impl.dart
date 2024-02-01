@@ -15,14 +15,20 @@ class SubmitReviewServiceImpl extends SubmitReviewService{
   @override
   Future<bool> submitReview({required SubmitReviewRepositoryParams params}) async{
     try{
+      logger.e({
+        "rating": params.rating,
+        "review": params.review,
+        "reviewerId": params.reviewerId,
+        "userId": params.userId,
+      });
       Response<dynamic> response = await apiService.post(
           "$baseUrl$version/reviews",
-          data: SubmitReviewRequestModel(
-            rating: params.rating,
-            review: params.review,
-            reviewerId: params.reviewerId,
-            userId: params.userId,
-          ).toJson()
+          data: {
+            "rating": params.rating,
+            "review": params.review,
+            "reviewerId": params.reviewerId,
+            "userId": params.userId,
+          }
       );
       if(response.statusCode==201){
         return true;
