@@ -18,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/functions/required_text_validator.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
@@ -52,6 +53,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   DateTime? startDate;
   DateTime? endDate;
   String address = "";
+  String? selectedIndustry;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -349,6 +351,32 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       24.height,
                       AppDivider(),
                       24.height,
+                      Text(getLocalization().industry, style: theme.textTheme.bodyMedium!.copyWith(
+                          fontVariations: 600.fontWeight
+                      ),),
+                      16.height,
+                      if(getBloc().industries!=null)DropdownButton<String>(
+                        value: selectedIndustry,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedIndustry = newValue;
+                          });
+                        },
+                        items: getBloc().industries!.industries.map<DropdownMenuItem<String>>((IndustryEntity industry) {
+                          return DropdownMenuItem<String>(
+                            value: industry.id!.toString(),
+                            child: Text(
+                              industry.industry!.toString(),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        }).toList(),
+                        isExpanded: true,
+                        hint: Text('Select Industry'),
+                      ),
+                      24.height,
+                      AppDivider(),
+                      24.height,
                       Text(getLocalization().skillsRequired, style: theme.textTheme.bodyMedium!.copyWith(
                           fontVariations: 600.fontWeight
                       ),),
@@ -420,12 +448,17 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           }else if(hoursTextController.text.isEmptyOrNull){
                             wErrorPopUp(message: "Estimated hours cannot be empty", type: getLocalization().error, context: context);
                             return;
+                          }else if(selectedIndustry.isEmptyOrNull){
+                            wErrorPopUp(message: "Please select the industry", type: getLocalization().error, context: context);
+                            return;
                           }
+                          logger.d(selectedIndustry);
                           CreateJobPageJobEntity job =  CreateJobPageJobEntity(
                               title: jobTitleController.text,
                               description: jobDescriptionController.text,
                               address: address,
                               status: 'active',
+                              industryId: selectedIndustry!,
                               startDate: startDate,
                               endDate: endDate,
                               startTime: startTimeTextController.text,
@@ -436,7 +469,13 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               images: getBloc().photos.map((e) => e.url!).toList(),
                               skills: getBloc().chipOptions
                           );
-                          context.router.push(ReviewJobListingInfoRoute(jobEntity: job, profile: getBloc().currentUser!));
+                          context.router.push(
+                            ReviewJobListingInfoRoute(
+                              jobEntity: job,
+                              profile: getBloc().currentUser!,
+                                candidateProfileEntity: widget.candidateToOffer
+                            ),
+                          );
                         },
                         child: Text(getLocalization().ccontinue)
                       ),

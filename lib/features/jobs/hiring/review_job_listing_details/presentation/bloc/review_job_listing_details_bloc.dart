@@ -5,6 +5,7 @@ import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
+import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/usecases/send_job_offer_use_case.dart';
 
 import '../../../../../../shared/domain/entities/create_job_page_job_entity.dart';
@@ -43,12 +44,15 @@ class ReviewJobListingInfoBloc extends BaseBloc<ReviewJobEvent, ReviewJobListing
     emit(SendJobOfferState()..dataState=DataState.loading);
     try{
       JobEntity insertedJob = await createJobListingUseCase.call(params: CreateJobListingUseCaseParams(jobEntity: event.job));
-      logger.d(insertedJob);
-      emit(SendJobOfferState()..dataState = DataState.success);
+      bool success = await sendJobOfferUseCase.call(params: SendJobOfferUseCaseParams(candidateProfileEntity: event.candidateProfileEntity, jobEntity: insertedJob));
+     if(success){
+       emit(SendJobOfferState()..dataState = DataState.success);
+     }else{
+       emit(SendJobOfferState(error: "An error occurred")..dataState = DataState.error);
+     }
     }catch(ex){
       logger.e(ex);
-
-      emit(SendJobOfferState()..dataState = DataState.error);
+      emit(SendJobOfferState(error: "An error occurred")..dataState = DataState.error);
     }
   }
 }

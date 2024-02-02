@@ -31,6 +31,8 @@ class AllServicesPage extends BasePage {
 
 class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPageBloc> {
   final Debouncer _debouncer = Debouncer(milliseconds: 500);
+  TextEditingController searchTextController = TextEditingController();
+  TextEditingController addressTextController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -67,6 +69,17 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
           getBloc().preloaderActive = false;
           Navigator.pop(context);
         }
+        if(state is SubmitSearchState && state.dataState == DataState.success){
+          if(widget.pageMode == ServicesPageMode.hiring){
+            context.router.push(
+                ServiceCategoryCandidatesRoute(
+                  filter: getBloc().filterEntity, pageTitle: getLocalization().searchResults,
+                )
+            );
+          }else{
+            context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getLocalization().searchForJobs, filter: getBloc().filterEntity));
+          }
+        }
       },
       builder: (context, state) {
         return Container(
@@ -82,9 +95,7 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
                 borderColor: whiteColor,
                 prefixIcon: const Icon(Iconsax.search_normal_1),
                 hint: getLocalization().whatAreYouLookingFor,
-                onChanged: (String searchText) => {
-                 _debouncer.run(() => getBloc().add(SearchTextChangedEvent(searchText: searchText)))
-                },
+                controller: searchTextController,
               ),
               10.height,
               AppTextField(
@@ -93,6 +104,20 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
                 borderColor: whiteColor,
                 prefixIcon: const Icon(Iconsax.location),
                 hint: getLocalization().locationAreaBasedOnProfile,
+                controller: addressTextController,
+
+              ),
+              20.height,
+              PrimaryButtonDark.fullWidth(
+                onPressed: ()=> getBloc().add(SearchTextChangedEvent(searchText: searchTextController.text, address:addressTextController.text)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(widget.pageMode == ServicesPageMode.hiring?getLocalization().searchForCandidates:getLocalization().searchForJobs),
+                    16.width,
+                    const Icon(Iconsax.search_normal)
+                  ],
+                ),
               ),
               20.height,
               Text(getLocalization().browseCategories,
@@ -109,7 +134,7 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
                         if(widget.pageMode == ServicesPageMode.hiring){
                           context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: getBloc().paginatedIndustries!.industries[index].id.toString()));
                         }else{
-                          context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getBloc().paginatedIndustries!.industries[index].industry, filter: FilterEntity(industryId: getBloc().paginatedIndustries!.industries[3].id.toString())));
+                          context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, pageTitle: getBloc().paginatedIndustries!.industries[index].industry, filter: FilterEntity(industryId: getBloc().paginatedIndustries!.industries[index].id.toString())));
                         }
                       },
                     );
@@ -140,7 +165,7 @@ class _AllServicesPageState extends BasePageState<AllServicesPage, AllServicesPa
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().allServices),
+      title: Text(widget.pageMode == ServicesPageMode.hiring?getLocalization().allServices:getLocalization().allJobs),
       actions: [
         TextButton(onPressed: () async{
           FilterEntity? filter = await context.router.push(FiltersRoute());

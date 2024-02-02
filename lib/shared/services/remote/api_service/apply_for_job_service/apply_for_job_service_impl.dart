@@ -91,6 +91,7 @@ class ApplyForJobServiceImpl extends ApplyForJobService{
    try{
      Response<dynamic> response = await apiService.put("$baseUrl$version/jobs/jobInterests/$jobInterestId", data: {
        "status": status,
+       "type": status=="booked"?"booking":"application",
      });
      if(response.statusCode==201 || response.statusCode==200){
        return true;

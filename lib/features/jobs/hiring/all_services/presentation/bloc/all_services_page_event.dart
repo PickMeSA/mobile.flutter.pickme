@@ -9,7 +9,8 @@ class AllServicesPageEnteredEvent extends AllServicesPageEvent{
 
 class SearchTextChangedEvent extends AllServicesPageEvent{
   final String searchText;
-  SearchTextChangedEvent({required this.searchText});
+  final String address;
+  SearchTextChangedEvent({required this.searchText, required this.address});
 }
 
 class FilterChangedEvent extends AllServicesPageEvent{

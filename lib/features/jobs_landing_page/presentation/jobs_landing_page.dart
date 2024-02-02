@@ -75,7 +75,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
               children: [
                 AppExplorationTile(
                   title: getLocalization().exploreAllJobs,
-                  onClick: ()=>context.router.push(const AllJobsRoute()),
+                  onClick: ()=>context.router.push(AllServicesRoute(pageMode: ServicesPageMode.working)),
                 ),
                 10.height,
                 AppExplorationTile(

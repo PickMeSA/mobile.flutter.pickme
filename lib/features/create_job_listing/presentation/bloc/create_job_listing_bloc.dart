@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -15,6 +14,8 @@ import 'package:pickme/features/jobs/shared/features/skills/domain/usecases/get_
 
 import 'package:pickme/shared/constants/numerical.dart';
 import 'package:logger/logger.dart';
+import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
+import 'package:pickme/shared/domain/usecases/get_industries_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remote_profile_usecase.dart';
@@ -31,6 +32,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   List<UploadedFileEntity> photos = [];
   UploadFileUseCase uploadFileUseCase;
   GetSkillsListUseCase getSkillsListUseCase;
+  GetIndustriesUseCase getIndustriesUseCase;
   int selectedTabIndex = 0;
   Logger logger = Logger();
   bool flexibleHoursChecked = false;
@@ -42,10 +44,12 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   OTPLocationEntity? otpLocationEntity;
   final GetRemoteProfileUseCase getRemoteProfileUseCase;
   ProfileEntity? currentUser;
+  PaginatedIndustryEntity? industries;
 
   CreateJobListingBloc({required this.uploadFileUseCase,
     required this.getSkillsListUseCase,
-    required this.getRemoteProfileUseCase}) : super(CreateJobListingInitial()) {
+    required this.getRemoteProfileUseCase,
+    required this.getIndustriesUseCase}) : super(CreateJobListingInitial()) {
     on<CreateJobListingPageEnteredEvent>((event, emit) => _onCreateJobListingPageEnteredEvent(event, emit));
     on<JobImageAddedClickedEvent>((event, emit) => _onAddJobImageClickedEvent(event, emit));
     on<FlexibleHoursCheckboxChangedEvent>((event, emit) => _onFlexibleHoursCheckboxChangedEvent(event, emit));
@@ -101,6 +105,7 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
       UserModel user = boxUser.get(current);
       currentUser = await getRemoteProfileUseCase.call(params: GetRemoteProfileUseCaseParams(id: user.id));
       JobsSkillListEntity skillListEntity = await getSkillsListUseCase.call();
+      industries = await getIndustriesUseCase.call();
       skillEntries = skillListEntity.skillListEntity!.map((e) => DropdownMenuItem(value: e, child: Text(e.skill!))).toList();
       emit(GetSkillsListState()..dataState = DataState.success);
     }catch(ex){

@@ -299,7 +299,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    Expanded(
                                      child: SecondaryButtonDark(
                                          child: Text(getLocalization().decline),
-                                         onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                                         onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "declined"))
                                      ),
                                    ),
                                    16.width,
@@ -442,7 +442,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                Expanded(
                                  child: SecondaryButtonDark(
                                      child: Text(getLocalization().decline),
-                                     onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                                     onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "declined"))
                                  ),
                                ),
                                16.width,

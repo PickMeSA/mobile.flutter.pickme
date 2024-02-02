@@ -19,5 +19,5 @@ class ReviewJobPageSubmitJobState extends ReviewJobListingState {
 }
 
 class SendJobOfferState extends ReviewJobListingState {
-  SendJobOfferState();
+  SendJobOfferState({super.error});
 }
