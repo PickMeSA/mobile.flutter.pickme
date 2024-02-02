@@ -1910,10 +1910,10 @@ class AppLocalizations {
     );
   }
 
-  /// `My Calendar`
+  /// `My calendar`
   String get myCalendar {
     return Intl.message(
-      'My Calendar',
+      'My calendar',
       name: 'myCalendar',
       desc: '',
       args: [],
