@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add work experience"),
         "additionalInformation":
             MessageLookupByLibrary.simpleMessage("Additional information"),
+        "allJobs": MessageLookupByLibrary.simpleMessage("All jobs"),
         "allServices": MessageLookupByLibrary.simpleMessage("All services"),
         "allowYourClientsToLeaveAReview": MessageLookupByLibrary.simpleMessage(
             "Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them."),

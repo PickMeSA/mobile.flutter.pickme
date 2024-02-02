@@ -3380,16 +3380,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Switching your profile from 'Working' to 'Hiring'. Confirm your choice?`
-  String get switchingYourProfileFromWorkerToHire {
-    return Intl.message(
-      'Switching your profile from \'Working\' to \'Hiring\'. Confirm your choice?',
-      name: 'switchingYourProfileFromWorkerToHire',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `You're booked for the job!`
   String get youreBookedForTheJob {
     return Intl.message(
@@ -3450,31 +3440,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Review submitted`
-  String get reviewSubmitted {
+  /// `Switching your profile from 'Working' to 'Hiring'. Confirm your choice?`
+  String get switchingYourProfileFromWorkerToHire {
     return Intl.message(
-      'Review submitted',
-      name: 'reviewSubmitted',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Thank you for reviewing this user`
-  String get thanksForReviewingThisUser {
-    return Intl.message(
-      'Thank you for reviewing this user',
-      name: 'thanksForReviewingThisUser',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Back to dashboard`
-  String get backToDashboard {
-    return Intl.message(
-      'Back to dashboard',
-      name: 'backToDashboard',
+      'Switching your profile from \'Working\' to \'Hiring\'. Confirm your choice?',
+      name: 'switchingYourProfileFromWorkerToHire',
       desc: '',
       args: [],
     );
@@ -3525,6 +3495,46 @@ class AppLocalizations {
     return Intl.message(
       'You don\'t have upcoming appointments',
       name: 'youDontHaveUpcomingAppointments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review submitted`
+  String get reviewSubmitted {
+    return Intl.message(
+      'Review submitted',
+      name: 'reviewSubmitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thank you for reviewing this user`
+  String get thanksForReviewingThisUser {
+    return Intl.message(
+      'Thank you for reviewing this user',
+      name: 'thanksForReviewingThisUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to dashboard`
+  String get backToDashboard {
+    return Intl.message(
+      'Back to dashboard',
+      name: 'backToDashboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All jobs`
+  String get allJobs {
+    return Intl.message(
+      'All jobs',
+      name: 'allJobs',
       desc: '',
       args: [],
     );

@@ -91,7 +91,8 @@ class _BookingSuccessPageState extends BasePageState<BookingSuccessPage, Booking
                                )
                            ),
                            onPressed: () {
-                            context.router.popUntilRouteWithName("");
+                            context.router.pop();
+                            context.router.pop();
                            },
                            child: Text(getLocalization().backToBooking, style: TextStyle(color: theme.colorScheme.secondary),),
                          ),
