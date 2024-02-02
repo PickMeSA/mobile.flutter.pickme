@@ -216,7 +216,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                           Expanded(
                             child: SecondaryButtonDark(
                                 child: Text(getLocalization().decline),
-                                onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "decline"))
+                                onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "declined"))
                             ),
                           ),
                           16.width,
