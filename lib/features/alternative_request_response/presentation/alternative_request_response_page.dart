@@ -187,6 +187,7 @@ class _AlternativeRequestResponsePageState extends BasePageState<AlternativeRequ
                           )
                       ),
                       onPressed: () {
+                        if(!widget.approved)
                         getBloc().add(RescheduleBookingEvent(rescheduleEntity:
                         RescheduleEntity(
                             previousStatus: widget.booking!.previousStatus,
@@ -200,6 +201,11 @@ class _AlternativeRequestResponsePageState extends BasePageState<AlternativeRequ
                             status: widget.booking!.previousStatus,
                             proposerUid: widget.booking!.proposerUid
                         )));
+                        if(widget.approved)
+                          context.router.pushAndPopUntil(
+                              BottomNavigationBarRoute(
+                                  initialIndex: 1), predicate: (Route<dynamic> route) => false);
+
                       },
                       child: Text(getLocalization().backToBooking,
                         style: TextStyle(color: theme.colorScheme.secondary),),
