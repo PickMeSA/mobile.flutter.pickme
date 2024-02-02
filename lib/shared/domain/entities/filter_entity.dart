@@ -12,6 +12,8 @@ class FilterEntity{
   String? industryId;
   double? lat;
   double? lng;
+  String? address;
+  String? title;
 
   FilterEntity({
     this.priceRange,
@@ -22,6 +24,8 @@ class FilterEntity{
     this.industryId,
     this.lat,
     this.lng,
+    this.address,
+    this.title,
   }):assert((lat==null && lng==null) || (lat!=null && lng!=null));
 
   copyWith({

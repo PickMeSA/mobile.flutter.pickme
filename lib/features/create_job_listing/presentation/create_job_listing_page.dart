@@ -436,7 +436,13 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               images: getBloc().photos.map((e) => e.url!).toList(),
                               skills: getBloc().chipOptions
                           );
-                          context.router.push(ReviewJobListingInfoRoute(jobEntity: job, profile: getBloc().currentUser!));
+                          context.router.push(
+                            ReviewJobListingInfoRoute(
+                              jobEntity: job,
+                              profile: getBloc().currentUser!,
+                                candidateProfileEntity: widget.candidateToOffer
+                            ),
+                          );
                         },
                         child: Text(getLocalization().ccontinue)
                       ),
