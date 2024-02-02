@@ -108,8 +108,8 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             JobEntity job = getBloc().myJobs!.activeJobs[index];
                             return AppJobAdvertCard(
                                 jobName: job.title,
-                                employerName: "${job.customer!.firstName} ${job.customer!.surname}",
-                                locationName: "${job.customer!.address}",
+                                employerName: "${job.customer?.firstName} ${job.customer?.surname}",
+                                locationName: "${job.address}",
                                 dateTime: job.startDate,
                                 status: JobStatus.active,
                                 onNext: ()=>context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)).then((value) => getBloc().add(MyJobListingsPageEnteredEvent())),
