@@ -141,7 +141,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: ()=> context.router.push(JobListRoute(pageMode: JobListMode.inYourArea, filter: FilterEntity(distance: 20))),
+                        onPressed: ()=> context.router.push(JobListRoute(pageMode: JobListMode.inYourArea, filter: FilterEntity(distance: 20), pageTitle: getLocalization().inYourArea)),
                         child: Row(
                           children: [
                             Text(
