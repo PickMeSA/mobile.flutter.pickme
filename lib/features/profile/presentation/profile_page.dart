@@ -88,7 +88,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    (getBloc().profileEntity?.pictureEntity?.url=="")?
+                    (getBloc().profileEntity?.pictureEntity?.url==""|| getBloc().profileEntity?.pictureEntity?.url == null)?
                     AppImageAvatar.small():
                     AppImageAvatar.small(
                       image: CachedNetworkImageProvider(getBloc().profileEntity!.pictureEntity!.url!),
