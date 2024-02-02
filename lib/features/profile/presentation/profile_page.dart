@@ -301,11 +301,8 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                     );
                                 }),
                             30.height,
-
                             const AppDivider(),
                             10.height,
-
-
                           ],
                         );
                       }
