@@ -4,6 +4,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -14,6 +15,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/my_bookings_upcoming_bloc.dart';
@@ -58,11 +60,14 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
 
     ThemeData theme = Theme.of(context);
     return SmartRefresher(
-
       controller: _refreshController,
       onRefresh: _onRefresh,
       child: BlocConsumer<MyBookingsUpcomingBloc, MyBookingsUpcomingPageState>(
-        listener: (context, state){},
+        listener: (context, state){
+          if(state.dataState == DataState.error && state is LoadBookingUpcomingState){
+            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          }
+        },
         builder: (context, state) {
 
            return SingleChildScrollView(
@@ -211,7 +216,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                         dateTime: getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
                                             || getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
                               ?DateTime.parse(getBloc().upcomingHireBookingsList[index].proposedAltStartDate)
-                                            :getBloc().upcomingHireBookingsList[index].job.startDate!,
+                                            :DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!),
                                         status: getBloc().upcomingHireBookingsList[index].status,
                                         onNext: () { UserModel userModel = boxUser.get(current);
                                         if(

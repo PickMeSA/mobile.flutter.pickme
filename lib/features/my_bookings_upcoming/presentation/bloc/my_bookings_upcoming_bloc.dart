@@ -58,7 +58,7 @@ class MyBookingsUpcomingBloc
             });
             emit(LoadBookingUpcomingState()..dataState = DataState.success);
         }catch(ex){
-            emit(LoadBookingUpcomingState()..dataState = DataState.error);
+            emit(LoadBookingUpcomingState(error: ex.toString())..dataState = DataState.error);
         }
     }
 

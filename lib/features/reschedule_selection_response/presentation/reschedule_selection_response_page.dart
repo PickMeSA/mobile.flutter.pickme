@@ -187,19 +187,10 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                               )
                           ),
                           onPressed: () {
-                            getBloc().add(RescheduleBookingEvent(rescheduleEntity:
-                            RescheduleEntity(
-                              previousStatus: widget.booking!.previousStatus,
-                              proposedAltStartDate: "",
-                                proposedAltStartTime: "",
-                                startTime: widget.booking?.job.startTime??"",
-                                jobInterestId: widget.booking?.id??"",
-                                reasonForChange: widget.booking?.reasonForChange??"",
-                                startDate: widget.booking!.startDate!,
-                                comments: widget.booking!.comments,
-                                status: widget.booking!.previousStatus,
-                                proposerUid: widget.booking!.proposerUid
-                            )));
+                            context.router.pushAndPopUntil(
+                            BottomNavigationBarRoute(
+                                initialIndex: 1), predicate: (Route<dynamic> route) => false);
+
                           },
                           child: Text(getLocalization().backToBooking,
                             style: TextStyle(color: theme.colorScheme.secondary),),
