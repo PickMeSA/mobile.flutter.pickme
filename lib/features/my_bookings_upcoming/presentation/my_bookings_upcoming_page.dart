@@ -156,9 +156,9 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                      //viewHeight:192,
                      initialIndex: 0,
                      tabs:  <Widget>[
-                        Text(getLocalization().upcoming, style: theme.textTheme.titleSmall?.copyWith(fontSize: 12),),
-                       Text(getLocalization().completed, style: theme.textTheme.titleSmall?.copyWith(fontSize: 12),),
-                       Text(getLocalization().cancelled, style: theme.textTheme.titleSmall?.copyWith(fontSize: 12),),
+                        wText(getLocalization().upcoming, style: theme.textTheme.titleSmall?.copyWith(fontSize: 11),),
+                       wText(getLocalization().completed, style: theme.textTheme.titleSmall?.copyWith(fontSize: 11),),
+                       wText(getLocalization().cancelled, style: theme.textTheme.titleSmall?.copyWith(fontSize: 11),),
                      ],
                      views:  <Widget>[
                         ListView.builder(
