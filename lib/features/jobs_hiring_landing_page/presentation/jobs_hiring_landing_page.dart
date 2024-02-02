@@ -74,14 +74,14 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
               children: [
                 AppExplorationTile(
                   title: getLocalization().exploreAllServices,
-                  onClick: () => context.router.push(AllServicesRoute()),
+                  onClick: () => context.router.push(AllServicesRoute()).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                 ),
                 10.height,
                 AppExplorationTile(
                   title: getLocalization().myJobListings,
                   count: getBloc().jobCount,
                   icon: const Icon(Iconsax.document_text_14),
-                  onClick: ()=>context.router.push(MyJobListingsRoute(jobListingsPageEntity: getBloc().jobListingsPageEntity)),
+                  onClick: ()=>context.router.push(MyJobListingsRoute(jobListingsPageEntity: getBloc().jobListingsPageEntity)).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                 ),
                 40.height,
                 Row(
@@ -91,7 +91,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: () => context.router.push(AllServicesRoute()),
+                        onPressed: () => context.router.push(AllServicesRoute()).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                         child: Row(
                           children: [
                             Text(
@@ -120,14 +120,14 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                                   color: Colors.white,
                                   size: 20,
                                 ),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[0].id.toString())),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[0].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                             ),
                             10.height,
                             AppSectionCard(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
                               title: industries.industries[1].industry!,
                               color: const Color(0xFF23A8B3),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[1].id.toString())),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[1].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                             ),
                           ]),
                     ),
@@ -139,14 +139,14 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
                               title: industries.industries[2].industry!,
                               color: const Color(0xFF3EB62B),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[2].id.toString())),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[2].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                             ),
                             10.height,
                             AppSectionCard.small(
                               icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
                               title: industries.industries[3].industry!,
                               color: const Color(0xFFF44F4E),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[3].id.toString())),
+                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[3].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                             ),
                           ]),
                     ),
@@ -160,7 +160,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                       style: theme.textTheme.titleMedium,
                     )),
                     TextButton(
-                        onPressed: () => context.router.push(AllServicesRoute()),
+                        onPressed: () => context.router.push(AllServicesRoute()).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
                         child: Row(
                           children: [
                             Text(

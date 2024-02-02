@@ -23,6 +23,8 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
         "description": jobListingRepositoryParams.jobEntity.description,
         "status": jobListingRepositoryParams.jobEntity.status,
         "address": jobListingRepositoryParams.jobEntity.address,
+        "industries": jobListingRepositoryParams.jobEntity.industryId,
+        "offeredTo": jobListingRepositoryParams.jobEntity.offeredTo,
         "startDate": jobListingRepositoryParams.jobEntity.startDate != null
             ? jobListingRepositoryParams.jobEntity.startDate!.toIso8601String()
             : null,
@@ -50,6 +52,8 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
         "description": jobListingRepositoryParams.jobEntity.description,
         "status": jobListingRepositoryParams.jobEntity.status,
         "address": jobListingRepositoryParams.jobEntity.address,
+        "industries": jobListingRepositoryParams.jobEntity.industryId,
+        "offeredTo": jobListingRepositoryParams.jobEntity.offeredTo,
         "startDate": jobListingRepositoryParams.jobEntity.startDate != null
             ? jobListingRepositoryParams.jobEntity.startDate!.toIso8601String()
             : null,
