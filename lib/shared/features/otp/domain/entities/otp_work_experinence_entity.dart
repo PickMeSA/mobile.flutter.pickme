@@ -23,7 +23,7 @@ class OTPWorkExperienceEntity {
   OTPWorkExperienceEntity.fromResponse(OTPWorkExperienceModelResponse response){
     title = response.title??"";
     industryId = response.industryId??7;
-    endDate = DateTime.parse(response.endDate!);
+    endDate = response.endDate != null ?DateTime.parse(response.endDate!): null;
     startDate = DateTime.parse(response.startDate!);
     company = response.company??"";
     isCurrent = response.isCurrent??false;
@@ -35,7 +35,7 @@ class OTPWorkExperienceEntity {
         title: title,
         company: company,
         startDate: startDate.toString(),
-        endDate: endDate.toString(),
+        endDate:  endDate?.toString(),
         isCurrent: isCurrent,
         industryId: industryId,
         files: files?.map((e) => {"id": e.id, "name": e.name, "url":e.url}).toList()??[],

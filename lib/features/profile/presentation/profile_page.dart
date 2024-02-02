@@ -245,65 +245,75 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                       shrinkWrap: true,
                       itemCount: getBloc().profileEntity!.workExperience!.length,
                       itemBuilder:(context, index) {
-                        return AppProfileQualification(
-                            qualification: Award(
-                                name: getBloc().profileEntity!.workExperience![index].title!,
-                                //otpWorkExperienceEntityList![index].title!,
-                                institutionName: getBloc().profileEntity!.workExperience![index].company!,
-                                //otpWorkExperienceEntityList![index].company!,
-                                qualificationType: AppQualificationType
-                                    .experience,
-                                dateStarted: getBloc().profileEntity!.workExperience![index].startDate,
-                                //otpWorkExperienceEntityList![index].startDate!,
-                                dateEnded: getBloc().profileEntity!.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
-                            ));
+                        return Column(
+                          children: [
+                            AppProfileQualification(
+                                qualification: Award(
+                                    name: getBloc().profileEntity!.workExperience![index].title!,
+                                    //otpWorkExperienceEntityList![index].title!,
+                                    institutionName: getBloc().profileEntity!.workExperience![index].company!,
+                                    //otpWorkExperienceEntityList![index].company!,
+                                    qualificationType: AppQualificationType
+                                        .experience,
+                                    dateStarted: getBloc().profileEntity!.workExperience![index].startDate,
+                                    //otpWorkExperienceEntityList![index].startDate!,
+                                    dateEnded: getBloc().profileEntity!.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
+                                )),
+                            10.height,
+                            wText(getLocalization().photosOfWork),
+                            20.height,
+                            //if(getBloc().profileEntity?.workExperience?[index].files == null)
+                            ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: getBloc().profileEntity!.workExperience?[index].files?.length,
+                                itemBuilder: (context, pIndex){
+                                  return
+                                    getBloc().profileEntity!.workExperience?[index].files == null &&
+                                        getBloc().profileEntity!.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
+                                    const SizedBox():
+                                    getBloc().profileEntity!.workExperience![index].files!.isEmpty ?
+                                    const SizedBox():
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 16.0),
+                                          child: Row(
+                                            children: [
+                                              if(pIndex.isEven || pIndex == 0)
+                                                Expanded(child: ImageThumbnail(
+                                                  imagePath:  getBloc().profileEntity!.workExperience?[index].files?[pIndex].url,
+                                                  //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
+                                                )),
+                                              16.width, // Add some spacing between images
+                                              if(getBloc().profileEntity!.workExperience?[index].files?.length == pIndex + 1)
+                                                Expanded(child: Container(),),
+                                              if(getBloc().profileEntity!.workExperience![index].files!.length > pIndex + 1 && pIndex.isEven)
+                                                Expanded(child: ImageThumbnail(
+                                                  imagePath:  getBloc().profileEntity!.workExperience?[index].files?[pIndex + 1].url,
+                                                  //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
+                                                )),
+                                            ],
+                                          ),
+                                        ),
+
+                                      ],
+                                    );
+                                }),
+                            30.height,
+
+                            const AppDivider(),
+                            10.height,
+
+
+                          ],
+                        );
                       }
                     ),
 
-                    wText(getLocalization().photosOfWork),
-                    20.height,
-                    //if(getBloc().profileEntity?.workExperience?[index].files == null)
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                    itemCount: getBloc().profileEntity!.workExperience?.length,
-                    itemBuilder: (context, index){
-                      return
-                        getBloc().profileEntity!.workExperience?[index].files == null &&
-                            getBloc().profileEntity!.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
-                      const SizedBox():
-                            getBloc().profileEntity!.workExperience![index].files!.isEmpty ?
-                            const SizedBox():
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
-                            child: Row(
-                              children: [
-                                if(index.isEven || index == 0)
-                                  Expanded(child: ImageThumbnail(
-                                    imagePath:  getBloc().profileEntity!.workExperience?[index].files?[index].url,
-                                    //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
-                                  )),
-                                16.width, // Add some spacing between images
-                                if(getBloc().profileEntity!.workExperience?[index].files?.length == index + 1)
-                                  Expanded(child: Container(),),
-                                if(getBloc().profileEntity!.workExperience![index].files!.length > index + 1 && index.isEven)
-                                  Expanded(child: ImageThumbnail(
-                                    imagePath:  getBloc().profileEntity!.workExperience?[index].files?[index + 1].url,
-                                    //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
-                                  )),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
                   ],
                 ),
-                20.height,
-                const AppDivider(),
-                10.height,
+
                 Row(
                   children: [
                     wText(getLocalization().qualificationMembership, style: theme.textTheme.titleMedium),
