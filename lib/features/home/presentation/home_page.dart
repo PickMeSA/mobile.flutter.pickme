@@ -274,7 +274,7 @@ late ProfileModel profileModel;
                              wText(getLocalization().inYourArea, style: TextStyle(fontWeight: FontWeight.bold)),
                              Spacer(),
                              InkWell(onTap:()=> userMode.type == 'work'?
-                             context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs, filter: FilterEntity()),):
+                             context.router.push(JobListRoute(pageMode: JobListMode.inYourArea, filter: FilterEntity(distance: 20)),):
                              context.router.push(AllServicesRoute())
                                ,
                                child: wText(getLocalization().seeAll,
