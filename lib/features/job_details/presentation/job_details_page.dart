@@ -175,7 +175,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                rating: getBloc().jobEntity!.customer==null?0:getBloc().jobEntity!.customer!.averageRating??0,
                                seeReviews: getLocalization().seeReviews,
                                profileImage: getBloc().jobEntity!.customer!.profileImage,
-                               onSeeReviews: ()=>context.router.push(MyReviewsRoute(userId: getBloc().currentUserId))
+                               onSeeReviews: ()=>context.router.push(MyReviewsRoute(userId: getBloc().jobEntity?.customer?.id))
                            ),
                            const AppDivider(),
                              20.height,
