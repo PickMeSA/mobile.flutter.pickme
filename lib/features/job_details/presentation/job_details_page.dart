@@ -153,6 +153,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                  getBloc().jobEntity == null ?Center(
                    child: Text(getLocalization().loadingDotDot),
                  ):AppTabBar(
+
                    viewHeight:MediaQuery.sizeOf(context).height-300,
                    isScrollable:true,
                    tabs: <Widget>[
@@ -168,7 +169,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                          child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
-                           WClientWidget(
+                           wCardlessClientWidget(
                                context: context,
                                areaLocation: getBloc().jobEntity!.customer?.address??"",
                                clientName: getBloc().jobEntity!.customer!=null?"${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}":"",
