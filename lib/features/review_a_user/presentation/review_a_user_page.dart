@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/constants/default_values.dart';
-import 'package:pickme/shared/domain/entities/review_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
@@ -87,6 +85,14 @@ class _ReviewAUserPageState extends BasePageState<ReviewAUserPage, ReviewAUserBl
         if(state is SubmitClickedState && state.dataState == DataState.success){
           getBloc().preloaderActive = false;
           Navigator.pop(context);
+          context.router.push(ReusableNotificationRoute(
+              title: getLocalization().reviewSubmitted,
+              message: getLocalization().thanksForReviewingThisUser,
+              button: PrimaryButtonDark.fullWidth(
+                  onPressed: ()=>context.router.replace(BottomNavigationBarRoute(initialIndex: 1)),
+                  child: Text(getLocalization().backToDashboard)),
+              image: Image.asset("assets/man_and_woman_celebration.png")
+          ));
         }
         //loading
         if(state is SubmitClickedState && state.dataState == DataState.error){
@@ -105,33 +111,35 @@ class _ReviewAUserPageState extends BasePageState<ReviewAUserPage, ReviewAUserBl
           Center(child: Text(getLocalization().loadingDotDot),): Column(
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  AppCandidateProfile(
-                      fullName: "${user.firstName} ${user.surname}",
-                      jobTitle:  user.industry?.industry??"",
-                      rating: user.averageRating??0,
-                      hourlyRate: null),
-                  Text("${getLocalization().howWouldYouRate} ${user.firstName}?", style: const TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),),
-                  24.height,
-                  AppStarRating(
-                    rating: getBloc().rating,
-                    onChanged: (int value){
-                      getBloc().add(RatingChangedEvent(value: value));
-                    },
-                  ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    AppCandidateProfile(
+                        fullName: "${user.firstName} ${user.surname}",
+                        jobTitle:  user.industry?.industry??"",
+                        rating: user.averageRating??0,
+                        hourlyRate: null),
+                    Text("${getLocalization().howWouldYouRate} ${user.firstName}?", style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),),
                     24.height,
-                    AppTextField(
-                    textFieldType: TextFieldType.MULTILINE,
-                    controller: reviewTextController,
-                      onChanged: (String text){
-                        getBloc().add(ReviewTextChangedEvent(value: text));
+                    AppStarRating(
+                      rating: getBloc().rating,
+                      onChanged: (int value){
+                        getBloc().add(RatingChangedEvent(value: value));
                       },
-                  )
-                ],
+                    ),
+                      24.height,
+                      AppTextField(
+                      textFieldType: TextFieldType.MULTILINE,
+                      controller: reviewTextController,
+                        onChanged: (String text){
+                          getBloc().add(ReviewTextChangedEvent(value: text));
+                        },
+                    )
+                  ],
+                  ),
                 ),
               ),
               PrimaryButtonDark.fullWidth(

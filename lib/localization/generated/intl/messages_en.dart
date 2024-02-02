@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add work experience"),
         "additionalInformation":
             MessageLookupByLibrary.simpleMessage("Additional information"),
+        "allJobs": MessageLookupByLibrary.simpleMessage("All jobs"),
         "allServices": MessageLookupByLibrary.simpleMessage("All services"),
         "allowYourClientsToLeaveAReview": MessageLookupByLibrary.simpleMessage(
             "Allow your clients, customers, or co-workers to easily leave a review for you. They can scan the QR code or you can copy and share the link with them."),
@@ -97,11 +98,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "applied": MessageLookupByLibrary.simpleMessage("Applied"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
+        "areYouSureYouWantToDeleteYourAccount":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you would like to delete your account."),
         "atPickMeWeAddAdditionalCostsToYourRateToCoverEssentialAspects":
             MessageLookupByLibrary.simpleMessage(
                 "At PickMe, we add additional costs to your rate to cover essential aspects:"),
         "backToBooking":
             MessageLookupByLibrary.simpleMessage("Back to bookings"),
+        "backToDashboard":
+            MessageLookupByLibrary.simpleMessage("Back to dashboard"),
         "backToJobs": MessageLookupByLibrary.simpleMessage("Back to Jobs"),
         "backToMyWallet":
             MessageLookupByLibrary.simpleMessage("Back to my wallet"),
@@ -159,6 +165,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you\'re available"),
         "dateTime": MessageLookupByLibrary.simpleMessage("Date & Time"),
         "decline": MessageLookupByLibrary.simpleMessage("Decline"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
+        "deleteAccountQ":
+            MessageLookupByLibrary.simpleMessage("Delete account?"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "didntReceiveACode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive a code?"),
@@ -288,7 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myBankingDetails":
             MessageLookupByLibrary.simpleMessage("My banking details"),
         "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
-        "myCalendar": MessageLookupByLibrary.simpleMessage("My Calendar"),
+        "myCalendar": MessageLookupByLibrary.simpleMessage("My calendar"),
         "myHourlyRateAndWorkingHours": MessageLookupByLibrary.simpleMessage(
             "My hourly rate and working hours"),
         "myJobListings":
@@ -406,6 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Possible price range"),
         "preferredIndustry":
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
+        "present": MessageLookupByLibrary.simpleMessage("Present"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "proposeAlternative":
             MessageLookupByLibrary.simpleMessage("Propose Alternative"),
@@ -451,6 +461,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
+        "reviewSubmitted":
+            MessageLookupByLibrary.simpleMessage("Review submitted"),
         "reviewUser": MessageLookupByLibrary.simpleMessage("Review user"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
@@ -512,6 +524,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tell us about your qualifications"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
+        "thanksForReviewingThisUser": MessageLookupByLibrary.simpleMessage(
+            "Thank you for reviewing this user"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
@@ -557,6 +571,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "workingDays": MessageLookupByLibrary.simpleMessage("Working days"),
         "workingDaysA": MessageLookupByLibrary.simpleMessage("Working days *"),
         "workingHours": MessageLookupByLibrary.simpleMessage("Working hours"),
+        "yesDelete": MessageLookupByLibrary.simpleMessage("Yes, Delete"),
         "yesSwitch": MessageLookupByLibrary.simpleMessage("Yes, switch"),
         "youAreAllSetup":
             MessageLookupByLibrary.simpleMessage("You\'re all set up!"),

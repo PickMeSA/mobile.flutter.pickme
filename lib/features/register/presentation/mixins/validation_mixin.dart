@@ -1,5 +1,7 @@
 
-  import 'package:flutter_ui_components/flutter_ui_components.dart';
+  import 'dart:ffi';
+
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 
 bool isPasswordValid(String inputPassword){
   return true;
@@ -41,6 +43,11 @@ bool isPasswordValid(String inputPassword){
     if(value.length != 13){
       return "Please enter a valid ID number";
     }
+    String pattern =
+        r'^[0-9]{13}$';
+    RegExp regex =  RegExp(pattern);
+    if(!regex.hasMatch(value))
+      return "Please enter a valid phone number";
   }
   }
   

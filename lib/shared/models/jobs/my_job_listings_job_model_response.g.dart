@@ -94,14 +94,14 @@ Map<String, dynamic> _$$JobInterestModelImplToJson(
 
 _$ApplicantImpl _$$ApplicantImplFromJson(Map<String, dynamic> json) =>
     _$ApplicantImpl(
-      userId: json['userId'] as String,
-      firstName: json['firstName'] as String,
-      surname: json['surname'] as String,
-      profileImage: json['profileImage'] as String,
-      averageRating: json['averageRating'] as int,
-      address: json['address'] as String,
-      hourlyRate: (json['hourlyRate'] as num).toDouble(),
-      jobTitle: json['jobTitle'] as String,
+      userId: json['userId'] as String?,
+      firstName: json['firstName'] as String?,
+      surname: json['surname'] as String?,
+      profileImage: json['profileImage'] as String?,
+      averageRating: json['averageRating'] as int?,
+      address: json['address'] as String?,
+      hourlyRate: (json['hourlyRate'] as num?)?.toDouble(),
+      jobTitle: json['jobTitle'] as String?,
     );
 
 Map<String, dynamic> _$$ApplicantImplToJson(_$ApplicantImpl instance) =>

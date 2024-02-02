@@ -46,7 +46,7 @@ class EditWorkExperienceBloc
             emit(SubmitWorkExperienceState()..dataState = DataState.success);
 
         }catch(ex){
-            emit(SubmitWorkExperienceState()..dataState = DataState.error);
+            emit(SubmitWorkExperienceState(error: ex.toString())..dataState = DataState.error);
 
         }
 

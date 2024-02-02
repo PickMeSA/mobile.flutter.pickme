@@ -134,7 +134,7 @@ class _ResendOTPPageState extends BasePageState<ResendOTPPage, ResendOTPBloc> {
                         Padding(padding: EdgeInsets.only(top: 24, bottom: 14),
                           child: Center(
                               child: InkWell(
-                                onTap: () {},
+                                onTap: ()=>context.router.push(ContactRoute()),
                                 child: wText(getLocalization().contactHelpCenter, style:
                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                               )

@@ -36,7 +36,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
   late TextEditingController endDateController = TextEditingController();
   late TextEditingController dropdownIndustryController = TextEditingController();
   late DateTime startDate = DateTime.now();
-  late DateTime endDate = DateTime.now();
+   DateTime? endDate;
   final _formKey = GlobalKey<FormState>();
 
   @override

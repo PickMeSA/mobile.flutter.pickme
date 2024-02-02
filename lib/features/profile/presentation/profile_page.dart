@@ -14,6 +14,9 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_list_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_award.dart';
+import 'package:pickme/shared/widgets/w_decision_widget.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
 import 'bloc/profile_bloc.dart';
@@ -44,7 +47,21 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
   @override
   Widget buildView(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfilePageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is DeleteProfileState && state.dataState == DataState.loading ){
+          preloader(context);
+        }
+
+        if(state is DeleteProfileState && state.dataState == DataState.error){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+
+        if(state is DeleteProfileState && state.dataState == DataState.success){
+          context.router.pushAndPopUntil( const LandingRoute(), predicate: (Route<dynamic> route) => false);
+
+        }
+      },
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
         return state.dataState == DataState.loading && state is GetProfileDetailsState
@@ -115,14 +132,14 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                                 wText(getBloc().profileEntity!.location!.address.toString(), style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black,),),
                                 Row(
                                   children: [
-                                    AppStarRating(rating: 3, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
-                                    wText(3.toDouble().toString()),
+                                    AppStarRating(rating: getBloc().profileEntity!.averageRating??0, onChanged: (int index)=>debugPrint("Clicked index: $index"),),
+                                    wText(getBloc().profileEntity!.averageRating?.toString()??"0"),
                                     const Spacer(),
                                     GestureDetector(onTap: ()=>context.router.push(MyReviewsRoute()),
                                       child: wText(getLocalization().seeReviews,style: const TextStyle(decoration: TextDecoration.underline)),)
                                   ],
                                 ),
-                                  wText("R${getBloc().profileEntity!.hourlyRate} p/h"),
+                                  wText("${getLocalization().r}${getBloc().profileEntity!.hourlyRate} p/h"),
                               ],
                             ),
                           ],
@@ -228,65 +245,72 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                       shrinkWrap: true,
                       itemCount: getBloc().profileEntity!.workExperience!.length,
                       itemBuilder:(context, index) {
-                        return AppProfileQualification(
-                            qualification: Award(
-                                name: getBloc().profileEntity!.workExperience![index].title!,
-                                //otpWorkExperienceEntityList![index].title!,
-                                institutionName: getBloc().profileEntity!.workExperience![index].company!,
-                                //otpWorkExperienceEntityList![index].company!,
-                                qualificationType: AppQualificationType
-                                    .experience,
-                                dateStarted: getBloc().profileEntity!.workExperience![index].startDate,
-                                //otpWorkExperienceEntityList![index].startDate!,
-                                dateEnded: getBloc().profileEntity!.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
-                            ));
+                        return Column(
+                          children: [
+                            AppProfileQualification(
+                                qualification: Award(
+                                    name: getBloc().profileEntity!.workExperience![index].title!,
+                                    //otpWorkExperienceEntityList![index].title!,
+                                    institutionName: getBloc().profileEntity!.workExperience![index].company!,
+                                    //otpWorkExperienceEntityList![index].company!,
+                                    qualificationType: AppQualificationType
+                                        .experience,
+                                    dateStarted: getBloc().profileEntity!.workExperience![index].startDate,
+                                    //otpWorkExperienceEntityList![index].startDate!,
+                                    dateEnded: getBloc().profileEntity!.workExperience![index].endDate //otpWorkExperienceEntityList![index].endDate!
+                                )),
+                            10.height,
+                            wText(getLocalization().photosOfWork),
+                            20.height,
+                            //if(getBloc().profileEntity?.workExperience?[index].files == null)
+                            ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: getBloc().profileEntity!.workExperience?[index].files?.length,
+                                itemBuilder: (context, pIndex){
+                                  return
+                                    getBloc().profileEntity!.workExperience?[index].files == null &&
+                                        getBloc().profileEntity!.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
+                                    const SizedBox():
+                                    getBloc().profileEntity!.workExperience![index].files!.isEmpty ?
+                                    const SizedBox():
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 16.0),
+                                          child: Row(
+                                            children: [
+                                              if(pIndex.isEven || pIndex == 0)
+                                                Expanded(child: ImageThumbnail(
+                                                  imagePath:  getBloc().profileEntity!.workExperience?[index].files?[pIndex].url,
+                                                  //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
+                                                )),
+                                              16.width, // Add some spacing between images
+                                              if(getBloc().profileEntity!.workExperience?[index].files?.length == pIndex + 1)
+                                                Expanded(child: Container(),),
+                                              if(getBloc().profileEntity!.workExperience![index].files!.length > pIndex + 1 && pIndex.isEven)
+                                                Expanded(child: ImageThumbnail(
+                                                  imagePath:  getBloc().profileEntity!.workExperience?[index].files?[pIndex + 1].url,
+                                                  //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
+                                                )),
+                                            ],
+                                          ),
+                                        ),
+
+                                      ],
+                                    );
+                                }),
+                            30.height,
+                            const AppDivider(),
+                            10.height,
+                          ],
+                        );
                       }
                     ),
 
-                    wText(getLocalization().photosOfWork),
-                    20.height,
-                    //if(getBloc().profileEntity?.workExperience?[index].files == null)
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                    itemCount: getBloc().profileEntity!.workExperience?.length,
-                    itemBuilder: (context, index){
-                      return
-                        getBloc().profileEntity!.workExperience?[index].files == null &&
-                            getBloc().profileEntity!.workExperience![index].files!.isEmpty && index != 0 && !index.isOdd ?
-                      const SizedBox():
-                            getBloc().profileEntity!.workExperience![index].files!.isEmpty ?
-                            const SizedBox():
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
-                            child: Row(
-                              children: [
-                                if(index.isEven || index == 0)
-                                  Expanded(child: ImageThumbnail(
-                                    imagePath:  getBloc().profileEntity!.workExperience?[index].files?[index].url,
-                                    //onRemove: ()=> getBloc().add(RemoveImageClickedEvent(index: index)),
-                                  )),
-                                16.width, // Add some spacing between images
-                                if(getBloc().profileEntity!.workExperience?[index].files?.length == index + 1)
-                                  Expanded(child: Container(),),
-                                if(getBloc().profileEntity!.workExperience![index].files!.length > index + 1 && index.isEven)
-                                  Expanded(child: ImageThumbnail(
-                                    imagePath:  getBloc().profileEntity!.workExperience?[index].files?[index + 1].url,
-                                    //onRemove: ()=>getBloc().add(RemoveImageClickedEvent(index: index + 1)),
-                                  )),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
                   ],
                 ),
-                20.height,
-                const AppDivider(),
-                10.height,
+
                 Row(
                   children: [
                     wText(getLocalization().qualificationMembership, style: theme.textTheme.titleMedium),
@@ -327,6 +351,47 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                             //otpWorkExperienceEntityList![index].endDate!
                           ));
                     }
+                ),
+
+                40.height,
+
+                Row(
+                  children:[ Expanded(
+                    child: PrimaryButtonDark(
+                      style: ButtonStyle(
+                          side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                            return BorderSide(
+                              color: states.contains(MaterialState.disabled)?
+                              theme.colorScheme.secondary.withOpacity(0):
+                              theme.colorScheme.secondary,
+                              width: 2,
+                            );
+                          }
+                          ),
+                          backgroundColor: MaterialStateProperty.resolveWith(
+                                  (Set<MaterialState> states){
+                                return Colors.white;
+                              }
+                          )
+                      ),
+                      onPressed: () {
+                        wDecisionWidget(theme: theme, leftButton: (){
+                          context.router.pop();
+
+                        }, rightButton: (){
+                          getBloc().add(DeleteProfileEvent());
+
+                        }, leftButtonCaption: getLocalization().noCancel,
+                            rightButtonCaption: getLocalization().yesDelete,
+                            message: getLocalization().areYouSureYouWantToDeleteYourAccount,
+                            title: getLocalization().deleteAccountQ,
+                            context: context);
+                        // context.router.push(const LocationRoute());
+                      },
+                      child: Text(getLocalization().deleteAccount,style: TextStyle(color: Colors.black)),
+                    ),
+                  ),
+        ]
                 ),
 
               ],

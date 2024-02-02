@@ -98,7 +98,7 @@ final String? potentialMatchesRemoved;
           address: response.customer!.address,),
       address: response.address??"",
       profiles: response.applications?.map((jobInterest)=>CandidateProfileEntity(
-          id: jobInterest.applicant.userId,
+          id: jobInterest.applicant.userId!,
           fullName: "${jobInterest.applicant.firstName} ${jobInterest.applicant.surname}",
           jobTitle: jobInterest.applicant.jobTitle,
           hourlyRate: jobInterest.applicant.hourlyRate,
@@ -107,7 +107,7 @@ final String? potentialMatchesRemoved;
           jobInterestId: jobInterest.jobInterestId
       )).toList() ?? [],
       matches: response.potentialMatches?.map((jobInterest)=>CandidateProfileEntity(
-          id: jobInterest.applicant.userId,
+          id: jobInterest.applicant.userId!,
           fullName: "${jobInterest.applicant.firstName} ${jobInterest.applicant.surname}",
           jobTitle: jobInterest.applicant.jobTitle,
           hourlyRate: jobInterest.applicant.hourlyRate,

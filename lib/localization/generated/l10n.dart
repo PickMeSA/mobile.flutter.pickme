@@ -1910,10 +1910,10 @@ class AppLocalizations {
     );
   }
 
-  /// `My Calendar`
+  /// `My calendar`
   String get myCalendar {
     return Intl.message(
-      'My Calendar',
+      'My calendar',
       name: 'myCalendar',
       desc: '',
       args: [],
@@ -3380,16 +3380,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Switching your profile from 'Working' to 'Hiring'. Confirm your choice?`
-  String get switchingYourProfileFromWorkerToHire {
-    return Intl.message(
-      'Switching your profile from \'Working\' to \'Hiring\'. Confirm your choice?',
-      name: 'switchingYourProfileFromWorkerToHire',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `You're booked for the job!`
   String get youreBookedForTheJob {
     return Intl.message(
@@ -3450,6 +3440,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Switching your profile from 'Working' to 'Hiring'. Confirm your choice?`
+  String get switchingYourProfileFromWorkerToHire {
+    return Intl.message(
+      'Switching your profile from \'Working\' to \'Hiring\'. Confirm your choice?',
+      name: 'switchingYourProfileFromWorkerToHire',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Today`
   String get today {
     return Intl.message(
@@ -3495,6 +3495,96 @@ class AppLocalizations {
     return Intl.message(
       'You don\'t have upcoming appointments',
       name: 'youDontHaveUpcomingAppointments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review submitted`
+  String get reviewSubmitted {
+    return Intl.message(
+      'Review submitted',
+      name: 'reviewSubmitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thank you for reviewing this user`
+  String get thanksForReviewingThisUser {
+    return Intl.message(
+      'Thank you for reviewing this user',
+      name: 'thanksForReviewingThisUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to dashboard`
+  String get backToDashboard {
+    return Intl.message(
+      'Back to dashboard',
+      name: 'backToDashboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All jobs`
+  String get allJobs {
+    return Intl.message(
+      'All jobs',
+      name: 'allJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, Delete`
+  String get yesDelete {
+    return Intl.message(
+      'Yes, Delete',
+      name: 'yesDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you would like to delete your account.`
+  String get areYouSureYouWantToDeleteYourAccount {
+    return Intl.message(
+      'Are you sure you would like to delete your account.',
+      name: 'areYouSureYouWantToDeleteYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account?`
+  String get deleteAccountQ {
+    return Intl.message(
+      'Delete account?',
+      name: 'deleteAccountQ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Present`
+  String get present {
+    return Intl.message(
+      'Present',
+      name: 'present',
       desc: '',
       args: [],
     );

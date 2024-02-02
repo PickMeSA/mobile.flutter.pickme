@@ -12,8 +12,6 @@ import 'package:pickme/features/job_list_page/domain/use_cases/get_my_job_listin
 import 'package:pickme/features/location/domain/use_cases/location_usecase/get_current_device_location_usecase.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/use_cases/my_bookings_upcoming_usecase/load_bookings_upcoming_usecase.dart';
-import 'package:pickme/shared/domain/entities/job_entity.dart';
-import 'package:pickme/shared/domain/entities/lat_long_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/paginated_industry_object.dart';
 import 'package:pickme/shared/domain/usecases/get_paginated_candidates_usecase.dart';
@@ -88,7 +86,6 @@ class HomeBloc
                 emit(NextAppointmentCardClickedState(error: ex.toString())..dataState = DataState.error);
             }
         }catch(ex){
-
         }
     }
 
@@ -96,28 +93,20 @@ class HomeBloc
         JobsHiringLandingPageEnteredEvent event,
         Emitter<HomePageState> emit
         )async{
-
         try{
-            OTPLocationEntity locationEntity = await getCurrentDeviceLocationUseCase.call();
             PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
                 params: GetPaginatedCandidatesByIndustryUseCaseParams(
-                    pageNumber: 1, pageSize: 5,lat: locationEntity.latitude, lng: locationEntity.longitude
+                    pageNumber: 1, pageSize: 5,
                 ));
             paginatedCandidates = paginatedCandidateProfileEntity;
             jobListingsPageEntity = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(
-                lng: locationEntity.longitude,
-                lat: locationEntity.latitude,
-
+maxDistance: 20
             ));
             jobCount = ((jobListingsPageEntity?.activeJobs.length??0) + (jobListingsPageEntity?.inactiveJobs.length??0) );
             emit(JobsHiringLandingPageEnteredState()..dataState = DataState.success);
         }catch(ex){
-
             emit(JobsHiringLandingPageEnteredState()..dataState = DataState.error);
         }
-
-
-
     }
 
     _onCalendarChangedEvent(

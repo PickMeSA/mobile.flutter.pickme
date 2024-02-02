@@ -13,6 +13,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
@@ -50,11 +51,13 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
 
         //loading
         if(state is MyJobListingsPageEnteredState && state.dataState == DataState.success){
+          getBloc().preloaderActive = false;
           Navigator.pop(context); //Remove loader
         }          //loading
         if(state is MyJobListingsPageEnteredState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
           Navigator.pop(context); //Remove loader
-          //   todo: Display error
+          wErrorPopUp(message: state.error!, type: "Error", context: context);
         }
       },
       builder: (context, state) {
@@ -153,7 +156,9 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                               CachedNetworkImageProvider(job.customer!.profileImage!):null,
                               onNext: (){
                                   logger.i(job.title);
-                                  context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)).then((value) => getBloc().add(MyJobListingsPageEnteredEvent()));
+                                  context.router.push(
+                                      JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)
+                                  ).then((value) => getBloc().add(MyJobListingsPageEnteredEvent()));
                                   },
                             );
                           }

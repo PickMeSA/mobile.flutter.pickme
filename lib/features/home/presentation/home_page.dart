@@ -20,6 +20,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/constants/w_colors.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
@@ -31,7 +32,8 @@ import 'bloc/home_bloc.dart';
 
 @RoutePage()
 class HomePage extends BasePage {
-   HomePage({required this.controller,super.key});
+  ProfileEntity profileEntity;
+   HomePage({required this.profileEntity,required this.controller,super.key});
   final  PersistentTabController controller ;
   @override
   _HomePageState createState() => _HomePageState();
@@ -78,6 +80,7 @@ late ProfileModel profileModel;
 
         if(state is NextAppointmentCardClickedState && state.dataState == DataState.loading){
 
+
         }
 
         if(state is NextAppointmentCardClickedState && state.dataState == DataState.error){
@@ -121,9 +124,10 @@ late ProfileModel profileModel;
                            children: [
                              Row(
                                children: [
-                                 const CircleAvatar(
-                                 radius: 25,
-                                 backgroundColor: Colors.white,
+                                 (widget.profileEntity?.pictureEntity?.url=="" || widget.profileEntity?.pictureEntity?.url== null)?
+                                 AppImageAvatar.small():
+                                 AppImageAvatar.small(
+                                   image: CachedNetworkImageProvider(widget.profileEntity!.pictureEntity!.url!),
                                  ),
                                  const Spacer(),
 
@@ -162,7 +166,7 @@ late ProfileModel profileModel;
                            ),
                          ),
                          const SizedBox(height: 20,),
-                         wText(getLocalization().forYou),
+                         wText(getLocalization().forYou,style: TextStyle(fontWeight: FontWeight.bold)),
                          const SizedBox(height: 20,),
 
                          Row(
@@ -190,8 +194,8 @@ late ProfileModel profileModel;
                              ),
                            ],
                          ),
-
-                         wText(getLocalization().myCalendar),
+20.height,
+                         wText(getLocalization().myCalendar, style: TextStyle(fontWeight: FontWeight.bold)),
                      30.height,
                      Card(
                        child: Container(
@@ -267,7 +271,7 @@ late ProfileModel profileModel;
 
                          Row(
                            children: [
-                             wText(getLocalization().inYourArea),
+                             wText(getLocalization().inYourArea, style: TextStyle(fontWeight: FontWeight.bold)),
                              Spacer(),
                              InkWell(onTap:()=> userMode.type == 'work'?
                              context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs, filter: FilterEntity()),):

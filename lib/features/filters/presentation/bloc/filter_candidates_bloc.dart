@@ -39,10 +39,13 @@ class FilterCandidatesBloc extends BaseBloc<FilterCandidatesEvent, FilterCandida
       FilterCandidatesPageEnteredEvent event,
       Emitter<FilterCandidatesState> emit
       )async{
-    if(event.filterEntity==null){
-      filter = defaultFilter;
-      emit(FilterCandidatesPageEnteredState()..dataState = DataState.success);
-    }
+    filter = defaultFilter.copyWith(
+        priceRange_: event.filterEntity?.priceRange??defaultPriceRange,
+        estimatedHours_: event.filterEntity?.estimatedHours??defaultEstimatedHours.toDouble(),
+        rating_: event.filterEntity?.rating??defaultRating,
+        distance_: event.filterEntity?.distance??defaultDistance.toDouble()
+    );
+    emit(FilterCandidatesPageEnteredState()..dataState = DataState.success);
   }
   _onMaxDistanceChangedEvent(
       MaxDistanceChangedEvent event,
