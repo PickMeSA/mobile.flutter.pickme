@@ -5,7 +5,8 @@ abstract class ServiceCategoryCandidatesEvent extends BaseEvent {}
 
 class ServiceCategoryCandidatesPageEnteredEvent extends ServiceCategoryCandidatesEvent{
   final String? serviceCategoryId;
-  ServiceCategoryCandidatesPageEnteredEvent({this.serviceCategoryId});
+  final FilterEntity? filter;
+  ServiceCategoryCandidatesPageEnteredEvent({this.serviceCategoryId, this.filter});
 }
 
 

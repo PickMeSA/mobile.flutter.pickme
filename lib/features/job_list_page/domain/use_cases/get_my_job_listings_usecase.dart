@@ -25,7 +25,9 @@ class GetMyJobListingsUseCase extends BaseUseCase<GetMyJobListingsUseCaseParams,
          minPrice: params.minPrice,
          maxPrice: params.maxPrice,
          customerUid: params.customerUid,
-         industryId: params.industryId
+         industryId: params.industryId,
+         search: params.search,
+         address: params.address
      ));
    }catch(ex){
      rethrow;
@@ -42,6 +44,9 @@ class GetMyJobListingsUseCaseParams extends BaseUseCaseParams{
   final double? maxPrice;
   final String? customerUid;
   final String? industryId;
+  final String? address;
+  final String? search;
+
   GetMyJobListingsUseCaseParams({
     this.lat,
     this.lng,
@@ -50,5 +55,7 @@ class GetMyJobListingsUseCaseParams extends BaseUseCaseParams{
     this.minPrice,
     this.maxPrice,
     this.customerUid,
-    this.industryId
+    this.industryId,
+    this.address,
+    this.search,
   });}

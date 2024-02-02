@@ -3579,6 +3579,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Search for jobs`
+  String get searchForJobs {
+    return Intl.message(
+      'Search for jobs',
+      name: 'searchForJobs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for candidates`
+  String get searchForCandidates {
+    return Intl.message(
+      'Search for candidates',
+      name: 'searchForCandidates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search results`
+  String get searchResults {
+    return Intl.message(
+      'Search results',
+      name: 'searchResults',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

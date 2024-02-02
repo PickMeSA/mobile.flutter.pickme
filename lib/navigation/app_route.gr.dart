@@ -678,6 +678,8 @@ abstract class _$AppRouter extends RootStackRouter {
         child: ServiceCategoryCandidatesPage(
           key: args.key,
           serviceCategoryId: args.serviceCategoryId,
+          pageTitle: args.pageTitle,
+          filter: args.filter,
         ),
       );
     },
@@ -2946,12 +2948,16 @@ class ServiceCategoryCandidatesRoute
   ServiceCategoryCandidatesRoute({
     Key? key,
     String? serviceCategoryId,
+    String? pageTitle,
+    FilterEntity? filter,
     List<PageRouteInfo>? children,
   }) : super(
           ServiceCategoryCandidatesRoute.name,
           args: ServiceCategoryCandidatesRouteArgs(
             key: key,
             serviceCategoryId: serviceCategoryId,
+            pageTitle: pageTitle,
+            filter: filter,
           ),
           initialChildren: children,
         );
@@ -2966,15 +2972,21 @@ class ServiceCategoryCandidatesRouteArgs {
   const ServiceCategoryCandidatesRouteArgs({
     this.key,
     this.serviceCategoryId,
+    this.pageTitle,
+    this.filter,
   });
 
   final Key? key;
 
   final String? serviceCategoryId;
 
+  final String? pageTitle;
+
+  final FilterEntity? filter;
+
   @override
   String toString() {
-    return 'ServiceCategoryCandidatesRouteArgs{key: $key, serviceCategoryId: $serviceCategoryId}';
+    return 'ServiceCategoryCandidatesRouteArgs{key: $key, serviceCategoryId: $serviceCategoryId, pageTitle: $pageTitle, filter: $filter}';
   }
 }
 

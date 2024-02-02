@@ -35,6 +35,8 @@ class FilterEntity{
     int? rating_,
     String? customerUid_,
     String? industryId_,
+    String? address_,
+    String? title_,
   }){
     return FilterEntity(
       priceRange: priceRange_??priceRange,
@@ -43,11 +45,19 @@ class FilterEntity{
       rating:rating_??rating,
       customerUid: customerUid_??customerUid,
       industryId: industryId_??industryId,
+      title: title??title_,
+      address: address??address_,
     );
   }
   @override
   String toString() {
-    return ("FilterEntity {\npriceRange: $priceRange,\n distance: $distance,\n estimatedHours: $estimatedHours, \n rating: $rating");
+    return ("FilterEntity {"
+        "\npriceRange: $priceRange,"
+        "\n distance: $distance,"
+        "\n estimatedHours: $estimatedHours,"
+        " \n title: $title,"
+        " \n address: $address,"
+    );
   }
 
 }

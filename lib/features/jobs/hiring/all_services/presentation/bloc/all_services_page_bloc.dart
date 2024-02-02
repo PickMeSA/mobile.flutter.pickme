@@ -23,6 +23,7 @@ class AllServicesPageBloc extends BaseBloc<AllServicesPageEvent, AllServicesPage
   PaginatedIndustryEntity? paginatedIndustries;
   bool preloaderActive = false;
   final Logger logger = Logger();
+  FilterEntity filterEntity = FilterEntity();
 
   AllServicesPageBloc({
     required this.getIndustriesUseCase,
@@ -52,14 +53,13 @@ class AllServicesPageBloc extends BaseBloc<AllServicesPageEvent, AllServicesPage
       SearchTextChangedEvent event,
       Emitter<AllServicesPageState> emit
       )async{
-    emit(SearchTextChangedState()..dataState = DataState.loading);
+    emit(SubmitSearchState()..dataState = DataState.loading);
     try{
-      PaginatedIndustryEntity paginatedIndustryEntity = await getIndustriesUseCase.call(
-          params: GetIndustriesUseCaseParams(searchText: event.searchText));
-      paginatedIndustries = paginatedIndustryEntity;
-      emit(SearchTextChangedState()..dataState = DataState.success);
+      filterEntity.title = event.searchText.isEmpty?null:event.searchText;
+      filterEntity.address = event.address.isEmpty?null:event.address;
+      emit(SubmitSearchState()..dataState = DataState.success);
     }catch(ex){
-      emit(SearchTextChangedState()..dataState = DataState.error);
+      emit(SubmitSearchState()..dataState = DataState.error);
     }
   }
   _onFilterChangedEvent(

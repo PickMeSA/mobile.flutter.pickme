@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_bloc.dart';
 import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -69,6 +70,7 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
     emit(MyJobListingsPageEnteredState()..dataState=DataState.loading);
     try{
       filterEntity = event.filter;
+      logger.e(filterEntity);
       myJobs = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(
         lat: filterEntity.lat,
         lng: filterEntity.lng,
@@ -78,6 +80,8 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
         maxPrice: filterEntity.priceRange?.end,
         customerUid: filterEntity.customerUid,
         industryId: filterEntity.industryId,
+        address: filterEntity.address.isEmptyOrNull?null:filterEntity.address,
+        search: filterEntity.title.isEmptyOrNull?null:filterEntity.title,
       ));
       emit(MyJobListingsPageEnteredState()..dataState=DataState.success);
     }catch(ex){

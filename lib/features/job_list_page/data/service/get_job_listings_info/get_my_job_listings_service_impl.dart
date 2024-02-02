@@ -45,6 +45,12 @@ class GetMyJobListingsServiceImpl extends GetMyJobListingsService{
       if(getMyJobListingsRepositoryParams.customerUid!=null) {
         queryParams["customerUid"] = getMyJobListingsRepositoryParams.customerUid;
       }
+      if(getMyJobListingsRepositoryParams.address!=null) {
+        queryParams["address"] = getMyJobListingsRepositoryParams.address;
+      }
+      if(getMyJobListingsRepositoryParams.search!=null) {
+        queryParams["search"] = getMyJobListingsRepositoryParams.search;
+      }
       logger.e("converted uri $queryParams");
 
       Uri queryString = Uri(queryParameters: queryParams);
