@@ -66,14 +66,17 @@ class AllServicesPageBloc extends BaseBloc<AllServicesPageEvent, AllServicesPage
       FilterChangedEvent event,
       Emitter<AllServicesPageState> emit
       )async{
-    emit(SearchTextChangedState()..dataState = DataState.loading);
+    emit(SubmitSearchState()..dataState = DataState.loading);
     try{
-      PaginatedIndustryEntity paginatedIndustryEntity = await getIndustriesUseCase.call(
-          params: GetIndustriesUseCaseParams(filterEntity: event.filterEntity));
-      paginatedIndustries = paginatedIndustryEntity;
-      emit(SearchTextChangedState()..dataState = DataState.success);
+      filterEntity = filterEntity.copyWith(
+        priceRange_: event.filterEntity.priceRange,
+        estimatedHours_: event.filterEntity.estimatedHours,
+        rating_: event.filterEntity.rating,
+        distance_: event.filterEntity.distance
+      );
+      emit(SubmitSearchState()..dataState = DataState.success);
     }catch(ex){
-      emit(SearchTextChangedState()..dataState = DataState.error);
+      emit(SubmitSearchState()..dataState = DataState.error);
     }
   }
 }

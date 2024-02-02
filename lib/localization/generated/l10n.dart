@@ -1910,10 +1910,10 @@ class AppLocalizations {
     );
   }
 
-  /// `My Calendar`
+  /// `My calendar`
   String get myCalendar {
     return Intl.message(
-      'My Calendar',
+      'My calendar',
       name: 'myCalendar',
       desc: '',
       args: [],
@@ -3570,16 +3570,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Delete account`
-  String get deleteAccount {
-    return Intl.message(
-      'Delete account',
-      name: 'deleteAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Search for jobs`
   String get searchForJobs {
     return Intl.message(
@@ -3605,6 +3595,26 @@ class AppLocalizations {
     return Intl.message(
       'Search results',
       name: 'searchResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Present`
+  String get present {
+    return Intl.message(
+      'Present',
+      name: 'present',
       desc: '',
       args: [],
     );
