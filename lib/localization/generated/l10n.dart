@@ -3539,6 +3539,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Yes, Delete`
+  String get yesDelete {
+    return Intl.message(
+      'Yes, Delete',
+      name: 'yesDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you would like to delete your account.`
+  String get areYouSureYouWantToDeleteYourAccount {
+    return Intl.message(
+      'Are you sure you would like to delete your account.',
+      name: 'areYouSureYouWantToDeleteYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account?`
+  String get deleteAccountQ {
+    return Intl.message(
+      'Delete account?',
+      name: 'deleteAccountQ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
