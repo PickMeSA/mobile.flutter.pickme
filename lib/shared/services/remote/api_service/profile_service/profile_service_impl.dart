@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.dart';
-import 'package:pickme/features/bank_details/data/response_models/qualification_model_response/submit_bank_details_model_response.dart';
+
 import 'package:pickme/features/bank_details/domain/entities/bank_details_entities.dart';
 import 'package:pickme/features/final_details/data/response_models/submit_final_details_model_response/submit_final_details_model_response.dart';
 import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
@@ -10,7 +10,7 @@ import 'package:pickme/features/otp/data/response_models/otp_model_response/paym
 import 'package:pickme/features/otp/data/response_models/otp_model_response/work_times_model_response.dart';
 import 'package:pickme/features/qualification/domain/entities/submit_qualification_and_experience_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
-import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_list_entity.dart';
+
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
@@ -252,12 +252,33 @@ class ProfileServiceImpl extends ProfileService{
 
   @override
   Future<ProfileEntity> submitAcceptTermsAndConditions() async{
-    UserModel userModel = boxUser.get(current);
-    Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-        data: {
-      "acceptedTermsAndConditions": true
-        });
-    return returnProfileEntity(response: response);
+    try {
+      UserModel userModel = boxUser.get(current);
+      Response<dynamic> response = await apiService.put(
+          "$baseUrl$version/profiles/${userModel.id}",
+          data: {
+            "acceptedTermsAndConditions": true
+          });
+      return returnProfileEntity(response: response);
+    }catch(ex){
+      rethrow;
+    }
+  }
+
+  @override
+  Future<bool> deleteProfile() async {
+   try{
+     UserModel userModel = boxUser.get(current);
+     Response<dynamic> response = await apiService.delete(
+         "$baseUrl$version/profiles/${userModel.id}",
+         data: {
+           "acceptedTermsAndConditions": true
+         });
+
+     return true;
+   }catch(ex){
+     rethrow;
+   }
   }
 
 

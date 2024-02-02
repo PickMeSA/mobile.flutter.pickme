@@ -5,6 +5,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/features/profile/domain/use_cases/profile_usecase/delete_profile_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remote_profile_usecase.dart';
 
@@ -14,15 +15,30 @@ part 'profile_state.dart';
 @injectable
 class ProfileBloc
     extends BaseBloc<ProfilePageEvent, ProfilePageState> {
-
+    final DeleteProfileUseCase deleteProfileUseCase;
     final GetRemoteProfileUseCase getRemoteProfileUseCase;
-    ProfileBloc({required this.getRemoteProfileUseCase}): super(ProfilePageInitState()) {
+    ProfileBloc({required this.deleteProfileUseCase,required this.getRemoteProfileUseCase}): super(ProfilePageInitState()) {
         on<UpdateUIEvent>((event, emit)=> _onUpdateUIEvent(event,emit));
         on<GetProfileDetailsEvent>((event, emit)=> _onGetProfileDetailsEvent(event, emit));
+        on<DeleteProfileEvent>((event, emit)=> _onDeleteProfileEvent(event,emit));
     }
 
 
     late List<ChipOption> skills;
+
+    Future<void> _onDeleteProfileEvent(
+        DeleteProfileEvent event,
+        Emitter<ProfilePageState> emit
+        )async{
+        emit(DeleteProfileState()..dataState = DataState.loading);
+        try{
+            await deleteProfileUseCase.call();
+                emit(DeleteProfileState()..dataState = DataState.success);
+
+        }catch(ex){
+            emit(DeleteProfileState(error: ex.toString())..dataState = DataState.error);
+        }
+    }
 
     Future<void> _onUpdateUIEvent(
         UpdateUIEvent event,

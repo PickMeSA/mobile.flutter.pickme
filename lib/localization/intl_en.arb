@@ -347,5 +347,13 @@
   "reviewSubmitted": "Review submitted",
   "thanksForReviewingThisUser" : "Thank you for reviewing this user",
   "backToDashboard": "Back to dashboard",
-  "allJobs": "All jobs"
+  "allJobs": "All jobs",
+  "backToDashboard": "Back to dashboard",
+  "yesDelete": "Yes, Delete",
+  "areYouSureYouWantToDeleteYourAccount": "Are you sure you would like to delete your account.",
+  "deleteAccountQ": "Delete account?",
+  "deleteAccount": "Delete account"
+
+
+
 }

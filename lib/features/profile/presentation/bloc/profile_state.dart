@@ -13,3 +13,8 @@ class GetProfileDetailsState extends ProfilePageState{
 }
 
 class UpdateUIState extends ProfilePageState{}
+
+class DeleteProfileState extends ProfilePageState{
+  DeleteProfileState({super.error});
+
+}

@@ -14,6 +14,9 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_list_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_award.dart';
+import 'package:pickme/shared/widgets/w_decision_widget.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
+import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
 import 'bloc/profile_bloc.dart';
@@ -44,7 +47,21 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
   @override
   Widget buildView(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfilePageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is DeleteProfileState && state.dataState == DataState.loading ){
+          preloader(context);
+        }
+
+        if(state is DeleteProfileState && state.dataState == DataState.error){
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+
+        if(state is DeleteProfileState && state.dataState == DataState.success){
+          context.router.pushAndPopUntil( const LandingRoute(), predicate: (Route<dynamic> route) => false);
+
+        }
+      },
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
         return state.dataState == DataState.loading && state is GetProfileDetailsState
@@ -327,6 +344,47 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                             //otpWorkExperienceEntityList![index].endDate!
                           ));
                     }
+                ),
+
+                40.height,
+
+                Row(
+                  children:[ Expanded(
+                    child: PrimaryButtonDark(
+                      style: ButtonStyle(
+                          side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                            return BorderSide(
+                              color: states.contains(MaterialState.disabled)?
+                              theme.colorScheme.secondary.withOpacity(0):
+                              theme.colorScheme.secondary,
+                              width: 2,
+                            );
+                          }
+                          ),
+                          backgroundColor: MaterialStateProperty.resolveWith(
+                                  (Set<MaterialState> states){
+                                return Colors.white;
+                              }
+                          )
+                      ),
+                      onPressed: () {
+                        wDecisionWidget(theme: theme, leftButton: (){
+                          context.router.pop();
+
+                        }, rightButton: (){
+                          getBloc().add(DeleteProfileEvent());
+
+                        }, leftButtonCaption: getLocalization().noCancel,
+                            rightButtonCaption: getLocalization().yesDelete,
+                            message: getLocalization().areYouSureYouWantToDeleteYourAccount,
+                            title: getLocalization().deleteAccountQ,
+                            context: context);
+                        // context.router.push(const LocationRoute());
+                      },
+                      child: Text(getLocalization().deleteAccount,style: TextStyle(color: Colors.black)),
+                    ),
+                  ),
+        ]
                 ),
 
               ],

@@ -25,9 +25,10 @@ class DioApiService extends ApiService{
   }
 
   @override
-  Future<Response<T>> delete<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Response<T>> delete<T>(String path, {Object? data, Map<String, dynamic>? queryParameters, Options? options, CancelToken? cancelToken}) async {
+    Response<T> response = await dio.delete(path, data: data, queryParameters: queryParameters, options: options);
+    logger.d(response);
+    return response;
   }
 
   @override
