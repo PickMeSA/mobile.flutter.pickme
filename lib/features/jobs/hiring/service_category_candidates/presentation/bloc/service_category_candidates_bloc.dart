@@ -42,6 +42,11 @@ class ServiceCategoryCandidatesBloc extends BaseBloc<ServiceCategoryCandidatesEv
             industryId: categoryId,
             address: filterEntity?.address,
             title: filterEntity?.title,
+              lat: filterEntity?.lat,
+              lng: filterEntity?.lng,
+              maxDistance: filterEntity?.distance,
+              maxHourlyRate: filterEntity?.estimatedHours,
+              minRating: filterEntity?.rating,
           ),
       );
       paginatedCandidates = paginatedCandidateProfileEntity;

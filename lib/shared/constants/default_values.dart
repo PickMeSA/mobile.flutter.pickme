@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
-const defaultDistance = 0;
-const defaultPriceRange = RangeValues(0, 1);
+const defaultDistance = 50;
+const defaultPriceRange = RangeValues(0, 1000);
 const defaultMaxPrice = 1000;
 const defaultMaxDistance = 50;
 const defaultEstimatedHours = 8;
