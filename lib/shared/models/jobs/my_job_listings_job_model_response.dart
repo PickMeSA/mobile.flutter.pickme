@@ -56,14 +56,14 @@ class JobInterestModel with _$JobInterestModel {
 @freezed
 class Applicant with _$Applicant {
   factory Applicant({
-    required String userId,
-    required String firstName,
-    required String surname,
-    required String profileImage,
-    required int averageRating,
-    required String address,
-    required double hourlyRate,
-    required String jobTitle,
+    required String? userId,
+    required String? firstName,
+    required String? surname,
+    required String? profileImage,
+    required int? averageRating,
+    required String? address,
+    required double? hourlyRate,
+    required String? jobTitle,
   }) = _Applicant;
 
   factory Applicant.fromJson(Map<String, dynamic> json) =>

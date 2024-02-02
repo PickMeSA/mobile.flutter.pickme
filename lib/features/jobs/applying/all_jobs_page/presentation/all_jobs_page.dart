@@ -131,9 +131,11 @@ class _AllServicesPageState extends BasePageState<AllJobsPage, AllJobsPageBloc> 
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().allServices),
+      title: Text(getLocalization().allJobs),
       actions: [
-        TextButton(onPressed: (){}, child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
+        TextButton(
+            onPressed: ()=>context.router.push(FiltersRoute()).then((value) => getBloc().add(AllServicesPageEnteredEvent())),
+            child: Icon(Iconsax.candle_2, color: Theme.of(context).colorScheme.secondary,))
       ],
     );
   }
