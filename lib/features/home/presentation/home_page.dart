@@ -166,7 +166,7 @@ late ProfileModel profileModel;
                            ),
                          ),
                          const SizedBox(height: 20,),
-                         wText(getLocalization().forYou),
+                         wText(getLocalization().forYou,style: TextStyle(fontWeight: FontWeight.bold)),
                          const SizedBox(height: 20,),
 
                          Row(
@@ -194,8 +194,8 @@ late ProfileModel profileModel;
                              ),
                            ],
                          ),
-
-                         wText(getLocalization().myCalendar),
+20.height,
+                         wText(getLocalization().myCalendar, style: TextStyle(fontWeight: FontWeight.bold)),
                      30.height,
                      Card(
                        child: Container(
@@ -271,7 +271,7 @@ late ProfileModel profileModel;
 
                          Row(
                            children: [
-                             wText(getLocalization().inYourArea),
+                             wText(getLocalization().inYourArea, style: TextStyle(fontWeight: FontWeight.bold)),
                              Spacer(),
                              InkWell(onTap:()=> userMode.type == 'work'?
                              context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs, filter: FilterEntity()),):

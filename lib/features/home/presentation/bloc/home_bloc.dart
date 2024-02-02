@@ -94,13 +94,13 @@ class HomeBloc
         Emitter<HomePageState> emit
         )async{
         try{
-            OTPLocationEntity locationEntity = await getCurrentDeviceLocationUseCase.call();
             PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
                 params: GetPaginatedCandidatesByIndustryUseCaseParams(
                     pageNumber: 1, pageSize: 5,
                 ));
             paginatedCandidates = paginatedCandidateProfileEntity;
             jobListingsPageEntity = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(
+maxDistance: 20
             ));
             jobCount = ((jobListingsPageEntity?.activeJobs.length??0) + (jobListingsPageEntity?.inactiveJobs.length??0) );
             emit(JobsHiringLandingPageEnteredState()..dataState = DataState.success);

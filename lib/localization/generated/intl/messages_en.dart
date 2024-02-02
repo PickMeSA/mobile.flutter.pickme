@@ -296,7 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myBankingDetails":
             MessageLookupByLibrary.simpleMessage("My banking details"),
         "myBookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
-        "myCalendar": MessageLookupByLibrary.simpleMessage("My Calendar"),
+        "myCalendar": MessageLookupByLibrary.simpleMessage("My calendar"),
         "myHourlyRateAndWorkingHours": MessageLookupByLibrary.simpleMessage(
             "My hourly rate and working hours"),
         "myJobListings":
