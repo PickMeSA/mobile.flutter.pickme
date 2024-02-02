@@ -32,7 +32,7 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
   late TextEditingController endDateController = TextEditingController();
   late TextEditingController dropdownIndustryController = TextEditingController();
   late DateTime startDate = DateTime.now();
-  late DateTime endDate = DateTime.now();
+   DateTime? endDate;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -43,11 +43,11 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
     positionTitleController.text = widget.otpWorkExperienceEntity.title??"";
     companyController.text = widget.otpWorkExperienceEntity.company??"";
     startDateController.text = DateFormatters.getWordDate(widget.otpWorkExperienceEntity.startDate!);
-    endDateController.text = DateFormatters.getWordDate(widget.otpWorkExperienceEntity.endDate?? DateTime.now());
+    endDateController.text = DateFormatters.getWordDate(widget.otpWorkExperienceEntity.endDate);
     dropdownIndustryController.text = getBloc().preferredIndustryListEntity.preferredIndustryListEntity!.where((element) =>
     element.id == widget.otpWorkExperienceEntity.industryId).toString();
     startDate = widget.otpWorkExperienceEntity.startDate!;
-    endDate = widget.otpWorkExperienceEntity.endDate?? DateTime.now();
+    endDate = widget.otpWorkExperienceEntity.endDate;
     getBloc().current = widget.otpWorkExperienceEntity.isCurrent?? false;
   }
 

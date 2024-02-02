@@ -185,7 +185,7 @@
   "publishListing": "Publish listing",
   "yourNextAppointment": "Your next appointment",
   "forYou": "For you",
-  "myCalendar": "My Calendar",
+  "myCalendar": "My calendar",
   "myWallet": "My Wallet",
   "needAnAmbulance": "Need an \nambulance?",
   "hi": "Hi, {name} {surname}",
@@ -351,10 +351,11 @@
   "yesDelete": "Yes, Delete",
   "areYouSureYouWantToDeleteYourAccount": "Are you sure you would like to delete your account.",
   "deleteAccountQ": "Delete account?",
-  "deleteAccount": "Delete account",
   "searchForJobs": "Search for jobs",
   "searchForCandidates": "Search for candidates",
-  "searchResults": "Search results"
+  "searchResults": "Search results",
+  "deleteAccount": "Delete account",
+  "present": "Present"
 
 
 

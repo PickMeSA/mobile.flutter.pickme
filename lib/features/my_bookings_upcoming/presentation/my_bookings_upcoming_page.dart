@@ -156,9 +156,9 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                      //viewHeight:192,
                      initialIndex: 0,
                      tabs:  <Widget>[
-                        Text(getLocalization().upcoming, style: theme.textTheme.titleSmall?.copyWith(fontSize: 12),),
-                       Text(getLocalization().completed, style: theme.textTheme.titleSmall?.copyWith(fontSize: 12),),
-                       Text(getLocalization().cancelled, style: theme.textTheme.titleSmall?.copyWith(fontSize: 12),),
+                        wText(getLocalization().upcoming, style: theme.textTheme.titleSmall?.copyWith(fontSize: 10),),
+                       wText(getLocalization().completed, style: theme.textTheme.titleSmall?.copyWith(fontSize: 10),),
+                       wText(getLocalization().cancelled, style: theme.textTheme.titleSmall?.copyWith(fontSize: 10),),
                      ],
                      views:  <Widget>[
                         ListView.builder(
@@ -198,14 +198,17 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                   }
                                   },
                                       child: AppJobCard(
-
-                                        jobName: getBloc().upcomingHireBookingsList[index].job.title!,
+                              time: getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
+                                  || getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
+                                  ?getBloc().upcomingHireBookingsList[index].proposedAltStartTime:
+                              getBloc().upcomingHireBookingsList[index].startTime
+                                        ,jobName: getBloc().upcomingHireBookingsList[index].job.title!,
                                         employerName: getBloc().profileEntity?.type == "Worker"?
                                           getBloc().upcomingHireBookingsList[index].job.title??"":
                                         "${getBloc().upcomingHireBookingsList[index].customer?.firstName} "
                                             "${getBloc().upcomingHireBookingsList[index].customer?.surname}",
                                         locationName: getBloc().upcomingHireBookingsList[index].job.address??"",
-                                        dateTime: getBloc().upcomingHireBookingsList[index].status == JobStatus.rescheduled
+                                        dateTime: getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
                                             || getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
                               ?DateTime.parse(getBloc().upcomingHireBookingsList[index].proposedAltStartDate)
                                             :getBloc().upcomingHireBookingsList[index].job.startDate!,

@@ -32,6 +32,8 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
   TextEditingController accountNumberController = TextEditingController();
   TextEditingController branchCodeController = TextEditingController();
 
+  GlobalKey<FormState> _key = GlobalKey();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -75,117 +77,142 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
           child:SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
+              child: Form(
+                key: _key,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
 
-                      InkWell(onTap: ()=> context.router.pop()
-                          ,child: const Icon(Icons.arrow_back_rounded)),
-                      20.width,
-                      wText(getLocalization().editMyBankingDetails, style: theme.textTheme.titleLarge),
-                    ],
-                  ),
-                  30.height,
-                  AppTextFormField(
-                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: accountHolderNameController,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    textFieldType: TextFieldType.NAME,
-                    labelText: getLocalization().accountHolderName,),
-                  20.height,
-                  AppTextFormField(
-                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: bankNameController,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    textFieldType: TextFieldType.NAME,
-                    labelText: getLocalization().bankA,),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: AppDropdownMenu<AccountTypeEntity>(
-                      controller: accountTypeController,
-                      label: wText(getLocalization().accountTypeA),
-                      enableFilter: true,
-                      dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
-                      width: MediaQuery.of(context).size.width-40,),
-                  ),
-                  20.height,
-                  AppTextFormField(
-                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: accountNumberController,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    textFieldType: TextFieldType.NAME,
-                    labelText: getLocalization().accountNumberA,),
-                  20.height,
-                  AppTextFormField(
-                    onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                    controller: branchCodeController,
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    textFieldType: TextFieldType.NAME,
-                    labelText: getLocalization().branchCodeA,),
+                        InkWell(onTap: ()=> context.router.pop()
+                            ,child: const Icon(Icons.arrow_back_rounded)),
+                        20.width,
+                        wText(getLocalization().editMyBankingDetails, style: theme.textTheme.titleLarge),
+                      ],
+                    ),
+                    30.height,
+                    AppTextFormField(
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: accountHolderNameController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NAME,
+                      labelText: getLocalization().accountHolderName,),
+                    20.height,
+                    AppTextFormField(
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: bankNameController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NAME,
+                      labelText: getLocalization().bankA,),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: AppDropdownMenu<AccountTypeEntity>(
+                        controller: accountTypeController,
+                        label: wText(getLocalization().accountTypeA),
+                        enableFilter: true,
+                        dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
+                        width: MediaQuery.of(context).size.width-40,),
+                    ),
+                    20.height,
+                    AppTextFormField(
+                      validator: (value){
+                        if(value!.isEmpty)
+                          return "Account number is required";
+                        String pattern =
+                            r'^[0-9]';
+                        RegExp regex =  RegExp(pattern);
+                        if(!regex.hasMatch(value))
+                          return "Please enter a valid account number";
+                      },
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: accountNumberController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NUMBER,
+                      labelText: getLocalization().accountNumberA,),
+                    20.height,
+                    AppTextFormField(
+                      validator: (value){
+                          if(value!.isEmpty)
+                            return "branch code is required";
+                          String pattern =
+                              r'^[0-9]';
+                          RegExp regex =  RegExp(pattern);
+                          if(!regex.hasMatch(value))
+                            return "Please enter a valid branch";
 
-                  100.height,
+                      },
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: branchCodeController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NUMBER,
+                      labelText: getLocalization().branchCodeA,),
 
-                  Row(
-                    children: [
-                      Expanded(
-                        child: PrimaryButton(
-                          style: ButtonStyle(
-                              side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                return BorderSide(
-                                  color: states.contains(MaterialState.disabled)?
-                                  theme.colorScheme.secondary.withOpacity(0):
-                                  theme.colorScheme.secondary,
-                                  width: 2,
-                                );
-                              }
-                              ),
-                              backgroundColor: MaterialStateProperty.resolveWith(
-                                      (Set<MaterialState> states) {
-                                    return Colors.white;
-                                  }
-                              )
+                    100.height,
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButton(
+                            style: ButtonStyle(
+                                side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                  return BorderSide(
+                                    color: states.contains(MaterialState.disabled)?
+                                    theme.colorScheme.secondary.withOpacity(0):
+                                    theme.colorScheme.secondary,
+                                    width: 2,
+                                  );
+                                }
+                                ),
+                                backgroundColor: MaterialStateProperty.resolveWith(
+                                        (Set<MaterialState> states) {
+                                      return Colors.white;
+                                    }
+                                )
+                            ),
+                            onPressed:() { context.router.pop();
+                            },
+                            child: Text(getLocalization().cancel, style: TextStyle(color: theme.colorScheme.secondary)),
                           ),
-                          onPressed:() { context.router.pop();
-                          },
-                          child: Text(getLocalization().cancel, style: TextStyle(color: theme.colorScheme.secondary)),
                         ),
-                      ),
-                      const SizedBox(width: 10,),
-                      Expanded(
-                        child: PrimaryButton(
-                          style: ButtonStyle(
-                              side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                return BorderSide(
-                                  color: states.contains(MaterialState.disabled)?
-                                  theme.colorScheme.primary.withOpacity(0):
-                                  theme.colorScheme.primary,
-                                  width: 2,
-                                );
+                        const SizedBox(width: 10,),
+                        Expanded(
+                          child: PrimaryButton(
+                            style: ButtonStyle(
+                                side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                  return BorderSide(
+                                    color: states.contains(MaterialState.disabled)?
+                                    theme.colorScheme.primary.withOpacity(0):
+                                    theme.colorScheme.primary,
+                                    width: 2,
+                                  );
+                                }
+                                ),
+                                backgroundColor: MaterialStateProperty.resolveWith(
+                                        (Set<MaterialState> states){
+                                      return states.contains(MaterialState.disabled)?
+                                      theme.colorScheme.primary.withOpacity(0.3):
+                                      theme.colorScheme.primary;
+                                    }
+                                )
+                            ),
+                            onPressed: !getBloc().checked?null:() {
+                              if(_key.currentState!.validate()) {
+                                getBloc().add(BankDetailsSubmittedEvent(
+                                    bankDetailsEntity: getFormData()));
                               }
-                              ),
-                              backgroundColor: MaterialStateProperty.resolveWith(
-                                      (Set<MaterialState> states){
-                                    return states.contains(MaterialState.disabled)?
-                                    theme.colorScheme.primary.withOpacity(0.3):
-                                    theme.colorScheme.primary;
-                                  }
-                              )
+                              // context.router.push(const LocationRoute());
+                            },
+                            child: Text(getLocalization().save),
                           ),
-                          onPressed: !getBloc().checked?null:() {
-                            getBloc().add(BankDetailsSubmittedEvent(bankDetailsEntity: getFormData()));
-                            // context.router.push(const LocationRoute());
-                          },
-                          child: Text(getLocalization().save),
                         ),
-                      ),
-                    ],
-                  )
+                      ],
+                    )
 
 
 
-                ],
+                  ],
+                ),
               ),
             ),
           )  ,

@@ -153,6 +153,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                  getBloc().jobEntity == null ?Center(
                    child: Text(getLocalization().loadingDotDot),
                  ):AppTabBar(
+
                    viewHeight:MediaQuery.sizeOf(context).height-300,
                    isScrollable:true,
                    tabs: <Widget>[
@@ -168,14 +169,14 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                          child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
-                           WClientWidget(
+                           wCardlessClientWidget(
                                context: context,
                                areaLocation: getBloc().jobEntity!.customer?.address??"",
                                clientName: getBloc().jobEntity!.customer!=null?"${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}":"",
                                rating: getBloc().jobEntity!.customer==null?0:getBloc().jobEntity!.customer!.averageRating??0,
                                seeReviews: getLocalization().seeReviews,
                                profileImage: getBloc().jobEntity!.customer!.profileImage,
-                               onSeeReviews: ()=>context.router.push(MyReviewsRoute(userId: getBloc().currentUserId))
+                               onSeeReviews: ()=>context.router.push(MyReviewsRoute(userId: getBloc().jobEntity?.customer?.id))
                            ),
                            const AppDivider(),
                              20.height,
