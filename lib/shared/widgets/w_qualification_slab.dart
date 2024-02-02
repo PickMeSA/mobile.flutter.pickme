@@ -44,7 +44,7 @@ Widget qualificationSlab({
                     institutionName: otpWorkExperienceEntityList![index].company!,
                     qualificationType: AppQualificationType.experience,
                   dateStarted: otpWorkExperienceEntityList![index].startDate!,
-                  dateEnded: otpWorkExperienceEntityList![index].endDate!
+                  dateEnded: otpWorkExperienceEntityList?[index].endDate
                 ));
           }):
       Row(

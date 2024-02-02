@@ -28,7 +28,7 @@ class OTPWorkExperienceListEntity{
           title: element.title,
           company: element.company,
           startDate: element.startDate.toString(),
-          endDate: element.endDate.toString(),
+          endDate: element?.endDate?.toString(),
           isCurrent: element.isCurrent,
           industryId: element.industryId,
           fileIds: fileIds,

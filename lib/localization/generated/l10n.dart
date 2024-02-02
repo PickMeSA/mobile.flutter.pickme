@@ -3569,6 +3569,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Present`
+  String get present {
+    return Intl.message(
+      'Present',
+      name: 'present',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

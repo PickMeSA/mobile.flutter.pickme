@@ -361,7 +361,8 @@
   "yesDelete": "Yes, Delete",
   "areYouSureYouWantToDeleteYourAccount": "Are you sure you would like to delete your account.",
   "deleteAccountQ": "Delete account?",
-  "deleteAccount": "Delete account"
+  "deleteAccount": "Delete account",
+  "present": "Present"
 
 
 

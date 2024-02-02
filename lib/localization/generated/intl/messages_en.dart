@@ -414,6 +414,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Possible price range"),
         "preferredIndustry":
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
+        "present": MessageLookupByLibrary.simpleMessage("Present"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "proposeAlternative":
             MessageLookupByLibrary.simpleMessage("Propose Alternative"),

@@ -41,8 +41,13 @@ class DateFormatters{
      }
    }
 
-  static String getWordDate (DateTime dateTime){
-     return "${toMonthShortWord(dateTime)} ${dateTime.year}";
+  static String getWordDate (DateTime? dateTime){
+     String wordDate = "";
+     dateTime != null?
+      wordDate =  "${toMonthShortWord(dateTime)} ${dateTime.year}":
+    wordDate = "Present";
+
+     return wordDate;
   }
 
   static String getFullDate (DateTime dateTime){
