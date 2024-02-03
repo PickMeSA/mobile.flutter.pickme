@@ -184,7 +184,17 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                              20.height,
                              wText(getBloc().jobEntity!.description,),
                              20.height,
-
+                           widget.fromIndex == 0 && widget.pageMode!=PageMode.hiring  && ( getBloc().jobEntity!.jobInterestStatus==null)?
+                           PrimaryButton.fullWidth(
+                             onPressed:getBloc().jobEntity!.jobInterestStatus!=null?null:() {
+                               if(getBloc().jobEntity?.startDate == null){
+                                 context.router.push(ApplyForJobRoute(job: getBloc().jobEntity!));
+                               }else{
+                                 getBloc().add(ApplyForJobEvent());
+                               }
+                             },
+                             child: Text(getLocalization().apply),
+                           ):
                              widget.fromIndex == 1?
                              Column(
                                children: [
