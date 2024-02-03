@@ -260,7 +260,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    child: Text(getLocalization().cancelBooking, style: TextStyle(color: theme.colorScheme.secondary,)),
                                  )
                                ],
-                             ):                         widget.fromIndex == 2?
+                             ): widget.fromIndex == 2?
                              SecondaryButtonDark(
                                  width: MediaQuery.sizeOf(context).width,
                                  style: ButtonStyle(
@@ -282,7 +282,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
 
                                  },
                                  child: Text(getLocalization().seeCancellationDetails, style: TextStyle(color: theme.colorScheme.secondary),)):const SizedBox(),
-                             getBloc().jobEntity!.jobInterestStatus=="offer"?Padding(
+                             getBloc().jobEntity!.jobInterestStatus=="offered"?Padding(
                                padding: const EdgeInsets.all(16.0),
                                child: Row(
                                  children: [
@@ -294,7 +294,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    ),
                                    16.width,
                                    Expanded(
-                                     child: PrimaryButtonDark(
+                                     child: PrimaryButton(
                                          child: Text(getLocalization().accept),
                                          onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
                                      ),
@@ -373,7 +373,9 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    ],
                                  );
                              }),
+                         if(getBloc().jobEntity!.images.isNotEmpty)
                          20.height,
+                         if(getBloc().jobEntity!.images.isNotEmpty)
                          const AppDivider(),
                          20.height,
                          if(getBloc().jobEntity != null && widget.pageMode==PageMode.hiring)PrimaryButton.fullWidth(onPressed: ()=>getBloc().add(
@@ -502,7 +504,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                ),
                                16.width,
                                Expanded(
-                                 child: PrimaryButtonDark(
+                                 child: PrimaryButton(
                                      child: Text(getLocalization().accept),
                                      onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
                                  ),

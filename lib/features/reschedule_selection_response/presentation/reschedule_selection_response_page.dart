@@ -149,7 +149,7 @@ class _RescheduleSelectionResponsePageState extends BasePageState<RescheduleSele
                                   previousStatus: widget.booking?.previousStatus??JobStatus.booked,
                                   proposedAltStartTime: "",
                                   proposedAltStartDate: "",
-                                  startTime: widget.booking?.job.startTime??"",
+                                  startTime: widget.booking?.startTime??"",
                                   jobInterestId: widget.booking?.id??"",
                                   reasonForChange: widget.booking?.reasonForChange??"",
                                   startDate: widget.booking!.startDate!,

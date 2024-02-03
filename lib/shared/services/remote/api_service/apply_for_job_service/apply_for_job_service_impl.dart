@@ -63,7 +63,8 @@ class ApplyForJobServiceImpl extends ApplyForJobService{
   @override
   Future<bool> applyForJob({required ApplyForJobRepositoryParams params}) async {
    try{
-     Response<dynamic> response = await apiService.post("$baseUrl$version/jobs/jobInterest", data: SendJobOfferModelRequest(
+     Response<dynamic> response = await apiService.post("$baseUrl$version/jobs/jobInterest",
+         data: SendJobOfferModelRequest(
        jobId: params.jobEntity.id,
        customerUid: params.jobEntity.customer!.id!,
        labourerUid: params.userId,
@@ -91,7 +92,7 @@ class ApplyForJobServiceImpl extends ApplyForJobService{
    try{
      Response<dynamic> response = await apiService.put("$baseUrl$version/jobs/jobInterests/$jobInterestId", data: {
        "status": status,
-       "type": status=="booked"?"booking":"application",
+       "type": status =="booked"?"booking":"application",
      });
      if(response.statusCode==201 || response.statusCode==200){
        return true;

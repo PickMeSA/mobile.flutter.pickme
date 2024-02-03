@@ -20,12 +20,12 @@ class CancelBookingBloc
     extends BaseBloc<CancelBookingPageEvent, CancelBookingPageState> {
 
     List<DropdownMenuEntry> cancelReasonEntries = [
-        DropdownMenuEntry(value: CancelReasonEntity(id: 0, reason: "Family emergency"), label: "Booking Conflict"),
-        DropdownMenuEntry(value: CancelReasonEntity(id: 1, reason: "Double booked"), label: "Personal Emergency"),
-        DropdownMenuEntry(value: CancelReasonEntity(id: 2, reason: "Not interested anymore"), label: "Not feeling well"),
-        DropdownMenuEntry(value: CancelReasonEntity(id: 3, reason: "Unfit to complete work"), label: "Travel Issues" ),
-        DropdownMenuEntry(value: CancelReasonEntity(id: 4, reason: "Travel Issues"), label: "Religious purposes"),
-        DropdownMenuEntry(value: CancelReasonEntity(id: 5, reason: "Religious purposes "), label: "Religious purposes"),
+        DropdownMenuEntry(value: CancelReasonEntity(id: 0, reason: "Family emergency"), label: "Family emergency"),
+        DropdownMenuEntry(value: CancelReasonEntity(id: 1, reason: "Double booked"), label: "Double booked"),
+        DropdownMenuEntry(value: CancelReasonEntity(id: 2, reason: "Not interested anymore"), label: "Not interested anymore"),
+        DropdownMenuEntry(value: CancelReasonEntity(id: 3, reason: "Unfit to complete work"), label: "Unfit to complete work" ),
+        DropdownMenuEntry(value: CancelReasonEntity(id: 4, reason: "Travel Issues"), label: "Travel Issues"),
+        DropdownMenuEntry(value: CancelReasonEntity(id: 5, reason: "Religious purposes"), label: "Religious purposes"),
 
     ];
 

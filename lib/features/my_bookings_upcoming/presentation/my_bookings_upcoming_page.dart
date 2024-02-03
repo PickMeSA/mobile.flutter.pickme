@@ -173,13 +173,10 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if(index == 0 && getBloc().upcomingHireBookingsList[index].job.startDate!.difference(DateTime.now()) < const Duration(days: 1))
+                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).difference(DateTime.now()) < const Duration(days: 1))
                                       wText(getLocalization().today),
-
-                                    if(index == 0 && getBloc().upcomingHireBookingsList[index].job.startDate!.difference(DateTime.now()) > const Duration(days: 1) && getLaterThisMonth())
+                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).difference(DateTime.now()) > const Duration(days: 1) && getLaterThisMonth())
                                       wText(getLocalization().laterThisMonth),
-
-
                                     InkWell(
                                   onTap: (){ UserModel userModel = boxUser.get(current);
                                     if(
@@ -210,7 +207,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                         ,jobName: getBloc().upcomingHireBookingsList[index].job.title!,
                                         employerName: getBloc().profileEntity?.type == "Worker"?
                                           getBloc().upcomingHireBookingsList[index].job.title??"":
-                                        "${getBloc().upcomingHireBookingsList[index].customer?.firstName} "
+                                        "${getBloc().upcomingHireBookingsList[index].customer?.firstName}"
                                             "${getBloc().upcomingHireBookingsList[index].customer?.surname}",
                                         locationName: getBloc().upcomingHireBookingsList[index].job.address??"",
                                         dateTime: getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
@@ -253,10 +250,10 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    if (index == 0)
-                                     wText(DateFormatters.toMonthFullWord(getBloc().completeHireBookingsList[index].job.startDate!)),
+                                     wText(DateFormatters.toMonthFullWord(DateTime.parse(getBloc().completeHireBookingsList[index].startDate)!)),
                                    if(index != 0)
-                                     if(getBloc().completeHireBookingsList[index].job.startDate?.month != getBloc().completeHireBookingsList[index -1].job.startDate?.month)
-                                       wText(DateFormatters.toMonthFullWord(getBloc().completeHireBookingsList[index].job.startDate!)),
+                                     if(DateTime.parse(getBloc().completeHireBookingsList[index].startDate)?.month != DateTime.parse(getBloc().completeHireBookingsList[index -1].startDate)?.month)
+                                       wText(DateFormatters.toMonthFullWord(DateTime.parse(getBloc().completeHireBookingsList[index].startDate)!)),
                                    InkWell(
                                      onTap:()=> context.router.push(JobDetailsRoute(
                                          pageMode: PageMode.booking,
