@@ -149,20 +149,15 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
              height: MediaQuery.sizeOf(context).height,
              child: Column(
                children: [
-                 Expanded(child:
                  getBloc().jobEntity == null ?Center(
                    child: Text(getLocalization().loadingDotDot),
-                 ):AppTabBar(
+                 ):
+                     AppTabBar(tabs:<Widget> [if(widget.pageMode != PageMode.hiring)Text(getLocalization().client),
+                       Text(getLocalization().description),
+                       if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
+                       if(widget.pageMode == PageMode.hiring)Text("${getLocalization().matchingProfiles} (${getBloc().jobEntity?.matches?.length})", style: theme.textTheme.bodySmall,),
+                       ],
 
-                   viewHeight:MediaQuery.sizeOf(context).height-300,
-                   isScrollable:true,
-                   tabs: <Widget>[
-                     if(widget.pageMode != PageMode.hiring)Text(getLocalization().client, style: theme.textTheme.bodySmall,),
-                     Text(getLocalization().description, style: theme.textTheme.bodySmall,),
-                     if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
-                     if(widget.pageMode == PageMode.hiring)Text("${getLocalization().matchingProfiles} (${getBloc().jobEntity?.matches?.length})", style: theme.textTheme.bodySmall,),
-                     // if(getBloc().currentUserId == getBloc().jobEntity!.customer.id)
-                   ],
                    views:  <Widget>[
                      if(widget.pageMode != PageMode.hiring)
                        SingleChildScrollView(
@@ -624,7 +619,6 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                          }
                      ),
                    ], onTap: (int index) {  },
-                 ),
                  ),
                ],
              ),

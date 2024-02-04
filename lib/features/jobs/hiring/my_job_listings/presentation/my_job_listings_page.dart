@@ -78,12 +78,14 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                 AppTabBar(
                   viewHeight: MediaQuery.sizeOf(context).height - 355,
                   initialIndex: getBloc().selectedTabIndex,
+                  isScrollable: true,
                   tabs: [
                     Text(getLocalization().activeListings),
                     Text(getLocalization().inactiveListings),
                   ],
                   views: [
-                    if(getBloc().myJobs== null || getBloc().myJobs!.activeJobs.isEmpty)Column(
+                    if(getBloc().myJobs== null || getBloc().myJobs!.activeJobs.isEmpty)
+                      Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(
