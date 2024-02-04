@@ -22,6 +22,7 @@ class ServiceCategoryCandidatesBloc extends BaseBloc<ServiceCategoryCandidatesEv
   bool preloaderActive = false;
   Logger logger = Logger();
   String? categoryId;
+  FilterEntity? filterEntity;
 
   ServiceCategoryCandidatesBloc({required this.getPaginatedCandidatesByIndustryUseCase}) : super(ServiceCategoryCandidatesInitial()) {
     on<ServiceCategoryCandidatesPageEnteredEvent>((event, emit) =>
@@ -34,11 +35,20 @@ class ServiceCategoryCandidatesBloc extends BaseBloc<ServiceCategoryCandidatesEv
       )async{
     emit(GetServiceCategoryCandidatesState()..dataState = DataState.loading);
     try{
-
-
+      filterEntity = event.filter;
       categoryId = event.serviceCategoryId;
       PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
-          params: GetPaginatedCandidatesByIndustryUseCaseParams(industryId: categoryId));
+          params: GetPaginatedCandidatesByIndustryUseCaseParams(
+            industryId: categoryId,
+            address: filterEntity?.address,
+            title: filterEntity?.title,
+              lat: filterEntity?.lat,
+              lng: filterEntity?.lng,
+              maxDistance: filterEntity?.distance,
+              maxHourlyRate: filterEntity?.estimatedHours,
+              minRating: filterEntity?.rating,
+          ),
+      );
       paginatedCandidates = paginatedCandidateProfileEntity;
       emit(GetServiceCategoryCandidatesState(paginatedCandidates: paginatedCandidateProfileEntity)..dataState = DataState.success);
     }catch(ex){

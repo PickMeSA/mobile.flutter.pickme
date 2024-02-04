@@ -27,6 +27,8 @@ class GetPaginatedCandidatesByIndustryUseCase extends BaseUseCase<GetPaginatedCa
            maxHourlyRate: params?.maxHourlyRate,
            minRating: params?.minRating,
            industryId: params?.industryId,
+           address: params?.address,
+           title: params?.title
          ));
    }catch(ex){
      rethrow;
@@ -44,6 +46,8 @@ class GetPaginatedCandidatesByIndustryUseCaseParams extends BaseUseCaseParams{
   final String? industryId;
   final double? lat;
   final double? lng;
+  final String? address;
+  final String? title;
   GetPaginatedCandidatesByIndustryUseCaseParams({
      this.lat,
      this.lng,
@@ -54,5 +58,7 @@ class GetPaginatedCandidatesByIndustryUseCaseParams extends BaseUseCaseParams{
     this.maxHourlyRate,
     this.minRating,
     this.industryId,
+    this.address,
+    this.title,
   });
 }

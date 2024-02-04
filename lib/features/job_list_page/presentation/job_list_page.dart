@@ -43,7 +43,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
   @override
   void initState() {
     super.initState();
-    getBloc().add(MyJobListingsPageEnteredEvent(filter: widget.filter));
+    getBloc().add(MyJobListingsPageEnteredEvent(filter: widget.filter, pageMode: widget.pageMode));
   }
 
   @override
@@ -126,7 +126,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                       return AppJobCard(
                         jobName: job.title,
                         employerName: job.customer?.firstName??"",
-                        locationName: job.customer?.address??"",
+                        locationName: job.address??job.customer?.address??"",
                         dateTime: job.startDate,
                         selected: getBloc().selectedJob==job,
                         image: (job.customer?.profileImage!=null)?

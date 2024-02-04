@@ -13,6 +13,8 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
   final String? industryId;
   final double? lat;
   final double? lng;
+  final String? address;
+  final String? title;
   GetPaginatedCandidatesByIndustryRepositoryParams({
     this.pageNumber,
     this.pageSize,
@@ -21,6 +23,8 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
     this.maxHourlyRate,
     this.minRating,
     this.industryId,
+    this.address,
+    this.title,
     required this.lng,
     required this.lat
   });
@@ -58,8 +62,8 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
     if(pageSize!=null){
       map += "&pageSize=${pageSize.toString()}";
     }
-    if(true){
-      map += "&maxDistance=10000000";
+    if(maxDistance!=null){
+      map += "&maxDistance=${maxDistance.toString()}";
     }
     if(minHourlyRate!=null){
       map += "&minHourlyRate=${minHourlyRate.toString()}";
@@ -80,6 +84,14 @@ class GetPaginatedCandidatesByIndustryRepositoryParams extends BaseRepositoryPar
 
     if(lng!=null){
       map += "&lng=${lng.toString()}";
+    }
+
+    if(address!=null){
+      map += "&address=${address.toString()}";
+    }
+
+    if(title!=null){
+      map += "&search=${title.toString()}";
     }
     return map;
   }

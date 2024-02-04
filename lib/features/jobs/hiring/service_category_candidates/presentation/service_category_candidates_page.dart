@@ -21,8 +21,10 @@ import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 
 @RoutePage()
 class ServiceCategoryCandidatesPage extends BasePage {
-  const ServiceCategoryCandidatesPage({super.key, this.serviceCategoryId, });
+  const ServiceCategoryCandidatesPage({super.key, this.serviceCategoryId, this.pageTitle, this.filter});
   final String? serviceCategoryId;
+  final String? pageTitle;
+  final FilterEntity? filter;
 
   @override
   State<ServiceCategoryCandidatesPage> createState() => _ServiceCategoryCandidatesPage();
@@ -33,7 +35,7 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
   @override
   void initState() {
     super.initState();
-    getBloc().add(ServiceCategoryCandidatesPageEnteredEvent(serviceCategoryId: widget.serviceCategoryId));
+    getBloc().add(ServiceCategoryCandidatesPageEnteredEvent(serviceCategoryId: widget.serviceCategoryId, filter: widget.filter));
   }
 
   @override
@@ -129,7 +131,7 @@ class _ServiceCategoryCandidatesPage extends BasePageState<ServiceCategoryCandid
   @override
   PreferredSizeWidget buildAppbar(){
     return getAppBar(
-      title: Text(getLocalization().serviceCategory,),
+      title: Text(widget.pageTitle??getLocalization().serviceCategory,),
       actions: [
         TextButton(onPressed: () async{
           FilterEntity? filter = await context.router.push<FilterEntity>(FiltersRoute(appMode: AppMode.hiring));

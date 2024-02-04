@@ -17,6 +17,7 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import 'bloc/jobs_hiring_landing_page_bloc.dart';
 
@@ -37,176 +38,193 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
     getBloc().add(JobsHiringLandingPageEnteredEvent());
   }
 
+  RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
+  bool laterFlagged = false;
+
+  void _onRefresh() async{
+    // monitor network fetch
+    getBloc().add(JobsHiringLandingPageEnteredEvent());
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
-    return BlocConsumer<JobsHiringLandingPageBloc, JobsHiringLandingPageState>(
-      listener: (context, state) {
-        if(state is GetTopIndustriesState && state.dataState == DataState.error){
-          getBloc().preloaderActive = false;
-          Navigator.of(context, rootNavigator: true).pop();
-          wErrorPopUp(message: "An error occurred while fetching your data.", type: getLocalization().error, context: context);
-        }
-        //loading
-        if(state is GetTopIndustriesState && state.dataState == DataState.loading){
-          if(!getBloc().preloaderActive){
-            getBloc().preloaderActive = true;
-            preloader(context);
+    return SmartRefresher(
+      controller: _refreshController ,
+      onRefresh: _onRefresh ,
+      child: BlocConsumer<JobsHiringLandingPageBloc, JobsHiringLandingPageState>(
+        listener: (context, state) {
+          if(state is GetTopIndustriesState && state.dataState == DataState.error){
+            getBloc().preloaderActive = false;
+            Navigator.of(context, rootNavigator: true).pop();
+            wErrorPopUp(message: "An error occurred while fetching your data.", type: getLocalization().error, context: context);
           }
-        }
-        //loading
-        if(state is GetTopIndustriesState && state.dataState == DataState.success){
-          getBloc().preloaderActive = false;
-          Navigator.of(context, rootNavigator: true).pop();
-        }
-      },
-      builder: (context, state) {
-        PaginatedIndustryEntity? industries = state.paginatedIndustries;
+          //loading
+          if(state is GetTopIndustriesState && state.dataState == DataState.loading){
+            if(!getBloc().preloaderActive){
+              getBloc().preloaderActive = true;
+              preloader(context);
+            }
+          }
+          //loading
+          if(state is GetTopIndustriesState && state.dataState == DataState.success){
+            getBloc().preloaderActive = false;
+            Navigator.of(context, rootNavigator: true).pop();
+          }
+        },
+        builder: (context, state) {
+          PaginatedIndustryEntity? industries = state.paginatedIndustries;
 
-        return Container(
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height,
-          padding: wPagePadding(top:0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppExplorationTile(
-                  title: getLocalization().exploreAllServices,
-                  onClick: () => context.router.push(AllServicesRoute()),
-                ),
-                10.height,
-                AppExplorationTile(
-                  title: getLocalization().myJobListings,
-                  count: getBloc().jobCount,
-                  icon: const Icon(Iconsax.document_text_14),
-                  onClick: ()=>context.router.push(MyJobListingsRoute(jobListingsPageEntity: getBloc().jobListingsPageEntity)),
-                ),
-                40.height,
-                Row(
-                  children: [
-                    Expanded(child: Text(
-                      getLocalization().services,
-                      style: theme.textTheme.titleMedium,
-                    )),
-                    TextButton(
-                        onPressed: () => context.router.push(AllServicesRoute()),
-                        child: Row(
-                          children: [
-                            Text(
-                              getLocalization().seeAll,
-                              style: theme.textTheme.labelMedium,
-                            ),
-                            10.width,
-                            const Icon(
-                              Iconsax.arrow_right_1,
-                              size: 16,
-                              color: neutrals500Color,
-                            )
-                          ],
-                        ))
-                  ],
-                ),
-                if(state.paginatedIndustries!=null)Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                          children: [
-                            AppSectionCard.small(
-                                title: industries!.industries[0].industry!,
-                                color: const Color(0xFFF17E2C),
-                                icon: const Icon(Iconsax.setting,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[0].id.toString())),
-                            ),
-                            10.height,
-                            AppSectionCard(
-                              icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries.industries[1].industry!,
-                              color: const Color(0xFF23A8B3),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[1].id.toString())),
-                            ),
-                          ]),
-                    ),
-                    10.width,
-                    Expanded(
-                      child: Column(
-                          children: [
-                            AppSectionCard(
-                              icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries.industries[2].industry!,
-                              color: const Color(0xFF3EB62B),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[2].id.toString())),
-                            ),
-                            10.height,
-                            AppSectionCard.small(
-                              icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                              title: industries.industries[3].industry!,
-                              color: const Color(0xFFF44F4E),
-                              onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[3].id.toString())),
-                            ),
-                          ]),
-                    ),
-                  ],
-                ),
-                40.height,
-                Row(
-                  children: [
-                    Expanded(child: Text(
-                      getLocalization().inYourArea,
-                      style: theme.textTheme.titleMedium,
-                    )),
-                    TextButton(
-                        onPressed: () => context.router.push(AllServicesRoute()),
-                        child: Row(
-                          children: [
-                            Text(
-                              getLocalization().seeAll,
-                              style: theme.textTheme.labelMedium,
-                            ),
-                            10.width,
-                            const Icon(
-                              Iconsax.arrow_right_1,
-                              size: 16,
-                              color: neutrals500Color,
-                            )
-                          ],
-                        ))
-                  ],
-                ),
-                20.height,
-                SizedBox(
-                  child: (state.paginatedCandidates!=null)?
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: (state.paginatedCandidates!.candidates.length>3)?3:state.paginatedCandidates!.candidates.length,
-                    itemBuilder: (BuildContext context, int index){
-                      CandidateProfileEntity candidate = state.paginatedCandidates!.candidates[index];
-                      return AppCandidateProfile(
-                        fullName: candidate.fullName,
-                        jobTitle: candidate.jobTitle?? getLocalization().noJobDescription,
-                        rating: candidate.rating??0,
-                        hourlyRate: "R${candidate.hourlyRate}p/h",
-                        image: (candidate.profilePicture!=null)?
-                        CachedNetworkImageProvider(
-                            candidate.profilePicture!
-                        ):null,
-                        viewProfileFunction: (){
-                          context.router.push(CandidateProfileRoute(candidateProfile: candidate)).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent()));
-                        },
-                      );
-                    },
-                  ):SizedBox(),
-                ),
-              ],
+          return Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            padding: wPagePadding(top:0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppExplorationTile(
+                    title: getLocalization().exploreAllServices,
+                    onClick: () => context.router.push(AllServicesRoute()).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                  ),
+                  10.height,
+                  AppExplorationTile(
+                    title: getLocalization().myJobListings,
+                    count: getBloc().jobCount,
+                    icon: const Icon(Iconsax.document_text_14),
+                    onClick: ()=>context.router.push(MyJobListingsRoute(jobListingsPageEntity: getBloc().jobListingsPageEntity)).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                  ),
+                  40.height,
+                  Row(
+                    children: [
+                      Expanded(child: Text(
+                        getLocalization().services,
+                        style: theme.textTheme.titleMedium,
+                      )),
+                      TextButton(
+                          onPressed: () => context.router.push(AllServicesRoute()).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                          child: Row(
+                            children: [
+                              Text(
+                                getLocalization().seeAll,
+                                style: theme.textTheme.labelMedium,
+                              ),
+                              10.width,
+                              const Icon(
+                                Iconsax.arrow_right_1,
+                                size: 16,
+                                color: neutrals500Color,
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                  if(state.paginatedIndustries!=null)Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                            children: [
+                              AppSectionCard.small(
+                                  title: industries!.industries[0].industry!,
+                                  color: const Color(0xFFF17E2C),
+                                  icon: const Icon(Iconsax.setting,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[0].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                              ),
+                              10.height,
+                              AppSectionCard(
+                                icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
+                                title: industries.industries[1].industry!,
+                                color: const Color(0xFF23A8B3),
+                                onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[1].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                              ),
+                            ]),
+                      ),
+                      10.width,
+                      Expanded(
+                        child: Column(
+                            children: [
+                              AppSectionCard(
+                                icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
+                                title: industries.industries[2].industry!,
+                                color: const Color(0xFF3EB62B),
+                                onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[2].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                              ),
+                              10.height,
+                              AppSectionCard.small(
+                                icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
+                                title: industries.industries[3].industry!,
+                                color: const Color(0xFFF44F4E),
+                                onClick:() => context.router.push(ServiceCategoryCandidatesRoute(serviceCategoryId: industries.industries[3].id.toString())).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                              ),
+                            ]),
+                      ),
+                    ],
+                  ),
+                  40.height,
+                  Row(
+                    children: [
+                      Expanded(child: Text(
+                        getLocalization().inYourArea,
+                        style: theme.textTheme.titleMedium,
+                      )),
+                      TextButton(
+                          onPressed: () => context.router.push(AllServicesRoute()).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent())),
+                          child: Row(
+                            children: [
+                              Text(
+                                getLocalization().seeAll,
+                                style: theme.textTheme.labelMedium,
+                              ),
+                              10.width,
+                              const Icon(
+                                Iconsax.arrow_right_1,
+                                size: 16,
+                                color: neutrals500Color,
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                  20.height,
+                  SizedBox(
+                    height: 800,
+                    child: (state.paginatedCandidates!=null)?
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: (state.paginatedCandidates!.candidates.length>3)?3:state.paginatedCandidates!.candidates.length,
+                      itemBuilder: (BuildContext context, int index){
+                        CandidateProfileEntity candidate = state.paginatedCandidates!.candidates[index];
+                        return AppCandidateProfile(
+                          fullName: candidate.fullName,
+                          jobTitle: candidate.jobTitle?? getLocalization().noJobDescription,
+                          rating: candidate.rating??0,
+                          hourlyRate: "R${candidate.hourlyRate}p/h",
+                          image: (candidate.profilePicture!=null)?
+                          CachedNetworkImageProvider(
+                              candidate.profilePicture!
+                          ):null,
+                          viewProfileFunction: (){
+                            context.router.push(CandidateProfileRoute(candidateProfile: candidate)).then((value) => getBloc().add(JobsHiringLandingPageEnteredEvent()));
+                          },
+                        );
+                      },
+                    ):SizedBox(),
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 

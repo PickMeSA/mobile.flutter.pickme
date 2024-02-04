@@ -42,14 +42,12 @@ class GetJobsLandingPageDataServiceImpl extends GetJobsLandingPageDataService{
       }
         List<JobOfferEntity> jobOffers = [];
         for (var value in jobOffersResponse.data as List) {
-          logger.d(value);
           JobOfferModel jobsResponseModel = JobOfferModel.fromJson(value);
-
           jobOffers.add(JobOfferEntity.fromResponse(jobsResponseModel));
         }
 
         Response<dynamic> jobsNearYouResponse = await
-      apiService.get("$baseUrl$version/jobs/location/filters?maxDistance=25");
+      apiService.get("$baseUrl$version/jobs/location/filters?maxDistance=50");
       if(jobsResponse.statusCode!=200){
         throw "an error occurred";
       }

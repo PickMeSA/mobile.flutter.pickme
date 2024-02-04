@@ -24,19 +24,30 @@ class SendJobOfferServiceImpl extends SendJobOfferService{
   Future<bool> sendOffer({required JobEntity job, required CandidateProfileEntity candidateProfileEntity}) async{
     UserModel userModel = boxUser.get(current);
     try{
-      Map<String, dynamic> params = {
-        "jobId": job.id,
-        "customerUid": userModel.id.toString(),
-        "labourerUid": candidateProfileEntity.id,
-        "startDate": job.startDate?.toIso8601String(),
-        "endDate": job.endDate?.toIso8601String(),
-        "startTime": job.startTime,
-        "estimatedHours": job.estimatedHours,
-        "comments": job.comments,
-        "type": "offer",
-        "status": "offered",
-        "bookingId": ""
-      };
+      Map<String, dynamic> params = {};
+        params["jobId"] = job.id;
+        params["customerUid"] = userModel.id.toString();
+        params["labourerUid"] = candidateProfileEntity.id;
+      params["estimatedHours"] = job.estimatedHours;
+      params["type"] = "offer";
+      params["status"] = "offered";
+
+      if (job.startDate != null) {
+        params["startDate"] = job.startDate!.toIso8601String();
+      }
+
+      if (job.endDate != null) {
+        params["endDate"] = job.endDate!.toIso8601String();
+      }
+
+      if (job.startTime != null && job.startTime!.isNotEmpty) {
+        params["startTime"] = job.startTime;
+      }
+
+      if (job.comments != null && job.comments.isNotEmpty) {
+        params["comments"] = job.comments;
+      }
+
       logger.d(params);
       Response<dynamic> response = await apiService.post("$baseUrl$version/jobs/jobInterest",
           data: params);

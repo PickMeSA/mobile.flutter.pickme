@@ -149,7 +149,7 @@ class _AlternativeRequestResponsePageState extends BasePageState<AlternativeRequ
                               previousStatus: widget.booking!.previousStatus,
                               proposedAltStartDate: "",
                                 proposedAltStartTime: "",
-                                startTime: widget.booking?.job.startTime??"",
+                                startTime: widget.booking?.startTime??"",
                                 jobInterestId: widget.booking?.id??"",
                                 reasonForChange: widget.booking?.reasonForChange??"",
                                 startDate: widget.booking!.startDate!,
@@ -187,12 +187,13 @@ class _AlternativeRequestResponsePageState extends BasePageState<AlternativeRequ
                           )
                       ),
                       onPressed: () {
+                        if(!widget.approved)
                         getBloc().add(RescheduleBookingEvent(rescheduleEntity:
                         RescheduleEntity(
                             previousStatus: widget.booking!.previousStatus,
                             proposedAltStartDate: "",
                             proposedAltStartTime: "",
-                            startTime: widget.booking?.job.startTime??"",
+                            startTime: widget.booking?.startTime??"",
                             jobInterestId: widget.booking?.id??"",
                             reasonForChange: widget.booking?.reasonForChange??"",
                             startDate: widget.booking!.startDate!,
@@ -200,6 +201,11 @@ class _AlternativeRequestResponsePageState extends BasePageState<AlternativeRequ
                             status: widget.booking!.previousStatus,
                             proposerUid: widget.booking!.proposerUid
                         )));
+                        if(widget.approved)
+                          context.router.pushAndPopUntil(
+                              BottomNavigationBarRoute(
+                                  initialIndex: 1), predicate: (Route<dynamic> route) => false);
+
                       },
                       child: Text(getLocalization().backToBooking,
                         style: TextStyle(color: theme.colorScheme.secondary),),

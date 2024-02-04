@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
@@ -70,8 +71,8 @@ final String? potentialMatchesRemoved;
   factory JobEntity.fromResponse(MyJobListingsJobModelResponse response){
     return JobEntity(
         title: response.title??"",
-        startDate: (response.startDate!=null && response.startDate!= "")?DateTime.parse(response.startDate!):DateTime.now(),
-        endDate: (response.endDate!=null && response.endDate != "")?DateTime.parse(response.endDate!):DateTime.now(),
+        startDate: response.startDate.isEmptyOrNull?null:DateTime.parse(response.startDate!),
+        endDate: response.endDate.isEmptyOrNull?null:DateTime.parse(response.endDate!),
         startTime: response.startTime,
         description: response.description??"",
         images: response.images??"",

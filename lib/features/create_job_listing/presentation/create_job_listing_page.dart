@@ -18,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
+import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/functions/required_text_validator.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
@@ -52,6 +53,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   DateTime? startDate;
   DateTime? endDate;
   String address = "";
+  String? selectedIndustry;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -148,7 +150,6 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                             controller: jobDescriptionController,
                             textFieldType: TextFieldType.MULTILINE,
                             labelText: "${getLocalization().jobDescription} *",
-                            hint: getLocalization().loremIpsumDescriptionField,
                             validator: requiredTextValidator,
                           ),
                           GestureDetector(
@@ -349,6 +350,32 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       24.height,
                       AppDivider(),
                       24.height,
+                      Text(getLocalization().industry, style: theme.textTheme.bodyMedium!.copyWith(
+                          fontVariations: 600.fontWeight
+                      ),),
+                      16.height,
+                      if(getBloc().industries!=null)DropdownButton<String>(
+                        value: selectedIndustry,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedIndustry = newValue;
+                          });
+                        },
+                        items: getBloc().industries!.industries.map<DropdownMenuItem<String>>((IndustryEntity industry) {
+                          return DropdownMenuItem<String>(
+                            value: industry.id!.toString(),
+                            child: Text(
+                              industry.industry!.toString(),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        }).toList(),
+                        isExpanded: true,
+                        hint: Text('Select Industry'),
+                      ),
+                      24.height,
+                      AppDivider(),
+                      24.height,
                       Text(getLocalization().skillsRequired, style: theme.textTheme.bodyMedium!.copyWith(
                           fontVariations: 600.fontWeight
                       ),),
@@ -420,23 +447,35 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           }else if(hoursTextController.text.isEmptyOrNull){
                             wErrorPopUp(message: "Estimated hours cannot be empty", type: getLocalization().error, context: context);
                             return;
+                          }else if(selectedIndustry.isEmptyOrNull){
+                            wErrorPopUp(message: "Please select the industry", type: getLocalization().error, context: context);
+                            return;
                           }
+                          logger.d(selectedIndustry);
                           CreateJobPageJobEntity job =  CreateJobPageJobEntity(
                               title: jobTitleController.text,
                               description: jobDescriptionController.text,
                               address: address,
                               status: 'active',
+                              industryId: selectedIndustry!,
                               startDate: startDate,
                               endDate: endDate,
                               startTime: startTimeTextController.text,
                               imFlexible: getBloc().flexibleHoursChecked,
                               estimatedHours: hoursTextController.text,
-                              lat: getBloc().otpLocationEntity?.latitude.toString()??"",
-                              lng: getBloc().otpLocationEntity?.longitude.toString()??"",
+                              lat: getBloc().otpLocationEntity?.latitude.toString()??(getBloc().currentUser!.location?.latitude.toString()??""),
+                              lng: getBloc().otpLocationEntity?.longitude.toString()??(getBloc().currentUser!.location?.longitude.toString()??""),
                               images: getBloc().photos.map((e) => e.url!).toList(),
-                              skills: getBloc().chipOptions
+                              skills: getBloc().chipOptions,
+                            offeredTo: widget.candidateToOffer==null?null:widget.candidateToOffer!.id
                           );
-                          context.router.push(ReviewJobListingInfoRoute(jobEntity: job, profile: getBloc().currentUser!));
+                          context.router.push(
+                            ReviewJobListingInfoRoute(
+                              jobEntity: job,
+                              profile: getBloc().currentUser!,
+                                candidateProfileEntity: widget.candidateToOffer
+                            ),
+                          );
                         },
                         child: Text(getLocalization().ccontinue)
                       ),
@@ -458,69 +497,72 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   }
   getMapWindow(){
     var theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 10,),
-        wText(getLocalization().whereAreYouLocated,
-            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
-        30.height,
-        Container(
-          height: 450,
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
-          child: PlacePicker(
-            apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
-            onPlacePicked: (result) {
-              getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));
-              Navigator.pop(context);
-            },
-            initialPosition: const LatLng(-33.918861, 18.423300),
-            useCurrentLocation: true,
-            resizeToAvoidBottomInset: false, // only works in page mode, less flickery, remove if wrong offsets
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10,),
+          wText(getLocalization().whereAreYouLocated,
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
+          30.height,
+          Container(
+            height: 450,
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
+            child: PlacePicker(
+              apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
+              onPlacePicked: (result) {
+                getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));
+                Navigator.pop(context);
+              },
+              initialPosition: const LatLng(-33.918861, 18.423300),
+              useCurrentLocation: true,
+              resizeToAvoidBottomInset: false, // only works in page mode, less flickery, remove if wrong offsets
+            ),
           ),
-        ),
-        20.height,
-        50.height,
-        Row(
-          children: [
-            Container(
-              height: 56,
-              width: 56,
-              decoration: BoxDecoration(
-                  border: Border.all(width: 2,
-                      color: Colors.black),
-                  borderRadius: const BorderRadius.all(Radius.circular(10))),
-              child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
+          20.height,
+          50.height,
+          Row(
+            children: [
+              Container(
+                height: 56,
+                width: 56,
+                decoration: BoxDecoration(
+                    border: Border.all(width: 2,
+                        color: Colors.black),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
 
-            ),
-            const SizedBox(width: 10,),
-            Expanded(
-              child: PrimaryButton(
-                style: ButtonStyle(
-                    side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                      return BorderSide(
-                        color: states.contains(MaterialState.disabled)?
-                        theme.colorScheme.secondary.withOpacity(0):
-                        theme.colorScheme.secondary,
-                        width: 2,
-                      );
-                    }
-                    ),
-                    backgroundColor: MaterialStateProperty.resolveWith(
-                            (Set<MaterialState> states){
-                          return states.contains(MaterialState.disabled)?
-                          theme.colorScheme.secondary.withOpacity(0.3):
-                          theme.colorScheme.secondary;
-                        }
-                    )
-                ),
-                onPressed: (){},
-                child: Text(getLocalization().save),
               ),
-            ),
-          ],
-        ),
-      ],
+              const SizedBox(width: 10,),
+              Expanded(
+                child: PrimaryButton(
+                  style: ButtonStyle(
+                      side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                        return BorderSide(
+                          color: states.contains(MaterialState.disabled)?
+                          theme.colorScheme.secondary.withOpacity(0):
+                          theme.colorScheme.secondary,
+                          width: 2,
+                        );
+                      }
+                      ),
+                      backgroundColor: MaterialStateProperty.resolveWith(
+                              (Set<MaterialState> states){
+                            return states.contains(MaterialState.disabled)?
+                            theme.colorScheme.secondary.withOpacity(0.3):
+                            theme.colorScheme.secondary;
+                          }
+                      )
+                  ),
+                  onPressed: (){},
+                  child: Text(getLocalization().save),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
   @override

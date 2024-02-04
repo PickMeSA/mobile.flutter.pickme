@@ -23,3 +23,9 @@ class SearchTextChangedState extends AllServicesPageState {
     super.searchText
   });
 }
+
+class SubmitSearchState extends AllServicesPageState {
+  SubmitSearchState({
+    super.searchText
+  });
+}

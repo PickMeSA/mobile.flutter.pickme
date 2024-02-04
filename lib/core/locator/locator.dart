@@ -20,10 +20,7 @@ void setupLocators()=> locator.init();
 
 @module
 abstract class RegisterModule{
-
-
   AppLocalizations get appLocalizations => AppLocalizations();
-
   Dio get dio => Dio();
   @singleton
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;

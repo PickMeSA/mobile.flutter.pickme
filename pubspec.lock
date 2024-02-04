@@ -518,11 +518,9 @@ packages:
   flutter_ui_components:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: e78f09b55cdccc5ae68c865b8072939644878710
-      url: "https://github.com/pickmesa/pickmme.flutter.uipackage.git"
-    source: git
+      path: "../pickmme.flutter.uipackage"
+      relative: true
+    source: path
     version: "0.0.1+3"
   flutter_web_plugins:
     dependency: transitive

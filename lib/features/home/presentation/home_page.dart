@@ -274,7 +274,7 @@ late ProfileModel profileModel;
                              wText(getLocalization().inYourArea, style: TextStyle(fontWeight: FontWeight.bold)),
                              Spacer(),
                              InkWell(onTap:()=> userMode.type == 'work'?
-                             context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs, filter: FilterEntity()),):
+                             context.router.push(JobListRoute(pageMode: JobListMode.inYourArea, filter: FilterEntity(distance: 20)),):
                              context.router.push(AllServicesRoute())
                                ,
                                child: wText(getLocalization().seeAll,
@@ -301,7 +301,8 @@ late ProfileModel profileModel;
                                            employerName: "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.firstName} "
                                                "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.surname}",
                                            locationName: getBloc().jobListingsPageEntity!.activeJobs[index].customer?.address??getLocalization().noAddressSpecified,
-                                           dateTime: DateTime.now(),
+                                           dateTime: getBloc().jobListingsPageEntity!.activeJobs[index].startDate,
+                                           time: getBloc().jobListingsPageEntity!.activeJobs[index].startTime,
                                            image: (getBloc().jobListingsPageEntity!.activeJobs[index].customer?.profileImage!=null)?
                                            CachedNetworkImageProvider(getBloc().jobListingsPageEntity!.activeJobs[index].customer!.profileImage!):null,
                                            onNext: ()=>context.router.push(JobDetailsRoute(jobId: getBloc().jobListingsPageEntity!.activeJobs[index].id,
