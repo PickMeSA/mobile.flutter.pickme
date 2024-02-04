@@ -216,7 +216,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   20.height,
                   if(getBloc().profileEntity!.skills!.isNotEmpty)
                   SizedBox(
-                    height: 150 ,
+                    height: 200 ,
                     child: Center(
                       child: ChipGroup(
                         inputs: getBloc().skills,
