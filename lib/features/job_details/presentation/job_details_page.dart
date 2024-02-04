@@ -171,7 +171,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                          children: [
                            wCardlessClientWidget(
                                context: context,
-                               areaLocation: getBloc().jobEntity!.customer?.address??"",
+                               areaLocation: getBloc().jobEntity!.address.isEmptyOrNull?"${getBloc().jobEntity!.customer?.address}":"${getBloc().jobEntity!.address}",
                                clientName: getBloc().jobEntity!.customer!=null?"${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}":"",
                                rating: getBloc().jobEntity!.customer==null?0:getBloc().jobEntity!.customer!.averageRating??0,
                                seeReviews: getLocalization().seeReviews,
@@ -322,7 +322,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            padding: EdgeInsets.zero,
                            jobName: getBloc().jobEntity!.title,
                            employerName: "${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}",
-                           locationName: "${getBloc().jobEntity!.customer?.address}",
+                           locationName: getBloc().jobEntity!.address.isEmptyOrNull?"${getBloc().jobEntity!.customer?.address}":"${getBloc().jobEntity!.address}",
                            dateTime: getBloc().jobEntity!.startDate,
                            onNext: (){},
                            estimatedTime: "${getBloc().jobEntity!.estimatedHours} hrs",

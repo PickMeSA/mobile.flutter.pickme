@@ -109,7 +109,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             return AppJobAdvertCard(
                                 jobName: job.title,
                                 employerName: "${job.customer?.firstName} ${job.customer?.surname}",
-                                locationName: "${job.address}",
+                                locationName: job.address.isEmptyOrNull?"${job.customer?.address}":"${job.address}",
                                 dateTime: job.startDate,
                                 status: JobStatus.active,
                                 onNext: ()=>context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)).then((value) => getBloc().add(MyJobListingsPageEnteredEvent())),
@@ -149,7 +149,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                             return AppJobCard(
                                 jobName: job.title!,
                                 employerName: "${job.customer!.firstName} ${job.customer!.surname}",
-                                locationName: "${job.customer!.address}",
+                                locationName: job.address.isEmptyOrNull?"${job.customer?.address}":"${job.address}",
                                 dateTime: job.startDate??DateTime.now(),
                                 status: JobStatus.inactive,
                               image: (job.customer?.profileImage!=null)?

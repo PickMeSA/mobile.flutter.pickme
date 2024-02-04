@@ -15,6 +15,7 @@ import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_m
 
 import '../../domain/entities/my_job_listings_page_entity.dart';
 import '../../domain/use_cases/get_my_job_listings_usecase.dart';
+import '../job_list_page.dart';
 part 'job_list_page_event.dart';
 part 'job_list_page_state.dart';
 
@@ -27,6 +28,7 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
   bool preloaderActive = false;
   JobEntity? selectedJob;
   FilterEntity filterEntity = FilterEntity();
+  bool? recommended;
 
   JobListBloc({required this.getMyJobListingsUseCase, required this.sendJobOfferUseCase}) : super(MyJobListingsPageInitial()) {
     on<MyJobListingsPageEnteredEvent>((event, emit) => _onMyJobListingsPageEnteredEvent(event, emit));
@@ -70,6 +72,7 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
     emit(MyJobListingsPageEnteredState()..dataState=DataState.loading);
     try{
       filterEntity = event.filter;
+      recommended = event.pageMode== JobListMode.recommendedJobs;
       logger.e(filterEntity);
       myJobs = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(
         lat: filterEntity.lat,
@@ -82,6 +85,7 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
         industryId: filterEntity.industryId,
         address: filterEntity.address.isEmptyOrNull?null:filterEntity.address,
         search: filterEntity.title.isEmptyOrNull?null:filterEntity.title,
+          recommended:recommended
       ));
       emit(MyJobListingsPageEnteredState()..dataState=DataState.success);
     }catch(ex){
@@ -110,8 +114,8 @@ class JobListBloc extends BaseBloc<JobListPageEvent, JobListPageState> {
           maxEstimatedHours: filterEntity.estimatedHours,
           minPrice: filterEntity.priceRange?.start,
           maxPrice: filterEntity.priceRange?.end,
-          customerUid: filterEntity.customerUid
-
+          customerUid: filterEntity.customerUid,
+          recommended: recommended
       ));
       preloaderActive = false;
       emit(FilterChangedState()..dataState = DataState.success);

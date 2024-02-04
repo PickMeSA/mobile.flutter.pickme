@@ -27,7 +27,8 @@ class GetMyJobListingsUseCase extends BaseUseCase<GetMyJobListingsUseCaseParams,
          customerUid: params.customerUid,
          industryId: params.industryId,
          search: params.search,
-         address: params.address
+         address: params.address,
+         recommended: params.recommended
      ));
    }catch(ex){
      rethrow;
@@ -46,6 +47,7 @@ class GetMyJobListingsUseCaseParams extends BaseUseCaseParams{
   final String? industryId;
   final String? address;
   final String? search;
+  final bool? recommended;
 
   GetMyJobListingsUseCaseParams({
     this.lat,
@@ -58,4 +60,5 @@ class GetMyJobListingsUseCaseParams extends BaseUseCaseParams{
     this.industryId,
     this.address,
     this.search,
+    this.recommended,
   });}
