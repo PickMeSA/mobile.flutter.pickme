@@ -111,6 +111,7 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                                 employerName: "${job.customer?.firstName} ${job.customer?.surname}",
                                 locationName: job.address.isEmptyOrNull?"${job.customer?.address}":"${job.address}",
                                 dateTime: job.startDate,
+                                time: job.startTime,
                                 status: JobStatus.active,
                                 onNext: ()=>context.router.push(JobDetailsRoute(jobId: job.id, pageMode: PageMode.hiring)).then((value) => getBloc().add(MyJobListingsPageEnteredEvent())),
                               totalMatches: job.possibleApplicantMatchesCount,

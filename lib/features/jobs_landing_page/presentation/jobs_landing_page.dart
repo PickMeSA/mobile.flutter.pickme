@@ -148,6 +148,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                         employerName: "${e.customer?.firstName} ${e.customer?.surname}",
                         locationName: e.address??e.customer?.address??getLocalization().noAddressSpecified,
                         dateTime: e.startDate,
+                        time: e.startTime,
                         image: (e.customer?.profileImage!=null)?
                         CachedNetworkImageProvider(e.customer!.profileImage!):null,
                         onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
@@ -185,6 +186,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                       employerName: "${e.customer?.firstName} ${e.customer?.surname}",
                       locationName: e.address??e.customer?.address??getLocalization().noAddressSpecified,
                       dateTime: DateTime.now(),
+                      time: e.startTime,
                       image: (e.customer?.profileImage!=null)?
                         CachedNetworkImageProvider(e.customer!.profileImage!):null,
                       onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
