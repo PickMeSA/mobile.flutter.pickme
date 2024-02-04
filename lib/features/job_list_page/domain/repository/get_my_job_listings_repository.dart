@@ -15,6 +15,7 @@ class GetMyJobListingsRepositoryParams extends BaseRepositoryParams{
   final String? industryId;
   final String? address;
   final String? search;
+  final bool? recommended;
   GetMyJobListingsRepositoryParams({
     this.lat,
       this.lng,
@@ -26,6 +27,7 @@ class GetMyJobListingsRepositoryParams extends BaseRepositoryParams{
       this.industryId,
       this.address,
       this.search,
+      this.recommended,
   });
   @override
   String toString() {

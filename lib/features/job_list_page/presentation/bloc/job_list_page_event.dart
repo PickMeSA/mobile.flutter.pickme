@@ -8,7 +8,8 @@ class SeeAllClickedEvent extends JobListPageEvent{
 }
 class MyJobListingsPageEnteredEvent extends JobListPageEvent{
   final FilterEntity filter;
-  MyJobListingsPageEnteredEvent({required this.filter});
+  final JobListMode pageMode;
+  MyJobListingsPageEnteredEvent({required this.filter, required this.pageMode});
 }
 
 class JobSelectedEvent extends JobListPageEvent{

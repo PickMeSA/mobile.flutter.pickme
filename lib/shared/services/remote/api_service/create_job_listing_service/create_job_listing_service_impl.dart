@@ -18,7 +18,7 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
   @override
   Future<JobEntity> createJob({required CreateJobListingRepositoryParams jobListingRepositoryParams}) async {
     try {
-      logger.e({
+      Map<String,dynamic> data = {
         "title": jobListingRepositoryParams.jobEntity.title,
         "description": jobListingRepositoryParams.jobEntity.description,
         "status": jobListingRepositoryParams.jobEntity.status,
@@ -45,36 +45,10 @@ class CreateJobListingServiceImpl extends CreateJobListingService{
         "skills": jobListingRepositoryParams.jobEntity.skills.map((e) => e.id)
             .toList()
             .join(","),
-      });
+      };
+      logger.e(data);
       Response<dynamic> response = await apiService.post(
-          "$baseUrl$version/jobs", data: {
-        "title": jobListingRepositoryParams.jobEntity.title,
-        "description": jobListingRepositoryParams.jobEntity.description,
-        "status": jobListingRepositoryParams.jobEntity.status,
-        "address": jobListingRepositoryParams.jobEntity.address,
-        "industries": jobListingRepositoryParams.jobEntity.industryId,
-        "offeredTo": jobListingRepositoryParams.jobEntity.offeredTo,
-        "startDate": jobListingRepositoryParams.jobEntity.startDate != null
-            ? jobListingRepositoryParams.jobEntity.startDate!.toIso8601String()
-            : null,
-        "endDate": jobListingRepositoryParams.jobEntity.endDate != null
-            ? jobListingRepositoryParams.jobEntity.endDate!.toIso8601String()
-            : null,
-        "startTime": jobListingRepositoryParams.jobEntity.startTime != null
-            ? jobListingRepositoryParams.jobEntity.startTime!
-            : null,
-        "estimatedHours": double.parse(
-            jobListingRepositoryParams.jobEntity.estimatedHours),
-        "distance": 0,
-        "lat": (jobListingRepositoryParams.jobEntity.lat == null || jobListingRepositoryParams.jobEntity.lat!.isEmpty) ? null : double
-            .parse(jobListingRepositoryParams.jobEntity.lat!),
-        "lng": jobListingRepositoryParams.jobEntity.lng == null || jobListingRepositoryParams.jobEntity.lng!.isEmpty ? null : double
-            .parse(jobListingRepositoryParams.jobEntity.lng!),
-        "images": jobListingRepositoryParams.jobEntity.images.join(","),
-        "skills": jobListingRepositoryParams.jobEntity.skills.map((e) => e.id)
-            .toList()
-            .join(","),
-      });
+          "$baseUrl$version/jobs", data: data);
 
       CreateJobListingModelResponse createJobListingModelResponse = CreateJobListingModelResponse.fromJson(response.data);
       logger.i("created job successfully");

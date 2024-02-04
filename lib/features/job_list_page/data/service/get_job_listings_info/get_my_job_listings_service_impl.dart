@@ -54,7 +54,12 @@ class GetMyJobListingsServiceImpl extends GetMyJobListingsService{
       logger.e("converted uri $queryParams");
 
       Uri queryString = Uri(queryParameters: queryParams);
-      Response<dynamic> response = await apiService.get("$baseUrl$version/jobs/location/filters?${queryString.query}");
+      Response<dynamic> response;
+      if(getMyJobListingsRepositoryParams.recommended!=null && getMyJobListingsRepositoryParams.recommended!){
+        response = await apiService.get("$baseUrl$version/jobs/recommended?${queryString.query}");
+      }else{
+        response = await apiService.get("$baseUrl$version/jobs/location/filters?${queryString.query}");
+      }
 
       if (response.statusCode == 200) {
         return MyJobListingsPageEntity.fromResponse(

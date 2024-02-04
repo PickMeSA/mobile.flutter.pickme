@@ -195,6 +195,7 @@ class _JobsHiringLandingPageState extends BasePageState<JobsHiringLandingPage, J
                   ),
                   20.height,
                   SizedBox(
+                    height: 800,
                     child: (state.paginatedCandidates!=null)?
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),

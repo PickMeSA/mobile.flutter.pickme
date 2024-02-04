@@ -54,10 +54,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
-    return SmartRefresher(
-      controller: _refreshController,
-      onRefresh: _onRefresh,
-      child: BlocConsumer<JobsLandingPageBloc, JobsLandingPageState>(
+    return BlocConsumer<JobsLandingPageBloc, JobsLandingPageState>(
         listener: (context, state) {
         //loading GetIndustriesState
           if(state is GetTopIndustriesState && state.dataState == DataState.loading){
@@ -84,7 +81,10 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
             width: MediaQuery.sizeOf(context).width,
             height: MediaQuery.sizeOf(context).height,
             padding: wPagePadding(top: 0),
-            child: SingleChildScrollView(
+            child: SmartRefresher(
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -137,16 +137,22 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                           ))
                     ],
                   ),
-                  if(getBloc().pageEntity!=null)Column(
-                    children: getBloc().pageEntity?.recommendedJobs.map((e) => AppJobAdvertCard.matching(
-                      jobName: e.title,
-                      employerName: "${e.customer?.firstName} ${e.customer?.surname}",
-                      locationName: e.customer?.address??getLocalization().noAddressSpecified,
-                      dateTime: DateTime.now(),
-                      image: (e.customer?.profileImage!=null)?
+                  if(getBloc().pageEntity!=null)ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: (getBloc().pageEntity!.recommendedJobs.length<3)?getBloc().pageEntity?.recommendedJobs.length:3,
+                    itemBuilder: (BuildContext context, int index){
+                      var e = getBloc().pageEntity!.recommendedJobs[index];
+                      return AppJobAdvertCard.matching(
+                        jobName: e.title,
+                        employerName: "${e.customer?.firstName} ${e.customer?.surname}",
+                        locationName: e.address??e.customer?.address??getLocalization().noAddressSpecified,
+                        dateTime: e.startDate,
+                        image: (e.customer?.profileImage!=null)?
                         CachedNetworkImageProvider(e.customer!.profileImage!):null,
-                      onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
-                      ,)).toList()??[],
+                        onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
+                        ,);
+                    },
                   ),
                   40.height,
                   Row(
@@ -177,7 +183,7 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                     children: getBloc().pageEntity?.jobsNearMe.map((e) => AppJobAdvertCard.matching(
                       jobName: e.title,
                       employerName: "${e.customer?.firstName} ${e.customer?.surname}",
-                      locationName: e.customer?.address??getLocalization().noAddressSpecified,
+                      locationName: e.address??e.customer?.address??getLocalization().noAddressSpecified,
                       dateTime: DateTime.now(),
                       image: (e.customer?.profileImage!=null)?
                         CachedNetworkImageProvider(e.customer!.profileImage!):null,
@@ -257,9 +263,9 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                 ],
               ),
             ),
+          ),
           );
         },
-      ),
     );
   }
 

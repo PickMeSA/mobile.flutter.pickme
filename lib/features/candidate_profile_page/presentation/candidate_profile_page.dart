@@ -132,7 +132,7 @@ class _CandidateProfilePageState extends BasePageState<CandidateProfilePage, Can
                     ),
                     wText(getLocalization().aboutMe, style: Theme.of(context).textTheme.titleMedium),
                     16.height,
-                    wText(profileEntity?.industry!.industry??getLocalization().noProfileDescription),
+                    wText(profileEntity?.description??getLocalization().noProfileDescription),
                     16.height,
                     const AppDivider(),
                     24.height,
