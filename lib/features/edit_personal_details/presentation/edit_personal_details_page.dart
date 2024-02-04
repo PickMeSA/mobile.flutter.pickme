@@ -292,7 +292,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    Column(
                      children: mockSubscriptionPlans.map((plan) =>
                          AppSubscriptionPlan(
-                           price: "${getLocalization().r}${plan.price}",
+                           price: "${getLocalization().r}${plan.price.toStringAsFixed(2)}",
                            subscriptionType: plan.subscriptionType,
                            entityType: plan.entityType,
                            selected: true,

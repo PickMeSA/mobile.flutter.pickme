@@ -69,6 +69,8 @@ class EditPersonalDetailsBloc
             SkillChipDeletedEvent event,
         Emitter<EditPersonalDetailsPageState> emit
         )async{
+        event.profileEntity?.ratesAndWorkTimesEntity?.workingDaysListEntity
+            ?.workingDaysEntityList!.removeAt(event.index!);
         selectedDays.removeAt(event.index!);
         chipOptions.removeAt(event.index!);
         //event.profileEntity!.ratesAndWorkTimesEntity!.workingDaysListEntity!.workingDaysEntityList!.removeAt(event.index!);
