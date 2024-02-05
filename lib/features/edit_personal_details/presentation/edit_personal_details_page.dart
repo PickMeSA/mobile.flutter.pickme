@@ -54,9 +54,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
     startTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.startTime??"";
     endTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.endTime??"";
     workPermitController.text = widget.profileEntity.workPermit??"";
-    int count = 0;
     widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity?.workingDaysEntityList?.forEach((element) {
-      getBloc().selectedDays.add(WorkingDaysEntity(id: count.toString(), day: element.day));
       getBloc().add(WorkingDaySelectedEvent(workingDaysEntity: element, profileEntity: widget.profileEntity));
     });
 
