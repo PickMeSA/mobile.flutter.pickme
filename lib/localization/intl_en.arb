@@ -357,8 +357,8 @@
   "deleteAccount": "Delete account",
   "present": "Present",
   "successEx": "Success!",
-  "yourJobHasBeenPublished": "Your job has been published"
-
+  "yourJobHasBeenPublished": "Your job has been published",
+  "fullName": "Full name"
 
 
 }
