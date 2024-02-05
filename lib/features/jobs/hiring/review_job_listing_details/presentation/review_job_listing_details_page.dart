@@ -99,6 +99,7 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
                             employerName: "${widget.profile.firstName} ${widget.profile.surname}",
                             locationName: widget.jobEntity.address,
                             dateTime: widget.jobEntity.startDate,
+                            time: widget.jobEntity.startTime,
                             onNext: (){}, estimatedTime: widget.jobEntity.estimatedHours,
                           rate: "based on ${widget.jobEntity.estimatedHours} hours",
                         ),

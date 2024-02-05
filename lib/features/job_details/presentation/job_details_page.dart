@@ -322,6 +322,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                            employerName: "${getBloc().jobEntity!.customer?.firstName} ${getBloc().jobEntity!.customer?.surname}",
                            locationName: getBloc().jobEntity!.address.isEmptyOrNull?"${getBloc().jobEntity!.customer?.address}":"${getBloc().jobEntity!.address}",
                            dateTime: getBloc().jobEntity!.startDate,
+                           time: getBloc().jobEntity!.startTime,
                            onNext: (){},
                            estimatedTime: "${getBloc().jobEntity!.estimatedHours} hrs",
                            rate: "R${getBloc().jobEntity!.hourlyRate} ph",
