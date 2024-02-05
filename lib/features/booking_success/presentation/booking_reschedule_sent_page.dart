@@ -73,27 +73,8 @@ class _BookingSuccessPageState extends BasePageState<BookingSuccessPage, Booking
                    Row(
                      children: [
                        Expanded(
-                         child: PrimaryButton(
-                           style: ButtonStyle(
-                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                 return BorderSide(
-                                   color:
-                                   theme.colorScheme.secondary,
-                                   width: 2,
-                                 );
-                               }
-                               ),
-                               backgroundColor: MaterialStateProperty.resolveWith(
-                                       (Set<MaterialState> states){
-                                     return
-                                     Colors.white;
-                                   }
-                               )
-                           ),
-                           onPressed: () {
-                            context.router.pop();
-                            context.router.pop();
-                           },
+                         child: PrimaryButton.fullWidth(
+                           onPressed: ()=>context.router.replace(BottomNavigationBarRoute(initialIndex: 1)),
                            child: Text(getLocalization().backToBooking, style: TextStyle(color: theme.colorScheme.secondary),),
                          ),
                        ),
