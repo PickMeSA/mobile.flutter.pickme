@@ -165,7 +165,6 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
             getBloc().preloaderActive = true;
             preloader(context);
           }
-          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
 
