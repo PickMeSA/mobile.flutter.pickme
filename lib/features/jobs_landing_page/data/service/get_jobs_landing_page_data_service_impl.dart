@@ -36,7 +36,7 @@ class GetJobsLandingPageDataServiceImpl extends GetJobsLandingPageDataService{
         }
 
       Response<dynamic> jobOffersResponse = await
-      apiService.get("$baseUrl$version/jobs/jobInterests/offered");
+      apiService.get("$baseUrl$version/jobs/jobInterests/offer");
       if(jobsResponse.statusCode!=200){
         throw "an error occurred";
       }
