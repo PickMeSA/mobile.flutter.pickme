@@ -7,8 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/add_skills/domain/entities/prefered_industry_list_entity.dart';
 import 'package:pickme/features/add_skills/domain/use_cases/add_skills_usecase/add_skills_get_industry_list_usecase.dart';
-import 'package:pickme/features/add_work_experience/presentation/bloc/add_work_experience_bloc.dart';
-
 import '../../../add_skills/domain/entities/preferred_industry_entity.dart';
 
 part 'edit_work_experience_details_event.dart';

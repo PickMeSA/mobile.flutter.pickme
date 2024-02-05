@@ -3639,6 +3639,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Full name`
+  String get fullName {
+    return Intl.message(
+      'Full name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

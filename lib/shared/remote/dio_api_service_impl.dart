@@ -21,7 +21,14 @@ class DioApiService extends ApiService{
          options.headers['Content-Type'] = 'application/json';
      options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
      return handler.next(options);
-   }));
+   },
+   onResponse: (response, handler){
+     logger.d("Response::${response.statusMessage}");
+     logger.d(response.data);
+     logger.d(response.toString());
+
+     handler.next(response);
+   },));
   }
 
   @override

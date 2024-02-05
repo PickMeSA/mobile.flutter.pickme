@@ -132,7 +132,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             validator: (value)=> validateName(value??""),
                             controller: firstNameController,
                             padding: const EdgeInsets.only(left: 20, right: 20),
-                            textFieldType: TextFieldType.NAME, labelText: getLocalization().firstName,),
+                            textFieldType: TextFieldType.NAME, labelText: getLocalization().fullName,),
                         ),
                         Padding(
                           padding: const EdgeInsets.only( top: 10, bottom:  10),

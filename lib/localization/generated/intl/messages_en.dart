@@ -200,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "forYou": MessageLookupByLibrary.simpleMessage("For you"),
+        "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
         "getReviewsToBoostProfile": MessageLookupByLibrary.simpleMessage(
             "Get reviews to boost your profile and increase your chances of getting hired"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),

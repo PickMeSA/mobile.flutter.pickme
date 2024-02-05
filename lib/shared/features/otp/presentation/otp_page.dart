@@ -69,8 +69,9 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           if(getBloc().preloaderActive) {
             Navigator.pop(context);
             getBloc().preloaderActive = false;
+
           }
-          wErrorPopUp(message: state.error??"", type: getLocalization().error, context: context);
+
         }
         //loading
         if(state is OTPGetTokenState && state.dataState == DataState.loading){
@@ -117,6 +118,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //error
         if(state is RegisterOTPCompleteState && state.dataState == DataState.error){
           // will use error dialog
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
           print(state.error);
         }
 
@@ -134,8 +136,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         }
         //error
         if(state is SaveRemoteProfileDataState && state.dataState == DataState.error){
-          //will use error dialog[
-          print(state.error);
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
         //GetProfileProgressState////////////////////////////////////
