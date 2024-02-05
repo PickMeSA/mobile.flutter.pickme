@@ -152,7 +152,10 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                  getBloc().jobEntity == null ?Center(
                    child: Text(getLocalization().loadingDotDot),
                  ):
-                     AppTabBar(tabs:<Widget> [if(widget.pageMode != PageMode.hiring)Text(getLocalization().client),
+                     AppTabBar(
+                       isScrollable: widget.pageMode == PageMode.hiring,
+                       tabs:<Widget> [
+                         if(widget.pageMode != PageMode.hiring)Text(getLocalization().client),
                        Text(getLocalization().description),
                        if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
                        if(widget.pageMode == PageMode.hiring)Text("${getLocalization().matchingProfiles} (${getBloc().jobEntity?.matches?.length})", style: theme.textTheme.bodySmall,),

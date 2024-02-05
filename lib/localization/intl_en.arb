@@ -355,7 +355,9 @@
   "searchForCandidates": "Search for candidates",
   "searchResults": "Search results",
   "deleteAccount": "Delete account",
-  "present": "Present"
+  "present": "Present",
+  "successEx": "Success!",
+  "yourJobHasBeenPublished": "Your job has been published"
 
 
 

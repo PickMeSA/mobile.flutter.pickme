@@ -629,6 +629,7 @@ abstract class _$AppRouter extends RootStackRouter {
           message: args.message,
           button: args.button,
           image: args.image,
+          crossAxisAlignment: args.crossAxisAlignment,
         ),
       );
     },
@@ -2758,6 +2759,7 @@ class ReusableNotificationRoute
     required String message,
     required Widget button,
     required Image image,
+    CrossAxisAlignment? crossAxisAlignment,
     List<PageRouteInfo>? children,
   }) : super(
           ReusableNotificationRoute.name,
@@ -2767,6 +2769,7 @@ class ReusableNotificationRoute
             message: message,
             button: button,
             image: image,
+            crossAxisAlignment: crossAxisAlignment,
           ),
           initialChildren: children,
         );
@@ -2784,6 +2787,7 @@ class ReusableNotificationRouteArgs {
     required this.message,
     required this.button,
     required this.image,
+    this.crossAxisAlignment,
   });
 
   final Key? key;
@@ -2796,9 +2800,11 @@ class ReusableNotificationRouteArgs {
 
   final Image image;
 
+  final CrossAxisAlignment? crossAxisAlignment;
+
   @override
   String toString() {
-    return 'ReusableNotificationRouteArgs{key: $key, title: $title, message: $message, button: $button, image: $image}';
+    return 'ReusableNotificationRouteArgs{key: $key, title: $title, message: $message, button: $button, image: $image, crossAxisAlignment: $crossAxisAlignment}';
   }
 }
 

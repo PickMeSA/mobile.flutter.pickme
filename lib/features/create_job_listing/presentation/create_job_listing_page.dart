@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -53,7 +54,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   DateTime? startDate;
   DateTime? endDate;
   String address = "";
-  String? selectedIndustry;
+  IndustryEntity? selectedIndustry;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -354,24 +355,18 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           fontVariations: 600.fontWeight
                       ),),
                       16.height,
-                      if(getBloc().industries!=null)DropdownButton<String>(
-                        value: selectedIndustry,
-                        onChanged: (String? newValue) {
+                      if(getBloc().industries!=null)DropdownSearch<IndustryEntity>(
+                        items: getBloc()
+                            .industries!
+                            .industries
+                            .map((IndustryEntity industry) => industry)
+                            .toList(),
+                        onChanged: (IndustryEntity? newValue) {
                           setState(() {
                             selectedIndustry = newValue;
                           });
                         },
-                        items: getBloc().industries!.industries.map<DropdownMenuItem<String>>((IndustryEntity industry) {
-                          return DropdownMenuItem<String>(
-                            value: industry.id!.toString(),
-                            child: Text(
-                              industry.industry!.toString(),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          );
-                        }).toList(),
-                        isExpanded: true,
-                        hint: Text('Select Industry'),
+                        selectedItem: selectedIndustry,
                       ),
                       24.height,
                       AppDivider(),
@@ -447,7 +442,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           }else if(hoursTextController.text.isEmptyOrNull){
                             wErrorPopUp(message: "Estimated hours cannot be empty", type: getLocalization().error, context: context);
                             return;
-                          }else if(selectedIndustry.isEmptyOrNull){
+                          }else if(selectedIndustry==null || selectedIndustry!.id == null){
                             wErrorPopUp(message: "Please select the industry", type: getLocalization().error, context: context);
                             return;
                           }
@@ -457,7 +452,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               description: jobDescriptionController.text,
                               address: address,
                               status: 'active',
-                              industryId: selectedIndustry!,
+                              industryId: selectedIndustry!.id.toString(),
                               startDate: startDate,
                               endDate: endDate,
                               startTime: startTimeTextController.text,

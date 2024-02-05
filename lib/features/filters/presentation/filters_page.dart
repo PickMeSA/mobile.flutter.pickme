@@ -12,6 +12,8 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 
@@ -38,6 +40,8 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
 
   @override
   Widget buildView(BuildContext context) {
+    UserModel userModel = boxUser.get(current);
+    bool isHiring = userModel.type =="hire";
     var theme = Theme.of(context);
     return BlocConsumer<FilterCandidatesBloc, FilterCandidatesState>(
       listener: (context, state) {
@@ -71,25 +75,26 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
                             color: neutrals100Color,
                             child: Text("${getBloc().filter!.distance!.toStringAsFixed(0)} km",)),),
                       24.height,
-                      if(widget.appMode == AppMode.working)Text(getLocalization().estHours, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      if(!isHiring)Text(getLocalization().estHours, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontVariations: [
                             const FontVariation("wght", 600)
                           ]
                       ),),
-                      if(widget.appMode == AppMode.working)AppSlider(
+                      if(!isHiring)AppSlider(
                         currentSliderValue: getBloc().filter!.estimatedHours!,
                         minimumSliderValue: 0,
                         maximumSliderValue: defaultEstimatedHours.toDouble(),
                         divisions: defaultEstimatedHours,
                         onChanged: (double newValue) => getBloc().add(EstimatedHoursChangedEvent(estimatedHours: newValue))
                         ,),
-                      Align(
+                      if(!isHiring)Align(
                         alignment: Alignment.centerRight,
                         child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
                             child: Text("${getBloc().filter!.estimatedHours!.toInt()} hours",)),),
-                      24.height,                      Text(getLocalization().possiblePriceRange, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      if(!isHiring)24.height,
+                      Text(getLocalization().possiblePriceRange, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontVariations: [
                           const FontVariation("wght", 600)
                         ]
@@ -107,21 +112,21 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
                         Container(
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
-                            child: Text("R${getBloc().filter!.priceRange!.start.toStringAsFixed(2)}",)), //todo: Confirm precision
+                            child: Text("R ${getBloc().filter!.priceRange!.start.toStringAsFixed(2)}",)), //todo: Confirm precision
                         Container(
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             color: neutrals100Color,
-                            child: Text(getBloc().filter!.priceRange!.end.toStringAsFixed(2),))
+                            child: Text("R ${getBloc().filter!.priceRange!.end.toStringAsFixed(2)}",))
                       ],
                     ),
                       48.height,
-                      if(widget.appMode == AppMode.hiring)Text(getLocalization().candidateRating, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      if(isHiring)Text(getLocalization().candidateRating, style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontVariations: [
                             const FontVariation("wght", 600)
                           ]
                       ),),
                       20.height,
-                      if(widget.appMode == AppMode.hiring)AppStarRating(
+                      if(isHiring)AppStarRating(
                         rating: getBloc().filter!.rating!,
                         onChanged: (int newRating)=>getBloc().add(RatingChangedEvent(rating: newRating)),
                       ),
