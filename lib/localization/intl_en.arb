@@ -204,7 +204,7 @@
   "dateOfJobText":"If the start date is set by the client, you cannot edit it. If the date is open for discussion, you can propose a date that you're available",
   "sendApplication": "Send Application",
   "applicationSent": "Application sent",
-  "applicationSenttext": "We've seen your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\"",
+  "applicationSenttext": "We've sent your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\"",
   "backToJobs": "Back to Jobs",
   "rescheduleBooking": "Reschedule booking",
   "cancelBooking": "Cancel booking",

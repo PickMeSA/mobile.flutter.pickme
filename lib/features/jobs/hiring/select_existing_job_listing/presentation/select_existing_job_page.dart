@@ -109,6 +109,7 @@ class _MyJobListingsPageState extends BasePageState<SelectExistingJobPage, Selec
                         employerName: "${job.customer!.firstName!} ${job.customer!.surname!}",
                         locationName: job.customer!.address??"no location specified",
                         dateTime: job.startDate!,
+                        time: job.startTime,
                         selected: getBloc().selectedJob==job,
                         onClick: ()=>getBloc().add(JobSelectedEvent(job: job)),
                       );

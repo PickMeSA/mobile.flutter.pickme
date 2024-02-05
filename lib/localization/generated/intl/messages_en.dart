@@ -93,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "applicationSent":
             MessageLookupByLibrary.simpleMessage("Application sent"),
         "applicationSenttext": MessageLookupByLibrary.simpleMessage(
-            "We\'ve seen your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\""),
+            "We\'ve sent your application to the client. Once accepted, it will appear in your calendar in \"My Bookings\""),
         "applications": MessageLookupByLibrary.simpleMessage("Applications"),
         "applied": MessageLookupByLibrary.simpleMessage("Applied"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
