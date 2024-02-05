@@ -492,71 +492,73 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
   }
   getMapWindow(){
     var theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10,),
-          wText(getLocalization().whereAreYouLocated,
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
-          30.height,
-          Container(
-            height: 450,
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
-            child: PlacePicker(
-              apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
-              onPlacePicked: (result) {
-                getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));
-                Navigator.pop(context);
-              },
-              initialPosition: const LatLng(-33.918861, 18.423300),
-              useCurrentLocation: true,
-              resizeToAvoidBottomInset: false, // only works in page mode, less flickery, remove if wrong offsets
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10,),
+            wText(getLocalization().whereAreYouLocated,
+                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
+            30.height,
+            Container(
+              height: 450,
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
+              child: PlacePicker(
+                apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
+                onPlacePicked: (result) {
+                  getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));
+                  Navigator.pop(context);
+                },
+                initialPosition: const LatLng(-33.918861, 18.423300),
+                useCurrentLocation: true,
+                resizeToAvoidBottomInset: false, // only works in page mode, less flickery, remove if wrong offsets
+              ),
             ),
-          ),
-          20.height,
-          50.height,
-          Row(
-            children: [
-              Container(
-                height: 56,
-                width: 56,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 2,
-                        color: Colors.black),
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
-                child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
+            20.height,
+            50.height,
+            Row(
+              children: [
+                Container(
+                  height: 56,
+                  width: 56,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 2,
+                          color: Colors.black),
+                      borderRadius: const BorderRadius.all(Radius.circular(10))),
+                  child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
 
-              ),
-              const SizedBox(width: 10,),
-              Expanded(
-                child: PrimaryButton(
-                  style: ButtonStyle(
-                      side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                        return BorderSide(
-                          color: states.contains(MaterialState.disabled)?
-                          theme.colorScheme.secondary.withOpacity(0):
-                          theme.colorScheme.secondary,
-                          width: 2,
-                        );
-                      }
-                      ),
-                      backgroundColor: MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> states){
-                            return states.contains(MaterialState.disabled)?
-                            theme.colorScheme.secondary.withOpacity(0.3):
-                            theme.colorScheme.secondary;
-                          }
-                      )
-                  ),
-                  onPressed: (){},
-                  child: Text(getLocalization().save),
                 ),
-              ),
-            ],
-          ),
-        ],
+                const SizedBox(width: 10,),
+                Expanded(
+                  child: PrimaryButton(
+                    style: ButtonStyle(
+                        side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                          return BorderSide(
+                            color: states.contains(MaterialState.disabled)?
+                            theme.colorScheme.secondary.withOpacity(0):
+                            theme.colorScheme.secondary,
+                            width: 2,
+                          );
+                        }
+                        ),
+                        backgroundColor: MaterialStateProperty.resolveWith(
+                                (Set<MaterialState> states){
+                              return states.contains(MaterialState.disabled)?
+                              theme.colorScheme.secondary.withOpacity(0.3):
+                              theme.colorScheme.secondary;
+                            }
+                        )
+                    ),
+                    onPressed: (){},
+                    child: Text(getLocalization().save),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
