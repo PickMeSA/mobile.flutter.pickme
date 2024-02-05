@@ -3619,6 +3619,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Success!`
+  String get successEx {
+    return Intl.message(
+      'Success!',
+      name: 'successEx',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your job has been published`
+  String get yourJobHasBeenPublished {
+    return Intl.message(
+      'Your job has been published',
+      name: 'yourJobHasBeenPublished',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

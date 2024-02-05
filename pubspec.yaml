@@ -75,6 +75,7 @@ dependencies:
   url_launcher: ^6.2.4
   qr_code_scanner: ^1.0.1
   pull_to_refresh_flutter3: ^2.0.2
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   flutter_test:

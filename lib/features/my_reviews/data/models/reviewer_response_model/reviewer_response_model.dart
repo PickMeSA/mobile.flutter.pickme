@@ -11,6 +11,7 @@ class ReviewerModelResponse with _$ReviewerModelResponse {
     required String firstName,
     required String surname,
     required String? profilePictureUrl,
+    String? relationship,
     required AddSkillsIndustryModelResponse industry,
   }) = _ReviewerModelResponse;
 

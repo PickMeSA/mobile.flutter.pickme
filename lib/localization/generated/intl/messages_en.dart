@@ -516,6 +516,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subscriptionFee":
             MessageLookupByLibrary.simpleMessage("Subscription fee"),
+        "successEx": MessageLookupByLibrary.simpleMessage("Success!"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
         "switchingProfiles":
             MessageLookupByLibrary.simpleMessage("Switching profiles"),
@@ -596,6 +597,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "youHaveTheFlexibilityToSetYourOwnHourlyRate":
             MessageLookupByLibrary.simpleMessage(
                 "You have the flexibility to set your own hourly rate"),
+        "yourJobHasBeenPublished":
+            MessageLookupByLibrary.simpleMessage("Your job has been published"),
         "yourJobOfferHasBeenSent": MessageLookupByLibrary.simpleMessage(
             "Your job offer has been sent. You\'ll receive a notification once the candidate accepts."),
         "yourNextAppointment":

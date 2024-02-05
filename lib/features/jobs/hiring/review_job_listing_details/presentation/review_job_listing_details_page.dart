@@ -47,8 +47,9 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
         if(state is ReviewJobPageSubmitJobState && state.dataState == DataState.success){
           Navigator.pop(context); //Remove loader
           context.router.push(ReusableNotificationRoute(
-              title: getLocalization().offerSentEx,
-              message: getLocalization().yourJobOfferHasBeenSent,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              title: getLocalization().successEx,
+              message: getLocalization().yourJobHasBeenPublished,
               button: PrimaryButtonDark.fullWidth(
                   onPressed: ()=> context.router.pushAndPopUntil( BottomNavigationBarRoute(initialIndex: 2), predicate: (Route<dynamic> route) => false),
                   child: Text(getLocalization().backToJobs)),
@@ -84,61 +85,71 @@ class _MyJobListingsPageState extends BasePageState<ReviewJobListingInfoPage, Re
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
           padding: wPagePadding(top:0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppJobDetailCard(
-                  elevation: 0,
-                  padding: EdgeInsets.zero,
-                  jobName: widget.jobEntity.title,
-                    employerName: "${widget.profile.firstName} ${widget.profile.surname}",
-                    locationName: widget.jobEntity.address,
-                    dateTime: widget.jobEntity.startDate,
-                    onNext: (){}, estimatedTime: widget.jobEntity.estimatedHours,
-                  rate: "based on ${widget.jobEntity.estimatedHours} hours",
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppJobDetailCard(
+                          elevation: 0,
+                          padding: EdgeInsets.zero,
+                          jobName: widget.jobEntity.title,
+                            employerName: "${widget.profile.firstName} ${widget.profile.surname}",
+                            locationName: widget.jobEntity.address,
+                            dateTime: widget.jobEntity.startDate,
+                            onNext: (){}, estimatedTime: widget.jobEntity.estimatedHours,
+                          rate: "based on ${widget.jobEntity.estimatedHours} hours",
+                        ),
+                        16.height,
+                        const AppDivider(),
+                        24.height,
+                        wText(getLocalization().jobDescription, style: Theme.of(context).textTheme.titleMedium),
+                        16.height,
+                        wText(widget.jobEntity.description),
+                        16.height,
+                        const AppDivider(),
+                        24.height,
+                        wText(getLocalization().skillsRequired, style: Theme.of(context).textTheme.titleMedium),
+                        16.height,
+                        ChipGroup(inputs: widget.jobEntity.skills.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList()),
+                        16.height,
+                        const AppDivider(),
+                        24.height,
+                        wText(getLocalization().photos, style: Theme.of(context).textTheme.titleMedium),
+                        16.height,
+                        if(widget.jobEntity.images.isNotEmpty)Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: Row(
+                            children: [
+                              Expanded(child: ImageThumbnail(
+                                imagePath:  widget.jobEntity.images[0],
+                              )),
+                              16.width, // Add some spacing between images
+                              if(widget.jobEntity.images.length == 1)
+                                Expanded(child: Container(),),
+                              if(widget.jobEntity.images.length > 1)
+                                Expanded(child: ImageThumbnail(
+                                imagePath:  widget.jobEntity.images[1],
+                              )),
+                            ],
+                          ),
+                        ),
+                        24.height,
+
+                      ],
+                    ),
                 ),
-                16.height,
-                const AppDivider(),
-                24.height,
-                wText(getLocalization().jobDescription, style: Theme.of(context).textTheme.titleMedium),
-                16.height,
-                wText(widget.jobEntity.description),
-                16.height,
-                const AppDivider(),
-                24.height,
-                wText(getLocalization().skillsRequired, style: Theme.of(context).textTheme.titleMedium),
-                16.height,
-                ChipGroup(inputs: widget.jobEntity.skills.map((e) => ChipOption(label: e.skill!, id: int.parse(e.id!))).toList()),
-                16.height,
-                const AppDivider(),
-                24.height,
-                wText(getLocalization().photos, style: Theme.of(context).textTheme.titleMedium),
-                16.height,
-                if(widget.jobEntity.images.isNotEmpty)Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Row(
-                    children: [
-                      Expanded(child: ImageThumbnail(
-                        imagePath:  widget.jobEntity.images[0],
-                      )),
-                      16.width, // Add some spacing between images
-                      if(widget.jobEntity.images.length == 1)
-                        Expanded(child: Container(),),
-                      if(widget.jobEntity.images.length > 1)
-                        Expanded(child: ImageThumbnail(
-                        imagePath:  widget.jobEntity.images[1],
-                      )),
-                    ],
-                  ),
-                ),
-                24.height,
-                PrimaryButton.fullWidth(onPressed: ()=>(widget.candidateProfileEntity==null)?
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical:16.0),
+                child: PrimaryButton.fullWidth(onPressed: ()=>(widget.candidateProfileEntity==null)?
                 getBloc().add(ReviewJobPageSubmitJobEvent(job: widget.jobEntity)):
                 getBloc().add(SendJobOfferEvent(job: widget.jobEntity, candidateProfileEntity: widget.candidateProfileEntity!)
-                ), child: wText(getLocalization().publishListing))
-              ],
-            ),
+                ), child: wText(getLocalization().publishListing)),
+              )
+            ],
           ),
         );
       },

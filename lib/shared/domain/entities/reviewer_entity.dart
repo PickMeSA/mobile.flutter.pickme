@@ -6,9 +6,10 @@ class ReviewerEntity extends Equatable{
   final String? firstName;
   final String? surname;
   final String? profilePictureUrl;
+  final String? relationship;
   final IndustryEntity? industry;
 
-  const ReviewerEntity({this.reviewerId, this.firstName, this.surname, this.profilePictureUrl, this.industry});
+  const ReviewerEntity({this.reviewerId, this.firstName, this.surname, this.profilePictureUrl, this.industry, this.relationship});
 
   @override
   List<Object?> get props => [reviewerId];
