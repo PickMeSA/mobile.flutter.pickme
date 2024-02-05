@@ -128,6 +128,7 @@ class _JobListPageState extends BasePageState<JobListPage, JobListBloc> {
                         employerName: job.customer?.firstName??"",
                         locationName: job.address??job.customer?.address??"",
                         dateTime: job.startDate,
+                        time: job.startTime,
                         selected: getBloc().selectedJob==job,
                         image: (job.customer?.profileImage!=null)?
                         CachedNetworkImageProvider(job.customer!.profileImage!):null,

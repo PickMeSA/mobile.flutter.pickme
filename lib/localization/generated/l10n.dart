@@ -2100,10 +2100,10 @@ class AppLocalizations {
     );
   }
 
-  /// `We've seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"`
+  /// `We've sent your application to the client. Once accepted, it will appear in your calendar in "My Bookings"`
   String get applicationSenttext {
     return Intl.message(
-      'We\'ve seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"',
+      'We\'ve sent your application to the client. Once accepted, it will appear in your calendar in "My Bookings"',
       name: 'applicationSenttext',
       desc: '',
       args: [],

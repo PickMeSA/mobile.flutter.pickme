@@ -267,7 +267,11 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                        "${getBloc().completeHireBookingsList[index].customer?.firstName} "
                                            "${getBloc().completeHireBookingsList[index].customer?.surname}",
                                        locationName: getBloc().completeHireBookingsList[index].job.address??"",
-                                       dateTime: DateTime.now().add(const Duration(days: 5)),
+                                       time: getBloc().completeHireBookingsList[index].status == JobStatus.requestedReschedule
+                                           || getBloc().completeHireBookingsList[index].status == JobStatus.alternativeProposed
+                                           ?getBloc().completeHireBookingsList[index].proposedAltStartTime:
+                                       getBloc().completeHireBookingsList[index].startTime,
+                                       dateTime: DateTime.parse(getBloc().cancelledHireBookingsList[index].startDate),
                                        onNext: () {  },
                                      ),
                                    ),
@@ -299,7 +303,11 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                        "${getBloc().cancelledHireBookingsList[index].customer?.firstName} "
                                            "${getBloc().cancelledHireBookingsList[index].customer?.surname}",
                                        locationName: getBloc().cancelledHireBookingsList[index].job.address??"",
-                                       dateTime: DateTime.now().add(const Duration(days: 5)),
+                                       dateTime: DateTime.parse(getBloc().cancelledHireBookingsList[index].startDate),
+                                       time: getBloc().cancelledHireBookingsList[index].status == JobStatus.requestedReschedule
+                                           || getBloc().cancelledHireBookingsList[index].status == JobStatus.alternativeProposed
+                                           ?getBloc().cancelledHireBookingsList[index].proposedAltStartTime:
+                                       getBloc().cancelledHireBookingsList[index].startTime,
                                        status: JobStatus.cancelled,
                                        onNext: () => context.router.push(
                                            JobDetailsRoute(

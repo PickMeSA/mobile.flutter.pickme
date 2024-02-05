@@ -154,7 +154,8 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                                 employerName: "${job.customer!.firstName} ${job.customer!.surname}",
                                 locationName: job.address.isEmptyOrNull?"${job.customer?.address}":"${job.address}",
                                 dateTime: job.startDate??DateTime.now(),
-                                status: JobStatus.inactive,
+                              time: job.startTime,
+                              status: JobStatus.inactive,
                               image: (job.customer?.profileImage!=null)?
                               CachedNetworkImageProvider(job.customer!.profileImage!):null,
                               onNext: (){
