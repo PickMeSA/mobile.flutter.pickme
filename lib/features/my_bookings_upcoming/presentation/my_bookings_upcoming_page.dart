@@ -21,6 +21,11 @@ import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/my_bookings_upcoming_bloc.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
+final now = DateTime.now();
+final today = DateTime(now.year, now.month, now.day);
+final yesterday = DateTime(now.year, now.month, now.day - 1);
+final tomorrow = DateTime(now.year, now.month, now.day + 1);
+
 @RoutePage()
 class MyBookingsUpcomingPage extends BasePage {
 
@@ -34,11 +39,16 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
     int? date = 0;
     RefreshController _refreshController =
     RefreshController(initialRefresh: false);
-    bool laterFlagged = false;
+    bool laterFlagged = true;
+    bool todayFlagged = true;
+    bool olderFlagged = true;
+
 
     void _onRefresh() async{
       // monitor network fetch
       getBloc().add(LoadBookingsUpcomingEvent());
+      laterFlagged = true;
+      todayFlagged = true;
       // if failed,use refreshFailed()
       _refreshController.refreshCompleted();
     }
@@ -170,14 +180,23 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                         ListView.builder(
                           itemCount: getBloc().upcomingHireBookingsList.length,
                             itemBuilder: (context , index){
+                              DateTime dateToCheck = DateTime(
+                                  DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).year,
+                                  DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).month,
+                                  DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).day
+                              );
                               return
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).difference(DateTime.now()) < const Duration(days: 1))
+
+                                    if(getToday() && dateToCheck == today)
                                       wText(getLocalization().today),
-                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).difference(DateTime.now()) > const Duration(days: 1) && getLaterThisMonth())
-                                      wText(getLocalization().laterThisMonth),
+                                    if(dateToCheck.isAfter(today) && getLaterThisMonth())
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 8.0),
+                                        child: wText(getLocalization().upcoming),
+                                      ),
                                     InkWell(
                                   onTap: (){ UserModel userModel = boxUser.get(current);
                                     if(
@@ -354,5 +373,14 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
       }
   }
 
+
+    bool getToday(){
+      if(todayFlagged){
+        todayFlagged = false;
+        return true;
+      }else{
+        return false;
+      }
+    }
 
 }

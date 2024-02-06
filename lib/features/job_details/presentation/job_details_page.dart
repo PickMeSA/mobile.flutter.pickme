@@ -161,7 +161,7 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                          if(widget.pageMode == PageMode.hiring)Text("${getLocalization().applications} (${getBloc().jobEntity?.profiles?.length})", style: theme.textTheme.bodySmall,),
                          if(widget.pageMode == PageMode.hiring)Text("${getLocalization().matchingProfiles} (${getBloc().jobEntity?.matches?.length})", style: theme.textTheme.bodySmall,),
                          ],
-                   viewHeight: MediaQuery.sizeOf(context).height- 220,
+
                    views:  <Widget>[
                        if(widget.pageMode != PageMode.hiring)
                          SingleChildScrollView(
