@@ -58,6 +58,14 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
     on<LocationFromProfileToggledEvent>((event, emit) => _onLocationFromProfileToggledEvent(event, emit));
     on<LocationSelectedEvent>((event, emit)=> _onLocationSelectedEvent(event, emit));
     on<DateChangedEvent>((event, emit)=> _onDateChangedEvent(event, emit));
+    on<RemoveImageClickedEvent>((event, emit) => _onRemoveImageClickedEvent(event, emit));
+  }
+  _onRemoveImageClickedEvent(
+      RemoveImageClickedEvent event,
+      Emitter<CreateJobListingState> emit
+      )async{
+    photos.removeAt(event.index);
+    emit(RemoveImageClickedState(index: event.index)..dataState = DataState.success);
   }
   Future<void> _onLocationSelectedEvent(
       LocationSelectedEvent event,
