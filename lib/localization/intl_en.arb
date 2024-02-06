@@ -358,7 +358,21 @@
   "present": "Present",
   "successEx": "Success!",
   "yourJobHasBeenPublished": "Your job has been published",
-  "fullName": "Full name"
+  "fullName": "Full name",
+  "letsBegin" : "Let's begin",
+  "verifyItsYou": "Verify it's you",
+  "weveSentAnEmailToYourEmailAddress": "We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!",
+  "iDidntReceiveALink": "I didn't receive a link",
+  "letsGetYourAccountVerified": "Let's get your account verified",
+  "logIntoYourAccountWithYourEmailAndPassword": "Log in to your account with your email and password",
+  "forgotPassword": "Forgot password",
+  "letsOnboardYou": "Let's onboard you!",
+  "passwordA": "Password*",
+  "confirmPasswordA": "Confirm password*",
+  "thePasswordProvidedIsTooWeak": "The password provided is too weak",
+  "theAccountAlreadyExistsForThatEmail": "An account already exists for the email."
+
+
 
 
 }

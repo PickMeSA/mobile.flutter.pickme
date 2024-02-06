@@ -141,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "completeBooking":
             MessageLookupByLibrary.simpleMessage("Complete booking"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
+        "confirmPasswordA":
+            MessageLookupByLibrary.simpleMessage("Confirm password*"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
         "contactHelpCenter":
@@ -200,6 +202,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "forYou": MessageLookupByLibrary.simpleMessage("For you"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot password"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
         "getReviewsToBoostProfile": MessageLookupByLibrary.simpleMessage(
             "Get reviews to boost your profile and increase your chances of getting hired"),
@@ -227,6 +231,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I am looking for"),
         "iDidntReceiveACode":
             MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
+        "iDidntReceiveALink":
+            MessageLookupByLibrary.simpleMessage("I didn\'t receive a link"),
         "iHaveReadThe":
             MessageLookupByLibrary.simpleMessage("I have read & accept the"),
         "iMFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
@@ -264,14 +270,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "Keep tabs on this job in \'My Bookings\'."),
         "laterThisMonth":
             MessageLookupByLibrary.simpleMessage("Later this month"),
+        "letsBegin": MessageLookupByLibrary.simpleMessage("Let\'s begin"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
+        "letsGetYourAccountVerified": MessageLookupByLibrary.simpleMessage(
+            "Let\'s get your account verified"),
+        "letsOnboardYou":
+            MessageLookupByLibrary.simpleMessage("Let\'s onboard you!"),
         "loadMore": MessageLookupByLibrary.simpleMessage("Load more"),
         "loadingDotDot": MessageLookupByLibrary.simpleMessage("loading..."),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "locationAreaBasedOnProfile": MessageLookupByLibrary.simpleMessage(
             "Location/area based on profile"),
+        "logIntoYourAccountWithYourEmailAndPassword":
+            MessageLookupByLibrary.simpleMessage(
+                "Log in to your account with your email and password"),
         "logIntoYourAccountWithYourPhoneNumberAndOtp":
             MessageLookupByLibrary.simpleMessage(
                 "Log in to your account with your phone number and an OTP"),
@@ -363,6 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),
+        "passwordA": MessageLookupByLibrary.simpleMessage("Password*"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payNow": MessageLookupByLibrary.simpleMessage("Pay now"),
         "paySomeone": MessageLookupByLibrary.simpleMessage("Pay someone"),
@@ -533,6 +548,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
         "thanksForReviewingThisUser": MessageLookupByLibrary.simpleMessage(
             "Thank you for reviewing this user"),
+        "theAccountAlreadyExistsForThatEmail":
+            MessageLookupByLibrary.simpleMessage(
+                "An account already exists for the email."),
+        "thePasswordProvidedIsTooWeak": MessageLookupByLibrary.simpleMessage(
+            "The password provided is too weak"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
@@ -547,6 +567,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Upload cancelled by user"),
         "useMyCurrentLocation":
             MessageLookupByLibrary.simpleMessage("Use my current location"),
+        "verifyItsYou":
+            MessageLookupByLibrary.simpleMessage("Verify it\'s you"),
         "viewProfile": MessageLookupByLibrary.simpleMessage("view Profile"),
         "weAreStillVerifyingYourAccount": MessageLookupByLibrary.simpleMessage(
             "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."),
@@ -554,6 +576,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeLetsSetUpYourProfile": m5,
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
+        "weveSentAnEmailToYourEmailAddress": MessageLookupByLibrary.simpleMessage(
+            "We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!"),
         "weveSentYourAlternativeDateAndTimeProposal":
             MessageLookupByLibrary.simpleMessage(
                 "We\'ve sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected"),

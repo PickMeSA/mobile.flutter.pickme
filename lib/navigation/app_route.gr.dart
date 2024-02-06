@@ -325,6 +325,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const FinalDetailsPage(),
       );
     },
+    ForgotPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ForgotPasswordPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -388,6 +394,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LandingPage(),
+      );
+    },
+    LetsBeginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LetsBeginPage(),
       );
     },
     LocationRoute.name: (routeData) {
@@ -700,6 +712,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const TermsAndConditionsPage(),
+      );
+    },
+    VerifyItsYouRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const VerifyItsYouPage(),
       );
     },
     YouAreAllSetupRoute.name: (routeData) {
@@ -1776,6 +1794,20 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ForgotPasswordPage]
+class ForgotPasswordRoute extends PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          ForgotPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ForgotPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
@@ -1999,6 +2031,20 @@ class LandingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LandingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LetsBeginPage]
+class LetsBeginRoute extends PageRouteInfo<void> {
+  const LetsBeginRoute({List<PageRouteInfo>? children})
+      : super(
+          LetsBeginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LetsBeginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -3034,6 +3080,20 @@ class TermsAndConditionsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'TermsAndConditionsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [VerifyItsYouPage]
+class VerifyItsYouRoute extends PageRouteInfo<void> {
+  const VerifyItsYouRoute({List<PageRouteInfo>? children})
+      : super(
+          VerifyItsYouRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'VerifyItsYouRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

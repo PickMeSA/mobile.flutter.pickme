@@ -3649,6 +3649,126 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Let's begin`
+  String get letsBegin {
+    return Intl.message(
+      'Let\'s begin',
+      name: 'letsBegin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify it's you`
+  String get verifyItsYou {
+    return Intl.message(
+      'Verify it\'s you',
+      name: 'verifyItsYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!`
+  String get weveSentAnEmailToYourEmailAddress {
+    return Intl.message(
+      'We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!',
+      name: 'weveSentAnEmailToYourEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I didn't receive a link`
+  String get iDidntReceiveALink {
+    return Intl.message(
+      'I didn\'t receive a link',
+      name: 'iDidntReceiveALink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's get your account verified`
+  String get letsGetYourAccountVerified {
+    return Intl.message(
+      'Let\'s get your account verified',
+      name: 'letsGetYourAccountVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in to your account with your email and password`
+  String get logIntoYourAccountWithYourEmailAndPassword {
+    return Intl.message(
+      'Log in to your account with your email and password',
+      name: 'logIntoYourAccountWithYourEmailAndPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's onboard you!`
+  String get letsOnboardYou {
+    return Intl.message(
+      'Let\'s onboard you!',
+      name: 'letsOnboardYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password*`
+  String get passwordA {
+    return Intl.message(
+      'Password*',
+      name: 'passwordA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password*`
+  String get confirmPasswordA {
+    return Intl.message(
+      'Confirm password*',
+      name: 'confirmPasswordA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password provided is too weak`
+  String get thePasswordProvidedIsTooWeak {
+    return Intl.message(
+      'The password provided is too weak',
+      name: 'thePasswordProvidedIsTooWeak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An account already exists for the email.`
+  String get theAccountAlreadyExistsForThatEmail {
+    return Intl.message(
+      'An account already exists for the email.',
+      name: 'theAccountAlreadyExistsForThatEmail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -27,7 +27,8 @@ class LoginPage extends BasePage {
 
 class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
 
-  TextEditingController mobileNumberTextEditingController = TextEditingController();
+  TextEditingController emailAddressController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
@@ -84,7 +85,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                          ),
                          Padding(
                            padding: EdgeInsets.only( right: 32, bottom: 8),
-                           child: wText(getLocalization().logIntoYourAccountWithYourPhoneNumberAndOtp,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                           child: wText(getLocalization().logIntoYourAccountWithYourEmailAndPassword,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
                          )
                        ],
                      ),
@@ -103,13 +104,14 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                child: Padding(
                  padding: const EdgeInsets.all(30.0),
                  child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
                      Padding(
                        padding: const EdgeInsets.only(top: 20, bottom:  10),
                        child: AppTextFormField(
-                         hint: getLocalization().exampleNumber,
+
                           onChanged: (value)=> getBloc().add(NumberChangedEvent(mobileNumber: value)),
-                         controller: mobileNumberTextEditingController,
+                         controller: emailAddressController,
                          // validator: (value)=> validatePhoneNumber(value??""),
                          prefixIcon: SizedBox(width: 50,
                            child: Row(
@@ -117,8 +119,32 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                            ),
                          ),
                          padding: const EdgeInsets.only(left: 20, right: 20),
-                         textFieldType: TextFieldType.NUMBER, labelText: getLocalization().phoneNumber,),
+                         textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
                      ),
+                     Padding(
+                       padding: const EdgeInsets.only( bottom:  10),
+                       child: AppTextFormField(
+
+                         onChanged: (value)=> getBloc().add(NumberChangedEvent(mobileNumber: value)),
+                         controller: passwordController,
+                         // validator: (value)=> validatePhoneNumber(value??""),
+                         prefixIcon: SizedBox(width: 50,
+                           child: Row(
+                             children: [Text(getLocalization().countryCode,)],
+                           ),
+                         ),
+                         padding: const EdgeInsets.only(left: 20, right: 20),
+                         textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().passwordA,),
+
+                     ),
+                     Padding(padding: const EdgeInsets.only(top: 10, bottom: 14),
+                       child: InkWell(
+                         onTap: (){
+                           context.router.push( RegisterRoute());
+                         } ,
+                         child: wText(getLocalization().forgotPassword, style:
+                         const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                       ),),
                      const Spacer(),
                      PrimaryButton(
                        width: MediaQuery.sizeOf(context).width,
@@ -141,7 +167,6 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                            )
                        ),
                        onPressed: !state.checked?null:()async {
-                         await authenticate(mobileNumber:"${getLocalization().phonePrefix}${mobileNumberTextEditingController.text}" );
                        },
                        child: Text(getLocalization().ccontinue),
                      ),
