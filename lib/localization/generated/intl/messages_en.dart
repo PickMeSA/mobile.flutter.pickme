@@ -188,6 +188,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "endDateCannotBeBeforeStartDate": MessageLookupByLibrary.simpleMessage(
             "End date cannot be before start date"),
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
+        "enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword":
+            MessageLookupByLibrary.simpleMessage(
+                "Enter your email address to receive an email with a link to reset your password."),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "estHours": MessageLookupByLibrary.simpleMessage("Est. hours"),
@@ -274,6 +277,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
+        "letsGetYouUpAndRunningAgain": MessageLookupByLibrary.simpleMessage(
+            "Let\'s get you up and running again!"),
         "letsGetYourAccountVerified": MessageLookupByLibrary.simpleMessage(
             "Let\'s get your account verified"),
         "letsOnboardYou":
@@ -378,6 +383,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),
         "passwordA": MessageLookupByLibrary.simpleMessage("Password*"),
+        "passwordResetLinkSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password reset link successfully"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payNow": MessageLookupByLibrary.simpleMessage("Pay now"),
         "paySomeone": MessageLookupByLibrary.simpleMessage("Pay someone"),
@@ -474,6 +481,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rescheduleRequestSent":
             MessageLookupByLibrary.simpleMessage("Reschedule request sent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),

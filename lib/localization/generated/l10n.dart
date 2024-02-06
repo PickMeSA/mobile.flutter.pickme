@@ -3769,6 +3769,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Let's get you up and running again!`
+  String get letsGetYouUpAndRunningAgain {
+    return Intl.message(
+      'Let\'s get you up and running again!',
+      name: 'letsGetYouUpAndRunningAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email address to receive an email with a link to reset your password.`
+  String get enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword {
+    return Intl.message(
+      'Enter your email address to receive an email with a link to reset your password.',
+      name: 'enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password reset link successfully`
+  String get passwordResetLinkSuccessfully {
+    return Intl.message(
+      'Password reset link successfully',
+      name: 'passwordResetLinkSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

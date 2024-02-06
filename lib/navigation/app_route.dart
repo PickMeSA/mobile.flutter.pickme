@@ -33,6 +33,7 @@ import 'package:pickme/features/edit_work_experience/presentation/edit_work_expe
 import 'package:pickme/features/edit_work_experience_details/presentation/edit_work_experience_details_page.dart';
 import 'package:pickme/features/filters/presentation/filters_page.dart';
 import 'package:pickme/features/edit_my_banking_details/presentation/edit_my_banking_details_page.dart';
+import 'package:pickme/features/forgot_password/presentation/forgot_password_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
@@ -198,7 +199,8 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: RequestAReviewRoute.page),
     AnimatedRoute(page: ReviewAUserRoute.page),
     AnimatedRoute(page: LetsBeginRoute.page),
-    AnimatedRoute(page: VerifyItsYouRoute.page)
+    AnimatedRoute(page: VerifyItsYouRoute.page),
+    AnimatedRoute(page: ForgotPasswordRoute.page)
 
   ];
 }

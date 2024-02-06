@@ -370,7 +370,11 @@
   "passwordA": "Password*",
   "confirmPasswordA": "Confirm password*",
   "thePasswordProvidedIsTooWeak": "The password provided is too weak",
-  "theAccountAlreadyExistsForThatEmail": "An account already exists for the email."
+  "theAccountAlreadyExistsForThatEmail": "An account already exists for the email.",
+  "letsGetYouUpAndRunningAgain": "Let's get you up and running again!",
+  "enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword": "Enter your email address to receive an email with a link to reset your password.",
+  "resetPassword": "Reset Password",
+  "passwordResetLinkSuccessfully": "Password reset link successfully"
 
 
 

@@ -4,3 +4,10 @@ abstract class ForgotPasswordPageState extends BaseState {}
 
 class ForgotPasswordPageInitState extends ForgotPasswordPageState  {}
 
+class EmailChangedState extends ForgotPasswordPageState{
+
+}
+
+class ResetEmailButtonClickedState extends ForgotPasswordPageState{
+
+}

@@ -31,7 +31,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget buildView(BuildContext context) {
-    var theme = Theme.of(context);
+    ThemeData theme = Theme.of(context);
    return BlocConsumer<LoginBloc,LoginState>
      (builder: (context , state){
      return SizedBox(
@@ -140,7 +140,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                      Padding(padding: const EdgeInsets.only(top: 10, bottom: 14),
                        child: InkWell(
                          onTap: (){
-                           context.router.push( RegisterRoute());
+                           context.router.push( ForgotPasswordRoute());
                          } ,
                          child: wText(getLocalization().forgotPassword, style:
                          const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),

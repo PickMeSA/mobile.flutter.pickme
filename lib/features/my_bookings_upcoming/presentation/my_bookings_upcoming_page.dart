@@ -174,9 +174,9 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).difference(DateTime.now()) < const Duration(days: 1))
+                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate).difference(DateTime.now()) < const Duration(days: 1))
                                       wText(getLocalization().today),
-                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).difference(DateTime.now()) > const Duration(days: 1) && getLaterThisMonth())
+                                    if(index == 0 && DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate).difference(DateTime.now()) > const Duration(days: 1) && getLaterThisMonth())
                                       wText(getLocalization().laterThisMonth),
                                     InkWell(
                                   onTap: (){ UserModel userModel = boxUser.get(current);
