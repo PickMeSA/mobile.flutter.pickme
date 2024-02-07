@@ -36,18 +36,28 @@ class PickMeApp{
 
   static void run(){
     AppRouter _appRouter = AppRouter();
+    MediaQueryData windowData =
+    MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+    windowData = windowData.copyWith(
+      textScaleFactor:
+      windowData.textScaleFactor > 1 ? 1 : windowData.textScaleFactor,
+    );
 
     return runApp(
-      MaterialApp.router(
-       routerConfig: _appRouter.config(),
-        localizationsDelegates:  const [
-          AppLocalizations.delegate,
-        ],
-        themeMode: ThemeMode.system,
-        darkTheme: AppTheme().defaultTheme,
-        theme: AppTheme().defaultTheme,
+      MediaQuery(
+        data: windowData,
+        child: MaterialApp.router(
+          useInheritedMediaQuery: true,
+         routerConfig: _appRouter.config(),
+          localizationsDelegates:  const [
+            AppLocalizations.delegate,
+          ],
+          themeMode: ThemeMode.system,
+          darkTheme: AppTheme().defaultTheme,
+          theme: AppTheme().defaultTheme,
 
 
+        ),
       )
     );
   }
