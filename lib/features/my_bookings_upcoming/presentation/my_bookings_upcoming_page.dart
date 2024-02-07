@@ -39,6 +39,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
     bool olderFlagged = true;
 
 
+
     void _onRefresh() async{
       // monitor network fetch
       getBloc().add(LoadBookingsUpcomingEvent());
@@ -175,6 +176,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                         ListView.builder(
                           itemCount: getBloc().upcomingHireBookingsList.length,
                             itemBuilder: (context , index){
+                            DateTime today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
                               DateTime dateToCheck = DateTime(
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).year,
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).month,
