@@ -374,9 +374,9 @@
   "letsGetYouUpAndRunningAgain": "Let's get you up and running again!",
   "enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword": "Enter your email address to receive an email with a link to reset your password.",
   "resetPassword": "Reset Password",
-  "passwordResetLinkSuccessfully": "Password reset link successfully"
-
-
+  "passwordResetLinkSuccessfully": "Password reset link successfully",
+  "fullName": "Full name",
+  "later": "Later"
 
 
 }
