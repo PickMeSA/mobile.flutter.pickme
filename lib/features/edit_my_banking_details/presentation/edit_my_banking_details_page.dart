@@ -93,6 +93,39 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
                     ),
                     30.height,
                     AppTextFormField(
+                      validator: (value){
+                        if(value!.isEmpty)
+                          return "Account number is required";
+                        String pattern =
+                            r'^[0-9]';
+                        RegExp regex =  RegExp(pattern);
+                        if(!regex.hasMatch(value))
+                          return "Please enter a valid account number";
+                      },
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: accountNumberController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NUMBER,
+                      labelText: getLocalization().accountNumberA,),
+                    20.height,
+                    AppTextFormField(
+                      validator: (value){
+                        if(value!.isEmpty)
+                          return "branch code is required";
+                        String pattern =
+                            r'^[0-9]';
+                        RegExp regex =  RegExp(pattern);
+                        if(!regex.hasMatch(value))
+                          return "Please enter a valid branch";
+
+                      },
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: branchCodeController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NUMBER,
+                      labelText: getLocalization().branchCodeA,),
+                    20.height,
+                    AppTextFormField(
                       onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
                       controller: accountHolderNameController,
                       padding: const EdgeInsets.only(left: 20, right: 20),
@@ -114,39 +147,7 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
                         dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
                         width: MediaQuery.of(context).size.width-40,),
                     ),
-                    20.height,
-                    AppTextFormField(
-                      validator: (value){
-                        if(value!.isEmpty)
-                          return "Account number is required";
-                        String pattern =
-                            r'^[0-9]';
-                        RegExp regex =  RegExp(pattern);
-                        if(!regex.hasMatch(value))
-                          return "Please enter a valid account number";
-                      },
-                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                      controller: accountNumberController,
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      textFieldType: TextFieldType.NUMBER,
-                      labelText: getLocalization().accountNumberA,),
-                    20.height,
-                    AppTextFormField(
-                      validator: (value){
-                          if(value!.isEmpty)
-                            return "branch code is required";
-                          String pattern =
-                              r'^[0-9]';
-                          RegExp regex =  RegExp(pattern);
-                          if(!regex.hasMatch(value))
-                            return "Please enter a valid branch";
 
-                      },
-                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                      controller: branchCodeController,
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      textFieldType: TextFieldType.NUMBER,
-                      labelText: getLocalization().branchCodeA,),
 
                     100.height,
 

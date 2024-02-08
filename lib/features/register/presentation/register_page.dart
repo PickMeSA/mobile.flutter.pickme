@@ -21,9 +21,9 @@ import 'package:pickme/shared/widgets/w_text.dart';
 
 @RoutePage()
 class RegisterPage extends BasePage {
-
+    String email;
    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-   RegisterPage({super.key});
+   RegisterPage({required this.email,super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -46,6 +46,13 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailAddressController.text = widget.email;
+  }
+
+  @override
   Widget buildView(BuildContext context) {
 
     var theme = Theme.of(context);
@@ -65,7 +72,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                 top: 0,
                 child: Container(
                   color: Colors.white,
-                  height: MediaQuery.sizeOf(context).height * (1.5/3) ,
+                  height: 250 ,
                   width: MediaQuery.sizeOf(context).width,
                   child:  Stack(
                       children:[
@@ -113,7 +120,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                         ),]
                   ),)
             ),
-            Positioned(bottom: 0,
+            Positioned(bottom: 70,
               child: Container(height: MediaQuery.sizeOf(context).height * (2/3) ,
                 width: MediaQuery.sizeOf(context).width,
                 decoration: const BoxDecoration(
@@ -146,7 +153,9 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                        Padding(
                           padding: const EdgeInsets.only(top: 10, bottom:  10),
                           child: AppTextFormField(
-                            onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
+                            onChanged: (value){ getBloc().add(ValueChangedEvent(userModel: getGetUserModel()));
+                              if(value.length == 9 )
+                                FocusScope.of(context).unfocus();},
                             validator: (value)=> validatePhoneNumber(value??""),
                             prefixIcon: SizedBox(width: 50,
                               child: Row(
@@ -156,16 +165,6 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             controller: phoneNumberController,
                             padding: const EdgeInsets.only(left: 20, right: 20),
                             textFieldType: TextFieldType.NUMBER, labelText: getLocalization().phoneNumber,),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only( top: 10, bottom: 10),
-                          child: AppTextFormField(
-                            onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
-                            validator:(value)=> validateEmailAddress(value??""),
-                            controller: emailAddressController,
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            textFieldType: TextFieldType.EMAIL,
-                            labelText: getLocalization().emailAddress,),
                         ),
                         AppTabBar(
                           onTap: (index)=> getBloc().add(IdentificationChangedEvent(index: index)),
@@ -184,11 +183,13 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                 Padding(
                                   padding:  const EdgeInsets.only( top: 10, bottom:  10),
                                   child: AppTextFormField(
-                                    onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
+                                    onChanged: (value){ getBloc().add(ValueChangedEvent(userModel: getGetUserModel()));
+                                      if(value.length == 13)
+                                        FocusScope.of(context).unfocus();},
                                     validator: (value)=> validateIdNumber(value??""),
                                     controller: idNumberController,
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom:  5),
-                                    textFieldType: TextFieldType.NAME, labelText: getLocalization().idNumber,),
+                                    textFieldType: TextFieldType.NUMBER, labelText: getLocalization().idNumber,),
                                 ),
                                 Text(getLocalization().indicatesARequiredField),
                               ],
@@ -204,7 +205,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                     validator: (value)=> validatePassportNumber(value??""),
                                     controller: passportNumberController,
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom:  5),
-                                    textFieldType: TextFieldType.NAME, labelText: getLocalization().passportNumberA,),
+                                    textFieldType: TextFieldType.NUMBER, labelText: getLocalization().passportNumberA,),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only( top: 10, bottom:  5),
@@ -213,7 +214,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                     controller: workPermitController,
                                      validator: (value)=> validateWorkPermitNumber(value??""),
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10,  ),
-                                    textFieldType: TextFieldType.NAME, labelText: getLocalization().workPermitNumber,),
+                                    textFieldType: TextFieldType.NUMBER, labelText: getLocalization().workPermitNumber,),
                                 ),
                                 Text(getLocalization().indicatesARequiredField),
                               ],
@@ -291,17 +292,11 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
           Navigator.pop(context);
           getBloc().preloader = false;
         }
-       final error =  await context.router.push(OTPRoute(
+         context.router.push(OTPRoute(
          verificationId: verificationId,
             userModel: getGetUserModel(),
             fromregister: true));
-       if(error != null){
-         if(getBloc().preloader) {
-           Navigator.pop(context);
-           getBloc().preloader = false;
-         }
-         wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
-       }
+
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
@@ -319,7 +314,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
 
  UserEntity getGetUserModel(){
     return UserEntity(
-        email: emailAddressController.text,
+        email: widget.email,
         surname: surnameController.text,
         firstName: firstNameController.text,
         mobile: "${getLocalization().phonePrefix}${phoneNumberController.text}",

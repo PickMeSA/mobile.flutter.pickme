@@ -3819,6 +3819,68 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `An email containing a link to reset your password has been sent to you email address`
+  String
+      get anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress {
+    return Intl.message(
+      'An email containing a link to reset your password has been sent to you email address',
+      name:
+          'anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a password`
+  String get pleaseEnterAPassword {
+    return Intl.message(
+      'Please enter a password',
+      name: 'pleaseEnterAPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a username`
+  String get pleaseEnterAUsername {
+    return Intl.message(
+      'Please enter a username',
+      name: 'pleaseEnterAUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username or password is incorrect`
+  String get usernameOrPasswordIsIncorrect {
+    return Intl.message(
+      'Username or password is incorrect',
+      name: 'usernameOrPasswordIsIncorrect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address profile doesn't exist`
+  String get emailAddressProfileDoesntExist {
+    return Intl.message(
+      'Email address profile doesn\'t exist',
+      name: 'emailAddressProfileDoesntExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!`
+  String get weveSentAnEmailPleaseClickOnTheVerificationLink {
+    return Intl.message(
+      'We\'ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!',
+      name: 'weveSentAnEmailPleaseClickOnTheVerificationLink',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

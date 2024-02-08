@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
@@ -28,7 +29,22 @@ class DioApiService extends ApiService{
      logger.d(response.toString());
 
      handler.next(response);
-   },));
+   },
+   onError: (error, handler) async{
+     if(error.response?.statusCode == 401){
+        String token = await FirebaseAuth.instance.currentUser?.getIdToken(true)??"";
+       TokenModel tokenModel = TokenModel(
+           refreshToken: token,
+           accessToken: token,
+           tokenID: token );
+       boxTokens.put(current, tokenModel);
+        dio.options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
+        return handler.resolve(await dio.fetch(error.requestOptions));
+     }
+
+     return handler.next(error);
+   }));
+
   }
 
   @override

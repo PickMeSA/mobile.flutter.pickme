@@ -376,7 +376,14 @@
   "resetPassword": "Reset Password",
   "passwordResetLinkSuccessfully": "Password reset link successfully",
   "fullName": "Full name",
-  "later": "Later"
+  "later": "Later",
+  "anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress": "An email containing a link to reset your password has been sent to you email address",
+  "pleaseEnterAPassword": "Please enter a password",
+  "pleaseEnterAUsername": "Please enter a username",
+  "usernameOrPasswordIsIncorrect": "Username or password is incorrect",
+  "emailAddressProfileDoesntExist": "Email address profile doesn't exist",
+  "weveSentAnEmailPleaseClickOnTheVerificationLink": "We've sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!",
+  "iDidntReceiveALink": "I didn't receive a link"
 
 
 }

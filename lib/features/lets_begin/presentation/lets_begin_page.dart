@@ -59,67 +59,76 @@ class _LetsBeginPageState extends BasePageState<LetsBeginPage, LetsBeginBloc> {
     return BlocConsumer<LetsBeginBloc, LetsBeginPageState>(
       listener: (context, state){},
       builder: (context, state) {
-        return SizedBox(
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height,
-          child: Form(
-            key: _formKey,
-            child: Stack(
-              children:[
-                Positioned(
-                    top: 0,
-                    child: Container(
-                      color: Colors.white,
-                      height: MediaQuery.sizeOf(context).height * (1.5/3) ,
-                      width: MediaQuery.sizeOf(context).width,
-                      child:  Stack(
-                          children:[
-                            Positioned(
-                              top: 0,
-                              right:  -30,
-                              child: Container(
-                                child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
-                              ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              left:  29.78,
-                              child: Container(
-                                child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
-                              ),
-                            ),
-                            Positioned(
-                              top: -15,
-                              right:  0,
-                              child: Container(
-                                child: SvgPicture.asset("assets/hi_there_man.svg"),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(30.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: 25,
-                                    height: 25,
-                                    child: InkWell(onTap: ()=> context.router.pop()
-                                        ,child: Icon(Icons.arrow_back)),),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                                    child: wText(getLocalization().hiThere,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only( right: 32, bottom: 8),
-                                    child: wText(getLocalization().letsGetYouStartedByCreatingYourAccount,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                                  )
-                                ],
-                              ),
-                            ),]
-                      ),)
+        return SingleChildScrollView(
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            child: Column(
+              children: [
+                Form(
+                  key: _formKey,
+                  child: SizedBox(height: 250,
+                    child: Stack(
+                      children:[
+                        Positioned(
+                            top: 0,
+                            child: Container(
+                              color: Colors.white,
+                              height: 250 ,
+                              width: MediaQuery.sizeOf(context).width,
+                              child:  Stack(
+                                  children:[
+                                    Positioned(
+                                      top: 0,
+                                      right:  -30,
+                                      child: Container(
+                                        child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      left:  29.78,
+                                      child: Container(
+                                        child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: -15,
+                                      right:  0,
+                                      child: Container(
+                                        child: SvgPicture.asset("assets/hi_there_man.svg"),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(30.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: 25,
+                                            height: 25,
+                                            child: InkWell(onTap: ()=> context.router.pop()
+                                                ,child: Icon(Icons.arrow_back)),),
+                                          Padding(
+                                            padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
+                                            child: wText(getLocalization().letsBegin,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only( right: 32, bottom: 8),
+                                            child: wText(getLocalization().letsGetYouStartedByCreatingYourAccount,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                                          )
+                                        ],
+                                      ),
+                                    ),]
+                              ),)
+                        ),
+
+                      ],
+                    ),
+                  ),
                 ),
-                Positioned(bottom: 0,
-                  child: Container(height: MediaQuery.sizeOf(context).height * (2/3) ,
+                SingleChildScrollView(
+                  child: Container(
                     width: MediaQuery.sizeOf(context).width,
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -157,39 +166,33 @@ class _LetsBeginPageState extends BasePageState<LetsBeginPage, LetsBeginBloc> {
                                 padding: const EdgeInsets.only(left: 20, right: 20),
                                 textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().confirmPasswordA,),
                             ),
-
-
-
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20, bottom: 10),
-                              child: PrimaryButton(
-                                width: MediaQuery.sizeOf(context).width,
-                                style: ButtonStyle(
-                                    side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                      return BorderSide(
-                                        color: states.contains(MaterialState.disabled)?
-                                        theme.colorScheme.secondary.withOpacity(0):
-                                        theme.colorScheme.secondary,
-                                        width: 2,
-                                      );
-                                    }
-                                    ),
-                                    backgroundColor: MaterialStateProperty.resolveWith(
-                                            (Set<MaterialState> states){
-                                          return states.contains(MaterialState.disabled)?
-                                          theme.colorScheme.secondary.withOpacity(0.3):
-                                          theme.colorScheme.secondary;
-                                        }
-                                    )
-                                ),
-
-                                onPressed: !getBloc().checked!?null:() {
-                                  if(_formKey.currentState!.validate()) {
-                                    /*  */ authenticate(getLetsBeginEntity());
+                            PrimaryButton(
+                              width: MediaQuery.sizeOf(context).width,
+                              style: ButtonStyle(
+                                  side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                    return BorderSide(
+                                      color: states.contains(MaterialState.disabled)?
+                                      theme.colorScheme.secondary.withOpacity(0):
+                                      theme.colorScheme.secondary,
+                                      width: 2,
+                                    );
                                   }
-                                },
-                                child: Text(getLocalization().ccontinue),
+                                  ),
+                                  backgroundColor: MaterialStateProperty.resolveWith(
+                                          (Set<MaterialState> states){
+                                        return states.contains(MaterialState.disabled)?
+                                        theme.colorScheme.secondary.withOpacity(0.3):
+                                        theme.colorScheme.secondary;
+                                      }
+                                  )
                               ),
+
+                              onPressed: !getBloc().checked!?null:() {
+                                if(_formKey.currentState!.validate()) {
+                                  /*  */ authenticate(getLetsBeginEntity());
+                                }
+                              },
+                              child: Text(getLocalization().ccontinue),
                             ),
                           ],
 

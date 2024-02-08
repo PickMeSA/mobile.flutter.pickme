@@ -90,6 +90,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "anAlternativeRescheduleRequestHasBeenSentToYou":
             MessageLookupByLibrary.simpleMessage(
                 "An Alternative reschedule request has been sent to you. Once you approve, your booking will be updated in your calendar to the proposed date and time."),
+        "anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress":
+            MessageLookupByLibrary.simpleMessage(
+                "An email containing a link to reset your password has been sent to you email address"),
         "applicationSent":
             MessageLookupByLibrary.simpleMessage("Application sent"),
         "applicationSenttext": MessageLookupByLibrary.simpleMessage(
@@ -184,6 +187,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editWorkExperience":
             MessageLookupByLibrary.simpleMessage("Edit work experience"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
+        "emailAddressProfileDoesntExist": MessageLookupByLibrary.simpleMessage(
+            "Email address profile doesn\'t exist"),
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "endDateCannotBeBeforeStartDate": MessageLookupByLibrary.simpleMessage(
             "End date cannot be before start date"),
@@ -409,6 +414,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickMeReceivesAR2hrWorkedAsServiceFees":
             MessageLookupByLibrary.simpleMessage(
                 "PickMe Receives a R2/hr worked as services fees"),
+        "pleaseEnterAPassword":
+            MessageLookupByLibrary.simpleMessage("Please enter a password"),
+        "pleaseEnterAUsername":
+            MessageLookupByLibrary.simpleMessage("Please enter a username"),
         "pleaseEnterCompanyName":
             MessageLookupByLibrary.simpleMessage("Please enter company name"),
         "pleaseEnterIssuingOrganization": MessageLookupByLibrary.simpleMessage(
@@ -576,6 +585,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Upload cancelled by user"),
         "useMyCurrentLocation":
             MessageLookupByLibrary.simpleMessage("Use my current location"),
+        "usernameOrPasswordIsIncorrect": MessageLookupByLibrary.simpleMessage(
+            "Username or password is incorrect"),
         "verifyItsYou":
             MessageLookupByLibrary.simpleMessage("Verify it\'s you"),
         "viewProfile": MessageLookupByLibrary.simpleMessage("view Profile"),
@@ -585,6 +596,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeLetsSetUpYourProfile": m5,
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
+        "weveSentAnEmailPleaseClickOnTheVerificationLink":
+            MessageLookupByLibrary.simpleMessage(
+                "We\'ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!"),
         "weveSentAnEmailToYourEmailAddress": MessageLookupByLibrary.simpleMessage(
             "We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!"),
         "weveSentYourAlternativeDateAndTimeProposal":

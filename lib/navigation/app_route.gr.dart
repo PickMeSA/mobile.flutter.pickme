@@ -567,11 +567,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     RegisterRoute.name: (routeData) {
-      final args = routeData.argsAs<RegisterRouteArgs>(
-          orElse: () => const RegisterRouteArgs());
+      final args = routeData.argsAs<RegisterRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: RegisterPage(key: args.key),
+        child: RegisterPage(
+          email: args.email,
+          key: args.key,
+        ),
       );
     },
     RequestAReviewRoute.name: (routeData) {
@@ -715,9 +717,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     VerifyItsYouRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyItsYouRouteArgs>(
+          orElse: () => const VerifyItsYouRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const VerifyItsYouPage(),
+        child: VerifyItsYouPage(key: args.key),
       );
     },
     YouAreAllSetupRoute.name: (routeData) {
@@ -2559,11 +2563,15 @@ class RegisterAccountStep1Route extends PageRouteInfo<void> {
 /// [RegisterPage]
 class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
   RegisterRoute({
+    required String email,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           RegisterRoute.name,
-          args: RegisterRouteArgs(key: key),
+          args: RegisterRouteArgs(
+            email: email,
+            key: key,
+          ),
           initialChildren: children,
         );
 
@@ -2574,13 +2582,18 @@ class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
 }
 
 class RegisterRouteArgs {
-  const RegisterRouteArgs({this.key});
+  const RegisterRouteArgs({
+    required this.email,
+    this.key,
+  });
+
+  final String email;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'RegisterRouteArgs{key: $key}';
+    return 'RegisterRouteArgs{email: $email, key: $key}';
   }
 }
 
@@ -3086,16 +3099,31 @@ class TermsAndConditionsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [VerifyItsYouPage]
-class VerifyItsYouRoute extends PageRouteInfo<void> {
-  const VerifyItsYouRoute({List<PageRouteInfo>? children})
-      : super(
+class VerifyItsYouRoute extends PageRouteInfo<VerifyItsYouRouteArgs> {
+  VerifyItsYouRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           VerifyItsYouRoute.name,
+          args: VerifyItsYouRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'VerifyItsYouRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<VerifyItsYouRouteArgs> page =
+      PageInfo<VerifyItsYouRouteArgs>(name);
+}
+
+class VerifyItsYouRouteArgs {
+  const VerifyItsYouRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VerifyItsYouRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

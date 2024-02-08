@@ -59,15 +59,22 @@ class ProfileServiceImpl extends ProfileService{
 
   @override
   Future<ProfileEntity> getRemoteProfileData({String? userId}) async{
-    try{
+    try {
       Response<dynamic> response;
-      if(userId==null){
+      if (userId == null) {
         UserModel userModel = boxUser.get(current);
-        response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
-      }else{
+        response =
+        await apiService.get("$baseUrl$version/profiles/${userModel.id}");
+      } else {
         response = await apiService.get("$baseUrl$version/profiles/$userId");
       }
       return returnProfileEntity(response: response);
+    } on DioException catch(ex) {
+      if (ex.response!.data!["message"].toString() == "You don't have a profile and we could not create one.") {
+        return ProfileEntity();
+      } else {
+        throw(ex.response!.data["message"].toString());
+      }
     }catch(ex){
       rethrow;
     }

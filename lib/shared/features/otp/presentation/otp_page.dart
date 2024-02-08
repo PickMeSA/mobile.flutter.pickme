@@ -56,11 +56,9 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //OTPGetTokenState////////////////////////////////////////////////////
         //success
         if(state is OTPGetTokenState && state.dataState == DataState.success){
-          if(widget.fromregister!) {
+
             getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
-          }else{
-            getBloc().add(GetProfileProgressEvent());
-          }
+
         }
 
         //error
@@ -273,27 +271,15 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
     );
   }
 
-  Future<TokenModel> getToken({required String otp}) async {
+  Future<void> getToken({required String otp}) async {
     try {
       getBloc().add(OTPGetTokenEvent(stage: 0));
       PhoneAuthCredential credential =  PhoneAuthProvider.credential(
           verificationId: widget.verificationId!, smsCode: otp);
-      UserCredential userCredential = await widget.firebaseAuth.signInWithCredential(credential);
-      String? token = await userCredential.user?.getIdToken();
-      TokenModel tokenModel =
-      TokenModel(
-          refreshToken: token??"",
-          accessToken: token??"",
-          tokenID: token??"");
-      boxTokens.put(current, tokenModel);
-      UserModel userModel = UserModel(id: "");
-      userModel.id = userCredential.user?.uid;
-      boxUser.put(current, userModel);
       getBloc().add(OTPGetTokenEvent(stage: 1));
-      return tokenModel;
     } catch (ex) {
       getBloc().add(OTPGetTokenEvent(stage: -1));
-      return TokenModel(refreshToken: "", accessToken: "", tokenID: "");
+
     }
   }
 

@@ -2,10 +2,10 @@ part of 'login_bloc.dart';
 
 @immutable
 abstract class LoginState extends BaseState {
-  bool checked;
+  bool?checked;
   String? error;
 
-  LoginState({required this.checked, this.error});
+  LoginState({ this.checked, this.error});
 }
 
 class LoginInitial extends LoginState {
@@ -15,14 +15,16 @@ class LoginInitial extends LoginState {
 
 class LoginContinueClickedState extends LoginState{
   late bool? loggedIn;
+  final ProfileEntity? profileEntity;
 
   LoginContinueClickedState({
+    this.profileEntity,
     this.loggedIn,
-    required super.checked,
+    super.checked,
     super.error});
 }
 
 class NumberChangedState extends LoginState{
 
-  NumberChangedState({required super.checked});
+  NumberChangedState();
 }

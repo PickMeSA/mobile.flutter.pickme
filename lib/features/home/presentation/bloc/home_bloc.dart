@@ -100,7 +100,7 @@ class HomeBloc
                 ));
             paginatedCandidates = paginatedCandidateProfileEntity;
             jobListingsPageEntity = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(
-maxDistance: 20
+                maxDistance: 50
             ));
             jobCount = ((jobListingsPageEntity?.activeJobs.length??0) + (jobListingsPageEntity?.inactiveJobs.length??0) );
             emit(JobsHiringLandingPageEnteredState()..dataState = DataState.success);

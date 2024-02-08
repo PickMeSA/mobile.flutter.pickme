@@ -51,70 +51,80 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage, ForgotP
         if(state.dataState == DataState.loading){
           preloader(context);
         }
+
+        if(state.dataState == DataState.success && state is ResetEmailButtonClickedState){
+          context.router.pop();
+          wErrorPopUp(message: getLocalization().anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress, type: getLocalization().information, context: context);
+
+        }
       },
       builder: (context, state) {
         return SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
-          child: Stack(
-            children:[
-              Positioned(
-                  top: 0,
-                  child: Container(
-                    color: Colors.white,
-                    height: MediaQuery.sizeOf(context).height * (1.5/3) ,
-                    width: MediaQuery.sizeOf(context).width,
-                    child:  Stack(
-                        children:[
-                          Positioned(
-                            top: 0,
-                            right:  -30,
-                            child: Container(
-                              child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
-                            ),
-                          ),
-                          Positioned(
-                            top: 0,
-                            left:  29.78,
-                            child: Container(
-                              child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
-                            ),
-                          ),
-                          Positioned(
-                            top: -15,
-                            right:  0,
-                            child: Container(
-                              child: SvgPicture.asset("assets/hi_there_man.svg"),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(30.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: 25,
-                                  height: 25,
-                                  child: InkWell(onTap: ()=> context.router.pop()
-                                      ,child: Icon(Icons.arrow_back)),),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                                  child: wText(getLocalization().forgotPassword,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                height: 250,
+                child: Stack(
+                  children:[
+                    Positioned(
+                        top: 0,
+                        child: Container(
+                          color: Colors.white,
+                          height: MediaQuery.sizeOf(context).height * (1.5/3) ,
+                          width: MediaQuery.sizeOf(context).width,
+                          child:  Stack(
+                              children:[
+                                Positioned(
+                                  top: 0,
+                                  right:  -30,
+                                  child: Container(
+                                    child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  left:  29.78,
+                                  child: Container(
+                                    child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: -15,
+                                  right:  0,
+                                  child: Container(
+                                    child: SvgPicture.asset("assets/hi_there_man.svg"),
+                                  ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only( right: 32, bottom: 8),
-                                  child: wText(getLocalization().letsGetYouUpAndRunningAgain,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                                )
-                              ],
-                            ),
-                          ),]
-                    ),)
+                                  padding: EdgeInsets.all(30.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 25,
+                                        height: 25,
+                                        child: InkWell(onTap: ()=> context.router.pop()
+                                            ,child: Icon(Icons.arrow_back)),),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
+                                        child: wText(getLocalization().forgotPassword,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only( right: 32, bottom: 8),
+                                        child: wText(getLocalization().letsGetYouUpAndRunningAgain,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                                      )
+                                    ],
+                                  ),
+                                ),]
+                          ),)
+                    ),
+                  ],
+                ),
               ),
-
-
-              Positioned(bottom: 0,
-                child: Container(height: MediaQuery.sizeOf(context).height * (1.9/3) ,
-                  width: MediaQuery.sizeOf(context).width,
+                Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
@@ -139,8 +149,6 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage, ForgotP
                             padding: EdgeInsets.only( right: 32, bottom: 8),
                             child: wText(getLocalization().enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
                           ),
-
-                          const Spacer(),
                           PrimaryButton(
                             width: MediaQuery.sizeOf(context).width,
                             style: ButtonStyle(
@@ -163,7 +171,9 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage, ForgotP
                             ),
                             onPressed: !getBloc().checked?null:()async {
                               if(_formKey.currentState!.validate())
-                                resendEmailLink(email: emailAddressController.text);
+                                resendEmailLink(
+                                    email: emailAddressController.text);
+
                             },
                             child: Text(getLocalization().resetPassword),
                           ),
@@ -172,10 +182,9 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage, ForgotP
                       ),
                     ),
                   ),
-                ),
-              ),
-
-            ],
+                )
+              ]
+            ),
           ),
         );
       },
@@ -199,7 +208,7 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage, ForgotP
         await firebaseAuth.sendPasswordResetEmail(email: email);
         Navigator.pop(context);
         getBloc().add(ResetEmailButtonClickedEvent(index: 1));
-        wErrorPopUp(message:getLocalization().passwordResetLinkSuccessfully, type: getLocalization().information, context: context);
+
       } on FirebaseAuthException catch(err){
         getBloc().add(ResetEmailButtonClickedEvent(index: 2));
         wErrorPopUp(message: err.message.toString(), type: getLocalization().error, context: context);
