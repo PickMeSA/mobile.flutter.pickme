@@ -127,76 +127,75 @@ class _LetsBeginPageState extends BasePageState<LetsBeginPage, LetsBeginBloc> {
                     ),
                   ),
                 ),
-                SingleChildScrollView(
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top:30.0, bottom: 20, left: 20, right: 20),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only( top: 10, bottom:  10),
-                              child: AppTextFormField(
-                                onChanged: (value)=> getBloc().add(ValueChangedEvent(letsBeginEntity: getLetsBeginEntity())),
-                                validator: (value)=> validateEmailAddress(value??""),
-                                controller: emailAddressController,
-                                padding: const EdgeInsets.only(left: 20, right: 20),
-                                textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only( top: 10, bottom:  10),
-                              child: AppTextFormField(
-                                onChanged: (value)=> getBloc().add(ValueChangedEvent(letsBeginEntity: getLetsBeginEntity())),
-                                validator: (value)=> validatePassword(value??""),
-                                controller: passwordController,
-                                padding: const EdgeInsets.only(left: 20, right: 20,),
-                                textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().passwordA,),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom:  10),
-                              child: AppTextFormField(
-                                onChanged: (value)=> getBloc().add(ValueChangedEvent(letsBeginEntity: getLetsBeginEntity())),
-                                validator: (value)=> validateConfirmPassword(value??"",passwordController.text??""),
-                                controller: confirmPasswordController,
-                                padding: const EdgeInsets.only(left: 20, right: 20),
-                                textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().confirmPasswordA,),
-                            ),
-                            PrimaryButton(
-                              width: MediaQuery.sizeOf(context).width,
-                              style: ButtonStyle(
-                                  side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                    return BorderSide(
-                                      color: states.contains(MaterialState.disabled)?
-                                      theme.colorScheme.secondary.withOpacity(0):
-                                      theme.colorScheme.secondary,
-                                      width: 2,
-                                    );
-                                  }
-                                  ),
-                                  backgroundColor: MaterialStateProperty.resolveWith(
-                                          (Set<MaterialState> states){
-                                        return states.contains(MaterialState.disabled)?
-                                        theme.colorScheme.secondary.withOpacity(0.3):
-                                        theme.colorScheme.secondary;
-                                      }
-                                  )
-                              ),
-
-                              onPressed: !getBloc().checked!?null:() {
-                                if(_formKey.currentState!.validate()) {
-                                  /*  */ authenticate(getLetsBeginEntity());
+                Container(
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top:30.0, bottom: 20, left: 20, right: 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only( top: 10, bottom:  10),
+                            child: AppTextFormField(
+                              onChanged: (value)=> getBloc().add(ValueChangedEvent(letsBeginEntity: getLetsBeginEntity())),
+                              validator: (value)=> validateEmailAddress(value??""),
+                              controller: emailAddressController,
+                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only( top: 10, bottom:  10),
+                            child: AppTextFormField(
+                              onChanged: (value)=> getBloc().add(ValueChangedEvent(letsBeginEntity: getLetsBeginEntity())),
+                              validator: (value)=> validatePassword(value??""),
+                              controller: passwordController,
+                              padding: const EdgeInsets.only(left: 20, right: 20,),
+                              textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().passwordA,),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom:  10),
+                            child: AppTextFormField(
+                              onChanged: (value)=> getBloc().add(ValueChangedEvent(letsBeginEntity: getLetsBeginEntity())),
+                              validator: (value)=> validateConfirmPassword(value??"",passwordController.text??""),
+                              controller: confirmPasswordController,
+                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().confirmPasswordA,),
+                          ),
+                          30.height,
+                          PrimaryButton(
+                            width: MediaQuery.sizeOf(context).width,
+                            style: ButtonStyle(
+                                side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                  return BorderSide(
+                                    color: states.contains(MaterialState.disabled)?
+                                    theme.colorScheme.secondary.withOpacity(0):
+                                    theme.colorScheme.secondary,
+                                    width: 2,
+                                  );
                                 }
-                              },
-                              child: Text(getLocalization().ccontinue),
+                                ),
+                                backgroundColor: MaterialStateProperty.resolveWith(
+                                        (Set<MaterialState> states){
+                                      return states.contains(MaterialState.disabled)?
+                                      theme.colorScheme.secondary.withOpacity(0.3):
+                                      theme.colorScheme.secondary;
+                                    }
+                                )
                             ),
-                          ],
 
-                        ),
+                            onPressed: !getBloc().checked!?null:() {
+                              if(_formKey.currentState!.validate()) {
+                                /*  */ authenticate(getLetsBeginEntity());
+                              }
+                            },
+                            child: Text(getLocalization().ccontinue),
+                          ),
+                        ],
+
                       ),
                     ),
                   ),

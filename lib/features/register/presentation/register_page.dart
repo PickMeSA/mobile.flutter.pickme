@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,12 +46,28 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
   int? resentToken;
 
   final _formKey = GlobalKey<FormState>();
-
+  EdgeInsets _viewInsets = EdgeInsets.zero;
+  SingletonFlutterWindow? window;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     emailAddressController.text = widget.email;
+    window = WidgetsBinding.instance?.window;
+    window?.onMetricsChanged = () {
+      setState(() {
+        final window = this.window;
+        if (window != null) {
+          _viewInsets = EdgeInsets.fromWindowPadding(
+            window.viewInsets,
+            window.devicePixelRatio,
+          ).add(EdgeInsets.fromWindowPadding(
+            window.padding,
+            window.devicePixelRatio,
+          )) as EdgeInsets;
+        }
+      });
+    };
   }
 
   @override
@@ -61,75 +79,85 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
 
   },
   builder: (context, state) {
-    return SizedBox(
+    return Container(
+      alignment: Alignment.bottomCenter,
       width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height,
-      child: Form(
-          key: _formKey,
-        child: Stack(
-          children:[
-            Positioned(
-                top: 0,
-                child: Container(
-                  color: Colors.white,
-                  height: 250 ,
-                  width: MediaQuery.sizeOf(context).width,
-                  child:  Stack(
-                      children:[
-                        Positioned(
+      height:  double.infinity,
+      child: Padding(
+        padding:  EdgeInsets.only(bottom: _viewInsets.bottom ),
+        child: Form(
+            key: _formKey,
+          child: ListView(
+            children:[ Column(
+              children: [
+                SizedBox(
+                  height: 250,
+                  child: Stack(
+                    children:[
+                      Positioned(
                           top: 0,
-                          right:  -30,
                           child: Container(
-                            child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          left:  29.78,
-                          child: Container(
-                            child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
-                          ),
-                        ),
-                        Positioned(
-                          top: -15,
-                          right:  0,
-                          child: Container(
-                            child: SvgPicture.asset("assets/hi_there_man.svg"),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(30.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 25,
-                                height: 25,
-                                child: InkWell(onTap: ()=> context.router.pop()
-                                    ,child: Icon(Icons.arrow_back)),),
-                              Padding(
-                                padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                                child: wText(getLocalization().hiThere,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only( right: 32, bottom: 8),
-                                child: wText(getLocalization().letsGetYouStartedByCreatingYourAccount,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                              )
-                            ],
-                          ),
-                        ),]
-                  ),)
-            ),
-            Positioned(bottom: 70,
-              child: Container(height: MediaQuery.sizeOf(context).height * (2/3) ,
-                width: MediaQuery.sizeOf(context).width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
+                            color: Colors.white,
+                            height: 280 ,
+                            width: MediaQuery.sizeOf(context).width,
+                            child:  Stack(
+                                children:[
+                                  Positioned(
+                                    top: 0,
+                                    right:  -30,
+                                    child: Container(
+                                      child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 0,
+                                    left:  29.78,
+                                    child: Container(
+                                      child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: -15,
+                                    right:  0,
+                                    child: Container(
+                                      child: SvgPicture.asset("assets/hi_there_man.svg"),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(30.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: 25,
+                                          height: 25,
+                                          child: InkWell(onTap: ()=> context.router.pop()
+                                              ,child: Icon(Icons.arrow_back)),),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
+                                          child: wText(getLocalization().letsOnboardYou,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only( right: 32, bottom: 8),
+                                          child: wText(getLocalization().letsGetYouStartedByCreatingYourAccount,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                                        )
+                                      ],
+                                    ),
+                                  ),]
+                            ),)
+                      ),
+                  ],
+        ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top:30.0, bottom: 20, left: 20, right: 20),
-                  child: SingleChildScrollView(
+                Container(
+
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top:30.0, bottom: 20, left: 20, right: 20),
                     child: Column(
                       children: [
                         Padding(
@@ -150,12 +178,12 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             padding: const EdgeInsets.only(left: 20, right: 20,),
                             textFieldType: TextFieldType.NAME, labelText: getLocalization().surname,),
                         ),
-                       Padding(
+                        Padding(
                           padding: const EdgeInsets.only(top: 10, bottom:  10),
                           child: AppTextFormField(
                             onChanged: (value){ getBloc().add(ValueChangedEvent(userModel: getGetUserModel()));
-                              if(value.length == 9 )
-                                FocusScope.of(context).unfocus();},
+                            if(value.length == 9 )
+                              FocusScope.of(context).unfocus();},
                             validator: (value)=> validatePhoneNumber(value??""),
                             prefixIcon: SizedBox(width: 50,
                               child: Row(
@@ -168,11 +196,11 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                         ),
                         AppTabBar(
                           onTap: (index)=> getBloc().add(IdentificationChangedEvent(index: index)),
-                          viewHeight:192,
+                          viewHeight: getBloc().index == 0?100: 180,
                           initialIndex: 0,
                           tabs:  <Widget>[
                             InkWell(
-                            child: Text(getLocalization().idNumber)),
+                                child: Text(getLocalization().idNumber)),
                             Text(getLocalization().passport),
                           ],
                           views:  <Widget>[
@@ -184,8 +212,10 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                   padding:  const EdgeInsets.only( top: 10, bottom:  10),
                                   child: AppTextFormField(
                                     onChanged: (value){ getBloc().add(ValueChangedEvent(userModel: getGetUserModel()));
-                                      if(value.length == 13)
-                                        FocusScope.of(context).unfocus();},
+                                    if(value.length == 13) {
+                                      FocusScope.of(context).unfocus();
+                                    }
+                                    },
                                     validator: (value)=> validateIdNumber(value??""),
                                     controller: idNumberController,
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom:  5),
@@ -212,7 +242,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                   child: AppTextFormField(
                                     onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
                                     controller: workPermitController,
-                                     validator: (value)=> validateWorkPermitNumber(value??""),
+                                    validator: (value)=> validateWorkPermitNumber(value??""),
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10,  ),
                                     textFieldType: TextFieldType.NUMBER, labelText: getLocalization().workPermitNumber,),
                                 ),
@@ -248,7 +278,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             onPressed: !getBloc().checked!?null:() {
                               if(_formKey.currentState!.validate()) {
                                 authenticate(mobileNumber: "${getLocalization().phonePrefix}${phoneNumberController.text}");
-                              /*  */
+                                /*  */
                               }
                             },
                             child: Text(getLocalization().ccontinue),
@@ -259,11 +289,12 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                     ),
                   ),
                 ),
-              ),
-            ),
-        ],
-      ),
+
+              ],
+            ),]
+          ),
     ),
+      ),
     );
   },
 );
