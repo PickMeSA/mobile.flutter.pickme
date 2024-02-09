@@ -94,8 +94,11 @@ late ProfileModel profileModel;
          return state.dataState == DataState.init ?
              Center(
                child: CircularProgressIndicator(),
-             ):
-           Container(
+             ): state.dataState == DataState.loading && state is JobsHiringLandingPageEnteredState?
+         Center(
+           child: CircularProgressIndicator(),
+         ):
+         Container(
            width: MediaQuery.sizeOf(context).width,
            height: MediaQuery.sizeOf(context).height,
            child: SingleChildScrollView(
@@ -286,7 +289,9 @@ late ProfileModel profileModel;
                            ],
                          ),
                          20.height,
-                         getBloc().jobListingsPageEntity!.activeJobs.isNotEmpty&& userMode.type == 'work'?
+                         getBloc().jobListingsPageEntity?.activeJobs != null &&
+                             getBloc().jobListingsPageEntity!.activeJobs.isNotEmpty&&
+                             userMode.type == 'work'?
                          SizedBox(
                            height: 400,
                            child: ListView.builder(

@@ -383,7 +383,8 @@
   "usernameOrPasswordIsIncorrect": "Username or password is incorrect",
   "emailAddressProfileDoesntExist": "Email address profile doesn't exist",
   "weveSentAnEmailPleaseClickOnTheVerificationLink": "We've sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!",
-  "iDidntReceiveALink": "I didn't receive a link"
+  "iDidntReceiveALink": "I didn't receive a link",
+  "weAreSuperExcitedToHaveYouJoinThePickMeCommunity": "Your profile has been successfully set up\n\nWe're super exited to have you join the PickMe community and can't wait to see the amazing things we'll achieve together"
 
 
 }

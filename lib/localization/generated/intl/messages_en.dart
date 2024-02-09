@@ -592,6 +592,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewProfile": MessageLookupByLibrary.simpleMessage("view Profile"),
         "weAreStillVerifyingYourAccount": MessageLookupByLibrary.simpleMessage(
             "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."),
+        "weAreSuperExcitedToHaveYouJoinThePickMeCommunity":
+            MessageLookupByLibrary.simpleMessage(
+                "Your profile has been successfully set up\n\nWe\'re super exited to have you join the PickMe community and can\'t wait to see the amazing things we\'ll achieve together"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeLetsSetUpYourProfile": m5,
         "welcomeTopickme":

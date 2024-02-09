@@ -45,6 +45,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
   String? verificationId;
   int? resentToken;
 
+
   final _formKey = GlobalKey<FormState>();
   EdgeInsets _viewInsets = EdgeInsets.zero;
   SingletonFlutterWindow? window;
@@ -150,7 +151,6 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
         ),
                 ),
                 Container(
-
                   width: MediaQuery.sizeOf(context).width,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -182,8 +182,9 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                           padding: const EdgeInsets.only(top: 10, bottom:  10),
                           child: AppTextFormField(
                             onChanged: (value){ getBloc().add(ValueChangedEvent(userModel: getGetUserModel()));
-                            if(value.length == 9 )
-                              FocusScope.of(context).unfocus();},
+                            if(value.length == 9 ) {
+                              FocusScope.of(context).unfocus();
+                            }},
                             validator: (value)=> validatePhoneNumber(value??""),
                             prefixIcon: SizedBox(width: 50,
                               child: Row(
@@ -240,6 +241,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                 Padding(
                                   padding: const EdgeInsets.only( top: 10, bottom:  5),
                                   child: AppTextFormField(
+
                                     onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
                                     controller: workPermitController,
                                     validator: (value)=> validateWorkPermitNumber(value??""),

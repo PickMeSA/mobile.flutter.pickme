@@ -3881,6 +3881,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Your profile has been successfully set up\n\nWe're super exited to have you join the PickMe community and can't wait to see the amazing things we'll achieve together`
+  String get weAreSuperExcitedToHaveYouJoinThePickMeCommunity {
+    return Intl.message(
+      'Your profile has been successfully set up\n\nWe\'re super exited to have you join the PickMe community and can\'t wait to see the amazing things we\'ll achieve together',
+      name: 'weAreSuperExcitedToHaveYouJoinThePickMeCommunity',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

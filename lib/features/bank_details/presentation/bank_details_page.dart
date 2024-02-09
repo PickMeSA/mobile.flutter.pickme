@@ -87,7 +87,6 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     wText(getLocalization().step5,style:theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 32,
@@ -151,11 +150,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                         dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
                         width: MediaQuery.of(context).size.width-40,),
                     ),
-
-
-
                       100.height,
-
                     Row(
                       children: [
                         Container(

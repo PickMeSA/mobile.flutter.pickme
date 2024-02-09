@@ -65,7 +65,8 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
 
          const Center(
            child: CircularProgressIndicator()
-         ):state is GetProfileDetailsState && state.dataState == DataState.success? PersistentTabView(
+         ):state is GetProfileDetailsState && state.dataState == DataState.success?
+         PersistentTabView(
            context,
            controller: _controller,
            screens: _buildScreens(type: userModel.type??"hire", profileEntity: state.profileEntity!),

@@ -59,7 +59,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                       color: Colors.black
                   )),
                   20.height,
-                  wText(getLocalization().yourProfileHasBeenSuccessfullySubmittedToThePickMeAdministrators),
+                  wText(getLocalization().weAreSuperExcitedToHaveYouJoinThePickMeCommunity),
                   20.height,
                   SizedBox(
                     height: 400,

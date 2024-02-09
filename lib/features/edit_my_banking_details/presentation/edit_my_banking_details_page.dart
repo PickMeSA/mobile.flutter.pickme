@@ -143,7 +143,8 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
                       child: AppDropdownMenu<AccountTypeEntity>(
                         controller: accountTypeController,
                         label: wText(getLocalization().accountTypeA),
-                        enableFilter: true,
+                        enableFilter: false,
+                        filled: true,
                         dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
                         width: MediaQuery.of(context).size.width-40,),
                     ),
