@@ -5,6 +5,7 @@ import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/profile_data_model_response.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/user_service/user_service.dart';
 
@@ -58,6 +59,9 @@ class UserServiceImpl extends UserService{
           profileType: profileDataModelResponse.profileType??"",
           subscriptionType: profileDataModelResponse.subscriptionType??""
       );
+
+
+
       boxUser.put(current, UserModel(id: profileDataModelResponse.id));
       return newUserModel;
     }on  DioException catch (ex){
@@ -70,6 +74,8 @@ class UserServiceImpl extends UserService{
   @override
   Future<UserEntity> updateRemoteProfileDate({required UserEntity userModel})async{
     try {
+
+
 
       UserModel userBox = boxUser.get(current);
       print(ProfileDataModelResponse(

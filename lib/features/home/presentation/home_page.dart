@@ -139,7 +139,7 @@ late ProfileModel profileModel;
                              ),
                              SizedBox(height: 20,),
                              wText(
-                                 getLocalization().hi(profileModel.firstName!, profileModel.surname!)
+                                 getLocalization().hi(widget.profileEntity.firstName!, widget.profileEntity.surname!)
                                  ,style: theme.textTheme.headlineSmall?.copyWith(
                                  color: Colors.white,
                                  fontWeight: FontWeight.w500)),

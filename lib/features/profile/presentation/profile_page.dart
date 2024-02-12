@@ -2,6 +2,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -73,6 +74,35 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
 
           if(state is DeleteProfileState && state.dataState == DataState.success){
             context.router.pushAndPopUntil( const LandingRoute(), predicate: (Route<dynamic> route) => false);
+          }
+
+          ////
+
+          if(state is ProfilePictureAddedState && state.dataState == DataState.loading ){
+            preloader(context);
+          }
+
+          if(state is ProfilePictureAddedState && state.dataState == DataState.error){
+            context.router.pop();
+            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          }
+
+          if(state is ProfilePictureAddedState && state.dataState == DataState.success){
+            getBloc().add(SubmitClickedEvent(description: getBloc().profileEntity!.description!));
+          }
+          //////
+
+          if(state is SubmitClickedState && state.dataState == DataState.loading ){
+          }
+
+          if(state is SubmitClickedState && state.dataState == DataState.error){
+            context.router.pop();
+            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          }
+
+          if(state is SubmitClickedState && state.dataState == DataState.success){
+            context.router.pop();
+            getBloc().add(GetProfileDetailsEvent());
 
           }
         },
@@ -102,10 +132,15 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      (getBloc().profileEntity?.pictureEntity?.url==""|| getBloc().profileEntity?.pictureEntity?.url == null)?
-                      AppImageAvatar.small():
-                      AppImageAvatar.small(
-                        image: CachedNetworkImageProvider(getBloc().profileEntity!.pictureEntity!.url!),
+
+                      InkWell(
+                        onTap: (){
+                          _pickFile();
+                        },
+                        child:(getBloc().profileEntity?.pictureEntity?.url==""|| getBloc().profileEntity?.pictureEntity?.url == null)?
+                        AppImageAvatar.small(): AppImageAvatar.small(
+                          image: CachedNetworkImageProvider(getBloc().profileEntity!.pictureEntity!.url!),
+                        ),
                       ),
                       10.width,
                       Expanded(
@@ -426,6 +461,18 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+        getBloc().add(ProfilePictureAddedEvent(filePath: result.files.single.path!));
+    } else {
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
+    }
+
   }
 
 

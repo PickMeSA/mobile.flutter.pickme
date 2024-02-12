@@ -147,6 +147,9 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                         label: wText(getLocalization().accountTypeA),
                         enableFilter: false,
                         filled: true,
+                        onSelected: (values){
+                          getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData()));
+                        },
                         dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
                         width: MediaQuery.of(context).size.width-40,),
                     ),

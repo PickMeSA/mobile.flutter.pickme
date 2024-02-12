@@ -45,153 +45,161 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
      return SingleChildScrollView(
        child: SizedBox(
          width: MediaQuery.sizeOf(context).width,
-         height: MediaQuery.sizeOf(context).height,
-         child: ListView(
-           children: [
-             SizedBox(height: 250,
-               child: Stack(
-                 children:[
-                   Positioned(
-                       top: 0,
-                       child: Container(
-                         color: Colors.white,
-                         height: MediaQuery.sizeOf(context).height * (1.5/3) ,
-                         width: MediaQuery.sizeOf(context).width,
-                         child:  Stack(
-                           children:[
-                           Positioned(
-                           top: 12,
-                           right:  -30,
-                           child: Container(
-                             child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
+         child: Form(
+           key: _formKey,
+           child: Column(
+             children: [
+               SizedBox(height: 250,
+                 child: Stack(
+                   children:[
+                     Positioned(
+                         top: 0,
+                         child: Container(
+                           color: Colors.white,
+                           height: 258,
+                           width: MediaQuery.sizeOf(context).width,
+                           child:  Stack(
+                             children:[
+                             Positioned(
+                             top: 12,
+                             right:  -30,
+                             child: Container(
+                               child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
+                             ),
                            ),
-                         ),
-                             Positioned(
-                               top: 0,
-                               left:  29.78,
-                               child: Container(
-                                 child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
-                               ),
-                             ),
-                             Positioned(
-                               top: 12,
-                               right:  0,
-                               child: Container(
-                                 child: SvgPicture.asset("assets/welcome_back_lady.svg"),
-                               ),
-                             ),
-                             Padding(
-                             padding: EdgeInsets.all(30.0),
-                             child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
-                                 SizedBox(
-                                   width: 25,
-                                   height: 25,
-                                   child: InkWell(onTap: ()=> context.router.pop()
-                                       ,child: Icon(Icons.arrow_back)),),
-                                 Padding(
-                                   padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                                   child: wText(getLocalization().welcomeBack,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                               Positioned(
+                                 top: 0,
+                                 left:  29.78,
+                                 child: Container(
+                                   child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
                                  ),
-                                 Padding(
-                                   padding: EdgeInsets.only( right: 32, bottom: 8),
-                                   child: wText(getLocalization().logIntoYourAccountWithYourEmailAndPassword,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                                 )
-                               ],
-                             ),
-                           ),]
-                         ),)
-                   ),
-                 ],
-               ),
-             ),
-             Form(
-               key: _formKey,
-               child: Padding(
-                 padding: const EdgeInsets.all(20.0),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     Padding(
-                       padding: const EdgeInsets.only(top: 20, bottom:  10),
-                       child: AppTextFormField(
-
-                         onChanged: (value)=> getBloc().add(NumberChangedEvent(email: value, password: passwordController.text)),
-                         controller: emailAddressController,
-                         validator:(value){
-                           if(value.isEmptyOrNull)
-                             return getLocalization().pleaseEnterAUsername;
-                         },
-                         padding: const EdgeInsets.only(left: 20, right: 20),
-                         textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
+                               ),
+                               Positioned(
+                                 top: 12,
+                                 right:  0,
+                                 child: Container(
+                                   child: SvgPicture.asset("assets/welcome_back_lady.svg"),
+                                 ),
+                               ),
+                               Padding(
+                               padding: EdgeInsets.all(30.0),
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   SizedBox(
+                                     width: 25,
+                                     height: 25,
+                                     child: InkWell(onTap: ()=> context.router.pop()
+                                         ,child: Icon(Icons.arrow_back)),),
+                                   Padding(
+                                     padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
+                                     child: wText(getLocalization().welcomeBack,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                                   ),
+                                   Padding(
+                                     padding: EdgeInsets.only( right: 32, bottom: 8),
+                                     child: wText(getLocalization().logIntoYourAccountWithYourEmailAndPassword,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                                   )
+                                 ],
+                               ),
+                             ),]
+                           ),)
                      ),
-                     Padding(
-                       padding: const EdgeInsets.only( bottom:  10),
-                       child: AppTextFormField(
-
-                         onChanged: (value)=> getBloc().add(NumberChangedEvent(email: emailAddressController.text , password:value )),
-                         controller: passwordController,
-                         validator: (value){
-                           if(value.isEmptyOrNull)
-                             return getLocalization().pleaseEnterAPassword;
-                         },
-
-                         padding: const EdgeInsets.only(left: 20, right: 20),
-                         textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().passwordA,),
-
-                     ),
-                     Padding(padding: const EdgeInsets.only(top: 10, bottom: 14),
-                       child: InkWell(
-                         onTap: (){
-                           context.router.push( ForgotPasswordRoute());
-                         } ,
-                         child: wText(getLocalization().forgotPassword, style:
-                         const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                       ),),
-
-                     PrimaryButton(
-                       width: MediaQuery.sizeOf(context).width,
-                       style: ButtonStyle(
-                           side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                             return BorderSide(
-                               color: states.contains(MaterialState.disabled)?
-                               theme.colorScheme.secondary.withOpacity(0):
-                               theme.colorScheme.secondary,
-                               width: 2,
-                             );
-                           }
-                           ),
-                           backgroundColor: MaterialStateProperty.resolveWith(
-                                   (Set<MaterialState> states){
-                                 return states.contains(MaterialState.disabled)?
-                                 theme.colorScheme.secondary.withOpacity(0.3):
-                                 theme.colorScheme.secondary;
-                               }
-                           )
-                       ),
-                       onPressed: !getBloc().checked?null:()async {
-                         if(_formKey.currentState!.validate()){
-                           authenticate(username: emailAddressController.text, password: passwordController.text);
-                         }
-                       },
-                       child: Text(getLocalization().ccontinue),
-                     ),
-                     Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
-                       child: Center(
-                           child: InkWell(
-                             onTap: (){
-                               context.router.push( const LetsBeginRoute());
-                             } ,
-                             child: wText(getLocalization().noAccountCreateOne, style:
-                             const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                           )
-                       ),)
                    ],
                  ),
                ),
-             ),
-           ],
+               Container(
+                 width: MediaQuery.sizeOf(context).width,
+                 decoration: const BoxDecoration(
+                   color: Colors.white,
+                   borderRadius: BorderRadius.only(
+                       topRight: Radius.circular(32),
+                       topLeft: Radius.circular(32) ),
+                 ),
+                 child: Padding(
+                   padding: const EdgeInsets.only(left: 20.0, right: 20),
+                   child: SingleChildScrollView(
+                     child: Column(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.only(top: 20, bottom:  10),
+                           child: AppTextFormField(
+                             onChanged: (value)=> getBloc().add(NumberChangedEvent(email: value, password: passwordController.text)),
+                             controller: emailAddressController,
+                             validator:(value){
+                               if(value.isEmptyOrNull)
+                                 return getLocalization().pleaseEnterAUsername;
+                             },
+                             padding: const EdgeInsets.only(left: 20, right: 20),
+                             textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
+                         ),
+                         Padding(
+                           padding: const EdgeInsets.only( bottom:  10),
+                           child: AppTextFormField(
+                             onChanged: (value)=> getBloc().add(NumberChangedEvent(email: emailAddressController.text , password:value )),
+                             controller: passwordController,
+                             validator: (value){
+                               if(value.isEmptyOrNull)
+                                 return getLocalization().pleaseEnterAPassword;
+                             },
+
+                             padding: const EdgeInsets.only(left: 20, right: 20),
+                             textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().passwordA,),
+
+                         ),
+                         150.height,
+                         Padding(padding: const EdgeInsets.only(top: 10, bottom: 14),
+                           child: InkWell(
+                             onTap: (){
+                               context.router.push( ForgotPasswordRoute());
+                             } ,
+                             child: wText(getLocalization().forgotPassword, style:
+                             const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                           ),),
+
+                         PrimaryButton(
+                           width: MediaQuery.sizeOf(context).width,
+                           style: ButtonStyle(
+                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                 return BorderSide(
+                                   color: states.contains(MaterialState.disabled)?
+                                   theme.colorScheme.secondary.withOpacity(0):
+                                   theme.colorScheme.secondary,
+                                   width: 2,
+                                 );
+                               }
+                               ),
+                               backgroundColor: MaterialStateProperty.resolveWith(
+                                       (Set<MaterialState> states){
+                                     return states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.secondary.withOpacity(0.3):
+                                     theme.colorScheme.secondary;
+                                   }
+                               )
+                           ),
+                           onPressed: !getBloc().checked?null:()async {
+                             if(_formKey.currentState!.validate()){
+                               authenticate(username: emailAddressController.text, password: passwordController.text);
+                             }
+                           },
+                           child: Text(getLocalization().ccontinue),
+                         ),
+                         Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
+                           child: Center(
+                               child: InkWell(
+                                 onTap: (){
+                                   context.router.push( const LetsBeginRoute());
+                                 } ,
+                                 child: wText(getLocalization().noAccountCreateOne, style:
+                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                               )
+                           ),)
+                       ],
+                     ),
+                   ),
+                 ),
+               ),
+             ],
+           ),
          ),
        ),
      );

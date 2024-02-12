@@ -97,7 +97,7 @@ class HomeBloc
         try{
             PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
                 params: GetPaginatedCandidatesByIndustryUseCaseParams(
-                    pageNumber: 1, pageSize: 5,
+                    pageNumber: 1, pageSize: 5, maxDistance: 50
                 ));
             paginatedCandidates = paginatedCandidateProfileEntity;
             jobListingsPageEntity = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(

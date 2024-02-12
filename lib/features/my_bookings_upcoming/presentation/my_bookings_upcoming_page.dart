@@ -140,7 +140,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
 
                      showOnlyCurrentMonthDate: false,
 //      firstDayOfWeek: 4,
-                     height: 270.0,
+                      height: 270.0,
                      selectedDateTime: getBloc().currentDate2,
                      targetDateTime: getBloc().targetDateTime,
                      customGridViewPhysics: const NeverScrollableScrollPhysics(),
@@ -287,7 +287,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                            || getBloc().completeHireBookingsList[index].status == JobStatus.alternativeProposed
                                            ?getBloc().completeHireBookingsList[index].proposedAltStartTime:
                                        getBloc().completeHireBookingsList[index].startTime,
-                                       dateTime: DateTime.parse(getBloc().cancelledHireBookingsList[index].startDate),
+                                       dateTime: DateTime.parse(getBloc().completeHireBookingsList[index].startDate),
                                        onNext: () {  },
                                      ),
                                    ),

@@ -32,9 +32,6 @@ class _LetsBeginPageState extends BasePageState<LetsBeginPage, LetsBeginBloc> {
   late TextEditingController passwordController = TextEditingController();
 
   late TextEditingController emailAddressController = TextEditingController();
-
-
-
   String? verificationId;
   int? resentToken;
 
@@ -129,9 +126,12 @@ class _LetsBeginPageState extends BasePageState<LetsBeginPage, LetsBeginBloc> {
 
                   Container(
                     width: MediaQuery.sizeOf(context).width,
+
                     decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(32),
+                          topLeft: Radius.circular(32) ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(top:30.0, bottom: 20, left: 20, right: 20),
