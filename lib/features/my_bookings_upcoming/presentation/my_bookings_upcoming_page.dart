@@ -164,6 +164,11 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                    AppTabBar(
                      isScrollable: true,
                      onTap: (index){
+                       if(index != 0){
+                         laterFlagged = true;
+                         todayFlagged = true;
+                         olderFlagged = true;
+                       }
                      },
                      //viewHeight:192,
                      initialIndex: 0,
@@ -186,7 +191,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-
+                                    if(getOlder() && dateToCheck.isBefore(today))
+                                      wText(getLocalization().today),
                                     if(getToday() && dateToCheck == today)
                                       wText(getLocalization().today),
                                     if(dateToCheck.isAfter(today) && getLaterThisMonth())
@@ -369,6 +375,15 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
         return false;
       }
   }
+
+    bool getOlder(){
+      if(olderFlagged){
+        olderFlagged = false;
+        return true;
+      }else{
+        return false;
+      }
+    }
 
 
     bool getToday(){

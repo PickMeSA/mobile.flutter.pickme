@@ -13,7 +13,7 @@ import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
-
+import 'package:iconsax/iconsax.dart';
 import 'bloc/edit_skills_bloc.dart';
 
 @RoutePage()
@@ -82,19 +82,24 @@ class _EditSkillsPageState extends BasePageState<EditSkillsPage, EditSkillsBloc>
                  20.height,
                  Padding(
                    padding: const EdgeInsets.only(top: 10, bottom: 30),
-                   child: MultiAppDropdownMenu<SkillEntity>(
-                       onSelected: (selected){
+                   child: AppMultiSelectDropdownMenu<SkillEntity>(
+                       leadingIcon: const Icon(Iconsax.add),
+                       onSearch: (selected){
+                         // getBloc().add(SkillSelectedEvent(skill: selected!));
+                       },
+                       onChanged: (selected){
                          getBloc().add(SkillSelectedEvent(skill: selected!));
                        },
-                       width: MediaQuery.sizeOf(context).width - 40,
-                       enableFilter: false,
-                       filled: true,
+                       width: MediaQuery.sizeOf(context).width - 70,
+                       enableFilter: true,
                        dropdownMenuEntries: getBloc().skillEntries,
                        label: wText(getLocalization().skillsA,
                            style: theme.textTheme.bodyMedium?.copyWith(
                                fontWeight: FontWeight.w400,
                                fontSize: 16,
-                               color: Colors.grey))),
+                               color: Colors.grey)
+                       )
+                   ),
                  ),
 
                  SizedBox(

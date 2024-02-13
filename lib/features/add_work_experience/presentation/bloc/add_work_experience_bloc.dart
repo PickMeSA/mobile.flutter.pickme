@@ -25,7 +25,7 @@ class AddWorkExperienceBloc
     List<DropdownMenuEntry<PreferredIndustryEntity>> industryEntries
     = <DropdownMenuEntry<PreferredIndustryEntity>>[];
     late PreferredIndustryListEntity preferredIndustryListEntity;
-    late PreferredIndustryEntity selectedIndustry;
+     PreferredIndustryEntity? selectedIndustry;
     final AddSkillsGetIndustryListUseCase addSkillsGetIndustryListUseCase;
      final UploadFileUseCase uploadFileUseCase;
     AddWorkExperienceBloc({required this.addSkillsGetIndustryListUseCase, required this.uploadFileUseCase}):

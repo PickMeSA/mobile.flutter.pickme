@@ -1,6 +1,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
@@ -97,9 +98,10 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
 
       },
       builder: (context, state) {
-        ThemeData theme = Theme.of(context);
          return state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.loading ?
          const Center(child: CircularProgressIndicator(),):
+             state.dataState == DataState.init?
+             const Center(child: CircularProgressIndicator(),):
          Padding(
            padding: const EdgeInsets.all(20.0),
            child: SizedBox(
@@ -183,16 +185,18 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                      ),
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10),
-                       child: AppDropdownMenu<PreferredIndustryEntity>(
-                           onSelected: (selected){
-                             getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
-                           },
-                           width: MediaQuery.sizeOf(context).width - 40,
-                           enableFilter: true,
-                           dropdownMenuEntries: getBloc().industryEntries,
-                           controller: dropdownIndustryController,
-                           label: wText(getLocalization().preferredIndustry,
-                               style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
+                       child: DropdownSearch<PreferredIndustryEntity>(
+
+                         onChanged: (selected){
+                           getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
+                         },
+
+                         items: getBloc().preferredIndustryListEntity!.preferredIndustryListEntity!
+                             .map((PreferredIndustryEntity industry) {
+                           return industry;
+                         }).toList(),
+                         selectedItem: getBloc().selectedIndustry,
+                       ),
                      ),
 
                      Padding(padding: const EdgeInsets.only(bottom: 15, top: 15),
@@ -314,7 +318,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
         startDate: startDate,
         endDate: endDate,
         company: companyController.text,
-        industryId: int.parse(getBloc().selectedIndustry.id!),
+        industryId: int.parse(getBloc().selectedIndustry!.id!),
         isCurrent: getBloc().current,
         files: widget.files);
   }

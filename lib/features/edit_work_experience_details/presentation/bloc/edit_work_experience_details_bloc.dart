@@ -20,7 +20,7 @@ class EditWorkExperienceDetailsBloc
     List<DropdownMenuEntry<PreferredIndustryEntity>> industryEntries
     = <DropdownMenuEntry<PreferredIndustryEntity>>[];
     late PreferredIndustryListEntity preferredIndustryListEntity = PreferredIndustryListEntity(preferredIndustryListEntity: []);
-    late PreferredIndustryEntity selectedIndustry;
+     PreferredIndustryEntity? selectedIndustry;
     final AddSkillsGetIndustryListUseCase addSkillsGetIndustryListUseCase;
 
     EditWorkExperienceDetailsBloc({required this.addSkillsGetIndustryListUseCase}): super(EditWorkExperienceDetailsPageInitState()) {

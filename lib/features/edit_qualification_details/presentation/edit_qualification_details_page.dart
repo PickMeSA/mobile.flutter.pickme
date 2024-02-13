@@ -71,9 +71,11 @@ class _EditQualificationDetailsPageState extends BasePageState<EditQualification
                        padding: const EdgeInsets.only(top: 20, bottom: 50),
                        child: Row(
                          children: [
-                           wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
-                               fontSize: 20, fontWeight: FontWeight.w400
-                           )),
+                           SizedBox(width: MediaQuery.sizeOf(context).width * 0.8,
+                             child: wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
+                                 fontSize: 20, fontWeight: FontWeight.w400
+                             )),
+                           ),
                            const Spacer(),
                            InkWell(
                                onTap: ()=>context.router.pop(),

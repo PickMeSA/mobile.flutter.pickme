@@ -1,6 +1,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -11,10 +12,10 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/constants/w_colors.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/widgets/w_page_loader.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
-import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
 import 'bloc/add_skills_bloc.dart';
@@ -137,17 +138,18 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 60),
-                    child: AppDropdownMenu<PreferredIndustryEntity>(
-                      onSelected: (selected){
+                    child: DropdownSearch<PreferredIndustryEntity>(
+                      onChanged: (selected){
                         getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
                       },
-                        width: MediaQuery.sizeOf(context).width - 40,
-                        enableFilter: true,
-                        dropdownMenuEntries: getBloc().industryEntries,
-                        controller: dropdownIndustryController,
-                    label: wText(getLocalization().preferredIndustry,
-                        style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
-                  ),
+
+                        items: getBloc().preferredIndustryListEntity!.preferredIndustryListEntity!
+                            .map((PreferredIndustryEntity industry) {
+                              logger.d(industry.industry);
+                              return industry;
+                            }).toList(),
+                        selectedItem: getBloc().selectedIndustry,
+                  ),),
 
                    wText(getLocalization().skillsMax5,style: theme.textTheme.bodyMedium?.copyWith(
                        fontSize: 16,
@@ -155,19 +157,24 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
 
                    Padding(
                      padding: const EdgeInsets.only(top: 10, bottom: 30),
-                     child: MultiAppDropdownMenu<SkillEntity>(
-                        onSelected: (selected){
-                          getBloc().add(SkillSelectedEvent(skill: selected!));
-                        },
-                         width: MediaQuery.sizeOf(context).width - 40,
-                         enableFilter: false,
-                         filled: true,
+                     child:AppMultiSelectDropdownMenu<SkillEntity>(
+                         leadingIcon: const Icon(Iconsax.add),
+                         onSearch: (selected){
+                           // getBloc().add(SkillSelectedEvent(skill: selected!));
+                         },
+                         onChanged: (selected){
+                           getBloc().add(SkillSelectedEvent(skill: selected!));
+                         },
+                         width: MediaQuery.sizeOf(context).width - 70,
+                         enableFilter: true,
                          dropdownMenuEntries: getBloc().skillEntries,
                          label: wText(getLocalization().skillsA,
                              style: theme.textTheme.bodyMedium?.copyWith(
                                  fontWeight: FontWeight.w400,
                                  fontSize: 16,
-                                 color: Colors.grey))),
+                                 color: Colors.grey)
+                         )
+                     ),
                    ),
 
                    SizedBox(

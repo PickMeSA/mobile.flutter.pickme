@@ -3891,6 +3891,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Older`
+  String get older {
+    return Intl.message(
+      'Older',
+      name: 'older',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
