@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:auto_route/annotations.dart';
@@ -223,6 +224,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                   }
                                   },
                                       child: AppJobCard(
+
                               time: getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
                                   || getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
                                   ?getBloc().upcomingHireBookingsList[index].proposedAltStartTime:
@@ -238,6 +240,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                               ?DateTime.parse(getBloc().upcomingHireBookingsList[index].proposedAltStartDate)
                                             :DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!),
                                         status: getBloc().upcomingHireBookingsList[index].status,
+
                                         onNext: () { UserModel userModel = boxUser.get(current);
                                         if(
                                         getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
@@ -258,6 +261,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                               bookingId: getBloc().upcomingHireBookingsList[index]));
                                         }
                                         },
+                                        image: getBloc().upcomingHireBookingsList[index].customer?.profileImage != null?
+                                        CachedNetworkImageProvider(getBloc().upcomingHireBookingsList[index].customer!.profileImage!):null,
                                       ),
                                     ),
                                     10.height
@@ -283,6 +288,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                          fromIndex: 3,
                                          jobId: getBloc().completeHireBookingsList[index].jobId)),
                                      child: AppJobCard(
+
                                        jobName: getBloc().completeHireBookingsList[index].job.title!,
                                        employerName: getBloc().profileEntity?.type == "Worker"?
                                        getBloc().completeHireBookingsList[index].job.title??"":
@@ -295,6 +301,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                        getBloc().completeHireBookingsList[index].startTime,
                                        dateTime: DateTime.parse(getBloc().completeHireBookingsList[index].startDate),
                                        onNext: () {  },
+                                       image: getBloc().completeHireBookingsList[index].customer?.profileImage != null?
+                             CachedNetworkImageProvider(getBloc().completeHireBookingsList[index].customer!.profileImage!):null,
                                      ),
                                    ),
                                    10.height
@@ -337,6 +345,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                                jobId: getBloc().cancelledHireBookingsList[index].jobId,
                                                bookingId: getBloc().cancelledHireBookingsList[index]
                                            )),
+                                       image: getBloc().cancelledHireBookingsList[index].customer?.profileImage != null?
+                                       CachedNetworkImageProvider(getBloc().cancelledHireBookingsList[index].customer!.profileImage!):null,
                                      ),
                                    ),
                                    10.height
