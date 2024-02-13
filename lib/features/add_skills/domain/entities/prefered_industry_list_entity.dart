@@ -4,7 +4,7 @@ import 'preferred_industry_entity.dart';
 
 class PreferredIndustryListEntity {
 
-   late List<PreferredIndustryEntity>? preferredIndustryListEntity;
+    List<PreferredIndustryEntity>? preferredIndustryListEntity;
 
   PreferredIndustryListEntity({required this.preferredIndustryListEntity});
 

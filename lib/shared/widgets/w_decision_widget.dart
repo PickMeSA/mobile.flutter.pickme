@@ -1,5 +1,7 @@
 
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
@@ -19,7 +21,7 @@ required String title,
       height: 150,
 
       child: Padding(
-        padding:  EdgeInsets.only(top: MediaQuery.sizeOf(context).height/3, bottom: 320),
+        padding:  EdgeInsets.only(top: MediaQuery.sizeOf(context).height/3, bottom: Platform.isIOS?MediaQuery.sizeOf(context).height/3.1:MediaQuery.sizeOf(context).height/2.6 ),
         child: Container(
           decoration: const BoxDecoration(
             color: Colors.white,

@@ -6,12 +6,16 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/lets_begin/presentation/modal/validation.dart';
+import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/features/login/presentation/bloc/login_bloc.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -27,192 +31,247 @@ class LoginPage extends BasePage {
 
 class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
 
-  TextEditingController mobileNumberTextEditingController = TextEditingController();
+  TextEditingController emailAddressController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget buildView(BuildContext context) {
-    var theme = Theme.of(context);
+    ThemeData theme = Theme.of(context);
    return BlocConsumer<LoginBloc,LoginState>
      (builder: (context , state){
-     return SizedBox(
-       width: MediaQuery.sizeOf(context).width,
-       height: MediaQuery.sizeOf(context).height,
-       child: Stack(
-         children:[
-
-           Positioned(
-               top: 0,
-               child: Container(
-                 color: Colors.white,
-                 height: MediaQuery.sizeOf(context).height * (1.5/3) ,
-                 width: MediaQuery.sizeOf(context).width,
-                 child:  Stack(
+     return SingleChildScrollView(
+       child: SizedBox(
+         width: MediaQuery.sizeOf(context).width,
+         child: Form(
+           key: _formKey,
+           child: Column(
+             children: [
+               SizedBox(height: 250,
+                 child: Stack(
                    children:[
-                   Positioned(
-                   top: 12,
-                   right:  -30,
-                   child: Container(
-                     child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
-                   ),
-                 ),
                      Positioned(
-                       top: 0,
-                       left:  29.78,
-                       child: Container(
-                         child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
-                       ),
-                     ),
-                     Positioned(
-                       top: 12,
-                       right:  0,
-                       child: Container(
-                         child: SvgPicture.asset("assets/welcome_back_lady.svg"),
-                       ),
-                     ),
-                     Padding(
-                     padding: EdgeInsets.all(30.0),
-                     child: Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                         SizedBox(
-                           width: 25,
-                           height: 25,
-                           child: InkWell(onTap: ()=> context.router.pop()
-                               ,child: Icon(Icons.arrow_back)),),
-                         Padding(
-                           padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                           child: wText(getLocalization().welcomeBack,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                         ),
-                         Padding(
-                           padding: EdgeInsets.only( right: 32, bottom: 8),
-                           child: wText(getLocalization().logIntoYourAccountWithYourPhoneNumberAndOtp,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                         )
-                       ],
-                     ),
-                   ),]
-                 ),)
-           ),
-
-
-           Positioned(bottom: 0,
-             child: Container(height: MediaQuery.sizeOf(context).height * (1.9/3) ,
-               width: MediaQuery.sizeOf(context).width,
-               decoration: const BoxDecoration(
-                 color: Colors.white,
-                 borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
-               ),
-               child: Padding(
-                 padding: const EdgeInsets.all(30.0),
-                 child: Column(
-                   children: [
-                     Padding(
-                       padding: const EdgeInsets.only(top: 20, bottom:  10),
-                       child: AppTextFormField(
-                         hint: getLocalization().exampleNumber,
-                          onChanged: (value)=> getBloc().add(NumberChangedEvent(mobileNumber: value)),
-                         controller: mobileNumberTextEditingController,
-                         // validator: (value)=> validatePhoneNumber(value??""),
-                         prefixIcon: SizedBox(width: 50,
-                           child: Row(
-                             children: [Text(getLocalization().countryCode,)],
+                         top: 0,
+                         child: Container(
+                           color: Colors.white,
+                           height: 258,
+                           width: MediaQuery.sizeOf(context).width,
+                           child:  Stack(
+                             children:[
+                             Positioned(
+                             top: 12,
+                             right:  -30,
+                             child: Container(
+                               child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
+                             ),
                            ),
-                         ),
-                         padding: const EdgeInsets.only(left: 20, right: 20),
-                         textFieldType: TextFieldType.NUMBER, labelText: getLocalization().phoneNumber,),
+                               Positioned(
+                                 top: 0,
+                                 left:  29.78,
+                                 child: Container(
+                                   child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
+                                 ),
+                               ),
+                               Positioned(
+                                 top: 12,
+                                 right:  0,
+                                 child: Container(
+                                   child: SvgPicture.asset("assets/welcome_back_lady.svg"),
+                                 ),
+                               ),
+                               Padding(
+                               padding: EdgeInsets.all(30.0),
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   SizedBox(
+                                     width: 25,
+                                     height: 25,
+                                     child: InkWell(onTap: ()=> context.router.pop()
+                                         ,child: Icon(Icons.arrow_back)),),
+                                   Padding(
+                                     padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
+                                     child: wText(getLocalization().welcomeBack,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                                   ),
+                                   Padding(
+                                     padding: EdgeInsets.only( right: 32, bottom: 8),
+                                     child: wText(getLocalization().logIntoYourAccountWithYourEmailAndPassword,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                                   )
+                                 ],
+                               ),
+                             ),]
+                           ),)
                      ),
-                     const Spacer(),
-                     PrimaryButton(
-                       width: MediaQuery.sizeOf(context).width,
-                       style: ButtonStyle(
-                           side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                             return BorderSide(
-                               color: states.contains(MaterialState.disabled)?
-                               theme.colorScheme.secondary.withOpacity(0):
-                               theme.colorScheme.secondary,
-                               width: 2,
-                             );
-                           }
-                           ),
-                           backgroundColor: MaterialStateProperty.resolveWith(
-                                   (Set<MaterialState> states){
-                                 return states.contains(MaterialState.disabled)?
-                                 theme.colorScheme.secondary.withOpacity(0.3):
-                                 theme.colorScheme.secondary;
-                               }
-                           )
-                       ),
-                       onPressed: !state.checked?null:()async {
-                         await authenticate(mobileNumber:"${getLocalization().phonePrefix}${mobileNumberTextEditingController.text}" );
-                       },
-                       child: Text(getLocalization().ccontinue),
-                     ),
-                     Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
-                       child: Center(
-                           child: InkWell(
-                             onTap: (){
-                              context.router.push( RegisterRoute());
-                             } ,
-                             child: wText(getLocalization().noAccountCreateOne, style:
-                             const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                           )
-                       ),)
                    ],
                  ),
                ),
-             ),
-           ),
+               Container(
+                 width: MediaQuery.sizeOf(context).width,
+                 decoration: const BoxDecoration(
+                   color: Colors.white,
+                   borderRadius: BorderRadius.only(
+                       topRight: Radius.circular(32),
+                       topLeft: Radius.circular(32) ),
+                 ),
+                 child: Padding(
+                   padding: const EdgeInsets.only(left: 20.0, right: 20),
+                   child: SingleChildScrollView(
+                     child: Column(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.only(top: 20, bottom:  10),
+                           child: AppTextFormField(
+                             onChanged: (value)=> getBloc().add(NumberChangedEvent(email: value, password: passwordController.text)),
+                             controller: emailAddressController,
+                             validator:(value){
+                               if(value.isEmptyOrNull)
+                                 return getLocalization().pleaseEnterAUsername;
+                             },
+                             padding: const EdgeInsets.only(left: 20, right: 20),
+                             textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
+                         ),
+                         Padding(
+                           padding: const EdgeInsets.only( bottom:  10),
+                           child: AppTextFormField(
+                             onChanged: (value)=> getBloc().add(NumberChangedEvent(email: emailAddressController.text , password:value )),
+                             controller: passwordController,
+                             validator: (value){
+                               if(value.isEmptyOrNull)
+                                 return getLocalization().pleaseEnterAPassword;
+                             },
 
-         ],
+                             padding: const EdgeInsets.only(left: 20, right: 20),
+                             textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().passwordA,),
+
+                         ),
+                         150.height,
+                         Padding(padding: const EdgeInsets.only(top: 10, bottom: 14),
+                           child: InkWell(
+                             onTap: (){
+                               context.router.push( ForgotPasswordRoute());
+                             } ,
+                             child: wText(getLocalization().forgotPassword, style:
+                             const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                           ),),
+
+                         PrimaryButton(
+                           width: MediaQuery.sizeOf(context).width,
+                           style: ButtonStyle(
+                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                 return BorderSide(
+                                   color: states.contains(MaterialState.disabled)?
+                                   theme.colorScheme.secondary.withOpacity(0):
+                                   theme.colorScheme.secondary,
+                                   width: 2,
+                                 );
+                               }
+                               ),
+                               backgroundColor: MaterialStateProperty.resolveWith(
+                                       (Set<MaterialState> states){
+                                     return states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.secondary.withOpacity(0.3):
+                                     theme.colorScheme.secondary;
+                                   }
+                               )
+                           ),
+                           onPressed: !getBloc().checked?null:()async {
+                             if(_formKey.currentState!.validate()){
+                               authenticate(username: emailAddressController.text, password: passwordController.text);
+                             }
+                           },
+                           child: Text(getLocalization().ccontinue),
+                         ),
+                         Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
+                           child: Center(
+                               child: InkWell(
+                                 onTap: (){
+                                   context.router.push( const LetsBeginRoute());
+                                 } ,
+                                 child: wText(getLocalization().noAccountCreateOne, style:
+                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                               )
+                           ),)
+                       ],
+                     ),
+                   ),
+                 ),
+               ),
+             ],
+           ),
+         ),
        ),
      );
    },
        listener: (context , state){
+      if(state is LoginContinueClickedState && state.dataState == DataState.loading){
+        preloader(context);
+      }
+      if(state is LoginContinueClickedState && state.dataState == DataState.success){
+        Navigator.pop(context);
+        if(state.profileEntity?.firstName == null){
+          context.router.push( RegisterRoute(email:emailAddressController.text ));
+        }else if(state.profileEntity!.type!.isEmpty){
+          context.router.push(const SetupProfileRoute());
+        }else if (state.profileEntity!.acceptedTermsAndConditions == false){
+          context.router.push(const RegisterAccountStep1Route());
+        }else if (state.profileEntity!.qualifications!.isEmpty &&
+            state.profileEntity!.workExperience!.isEmpty){
+          context.router.push(const QualificationsRoute());
+        }else if(state.profileEntity!.skills!.isEmpty){
+          context.router.push(const AddSkillsRoute());
+        }else if(state.profileEntity!.hourlyRate! == 0){
+          context.router.push(const RateAndWorkTimesRoute());
+        }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
+          context.router.push(const BankDetailsRoute());
+        }else if(state.profileEntity!.location!.address == "" ){
+          context.router.push(const LocationRoute(),);
+        }else if(state.profileEntity!.description!.isEmpty) {
+          context.router.push(const FinalDetailsRoute());
+        }else if(!state.profileEntity!.subscriptionPaid!){
+          context.router.push( PaySomeoneWebViewRoute(from: 0));}
+        else{
+          context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
+        }
+      }
 
+      if(state is LoginContinueClickedState && state.dataState == DataState.error){
+        Navigator.pop(context);
+        wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+      }
    });
   }
 
-  Future<void> authenticate({ required String mobileNumber})  async {
-    if(!getBloc().preloader) {
-      preloader(context);
-      getBloc().preloader = true;
-    }
-    await widget.firebaseAuth.verifyPhoneNumber(
-      phoneNumber: mobileNumber,
-      timeout: const Duration(minutes: 1),
-      verificationCompleted: (PhoneAuthCredential credential) async{
-        await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
-          await value.user!.getIdToken(true).then((value1) {
+  Future<void> authenticate({ required String username, required String password})  async {
+    preloader(context);
+    await widget.firebaseAuth.signInWithEmailAndPassword(
+        email: username,
+        password: password).then((value)async{
 
-          });
-        });
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        Navigator.pop(context);
-        wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
-      },
-      codeSent: (String verificationId, int? resendToken) async {
-        if(getBloc().preloader) {
-          Navigator.pop(context);
-          getBloc().preloader = false;
-        }
-        final error =  await context.router.push(OTPRoute(
-            verificationId: verificationId,
-            userModel: UserEntity(
-              email: "",
-              surname: '',
-              firstName: '',
-              mobile: mobileNumber,
-            ),
-            fromregister: false));
-        if(error != null){
-          if(getBloc().preloader) {
+          if(value.user!.emailVerified){
+            String? token = await value.user?.getIdToken();
+            TokenModel tokenModel =
+            TokenModel(
+                refreshToken: token??"",
+                accessToken: token??"",
+                tokenID: token??"");
+            boxTokens.put(current, tokenModel);
+            UserModel userModel = UserModel(id: "");
+            userModel.id = value.user?.uid;
+            boxUser.put(current, userModel);
             Navigator.pop(context);
-            getBloc().preloader = false;
+            getBloc().add(LoginContinueClickedEvent());
+          }else{
+            //context.router.pop();
+            Navigator.pop(context);
+            context.router.push(VerifyItsYouRoute());
           }
-          wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
-        }
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {},
-    );
+
+    }).catchError((error, stackTrace){
+      Navigator.pop(context);
+      wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
+    });
   }
 
   @override

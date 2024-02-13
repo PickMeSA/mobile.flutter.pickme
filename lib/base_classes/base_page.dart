@@ -22,6 +22,8 @@ abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends Bas
     child: WillPopScope(
       onWillPop: onBackPressed,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBody: true,
         backgroundColor: scaffoldBackgroundColor(),
         key: _scaffoldkey,
         appBar: buildAppbar(),

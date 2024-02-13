@@ -22,4 +22,7 @@ class PreferredIndustryEntity extends Equatable{
    AddSkillsIndustryModelResponse toResponse(){
      return AddSkillsIndustryModelResponse(id: id!, industry: industry!);
    }
+
+   @override
+   String toString() => industry!;
 }

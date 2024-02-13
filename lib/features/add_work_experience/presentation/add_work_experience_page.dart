@@ -1,9 +1,10 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/add_skills/domain/entities/preferred_industry_entity.dart';
@@ -54,6 +55,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
 
   @override
   Widget buildView(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return BlocConsumer<AddWorkExperienceBloc, AddWorkExperiencePageState>(
       listener: (context, state){
         if(state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.success){
@@ -97,9 +99,10 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
 
       },
       builder: (context, state) {
-        ThemeData theme = Theme.of(context);
          return state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.loading ?
          const Center(child: CircularProgressIndicator(),):
+             state.dataState == DataState.init?
+             const Center(child: CircularProgressIndicator(),):
          Padding(
            padding: const EdgeInsets.all(20.0),
            child: SizedBox(
@@ -109,6 +112,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                child: Form(
                  key: _formKey,
                  child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
 
                      Padding(
@@ -181,18 +185,26 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
                          endDateController.text = DateFormatters.getWordDate(dateTime);
                        },),
                      ),
+                     20.height,
+
+                     wText(getLocalization().industry,style: theme.textTheme.bodyMedium?.copyWith(
+                         fontSize: 16,
+                         )),
+                     10.height,
                      Padding(
                        padding: const EdgeInsets.only(bottom: 10),
-                       child: AppDropdownMenu<PreferredIndustryEntity>(
-                           onSelected: (selected){
-                             getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
-                           },
-                           width: MediaQuery.sizeOf(context).width - 40,
-                           enableFilter: true,
-                           dropdownMenuEntries: getBloc().industryEntries,
-                           controller: dropdownIndustryController,
-                           label: wText(getLocalization().preferredIndustry,
-                               style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
+                       child: DropdownSearch<PreferredIndustryEntity>(
+
+                         onChanged: (selected){
+                           getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
+                         },
+
+                         items: getBloc().preferredIndustryListEntity!.preferredIndustryListEntity!
+                             .map((PreferredIndustryEntity industry) {
+                           return industry;
+                         }).toList(),
+                         selectedItem: getBloc().selectedIndustry,
+                       ),
                      ),
 
                      Padding(padding: const EdgeInsets.only(bottom: 15, top: 15),
@@ -286,15 +298,17 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
   }
 
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-
-      getBloc().add(ProfilePictureAddedEvent(filePath: result.files.single.path!));
+      getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
     } else {
-      wErrorPopUp(message: getLocalization().uploadCancelledByUser, type: getLocalization().error, context: context);
-
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
     }
+
   }
 
 
@@ -314,7 +328,7 @@ class _AddWorkExperiencePageState extends BasePageState<AddWorkExperiencePage, A
         startDate: startDate,
         endDate: endDate,
         company: companyController.text,
-        industryId: int.parse(getBloc().selectedIndustry.id!),
+        industryId: int.parse(getBloc().selectedIndustry!.id!),
         isCurrent: getBloc().current,
         files: widget.files);
   }

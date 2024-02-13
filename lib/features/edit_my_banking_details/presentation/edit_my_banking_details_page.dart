@@ -93,29 +93,6 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
                     ),
                     30.height,
                     AppTextFormField(
-                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                      controller: accountHolderNameController,
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      textFieldType: TextFieldType.NAME,
-                      labelText: getLocalization().accountHolderName,),
-                    20.height,
-                    AppTextFormField(
-                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                      controller: bankNameController,
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      textFieldType: TextFieldType.NAME,
-                      labelText: getLocalization().bankA,),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: AppDropdownMenu<AccountTypeEntity>(
-                        controller: accountTypeController,
-                        label: wText(getLocalization().accountTypeA),
-                        enableFilter: true,
-                        dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
-                        width: MediaQuery.of(context).size.width-40,),
-                    ),
-                    20.height,
-                    AppTextFormField(
                       validator: (value){
                         if(value!.isEmpty)
                           return "Account number is required";
@@ -133,13 +110,13 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
                     20.height,
                     AppTextFormField(
                       validator: (value){
-                          if(value!.isEmpty)
-                            return "branch code is required";
-                          String pattern =
-                              r'^[0-9]';
-                          RegExp regex =  RegExp(pattern);
-                          if(!regex.hasMatch(value))
-                            return "Please enter a valid branch";
+                        if(value!.isEmpty)
+                          return "branch code is required";
+                        String pattern =
+                            r'^[0-9]';
+                        RegExp regex =  RegExp(pattern);
+                        if(!regex.hasMatch(value))
+                          return "Please enter a valid branch";
 
                       },
                       onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
@@ -147,6 +124,31 @@ class _EditMyBankingDetailsPageState extends BasePageState<EditMyBankingDetailsP
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       textFieldType: TextFieldType.NUMBER,
                       labelText: getLocalization().branchCodeA,),
+                    20.height,
+                    AppTextFormField(
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: accountHolderNameController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NAME,
+                      labelText: getLocalization().accountHolderName,),
+                    20.height,
+                    AppTextFormField(
+                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      controller: bankNameController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NAME,
+                      labelText: getLocalization().bankA,),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: AppDropdownMenu<AccountTypeEntity>(
+                        controller: accountTypeController,
+                        label: wText(getLocalization().accountTypeA),
+                        enableFilter: false,
+                        filled: true,
+                        dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
+                        width: MediaQuery.of(context).size.width-40,),
+                    ),
+
 
                     100.height,
 

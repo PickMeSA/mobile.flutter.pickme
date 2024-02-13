@@ -48,7 +48,8 @@ class BankDetailsBloc
         event.bankDetailsEntity.branchCode.isNotEmpty
         && event.bankDetailsEntity.bank.isNotEmpty
         && event.bankDetailsEntity.accountType.isNotEmpty
-        && event.bankDetailsEntity.accountNumber.isNotEmpty){
+        && event.bankDetailsEntity.accountNumber.isNotEmpty
+        && event.bankDetailsEntity.accountType.isNotEmpty){
 
             checked = true;
         }

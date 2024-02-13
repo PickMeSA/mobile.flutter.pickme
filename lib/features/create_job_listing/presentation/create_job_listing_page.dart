@@ -1,11 +1,10 @@
 import 'dart:ui';
-
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -22,8 +21,6 @@ import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/functions/required_text_validator.dart';
-import 'package:pickme/shared/local/hive_storage_init.dart';
-import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
@@ -215,22 +212,6 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           ),
                         onPressed: () => getBloc().add(LocationFromProfileToggledEvent(locationSource: LocationSource.profile)),
                       ),
-                      // InputChip(
-                      //   color: MaterialStateProperty.resolveWith((states) => (getBloc().locationSource == LocationSource.currentLocation)?neutrals100Color:whiteColor),
-                      //   label: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: Row(
-                      //       children: [
-                      //         const Icon(Iconsax.map),
-                      //         16.width,
-                      //         Expanded(child: Text(getLocalization().useMyCurrentLocation)),
-                      //         16.width,
-                      //         if(getBloc().locationSource == LocationSource.currentLocation)const Icon(Icons.close)
-                      //       ],
-                      //     ),
-                      //   ),
-                      //   onPressed: () => getBloc().add(LocationFromProfileToggledEvent(locationSource: LocationSource.currentLocation)),
-                      // ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16.0),
                           child: Column(
@@ -355,7 +336,8 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                           fontVariations: 600.fontWeight
                       ),),
                       16.height,
-                      if(getBloc().industries!=null)DropdownSearch<IndustryEntity>(
+                      if(getBloc().industries!=null)
+                        DropdownSearch<IndustryEntity>(
                         items: getBloc()
                             .industries!
                             .industries
@@ -578,14 +560,21 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
       title: Text(widget.candidateToOffer==null?getLocalization().createAJobListing:getLocalization().createAOneTimeListing,),
     );
   }
+
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-      getBloc().add(JobImageAddedClickedEvent(filePath: result.files.single.path!));
-
+      getBloc().add(JobImageAddedClickedEvent(filePath: result.path!));
+    } else {
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
     }
+
   }
+
 
   OTPLocationEntity getLocation(PickResult result){
     if(result.formattedAddress!=null){

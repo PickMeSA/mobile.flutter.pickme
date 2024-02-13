@@ -90,6 +90,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "anAlternativeRescheduleRequestHasBeenSentToYou":
             MessageLookupByLibrary.simpleMessage(
                 "An Alternative reschedule request has been sent to you. Once you approve, your booking will be updated in your calendar to the proposed date and time."),
+        "anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress":
+            MessageLookupByLibrary.simpleMessage(
+                "An email containing a link to reset your password has been sent to you email address"),
         "applicationSent":
             MessageLookupByLibrary.simpleMessage("Application sent"),
         "applicationSenttext": MessageLookupByLibrary.simpleMessage(
@@ -141,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "completeBooking":
             MessageLookupByLibrary.simpleMessage("Complete booking"),
         "completed": MessageLookupByLibrary.simpleMessage("Completed"),
+        "confirmPasswordA":
+            MessageLookupByLibrary.simpleMessage("Confirm password*"),
         "connectingWorkersAndClients": MessageLookupByLibrary.simpleMessage(
             "Connecting workers and clients"),
         "contactHelpCenter":
@@ -182,10 +187,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "editWorkExperience":
             MessageLookupByLibrary.simpleMessage("Edit work experience"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address *"),
+        "emailAddressProfileDoesntExist": MessageLookupByLibrary.simpleMessage(
+            "Email address profile doesn\'t exist"),
         "endDate": MessageLookupByLibrary.simpleMessage("End date *"),
         "endDateCannotBeBeforeStartDate": MessageLookupByLibrary.simpleMessage(
             "End date cannot be before start date"),
         "endTime": MessageLookupByLibrary.simpleMessage("End time *"),
+        "enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword":
+            MessageLookupByLibrary.simpleMessage(
+                "Enter your email address to receive an email with a link to reset your password."),
         "enterYourOTP": MessageLookupByLibrary.simpleMessage("Enter your OTP"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "estHours": MessageLookupByLibrary.simpleMessage("Est. hours"),
@@ -200,6 +210,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "forYou": MessageLookupByLibrary.simpleMessage("For you"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot password"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
         "getReviewsToBoostProfile": MessageLookupByLibrary.simpleMessage(
             "Get reviews to boost your profile and increase your chances of getting hired"),
@@ -227,6 +239,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I am looking for"),
         "iDidntReceiveACode":
             MessageLookupByLibrary.simpleMessage("I didn\'t receive a code"),
+        "iDidntReceiveALink":
+            MessageLookupByLibrary.simpleMessage("I didn\'t receive a link"),
         "iHaveReadThe":
             MessageLookupByLibrary.simpleMessage("I have read & accept the"),
         "iMFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
@@ -265,14 +279,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "later": MessageLookupByLibrary.simpleMessage("Later"),
         "laterThisMonth":
             MessageLookupByLibrary.simpleMessage("Later this month"),
+        "letsBegin": MessageLookupByLibrary.simpleMessage("Let\'s begin"),
         "letsGetYouStartedByCreatingYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Let’s get you started by creating your account."),
+        "letsGetYouUpAndRunningAgain": MessageLookupByLibrary.simpleMessage(
+            "Let\'s get you up and running again!"),
+        "letsGetYourAccountVerified": MessageLookupByLibrary.simpleMessage(
+            "Let\'s get your account verified"),
+        "letsOnboardYou":
+            MessageLookupByLibrary.simpleMessage("Let\'s onboard you!"),
         "loadMore": MessageLookupByLibrary.simpleMessage("Load more"),
         "loadingDotDot": MessageLookupByLibrary.simpleMessage("loading..."),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "locationAreaBasedOnProfile": MessageLookupByLibrary.simpleMessage(
             "Location/area based on profile"),
+        "logIntoYourAccountWithYourEmailAndPassword":
+            MessageLookupByLibrary.simpleMessage(
+                "Log in to your account with your email and password"),
         "logIntoYourAccountWithYourPhoneNumberAndOtp":
             MessageLookupByLibrary.simpleMessage(
                 "Log in to your account with your phone number and an OTP"),
@@ -352,6 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Not satisfied with the proposed reschedule date & time? you can propose an alternative"),
         "offerAJob": MessageLookupByLibrary.simpleMessage("Offer a job"),
         "offerSentEx": MessageLookupByLibrary.simpleMessage("Offer sent!"),
+        "older": MessageLookupByLibrary.simpleMessage("Older"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
         "oopsSomethingWentWrongWithYourPayment":
             MessageLookupByLibrary.simpleMessage(
@@ -364,6 +389,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
             MessageLookupByLibrary.simpleMessage("Passport number *"),
+        "passwordA": MessageLookupByLibrary.simpleMessage("Password*"),
+        "passwordResetLinkSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password reset link successfully"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payNow": MessageLookupByLibrary.simpleMessage("Pay now"),
         "paySomeone": MessageLookupByLibrary.simpleMessage("Pay someone"),
@@ -387,6 +415,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pickMeReceivesAR2hrWorkedAsServiceFees":
             MessageLookupByLibrary.simpleMessage(
                 "PickMe Receives a R2/hr worked as services fees"),
+        "pleaseEnterAPassword":
+            MessageLookupByLibrary.simpleMessage("Please enter a password"),
+        "pleaseEnterAUsername":
+            MessageLookupByLibrary.simpleMessage("Please enter a username"),
         "pleaseEnterCompanyName":
             MessageLookupByLibrary.simpleMessage("Please enter company name"),
         "pleaseEnterIssuingOrganization": MessageLookupByLibrary.simpleMessage(
@@ -460,6 +492,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rescheduleRequestSent":
             MessageLookupByLibrary.simpleMessage("Reschedule request sent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
@@ -534,6 +567,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
         "thanksForReviewingThisUser": MessageLookupByLibrary.simpleMessage(
             "Thank you for reviewing this user"),
+        "theAccountAlreadyExistsForThatEmail":
+            MessageLookupByLibrary.simpleMessage(
+                "An account already exists for the email."),
+        "thePasswordProvidedIsTooWeak": MessageLookupByLibrary.simpleMessage(
+            "The password provided is too weak"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
@@ -548,13 +586,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Upload cancelled by user"),
         "useMyCurrentLocation":
             MessageLookupByLibrary.simpleMessage("Use my current location"),
+        "usernameOrPasswordIsIncorrect": MessageLookupByLibrary.simpleMessage(
+            "Username or password is incorrect"),
+        "verifyItsYou":
+            MessageLookupByLibrary.simpleMessage("Verify it\'s you"),
         "viewProfile": MessageLookupByLibrary.simpleMessage("view Profile"),
         "weAreStillVerifyingYourAccount": MessageLookupByLibrary.simpleMessage(
             "We’re still busy verifying your information. On ce verified, you can start posting jobs & hiring candidates."),
+        "weAreSuperExcitedToHaveYouJoinThePickMeCommunity":
+            MessageLookupByLibrary.simpleMessage(
+                "Your profile has been successfully set up\n\nWe\'re super exited to have you join the PickMe community and can\'t wait to see the amazing things we\'ll achieve together"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeLetsSetUpYourProfile": m5,
         "welcomeTopickme":
             MessageLookupByLibrary.simpleMessage("Welcome to pickme!"),
+        "weveSentAnEmailPleaseClickOnTheVerificationLink":
+            MessageLookupByLibrary.simpleMessage(
+                "We\'ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!"),
+        "weveSentAnEmailToYourEmailAddress": MessageLookupByLibrary.simpleMessage(
+            "We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!"),
         "weveSentYourAlternativeDateAndTimeProposal":
             MessageLookupByLibrary.simpleMessage(
                 "We\'ve sent your alternative date and time proposal, you will receive a notification as soon as your proposal has been accepted or rejected"),

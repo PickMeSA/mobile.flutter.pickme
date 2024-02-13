@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -108,14 +109,17 @@ class _ReviewAUserPageState extends BasePageState<ReviewAUserPage, ReviewAUserBl
           height: MediaQuery.sizeOf(context).height,
           padding: wPagePadding(top: 0),
           child: (user== null)?
-          Center(child: Text(getLocalization().loadingDotDot),): Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
+          Center(child: Text(getLocalization().loadingDotDot),):
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                     AppCandidateProfile(
+                      image:user?.pictureEntity?.url != null?
+                      CachedNetworkImageProvider(user.pictureEntity!.url!):null,
                         fullName: "${user.firstName} ${user.surname}",
                         jobTitle:  user.industry?.industry??"",
                         rating: user.averageRating??0,
@@ -141,15 +145,16 @@ class _ReviewAUserPageState extends BasePageState<ReviewAUserPage, ReviewAUserBl
                   ],
                   ),
                 ),
-              ),
-              PrimaryButtonDark.fullWidth(
-                onPressed: getBloc().reviewText.isEmpty?null:(){
-                  getBloc().add(SubmitClickedEvent(userId: widget.userId));
-                },
-                child: Text(getLocalization().submit),
-              ),
-              24.height,
-            ],
+                50.height,
+                PrimaryButtonDark.fullWidth(
+                  onPressed: getBloc().reviewText.isEmpty?null:(){
+                    getBloc().add(SubmitClickedEvent(userId: widget.userId));
+                  },
+                  child: Text(getLocalization().submit),
+                ),
+                24.height,
+              ],
+            ),
           ),
         );
       },

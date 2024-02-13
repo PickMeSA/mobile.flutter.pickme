@@ -1,9 +1,9 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -71,9 +71,11 @@ class _EditQualificationDetailsPageState extends BasePageState<EditQualification
                        padding: const EdgeInsets.only(top: 20, bottom: 50),
                        child: Row(
                          children: [
-                           wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
-                               fontSize: 20, fontWeight: FontWeight.w400
-                           )),
+                           SizedBox(width: MediaQuery.sizeOf(context).width * 0.8,
+                             child: wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
+                                 fontSize: 20, fontWeight: FontWeight.w400
+                             )),
+                           ),
                            const Spacer(),
                            InkWell(
                                onTap: ()=>context.router.pop(),
@@ -188,13 +190,17 @@ class _EditQualificationDetailsPageState extends BasePageState<EditQualification
   }
 
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-      getBloc().add(ProfilePictureAddedEvent(filePath: result.files.single.path!));
+      getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
     } else {
-      wErrorPopUp(message: getLocalization().uploadCancelledByUser, type: getLocalization().error, context: context);
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
     }
+
   }
 
 

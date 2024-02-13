@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:auto_route/annotations.dart';
@@ -21,11 +22,6 @@ import 'package:pickme/utils/date_formaters.dart';
 import 'bloc/my_bookings_upcoming_bloc.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
-final now = DateTime.now();
-final today = DateTime(now.year, now.month, now.day);
-final yesterday = DateTime(now.year, now.month, now.day - 1);
-final tomorrow = DateTime(now.year, now.month, now.day + 1);
-
 @RoutePage()
 class MyBookingsUpcomingPage extends BasePage {
 
@@ -42,6 +38,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
     bool laterFlagged = true;
     bool todayFlagged = true;
     bool olderFlagged = true;
+
 
 
     void _onRefresh() async{
@@ -144,7 +141,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
 
                      showOnlyCurrentMonthDate: false,
 //      firstDayOfWeek: 4,
-                     height: 270.0,
+                      height: 270.0,
                      selectedDateTime: getBloc().currentDate2,
                      targetDateTime: getBloc().targetDateTime,
                      customGridViewPhysics: const NeverScrollableScrollPhysics(),
@@ -168,6 +165,11 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                    AppTabBar(
                      isScrollable: true,
                      onTap: (index){
+                       if(index != 0){
+                         laterFlagged = true;
+                         todayFlagged = true;
+                         olderFlagged = true;
+                       }
                      },
                      //viewHeight:192,
                      initialIndex: 0,
@@ -180,6 +182,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                         ListView.builder(
                           itemCount: getBloc().upcomingHireBookingsList.length,
                             itemBuilder: (context , index){
+                            DateTime today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
                               DateTime dateToCheck = DateTime(
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).year,
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).month,
@@ -189,7 +192,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-
+                                    if(getOlder() && dateToCheck.isBefore(today))
+                                      wText(getLocalization().today),
                                     if(getToday() && dateToCheck == today)
                                       wText(getLocalization().today),
                                     if(dateToCheck.isAfter(today) && getLaterThisMonth())
@@ -220,6 +224,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                   }
                                   },
                                       child: AppJobCard(
+
                               time: getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
                                   || getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
                                   ?getBloc().upcomingHireBookingsList[index].proposedAltStartTime:
@@ -235,6 +240,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                               ?DateTime.parse(getBloc().upcomingHireBookingsList[index].proposedAltStartDate)
                                             :DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!),
                                         status: getBloc().upcomingHireBookingsList[index].status,
+
                                         onNext: () { UserModel userModel = boxUser.get(current);
                                         if(
                                         getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
@@ -255,6 +261,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                               bookingId: getBloc().upcomingHireBookingsList[index]));
                                         }
                                         },
+                                        image: getBloc().upcomingHireBookingsList[index].customer?.profileImage != null?
+                                        CachedNetworkImageProvider(getBloc().upcomingHireBookingsList[index].customer!.profileImage!):null,
                                       ),
                                     ),
                                     10.height
@@ -280,6 +288,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                          fromIndex: 3,
                                          jobId: getBloc().completeHireBookingsList[index].jobId)),
                                      child: AppJobCard(
+
                                        jobName: getBloc().completeHireBookingsList[index].job.title!,
                                        employerName: getBloc().profileEntity?.type == "Worker"?
                                        getBloc().completeHireBookingsList[index].job.title??"":
@@ -290,8 +299,10 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                            || getBloc().completeHireBookingsList[index].status == JobStatus.alternativeProposed
                                            ?getBloc().completeHireBookingsList[index].proposedAltStartTime:
                                        getBloc().completeHireBookingsList[index].startTime,
-                                       dateTime: DateTime.parse(getBloc().cancelledHireBookingsList[index].startDate),
+                                       dateTime: DateTime.parse(getBloc().completeHireBookingsList[index].startDate),
                                        onNext: () {  },
+                                       image: getBloc().completeHireBookingsList[index].customer?.profileImage != null?
+                             CachedNetworkImageProvider(getBloc().completeHireBookingsList[index].customer!.profileImage!):null,
                                      ),
                                    ),
                                    10.height
@@ -334,6 +345,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                                jobId: getBloc().cancelledHireBookingsList[index].jobId,
                                                bookingId: getBloc().cancelledHireBookingsList[index]
                                            )),
+                                       image: getBloc().cancelledHireBookingsList[index].customer?.profileImage != null?
+                                       CachedNetworkImageProvider(getBloc().cancelledHireBookingsList[index].customer!.profileImage!):null,
                                      ),
                                    ),
                                    10.height
@@ -372,6 +385,15 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
         return false;
       }
   }
+
+    bool getOlder(){
+      if(olderFlagged){
+        olderFlagged = false;
+        return true;
+      }else{
+        return false;
+      }
+    }
 
 
     bool getToday(){

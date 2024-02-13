@@ -18,3 +18,14 @@ class DeleteProfileState extends ProfilePageState{
   DeleteProfileState({super.error});
 
 }
+
+class ProfilePictureAddedState extends ProfilePageState  {
+
+  ProfilePictureAddedState({super.error});
+}
+
+class SubmitClickedState extends ProfilePageState  {
+  final ProfileEntity? profileEntity;
+
+  SubmitClickedState({ this.profileEntity, super.error});
+}
