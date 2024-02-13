@@ -149,6 +149,12 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                            endDateController.text = DateFormatters.getWordDate(dateTime);
                          },),
                      ),
+                   20.height,
+
+                   wText(getLocalization().industry,style: theme.textTheme.bodyMedium?.copyWith(
+                     fontSize: 16,
+                   )),
+                   10.height,
                    Padding(
                      padding: const EdgeInsets.only(bottom: 20),
                      child: DropdownSearch<PreferredIndustryEntity>(

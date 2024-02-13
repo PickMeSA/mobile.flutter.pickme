@@ -2,7 +2,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
@@ -12,8 +11,6 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_list_entity.dart';
-import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_award.dart';
 import 'package:pickme/shared/widgets/w_decision_widget.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
@@ -22,6 +19,7 @@ import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'bloc/profile_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 @RoutePage()
 class ProfilePage extends BasePage {
@@ -464,10 +462,12 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
   }
 
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+   // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-        getBloc().add(ProfilePictureAddedEvent(filePath: result.files.single.path!));
+        getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
     } else {
       // User canceled the file picker
       // Handle accordingly (e.g., show a message)

@@ -43,7 +43,7 @@ class EditWorkExperienceDetailsBloc
         ) async{
 
         current = !current;
-        emit(AddWorkExperienceCurrentSelectedState());
+        emit(AddWorkExperienceCurrentSelectedState()..dataState = DataState.success);
 
     }
 

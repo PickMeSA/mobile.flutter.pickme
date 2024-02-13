@@ -1,11 +1,10 @@
 import 'dart:ui';
-
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -561,14 +560,21 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
       title: Text(widget.candidateToOffer==null?getLocalization().createAJobListing:getLocalization().createAOneTimeListing,),
     );
   }
+
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-      getBloc().add(JobImageAddedClickedEvent(filePath: result.files.single.path!));
-
+      getBloc().add(JobImageAddedClickedEvent(filePath: result.path!));
+    } else {
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
     }
+
   }
+
 
   OTPLocationEntity getLocation(PickResult result){
     if(result.formattedAddress!=null){

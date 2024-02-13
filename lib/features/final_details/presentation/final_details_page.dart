@@ -2,10 +2,10 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -252,23 +252,18 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-      if(isSelectingProfilePicture){
-        getBloc().add(ProfilePictureAddedEvent(filePath: result.files.single.path!));
-      }else{
-        getBloc().add(PoliceClearanceAddedEvent(filePath: result.files.single.path!));
-      }
+      getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
     } else {
       // User canceled the file picker
       // Handle accordingly (e.g., show a message)
     }
-    setState(() {
-      isSelectingProfilePicture = false;
-    });
+
   }
 
 }

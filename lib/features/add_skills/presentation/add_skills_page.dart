@@ -135,7 +135,10 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                    ),
                    const SizedBox(height: 10,),
                    wText(getLocalization().skillsAndIndustry,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
-
+                  const SizedBox(height: 20,),
+                   wText(getLocalization().industry,style: theme.textTheme.bodyMedium?.copyWith(
+                       fontSize: 16,
+                       fontWeight: FontWeight.w600)),
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 60),
                     child: DropdownSearch<PreferredIndustryEntity>(
@@ -149,6 +152,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                               return industry;
                             }).toList(),
                         selectedItem: getBloc().selectedIndustry,
+
                   ),),
 
                    wText(getLocalization().skillsMax5,style: theme.textTheme.bodyMedium?.copyWith(
