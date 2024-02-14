@@ -305,11 +305,23 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                      Expanded(
                                        child: PrimaryButton(
                                            child: Text(getLocalization().accept),
-                                           onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                                           onPressed: (){
+                                             getBloc().jobEntity?.startDate == null? ApplyForJobRoute(job: getBloc().jobEntity!)
+                                             :getBloc().add(RespondToJobInterestEvent(status: "booked"));}
                                        ),
                                      ),
                                    ],
                                  ),
+                               ): getBloc().jobEntity!.jobInterestStatus=="applied"?Row(
+                                 children: [
+
+                                   Expanded(
+                                     child: PrimaryButton(
+                                         child: Text(getLocalization().applied),
+                                         onPressed: () {},
+                                     ),
+                                   ),
+                                 ],
                                ):SizedBox()
                              ],
                            ),
@@ -517,11 +529,23 @@ class _JobDetailsPageState extends BasePageState<JobDetailsPage, JobDetailsBloc>
                                    Expanded(
                                      child: PrimaryButton(
                                          child: Text(getLocalization().accept),
-                                         onPressed: () => getBloc().add(RespondToJobInterestEvent(status: "booked"))
+                                         onPressed: () {
+                                           getBloc().jobEntity?.startDate == null? ApplyForJobRoute(job: getBloc().jobEntity!)
+                                               :getBloc().add(RespondToJobInterestEvent(status: "booked"));}
                                      ),
                                    ),
                                  ],
                                ),
+                             ):getBloc().jobEntity!.jobInterestStatus=="applied"?Row(
+                               children: [
+
+                                 Expanded(
+                                   child: PrimaryButton(
+                                     child: Text(getLocalization().applied),
+                                     onPressed: () {},
+                                   ),
+                                 ),
+                               ],
                              ):SizedBox()
                            ],
                          ),

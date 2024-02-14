@@ -560,7 +560,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "6bc5a1c51b952d76a0041f9343c2daca16a1884c"
+      resolved-ref: "6bbd1740ab6535eadb7e69818f35b507d4fba14b"
       url: "https://github.com/pickmesa/pickmme.flutter.uipackage.git"
     source: git
     version: "0.0.1+3"

@@ -52,32 +52,30 @@ class _ScanQrCodePageState extends BasePageState<ScanQrCodePage, ScanQrCodeBloc>
         return SizedBox(
           height: MediaQuery.sizeOf(context).height,
           width: MediaQuery.sizeOf(context).width,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: (result == null)?QRView(
-                    key: qrKey,
-                    onQRViewCreated: _onQRViewCreated,
-                  ):Center(child: const Text("Scan successful!"),),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Center(
-                    child: (result != null)
-                        ? Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: PrimaryButton.fullWidth(
-                          onPressed: ()=>context.router.push(ReviewAUserRoute(userId: "${result!.code}")),
-                          child: const Text("Begin review!")
-                    ),
-                        )
-                        : const Text('Scan a code'),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 5,
+                child: (result == null)?QRView(
+                  key: qrKey,
+                  onQRViewCreated: _onQRViewCreated,
+                ):Center(child: const Text("Scan successful!"),),
+              ),
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: (result != null)
+                      ? Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: PrimaryButton.fullWidth(
+                        onPressed: ()=>context.router.push(ReviewAUserRoute(userId: "${result!.code}")),
+                        child: const Text("Begin review!")
                   ),
-                )
-              ],
-            ),
+                      )
+                      : const Text('Scan a code'),
+                ),
+              )
+            ],
           ),
         );
       },
