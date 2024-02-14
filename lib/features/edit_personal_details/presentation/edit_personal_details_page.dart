@@ -142,7 +142,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                        Padding(
                          padding: const EdgeInsets.only( top: 10, bottom: 10),
                          child: AppTextFormField(
-                           //enabled: false,
+                           enabled: false,
                            //onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
                            //validator:(value)=> validateEmailAddress(value??""),
                            controller: emailAddressController,

@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/shared/constants/default_values.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_page_loader.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -22,7 +23,8 @@ import 'bloc/add_skills_bloc.dart';
 
 @RoutePage()
 class AddSkillsPage extends BasePage {
-  const AddSkillsPage({super.key});
+  ProfileEntity profileEntity;
+   AddSkillsPage({required this.profileEntity,super.key});
 
   @override
   _AddSkillsPageState createState() => _AddSkillsPageState();
@@ -33,7 +35,6 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
   late TextEditingController dropDownSkillController = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getBloc().add(AddSkillsGetPreferredIndustryListEvent());
   }
@@ -81,19 +82,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
         if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(state.profileEntity!.hourlyRate! == 0){
-            context.router.push(const RateAndWorkTimesRoute());
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.location!.address =="" ){
-            context.router.push(const LocationRoute());
-          }else if(state.profileEntity!.description!.isEmpty){
-            context.router.push(const FinalDetailsRoute());
-          }else if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push( PaySomeoneWebViewRoute(from: 0));
-          }else{
-            context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-          }
+        routePage(profileEntity: state.profileEntity!, context: context);
         }
 
         if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.loading){
@@ -122,7 +111,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                      children: [
                        const Spacer(),
                        InkWell(
-                           onTap: ()=> context.router.push(const RateAndWorkTimesRoute()),
+                           onTap: ()=> routePage(profileEntity: widget.profileEntity, context: context),
                            child: wText(getLocalization().skip,
                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
                      ],
@@ -245,6 +234,22 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
          Container();
       },
     );
+  }
+
+  void routePage({required BuildContext context,required ProfileEntity profileEntity }){
+    if(profileEntity!.hourlyRate! == 0){
+      context.router.push(const RateAndWorkTimesRoute());
+    }else if(profileEntity!.paymentDetails!.bankName!.isEmpty){
+      context.router.push(const BankDetailsRoute());
+    }else if(profileEntity!.location!.address == "" ){
+      context.router.push(const LocationRoute());
+    }else if(profileEntity!.description!.isEmpty){
+      context.router.push(const FinalDetailsRoute());
+    }else if(profileEntity!.subscriptionPaid!) {
+      context.router.push( PaySomeoneWebViewRoute(from: 0));
+    }else{
+      context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+    }
   }
 
 

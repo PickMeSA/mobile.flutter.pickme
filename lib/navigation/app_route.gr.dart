@@ -28,9 +28,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     AddSkillsRoute.name: (routeData) {
+      final args = routeData.argsAs<AddSkillsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AddSkillsPage(),
+        child: AddSkillsPage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
       );
     },
     AddWorkExperienceRoute.name: (routeData) {
@@ -549,9 +553,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     QualificationsRoute.name: (routeData) {
+      final args = routeData.argsAs<QualificationsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const QualificationsPage(),
+        child: QualificationsPage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
       );
     },
     RateAndWorkTimesRoute.name: (routeData) {
@@ -768,16 +776,40 @@ class AddQualificationRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AddSkillsPage]
-class AddSkillsRoute extends PageRouteInfo<void> {
-  const AddSkillsRoute({List<PageRouteInfo>? children})
-      : super(
+class AddSkillsRoute extends PageRouteInfo<AddSkillsRouteArgs> {
+  AddSkillsRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           AddSkillsRoute.name,
+          args: AddSkillsRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AddSkillsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AddSkillsRouteArgs> page =
+      PageInfo<AddSkillsRouteArgs>(name);
+}
+
+class AddSkillsRouteArgs {
+  const AddSkillsRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AddSkillsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
 }
 
 /// generated route for
@@ -2519,16 +2551,40 @@ class ProposeAlternativeRouteArgs {
 
 /// generated route for
 /// [QualificationsPage]
-class QualificationsRoute extends PageRouteInfo<void> {
-  const QualificationsRoute({List<PageRouteInfo>? children})
-      : super(
+class QualificationsRoute extends PageRouteInfo<QualificationsRouteArgs> {
+  QualificationsRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           QualificationsRoute.name,
+          args: QualificationsRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'QualificationsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<QualificationsRouteArgs> page =
+      PageInfo<QualificationsRouteArgs>(name);
+}
+
+class QualificationsRouteArgs {
+  const QualificationsRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'QualificationsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
 }
 
 /// generated route for

@@ -38,9 +38,9 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
           Navigator.pop(context);
          if (state.profileEntity!.qualifications!.isEmpty &&
               state.profileEntity!.workExperience!.isEmpty){
-            context.router.push(const QualificationsRoute());
+            context.router.push( QualificationsRoute(profileEntity: state.profileEntity!));
           }else if(state.profileEntity!.skills!.isEmpty){
-            context.router.push(const AddSkillsRoute());
+            context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
