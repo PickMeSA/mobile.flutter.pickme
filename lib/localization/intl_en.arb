@@ -385,7 +385,8 @@
   "weveSentAnEmailPleaseClickOnTheVerificationLink": "We've sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!",
   "iDidntReceiveALink": "I didn't receive a link",
   "weAreSuperExcitedToHaveYouJoinThePickMeCommunity": "Your profile has been successfully set up\n\nWe're super exited to have you join the PickMe community and can't wait to see the amazing things we'll achieve together",
-  "older": "Older"
+  "older": "Older",
+  "theCLientHasSelectedAFlexibleDate": "The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set."
 
 
 }

@@ -104,14 +104,14 @@ class _ReviewAUserPageState extends BasePageState<ReviewAUserPage, ReviewAUserBl
       },
       builder: (context, state) {
         ProfileEntity? user = getBloc().pageEntity?.user;
-        return Container(
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height,
-          padding: wPagePadding(top: 0),
-          child: (user== null)?
-          Center(child: Text(getLocalization().loadingDotDot),):
-          SingleChildScrollView(
-            child: Column(
+        return SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            padding: wPagePadding(top: 0),
+            child: (user== null)?
+            Center(child: Text(getLocalization().loadingDotDot),):
+            Column(
               children: [
                 SingleChildScrollView(
                   child: Column(

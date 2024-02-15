@@ -210,7 +210,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
       context.router.push(const LocationRoute());
     }else if(profileEntity!.description!.isEmpty){
       context.router.push(const FinalDetailsRoute());
-    }else if(profileEntity!.subscriptionPaid!) {
+    }else if(!profileEntity!.subscriptionPaid!) {
       context.router.push( PaySomeoneWebViewRoute(from: 0));
     }else{
       context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);

@@ -19,3 +19,16 @@ class ApplyForJobClickedEvent extends ApplyForJobPageEvent{
     required this.comments,
   });
 }
+
+class UpdateJobDateTimeEvent extends ApplyForJobPageEvent{
+   final JobEntity jobEntity;
+   final DateAndTime dateAndTime;
+
+   UpdateJobDateTimeEvent({required this.jobEntity, required this.dateAndTime});
+}
+
+class RespondToJobInterestEvent extends ApplyForJobPageEvent{
+   final JobEntity jobEntity;
+  final String status;
+  RespondToJobInterestEvent({required this.jobEntity,required this.status});
+}

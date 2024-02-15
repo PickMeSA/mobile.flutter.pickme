@@ -3901,6 +3901,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set.`
+  String get theCLientHasSelectedAFlexibleDate {
+    return Intl.message(
+      'The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set.',
+      name: 'theCLientHasSelectedAFlexibleDate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

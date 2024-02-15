@@ -570,6 +570,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theAccountAlreadyExistsForThatEmail":
             MessageLookupByLibrary.simpleMessage(
                 "An account already exists for the email."),
+        "theCLientHasSelectedAFlexibleDate": MessageLookupByLibrary.simpleMessage(
+            "The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set."),
         "thePasswordProvidedIsTooWeak": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
