@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.dart';
 
@@ -171,16 +172,31 @@ class ProfileServiceImpl extends ProfileService{
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     UserModel userModel = boxUser.get(current);
     userModel.type = otpFullProfileModelResponse.type??"";
+    if(boxProfile.isNotEmpty) {
+      ProfileModel profileModel = boxProfile.get(current);
+      if(otpFullProfileModelResponse.email == profileModel.emailAddress) {
+        boxProfile.put(current, ProfileModel(
+            workPermitNumber: "",
+            idNumber: "",
+            emailAddress: otpFullProfileModelResponse.email ?? "",
+            surname: otpFullProfileModelResponse.surname ?? "",
+            firstName: otpFullProfileModelResponse.firstName ?? "",
+            passportNumber: "",
+            phoneNumber: ''));
+        boxUser.put(current, userModel);
+      }
+      }else{
+      boxProfile.put(current, ProfileModel(
+          workPermitNumber: "",
+          idNumber: "",
+          emailAddress: otpFullProfileModelResponse.email ?? "",
+          surname: otpFullProfileModelResponse.surname ?? "",
+          firstName: otpFullProfileModelResponse.firstName ?? "",
+          passportNumber: "",
+          phoneNumber: ''));
+      boxUser.put(current, userModel);
+      }
 
-    boxProfile.put(current, ProfileModel(
-        workPermitNumber: "",
-        idNumber:  "",
-        emailAddress: "",
-        surname: otpFullProfileModelResponse.surname??"",
-        firstName: otpFullProfileModelResponse.firstName??"",
-        passportNumber: "",
-        phoneNumber: '' ));
-    boxUser.put(current, userModel);
     return ProfileEntity(
       pictureEntity: UploadedFileEntity.fromResponse(response: otpFullProfileModelResponse?.profilePicture??
           const UploadFileResponse(url: "", ref: "", id: -1)),

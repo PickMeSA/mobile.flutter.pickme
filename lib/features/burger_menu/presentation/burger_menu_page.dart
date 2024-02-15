@@ -166,6 +166,7 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
                          onPressed:() {
                            context.router.pushAndPopUntil(const LandingRoute(),
                            predicate: (Route<dynamic> route) => false);
+                           boxProfile.clear();
         },
                          child: Text(getLocalization().logOut),
                        ),

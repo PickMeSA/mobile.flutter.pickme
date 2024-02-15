@@ -60,9 +60,15 @@ class UserServiceImpl extends UserService{
           subscriptionType: profileDataModelResponse.subscriptionType??""
       );
 
-
-
       boxUser.put(current, UserModel(id: profileDataModelResponse.id));
+      boxProfile.put(current, ProfileModel(
+          workPermitNumber: profileDataModelResponse.workPermitNumber,
+          idNumber: profileDataModelResponse.idNumber,
+          emailAddress: profileDataModelResponse.email,
+          phoneNumber: profileDataModelResponse.mobile,
+          surname: profileDataModelResponse.surname,
+          firstName: profileDataModelResponse.firstName,
+          passportNumber: profileDataModelResponse.passportNumber));
       return newUserModel;
     }on  DioException catch (ex){
         throw(ex.response.toString());
