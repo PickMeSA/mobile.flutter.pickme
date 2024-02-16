@@ -27,9 +27,9 @@ class AddSkillsBloc
     List<ChipOption> chipOptions = [];
     List<DropdownMenuEntry<PreferredIndustryEntity>> industryEntries
     = <DropdownMenuEntry<PreferredIndustryEntity>>[];
-    List<DropdownMenuEntry<SkillEntity>> skillEntries = [];
-    late PreferredIndustryListEntity preferredIndustryListEntity;
-    late PreferredIndustryEntity selectedIndustry;
+    List<DropdownMenuItem<SkillEntity>> skillEntries = [];
+    late PreferredIndustryListEntity? preferredIndustryListEntity;
+    PreferredIndustryEntity? selectedIndustry;
     late SkillListEntity selectedSkills = SkillListEntity(skillListEntity: []);
     final AddSkillsGetIndustryListUseCase addSkillsGetIndustryListUseCase;
     final AddSkillsGetSkillsListUseCase addSkillsGetSkillsListUseCase;
@@ -60,7 +60,7 @@ class AddSkillsBloc
             params: AddSkillsSubmitRemoteSkillsAndIndustryUseCaseParams(
                 skillsPageEntity: SkillsPageEntity(
                     skillListEntity:selectedSkills ,
-                    preferredIndustryEntity: selectedIndustry ))
+                    preferredIndustryEntity: selectedIndustry! ))
           )
         )..dataState = DataState.success);
       }catch(ex){
@@ -78,7 +78,7 @@ class AddSkillsBloc
         skillEntries.clear();
         SkillListEntity skillListEntity = await addSkillsGetSkillsListUseCase.call();
         skillListEntity.skillListEntity!.forEach((element) {
-          skillEntries.add(DropdownMenuEntry(value: element, label: element.skill!));
+          skillEntries.add(DropdownMenuItem(value: element,  child: Text(element.skill!),));
         });
         emit(AddSkillGetSkillsListState()..dataState = DataState.success);
       }catch(ex){
@@ -94,7 +94,7 @@ class AddSkillsBloc
           try{
             industryEntries.clear();
             preferredIndustryListEntity = await addSkillsGetIndustryListUseCase.call();
-            preferredIndustryListEntity.preferredIndustryListEntity!.forEach((element) {
+            preferredIndustryListEntity?.preferredIndustryListEntity!.forEach((element) {
               industryEntries.add(DropdownMenuEntry(value: element, label: element.industry!));
             });
 

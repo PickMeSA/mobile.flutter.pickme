@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+10
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -55,9 +55,9 @@ dependencies:
   auto_size_text: ^3.0.0
   dartz: ^0.10.1
   flutter_ui_components:
-#    git:
-#      url: https://github.com/pickmesa/pickmme.flutter.uipackage.git
-    path: ../pickmme.flutter.uipackage
+    git:
+      url: https://github.com/pickmesa/pickmme.flutter.uipackage.git
+    #path: ../pickmme.flutter.uipackage
   flutter_svg: ^2.0.7
   flutter_launcher_icons: ^0.13.1
   equatable: ^2.0.5
@@ -65,7 +65,6 @@ dependencies:
   google_maps_flutter: ^2.5.0
   geolocator: ^10.1.0
   google_maps_place_picker_mb: ^3.1.2
-  file_picker: ^6.1.1
   cached_network_image: ^3.3.0
   iconsax_flutter: ^1.0.0
   persistent_bottom_nav_bar: ^5.0.2
@@ -75,7 +74,8 @@ dependencies:
   url_launcher: ^6.2.4
   qr_code_scanner: ^1.0.1
   pull_to_refresh_flutter3: ^2.0.2
-
+  dropdown_search: ^5.0.6
+  image_picker: ^1.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

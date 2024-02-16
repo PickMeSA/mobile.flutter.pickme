@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_work_experinence_entity.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -20,7 +21,9 @@ import 'bloc/qualification_bloc.dart';
 
 @RoutePage()
 class QualificationsPage extends BasePage {
-  const QualificationsPage({super.key});
+
+  ProfileEntity profileEntity;
+   QualificationsPage({required this.profileEntity,super.key});
 
   @override
   _QualificationsPageState createState() => _QualificationsPageState();
@@ -48,21 +51,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-         if(state.profileEntity!.skills!.isEmpty){
-            context.router.push(const AddSkillsRoute());
-          }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.push(const RateAndWorkTimesRoute());
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.location!.address == "" ){
-            context.router.push(const LocationRoute());
-          }else if(state.profileEntity!.description!.isEmpty){
-            context.router.push(const FinalDetailsRoute());
-          }else if(!state.profileEntity!.subscriptionPaid!) {
-           context.router.push( PaySomeoneWebViewRoute(from: 0));
-         }else{
-             context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-           }
+          routePage(context: context,profileEntity: state.profileEntity!);
 
         }
 
@@ -89,7 +78,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                      children: [
                        const Spacer(),
                        InkWell(
-                           onTap:()=> context.router.push(const AddSkillsRoute()),
+                           onTap:()=> routePage(context: context, profileEntity:widget.profileEntity ),
                            child: wText(getLocalization().skip,
                                style: const TextStyle(
                                    fontSize: 14,
@@ -208,6 +197,24 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  void routePage({required BuildContext context,required ProfileEntity profileEntity }){
+    if(profileEntity!.skills!.isEmpty){
+      context.router.push( AddSkillsRoute(profileEntity:  profileEntity!));
+    }else if(profileEntity!.hourlyRate! == 0){
+      context.router.push(const RateAndWorkTimesRoute());
+    }else if(profileEntity!.paymentDetails!.bankName!.isEmpty){
+      context.router.push(const BankDetailsRoute());
+    }else if(profileEntity!.location!.address == "" ){
+      context.router.push(const LocationRoute());
+    }else if(profileEntity!.description!.isEmpty){
+      context.router.push(const FinalDetailsRoute());
+    }else if(!profileEntity!.subscriptionPaid!) {
+      context.router.push( PaySomeoneWebViewRoute(from: 0));
+    }else{
+      context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+    }
   }
 
 }

@@ -1,6 +1,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -44,11 +45,9 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
     companyController.text = widget.otpWorkExperienceEntity.company??"";
     startDateController.text = DateFormatters.getWordDate(widget.otpWorkExperienceEntity.startDate!);
     endDateController.text = DateFormatters.getWordDate(widget.otpWorkExperienceEntity.endDate);
-    dropdownIndustryController.text = getBloc().preferredIndustryListEntity.preferredIndustryListEntity!.where((element) =>
-    element.id == widget.otpWorkExperienceEntity.industryId).toString();
-    startDate = widget.otpWorkExperienceEntity.startDate!;
     endDate = widget.otpWorkExperienceEntity.endDate;
     getBloc().current = widget.otpWorkExperienceEntity.isCurrent?? false;
+
   }
 
     @override
@@ -58,11 +57,20 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
 
   @override
   Widget buildView(BuildContext context) {
+
     return BlocConsumer<EditWorkExperienceDetailsBloc, EditWorkExperienceDetailsPageState>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is AddWorkGetPreferredIndustryListState && state.dataState == DataState.success){
+          getBloc().selectedIndustry = getBloc().preferredIndustryListEntity.preferredIndustryListEntity!.where((element) =>
+          element.id == widget.otpWorkExperienceEntity.industryId.toString()).first;
+        }
+      },
       builder: (context, state) {
         ThemeData theme = Theme.of(context);
-         return state.dataState == DataState.loading &&  state is AddWorkGetPreferredIndustryListState?Center(child: CircularProgressIndicator(),):
+         return state.dataState == DataState.loading &&  state is AddWorkGetPreferredIndustryListState?
+         Center(child: CircularProgressIndicator(),):
+             state.dataState == DataState.init ?
+             Center(child: CircularProgressIndicator(),):
          SizedBox(
            height: MediaQuery.sizeOf(context).height,
            width: MediaQuery.sizeOf(context).width,
@@ -141,19 +149,26 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                            endDateController.text = DateFormatters.getWordDate(dateTime);
                          },),
                      ),
+                   20.height,
+
+                   wText(getLocalization().industry,style: theme.textTheme.bodyMedium?.copyWith(
+                     fontSize: 16,
+                   )),
+                   10.height,
                    Padding(
                      padding: const EdgeInsets.only(bottom: 20),
-                     child: AppDropdownMenu<PreferredIndustryEntity>(
-                         onSelected: (selected){
-                           getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
-                         },
-                         width: MediaQuery.sizeOf(context).width - 40,
-                         enableFilter: false,
-                         filled: true,
-                         dropdownMenuEntries: getBloc().industryEntries,
-                         controller: dropdownIndustryController,
-                         label: wText(getLocalization().industry,
-                             style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400, fontSize: 16, color: Colors.grey))),
+                     child: DropdownSearch<PreferredIndustryEntity>(
+
+                       onChanged: (selected){
+                         getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
+                       },
+
+                       items: getBloc().preferredIndustryListEntity!.preferredIndustryListEntity!
+                           .map((PreferredIndustryEntity industry) {
+                         return industry;
+                       }).toList(),
+                       selectedItem: getBloc().selectedIndustry,
+                     ),
                    ),
 
                    Row(
@@ -202,6 +217,7 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
                            ],
                          );
                        }),
+                   20.height,
                    Row(
                      children: [
                        Expanded(
@@ -260,7 +276,7 @@ class _EditWorkExperienceDetailsPageState extends BasePageState<EditWorkExperien
         startDate: startDate,
         endDate: endDate,
         company: companyController.text,
-        industryId: int.parse(getBloc().selectedIndustry.id!),
+        industryId: int.parse(getBloc().selectedIndustry!.id!),
         isCurrent: getBloc().current,
         files: []);
   }

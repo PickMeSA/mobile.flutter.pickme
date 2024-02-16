@@ -35,6 +35,7 @@ class MyReviewsServiceImpl extends MyReviewsService{
                   reviewerId: e.reviewer.reviewerId,
                   firstName: e.reviewer.firstName,
                   surname: e.reviewer.surname,
+                  relationship: e.reviewer.relationship,
                   profilePictureUrl: e.reviewer.profilePictureUrl,
                   industry: e.reviewer.industry.id==null?null:IndustryEntity(
                     id: int.parse(e.reviewer.industry.id.toString()),

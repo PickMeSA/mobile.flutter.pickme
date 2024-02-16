@@ -15,6 +15,7 @@ Widget wPaySomeone({
     ){
   return Column(
     children: [
+      20.height,
       SizedBox(
         height: 100,
         child:
@@ -50,7 +51,7 @@ Widget wPaySomeone({
                   40.height,
                   Row(
                     children: [
-                      wText("$currency ${(bookingEntity.labourerHourlyRate * bookingEntity.estimatedHours).toStringAsFixed(2)}"),
+                      wText(""),
                       Spacer(),
                       InkWell(onTap: ()=> onTap(),
                           child: wText(buttonCation,style: TextStyle(color: theme.primaryColor, decoration: TextDecoration.underline,  fontWeight: FontWeight.bold))),

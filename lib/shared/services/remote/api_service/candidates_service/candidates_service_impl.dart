@@ -39,7 +39,7 @@ class CandidateProfilesImpl extends CandidatesService{
                 description: data["description"],
                 rating: data["rating"],
                 jobTitle: data["jobTitle"],
-                hourlyRate: double.parse(data["hourlyRate"].toString()),
+                hourlyRate: data["hourlyRate"] != null?  double.parse(data["hourlyRate"].toString()):0,
                 profilePictureUrl: data["profilePictureUrl"],
               ));
             });

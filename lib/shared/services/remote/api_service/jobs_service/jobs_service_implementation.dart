@@ -2,6 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/features/apply_for_job/data/response_models/apply_for_job_model_response/date_and_time_model_response.dart';
+import 'package:pickme/features/apply_for_job/domain/entities/date_and_time.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/entities/lat_long_entity.dart';
 import 'package:pickme/shared/models/jobs/my_job_listings_job_model_response.dart';
@@ -96,6 +98,62 @@ class JobServiceImplementation extends JobService{
       rethrow;
     }
 
+  }
+
+  Future<bool>updateJobInterestDateTime(
+      {required JobEntity jobEntity, required   DateAndTime dateAndTime})async{
+    try{
+      Response<dynamic> response = await apiService.put(
+          "$baseUrl$version/jobs/jobInterests/${jobEntity.jobInterestId}",
+          data: DateAndTimeModelResponse(
+              startDate: dateAndTime.startDate,
+              endDate: dateAndTime.endDate,
+              startTime: dateAndTime.startTime,
+              comments: dateAndTime.comments
+          ).toJson());
+
+      return true;
+    }on DioException catch(dioEx){
+      throw(dioEx.response.toString());
+    }catch(ex){
+      rethrow;
+    }
+  }
+
+  @override
+  Future<bool> updateJobDateTime({required JobEntity jobEntity, required   DateAndTime dateAndTime})  async{
+    try {
+      Response<dynamic> jobResponse = await apiService.put(
+          "$baseUrl$version/jobs/${jobEntity.id}",
+          data: DateAndTimeModelResponse(
+            startDate: dateAndTime.startDate,
+            endDate: dateAndTime.endDate,
+            startTime: dateAndTime.startTime,
+            comments: dateAndTime.comments
+          ).toJson());
+
+      Response<dynamic> interestResponse = await apiService.put(
+          "$baseUrl$version/jobs/jobInterests/${jobEntity.jobInterestId}",
+          data: DateAndTimeModelResponse(
+              startDate: dateAndTime.startDate,
+              endDate: dateAndTime.endDate,
+              startTime: dateAndTime.startTime,
+              comments: dateAndTime.comments
+          ).toJson());
+
+      print(
+          DateAndTimeModelResponse(
+              startDate: dateAndTime.startDate,
+              endDate: dateAndTime.endDate,
+              startTime: dateAndTime.startTime,
+              comments: dateAndTime.comments).toJson()
+      );
+      return true;
+    }on DioException catch(dioEx){
+      throw(dioEx.response.toString());
+    }catch(ex){
+      rethrow;
+    }
   }
 
 }

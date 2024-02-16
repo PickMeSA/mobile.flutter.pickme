@@ -16,5 +16,9 @@ class IndustryEntity extends Equatable{
     this.id = otpIndustryModelModelResponse.id;
     this.industry = otpIndustryModelModelResponse.industry;
   }
+
+
+   @override
+   String toString() => industry!;
 }
 

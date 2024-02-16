@@ -56,11 +56,9 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //OTPGetTokenState////////////////////////////////////////////////////
         //success
         if(state is OTPGetTokenState && state.dataState == DataState.success){
-          if(widget.fromregister!) {
+
             getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
-          }else{
-            getBloc().add(GetProfileProgressEvent());
-          }
+
         }
 
         //error
@@ -69,8 +67,9 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
           if(getBloc().preloaderActive) {
             Navigator.pop(context);
             getBloc().preloaderActive = false;
+
           }
-          wErrorPopUp(message: state.error??"", type: getLocalization().error, context: context);
+
         }
         //loading
         if(state is OTPGetTokenState && state.dataState == DataState.loading){
@@ -90,9 +89,9 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
             context.router.push(const RegisterAccountStep1Route());
           }else if (state.profileEntity!.qualifications!.isEmpty &&
               state.profileEntity!.workExperience!.isEmpty){
-            context.router.push(const QualificationsRoute());
+            context.router.push( QualificationsRoute(profileEntity: state.profileEntity));
           }else if(state.profileEntity!.skills!.isEmpty){
-            context.router.push(const AddSkillsRoute());
+            context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
@@ -117,6 +116,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //error
         if(state is RegisterOTPCompleteState && state.dataState == DataState.error){
           // will use error dialog
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
           print(state.error);
         }
 
@@ -134,8 +134,8 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         }
         //error
         if(state is SaveRemoteProfileDataState && state.dataState == DataState.error){
-          //will use error dialog[
-          print(state.error);
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
         }
 
         //GetProfileProgressState////////////////////////////////////
@@ -271,27 +271,15 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
     );
   }
 
-  Future<TokenModel> getToken({required String otp}) async {
+  Future<void> getToken({required String otp}) async {
     try {
       getBloc().add(OTPGetTokenEvent(stage: 0));
       PhoneAuthCredential credential =  PhoneAuthProvider.credential(
           verificationId: widget.verificationId!, smsCode: otp);
-      UserCredential userCredential = await widget.firebaseAuth.signInWithCredential(credential);
-      String? token = await userCredential.user?.getIdToken();
-      TokenModel tokenModel =
-      TokenModel(
-          refreshToken: token??"",
-          accessToken: token??"",
-          tokenID: token??"");
-      boxTokens.put(current, tokenModel);
-      UserModel userModel = UserModel(id: "");
-      userModel.id = userCredential.user?.uid;
-      boxUser.put(current, userModel);
       getBloc().add(OTPGetTokenEvent(stage: 1));
-      return tokenModel;
     } catch (ex) {
       getBloc().add(OTPGetTokenEvent(stage: -1));
-      return TokenModel(refreshToken: "", accessToken: "", tokenID: "");
+
     }
   }
 

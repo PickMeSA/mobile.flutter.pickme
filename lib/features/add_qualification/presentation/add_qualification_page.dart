@@ -1,9 +1,9 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -71,12 +71,12 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
 
       },
       builder: (context, state) {
-         return Padding(
-           padding: const EdgeInsets.all(20.0),
-           child: SizedBox(
-             width: MediaQuery.sizeOf(context).width,
-             height: MediaQuery.sizeOf(context).height- 100,
-             child: SingleChildScrollView(
+         return SizedBox(
+           width: MediaQuery.sizeOf(context).width,
+           height: MediaQuery.sizeOf(context).height,
+           child: SingleChildScrollView(
+             child: Padding(
+               padding: const EdgeInsets.all(20.0),
                child: Form(
                  key: _formKey,
                  child: Column(
@@ -85,9 +85,12 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                        padding: const EdgeInsets.only(top: 20, bottom: 50),
                        child: Row(
                          children: [
-                           wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
-                             fontSize: 20, fontWeight: FontWeight.w400
-                           )),
+                           SizedBox(
+                             width: MediaQuery.sizeOf(context).width - 100,
+                             child: wText(getLocalization().addAQualificationOrMembership, style: const TextStyle(
+                               fontSize: 20, fontWeight: FontWeight.w400
+                             )),
+                           ),
                            const Spacer(),
                            InkWell(
                                onTap: ()=>context.router.pop(),
@@ -189,21 +192,25 @@ class _AddQualificationPageState extends BasePageState<AddQualificationPage, Add
                  ),
                ),
              ),
-            ),
-         );
+           ),
+          );
       },
     );
   }
 
+
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-        getBloc().add(ProfilePictureAddedEvent(filePath: result.files.single.path!));
+      getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
     } else {
-      wErrorPopUp(message: getLocalization().uploadCancelledByUser, type: getLocalization().error, context: context);
-
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
     }
+
   }
 
 

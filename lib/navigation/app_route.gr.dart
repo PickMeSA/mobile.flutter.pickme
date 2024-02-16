@@ -28,9 +28,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     AddSkillsRoute.name: (routeData) {
+      final args = routeData.argsAs<AddSkillsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AddSkillsPage(),
+        child: AddSkillsPage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
       );
     },
     AddWorkExperienceRoute.name: (routeData) {
@@ -325,6 +329,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const FinalDetailsPage(),
       );
     },
+    ForgotPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ForgotPasswordPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -388,6 +398,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LandingPage(),
+      );
+    },
+    LetsBeginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LetsBeginPage(),
       );
     },
     LocationRoute.name: (routeData) {
@@ -537,9 +553,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     QualificationsRoute.name: (routeData) {
+      final args = routeData.argsAs<QualificationsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const QualificationsPage(),
+        child: QualificationsPage(
+          profileEntity: args.profileEntity,
+          key: args.key,
+        ),
       );
     },
     RateAndWorkTimesRoute.name: (routeData) {
@@ -555,11 +575,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     RegisterRoute.name: (routeData) {
-      final args = routeData.argsAs<RegisterRouteArgs>(
-          orElse: () => const RegisterRouteArgs());
+      final args = routeData.argsAs<RegisterRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: RegisterPage(key: args.key),
+        child: RegisterPage(
+          email: args.email,
+          key: args.key,
+        ),
       );
     },
     RequestAReviewRoute.name: (routeData) {
@@ -629,6 +651,7 @@ abstract class _$AppRouter extends RootStackRouter {
           message: args.message,
           button: args.button,
           image: args.image,
+          crossAxisAlignment: args.crossAxisAlignment,
         ),
       );
     },
@@ -701,6 +724,14 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TermsAndConditionsPage(),
       );
     },
+    VerifyItsYouRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyItsYouRouteArgs>(
+          orElse: () => const VerifyItsYouRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: VerifyItsYouPage(key: args.key),
+      );
+    },
     YouAreAllSetupRoute.name: (routeData) {
       final args = routeData.argsAs<YouAreAllSetupRouteArgs>(
           orElse: () => const YouAreAllSetupRouteArgs());
@@ -745,16 +776,40 @@ class AddQualificationRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AddSkillsPage]
-class AddSkillsRoute extends PageRouteInfo<void> {
-  const AddSkillsRoute({List<PageRouteInfo>? children})
-      : super(
+class AddSkillsRoute extends PageRouteInfo<AddSkillsRouteArgs> {
+  AddSkillsRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           AddSkillsRoute.name,
+          args: AddSkillsRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AddSkillsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AddSkillsRouteArgs> page =
+      PageInfo<AddSkillsRouteArgs>(name);
+}
+
+class AddSkillsRouteArgs {
+  const AddSkillsRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'AddSkillsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
 }
 
 /// generated route for
@@ -1775,6 +1830,20 @@ class FinalDetailsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ForgotPasswordPage]
+class ForgotPasswordRoute extends PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          ForgotPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ForgotPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
@@ -1998,6 +2067,20 @@ class LandingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LandingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LetsBeginPage]
+class LetsBeginRoute extends PageRouteInfo<void> {
+  const LetsBeginRoute({List<PageRouteInfo>? children})
+      : super(
+          LetsBeginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LetsBeginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -2468,16 +2551,40 @@ class ProposeAlternativeRouteArgs {
 
 /// generated route for
 /// [QualificationsPage]
-class QualificationsRoute extends PageRouteInfo<void> {
-  const QualificationsRoute({List<PageRouteInfo>? children})
-      : super(
+class QualificationsRoute extends PageRouteInfo<QualificationsRouteArgs> {
+  QualificationsRoute({
+    required ProfileEntity profileEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           QualificationsRoute.name,
+          args: QualificationsRouteArgs(
+            profileEntity: profileEntity,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'QualificationsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<QualificationsRouteArgs> page =
+      PageInfo<QualificationsRouteArgs>(name);
+}
+
+class QualificationsRouteArgs {
+  const QualificationsRouteArgs({
+    required this.profileEntity,
+    this.key,
+  });
+
+  final ProfileEntity profileEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'QualificationsRouteArgs{profileEntity: $profileEntity, key: $key}';
+  }
 }
 
 /// generated route for
@@ -2512,11 +2619,15 @@ class RegisterAccountStep1Route extends PageRouteInfo<void> {
 /// [RegisterPage]
 class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
   RegisterRoute({
+    required String email,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           RegisterRoute.name,
-          args: RegisterRouteArgs(key: key),
+          args: RegisterRouteArgs(
+            email: email,
+            key: key,
+          ),
           initialChildren: children,
         );
 
@@ -2527,13 +2638,18 @@ class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
 }
 
 class RegisterRouteArgs {
-  const RegisterRouteArgs({this.key});
+  const RegisterRouteArgs({
+    required this.email,
+    this.key,
+  });
+
+  final String email;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'RegisterRouteArgs{key: $key}';
+    return 'RegisterRouteArgs{email: $email, key: $key}';
   }
 }
 
@@ -2758,6 +2874,7 @@ class ReusableNotificationRoute
     required String message,
     required Widget button,
     required Image image,
+    CrossAxisAlignment? crossAxisAlignment,
     List<PageRouteInfo>? children,
   }) : super(
           ReusableNotificationRoute.name,
@@ -2767,6 +2884,7 @@ class ReusableNotificationRoute
             message: message,
             button: button,
             image: image,
+            crossAxisAlignment: crossAxisAlignment,
           ),
           initialChildren: children,
         );
@@ -2784,6 +2902,7 @@ class ReusableNotificationRouteArgs {
     required this.message,
     required this.button,
     required this.image,
+    this.crossAxisAlignment,
   });
 
   final Key? key;
@@ -2796,9 +2915,11 @@ class ReusableNotificationRouteArgs {
 
   final Image image;
 
+  final CrossAxisAlignment? crossAxisAlignment;
+
   @override
   String toString() {
-    return 'ReusableNotificationRouteArgs{key: $key, title: $title, message: $message, button: $button, image: $image}';
+    return 'ReusableNotificationRouteArgs{key: $key, title: $title, message: $message, button: $button, image: $image, crossAxisAlignment: $crossAxisAlignment}';
   }
 }
 
@@ -3030,6 +3151,35 @@ class TermsAndConditionsRoute extends PageRouteInfo<void> {
   static const String name = 'TermsAndConditionsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [VerifyItsYouPage]
+class VerifyItsYouRoute extends PageRouteInfo<VerifyItsYouRouteArgs> {
+  VerifyItsYouRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          VerifyItsYouRoute.name,
+          args: VerifyItsYouRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'VerifyItsYouRoute';
+
+  static const PageInfo<VerifyItsYouRouteArgs> page =
+      PageInfo<VerifyItsYouRouteArgs>(name);
+}
+
+class VerifyItsYouRouteArgs {
+  const VerifyItsYouRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VerifyItsYouRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

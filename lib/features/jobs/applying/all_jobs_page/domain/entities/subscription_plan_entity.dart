@@ -18,9 +18,9 @@ const List<SubscriptionPlanEntity> mockSubscriptionPlans = [
   SubscriptionPlanEntity(
     id: 1,
     name: "name",
-    price: 20,
+    price: 50,
     entityType: EntityType.individual,
-    subscriptionType: '',
+    subscriptionType: 'Subscription fee',
     includedItems: [
       "Lifetime subscription",
       "Nationwide exposure",

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.dart';
 
@@ -32,6 +33,7 @@ import 'package:pickme/shared/features/upload_file/data/models/upload_file_respo
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
@@ -59,15 +61,24 @@ class ProfileServiceImpl extends ProfileService{
 
   @override
   Future<ProfileEntity> getRemoteProfileData({String? userId}) async{
-    try{
+    try {
       Response<dynamic> response;
-      if(userId==null){
+      if (userId == null) {
         UserModel userModel = boxUser.get(current);
-        response = await apiService.get("$baseUrl$version/profiles/${userModel.id}");
-      }else{
+        response =
+        await apiService.get("$baseUrl$version/profiles/${userModel.id}");
+      } else {
         response = await apiService.get("$baseUrl$version/profiles/$userId");
       }
+
+
       return returnProfileEntity(response: response);
+    } on DioException catch(ex) {
+      if (ex.response!.data!["message"].toString() == "You don't have a profile and we could not create one.") {
+        return ProfileEntity();
+      } else {
+        throw(ex.response!.data["message"].toString());
+      }
     }catch(ex){
       rethrow;
     }
@@ -144,11 +155,11 @@ class ProfileServiceImpl extends ProfileService{
     try{
       UserModel userModel = boxUser.get(current);
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: SubmittedFinalDetailsModelResponse(
-            description: finalDetailsEntity.description,
-            profilePictureId: finalDetailsEntity.profilePicture?.id,
-            policeClearanceId: finalDetailsEntity.policeClearance?.id
-          ).toJson());
+          data: {
+            'description': finalDetailsEntity.description,
+            'profilePictureId': finalDetailsEntity.profilePicture?.id,
+            'policeClearanceId': finalDetailsEntity.policeClearance?.id
+          });
 
       return returnProfileEntity(response: response);
 
@@ -160,8 +171,34 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     UserModel userModel = boxUser.get(current);
-    userModel.type = otpFullProfileModelResponse.type??"";
-    boxUser.put(current, userModel);
+
+    if(boxProfile.isNotEmpty) {
+      ProfileModel profileModel = boxProfile.get(current);
+      if(otpFullProfileModelResponse.email!.toLowerCase() == profileModel.emailAddress!.toLowerCase()) {
+        boxProfile.put(current, ProfileModel(
+            workPermitNumber: "",
+            idNumber: otpFullProfileModelResponse.idNumber??"",
+            emailAddress: otpFullProfileModelResponse.email ?? "",
+            surname: otpFullProfileModelResponse.surname ?? "",
+            firstName: otpFullProfileModelResponse.firstName ?? "",
+            passportNumber: otpFullProfileModelResponse.passportNumber??"",
+            phoneNumber: otpFullProfileModelResponse.mobile??""));
+        boxUser.put(current, userModel);
+        userModel.type = otpFullProfileModelResponse.type??"";
+      }
+      }else{
+      boxProfile.put(current, ProfileModel(
+          workPermitNumber: "",
+          idNumber: otpFullProfileModelResponse.idNumber??"",
+          emailAddress: otpFullProfileModelResponse.email ?? "",
+          surname: otpFullProfileModelResponse.surname ?? "",
+          firstName: otpFullProfileModelResponse.firstName ?? "",
+          passportNumber: otpFullProfileModelResponse.passportNumber??"",
+          phoneNumber: otpFullProfileModelResponse.mobile??""));
+      boxUser.put(current, userModel);
+      userModel.type = otpFullProfileModelResponse.type??"";
+      }
+
     return ProfileEntity(
       pictureEntity: UploadedFileEntity.fromResponse(response: otpFullProfileModelResponse?.profilePicture??
           const UploadFileResponse(url: "", ref: "", id: -1)),

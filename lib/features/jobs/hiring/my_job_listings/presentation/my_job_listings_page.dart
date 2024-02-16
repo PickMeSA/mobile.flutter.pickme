@@ -78,12 +78,14 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                 AppTabBar(
                   viewHeight: MediaQuery.sizeOf(context).height - 355,
                   initialIndex: getBloc().selectedTabIndex,
+                  isScrollable: true,
                   tabs: [
                     Text(getLocalization().activeListings),
                     Text(getLocalization().inactiveListings),
                   ],
                   views: [
-                    if(getBloc().myJobs== null || getBloc().myJobs!.activeJobs.isEmpty)Column(
+                    if(getBloc().myJobs== null || getBloc().myJobs!.activeJobs.isEmpty)
+                      Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(
@@ -152,7 +154,8 @@ class _MyJobListingsPageState extends BasePageState<MyJobListingsPage, MyJobList
                                 employerName: "${job.customer!.firstName} ${job.customer!.surname}",
                                 locationName: job.address.isEmptyOrNull?"${job.customer?.address}":"${job.address}",
                                 dateTime: job.startDate??DateTime.now(),
-                                status: JobStatus.inactive,
+                              time: job.startTime,
+                              status: JobStatus.inactive,
                               image: (job.customer?.profileImage!=null)?
                               CachedNetworkImageProvider(job.customer!.profileImage!):null,
                               onNext: (){

@@ -65,10 +65,13 @@ class _ScanQrCodePageState extends BasePageState<ScanQrCodePage, ScanQrCodeBloc>
                 flex: 1,
                 child: Center(
                   child: (result != null)
-                      ? PrimaryButton.fullWidth(
-                      onPressed: ()=>context.router.push(ReviewAUserRoute(userId: "${result!.code}")),
-                      child: const Text("Begin review!")
-                  )
+                      ? Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: PrimaryButton.fullWidth(
+                        onPressed: ()=>context.router.push(ReviewAUserRoute(userId: "${result!.code}")),
+                        child: const Text("Begin review!")
+                  ),
+                      )
                       : const Text('Scan a code'),
                 ),
               )

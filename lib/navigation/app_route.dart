@@ -33,6 +33,7 @@ import 'package:pickme/features/edit_work_experience/presentation/edit_work_expe
 import 'package:pickme/features/edit_work_experience_details/presentation/edit_work_experience_details_page.dart';
 import 'package:pickme/features/filters/presentation/filters_page.dart';
 import 'package:pickme/features/edit_my_banking_details/presentation/edit_my_banking_details_page.dart';
+import 'package:pickme/features/forgot_password/presentation/forgot_password_page.dart';
 import 'package:pickme/features/home/presentation/home_page.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
 import 'package:pickme/features/job_list_page/presentation/job_list_page.dart';
@@ -96,7 +97,9 @@ import 'package:pickme/shared/features/resend_otp/presentation/resend_otp_page.d
 import 'package:pickme/features/login/presentation/login_page.dart';
 import 'package:pickme/features/terms_and_conditions/presentation/terms_and_conditions_page.dart';
 
+import '../features/lets_begin/presentation/lets_begin_page.dart';
 import '../features/scan_qr_code/presentation/scan_qr_code_page.dart';
+import '../features/verify_its_you/presentation/verify_its_you_page.dart';
 import '../shared/domain/entities/my_job_listings_page_entity.dart';
 
 part 'app_route.gr.dart';
@@ -195,6 +198,9 @@ class AppRouter extends _$AppRouter{
     AnimatedRoute(page: ScanQrCodeRoute.page),
     AnimatedRoute(page: RequestAReviewRoute.page),
     AnimatedRoute(page: ReviewAUserRoute.page),
+    AnimatedRoute(page: LetsBeginRoute.page),
+    AnimatedRoute(page: VerifyItsYouRoute.page),
+    AnimatedRoute(page: ForgotPasswordRoute.page)
 
   ];
 }

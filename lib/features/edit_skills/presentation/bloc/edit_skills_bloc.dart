@@ -13,6 +13,7 @@ import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.da
 import 'package:pickme/features/add_skills/domain/use_cases/add_skills_usecase/add_skills_get_skills_list_usecase.dart';
 import 'package:pickme/features/add_skills/domain/use_cases/add_skills_usecase/add_skills_submit_remote_skills_and_industry_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
 
 part 'edit_skills_event.dart';
 part 'edit_skills_state.dart';
@@ -28,7 +29,7 @@ class EditSkillsBloc
     late SkillListEntity skillListEntity = SkillListEntity(skillListEntity: []);
     List<DropdownMenuEntry<PreferredIndustryEntity>> industryEntries
     = <DropdownMenuEntry<PreferredIndustryEntity>>[];
-    List<DropdownMenuEntry<SkillEntity>> skillEntries = [];
+    List<DropdownMenuItem<SkillEntity>> skillEntries = [];
     final AddSkillsGetSkillsListUseCase addSkillsGetSkillsListUseCase;
     final AddSkillsSubmitRemoteSkillsAndIndustryUseCase addSkillsSubmitRemoteSkillsAndIndustryUseCase;
     EditSkillsBloc({required this.addSkillsSubmitRemoteSkillsAndIndustryUseCase,
@@ -77,7 +78,7 @@ class EditSkillsBloc
                 SkillListEntity skillListEntity = await addSkillsGetSkillsListUseCase.call();
                 skillListEntity.skillListEntity!.forEach((element) {
 
-                    skillEntries.add(DropdownMenuEntry(value: element, label: element.skill!));
+                    skillEntries.add(DropdownMenuItem(value: element, child: wText(element.skill!),));
                 });
                 emit(EditSkillsGetSkillsListState()..dataState = DataState.success);
 

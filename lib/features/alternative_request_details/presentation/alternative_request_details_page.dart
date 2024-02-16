@@ -101,9 +101,9 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                     child: Padding(padding: EdgeInsets.all(20),
                       child: Row(
                         children: [
-                          wText(DateFormatters.getDayMonthYear(DateTime.parse(widget.bookingEntity.startDate!)), style: theme.textTheme.titleLarge),
+                          wText(DateFormatters.getDayMonthYear(DateTime.parse(widget.bookingEntity.proposedAltStartDate!)), style: theme.textTheme.titleLarge),
                           Spacer(),
-                          wText(widget.bookingEntity!.startTime!),
+                          wText(widget.bookingEntity!.proposedAltStartTime!),
                         ],
                       ),),
                   ),

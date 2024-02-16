@@ -50,4 +50,10 @@ class ImFlexibleCheckedState extends CreateJobListingState{
   ImFlexibleCheckedState();
 }
 
+class RemoveImageClickedState extends CreateJobListingState{
+  final int? index;
+
+  RemoveImageClickedState({required this.index});
+}
+
 enum LocationSource{profile, currentLocation, map}

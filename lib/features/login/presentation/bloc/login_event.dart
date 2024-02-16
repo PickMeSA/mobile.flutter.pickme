@@ -5,15 +5,17 @@ abstract class LoginEvent extends BaseEvent{
 }
 
 class LoginContinueClickedEvent extends LoginEvent{
-  final int state;
 
-  LoginContinueClickedEvent({
-    required this.state});
+
+  LoginContinueClickedEvent();
 }
 
 class NumberChangedEvent extends LoginEvent{
-  String mobileNumber;
+  String email;
+  String password;
 
-  NumberChangedEvent({required this.mobileNumber});
+  NumberChangedEvent({
+    required this.email,
+  required this.password});
 }
 

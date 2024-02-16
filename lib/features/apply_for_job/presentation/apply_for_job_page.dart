@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/features/apply_for_job/domain/entities/date_and_time.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,46 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
     ThemeData theme = Theme.of(context);
     return BlocConsumer<ApplyForJobBloc, ApplyForJobPageState>(
       listener: (context, state){
+        //////////////////////////////////////////
+        if(state is UpdateJobDateTimeState && state.dataState == DataState.loading){
+          if(!getBloc().preloaderActive){
+            getBloc().preloaderActive = true;
+            preloader(context);
+          }
+        }
+        if(state is UpdateJobDateTimeState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+        if(state is UpdateJobDateTimeState && state.dataState == DataState.success){
+          getBloc().add(RespondToJobInterestEvent(jobEntity: widget.job, status: "booked"));
+        }
+        ///////////////////////////////////////////
+
+        if(state is RespondToJobInterestState && state.dataState == DataState.loading){
+
+
+        }
+        if(state is RespondToJobInterestState && state.dataState == DataState.error){
+          getBloc().preloaderActive = false;
+          Navigator.pop(context);
+          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        }
+        if(state is RespondToJobInterestState && state.dataState == DataState.success){
+          {
+            context.router.push(ReusableNotificationRoute(
+                title: getLocalization().youreBookedForTheJob,
+                message: getLocalization().youCanKeepTrackOfThisJobInMyBookings,
+                button: PrimaryButtonDark.fullWidth(
+                    onPressed: ()=>context.router.replace(BottomNavigationBarRoute(initialIndex: 2)),
+                    child: Text(getLocalization().backToJobs)),
+                image: Image.asset("assets/man_and_woman_celebration.png")
+            ));
+          }
+        }
+        //////////////////////////////////////
+
         if(state is ApplyForJobClickedState && state.dataState == DataState.loading){
           if(!getBloc().preloaderActive){
             getBloc().preloaderActive = true;
@@ -79,7 +120,7 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
                  children: [
                    InkWell(onTap: ()=> context.router.pop(),child: Icon(Icons.arrow_back_rounded)),
                    10.width,
-                   wText(getLocalization().apply, style: theme.textTheme.subtitle1),
+                   wText(widget.job.jobInterestStatus == "offered"?getLocalization().accept: getLocalization().apply, style: theme.textTheme.subtitle1),
                    Spacer(),
                    InkWell(
                      onTap: (){
@@ -89,7 +130,7 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
                  ],
                ),
                20.height,
-               wText(getLocalization().dateAndTime, style: theme.textTheme.titleMedium),
+               wText(widget.job.jobInterestStatus == "offered"?getLocalization().theCLientHasSelectedAFlexibleDate:getLocalization().dateAndTime, style: theme.textTheme.titleSmall),
                40.height,
                Row(
                  children: [
@@ -165,16 +206,27 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
                      if(startDate.isAfter(endDate)){
                        wErrorPopUp(message: "Start date should be before end date", type: "Error", context: context);
                      }else{
-                       getBloc().add(ApplyForJobClickedEvent(
-                         startDate: startDate,
-                         endDate: endDate,
-                         startTime: startTimeTextController.text,
-                         comments: commentController.text,
-                       ));
+                       if(widget.job.jobInterestStatus == "offered") {
+                         getBloc().add(UpdateJobDateTimeEvent(
+                             jobEntity: widget.job,
+                         dateAndTime: DateAndTime(
+                           startDate: startDate,
+                           endDate: endDate,
+                           startTime: startTimeTextController.text,
+                           comments: commentController.text,
+                         )));
+                       }else {
+                         getBloc().add(ApplyForJobClickedEvent(
+                           startDate: startDate,
+                           endDate: endDate,
+                           startTime: startTimeTextController.text,
+                           comments: commentController.text,
+                         ));
+                       }
                      }
                    }
                  },
-                 child: Text(getLocalization().apply),
+                 child: Text(widget.job.jobInterestStatus == "offered"?getLocalization().accept:getLocalization().apply),
                ),
 
              ],

@@ -8,13 +8,13 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/bank_details/domain/entities/bank_details_entities.dart';
 import 'package:pickme/features/bank_details/domain/usecases/bank_details_submitted_usecase.dart';
+import 'package:pickme/features/edit_personal_details/domain/use_cases/edit_personal_details_usecase/update_remote+profile_data_usecase.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/entities/working_days_list_entity.dart';
 import 'package:pickme/features/rate_and_work_times/domain/use_cases/rate_and_work_times_usecase/submit_remote_rate_and_work_times_usecase.dart';
 import 'package:pickme/features/rate_and_work_times/presentation/bloc/rate_and_work_times_bloc.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
-import 'package:pickme/shared/features/otp/domain/entities/otp_payment_details_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/otp_save_remote_profile_data_usecase.dart';
 
@@ -27,14 +27,14 @@ class EditPersonalDetailsBloc
     List<WorkingDaysEntity> workingDaysEntityList = getWorkingDays();
     List<WorkingDaysEntity> selectedDays = [];
     List<DropdownMenuEntry<WorkingDaysEntity>> workingDayEntries =[];
-    final OTPSaveRemoteProfileDataUseCase otpSaveRemoteProfileDataUseCase;
+    final UpdateRemoteProfileDateUseCase updateRemoteProfileDateUseCase;
     //final BankDetailsSubmittedUseCase bankDetailsSubmittedUseCase;
     final SubmitRemoteRateAndWorkTimesUseCase submitRemoteRateAndWorkTimesUseCase;
     List<ChipOption> chipOptions = [];
     bool checked = false;
     bool? preloaderActive = false;
     EditPersonalDetailsBloc({
-        required this.otpSaveRemoteProfileDataUseCase,
+        required this.updateRemoteProfileDateUseCase,
     required this.submitRemoteRateAndWorkTimesUseCase}): super(EditPersonalDetailsPageInitState()) {
         workingDayEntries = getWorkingDayEntries();
         on<UpdatePersonalDetailsEvent>((event, emit)=> _onUpdatePersonalDetailsEvent(event,emit));
@@ -69,6 +69,8 @@ class EditPersonalDetailsBloc
             SkillChipDeletedEvent event,
         Emitter<EditPersonalDetailsPageState> emit
         )async{
+        event.profileEntity?.ratesAndWorkTimesEntity?.workingDaysListEntity
+            ?.workingDaysEntityList!.removeAt(event.index!);
         selectedDays.removeAt(event.index!);
         chipOptions.removeAt(event.index!);
         //event.profileEntity!.ratesAndWorkTimesEntity!.workingDaysListEntity!.workingDaysEntityList!.removeAt(event.index!);
@@ -82,9 +84,9 @@ class EditPersonalDetailsBloc
         emit(UpdatePersonalDetailsState()..dataState = DataState.loading);
         try{
 
-            await otpSaveRemoteProfileDataUseCase.call(
-                params: OTPSaveRemoteProfileDataUseCaseParams(
-                    userModel: UserEntity(
+            await updateRemoteProfileDateUseCase.call(
+                params: UpdateRemoteProfileDateUseCaseParams(
+                    userEntity: UserEntity(
                         mobile: event.profileEntity.mobile??"",
                     surname: event.profileEntity.surname??"",
                     email: event.profileEntity.email??"",

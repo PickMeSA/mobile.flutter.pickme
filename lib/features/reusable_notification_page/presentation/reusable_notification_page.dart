@@ -15,11 +15,12 @@ import 'bloc/application_sent_bloc.dart';
 
 @RoutePage()
 class ReusableNotificationPage extends BasePage {
-  const ReusableNotificationPage({super.key,required this.title, required this.message, required this.button, required this.image, });
+  const ReusableNotificationPage({super.key,required this.title, required this.message, required this.button, required this.image, this.crossAxisAlignment, });
   final String title;
   final String message;
   final Widget button;
   final Image image;
+  final CrossAxisAlignment? crossAxisAlignment;
   @override
   _ReusableNotificationPageState createState() => _ReusableNotificationPageState();
 }
@@ -51,7 +52,7 @@ class _ReusableNotificationPageState extends BasePageState<ReusableNotificationP
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: widget.crossAxisAlignment??CrossAxisAlignment.start,
                 children: [
 
                   wText(widget.title,style:theme.textTheme.bodyMedium?.copyWith(

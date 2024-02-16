@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:pickme/features/job_list_page/domain/entities/my_job_listings_page_entity.dart';
 import 'package:pickme/features/job_list_page/domain/use_cases/get_my_job_listings_usecase.dart';
+import 'package:pickme/features/jobs_landing_page/domain/entities/jobs_landing_page_entity.dart';
 import 'package:pickme/features/location/domain/use_cases/location_usecase/get_current_device_location_usecase.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/use_cases/my_bookings_upcoming_usecase/load_bookings_upcoming_usecase.dart';
@@ -96,16 +97,16 @@ class HomeBloc
         try{
             PaginatedCandidateProfileEntity paginatedCandidateProfileEntity = await getPaginatedCandidatesByIndustryUseCase.call(
                 params: GetPaginatedCandidatesByIndustryUseCaseParams(
-                    pageNumber: 1, pageSize: 5,
+                    pageNumber: 1, pageSize: 5, maxDistance: 50
                 ));
             paginatedCandidates = paginatedCandidateProfileEntity;
             jobListingsPageEntity = await getMyJobListingsUseCase.call(params: GetMyJobListingsUseCaseParams(
-maxDistance: 20
+                maxDistance: 50
             ));
             jobCount = ((jobListingsPageEntity?.activeJobs.length??0) + (jobListingsPageEntity?.inactiveJobs.length??0) );
             emit(JobsHiringLandingPageEnteredState()..dataState = DataState.success);
         }catch(ex){
-            emit(JobsHiringLandingPageEnteredState()..dataState = DataState.error);
+            emit(JobsHiringLandingPageEnteredState(error:  ex.toString())..dataState = DataState.error);
         }
     }
 

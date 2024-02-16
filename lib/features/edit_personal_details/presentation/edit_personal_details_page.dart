@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
@@ -54,9 +56,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
     startTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.startTime??"";
     endTimeTextController.text = widget.profileEntity.ratesAndWorkTimesEntity?.endTime??"";
     workPermitController.text = widget.profileEntity.workPermit??"";
-    int count = 0;
     widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity?.workingDaysEntityList?.forEach((element) {
-      getBloc().selectedDays.add(WorkingDaysEntity(id: count.toString(), day: element.day));
       getBloc().add(WorkingDaySelectedEvent(workingDaysEntity: element, profileEntity: widget.profileEntity));
     });
 
@@ -144,7 +144,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                        Padding(
                          padding: const EdgeInsets.only( top: 10, bottom: 10),
                          child: AppTextFormField(
-                           //enabled: false,
+                           enabled: false,
                            //onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
                            //validator:(value)=> validateEmailAddress(value??""),
                            controller: emailAddressController,
@@ -285,6 +285,67 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                      ),
                    ),
                    20.height,
+                   if(Platform.isIOS)
+                     Row(
+                       children: [
+                         Expanded(
+                           child: PrimaryButton(
+                             style: ButtonStyle(
+                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                   return BorderSide(
+                                     color:
+                                     theme.colorScheme.secondary,
+                                     width: 2,
+                                   );
+                                 }
+                                 ),
+                                 backgroundColor: MaterialStateProperty.resolveWith(
+                                         (Set<MaterialState> states) {
+                                       return Colors.white;
+                                     }
+                                 )
+                             ),
+                             onPressed: getBloc().checked?null:() {
+                               context.router.pop();
+                             },
+                             child: Text(getLocalization().cancel,style: TextStyle(color: Colors.black)),
+                           ),
+                         ),
+                         10.width,
+                         Expanded(
+                           child: PrimaryButton(
+                             style: ButtonStyle(
+                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                   return BorderSide(
+                                     color: states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.primary.withOpacity(0):
+                                     theme.colorScheme.primary,
+                                     width: 2,
+                                   );
+                                 }
+                                 ),
+                                 backgroundColor: MaterialStateProperty.resolveWith(
+                                         (Set<MaterialState> states){
+                                       return states.contains(MaterialState.disabled)?
+                                       theme.colorScheme.primary.withOpacity(0.3):
+                                       theme.colorScheme.primary;
+                                     }
+                                 )
+                             ),
+                             onPressed: getBloc().checked?null:() {
+                               widget.profileEntity.email = emailAddressController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.startTime = startTimeTextController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.endTime = endTimeTextController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.hourlyRate = amountTextController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity = WorkingDaysListEntity(workingDaysEntityList: getBloc().selectedDays);
+                               getBloc().add(UpdatePersonalDetailsEvent(profileEntity: widget.profileEntity));
+                             },
+                             child: Text(getLocalization().save),
+                           ),
+                         ),
+                       ],
+                     ),
+                   20.height,
                    AppDivider(),
                    20.height,
                    Text(getLocalization().membership),
@@ -292,7 +353,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    Column(
                      children: mockSubscriptionPlans.map((plan) =>
                          AppSubscriptionPlan(
-                           price: "${getLocalization().r}${plan.price}",
+                           price: "${getLocalization().r}${plan.price.toStringAsFixed(2)}",
                            subscriptionType: plan.subscriptionType,
                            entityType: plan.entityType,
                            selected: true,
@@ -300,6 +361,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                          )).toList(),
                    ),
                    20.height,
+                   if(Platform.isAndroid)
                    Row(
                      children: [
                        Expanded(

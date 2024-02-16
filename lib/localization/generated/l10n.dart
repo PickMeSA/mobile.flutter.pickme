@@ -2100,10 +2100,10 @@ class AppLocalizations {
     );
   }
 
-  /// `We've seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"`
+  /// `We've sent your application to the client. Once accepted, it will appear in your calendar in "My Bookings"`
   String get applicationSenttext {
     return Intl.message(
-      'We\'ve seen your application to the client. Once accepted, it will appear in your calendar in "My Bookings"',
+      'We\'ve sent your application to the client. Once accepted, it will appear in your calendar in "My Bookings"',
       name: 'applicationSenttext',
       desc: '',
       args: [],
@@ -3615,6 +3615,298 @@ class AppLocalizations {
     return Intl.message(
       'Present',
       name: 'present',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success!`
+  String get successEx {
+    return Intl.message(
+      'Success!',
+      name: 'successEx',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your job has been published`
+  String get yourJobHasBeenPublished {
+    return Intl.message(
+      'Your job has been published',
+      name: 'yourJobHasBeenPublished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full name`
+  String get fullName {
+    return Intl.message(
+      'Full name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's begin`
+  String get letsBegin {
+    return Intl.message(
+      'Let\'s begin',
+      name: 'letsBegin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify it's you`
+  String get verifyItsYou {
+    return Intl.message(
+      'Verify it\'s you',
+      name: 'verifyItsYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!`
+  String get weveSentAnEmailToYourEmailAddress {
+    return Intl.message(
+      'We’ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!',
+      name: 'weveSentAnEmailToYourEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I didn't receive a link`
+  String get iDidntReceiveALink {
+    return Intl.message(
+      'I didn\'t receive a link',
+      name: 'iDidntReceiveALink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's get your account verified`
+  String get letsGetYourAccountVerified {
+    return Intl.message(
+      'Let\'s get your account verified',
+      name: 'letsGetYourAccountVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in to your account with your email and password`
+  String get logIntoYourAccountWithYourEmailAndPassword {
+    return Intl.message(
+      'Log in to your account with your email and password',
+      name: 'logIntoYourAccountWithYourEmailAndPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's onboard you!`
+  String get letsOnboardYou {
+    return Intl.message(
+      'Let\'s onboard you!',
+      name: 'letsOnboardYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password*`
+  String get passwordA {
+    return Intl.message(
+      'Password*',
+      name: 'passwordA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password*`
+  String get confirmPasswordA {
+    return Intl.message(
+      'Confirm password*',
+      name: 'confirmPasswordA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password provided is too weak`
+  String get thePasswordProvidedIsTooWeak {
+    return Intl.message(
+      'The password provided is too weak',
+      name: 'thePasswordProvidedIsTooWeak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An account already exists for the email.`
+  String get theAccountAlreadyExistsForThatEmail {
+    return Intl.message(
+      'An account already exists for the email.',
+      name: 'theAccountAlreadyExistsForThatEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's get you up and running again!`
+  String get letsGetYouUpAndRunningAgain {
+    return Intl.message(
+      'Let\'s get you up and running again!',
+      name: 'letsGetYouUpAndRunningAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email address to receive an email with a link to reset your password.`
+  String get enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword {
+    return Intl.message(
+      'Enter your email address to receive an email with a link to reset your password.',
+      name: 'enterYourEmailAddressToReceiveAnEmailWithALinkToResetYourPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password reset link successfully`
+  String get passwordResetLinkSuccessfully {
+    return Intl.message(
+      'Password reset link successfully',
+      name: 'passwordResetLinkSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Later`
+  String get later {
+    return Intl.message(
+      'Later',
+      name: 'later',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An email containing a link to reset your password has been sent to you email address`
+  String
+      get anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress {
+    return Intl.message(
+      'An email containing a link to reset your password has been sent to you email address',
+      name:
+          'anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a password`
+  String get pleaseEnterAPassword {
+    return Intl.message(
+      'Please enter a password',
+      name: 'pleaseEnterAPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a username`
+  String get pleaseEnterAUsername {
+    return Intl.message(
+      'Please enter a username',
+      name: 'pleaseEnterAUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username or password is incorrect`
+  String get usernameOrPasswordIsIncorrect {
+    return Intl.message(
+      'Username or password is incorrect',
+      name: 'usernameOrPasswordIsIncorrect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address profile doesn't exist`
+  String get emailAddressProfileDoesntExist {
+    return Intl.message(
+      'Email address profile doesn\'t exist',
+      name: 'emailAddressProfileDoesntExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!`
+  String get weveSentAnEmailPleaseClickOnTheVerificationLink {
+    return Intl.message(
+      'We\'ve sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!',
+      name: 'weveSentAnEmailPleaseClickOnTheVerificationLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your profile has been successfully set up\n\nWe're super exited to have you join the PickMe community and can't wait to see the amazing things we'll achieve together`
+  String get weAreSuperExcitedToHaveYouJoinThePickMeCommunity {
+    return Intl.message(
+      'Your profile has been successfully set up\n\nWe\'re super exited to have you join the PickMe community and can\'t wait to see the amazing things we\'ll achieve together',
+      name: 'weAreSuperExcitedToHaveYouJoinThePickMeCommunity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Older`
+  String get older {
+    return Intl.message(
+      'Older',
+      name: 'older',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set.`
+  String get theCLientHasSelectedAFlexibleDate {
+    return Intl.message(
+      'The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set.',
+      name: 'theCLientHasSelectedAFlexibleDate',
       desc: '',
       args: [],
     );

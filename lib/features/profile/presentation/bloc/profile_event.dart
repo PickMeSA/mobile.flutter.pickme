@@ -12,3 +12,13 @@ class UpdateUIEvent extends ProfilePageEvent{
 class DeleteProfileEvent extends ProfilePageEvent{
 
 }
+
+class ProfilePictureAddedEvent extends ProfilePageEvent{
+  final String filePath;
+  ProfilePictureAddedEvent({required this.filePath});
+}
+
+class SubmitClickedEvent extends ProfilePageEvent{
+  final String description;
+  SubmitClickedEvent({required this.description});
+}

@@ -11,8 +11,6 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/features/otp/domain/entities/otp_qualification_list_entity.dart';
-import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_award.dart';
 import 'package:pickme/shared/widgets/w_decision_widget.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
@@ -21,6 +19,7 @@ import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'bloc/profile_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 @RoutePage()
 class ProfilePage extends BasePage {
@@ -73,6 +72,35 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
 
           if(state is DeleteProfileState && state.dataState == DataState.success){
             context.router.pushAndPopUntil( const LandingRoute(), predicate: (Route<dynamic> route) => false);
+          }
+
+          ////
+
+          if(state is ProfilePictureAddedState && state.dataState == DataState.loading ){
+            preloader(context);
+          }
+
+          if(state is ProfilePictureAddedState && state.dataState == DataState.error){
+            context.router.pop();
+            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          }
+
+          if(state is ProfilePictureAddedState && state.dataState == DataState.success){
+            getBloc().add(SubmitClickedEvent(description: getBloc().profileEntity!.description!));
+          }
+          //////
+
+          if(state is SubmitClickedState && state.dataState == DataState.loading ){
+          }
+
+          if(state is SubmitClickedState && state.dataState == DataState.error){
+            context.router.pop();
+            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          }
+
+          if(state is SubmitClickedState && state.dataState == DataState.success){
+            context.router.pop();
+            getBloc().add(GetProfileDetailsEvent());
 
           }
         },
@@ -102,10 +130,15 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      (getBloc().profileEntity?.pictureEntity?.url==""|| getBloc().profileEntity?.pictureEntity?.url == null)?
-                      AppImageAvatar.small():
-                      AppImageAvatar.small(
-                        image: CachedNetworkImageProvider(getBloc().profileEntity!.pictureEntity!.url!),
+
+                      InkWell(
+                        onTap: (){
+                          _pickFile();
+                        },
+                        child:(getBloc().profileEntity?.pictureEntity?.url==""|| getBloc().profileEntity?.pictureEntity?.url == null)?
+                        AppImageAvatar.small(): AppImageAvatar.small(
+                          image: CachedNetworkImageProvider(getBloc().profileEntity!.pictureEntity!.url!),
+                        ),
                       ),
                       10.width,
                       Expanded(
@@ -216,7 +249,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                   20.height,
                   if(getBloc().profileEntity!.skills!.isNotEmpty)
                   SizedBox(
-                    height: 150 ,
+                    height: 200 ,
                     child: Center(
                       child: ChipGroup(
                         inputs: getBloc().skills,
@@ -426,6 +459,20 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  Future<void> _pickFile() async {
+   // File? result = await FilePicker.platform.pickFiles();
+    ImagePicker imagePicker = ImagePicker();
+    XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (result != null) {
+        getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
+    } else {
+      // User canceled the file picker
+      // Handle accordingly (e.g., show a message)
+    }
+
   }
 
 
