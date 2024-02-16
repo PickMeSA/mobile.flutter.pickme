@@ -15,6 +15,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -259,6 +260,14 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
             boxTokens.put(current, tokenModel);
             UserModel userModel = UserModel(id: "");
             userModel.id = value.user?.uid;
+            boxProfile.put(current, ProfileModel(
+                workPermitNumber: "",
+                idNumber: "",
+                emailAddress: username,
+                phoneNumber: "",
+                surname: "",
+                firstName: "",
+                passportNumber: ""));
             boxUser.put(current, userModel);
             Navigator.pop(context);
             getBloc().add(LoginContinueClickedEvent());

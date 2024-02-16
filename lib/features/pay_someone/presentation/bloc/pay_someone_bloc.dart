@@ -31,7 +31,8 @@ class PaySomeoneBloc
         UserModel userModel = boxUser.get(current);
         upcomingHireBookingsList.clear();
         try{
-            await loadBookingsUpcomingUseCase.call().then((profileBookings){
+            await loadBookingsUpcomingUseCase.call()
+                .then((profileBookings){
                 profileBookings.forEach((element) {
                     switch(element.status){
                         case JobStatus.cancelled:

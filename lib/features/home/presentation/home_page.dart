@@ -52,10 +52,10 @@ _onRefresh();
 
   void _onRefresh() async{
     ProfileModel profileModel = ProfileModel(
-        workPermitNumber: "",
-        idNumber: "",
-        emailAddress: "",
-        phoneNumber: "phoneNumber",
+        workPermitNumber: widget.profileEntity.workPermit,
+        idNumber: widget.profileEntity.idNumber,
+        emailAddress: widget.profileEntity.email,
+        phoneNumber: widget.profileEntity.mobile,
         surname: widget.profileEntity.surname, firstName: widget.profileEntity.firstName, passportNumber: "");
     boxProfile.put(current, profileModel);
     getBloc().add(JobsHiringLandingPageEnteredEvent());

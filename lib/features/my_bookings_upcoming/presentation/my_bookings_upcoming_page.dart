@@ -8,6 +8,7 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/job_details/presentation/job_details_page.dart';
+import 'package:pickme/features/my_bookings_upcoming/domain/entities/display_entity.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
@@ -188,6 +189,18 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).month,
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).day
                               );
+                            UserModel userModel = boxUser.get(current);
+                              DisplayEntity displayEntity = userModel.type == 'work'? DisplayEntity(
+                                  url: getBloc().upcomingHireBookingsList[index].customer?.profileImage,
+                                  surname: getBloc().upcomingHireBookingsList[index].customer?.surname??"",
+                                  location: getBloc().upcomingHireBookingsList[index].customer?.address??"",
+                                  name: getBloc().upcomingHireBookingsList[index].customer?.firstName??null)
+                                  :DisplayEntity(
+                                  url: getBloc().upcomingHireBookingsList[index].labourerEntity.profileImage,
+                                  surname: getBloc().upcomingHireBookingsList[index].labourerEntity?.surname??"",
+                                  location: getBloc().upcomingHireBookingsList[index].labourerEntity?.address??"",
+                                  name: getBloc().upcomingHireBookingsList[index].labourerEntity?.firstName??null);
+
                               return
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,11 +243,10 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                   ?getBloc().upcomingHireBookingsList[index].proposedAltStartTime:
                               getBloc().upcomingHireBookingsList[index].startTime
                                         ,jobName: getBloc().upcomingHireBookingsList[index].job.title!,
-                                        employerName: getBloc().profileEntity?.type == "Worker"?
-                                          getBloc().upcomingHireBookingsList[index].job.title??"":
-                                        "${getBloc().upcomingHireBookingsList[index].customer?.firstName}"
-                                            "${getBloc().upcomingHireBookingsList[index].customer?.surname}",
-                                        locationName: getBloc().upcomingHireBookingsList[index].job.address??"",
+                                        employerName:
+                                        "${displayEntity.name} "
+                                            "${displayEntity.surname}",
+                                        locationName: getBloc().upcomingHireBookingsList[index].customer?.address??"",
                                         dateTime: getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
                                             || getBloc().upcomingHireBookingsList[index].status == JobStatus.alternativeProposed
                               ?DateTime.parse(getBloc().upcomingHireBookingsList[index].proposedAltStartDate)
@@ -261,8 +273,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                               bookingId: getBloc().upcomingHireBookingsList[index]));
                                         }
                                         },
-                                        image: getBloc().upcomingHireBookingsList[index].customer?.profileImage != null?
-                                        CachedNetworkImageProvider(getBloc().upcomingHireBookingsList[index].customer!.profileImage!):null,
+                                        image: displayEntity.url != null?
+                                        CachedNetworkImageProvider(displayEntity.url!):null,
                                       ),
                                     ),
                                     10.height
@@ -273,7 +285,19 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                        ListView.builder(
                            itemCount: getBloc().completeHireBookingsList.length,
                            itemBuilder: (context , index){
+                             UserModel userModel = boxUser.get(current);
+                             DisplayEntity displayEntity = userModel.type == 'work'? DisplayEntity(
+                                 url: getBloc().completeHireBookingsList[index].customer?.profileImage,
+                                 surname: getBloc().completeHireBookingsList[index].customer?.surname??"",
+                                 location: getBloc().completeHireBookingsList[index].customer?.address??"",
+                                 name: getBloc().completeHireBookingsList[index].customer?.firstName??null)
+                                 :DisplayEntity(
+                                 url: getBloc().completeHireBookingsList[index].labourerEntity.profileImage,
+                                 surname: getBloc().completeHireBookingsList[index].labourerEntity?.surname??"",
+                                 location: getBloc().completeHireBookingsList[index].labourerEntity?.address??"",
+                                 name: getBloc().completeHireBookingsList[index].labourerEntity?.firstName??null);
                              return
+
                                Column(
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
@@ -292,8 +316,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                        jobName: getBloc().completeHireBookingsList[index].job.title!,
                                        employerName: getBloc().profileEntity?.type == "Worker"?
                                        getBloc().completeHireBookingsList[index].job.title??"":
-                                       "${getBloc().completeHireBookingsList[index].customer?.firstName} "
-                                           "${getBloc().completeHireBookingsList[index].customer?.surname}",
+                                       "${displayEntity.name} "
+                                       "${displayEntity.surname}",
                                        locationName: getBloc().completeHireBookingsList[index].job.address??"",
                                        time: getBloc().completeHireBookingsList[index].status == JobStatus.requestedReschedule
                                            || getBloc().completeHireBookingsList[index].status == JobStatus.alternativeProposed
@@ -301,8 +325,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                        getBloc().completeHireBookingsList[index].startTime,
                                        dateTime: DateTime.parse(getBloc().completeHireBookingsList[index].startDate),
                                        onNext: () {  },
-                                       image: getBloc().completeHireBookingsList[index].customer?.profileImage != null?
-                             CachedNetworkImageProvider(getBloc().completeHireBookingsList[index].customer!.profileImage!):null,
+                                       image: displayEntity.url != null?
+                                       CachedNetworkImageProvider(displayEntity.url!):null,
                                      ),
                                    ),
                                    10.height
@@ -313,6 +337,17 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                        ListView.builder(
                            itemCount: getBloc().cancelledHireBookingsList.length,
                            itemBuilder: (context , index){
+                             UserModel userModel = boxUser.get(current);
+                             DisplayEntity displayEntity = userModel.type == 'work'? DisplayEntity(
+                                 url: getBloc().cancelledHireBookingsList[index].customer?.profileImage,
+                                 surname: getBloc().cancelledHireBookingsList[index].customer?.surname??"",
+                                 location: getBloc().cancelledHireBookingsList[index].customer?.address??"",
+                                 name: getBloc().cancelledHireBookingsList[index].customer?.firstName??null)
+                                 :DisplayEntity(
+                                 url: getBloc().cancelledHireBookingsList[index].labourerEntity.profileImage,
+                                 surname: getBloc().cancelledHireBookingsList[index].labourerEntity?.surname??"",
+                                 location: getBloc().cancelledHireBookingsList[index].labourerEntity?.address??"",
+                                 name: getBloc().cancelledHireBookingsList[index].labourerEntity?.firstName??null);
                              return
                                Column(
                                  crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,8 +365,7 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                        jobName: getBloc().cancelledHireBookingsList[index].job.title!,
                                        employerName: getBloc().profileEntity?.type == "Worker"?
                                        getBloc().cancelledHireBookingsList[index].job.title??"":
-                                       "${getBloc().cancelledHireBookingsList[index].customer?.firstName} "
-                                           "${getBloc().cancelledHireBookingsList[index].customer?.surname}",
+                                       "${displayEntity.name} ${displayEntity.surname}",
                                        locationName: getBloc().cancelledHireBookingsList[index].job.address??"",
                                        dateTime: DateTime.parse(getBloc().cancelledHireBookingsList[index].startDate),
                                        time: getBloc().cancelledHireBookingsList[index].status == JobStatus.requestedReschedule
@@ -345,8 +379,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                                jobId: getBloc().cancelledHireBookingsList[index].jobId,
                                                bookingId: getBloc().cancelledHireBookingsList[index]
                                            )),
-                                       image: getBloc().cancelledHireBookingsList[index].customer?.profileImage != null?
-                                       CachedNetworkImageProvider(getBloc().cancelledHireBookingsList[index].customer!.profileImage!):null,
+                                       image: displayEntity.url != null?
+                                       CachedNetworkImageProvider(displayEntity.url!):null,
                                      ),
                                    ),
                                    10.height

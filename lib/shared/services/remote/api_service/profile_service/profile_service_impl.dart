@@ -171,30 +171,32 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     UserModel userModel = boxUser.get(current);
-    userModel.type = otpFullProfileModelResponse.type??"";
+
     if(boxProfile.isNotEmpty) {
       ProfileModel profileModel = boxProfile.get(current);
-      if(otpFullProfileModelResponse.email == profileModel.emailAddress) {
+      if(otpFullProfileModelResponse.email!.toLowerCase() == profileModel.emailAddress!.toLowerCase()) {
         boxProfile.put(current, ProfileModel(
             workPermitNumber: "",
-            idNumber: "",
+            idNumber: otpFullProfileModelResponse.idNumber??"",
             emailAddress: otpFullProfileModelResponse.email ?? "",
             surname: otpFullProfileModelResponse.surname ?? "",
             firstName: otpFullProfileModelResponse.firstName ?? "",
-            passportNumber: "",
-            phoneNumber: ''));
+            passportNumber: otpFullProfileModelResponse.passportNumber??"",
+            phoneNumber: otpFullProfileModelResponse.mobile??""));
         boxUser.put(current, userModel);
+        userModel.type = otpFullProfileModelResponse.type??"";
       }
       }else{
       boxProfile.put(current, ProfileModel(
           workPermitNumber: "",
-          idNumber: "",
+          idNumber: otpFullProfileModelResponse.idNumber??"",
           emailAddress: otpFullProfileModelResponse.email ?? "",
           surname: otpFullProfileModelResponse.surname ?? "",
           firstName: otpFullProfileModelResponse.firstName ?? "",
-          passportNumber: "",
-          phoneNumber: ''));
+          passportNumber: otpFullProfileModelResponse.passportNumber??"",
+          phoneNumber: otpFullProfileModelResponse.mobile??""));
       boxUser.put(current, userModel);
+      userModel.type = otpFullProfileModelResponse.type??"";
       }
 
     return ProfileEntity(
