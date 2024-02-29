@@ -160,6 +160,7 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
               20.height,
                AppTextFormField(controller: startTimeTextController,
                  onChanged: (value){} ,
+                 readOnly: true,
                  textFieldType: TextFieldType.NUMBER,
                  labelText: getLocalization().timeFormat,
                  suffix: InkWell(

@@ -346,6 +346,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    IdReasonRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const IdReasonPage(),
+      );
+    },
     JobDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<JobDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -1883,6 +1889,20 @@ class HomeRouteArgs {
   String toString() {
     return 'HomeRouteArgs{profileEntity: $profileEntity, controller: $controller, key: $key}';
   }
+}
+
+/// generated route for
+/// [IdReasonPage]
+class IdReasonRoute extends PageRouteInfo<void> {
+  const IdReasonRoute({List<PageRouteInfo>? children})
+      : super(
+          IdReasonRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'IdReasonRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

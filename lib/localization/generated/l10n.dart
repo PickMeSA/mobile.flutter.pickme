@@ -140,10 +140,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Passport number *`
+  /// `Passport number `
   String get passportNumberA {
     return Intl.message(
-      'Passport number *',
+      'Passport number ',
       name: 'passportNumberA',
       desc: '',
       args: [],
@@ -160,10 +160,10 @@ class AppLocalizations {
     );
   }
 
-  /// `ID number *`
+  /// `ID number `
   String get idNumber {
     return Intl.message(
-      'ID number *',
+      'ID number ',
       name: 'idNumber',
       desc: '',
       args: [],
@@ -190,10 +190,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Work permit number *`
+  /// `Work permit number `
   String get workPermitNumber {
     return Intl.message(
-      'Work permit number *',
+      'Work permit number ',
       name: 'workPermitNumber',
       desc: '',
       args: [],
@@ -3907,6 +3907,136 @@ class AppLocalizations {
     return Intl.message(
       'The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set.',
       name: 'theCLientHasSelectedAFlexibleDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `00:00`
+  String get timeHint {
+    return Intl.message(
+      '00:00',
+      name: 'timeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Why the below details are important to us`
+  String get whyWeNeedYourId {
+    return Intl.message(
+      'Why the below details are important to us',
+      name: 'whyWeNeedYourId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Online ID verification: the global process for remote identification`
+  String get onlineIdVerification {
+    return Intl.message(
+      'Online ID verification: the global process for remote identification',
+      name: 'onlineIdVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID verification, ID check or identity verification is the process that ensures a person is who they are supposed to be. But… How to guarantee safety when this process is done online?`
+  String get idVerificationIdChecksOrIdentityVerification {
+    return Intl.message(
+      'ID verification, ID check or identity verification is the process that ensures a person is who they are supposed to be. But… How to guarantee safety when this process is done online?',
+      name: 'idVerificationIdChecksOrIdentityVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity is the attribute of identical, the exact correspondence of one thing with another when compared. It is the set of unique traits and characteristics associated with a unique and irreplaceable individual. This turns essential when we talk about people and especially within the online environment, where identity theft is a more common phenomenon than we realize.`
+  String get identityIsTheAttribute {
+    return Intl.message(
+      'Identity is the attribute of identical, the exact correspondence of one thing with another when compared. It is the set of unique traits and characteristics associated with a unique and irreplaceable individual. This turns essential when we talk about people and especially within the online environment, where identity theft is a more common phenomenon than we realize.',
+      name: 'identityIsTheAttribute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `So how does it work?`
+  String get soHowDoesItWork {
+    return Intl.message(
+      'So how does it work?',
+      name: 'soHowDoesItWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We implement security safeguards designed to protect your data. We regularly monitor our systems for possible vulnerabilities and attacks. As well as having a strict privacy policy in place, we also encrypt your data using an encryption tool. This converts your information into a series of complex numbers, meaning that even your data is shared, it cannot be read by hackers or the general public.`
+  String get weImplementSecurity {
+    return Intl.message(
+      'We implement security safeguards designed to protect your data. We regularly monitor our systems for possible vulnerabilities and attacks. As well as having a strict privacy policy in place, we also encrypt your data using an encryption tool. This converts your information into a series of complex numbers, meaning that even your data is shared, it cannot be read by hackers or the general public.',
+      name: 'weImplementSecurity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `So how does this work in reality?`
+  String get soHowDoesThisWorkInReality {
+    return Intl.message(
+      'So how does this work in reality?',
+      name: 'soHowDoesThisWorkInReality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `When a user register on the app, with his/her Identity or passport number the user’s identity is instantly verified by our third-party partner.\nThe authenticity of these documents and the identity of the person is verified by a government or official institution to confirm the physical document is legitimate and not a fake.\nThe user’s identity has been verified and the user’s credentials serve as proof that the user is who they say they are.\nThe user is now registered and can start using the PickMe’s products and services.`
+  String get whenAUserRegistersOnTheApp {
+    return Intl.message(
+      'When a user register on the app, with his/her Identity or passport number the user’s identity is instantly verified by our third-party partner.\nThe authenticity of these documents and the identity of the person is verified by a government or official institution to confirm the physical document is legitimate and not a fake.\nThe user’s identity has been verified and the user’s credentials serve as proof that the user is who they say they are.\nThe user is now registered and can start using the PickMe’s products and services.',
+      name: 'whenAUserRegistersOnTheApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Why does PickMe need my Work Permit number?`
+  String get whyDoesPickMeNeedMyWorkPermitNumber {
+    return Intl.message(
+      'Why does PickMe need my Work Permit number?',
+      name: 'whyDoesPickMeNeedMyWorkPermitNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Foreign nationals require a work permit or work visa to legally be able to work in most countries.`
+  String get foreignNationalRequiresAWork {
+    return Intl.message(
+      'Foreign nationals require a work permit or work visa to legally be able to work in most countries.',
+      name: 'foreignNationalRequiresAWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A mandatory ID/Passport check ensures that there is a real person behind a process and proves that they are who they claim to be. This prevents anyone from carrying out a process in apps and online platforms on other people’s behalf without authorization, creating false identities, or committing fraud.\nThankfully, nowadays most online ID verification solutions can safely and accurately carry out global verification and identity checks online for users and companies all around the world, with even greater legitimacy than the traditional process.`
+  String get aMandatoryIdPassport {
+    return Intl.message(
+      'A mandatory ID/Passport check ensures that there is a real person behind a process and proves that they are who they claim to be. This prevents anyone from carrying out a process in apps and online platforms on other people’s behalf without authorization, creating false identities, or committing fraud.\nThankfully, nowadays most online ID verification solutions can safely and accurately carry out global verification and identity checks online for users and companies all around the world, with even greater legitimacy than the traditional process.',
+      name: 'aMandatoryIdPassport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How do I know if my data is secure?`
+  String get howDoiKnowIfMyDataIsSecure {
+    return Intl.message(
+      'How do I know if my data is secure?',
+      name: 'howDoiKnowIfMyDataIsSecure',
       desc: '',
       args: [],
     );

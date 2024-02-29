@@ -47,6 +47,7 @@ class PickMeApp{
       MediaQuery(
         data: windowData,
         child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           useInheritedMediaQuery: true,
          routerConfig: _appRouter.config(),
           localizationsDelegates:  const [
