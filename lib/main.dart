@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'core/PickMeApp.dart';
 
 void main() {

@@ -228,6 +228,8 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                     // onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                      textFieldType: TextFieldType.NUMBER,
                      labelText: getLocalization().startTime,
+                     hint: getLocalization().timeHint,
+                     readOnly: true,
                      suffix: InkWell(
                          onTap:() async{
                            TimeOfDay? timeofDay = await showTimePicker(
@@ -243,6 +245,8 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                     // onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                      textFieldType: TextFieldType.NUMBER,
                      labelText: getLocalization().endTime,
+                     hint: getLocalization().timeHint,
+                     readOnly: true,
                      suffix: InkWell(
                          onTap: ()async{
                            TimeOfDay? timeOfDay = await showTimePicker(

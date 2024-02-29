@@ -295,6 +295,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               8.height,
                               AppTextFormField(controller: startTimeTextController,
                                 onChanged: (value)=> debugPrint(value),
+                                readOnly:  true,
                                 textFieldType: TextFieldType.NUMBER,
                                 labelText: getLocalization().startTime,
                                 suffix: InkWell(
@@ -497,6 +498,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
               height: 450,
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
               child: PlacePicker(
+                ignoreLocationPermissionErrors: true,
                 apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
                 onPlacePicked: (result) {
                   getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));
