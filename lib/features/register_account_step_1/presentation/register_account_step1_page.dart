@@ -82,7 +82,7 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                     children: [
                       Expanded(
                         child: wText(
-                          getLocalization().selectMembership,
+                          getLocalization().letsOnboardYou,
                           style: theme.textTheme.headlineLarge!.copyWith(
                             fontWeight: FontWeight.w300
                           ),

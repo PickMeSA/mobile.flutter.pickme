@@ -353,8 +353,6 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    20.height,
                    AppDivider(),
                    20.height,
-                   Text(getLocalization().membership),
-                   20.height,
                    Column(
                      children: mockSubscriptionPlans.map((plan) =>
                          AppSubscriptionPlan(
