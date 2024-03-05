@@ -71,8 +71,6 @@ android {
                     shrinkResources true
                 }
            }
-
-        namespace 'co.za.pickme.app'
     }
 
 }
