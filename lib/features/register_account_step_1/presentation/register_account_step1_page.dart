@@ -88,11 +88,6 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                           ),
                         ),
                       ),
-                      TertiaryButton(onPressed: (){
-                        context.router.push(const MembershipInformationRoute());
-                      },
-                          child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,)
-                      )
                     ],
                   ),
                   30.height,
@@ -104,6 +99,7 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                       entityType: plan.entityType,
                       selected: true,
                       includedItems: plan.includedItems,
+                          onInformationClick: ()=>context.router.push(const MembershipInformationRoute()),
                     )).toList(),
                   ),
                   10.height,
