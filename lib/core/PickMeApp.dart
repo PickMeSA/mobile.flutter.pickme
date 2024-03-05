@@ -81,7 +81,7 @@ String selectEnvironment(Environment env)  {
     default :
       environment = "development.json";
   }
-  return "environment/$environment";
+  return "environments/$environment";
 }
 
 Future<Map<String, dynamic>> readEnvironment(String uri)async{
