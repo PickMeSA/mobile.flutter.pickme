@@ -13,6 +13,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -352,8 +353,6 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                    20.height,
                    AppDivider(),
                    20.height,
-                   Text(getLocalization().membership),
-                   20.height,
                    Column(
                      children: mockSubscriptionPlans.map((plan) =>
                          AppSubscriptionPlan(
@@ -362,6 +361,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                            entityType: plan.entityType,
                            selected: true,
                            includedItems: plan.includedItems,
+                           onInformationClick: ()=>context.router.push(const MembershipInformationRoute()),
                          )).toList(),
                    ),
                    20.height,
