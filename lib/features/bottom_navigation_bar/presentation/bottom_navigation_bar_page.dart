@@ -138,7 +138,7 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
       )
       ,
       PersistentBottomNavBarItem(
-        icon: const Icon(Iconsax.profile),
+        icon: const Icon(Iconsax.frame_1),
         title: (getLocalization().profile),
         activeColorPrimary: theme.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
