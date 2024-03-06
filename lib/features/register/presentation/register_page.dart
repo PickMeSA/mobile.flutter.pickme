@@ -295,7 +295,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                 )
                             ),
 
-                            onPressed: !getBloc().checked!?null:() {
+                            onPressed: !getBloc().checked! ? null :() {
                               if(_formKey.currentState!.validate()) {
                                 authenticate(mobileNumber: "${getLocalization().phonePrefix}${phoneNumberController.text}");
                                 /*  */
@@ -321,14 +321,23 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
   }
 
   Future<void> authenticate({ required String mobileNumber})  async {
+    dismissLoadingIndicator() {
+      if(getBloc().preloader) {
+        Navigator.pop(context);
+        getBloc().preloader = false;
+      }
+    }
+
     if(!getBloc().preloader) {
       preloader(context);
       getBloc().preloader = true;
     }
+
     await widget.firebaseAuth.verifyPhoneNumber(
       phoneNumber: mobileNumber,
       timeout: const Duration(minutes: 1),
-      verificationCompleted: (PhoneAuthCredential credential) async{
+      verificationCompleted: (PhoneAuthCredential credential) async {
+
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
           await value.user!.getIdToken(true).then((value1) {
 
@@ -336,13 +345,11 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
         });
       },
       verificationFailed: (FirebaseAuthException e) {
+        dismissLoadingIndicator();
         wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
       },
       codeSent: (String verificationId, int? resendToken) async {
-        if(getBloc().preloader) {
-          Navigator.pop(context);
-          getBloc().preloader = false;
-        }
+         dismissLoadingIndicator();
          context.router.push(OTPRoute(
          verificationId: verificationId,
             userModel: getGetUserModel(),
