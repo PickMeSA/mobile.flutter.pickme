@@ -1,0 +1,12 @@
+{
+  "app_colors": {
+    "primary_color": "0xFF3EB62B",
+    "neutral": "0xFF111828",
+    "secondary_one": "0xFF23A8B3",
+    "secondary_two": "0xFFF44F4E",
+    "secondary_three": "0xFFF17E2C",
+    "secondary_four": "0xFFFCCB2D"
+  },
+  "digital_oceans":{
+    "base_url" : "https://api-dev.pick-me.co.za/api/",
+    "version": "v1"
