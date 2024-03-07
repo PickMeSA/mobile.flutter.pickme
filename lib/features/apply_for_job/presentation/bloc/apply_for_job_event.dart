@@ -1,10 +1,10 @@
 part of 'apply_for_job_bloc.dart';
- @immutable
+@immutable
 abstract class ApplyForJobPageEvent extends BaseEvent {}
 
 class ApplyForJobPageEnteredEvent extends ApplyForJobPageEvent{
   final JobEntity jobEntity;
- ApplyForJobPageEnteredEvent({required this.jobEntity});
+  ApplyForJobPageEnteredEvent({required this.jobEntity});
 }
 
 class ApplyForJobClickedEvent extends ApplyForJobPageEvent{
@@ -21,14 +21,14 @@ class ApplyForJobClickedEvent extends ApplyForJobPageEvent{
 }
 
 class UpdateJobDateTimeEvent extends ApplyForJobPageEvent{
-   final JobEntity jobEntity;
-   final DateAndTime dateAndTime;
+  final JobEntity jobEntity;
+  final DateAndTime dateAndTime;
 
-   UpdateJobDateTimeEvent({required this.jobEntity, required this.dateAndTime});
+  UpdateJobDateTimeEvent({required this.jobEntity, required this.dateAndTime});
 }
 
 class RespondToJobInterestEvent extends ApplyForJobPageEvent{
-   final JobEntity jobEntity;
+  final JobEntity jobEntity;
   final String status;
   RespondToJobInterestEvent({required this.jobEntity,required this.status});
 }

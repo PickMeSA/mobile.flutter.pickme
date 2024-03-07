@@ -27,7 +27,7 @@ class PickMeApp{
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    await saveBaseUrls();
+    await _saveBaseUrls();
     await configFlavor(await readEnvironment(selectEnvironment(env)));
     await initHive();
     setupLocators();
@@ -66,7 +66,7 @@ class PickMeApp{
     );
   }
 }
-saveBaseUrls()async {
+_saveBaseUrls()async {
   var pref = await SecureSharedPref.getInstance();
   //save environment to secure shared preferences
   Map<String, dynamic> devEnvData = await readEnvironment(selectEnvironment(Environment.dev));
@@ -107,7 +107,7 @@ Future<Map<String, dynamic>> readEnvironment(String uri)async{
     return {"error": ex.toString()};
   }
 }
-Future<void> initAPIEnvironment(Map<String,dynamic> data) async{
+Future<void> _initAPIEnvironment(Map<String,dynamic> data) async{
   var pref = await SecureSharedPref.getInstance();
   pref.putString("base_url", data["digital_oceans"]["base_url"], isEncrypted : true);
   pref.putString("api_version", data["digital_oceans"]["version"], isEncrypted : true);
@@ -115,7 +115,7 @@ Future<void> initAPIEnvironment(Map<String,dynamic> data) async{
 
 configFlavor (Map<String,dynamic> data) async  {
   logger.d(data);
-  await initAPIEnvironment(data);
+  await _initAPIEnvironment(data);
   var pref = await SecureSharedPref.getInstance();
   var base_url = await pref.getString("base_url", isEncrypted : true);
 

@@ -5,7 +5,7 @@ class DateAndTime {
   final String startTime;
   final String comments;
 
-  DateAndTime({
+  const DateAndTime({
     required this.startDate,
     required this.startTime,
     required this.endDate,

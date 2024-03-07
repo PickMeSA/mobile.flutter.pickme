@@ -40,7 +40,7 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
     getBloc().add(ApplyForJobPageEnteredEvent(jobEntity: widget.job));
   }
 
-    @override
+  @override
   PreferredSizeWidget? buildAppbar() {
     return null;
   }
@@ -65,12 +65,7 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
         if(state is UpdateJobDateTimeState && state.dataState == DataState.success){
           getBloc().add(RespondToJobInterestEvent(jobEntity: widget.job, status: "booked"));
         }
-        ///////////////////////////////////////////
 
-        if(state is RespondToJobInterestState && state.dataState == DataState.loading){
-
-
-        }
         if(state is RespondToJobInterestState && state.dataState == DataState.error){
           getBloc().preloaderActive = false;
           Navigator.pop(context);
@@ -111,128 +106,128 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
         }
       },
       builder: (context, state) {
-         return Padding(
-           padding: const EdgeInsets.all(20.0),
-           child: Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-             children: [
-               Row(
-                 children: [
-                   InkWell(onTap: ()=> context.router.pop(),child: Icon(Icons.arrow_back_rounded)),
-                   10.width,
-                   wText(widget.job.jobInterestStatus == "offered"?getLocalization().accept: getLocalization().apply, style: theme.textTheme.subtitle1),
-                   Spacer(),
-                   InkWell(
-                     onTap: (){
-                       context.router.push(ApplyForJobToolTipRoute());
-                     },
-                       child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,))
-                 ],
-               ),
-               20.height,
-               wText(widget.job.jobInterestStatus == "offered"?getLocalization().theCLientHasSelectedAFlexibleDate:getLocalization().dateAndTime, style: theme.textTheme.titleSmall),
-               40.height,
-               Row(
-                 children: [
-                   SizedBox(
-                     width: (MediaQuery.sizeOf(context).width/2)-30,
-                     child: DateTextBox(
-                         labelText: getLocalization().dateFormat,
-                         controller: startDateController,
-                         onDateSelected: (DateTime dateTime){
-                           startDate = dateTime;
-                           startDateController.text = DateFormatters.getWordDate(dateTime);
-                         }),
-                   ),
-                   20.width,
-                   SizedBox(
-                     width: (MediaQuery.sizeOf(context).width/2)-30,
-                     child: DateTextBox(
-                         labelText: getLocalization().dateFormat,
-                         controller: endDateController,
-                         onDateSelected: (DateTime dateTime){
-                           endDate= dateTime;
-                           endDateController.text = DateFormatters.getWordDate(dateTime);
-                         }),
-                   ),
-                 ],
-               ),
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  InkWell(onTap: ()=> context.router.pop(),child: Icon(Icons.arrow_back_rounded)),
+                  10.width,
+                  wText(widget.job.jobInterestStatus == "offered"?getLocalization().accept: getLocalization().apply, style: theme.textTheme.subtitle1),
+                  Spacer(),
+                  InkWell(
+                      onTap: (){
+                        context.router.push(ApplyForJobToolTipRoute());
+                      },
+                      child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,))
+                ],
+              ),
               20.height,
-               AppTextFormField(controller: startTimeTextController,
-                 onChanged: (value){} ,
-                 readOnly: true,
-                 textFieldType: TextFieldType.NUMBER,
-                 labelText: getLocalization().timeFormat,
-                 suffix: InkWell(
-                     onTap:() async{
-                       TimeOfDay? timeofDay = await showTimePicker(
-                           context: context,
-                           initialTime:  TimeOfDay.now(),
-                           initialEntryMode: TimePickerEntryMode.inputOnly);
-                       startTimeTextController.text =
-                       "${timeofDay?.hour}:${timeofDay!.minute < 10? "0${timeofDay?.minute}": timeofDay.minute}";
-                     },
-                     child: const Icon(Iconsax.clock)),),
+              wText(widget.job.jobInterestStatus == "offered"?getLocalization().theCLientHasSelectedAFlexibleDate:getLocalization().dateAndTime, style: theme.textTheme.titleSmall),
+              40.height,
+              Row(
+                children: [
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width/2)-30,
+                    child: DateTextBox(
+                        labelText: getLocalization().dateFormat,
+                        controller: startDateController,
+                        onDateSelected: (DateTime dateTime){
+                          startDate = dateTime;
+                          startDateController.text = DateFormatters.getWordDate(dateTime);
+                        }),
+                  ),
+                  20.width,
+                  SizedBox(
+                    width: (MediaQuery.sizeOf(context).width/2)-30,
+                    child: DateTextBox(
+                        labelText: getLocalization().dateFormat,
+                        controller: endDateController,
+                        onDateSelected: (DateTime dateTime){
+                          endDate= dateTime;
+                          endDateController.text = DateFormatters.getWordDate(dateTime);
+                        }),
+                  ),
+                ],
+              ),
+              20.height,
+              AppTextFormField(controller: startTimeTextController,
+                onChanged: (value){} ,
+                readOnly: true,
+                textFieldType: TextFieldType.NUMBER,
+                labelText: getLocalization().timeFormat,
+                suffix: InkWell(
+                    onTap:() async{
+                      TimeOfDay? timeofDay = await showTimePicker(
+                          context: context,
+                          initialTime:  TimeOfDay.now(),
+                          initialEntryMode: TimePickerEntryMode.inputOnly);
+                      startTimeTextController.text =
+                      "${timeofDay?.hour}:${timeofDay!.minute < 10? "0${timeofDay?.minute}": timeofDay.minute}";
+                    },
+                    child: const Icon(Iconsax.clock)),),
 
-               20.height,
+              20.height,
 
-               AppTextFormField(
-                   controller: commentController,
-                   keyboardType: TextInputType.multiline,
-                   labelText: getLocalization().otherCommentsOptional,
-                   textFieldType: TextFieldType.USERNAME,
-                   maxLines: 10,maxLength: 2000),
-               Spacer(),
-               20.height,
-               PrimaryButton(
-                 width: MediaQuery.sizeOf(context).width,
-                 style: ButtonStyle(
-                     side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                       return BorderSide(
-                         color: theme.colorScheme.primary,
-                         width: 2,
-                       );
-                     }
-                     ),
-                     backgroundColor: MaterialStateProperty.resolveWith(
-                             (Set<MaterialState> states){
-                           return theme.colorScheme.primary;
-                         }
-                     )
-                 ),
-                 onPressed:() {
-                   if(startDateController.text.isEmpty || endDateController.text.isEmpty || startTimeTextController.text.isEmpty){
-                     wErrorPopUp(message: "Please ensure all fields are populated", type: "Error", context: context);
-                   }else{
-                     if(startDate.isAfter(endDate)){
-                       wErrorPopUp(message: "Start date should be before end date", type: "Error", context: context);
-                     }else{
-                       if(widget.job.jobInterestStatus == "offered") {
-                         getBloc().add(UpdateJobDateTimeEvent(
-                             jobEntity: widget.job,
-                         dateAndTime: DateAndTime(
-                           startDate: startDate,
-                           endDate: endDate,
-                           startTime: startTimeTextController.text,
-                           comments: commentController.text,
-                         )));
-                       }else {
-                         getBloc().add(ApplyForJobClickedEvent(
-                           startDate: startDate,
-                           endDate: endDate,
-                           startTime: startTimeTextController.text,
-                           comments: commentController.text,
-                         ));
-                       }
-                     }
-                   }
-                 },
-                 child: Text(widget.job.jobInterestStatus == "offered"?getLocalization().accept:getLocalization().apply),
-               ),
+              AppTextFormField(
+                  controller: commentController,
+                  keyboardType: TextInputType.multiline,
+                  labelText: getLocalization().otherCommentsOptional,
+                  textFieldType: TextFieldType.USERNAME,
+                  maxLines: 10,maxLength: 2000),
+              Spacer(),
+              20.height,
+              PrimaryButton(
+                width: MediaQuery.sizeOf(context).width,
+                style: ButtonStyle(
+                    side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                      return BorderSide(
+                        color: theme.colorScheme.primary,
+                        width: 2,
+                      );
+                    }
+                    ),
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                            (Set<MaterialState> states){
+                          return theme.colorScheme.primary;
+                        }
+                    )
+                ),
+                onPressed:() {
+                  if(startDateController.text.isEmpty || endDateController.text.isEmpty || startTimeTextController.text.isEmpty){
+                    wErrorPopUp(message: "Please ensure all fields are populated", type: "Error", context: context);
+                  }else{
+                    if(startDate.isAfter(endDate)){
+                      wErrorPopUp(message: "Start date should be before end date", type: "Error", context: context);
+                    }else{
+                      if(widget.job.jobInterestStatus == "offered") {
+                        getBloc().add(UpdateJobDateTimeEvent(
+                            jobEntity: widget.job,
+                            dateAndTime: DateAndTime(
+                              startDate: startDate,
+                              endDate: endDate,
+                              startTime: startTimeTextController.text,
+                              comments: commentController.text,
+                            )));
+                      }else {
+                        getBloc().add(ApplyForJobClickedEvent(
+                          startDate: startDate,
+                          endDate: endDate,
+                          startTime: startTimeTextController.text,
+                          comments: commentController.text,
+                        ));
+                      }
+                    }
+                  }
+                },
+                child: Text(widget.job.jobInterestStatus == "offered"?getLocalization().accept:getLocalization().apply),
+              ),
 
-             ],
-           ),
-         );
+            ],
+          ),
+        );
       },
     );
   }
@@ -247,6 +242,5 @@ class _ApplyForJobPageState extends BasePageState<ApplyForJobPage, ApplyForJobBl
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
-
+  
 }
