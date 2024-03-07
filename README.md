@@ -65,29 +65,6 @@ Android: API 34
 IOS: IOS 11
 Cocoapods:  1.13.0
 
-
-
-## App Store credentials
-
-Apple developer console admin account :
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
-Android developer console admin account:
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
-
-## Github credentials
-   Username: attie@pick-me.co.za
-   Password: Celandri@my2
-
-
-
-## Codemagic credentials
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
 ## Application architecture
 
 The PickMe application was built using the Clean Architecture as the project must still scale in functionality and this allows very simple maintainability.
