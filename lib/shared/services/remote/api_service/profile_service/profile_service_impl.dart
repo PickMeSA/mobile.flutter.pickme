@@ -62,6 +62,7 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> getRemoteProfileData({String? userId}) async{
     try {
+      await initialiseAPIURLs();
       Response<dynamic> response;
       if (userId == null) {
         UserModel userModel = boxUser.get(current);
