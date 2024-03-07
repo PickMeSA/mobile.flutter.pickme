@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.dart';
 
@@ -170,17 +171,34 @@ class ProfileServiceImpl extends ProfileService{
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
     UserModel userModel = boxUser.get(current);
-    userModel.type = otpFullProfileModelResponse.type??"";
 
-    boxProfile.put(current, ProfileModel(
-        workPermitNumber: "",
-        idNumber:  "",
-        emailAddress: "",
-        surname: otpFullProfileModelResponse.surname??"",
-        firstName: otpFullProfileModelResponse.firstName??"",
-        passportNumber: "",
-        phoneNumber: '' ));
-    boxUser.put(current, userModel);
+    if(boxProfile.isNotEmpty) {
+      ProfileModel profileModel = boxProfile.get(current);
+      if(otpFullProfileModelResponse.email!.toLowerCase() == profileModel.emailAddress!.toLowerCase()) {
+        boxProfile.put(current, ProfileModel(
+            workPermitNumber: "",
+            idNumber: otpFullProfileModelResponse.idNumber??"",
+            emailAddress: otpFullProfileModelResponse.email ?? "",
+            surname: otpFullProfileModelResponse.surname ?? "",
+            firstName: otpFullProfileModelResponse.firstName ?? "",
+            passportNumber: otpFullProfileModelResponse.passportNumber??"",
+            phoneNumber: otpFullProfileModelResponse.mobile??""));
+        boxUser.put(current, userModel);
+        userModel.type = otpFullProfileModelResponse.type??"";
+      }
+      }else{
+      boxProfile.put(current, ProfileModel(
+          workPermitNumber: "",
+          idNumber: otpFullProfileModelResponse.idNumber??"",
+          emailAddress: otpFullProfileModelResponse.email ?? "",
+          surname: otpFullProfileModelResponse.surname ?? "",
+          firstName: otpFullProfileModelResponse.firstName ?? "",
+          passportNumber: otpFullProfileModelResponse.passportNumber??"",
+          phoneNumber: otpFullProfileModelResponse.mobile??""));
+      boxUser.put(current, userModel);
+      userModel.type = otpFullProfileModelResponse.type??"";
+      }
+
     return ProfileEntity(
       pictureEntity: UploadedFileEntity.fromResponse(response: otpFullProfileModelResponse?.profilePicture??
           const UploadFileResponse(url: "", ref: "", id: -1)),

@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
@@ -11,6 +13,7 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -142,7 +145,7 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                        Padding(
                          padding: const EdgeInsets.only( top: 10, bottom: 10),
                          child: AppTextFormField(
-                           //enabled: false,
+                           enabled: false,
                            //onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
                            //validator:(value)=> validateEmailAddress(value??""),
                            controller: emailAddressController,
@@ -226,6 +229,8 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                     // onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                      textFieldType: TextFieldType.NUMBER,
                      labelText: getLocalization().startTime,
+                     hint: getLocalization().timeHint,
+                     readOnly: true,
                      suffix: InkWell(
                          onTap:() async{
                            TimeOfDay? timeofDay = await showTimePicker(
@@ -241,6 +246,8 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                     // onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                      textFieldType: TextFieldType.NUMBER,
                      labelText: getLocalization().endTime,
+                     hint: getLocalization().timeHint,
+                     readOnly: true,
                      suffix: InkWell(
                          onTap: ()async{
                            TimeOfDay? timeOfDay = await showTimePicker(
@@ -283,9 +290,68 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                      ),
                    ),
                    20.height,
-                   AppDivider(),
+                   if(Platform.isIOS)
+                     Row(
+                       children: [
+                         Expanded(
+                           child: PrimaryButton(
+                             style: ButtonStyle(
+                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                   return BorderSide(
+                                     color:
+                                     theme.colorScheme.secondary,
+                                     width: 2,
+                                   );
+                                 }
+                                 ),
+                                 backgroundColor: MaterialStateProperty.resolveWith(
+                                         (Set<MaterialState> states) {
+                                       return Colors.white;
+                                     }
+                                 )
+                             ),
+                             onPressed: getBloc().checked?null:() {
+                               context.router.pop();
+                             },
+                             child: Text(getLocalization().cancel,style: TextStyle(color: Colors.black)),
+                           ),
+                         ),
+                         10.width,
+                         Expanded(
+                           child: PrimaryButton(
+                             style: ButtonStyle(
+                                 side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                                   return BorderSide(
+                                     color: states.contains(MaterialState.disabled)?
+                                     theme.colorScheme.primary.withOpacity(0):
+                                     theme.colorScheme.primary,
+                                     width: 2,
+                                   );
+                                 }
+                                 ),
+                                 backgroundColor: MaterialStateProperty.resolveWith(
+                                         (Set<MaterialState> states){
+                                       return states.contains(MaterialState.disabled)?
+                                       theme.colorScheme.primary.withOpacity(0.3):
+                                       theme.colorScheme.primary;
+                                     }
+                                 )
+                             ),
+                             onPressed: getBloc().checked?null:() {
+                               widget.profileEntity.email = emailAddressController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.startTime = startTimeTextController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.endTime = endTimeTextController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.hourlyRate = amountTextController.text;
+                               widget.profileEntity.ratesAndWorkTimesEntity?.workingDaysListEntity = WorkingDaysListEntity(workingDaysEntityList: getBloc().selectedDays);
+                               getBloc().add(UpdatePersonalDetailsEvent(profileEntity: widget.profileEntity));
+                             },
+                             child: Text(getLocalization().save),
+                           ),
+                         ),
+                       ],
+                     ),
                    20.height,
-                   Text(getLocalization().membership),
+                   AppDivider(),
                    20.height,
                    Column(
                      children: mockSubscriptionPlans.map((plan) =>
@@ -295,9 +361,11 @@ class _EditPersonalDetailsPageState extends BasePageState<EditPersonalDetailsPag
                            entityType: plan.entityType,
                            selected: true,
                            includedItems: plan.includedItems,
+                           onInformationClick: ()=>context.router.push(const MembershipInformationRoute()),
                          )).toList(),
                    ),
                    20.height,
+                   if(Platform.isAndroid)
                    Row(
                      children: [
                        Expanded(

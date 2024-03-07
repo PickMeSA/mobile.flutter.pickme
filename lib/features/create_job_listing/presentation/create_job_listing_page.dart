@@ -295,6 +295,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                               8.height,
                               AppTextFormField(controller: startTimeTextController,
                                 onChanged: (value)=> debugPrint(value),
+                                readOnly:  true,
                                 textFieldType: TextFieldType.NUMBER,
                                 labelText: getLocalization().startTime,
                                 suffix: InkWell(
@@ -409,7 +410,16 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
                       padding: EdgeInsets.all(24),
                       child: PrimaryButtonDark.fullWidth(
                         onPressed: !isValid()?null:(){
-                          if(jobTitleController.text.isEmptyOrNull){
+                          if(!getBloc().flexibleHoursChecked && startDateController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Please select start date", type: getLocalization().error, context: context);
+                            return;
+                          }else if(!getBloc().flexibleHoursChecked && endDateController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Please select end date", type: getLocalization().error, context: context);
+                            return;
+                          }else if(!getBloc().flexibleHoursChecked && startTimeTextController.text.isEmptyOrNull){
+                            wErrorPopUp(message: "Please select start time", type: getLocalization().error, context: context);
+                            return;
+                          }else if(jobTitleController.text.isEmptyOrNull){
                             wErrorPopUp(message: "Job title cannot be empty", type: getLocalization().error, context: context);
                             return;
                           }else if(jobDescriptionController.text.isEmptyOrNull){
@@ -488,6 +498,7 @@ class _MyJobListingsPageState extends BasePageState<CreateJobListingPage, Create
               height: 450,
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
               child: PlacePicker(
+                ignoreLocationPermissionErrors: true,
                 apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
                 onPlacePicked: (result) {
                   getBloc().add(LocationSelectedEvent(otpLocationEntity:getLocation(result)));

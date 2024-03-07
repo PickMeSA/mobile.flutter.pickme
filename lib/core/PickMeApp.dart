@@ -47,6 +47,7 @@ class PickMeApp{
       MediaQuery(
         data: windowData,
         child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           useInheritedMediaQuery: true,
          routerConfig: _appRouter.config(),
           localizationsDelegates:  const [
@@ -80,7 +81,7 @@ String selectEnvironment(Environment env)  {
     default :
       environment = "development.json";
   }
-  return "environment/$environment";
+  return "environments/$environment";
 }
 
 Future<Map<String, dynamic>> readEnvironment(String uri)async{

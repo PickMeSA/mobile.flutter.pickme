@@ -45,21 +45,18 @@ class RegisterBloc extends BaseBloc<RegisterEvent, RegisterState> {
       ) async{
     checked = false;
       if(
-          event.userModel.firstName!.isNotEmpty&&
-          event.userModel.surname!.isNotEmpty&&
-          event.userModel.email!.isNotEmpty
+          event.userModel.firstName!.isNotEmpty &&
+          event.userModel.surname!.isNotEmpty &&
+          event.userModel.email!.isNotEmpty &&
+          event.userModel.mobile!.isNotEmpty &&
+          event.userModel.mobile != "+27" &&
+          event.userModel.mobile?.length == 12
       ){
-        if(index == 0){
-          if(event.userModel.idNumber!.isNotEmpty && event.userModel.idNumber!.length == 13){
-            checked = true;
-          }
-        }else if(event.userModel.passportNumber!.isNotEmpty &&
-        event.userModel.workPermitNumber!.isNotEmpty){
           checked = true;
-        }
 
-        emit(ValueChangedState());
+
       }
+    emit(ValueChangedState()..dataState = DataState.success);
   }
 
 

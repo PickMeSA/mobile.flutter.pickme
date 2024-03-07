@@ -10,9 +10,6 @@ import 'package:pickme/shared/domain/usecases/send_job_offer_use_case.dart';
 import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/domain/entities/candidate_profile_entity.dart';
-import 'package:pickme/shared/local/hive_storage_init.dart';
-import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
-
 import '../../domain/entities/my_job_listings_page_entity.dart';
 import '../../domain/use_cases/get_my_job_listings_usecase.dart';
 import '../job_list_page.dart';

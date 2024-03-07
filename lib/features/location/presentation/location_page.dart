@@ -97,6 +97,7 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
                        height: 450,
                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))) ,
                        child: PlacePicker(
+                         ignoreLocationPermissionErrors: true,
                            apiKey: "AIzaSyAw_cAyNUUBuni6xQi09gNcMFc610lfob8",
                            onPlacePicked: (result) {
                      print(result);

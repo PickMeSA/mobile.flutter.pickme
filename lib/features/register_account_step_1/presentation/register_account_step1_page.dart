@@ -38,9 +38,9 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
           Navigator.pop(context);
          if (state.profileEntity!.qualifications!.isEmpty &&
               state.profileEntity!.workExperience!.isEmpty){
-            context.router.push(const QualificationsRoute());
+            context.router.push( QualificationsRoute(profileEntity: state.profileEntity!));
           }else if(state.profileEntity!.skills!.isEmpty){
-            context.router.push(const AddSkillsRoute());
+            context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
           }else if(state.profileEntity!.hourlyRate! == 0){
             context.router.push(const RateAndWorkTimesRoute());
           }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
@@ -82,17 +82,12 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                     children: [
                       Expanded(
                         child: wText(
-                          getLocalization().selectMembership,
+                          getLocalization().letsOnboardYou,
                           style: theme.textTheme.headlineLarge!.copyWith(
                             fontWeight: FontWeight.w300
                           ),
                         ),
                       ),
-                      TertiaryButton(onPressed: (){
-                        context.router.push(const MembershipInformationRoute());
-                      },
-                          child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,)
-                      )
                     ],
                   ),
                   30.height,
@@ -104,6 +99,7 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                       entityType: plan.entityType,
                       selected: true,
                       includedItems: plan.includedItems,
+                          onInformationClick: ()=>context.router.push(const MembershipInformationRoute()),
                     )).toList(),
                   ),
                   10.height,

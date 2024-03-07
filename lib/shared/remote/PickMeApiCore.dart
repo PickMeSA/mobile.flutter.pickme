@@ -14,8 +14,8 @@ class PickMeCoreApi{
   late String token;
 
   PickMeCoreApi(){
-    baseUrl = "https://api-dev.pick-me.co.za/api/";//FlavorConfig.instance.variables["digital_oceans"]["base_url"];
-    version = "v1";//FlavorConfig.instance.variables["digital_oceans"]["version"];
+    baseUrl = FlavorConfig.instance.variables["digital_oceans"]["base_url"];
+    version = FlavorConfig.instance.variables["digital_oceans"]["version"];
   }
 
   Map<String, dynamic>? generateHeaders() {

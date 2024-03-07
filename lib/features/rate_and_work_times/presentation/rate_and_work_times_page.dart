@@ -141,6 +141,8 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                      AppTextFormField(controller: startTimeTextController,
                        onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                        textFieldType: TextFieldType.NUMBER,
+                     hint: getLocalization().timeHint,
+                     readOnly: true,
                      labelText: getLocalization().startTime,
                      suffix: InkWell(
                          onTap:() async{
@@ -156,6 +158,8 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                      AppTextFormField(controller: endTimeTextController,
                        onChanged: (value)=> getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails())),
                        textFieldType: TextFieldType.NUMBER,
+                       readOnly: true,
+                       hint: getLocalization().timeHint,
                        labelText: getLocalization().endTime,
                        suffix: InkWell(
                            onTap: ()async{
@@ -180,6 +184,7 @@ class _RateAndWorkTimesPageState extends BasePageState<RateAndWorkTimesPage, Rat
                            onSelected: (selected){
                              getBloc().add(WorkingDaySelectedEvent( workingDaysEntity: selected!));
                              getBloc().add(FormValueChangedEvent(hourRateTimes: getHourRateTimesFormDetails()));
+                             FocusScope.of(context).unfocus();
                            },
                            width: MediaQuery.sizeOf(context).width - 40,
                            enableFilter: false,

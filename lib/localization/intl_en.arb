@@ -8,12 +8,12 @@
   "surname": "Surname *",
   "phoneNumber": "Phone number *",
   "emailAddress": "Email address *",
-  "passportNumberA": "Passport number *",
+  "passportNumberA": "Passport number ",
   "passport": "Passport number",
-  "idNumber": "ID number *",
+  "idNumber": "ID number ",
   "indicatesARequiredField": "*Indicates a required field",
   "ccontinue": "Continue",
-  "workPermitNumber": "Work permit number *",
+  "workPermitNumber": "Work permit number ",
   "letsGetYouStartedByCreatingYourAccount": "Let’s get you started by creating your account.",
   "submit": "Submit",
   "iDidntReceiveACode": "I didn't receive a code",
@@ -385,7 +385,20 @@
   "weveSentAnEmailPleaseClickOnTheVerificationLink": "We've sent an email, please click on the verification link in the email and then login to the app to verify your account created and get you all setup!",
   "iDidntReceiveALink": "I didn't receive a link",
   "weAreSuperExcitedToHaveYouJoinThePickMeCommunity": "Your profile has been successfully set up\n\nWe're super exited to have you join the PickMe community and can't wait to see the amazing things we'll achieve together",
-  "older": "Older"
-
+  "older": "Older",
+  "theCLientHasSelectedAFlexibleDate": "The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set.",
+  "timeHint":"00:00",
+  "whyWeNeedYourId": "Why the below details are important to us",
+  "onlineIdVerification" : "Online ID verification: the global process for remote identification",
+  "idVerificationIdChecksOrIdentityVerification" : "ID verification, ID check or identity verification is the process that ensures a person is who they are supposed to be. But… How to guarantee safety when this process is done online?",
+  "identityIsTheAttribute": "Identity is the attribute of identical, the exact correspondence of one thing with another when compared. It is the set of unique traits and characteristics associated with a unique and irreplaceable individual. This turns essential when we talk about people and especially within the online environment, where identity theft is a more common phenomenon than we realize.",
+  "soHowDoesItWork": "So how does it work?",
+  "weImplementSecurity": "We implement security safeguards designed to protect your data. We regularly monitor our systems for possible vulnerabilities and attacks. As well as having a strict privacy policy in place, we also encrypt your data using an encryption tool. This converts your information into a series of complex numbers, meaning that even your data is shared, it cannot be read by hackers or the general public.",
+  "soHowDoesThisWorkInReality" : "So how does this work in reality?",
+  "whenAUserRegistersOnTheApp": "When a user register on the app, with his/her Identity or passport number the user’s identity is instantly verified by our third-party partner.\nThe authenticity of these documents and the identity of the person is verified by a government or official institution to confirm the physical document is legitimate and not a fake.\nThe user’s identity has been verified and the user’s credentials serve as proof that the user is who they say they are.\nThe user is now registered and can start using the PickMe’s products and services.",
+  "whyDoesPickMeNeedMyWorkPermitNumber": "Why does PickMe need my Work Permit number?",
+  "foreignNationalRequiresAWork": "Foreign nationals require a work permit or work visa to legally be able to work in most countries.",
+  "aMandatoryIdPassport": "A mandatory ID/Passport check ensures that there is a real person behind a process and proves that they are who they claim to be. This prevents anyone from carrying out a process in apps and online platforms on other people’s behalf without authorization, creating false identities, or committing fraud.\nThankfully, nowadays most online ID verification solutions can safely and accurately carry out global verification and identity checks online for users and companies all around the world, with even greater legitimacy than the traditional process.",
+  "howDoiKnowIfMyDataIsSecure": "How do I know if my data is secure?"
 
 }

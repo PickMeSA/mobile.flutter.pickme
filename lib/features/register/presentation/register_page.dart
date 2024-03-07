@@ -195,6 +195,22 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                             padding: const EdgeInsets.only(left: 20, right: 20),
                             textFieldType: TextFieldType.NUMBER, labelText: getLocalization().phoneNumber,),
                         ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: wText(
+                          getLocalization().whyWeNeedYourId,
+                          style: theme.textTheme.titleSmall!.copyWith(
+                              fontWeight: FontWeight.w300
+                          ),
+                        ),
+                      ),
+                      TertiaryButton(onPressed: (){
+                        context.router.push(const IdReasonRoute());
+                      },
+                          child: Icon(Icons.info_outline, color: theme.colorScheme.secondary,)
+                      )
+                    ],),
                         AppTabBar(
                           onTap: (index)=> getBloc().add(IdentificationChangedEvent(index: index)),
                           viewHeight: getBloc().index == 0?100: 180,
@@ -217,7 +233,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                       FocusScope.of(context).unfocus();
                                     }
                                     },
-                                    validator: (value)=> validateIdNumber(value??""),
+                                    validator: (value){},
                                     controller: idNumberController,
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom:  5),
                                     textFieldType: TextFieldType.NUMBER, labelText: getLocalization().idNumber,),
@@ -233,7 +249,9 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                   padding: const EdgeInsets.only( top: 10, bottom:  10),
                                   child: AppTextFormField(
                                     onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
-                                    validator: (value)=> validatePassportNumber(value??""),
+                                    validator: (value) {
+
+                                    },
                                     controller: passportNumberController,
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom:  5),
                                     textFieldType: TextFieldType.NUMBER, labelText: getLocalization().passportNumberA,),
@@ -244,7 +262,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
 
                                     onChanged: (value)=> getBloc().add(ValueChangedEvent(userModel: getGetUserModel())),
                                     controller: workPermitController,
-                                    validator: (value)=> validateWorkPermitNumber(value??""),
+                                    validator: (value){},
                                     padding: const EdgeInsets.only(left: 20, right: 20, top: 10,  ),
                                     textFieldType: TextFieldType.NUMBER, labelText: getLocalization().workPermitNumber,),
                                 ),
@@ -277,7 +295,7 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
                                 )
                             ),
 
-                            onPressed: !getBloc().checked!?null:() {
+                            onPressed: !getBloc().checked! ? null :() {
                               if(_formKey.currentState!.validate()) {
                                 authenticate(mobileNumber: "${getLocalization().phonePrefix}${phoneNumberController.text}");
                                 /*  */
@@ -303,14 +321,23 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
   }
 
   Future<void> authenticate({ required String mobileNumber})  async {
+    dismissLoadingIndicator() {
+      if(getBloc().preloader) {
+        Navigator.pop(context);
+        getBloc().preloader = false;
+      }
+    }
+
     if(!getBloc().preloader) {
       preloader(context);
       getBloc().preloader = true;
     }
+
     await widget.firebaseAuth.verifyPhoneNumber(
       phoneNumber: mobileNumber,
       timeout: const Duration(minutes: 1),
-      verificationCompleted: (PhoneAuthCredential credential) async{
+      verificationCompleted: (PhoneAuthCredential credential) async {
+
         await FirebaseAuth.instance.signInWithCredential(credential).then((value) async{
           await value.user!.getIdToken(true).then((value1) {
 
@@ -318,13 +345,11 @@ class _RegisterPageState extends BasePageState<RegisterPage,RegisterBloc> {
         });
       },
       verificationFailed: (FirebaseAuthException e) {
+        dismissLoadingIndicator();
         wErrorPopUp(message: e.toString(), type: getLocalization().error, context: context);
       },
       codeSent: (String verificationId, int? resendToken) async {
-        if(getBloc().preloader) {
-          Navigator.pop(context);
-          getBloc().preloader = false;
-        }
+         dismissLoadingIndicator();
          context.router.push(OTPRoute(
          verificationId: verificationId,
             userModel: getGetUserModel(),

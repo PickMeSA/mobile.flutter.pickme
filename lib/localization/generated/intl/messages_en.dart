@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "BackToPaySomeone":
             MessageLookupByLibrary.simpleMessage("Back to pay someone"),
         "HiName": m0,
+        "aMandatoryIdPassport": MessageLookupByLibrary.simpleMessage(
+            "A mandatory ID/Passport check ensures that there is a real person behind a process and proves that they are who they claim to be. This prevents anyone from carrying out a process in apps and online platforms on other people’s behalf without authorization, creating false identities, or committing fraud.\nThankfully, nowadays most online ID verification solutions can safely and accurately carry out global verification and identity checks online for users and companies all around the world, with even greater legitimacy than the traditional process."),
         "aOneTimeFeeOf500GetYouStarted": MessageLookupByLibrary.simpleMessage(
             "A one-time fee of R50.00 (including VAT) get you started, with no monthly charges."),
         "aRescheduleRequestHasBeenSentToYou": MessageLookupByLibrary.simpleMessage(
@@ -210,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
         "forYou": MessageLookupByLibrary.simpleMessage("For you"),
+        "foreignNationalRequiresAWork": MessageLookupByLibrary.simpleMessage(
+            "Foreign nationals require a work permit or work visa to legally be able to work in most countries."),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
@@ -231,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hours & total fee"),
         "hoursTotalFee":
             MessageLookupByLibrary.simpleMessage("hours & total fee"),
+        "howDoiKnowIfMyDataIsSecure": MessageLookupByLibrary.simpleMessage(
+            "How do I know if my data is secure?"),
         "howWouldYouRate":
             MessageLookupByLibrary.simpleMessage("How would you rate"),
         "iAmFlexibleOpenToDiscuss": MessageLookupByLibrary.simpleMessage(
@@ -247,7 +253,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "I\'m flexible (open to discuss)"),
         "iUnderstand": MessageLookupByLibrary.simpleMessage("I understand"),
         "iWouldLikeTo": MessageLookupByLibrary.simpleMessage("I would like to"),
-        "idNumber": MessageLookupByLibrary.simpleMessage("ID number *"),
+        "idNumber": MessageLookupByLibrary.simpleMessage("ID number "),
+        "idVerificationIdChecksOrIdentityVerification":
+            MessageLookupByLibrary.simpleMessage(
+                "ID verification, ID check or identity verification is the process that ensures a person is who they are supposed to be. But… How to guarantee safety when this process is done online?"),
+        "identityIsTheAttribute": MessageLookupByLibrary.simpleMessage(
+            "Identity is the attribute of identical, the exact correspondence of one thing with another when compared. It is the set of unique traits and characteristics associated with a unique and irreplaceable individual. This turns essential when we talk about people and especially within the online environment, where identity theft is a more common phenomenon than we realize."),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(
             "I\'m currently working in this role"),
         "inYourArea": MessageLookupByLibrary.simpleMessage("In your area"),
@@ -378,6 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "offerSentEx": MessageLookupByLibrary.simpleMessage("Offer sent!"),
         "older": MessageLookupByLibrary.simpleMessage("Older"),
         "onceOff": MessageLookupByLibrary.simpleMessage("once off"),
+        "onlineIdVerification": MessageLookupByLibrary.simpleMessage(
+            "Online ID verification: the global process for remote identification"),
         "oopsSomethingWentWrongWithYourPayment":
             MessageLookupByLibrary.simpleMessage(
                 "Ooops! Something went wrong with your payment, Please try again"),
@@ -388,7 +401,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "otherServices": MessageLookupByLibrary.simpleMessage("Other services"),
         "passport": MessageLookupByLibrary.simpleMessage("Passport number"),
         "passportNumberA":
-            MessageLookupByLibrary.simpleMessage("Passport number *"),
+            MessageLookupByLibrary.simpleMessage("Passport number "),
         "passwordA": MessageLookupByLibrary.simpleMessage("Password*"),
         "passwordResetLinkSuccessfully": MessageLookupByLibrary.simpleMessage(
             "Password reset link successfully"),
@@ -537,6 +550,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "skillsRequiredMax":
             MessageLookupByLibrary.simpleMessage("Skills required (max. 5)"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "soHowDoesItWork":
+            MessageLookupByLibrary.simpleMessage("So how does it work?"),
+        "soHowDoesThisWorkInReality": MessageLookupByLibrary.simpleMessage(
+            "So how does this work in reality?"),
         "southAfricanMinimumWage":
             MessageLookupByLibrary.simpleMessage("South African Minimum Wage"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start date *"),
@@ -570,9 +587,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "theAccountAlreadyExistsForThatEmail":
             MessageLookupByLibrary.simpleMessage(
                 "An account already exists for the email."),
+        "theCLientHasSelectedAFlexibleDate": MessageLookupByLibrary.simpleMessage(
+            "The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set."),
         "thePasswordProvidedIsTooWeak": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
+        "timeHint": MessageLookupByLibrary.simpleMessage("00:00"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "totalFee": MessageLookupByLibrary.simpleMessage("Total fee"),
         "transactionFees":
@@ -596,6 +616,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "weAreSuperExcitedToHaveYouJoinThePickMeCommunity":
             MessageLookupByLibrary.simpleMessage(
                 "Your profile has been successfully set up\n\nWe\'re super exited to have you join the PickMe community and can\'t wait to see the amazing things we\'ll achieve together"),
+        "weImplementSecurity": MessageLookupByLibrary.simpleMessage(
+            "We implement security safeguards designed to protect your data. We regularly monitor our systems for possible vulnerabilities and attacks. As well as having a strict privacy policy in place, we also encrypt your data using an encryption tool. This converts your information into a series of complex numbers, meaning that even your data is shared, it cannot be read by hackers or the general public."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeLetsSetUpYourProfile": m5,
         "welcomeTopickme":
@@ -616,16 +638,23 @@ class MessageLookup extends MessageLookupByLibrary {
                 "What is your hourly rate & work times?"),
         "whatWouldYouLikeToDo":
             MessageLookupByLibrary.simpleMessage("What would you like to do?"),
+        "whenAUserRegistersOnTheApp": MessageLookupByLibrary.simpleMessage(
+            "When a user register on the app, with his/her Identity or passport number the user’s identity is instantly verified by our third-party partner.\nThe authenticity of these documents and the identity of the person is verified by a government or official institution to confirm the physical document is legitimate and not a fake.\nThe user’s identity has been verified and the user’s credentials serve as proof that the user is who they say they are.\nThe user is now registered and can start using the PickMe’s products and services."),
         "whenOfferingAJobToACandidateLongText":
             MessageLookupByLibrary.simpleMessage(
                 "When offering a job to a candidate, you can send an existing listing you’ve created before, or you can create a one-time listing for this specific opportunity."),
         "whereAreYouLocated":
             MessageLookupByLibrary.simpleMessage("Where are you located?"),
+        "whyDoesPickMeNeedMyWorkPermitNumber":
+            MessageLookupByLibrary.simpleMessage(
+                "Why does PickMe need my Work Permit number?"),
+        "whyWeNeedYourId": MessageLookupByLibrary.simpleMessage(
+            "Why the below details are important to us"),
         "work": MessageLookupByLibrary.simpleMessage("Work"),
         "workExperience":
             MessageLookupByLibrary.simpleMessage("Work experience"),
         "workPermitNumber":
-            MessageLookupByLibrary.simpleMessage("Work permit number *"),
+            MessageLookupByLibrary.simpleMessage("Work permit number "),
         "workingDays": MessageLookupByLibrary.simpleMessage("Working days"),
         "workingDaysA": MessageLookupByLibrary.simpleMessage("Working days *"),
         "workingHours": MessageLookupByLibrary.simpleMessage("Working hours"),
