@@ -26,7 +26,7 @@ abstract class PurchasedProductChangeDelegate { // Ideally should have been brok
 class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
 
   // Constants
-  static const kiOSInAppSubscriptionProduct = 'name_of_ios_in_app_purchase';
+  static const kiOSInAppSubscriptionProduct = 'kM89mcnts7.pick.me ';
   static const shouldDisableInAppPurchasesOnAndroid = false; // Client requirement for the time being, in App Purchase on Android Will be enabled later
   static String get kAndroidInAppSubscriptionProduct =>
       kReleaseMode
