@@ -5,36 +5,47 @@ import '../../../../base_classes/base_event.dart';
 
 
 @immutable
-abstract class InAppPurchaseEvent extends BaseEvent  implements Equatable {
+abstract class InAppPurchaseEvent extends Equatable implements BaseEvent {
   final String userId;
 
-  InAppPurchaseEvent(this.userId);
+  const InAppPurchaseEvent(this.userId);
 
   @override
   bool? get stringify => false;
-}
-
-class SubscriptionFound extends InAppPurchaseEvent implements Equatable {
-  final String subscribedProductId;
-
-  SubscriptionFound(super.userId, this.subscribedProductId);
 
   @override
-  List<Object?> get props => [userId, subscribedProductId];
+  List<Object?> get props => [userId];
+
+}
+
+class SubscriptionFound extends InAppPurchaseEvent {
+  final String subscribedProductId;
+
+  const SubscriptionFound(super.userId, this.subscribedProductId);
+
+  @override
+  List<Object?> get props => super.props + [subscribedProductId];
+
+  @override
+  String getEventName() => 'subscription_found';
 }
 
 class SubscriptionNotFound extends InAppPurchaseEvent implements Equatable  {
-  SubscriptionNotFound(super.userId);
+  const SubscriptionNotFound(super.userId);
+
 
   @override
-  List<Object?> get props => [];
+  String getEventName() => 'subscription_not_found';
 }
 
 class SubscriptionRestored extends InAppPurchaseEvent {
   final String restoredProductId;
 
-  SubscriptionRestored(super.userId, this.restoredProductId);
+  const SubscriptionRestored(super.userId, this.restoredProductId);
 
   @override
-  List<Object?> get props => [userId, restoredProductId];
+  List<Object?> get props =>  super.props + [restoredProductId];
+
+  @override
+  String getEventName() => 'subscription_restored';
 }
