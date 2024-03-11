@@ -82,7 +82,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
         if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-        routePage(profileEntity: state.profileEntity!, context: context);
+        _routePage(profileEntity: state.profileEntity!, context: context);
         }
 
         if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.loading){
@@ -111,7 +111,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                      children: [
                        const Spacer(),
                        InkWell(
-                           onTap: ()=> routePage(profileEntity: widget.profileEntity, context: context),
+                           onTap: ()=> _routePage(profileEntity: widget.profileEntity, context: context),
                            child: wText(getLocalization().skip,
                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
                      ],
@@ -236,7 +236,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
     );
   }
 
-  void routePage({required BuildContext context,required ProfileEntity profileEntity }){
+  _routePage({required BuildContext context,required ProfileEntity profileEntity }){
     if(profileEntity!.hourlyRate! == 0){
       context.router.push(const RateAndWorkTimesRoute());
     }else if(profileEntity!.paymentDetails!.bankName!.isEmpty){

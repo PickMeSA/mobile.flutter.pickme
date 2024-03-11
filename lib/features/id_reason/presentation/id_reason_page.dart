@@ -24,13 +24,6 @@ class IdReasonPage extends BasePage {
 class _IdReasonPageState extends BasePageState<IdReasonPage, IdReasonBloc> {
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-  }
-
-    @override
   PreferredSizeWidget? buildAppbar() {
     return null;
   }
@@ -41,159 +34,159 @@ class _IdReasonPageState extends BasePageState<IdReasonPage, IdReasonBloc> {
     return BlocConsumer<IdReasonBloc, IdReasonPageState>(
       listener: (context, state){},
       builder: (context, state) {
-         return   SizedBox(
-           width: MediaQuery.sizeOf(context).width,
-           height: MediaQuery.sizeOf(context).height,
-           child: SingleChildScrollView(
-             child: Padding(
-               padding: const EdgeInsets.only(left: 24,right: 24, top: 56, bottom: 72),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Row(
-                     mainAxisAlignment: MainAxisAlignment.start,
-                     children: [
-                       const Padding(
-                         padding: EdgeInsets.only(right: 20),
-                         child: Icon(Icons.info_outline, size: 24,),
-                       ),
-                       Container(
-                         width: MediaQuery.sizeOf(context).width -150,
-                         child: wText(
+        return   SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 24,right: 24, top: 56, bottom: 72),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Icon(Icons.info_outline, size: 24,),
+                      ),
+                      Container(
+                        width: MediaQuery.sizeOf(context).width -150,
+                        child: wText(
 
-                           getLocalization().onlineIdVerification,
-                           style: theme.textTheme.titleSmall!.copyWith(
-                             fontWeight: FontWeight.bold,
-                               fontVariations: [
-                                 const FontVariation('wght', 300),
-                               ]
-                           ),
-                         ),
-                       ),
-                       Spacer(),
-                       TertiaryButton.icon(
-                           onPressed: (){
-                             Navigator.pop(context);
-                           }, child: Icon(Icons.close, color: theme.colorScheme.secondary))
-                     ],
-                   ),
-                   30.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width ,
-                     child: wText(
+                          getLocalization().onlineIdVerification,
+                          style: theme.textTheme.titleSmall!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontVariations: [
+                                const FontVariation('wght', 300),
+                              ]
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      TertiaryButton.icon(
+                          onPressed: (){
+                            Navigator.pop(context);
+                          }, child: Icon(Icons.close, color: theme.colorScheme.secondary))
+                    ],
+                  ),
+                  30.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width ,
+                    child: wText(
 
-                       getLocalization().idVerificationIdChecksOrIdentityVerification,
-                       style: theme.textTheme.titleSmall!.copyWith(
-                           fontWeight: FontWeight.bold,
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
-                   20.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width ,
-                     child: wText(
+                      getLocalization().idVerificationIdChecksOrIdentityVerification,
+                      style: theme.textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
+                  20.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width ,
+                    child: wText(
 
-                       getLocalization().identityIsTheAttribute,
-                       style: theme.textTheme.titleSmall!.copyWith(
+                      getLocalization().identityIsTheAttribute,
+                      style: theme.textTheme.titleSmall!.copyWith(
 
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
-                   20.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width -150,
-                     child: wText(
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
+                  20.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width -150,
+                    child: wText(
 
-                       getLocalization().soHowDoesItWork,
-                       style: theme.textTheme.titleSmall!.copyWith(
-                           fontWeight: FontWeight.bold,
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
-                   10.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width ,
-                     child: wText(
+                      getLocalization().soHowDoesItWork,
+                      style: theme.textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
+                  10.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width ,
+                    child: wText(
 
-                       getLocalization().aMandatoryIdPassport,
-                       style: theme.textTheme.titleSmall!.copyWith(
+                      getLocalization().aMandatoryIdPassport,
+                      style: theme.textTheme.titleSmall!.copyWith(
 
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
-                   20.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width -150,
-                     child: wText(
-                       getLocalization().howDoiKnowIfMyDataIsSecure,
-                       style: theme.textTheme.titleSmall!.copyWith(
-                           fontWeight: FontWeight.bold,
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
-                   10.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width ,
-                     child: wText(
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
+                  20.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width -150,
+                    child: wText(
+                      getLocalization().howDoiKnowIfMyDataIsSecure,
+                      style: theme.textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
+                  10.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width ,
+                    child: wText(
 
-                       getLocalization().whenAUserRegistersOnTheApp,
-                       style: theme.textTheme.titleSmall!.copyWith(
+                      getLocalization().whenAUserRegistersOnTheApp,
+                      style: theme.textTheme.titleSmall!.copyWith(
 
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
 
-                   20.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width -150,
-                     child: wText(
-                       getLocalization().whyDoesPickMeNeedMyWorkPermitNumber,
-                       style: theme.textTheme.titleSmall!.copyWith(
-                           fontWeight: FontWeight.bold,
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
-                   10.height,
-                   Container(
-                     width: MediaQuery.sizeOf(context).width ,
-                     child: wText(
+                  20.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width -150,
+                    child: wText(
+                      getLocalization().whyDoesPickMeNeedMyWorkPermitNumber,
+                      style: theme.textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
+                  10.height,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width ,
+                    child: wText(
 
-                       getLocalization().foreignNationalRequiresAWork,
-                       style: theme.textTheme.titleSmall!.copyWith(
+                      getLocalization().foreignNationalRequiresAWork,
+                      style: theme.textTheme.titleSmall!.copyWith(
 
-                           fontVariations: [
-                             const FontVariation('wght', 300),
-                           ]
-                       ),
-                     ),
-                   ),
+                          fontVariations: [
+                            const FontVariation('wght', 300),
+                          ]
+                      ),
+                    ),
+                  ),
 
-                 ],
-               ),
-             ),
-           ),
-         );
+                ],
+              ),
+            ),
+          ),
+        );
       },
     );
   }
@@ -208,6 +201,4 @@ class _IdReasonPageState extends BasePageState<IdReasonPage, IdReasonBloc> {
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
-
 }

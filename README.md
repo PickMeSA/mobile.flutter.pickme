@@ -65,29 +65,6 @@ Android: API 34
 IOS: IOS 11
 Cocoapods:  1.13.0
 
-
-
-## App Store credentials
-
-Apple developer console admin account :
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
-Android developer console admin account:
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
-
-## Github credentials
-   Username: attie@pick-me.co.za
-   Password: Celandri@my2
-
-
-
-## Codemagic credentials
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
 ## Application architecture
 
 The PickMe application was built using the Clean Architecture as the project must still scale in functionality and this allows very simple maintainability.
@@ -97,3 +74,10 @@ Clean architecture:
 The clean architecture description video can be found in the link below:
 https://www.youtube.com/watch?v=SmJB8cy8emU
 
+## Environment Switcher
+
+To switch between development and production server, we added a double-tap event listener in the landing page. 
+Double-tapping the space on the landing page will show a Modal Bottom Sheet with options to select between 
+Development and Production. By default, the app will be in the production environment.
+
+The current environment is stored in the secure shared preferences. 

@@ -18,71 +18,70 @@ part 'apply_for_job_state.dart';
 
 @injectable
 class ApplyForJobBloc extends BaseBloc<ApplyForJobPageEvent, ApplyForJobPageState> {
-    JobEntity? job;
-    bool preloaderActive = false;
-    final UpdateJobDateTimeUseCase updateJobDateTimeUseCase;
-    final RespondToJobInterestUseCase respondToJobInterestUseCase;
-    final ApplyForJobUseCase applyForJobEvent;
-    ApplyForJobBloc({ required this.respondToJobInterestUseCase,required this.updateJobDateTimeUseCase,
-        required this.applyForJobEvent}): super(ApplyForJobPageInitState()) {
-        on<ApplyForJobPageEnteredEvent>((event, emit) => onApplyForJobPageEnteredEvent(event, emit));
-        on<ApplyForJobClickedEvent>((event, emit) => onApplyForJobClickedEvent(event, emit));
-        on<UpdateJobDateTimeEvent>((event,emit)=> _onUpdateJobDateTimeEvent(event, emit));
-        on<RespondToJobInterestEvent>((event, emit) => _onRespondToJobInterestEvent(event, emit));
+  JobEntity? job;
+  bool preloaderActive = false;
+  final UpdateJobDateTimeUseCase updateJobDateTimeUseCase;
+  final RespondToJobInterestUseCase respondToJobInterestUseCase;
+  final ApplyForJobUseCase applyForJobEvent;
+  ApplyForJobBloc({ required this.respondToJobInterestUseCase,required this.updateJobDateTimeUseCase,
+    required this.applyForJobEvent}): super(ApplyForJobPageInitState()) {
+    on<ApplyForJobPageEnteredEvent>((event, emit) => onApplyForJobPageEnteredEvent(event, emit));
+    on<ApplyForJobClickedEvent>((event, emit) => onApplyForJobClickedEvent(event, emit));
+    on<UpdateJobDateTimeEvent>((event,emit)=> _onUpdateJobDateTimeEvent(event, emit));
+    on<RespondToJobInterestEvent>((event, emit) => _onRespondToJobInterestEvent(event, emit));
+  }
+
+  Future<void> _onRespondToJobInterestEvent(
+      RespondToJobInterestEvent event,
+      Emitter<ApplyForJobPageState> emit) async{
+
+    emit(RespondToJobInterestState()..dataState=DataState.loading);
+    try{
+      await respondToJobInterestUseCase.call(params: RespondToJobInterestUseCaseParams(jobInterestId: event.jobEntity!.jobInterestId!, status: event.status));
+      emit(RespondToJobInterestState()..dataState=DataState.success);
+    }catch(ex){
+      emit(RespondToJobInterestState(error: ex.toString())..dataState=DataState.error);
     }
+  }
 
-   Future<void> _onRespondToJobInterestEvent(
-       RespondToJobInterestEvent event,
-        Emitter<ApplyForJobPageState> emit) async{
+  Future<void> _onUpdateJobDateTimeEvent(
+      UpdateJobDateTimeEvent event,
+      Emitter<ApplyForJobPageState> emit
+      )async{
+    try{
+      emit(UpdateJobDateTimeState()..dataState = DataState.loading);
+      await updateJobDateTimeUseCase.call(params: UpdateJobDateTimeUseCaseParams(jobEntity: event.jobEntity, dateAndTime:  event.dateAndTime));
+      emit(UpdateJobDateTimeState()..dataState = DataState.success);
+    }catch(ex){
+      emit(UpdateJobDateTimeState(error: ex.toString())..dataState = DataState.error);
 
-        emit(RespondToJobInterestState()..dataState=DataState.loading);
-        try{
-
-            await respondToJobInterestUseCase.call(params: RespondToJobInterestUseCaseParams(jobInterestId: event.jobEntity!.jobInterestId!, status: event.status));
-            emit(RespondToJobInterestState()..dataState=DataState.success);
-        }catch(ex){
-            emit(RespondToJobInterestState(error: ex.toString())..dataState=DataState.error);
-        }
     }
+  }
 
-    Future<void> _onUpdateJobDateTimeEvent(
-        UpdateJobDateTimeEvent event,
-        Emitter<ApplyForJobPageState> emit
-        )async{
-        try{
-            emit(UpdateJobDateTimeState()..dataState = DataState.loading);
-            await updateJobDateTimeUseCase.call(params: UpdateJobDateTimeUseCaseParams(jobEntity: event.jobEntity, dateAndTime:  event.dateAndTime));
-            emit(UpdateJobDateTimeState()..dataState = DataState.success);
-        }catch(ex){
-            emit(UpdateJobDateTimeState(error: ex.toString())..dataState = DataState.error);
+  onApplyForJobPageEnteredEvent(ApplyForJobPageEnteredEvent event, Emitter<ApplyForJobPageState> emit){
+    job = event.jobEntity;
+    logger.e(job);
+  }
 
-        }
+  onApplyForJobClickedEvent(ApplyForJobClickedEvent event, Emitter<ApplyForJobPageState> emit) async {
+    logger.e(job);
+    job = job!.copyWith(
+        startDate: event.startDate,
+        endDate: event.endDate,
+        startTime: event.startTime,
+        comments: event.comments
+    );
+    emit(ApplyForJobClickedState()..dataState = DataState.loading);
+    try {
+      UserModel userModel = boxUser.get(current);
+      bool result = await applyForJobEvent.call(
+          params: ApplyForJobUseCaseParams(jobEntity: job!, userId: userModel.id!
+          ));
+      if(result){
+        emit(ApplyForJobClickedState()..dataState = DataState.success);
+      }
+    }catch(ex){
+      emit(ApplyForJobClickedState(error: ex.toString())..dataState = DataState.error);
     }
-
-    onApplyForJobPageEnteredEvent(ApplyForJobPageEnteredEvent event, Emitter<ApplyForJobPageState> emit){
-        job = event.jobEntity;
-        logger.e(job);
-    }
-
-    onApplyForJobClickedEvent(ApplyForJobClickedEvent event, Emitter<ApplyForJobPageState> emit) async {
-        logger.e(job);
-        job = job!.copyWith(
-            startDate: event.startDate,
-            endDate: event.endDate,
-            startTime: event.startTime,
-            comments: event.comments
-        );
-        emit(ApplyForJobClickedState()..dataState = DataState.loading);
-        try {
-            UserModel userModel = boxUser.get(current);
-            bool result = await applyForJobEvent.call(
-                params: ApplyForJobUseCaseParams(jobEntity: job!, userId: userModel.id!
-                ));
-            if(result){
-                emit(ApplyForJobClickedState()..dataState = DataState.success);
-            }
-        }catch(ex){
-            emit(ApplyForJobClickedState(error: ex.toString())..dataState = DataState.error);
-        }
-    }
-} 
+  }
+}
