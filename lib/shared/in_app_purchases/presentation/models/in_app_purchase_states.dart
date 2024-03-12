@@ -10,7 +10,6 @@ abstract class InAppPurchaseState extends BaseState {
   InAppPurchaseState(this.error, this.products);
 }
 
-@immutable
 class InAppPurchasedState extends InAppPurchaseState {
   final bool isSubscriptionPurchased;
 
@@ -18,19 +17,16 @@ class InAppPurchasedState extends InAppPurchaseState {
       super.error, super.products, this.isSubscriptionPurchased);
 }
 
-@immutable
 class InAppRestoredState extends InAppPurchaseState {
   final bool isSubcriptionRestored;
 
   InAppRestoredState(super.error, super.products, this.isSubcriptionRestored);
 }
 
-@immutable
 class InAppNotFoundState extends InAppPurchaseState {
   InAppNotFoundState(super.error, super.products);
 }
 
-@immutable
 class InAppPurchaseLoadingState extends InAppPurchaseState {
   InAppPurchaseLoadingState(super.error, super.products);
 }

@@ -20,6 +20,7 @@ import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_m
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
+import '../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'bloc/my_bookings_upcoming_bloc.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
@@ -189,7 +190,9 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).month,
                                   DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!).day
                               );
-                            UserModel userModel = boxUser.get(current);
+                            UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+                            UserModel userModel = userLocalStorage.getUser();
+
                               DisplayEntity displayEntity = userModel.type == 'work'? DisplayEntity(
                                   url: getBloc().upcomingHireBookingsList[index].customer?.profileImage,
                                   surname: getBloc().upcomingHireBookingsList[index].customer?.surname??"",
@@ -215,7 +218,9 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                         child: wText(getLocalization().upcoming),
                                       ),
                                     InkWell(
-                                  onTap: (){ UserModel userModel = boxUser.get(current);
+                                  onTap: (){
+                                    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+                                    UserModel userModel = userLocalStorage.getUser();
                                     if(
                                   getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
                                   && getBloc().upcomingHireBookingsList[index].proposerUid != userModel.id){
@@ -253,8 +258,10 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                                             :DateTime.parse(getBloc().upcomingHireBookingsList[index].startDate!),
                                         status: getBloc().upcomingHireBookingsList[index].status,
 
-                                        onNext: () { UserModel userModel = boxUser.get(current);
-                                        if(
+                                        onNext: () {
+                                          UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+                                          UserModel userModel = userLocalStorage.getUser();
+                                          if(
                                         getBloc().upcomingHireBookingsList[index].status == JobStatus.requestedReschedule
                                             && getBloc().upcomingHireBookingsList[index].proposerUid != userModel.id){
                                           context.router.push(RescheduleRequestRoute(
@@ -285,7 +292,8 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                        ListView.builder(
                            itemCount: getBloc().completeHireBookingsList.length,
                            itemBuilder: (context , index){
-                             UserModel userModel = boxUser.get(current);
+                             UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+                             UserModel userModel = userLocalStorage.getUser();
                              DisplayEntity displayEntity = userModel.type == 'work'? DisplayEntity(
                                  url: getBloc().completeHireBookingsList[index].customer?.profileImage,
                                  surname: getBloc().completeHireBookingsList[index].customer?.surname??"",
@@ -337,7 +345,9 @@ class _MyBookingsUpcomingPageState extends BasePageState<MyBookingsUpcomingPage,
                        ListView.builder(
                            itemCount: getBloc().cancelledHireBookingsList.length,
                            itemBuilder: (context , index){
-                             UserModel userModel = boxUser.get(current);
+                             UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+                             UserModel userModel = userLocalStorage.getUser();
+
                              DisplayEntity displayEntity = userModel.type == 'work'? DisplayEntity(
                                  url: getBloc().cancelledHireBookingsList[index].customer?.profileImage,
                                  surname: getBloc().cancelledHireBookingsList[index].customer?.surname??"",

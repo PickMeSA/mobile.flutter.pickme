@@ -1,13 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/profile_data_model_response.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile_local_storage.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/user_service/user_service.dart';
+
+import '../../../local/Hive/user_local_storage/user_local_storage.dart';
 
 @Singleton(as: UserService)
 class UserServiceImpl extends UserService{
@@ -59,9 +63,10 @@ class UserServiceImpl extends UserService{
           profileType: profileDataModelResponse.profileType??"",
           subscriptionType: profileDataModelResponse.subscriptionType??""
       );
-
-      boxUser.put(current, UserModel(id: profileDataModelResponse.id));
-      boxProfile.put(current, ProfileModel(
+       ProfileLocalStorage profileLocalStorage = locator<ProfileLocalStorage>();
+       UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+       userLocalStorage.setUser(UserModel(id: profileDataModelResponse.id));
+       profileLocalStorage.setProfileDetails(profileModel: ProfileModel(
           workPermitNumber: profileDataModelResponse.workPermitNumber,
           idNumber: profileDataModelResponse.idNumber,
           emailAddress: profileDataModelResponse.email,
@@ -80,10 +85,8 @@ class UserServiceImpl extends UserService{
   @override
   Future<UserEntity> updateRemoteProfileDate({required UserEntity userModel})async{
     try {
-
-
-
-      UserModel userBox = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userBoxModel = userLocalStorage.getUser();
       print(ProfileDataModelResponse(
           email: userModel.email,
           id: userModel.idNumber,
@@ -99,7 +102,7 @@ class UserServiceImpl extends UserService{
 
 
       Response <dynamic> response = await
-      apiService.put("$baseUrl$version/users/${userBox.id}",
+      apiService.put("$baseUrl$version/users/${userBoxModel.id}",
           data: ProfileDataModelResponse(
               email: userModel.email,
               id: userModel.idNumber,
@@ -126,9 +129,7 @@ class UserServiceImpl extends UserService{
           profileType: profileDataModelResponse.profileType??"",
           subscriptionType: profileDataModelResponse.subscriptionType??""
       );
-
-      boxUser.put(current, UserModel(id: profileDataModelResponse.id));
-
+      userLocalStorage.setUser(UserModel(id: profileDataModelResponse.id));
       return newUserModel;
     }catch(ex){
 rethrow;    }

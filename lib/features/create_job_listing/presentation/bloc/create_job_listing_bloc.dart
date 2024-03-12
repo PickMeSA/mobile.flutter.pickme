@@ -7,6 +7,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/add_skills/domain/entities/skill_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_entity.dart';
 import 'package:pickme/features/jobs/shared/features/skills/domain/entities/skill_list_entity.dart';
@@ -21,7 +22,9 @@ import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remote_profile_usecase.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile_local_storage.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 
 import '../../../../../../shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 part 'create_job_listing_event.dart';
@@ -45,11 +48,14 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
   final GetRemoteProfileUseCase getRemoteProfileUseCase;
   ProfileEntity? currentUser;
   PaginatedIndustryEntity? industries;
+  final UserLocalStorage userLocalStorage;
 
   CreateJobListingBloc({required this.uploadFileUseCase,
     required this.getSkillsListUseCase,
     required this.getRemoteProfileUseCase,
-    required this.getIndustriesUseCase}) : super(CreateJobListingInitial()) {
+    required this.getIndustriesUseCase,
+    required this.userLocalStorage,
+  }) : super(CreateJobListingInitial()) {
     on<CreateJobListingPageEnteredEvent>((event, emit) => _onCreateJobListingPageEnteredEvent(event, emit));
     on<JobImageAddedClickedEvent>((event, emit) => _onAddJobImageClickedEvent(event, emit));
     on<FlexibleHoursCheckboxChangedEvent>((event, emit) => _onFlexibleHoursCheckboxChangedEvent(event, emit));
@@ -110,7 +116,9 @@ class CreateJobListingBloc extends BaseBloc<CreateJobListingsEvent, CreateJobLis
     emit(GetSkillsListState()..dataState = DataState.loading);
     try{
 
-      UserModel user = boxUser.get(current);
+
+      
+      UserModel user = userLocalStorage.getUser();
       currentUser = await getRemoteProfileUseCase.call(params: GetRemoteProfileUseCaseParams(id: user.id));
       JobsSkillListEntity skillListEntity = await getSkillsListUseCase.call();
       industries = await getIndustriesUseCase.call();

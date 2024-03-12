@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/token_local_storage/token_local_storage.dart';
 import 'api-service.dart';
 
 @Singleton(as:ApiService)
@@ -17,7 +19,8 @@ class DioApiService extends ApiService{
     required this.dio}){
    dio.interceptors.add(InterceptorsWrapper(onRequest:
        (RequestOptions options, RequestInterceptorHandler handler){
-  TokenModel tokenModel = boxTokens.get(current);
+         TokenLocalStorage tokenLocalStorage = locator<TokenLocalStorage>();
+         TokenModel tokenModel = tokenLocalStorage.getToken();
          logger.d(tokenModel.accessToken);
          options.headers['Content-Type'] = 'application/json';
      options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
@@ -37,7 +40,8 @@ class DioApiService extends ApiService{
            refreshToken: token,
            accessToken: token,
            tokenID: token );
-       boxTokens.put(current, tokenModel);
+        TokenLocalStorage tokenLocalStorage = locator<TokenLocalStorage>();
+        tokenLocalStorage.setToken(tokenModel);
         dio.options.headers['authorization'] = "Bearer ${tokenModel.accessToken}";
         return handler.resolve(await dio.fetch(error.requestOptions));
      }

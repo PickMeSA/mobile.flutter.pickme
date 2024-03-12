@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/shared/models/send_job_offer_model/send_job_offer_model_request.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
 import 'package:pickme/shared/constants/default_values.dart';
@@ -10,6 +11,7 @@ import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
+import '../../../local/Hive/user_local_storage/user_local_storage.dart';
 import 'send_job_offer_service.dart';
 
 @Singleton(as: SendJobOfferService)
@@ -22,7 +24,8 @@ class SendJobOfferServiceImpl extends SendJobOfferService{
  
   @override
   Future<bool> sendOffer({required JobEntity job, required CandidateProfileEntity candidateProfileEntity}) async{
-    UserModel userModel = boxUser.get(current);
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    UserModel userModel = userLocalStorage.getUser();
     try{
       Map<String, dynamic> params = {};
         params["jobId"] = job.id;

@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/token_local_storage/token_local_storage.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -47,7 +48,8 @@ class _PaySomeoneWebViewPageState extends BasePageState<PaySomeoneWebViewPage, P
   Widget buildView(BuildContext context) {
     return BlocConsumer<PaySomeoneWebViewBloc, PaySomeoneWebViewPageState>(
       listener: (context, state){
-        TokenModel tokenModel = boxTokens.get(current);
+        TokenLocalStorage tokenLocalStorage = locator<TokenLocalStorage>();
+        TokenModel tokenModel = tokenLocalStorage.getToken();
         if(state is MakePaymentState && state.dataState == DataState.success){
           webViewController = WebViewController()
             ..setJavaScriptMode(JavaScriptMode.unrestricted)

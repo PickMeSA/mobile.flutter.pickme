@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
@@ -7,6 +8,7 @@ import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_m
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 import 'package:pickme/shared/domain/entities/my_job_listings_page_entity.dart';
 
+import '../../../local/Hive/user_local_storage/user_local_storage.dart';
 import 'get_my_job_listings_service.dart';
 
 @Singleton(as: GetMyJobListingsService)
@@ -20,7 +22,8 @@ class GetMyJobListingsServiceImpl extends GetMyJobListingsService{
   @override
   Future<MyJobListingsPageEntity> getMyJobListings() async{
     try{
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       Response<dynamic> response = await apiService.get("$baseUrl$version/jobs/location/filters?customerUid=${userModel.id}");
       if(response.statusCode==200){
         return MyJobListingsPageEntity.fromResponse(

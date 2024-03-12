@@ -26,8 +26,9 @@ class PickMeApp{
       options: DefaultFirebaseOptions.currentPlatform,
     );
     await configFlavor(await readEnvironment(selectEnvironment(env)));
-    await initHive();
     setupLocators();
+    HiveLocalStorage hiveLocalStorageInit = locator<HiveLocalStorage>();
+    await hiveLocalStorageInit.initHive();
     if(Platform.isAndroid) {
       AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
     }

@@ -1,7 +1,7 @@
 import 'core/PickMeApp.dart';
 
 void main() {
-  PickMeApp.appInit(Environment.prod);
+  PickMeApp.appInit(Environment.dev);
 }
 
 enum Environment{

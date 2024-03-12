@@ -6,7 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
+import 'package:pickme/shared/services/local/Hive/token_local_storage/token_local_storage.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import '../../../../core/locator/locator.dart';
+import '../../local/Hive/user_local_storage/user_local_storage.dart';
 import 'authentication.dart';
 
 @Singleton(as: Authentication)
@@ -99,16 +102,19 @@ class PFirebaseAuthentication extends Authentication {
       UserCredential userCredential = await firebaseAuth.signInWithCredential(credential);
       String? token = await userCredential.user?.getIdToken();
 
+      TokenLocalStorage tokenLocalStorage = locator<TokenLocalStorage>();
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+
       TokenModel tokenModel =
        TokenModel(
           refreshToken: token??"",
           accessToken: token??"",
           tokenID: token??"");
-      boxTokens.put(current, tokenModel);
+      tokenLocalStorage.setToken(tokenModel);
 
         UserModel userModel = UserModel(id: "");
         userModel.id = userCredential.user?.uid;
-        boxUser.put(current, userModel);
+      userLocalStorage.setUser(userModel);
 
 
       return tokenModel;

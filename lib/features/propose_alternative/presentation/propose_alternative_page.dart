@@ -18,6 +18,7 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pickme/utils/date_formaters.dart';
+import '../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'bloc/propose_alternative_bloc.dart';
 
 @RoutePage()
@@ -152,7 +153,8 @@ class _ProposeAlternativePageState extends BasePageState<ProposeAlternativePage,
                                  )
                              ),
                              onPressed: getBloc().checked?null:() {
-                               UserModel userModel = boxUser.get(current);
+                               UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+                               UserModel userModel = userLocalStorage.getUser();
                                if(_key.currentState!.validate()){
                                  getBloc().add(RescheduleBookingEvent(
                                      rescheduleEntity: RescheduleEntity(

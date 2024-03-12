@@ -28,12 +28,15 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import '../../../shared/services/local/Hive/profile_local_storage/profile_local_storage.dart';
+import '../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'bloc/home_bloc.dart';
 import 'bloc/home_bloc.dart';
 
 @RoutePage()
 class HomePage extends BasePage {
   ProfileEntity profileEntity;
+
    HomePage({required this.profileEntity,required this.controller,super.key});
   final  PersistentTabController controller ;
   @override
@@ -51,13 +54,15 @@ _onRefresh();
   }
 
   void _onRefresh() async{
+    final ProfileLocalStorage profileLocalStorage = locator<ProfileLocalStorage>();
     ProfileModel profileModel = ProfileModel(
         workPermitNumber: widget.profileEntity.workPermit,
         idNumber: widget.profileEntity.idNumber,
         emailAddress: widget.profileEntity.email,
         phoneNumber: widget.profileEntity.mobile,
         surname: widget.profileEntity.surname, firstName: widget.profileEntity.firstName, passportNumber: "");
-    boxProfile.put(current, profileModel);
+
+    profileLocalStorage.setProfileDetails(profileModel: profileModel);
     getBloc().add(JobsHiringLandingPageEnteredEvent());
   }
 
@@ -68,7 +73,8 @@ _onRefresh();
 
   @override
   Widget buildView(BuildContext context) {
-  UserModel userMode = boxUser.get(current);
+    final UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    UserModel userMode = userLocalStorage.getUser();
     ThemeData theme = Theme.of(context);
     return BlocConsumer<HomeBloc, HomePageState>(
       listener: (context, state){
