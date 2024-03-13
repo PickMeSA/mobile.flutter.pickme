@@ -1,6 +1,7 @@
 
 
 import 'package:injectable/injectable.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/login/domain/entities/app_state/app_state_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 
@@ -11,12 +12,14 @@ class AppStateLocalStorageImpl extends AppStateLocalStorage{
 
   @override
   bool getFirstTime() {
-   return boxAppState.isEmpty;
+    HiveLocalStorage hiveLocalStorageInit = locator<HiveLocalStorage>();
+    return hiveLocalStorageInit.boxAppState.isEmpty;
   }
 
   @override
   Future<bool> setFirstTime() {
-    boxAppState.put(current,
+    HiveLocalStorage hiveLocalStorageInit = locator<HiveLocalStorage>();
+    hiveLocalStorageInit.boxAppState.put(BoxNames.CURRENT.toString(),
         AppStateModel(
             loggedIn: false));
     return Future.value(true);
@@ -24,7 +27,8 @@ class AppStateLocalStorageImpl extends AppStateLocalStorage{
 
   @override
   Future<bool> setSignedIn({ required bool signedIn}) {
-   boxAppState.put(current,
+    HiveLocalStorage hiveLocalStorageInit = locator<HiveLocalStorage>();
+    hiveLocalStorageInit.boxAppState.put(BoxNames.CURRENT.toString(),
        AppStateModel(
             loggedIn: signedIn));
    return Future.value(true);
@@ -32,8 +36,9 @@ class AppStateLocalStorageImpl extends AppStateLocalStorage{
 
   @override
   Future<bool> getSignedIn() {
-    if(boxAppState.isNotEmpty) {
-      AppStateModel appStateModel = boxAppState.get(current);
+    HiveLocalStorage hiveLocalStorageInit = locator<HiveLocalStorage>();
+    if(hiveLocalStorageInit.boxAppState.isNotEmpty) {
+      AppStateModel appStateModel = hiveLocalStorageInit.boxAppState.get(BoxNames.CURRENT.toString());
       return Future.value(appStateModel.loggedIn);
     }else{
       return Future.value(false);

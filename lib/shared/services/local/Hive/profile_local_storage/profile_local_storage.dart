@@ -2,7 +2,9 @@ import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/
 
 abstract class ProfileLocalStorage {
 
-  Future<void> setProfileDetails({required ProfileModel profileModel});
+  void setProfileDetails({required ProfileModel profileModel});
 
-  Future<ProfileModel> getProfileModel();
+  ProfileModel getProfileModel();
+
+  void clearProfile();
 }

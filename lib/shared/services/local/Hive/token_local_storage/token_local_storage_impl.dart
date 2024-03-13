@@ -3,34 +3,37 @@ import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/token_local_storage/token_local_storage.dart';
 
-@Injectable(as: TokenLocalStorage )
+import '../../../../../core/locator/locator.dart';
+
+@Singleton(as: TokenLocalStorage )
 class TokenLocalStorageImpl extends TokenLocalStorage{
 
+  final HiveLocalStorage hiveLocalStorage;
+  TokenLocalStorageImpl({required this.hiveLocalStorage});
 
-
-  TokenLocalStorageImpl();
   @override
-  Future<TokenModel> getToken() {
-    if(boxTokens.isNotEmpty){
-      return Future.value(boxTokens.get(current));
+  TokenModel getToken() {
+    if(hiveLocalStorage.getBoxTokens().isNotEmpty){
+      return hiveLocalStorage.getBoxTokens().get(BoxNames.CURRENT.toString());
     }else{
-      return  Future.value(TokenModel(refreshToken: "", accessToken: "", tokenID: ""));
+      return TokenModel(refreshToken: "", accessToken: "", tokenID: "");//Leaving this here coz I don't know why this was done
     }
   }
 
   @override
-  Future<bool> setToken(TokenModel tokenModel) {
-    boxTokens.put(current, TokenModel(
+  bool setToken(TokenModel tokenModel) {
+
+    hiveLocalStorage.setBoxTokens(TokenModel(
         refreshToken: tokenModel.refreshToken,
         accessToken: tokenModel.accessToken,
         tokenID: tokenModel.tokenID));
-    return Future.value(true);
+    return true;
   }
 
   @override
-  Future<bool> eraseToken() {
-    boxTokens.delete(current);
-    return Future.value(true);
+  bool eraseToken() {
+    hiveLocalStorage.getBoxTokens().delete(BoxNames.CURRENT);
+    return true;
   }
 
 
