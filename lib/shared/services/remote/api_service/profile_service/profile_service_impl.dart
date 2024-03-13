@@ -34,11 +34,14 @@ import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile_local_storage.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
+import '../../../../../core/locator/locator.dart';
 import '../../../../../features/qualification/data/response_models/qualification_model_response/submit_remote_qualification_and_experience_model_response.dart';
 import '../../../../../features/rate_and_work_times/data/response_models/rate_and_work_times_model_response/submit_remote_rate_and_work_times_model_response.dart';
+import '../../../local/Hive/user_local_storage/user_local_storage.dart';
 
 @Singleton(as: ProfileService)
 
@@ -50,7 +53,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<bool> submitProfileType(ProfileTypeEntity profileTypeEntity) async  {
     try{
-        UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
       data: SetupProfileSubmitprofileTypeModelResponse(type: profileTypeEntity.type).toJson());
       return true;
@@ -64,7 +68,8 @@ class ProfileServiceImpl extends ProfileService{
     try {
       Response<dynamic> response;
       if (userId == null) {
-        UserModel userModel = boxUser.get(current);
+        UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+        UserModel userModel = userLocalStorage.getUser();
         response =
         await apiService.get("$baseUrl$version/profiles/${userModel.id}");
       } else {
@@ -87,7 +92,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> submitWorkQualificationAndWorkExperience({required SubmitQualificationAndExperienceEntity submitQualificationAndExperienceEntity}) async {
     try{
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       print(SubmitRemoteQualificationAndExperienceModelResponse(
           qualifications: submitQualificationAndExperienceEntity.otpQualificationEntityList.toResponseList(),
           workExperience: submitQualificationAndExperienceEntity.otpWorKExperienceEntityList.toResponseList()).toJson());
@@ -109,7 +115,9 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> submitRemoteSkillsAndIndustry({required SkillsPageEntity skillsPageEntity})async  {
     try{
-      UserModel userModel = boxUser.get(current);
+
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: skillsPageEntity.skillListEntity.toResponse().toJson());
 
@@ -125,7 +133,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> submitBankDetails({required BankDetailsEntity bankDetailsEntity})async  {
     try{
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: PaymentDetailsModelResponse(paymentDetails: OTPPaymentDetailsModelResponse(
             bankAccountHolder: bankDetailsEntity.accountHolderName,
@@ -153,7 +162,9 @@ class ProfileServiceImpl extends ProfileService{
         policeClearanceId: finalDetailsEntity.policeClearance?.id
     ).toJson());
     try{
-      UserModel userModel = boxUser.get(current);
+
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: {
             'description': finalDetailsEntity.description,
@@ -170,12 +181,13 @@ class ProfileServiceImpl extends ProfileService{
 
   returnProfileEntity({required Response<dynamic> response}){
     OTPFullProfileModelResponse otpFullProfileModelResponse = OTPFullProfileModelResponse.fromJson(response.data);
-    UserModel userModel = boxUser.get(current);
-
-    if(boxProfile.isNotEmpty) {
-      ProfileModel profileModel = boxProfile.get(current);
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    ProfileLocalStorage profileLocalStorage = locator<ProfileLocalStorage>();
+    UserModel userModel = userLocalStorage.getUser();
+    try{
+      ProfileModel profileModel = profileLocalStorage.getProfileModel();
       if(otpFullProfileModelResponse.email!.toLowerCase() == profileModel.emailAddress!.toLowerCase()) {
-        boxProfile.put(current, ProfileModel(
+        profileLocalStorage.setProfileDetails(profileModel: ProfileModel(
             workPermitNumber: "",
             idNumber: otpFullProfileModelResponse.idNumber??"",
             emailAddress: otpFullProfileModelResponse.email ?? "",
@@ -183,11 +195,11 @@ class ProfileServiceImpl extends ProfileService{
             firstName: otpFullProfileModelResponse.firstName ?? "",
             passportNumber: otpFullProfileModelResponse.passportNumber??"",
             phoneNumber: otpFullProfileModelResponse.mobile??""));
-        boxUser.put(current, userModel);
         userModel.type = otpFullProfileModelResponse.type??"";
+        userLocalStorage.setUser(userModel);
       }
-      }else{
-      boxProfile.put(current, ProfileModel(
+    }catch(ex){
+      profileLocalStorage.setProfileDetails(profileModel: ProfileModel(
           workPermitNumber: "",
           idNumber: otpFullProfileModelResponse.idNumber??"",
           emailAddress: otpFullProfileModelResponse.email ?? "",
@@ -195,9 +207,10 @@ class ProfileServiceImpl extends ProfileService{
           firstName: otpFullProfileModelResponse.firstName ?? "",
           passportNumber: otpFullProfileModelResponse.passportNumber??"",
           phoneNumber: otpFullProfileModelResponse.mobile??""));
-      boxUser.put(current, userModel);
       userModel.type = otpFullProfileModelResponse.type??"";
-      }
+      userLocalStorage.setUser(userModel);
+    }
+
 
     return ProfileEntity(
       pictureEntity: UploadedFileEntity.fromResponse(response: otpFullProfileModelResponse?.profilePicture??
@@ -246,7 +259,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> submitRemoteRateAndWorkTimes({required RatesAndWorkTimesEntity ratesAndWorkTimesEntity}) async {
     try{
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       print(SubmitRemoteRateAndWorkTimesModelResponse(
           hourlyRate: int.parse(ratesAndWorkTimesEntity.hourlyRate!),workTimes: ratesAndWorkTimesEntity.toResponse()).toJson());
 
@@ -265,7 +279,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> submitRemoteLocation({required OTPLocationEntity otpLocationEntity}) async {
     try{
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: LocationModelResponse(location: otpLocationEntity.toResponse()).toJson());
       return returnProfileEntity(response: response);
@@ -277,7 +292,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<OTPPaymentDetailsEntity> getBankDetails()async {
     try {
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       Response<dynamic> response = await apiService.get(
           "$baseUrl$version/profiles/${userModel.id}");
       ProfileEntity profileEntity = returnProfileEntity(response: response);
@@ -290,7 +306,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<ProfileEntity> submitAcceptTermsAndConditions() async{
     try {
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       Response<dynamic> response = await apiService.put(
           "$baseUrl$version/profiles/${userModel.id}",
           data: {
@@ -305,7 +322,8 @@ class ProfileServiceImpl extends ProfileService{
   @override
   Future<bool> deleteProfile() async {
    try{
-     UserModel userModel = boxUser.get(current);
+     UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+     UserModel userModel = userLocalStorage.getUser();
      Response<dynamic> response = await apiService.delete(
          "$baseUrl$version/profiles/${userModel.id}",
          data: {

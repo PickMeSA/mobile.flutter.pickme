@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/my_bookings_upcoming/data/response_models/my_bookings_upcoming_model_response/booking_model_response.dart';
 import 'package:pickme/features/my_bookings_upcoming/data/response_models/my_bookings_upcoming_model_response/customer_model_response.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
@@ -13,6 +14,8 @@ import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/booking_service/booking_service.dart';
 
+import '../../../local/Hive/user_local_storage/user_local_storage.dart';
+
 @Singleton(as: BookingService)
 class BookingServiceImpl extends BookingService{
 
@@ -21,7 +24,8 @@ class BookingServiceImpl extends BookingService{
   BookingServiceImpl({required this.apiService});
   @override
   Future<List<BookingEntity>> getRemoteBookings() async{
-    UserModel userModel = boxUser.get(current);
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    UserModel userModel = userLocalStorage.getUser();
     try {
       Response<dynamic> response = await apiService.get(
           "$baseUrl$version/jobs/jobInterests/booking?profileType=${userModel.type}");

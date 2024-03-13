@@ -22,7 +22,8 @@ abstract class PurchasedProductChangeDelegate { // Ideally should have been brok
 }
 
 
-@Singleton(as: InAppPurchaseInteractor)
+// @Singleton(as: InAppPurchaseInteractor)
+@singleton
 class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
 
   // Constants

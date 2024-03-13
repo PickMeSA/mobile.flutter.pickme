@@ -12,19 +12,19 @@ class RegisterOTPCompleteRepositoryImpl extends RegisterOTPCompleteRepository {
   RegisterOTPCompleteRepositoryImpl({required this.profileLocalStorage});
 
   @override
-  Future<bool> call({RegisterOTPCompleteRepositoryParams? params}) async {
+  Future<bool> call({RegisterOTPCompleteRepositoryParams? params}) {
    try{
-      await profileLocalStorage.setProfileDetails( profileModel:
+     profileLocalStorage.setProfileDetails( profileModel:
          ProfileModel(
              workPermitNumber: params!.userModel.workPermitNumber,
-             idNumber: params!.userModel.idNumber,
-             emailAddress: params!.userModel.email,
-             phoneNumber: params!.userModel.mobile,
-             surname: params!.userModel.surname,
+             idNumber: params.userModel.idNumber,
+             emailAddress: params.userModel.email,
+             phoneNumber: params.userModel.mobile,
+             surname: params.userModel.surname,
              firstName: params.userModel.firstName,
-             passportNumber: params!.userModel.passportNumber)
+             passportNumber: params.userModel.passportNumber)
      );
-      return true;
+      return Future.value(true);
    }catch(ex){
      rethrow;
    }

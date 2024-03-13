@@ -6,6 +6,9 @@ import 'package:pickme/shared/remote/api-service.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/booking_service/reschedule_service.dart';
 
+import '../../../../../core/locator/locator.dart';
+import '../../../local/Hive/user_local_storage/user_local_storage.dart';
+
 @Singleton(as : RescheduleService)
 class RescheduleServiceImpl extends  RescheduleService{
 
@@ -14,7 +17,9 @@ class RescheduleServiceImpl extends  RescheduleService{
   RescheduleServiceImpl({required this.apiService});
   @override
   Future<String> rescheduleBooking({required RescheduleEntity rescheduleEntity}) async {
-    UserModel userModel = boxUser.get(current);
+
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    UserModel userModel = userLocalStorage.getUser();
     rescheduleEntity!.proposerUid = userModel.id;
     print(rescheduleEntity.toResponse().toJson());
     try {
