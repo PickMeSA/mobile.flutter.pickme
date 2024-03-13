@@ -66,28 +66,6 @@ IOS: IOS 11
 Cocoapods:  1.13.0
 
 
-
-## App Store credentials
-
-Apple developer console admin account :
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
-Android developer console admin account:
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
-
-## Github credentials
-   Username: attie@pick-me.co.za
-   Password: Celandri@my2
-
-
-
-## Codemagic credentials
-Username: attie@pick-me.co.za
-Password: Celandri@my2
-
 ## Application architecture
 
 The PickMe application was built using the Clean Architecture as the project must still scale in functionality and this allows very simple maintainability.
@@ -97,3 +75,15 @@ Clean architecture:
 The clean architecture description video can be found in the link below:
 https://www.youtube.com/watch?v=SmJB8cy8emU
 
+## To build the release app bundle for Android, You will have to create a keys.properties file which will have the following
+
+storePassword=STORE_PASSWORD
+keyPassword=KEY_PASSWORD
+keyAlias=KEY_ALIAS
+storeFile=FILE_ABSOLUTE_PATH
+
+where
+STORE_PASSWORD is the release store password, this should have been provided with the handover document
+KEY_PASSWORD is the release key password, this should have been provided with the handover document
+KEY_ALIAS is the key alias, this should have been provided with the handover document
+FILE_ABSOLUTE_PATH is the absolute path to the key store file, this should have been provided with the handover document
