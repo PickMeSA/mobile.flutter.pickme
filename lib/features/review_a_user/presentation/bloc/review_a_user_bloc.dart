@@ -5,10 +5,12 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/review_a_user/domain/use_cases/submit_review_use_case.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
+import '../../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import '../../domain/entities/review_a_user_page_entity.dart';
 import '../../domain/use_cases/get_review_user_page_entity_use_case.dart';
 
@@ -79,7 +81,8 @@ class ReviewAUserBloc extends BaseBloc<ReviewAUserPageEvent, ReviewAUserState> {
       )async{
     emit(SubmitClickedState()..dataState = DataState.loading);
     try{
-      UserModel userModel = boxUser.get(current);
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       bool result = await submitReviewUseCase.call(params: SubmitReviewUseCaseParams(
         reviewerId: userModel.id!,
         userId: event.userId,

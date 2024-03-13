@@ -4,6 +4,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/job_details/domain/use_cases/job_details_usecase/get_full_job_details_usecase.dart';
 import 'package:pickme/features/job_details/domain/use_cases/job_details_usecase/toggle_job_status_usecase.dart';
 import 'package:pickme/shared/domain/entities/job_entity.dart';
@@ -11,6 +12,8 @@ import 'package:pickme/shared/domain/usecases/apply_for_job_usecase.dart';
 import 'package:pickme/shared/domain/usecases/respond_to_job_interest_use_case.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+
+import '../../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 
 part 'job_details_event.dart';
 part 'job_details_state.dart';
@@ -24,12 +27,15 @@ class JobDetailsBloc
     bool accepted = false;
     final GetJobFullDetailsUseCase getJobFullDetailsUseCase;
     final ApplyForJobUseCase applyForJobEvent;
+    final UserLocalStorage userLocalStorage;
     RespondToJobInterestUseCase respondToJobInterestUseCase;
     ToggleJobStatusUseCase toggleJobStatusUseCase;
     JobDetailsBloc({required this.getJobFullDetailsUseCase,
         required this.respondToJobInterestUseCase,
         required this.applyForJobEvent,
-        required this.toggleJobStatusUseCase}): super(JobDetailsPageInitState()) {
+        required this.toggleJobStatusUseCase,
+        required this.userLocalStorage,
+    }): super(JobDetailsPageInitState()) {
         on<RespondToJobInterestEvent>((event, emit) => _onRespondToJobInterestEvent(event, emit));
         on<GetFullJobDetailsEvent>((event, emit)=> _onGetFullJobDetailsEvents(event, emit));
         on<ApplyForJobEvent>((event, emit)=> _onApplyForJobEvent(event, emit));
@@ -41,7 +47,9 @@ class JobDetailsBloc
         if(event.job!=null){
             jobEntity = event.job;
         }
-        UserModel userModel = boxUser.get(current);
+
+        UserModel userModel = userLocalStorage.getUser();
+
         currentUserId = userModel.id;
         emit(GetFullJobDetailsState()..dataState = DataState.loading);
         try {

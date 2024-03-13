@@ -14,6 +14,7 @@ import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'bloc/request_a_review_bloc.dart';
 
 @RoutePage()
@@ -38,7 +39,9 @@ class RequestAReviewPageState extends BasePageState<RequestAReviewPage, RequestA
   }
   @override
   Widget buildView(BuildContext context) {
-    UserModel userModel = boxUser.get(current);
+
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    UserModel userModel = userLocalStorage.getUser();
     return BlocConsumer<RequestAReviewBloc, RequestAReviewState>(
       listener: (context, state) {
       },

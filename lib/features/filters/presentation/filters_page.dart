@@ -14,6 +14,7 @@ import 'package:pickme/shared/domain/entities/filter_entity.dart';
 import 'package:pickme/shared/enums/app_mode_enum.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'package:pickme/shared/widgets/w_app_bar.dart';
 import 'package:pickme/shared/widgets/w_page_padding.dart';
 
@@ -40,7 +41,8 @@ class _FilterCandidatesPage extends BasePageState<FiltersPage, FilterCandidatesB
 
   @override
   Widget buildView(BuildContext context) {
-    UserModel userModel = boxUser.get(current);
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    UserModel userModel = userLocalStorage.getUser();
     bool isHiring = userModel.type =="hire";
     var theme = Theme.of(context);
     return BlocConsumer<FilterCandidatesBloc, FilterCandidatesState>(

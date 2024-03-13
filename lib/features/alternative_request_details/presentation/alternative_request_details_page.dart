@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -165,7 +166,8 @@ class _AlternativeRequestDetailsPageState extends BasePageState<AlternativeReque
                               )
                           ),
                           onPressed: () {
-                            UserModel userModel = boxUser.get(current);
+                            UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+                            UserModel userModel = userLocalStorage.getUser();
                             getBloc().add(RescheduleBookingEvent(rescheduleEntity: RescheduleEntity(
                               previousStatus: JobStatus.rescheduled,
                               proposedAltStartTime: "",

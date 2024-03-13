@@ -5,9 +5,11 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
+import '../../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import '../../domain/entities/my_reviews_page_entity.dart';
 import '../../domain/use_cases/get_my_reviews_page_entity_use_case.dart';
 
@@ -35,7 +37,9 @@ class MyReviewsPageBloc extends BaseBloc<MyReviewsPageEvent, MyReviewsPageState>
       )async{
     emit(GetPageDataState()..dataState = DataState.loading);
     try{
-      UserModel userModel = boxUser.get(current);
+
+      UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+      UserModel userModel = userLocalStorage.getUser();
       String userId = event.userId??userModel.id!;
       isMyProfile = event.userId == null;
       pageEntity = await getMyReviewsUseCase.call(

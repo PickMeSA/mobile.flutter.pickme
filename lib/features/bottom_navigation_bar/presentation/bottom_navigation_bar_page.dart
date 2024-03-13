@@ -21,6 +21,7 @@ import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
+import '../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import '../../jobs_landing_page/presentation/jobs_landing_page.dart';
 
 @RoutePage()
@@ -56,7 +57,9 @@ class _BottomNavigationBarPageState extends BasePageState<BottomNavigationBarPag
   Widget buildView(BuildContext context) {
 
     ThemeData theme = Theme.of(context);
-    UserModel userModel = boxUser.get(current);
+
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    UserModel userModel = userLocalStorage.getUser();
     return BlocConsumer<BottomNavigationBarBloc, BottomNavigationBarPageState>(
       listener: (context, state){
       },

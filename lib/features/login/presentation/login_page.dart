@@ -6,20 +6,22 @@ import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/features/lets_begin/presentation/modal/validation.dart';
 import 'package:pickme/features/login/domain/entities/token/token_model.dart';
 import 'package:pickme/features/login/presentation/bloc/login_bloc.dart';
-import 'package:pickme/features/register/domain/entities/user/user_model.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile_local_storage.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+import 'package:pickme/shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+
+import '../../../shared/services/local/Hive/token_local_storage/token_local_storage.dart';
 
 @RoutePage()
 class LoginPage extends BasePage {
@@ -257,10 +259,14 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                 refreshToken: token??"",
                 accessToken: token??"",
                 tokenID: token??"");
-            boxTokens.put(current, tokenModel);
+
+            final TokenLocalStorage tokenLocalStorage = locator<TokenLocalStorage>();
+            final ProfileLocalStorage profileLocalStorage = locator<ProfileLocalStorage>();
+            final UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+            tokenLocalStorage.setToken(tokenModel);
             UserModel userModel = UserModel(id: "");
             userModel.id = value.user?.uid;
-            boxProfile.put(current, ProfileModel(
+            profileLocalStorage.setProfileDetails(profileModel: ProfileModel(
                 workPermitNumber: "",
                 idNumber: "",
                 emailAddress: username,
@@ -268,7 +274,8 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                 surname: "",
                 firstName: "",
                 passportNumber: ""));
-            boxUser.put(current, userModel);
+
+            userLocalStorage.setUser(userModel);
             Navigator.pop(context);
             getBloc().add(LoginContinueClickedEvent());
           }else{

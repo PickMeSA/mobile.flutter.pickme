@@ -4,6 +4,7 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/apply_for_job/domain/entities/date_and_time.dart';
 import 'package:pickme/features/apply_for_job/domain/use_cases/apply_for_job_usecase/update_job_date_time_usecase.dart';
 import 'package:pickme/shared/constants/default_values.dart';
@@ -12,6 +13,8 @@ import 'package:pickme/shared/domain/usecases/apply_for_job_usecase.dart';
 import 'package:pickme/shared/domain/usecases/respond_to_job_interest_use_case.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+
+import '../../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 
 part 'apply_for_job_event.dart';
 part 'apply_for_job_state.dart';
@@ -74,8 +77,10 @@ class ApplyForJobBloc extends BaseBloc<ApplyForJobPageEvent, ApplyForJobPageStat
         );
         emit(ApplyForJobClickedState()..dataState = DataState.loading);
         try {
-            UserModel userModel = boxUser.get(current);
-            bool result = await applyForJobEvent.call(
+          UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+          UserModel userModel = userLocalStorage.getUser();
+
+          bool result = await applyForJobEvent.call(
                 params: ApplyForJobUseCaseParams(jobEntity: job!, userId: userModel.id!
                 ));
             if(result){

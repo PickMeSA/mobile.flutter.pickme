@@ -11,12 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
+import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile_local_storage.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_decision_widget.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 import 'bloc/burger_menu_bloc.dart';
 
 @RoutePage()
@@ -36,11 +38,13 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
   void initState() {
     // TODO: implement initState
     super.initState();
-    userModel = boxUser.get(current);
-    profileModel = boxProfile.get(current);
+    UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+    ProfileLocalStorage profileLocalStorage = locator<ProfileLocalStorage>();
+    userModel = userLocalStorage.getUser();
+    profileModel = profileLocalStorage.getProfileModel();
   }
 
-    @override
+  @override
   PreferredSizeWidget? buildAppbar() {
     return null;
   }
@@ -69,113 +73,115 @@ class _BurgerMenuPageState extends BasePageState<BurgerMenuPage, BurgerMenuBloc>
         }
       },
       builder: (context, state) {
-         return Padding(
-           padding: const EdgeInsets.all(20.0),
-           child: SizedBox(
-             height: MediaQuery.sizeOf(context).height,
-             width: MediaQuery.sizeOf(context).width,
-             child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Row(
-                   children: [
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SizedBox(
+            height: MediaQuery.sizeOf(context).height,
+            width: MediaQuery.sizeOf(context).width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
                     SizedBox(width: MediaQuery.sizeOf(context).width*0.8,
                       child: wText(getLocalization().hi(profileModel!.firstName!, profileModel!.surname!),
                           style: theme.textTheme.headlineMedium),
                     ),
-                     const Spacer(),
-                     InkWell(onTap: (){context.router.pop();},child: const Icon(Icons.close))
-                   ],
-                 ),
+                    const Spacer(),
+                    InkWell(onTap: (){context.router.pop();},child: const Icon(Icons.close))
+                  ],
+                ),
 
-                 30.height,
-                 wText(getLocalization().iWouldLikeTo),
-                 15.height,
+                30.height,
+                wText(getLocalization().iWouldLikeTo),
+                15.height,
 
-                 ProfileToggle(
+                ProfileToggle(
 
-                   onPressed: (int index) {
+                  onPressed: (int index) {
 
-                     wDecisionWidget(theme: theme, leftButton:
-                     ()=>Navigator.pop(context)
-                     , rightButton: (){
-                       getBloc().add(ToggleSelectedEvent(selectedIndex: index));
-                       getBloc().add(SetupProfileSubmitProfileTypeEvent());
-                       }
-                         , leftButtonCaption: getLocalization().noCancel,
-                         rightButtonCaption: getLocalization().yesSwitch,
-                         message: index == 0 ?
-                         getLocalization().switchingYourProfileFromHireToWorking:
-                         getLocalization().switchingYourProfileFromWorkerToHire,
-                         title: getLocalization().switchingProfiles,
-                         context: context);
-                   },
-                   selected: userModel.type == 'work'?[true,false]: [false,true],
-                   children: [
-                     Container(width: (MediaQuery.of(context).size.width - 50)/2, child:  Center(child: Text(getLocalization().work))),
-                     Container(width: (MediaQuery.of(context).size.width - 50)/2, child:  Center(child: Text(getLocalization().hire))),
-                   ],
-                 ),
-                 30.height,
-                 InkWell(
-                   onTap: ()=> context.router.push(const MyWalletRoute()),
-                   child: ListTile(
-                     leading: const Icon(Iconsax.wallet_1),
-                     title: wText(getLocalization().myWallet),
-                     trailing: const Icon(Icons.arrow_forward_ios),
-                   ),
-                 ),
-                 ListTile(
-                   leading: const Icon(Iconsax.call),
-                   title: wText(getLocalization().contactUs),
-                   trailing: const Icon(Icons.arrow_forward_ios),
-                   onTap: (){
-                     context.router.pop().then((value) => context.router.push(ContactRoute()));
-                   },
-                 ),
-                 const AppDivider(),
-                 ListTile(
-                   leading: const Icon(Iconsax.star_1),
-                   title: wText(getLocalization().reviewUser),
-                   trailing: const Icon(Icons.arrow_forward_ios),
-                   onTap: (){
-                     context.router.pop().then((value) => context.router.push(const ScanQrCodeRoute()));
-                   },
-                 ),
+                    wDecisionWidget(theme: theme, leftButton:
+                        ()=>Navigator.pop(context)
+                        , rightButton: (){
+                          getBloc().add(ToggleSelectedEvent(selectedIndex: index));
+                          getBloc().add(SetupProfileSubmitProfileTypeEvent());
+                        }
+                        , leftButtonCaption: getLocalization().noCancel,
+                        rightButtonCaption: getLocalization().yesSwitch,
+                        message: index == 0 ?
+                        getLocalization().switchingYourProfileFromHireToWorking:
+                        getLocalization().switchingYourProfileFromWorkerToHire,
+                        title: getLocalization().switchingProfiles,
+                        context: context);
+                  },
+                  selected: userModel.type == 'work'?[true,false]: [false,true],
+                  children: [
+                    Container(width: (MediaQuery.of(context).size.width - 50)/2, child:  Center(child: Text(getLocalization().work))),
+                    Container(width: (MediaQuery.of(context).size.width - 50)/2, child:  Center(child: Text(getLocalization().hire))),
+                  ],
+                ),
+                30.height,
+                InkWell(
+                  onTap: ()=> context.router.push(const MyWalletRoute()),
+                  child: ListTile(
+                    leading: const Icon(Iconsax.wallet_1),
+                    title: wText(getLocalization().myWallet),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(Iconsax.call),
+                  title: wText(getLocalization().contactUs),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: (){
+                    context.router.pop().then((value) => context.router.push(ContactRoute()));
+                  },
+                ),
+                const AppDivider(),
+                ListTile(
+                  leading: const Icon(Iconsax.star_1),
+                  title: wText(getLocalization().reviewUser),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: (){
+                    context.router.pop().then((value) => context.router.push(const ScanQrCodeRoute()));
+                  },
+                ),
 
-                 const Spacer(),
+                const Spacer(),
 
-                 Row(
-                   children: [
-                     Expanded(
-                       child: PrimaryButton(
-                         style: ButtonStyle(
-                             side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                               return BorderSide(
-                                 color: theme.colorScheme.secondary,
-                                 width: 2,
-                               );
-                             }
-                             ),
-                             backgroundColor: MaterialStateProperty.resolveWith(
-                                     (Set<MaterialState> states){
-                                   return theme.colorScheme.secondary;
-                                 }
-                             )
-                         ),
-                         onPressed:() {
-                           context.router.pushAndPopUntil(const LandingRoute(),
-                           predicate: (Route<dynamic> route) => false);
-                           boxProfile.clear();
-        },
-                         child: Text(getLocalization().logOut),
-                       ),
-                     ),
-                   ],
-                 )               ],
-             ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: PrimaryButton(
+                        style: ButtonStyle(
+                            side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                              return BorderSide(
+                                color: theme.colorScheme.secondary,
+                                width: 2,
+                              );
+                            }
+                            ),
+                            backgroundColor: MaterialStateProperty.resolveWith(
+                                    (Set<MaterialState> states){
+                                  return theme.colorScheme.secondary;
+                                }
+                            )
+                        ),
+                        onPressed:() {
+                          context.router.pushAndPopUntil(const LandingRoute(),
+                              predicate: (Route<dynamic> route) => false);
+                          ProfileLocalStorage profileLocalStorage = locator<ProfileLocalStorage>();
+                          profileLocalStorage.clearProfile();
+                        },
+                        child: Text(getLocalization().logOut),
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
-         );
+          ),
+        );
       },
     );
   }

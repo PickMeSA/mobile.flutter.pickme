@@ -4,10 +4,13 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/entities/booking_entity.dart';
 import 'package:pickme/features/my_bookings_upcoming/domain/use_cases/my_bookings_upcoming_usecase/load_bookings_upcoming_usecase.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
+
+import '../../../../shared/services/local/Hive/user_local_storage/user_local_storage.dart';
 
 part 'pay_someone_event.dart';
 part 'pay_someone_state.dart';
@@ -28,7 +31,9 @@ class PaySomeoneBloc
 
     _onLoadBookingsUpcomingEvent(event,emit) async{
         emit(LoadBookingUpcomingState()..dataState = DataState.loading);
-        UserModel userModel = boxUser.get(current);
+        UserLocalStorage userLocalStorage = locator<UserLocalStorage>();
+        UserModel userModel = userLocalStorage.getUser();
+
         upcomingHireBookingsList.clear();
         try{
             await loadBookingsUpcomingUseCase.call()
