@@ -176,6 +176,28 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                       ),
 
                     ],
+                  ),
+                  20.height,
+                  RichText(
+                    text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: "${getLocalization().ifYouVePreviouslyPurchasedASubscriptionKindlySelect} ",
+                              style: theme.textTheme.bodyMedium!.copyWith(color: Colors.black54,)
+                          ),
+
+                          TextSpan(
+                              text: getLocalization().restorePurchase,
+                              style: theme.textTheme.bodyMedium!.copyWith(
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                // ToDo: Add on tap action
+                                }
+                          ),
+                        ]
+                    ),
                   )
                 ],
               ),
