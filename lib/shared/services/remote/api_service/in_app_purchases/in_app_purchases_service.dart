@@ -4,7 +4,7 @@ import '../../../../domain/entities/InAppPurchaseResponseEntity.dart';
 import '../../../../remote/PickMeApiCore.dart';
 
 abstract class InAppPurchasesService extends PickMeCoreApi{
-  Future<InAppPurchaseActivationResponseEntity> activate(InAppPurchaseActivationRequestEntity requestEntity);
-  Future<InAppPurchaseActivationResponseEntity> restoreSubscription(InAppPurchaseActivationRequestEntity requestEntity);
-  Future<InAppPurchaseActivationResponseEntity> checkSubscription(InAppPurchaseActivationRequestEntity requestEntity);
+  Future<InAppResponseActivationResultDetails> activate(InAppPurchaseActivationRequestEntity requestEntity);
+  Future<InAppResponseActivationResultDetails> restoreSubscription(InAppPurchaseActivationRequestEntity requestEntity);
+  Future<InAppResponseActivationResultDetails> checkSubscription(InAppPurchaseActivationRequestEntity requestEntity);
 }

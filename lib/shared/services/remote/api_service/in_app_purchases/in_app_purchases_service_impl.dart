@@ -18,11 +18,11 @@ class InAppPurchasesServiceImpl extends InAppPurchasesService{
       {required this.apiService});
 
   @override
-  Future<InAppPurchaseActivationResponseEntity> activate(InAppPurchaseActivationRequestEntity requestEntity) async{
+  Future<InAppResponseActivationResultDetails> activate(InAppPurchaseActivationRequestEntity requestEntity) async{
     try{
       Response<dynamic> response = await apiService.post("$baseUrl$version/activate", data: requestEntity.toModel().toJson());
       InAppPurchaseActivationResponseModel responseModel = InAppPurchaseActivationResponseModel.fromJson(response.data);
-      return InAppPurchaseActivationResponseEntity.fromModel(responseModel);
+      return InAppResponseActivationResultDetails.fromModel(responseModel);
     }on DioException catch(ex) {
       logger.e(ex);
       final errorMessage = ex.message ?? "";
@@ -36,11 +36,11 @@ class InAppPurchasesServiceImpl extends InAppPurchasesService{
   }
 
   @override
-  Future<InAppPurchaseActivationResponseEntity> checkSubscription(InAppPurchaseActivationRequestEntity requestEntity) async{
+  Future<InAppResponseActivationResultDetails> checkSubscription(InAppPurchaseActivationRequestEntity requestEntity) async{
     try{
       Response<dynamic> response = await apiService.post("$baseUrl$version/check-subscription", data: requestEntity.toModel().toJson());
       InAppPurchaseActivationResponseModel responseModel = InAppPurchaseActivationResponseModel.fromJson(response.data);
-      return InAppPurchaseActivationResponseEntity.fromModel(responseModel);
+      return InAppResponseActivationResultDetails.fromModel(responseModel);
     }catch(ex){
       logger.e(ex);
       if (ex is DioException) {
@@ -55,11 +55,11 @@ class InAppPurchasesServiceImpl extends InAppPurchasesService{
   }
 
   @override
-  Future<InAppPurchaseActivationResponseEntity> restoreSubscription(InAppPurchaseActivationRequestEntity requestEntity) async{
+  Future<InAppResponseActivationResultDetails> restoreSubscription(InAppPurchaseActivationRequestEntity requestEntity) async{
     try{
       Response<dynamic> response = await apiService.post("$baseUrl$version/restore", data: requestEntity.toModel().toJson());
       InAppPurchaseActivationResponseModel responseModel = InAppPurchaseActivationResponseModel.fromJson(response.data);
-      return InAppPurchaseActivationResponseEntity.fromModel(responseModel);
+      return InAppResponseActivationResultDetails.fromModel(responseModel);
     }catch(ex){
       logger.e(ex);
       if (ex is DioException) {

@@ -1,55 +1,55 @@
 import 'package:equatable/equatable.dart';
 
-import '../../models/in_app_purchases/in_app_purchase_activate_request_model.dart';
+import '../../models/error/http_error_model.dart';
 import '../../models/in_app_purchases/in_app_purchase_activation_response_model.dart';
 
-class InAppPurchaseActivationResponseEntity extends Equatable {
+class InAppResponseActivationResultDetails extends Equatable {
   final bool activated;
-  final ErrorResponseEntity? error;
+  final HttpErrorEntity? errorModel;
 
-  const InAppPurchaseActivationResponseEntity({
+  const InAppResponseActivationResultDetails({
     required this.activated,
-    this.error,
+    this.errorModel,
   });
 
-  factory InAppPurchaseActivationResponseEntity.fromModel(InAppPurchaseActivationResponseModel model) {
-    return InAppPurchaseActivationResponseEntity(
+  factory InAppResponseActivationResultDetails.fromModel(InAppPurchaseActivationResponseModel model) {
+    return InAppResponseActivationResultDetails(
       activated: model.activated,
-      error: model.error != null ? ErrorResponseEntity.fromModel(model.error!) : null,
+      errorModel: model.httpErrorModel != null ? HttpErrorEntity.fromModel(model.httpErrorModel!) : null,
     );
   }
 
   InAppPurchaseActivationResponseModel toModel() {
     return InAppPurchaseActivationResponseModel(
       activated: activated,
-      error: error?.toModel(),
+      httpErrorModel: errorModel?.toModel(),
     );
   }
 
   @override
   List<Object?> get props => [
     activated,
-    error,
+    errorModel,
   ];
 }
-class ErrorResponseEntity {
+class HttpErrorEntity {
   final String message;
   final int code;
 
-  ErrorResponseEntity({
+  HttpErrorEntity({
     required this.message,
     required this.code,
   });
 
-  factory ErrorResponseEntity.fromModel(Error model) {
-    return ErrorResponseEntity(
+  factory HttpErrorEntity.fromModel(HttpErrorModel model) {
+    return HttpErrorEntity(
       message: model.message,
       code: model.code,
     );
   }
 
-  Error toModel() {
-    return Error(
+  HttpErrorModel toModel() {
+    return HttpErrorModel(
       message: message,
       code: code,
     );

@@ -36,7 +36,7 @@ void main() {
       }
     };
     InAppPurchaseActivationResponseModel responseModel = InAppPurchaseActivationResponseModel.fromJson(responseJson);
-    InAppPurchaseActivationResponseEntity expectedEntity = InAppPurchaseActivationResponseEntity.fromModel(responseModel);
+    InAppResponseActivationResultDetails expectedEntity = InAppResponseActivationResultDetails.fromModel(responseModel);
 
     test('activate should return expected response entity on successful response', () async {
       when(mockApiService.post('/activate', data: requestEntity.toModel().toJson()))
