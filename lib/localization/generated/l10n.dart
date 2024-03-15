@@ -4041,6 +4041,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `An error occurred while processing your request. Please try again later.`
+  String get anErrorOccurredWhileProcessingYourRequest {
+    return Intl.message(
+      'An error occurred while processing your request. Please try again later.',
+      name: 'anErrorOccurredWhileProcessingYourRequest',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
