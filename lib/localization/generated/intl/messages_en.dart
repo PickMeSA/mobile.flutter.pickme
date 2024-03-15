@@ -95,6 +95,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress":
             MessageLookupByLibrary.simpleMessage(
                 "An email containing a link to reset your password has been sent to you email address"),
+        "anErrorOccurredWhileProcessingYourRequest":
+            MessageLookupByLibrary.simpleMessage(
+                "An error occurred while processing your request. Please try again later."),
         "applicationSent":
             MessageLookupByLibrary.simpleMessage("Application sent"),
         "applicationSenttext": MessageLookupByLibrary.simpleMessage(
