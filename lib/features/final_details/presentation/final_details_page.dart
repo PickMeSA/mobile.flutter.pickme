@@ -190,6 +190,12 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                     child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
                   ),
                   40.height,
+                  Text(getLocalization().whatIsBeingPaid, style: const TextStyle(
+                    color: Colors.black45,
+                  )),
+                  5.height,
+                  Text(getLocalization().theOnceOff50RandSubscription,),
+                  40.height,
                   Row(
                     children: [
                       Container(
@@ -228,7 +234,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                                {
                             getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
                           },
-                          child: Text(getLocalization().createProfile),
+                          child: Text(getLocalization().payNow),
                         ),
                       ),
                     ],

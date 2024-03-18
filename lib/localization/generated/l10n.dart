@@ -4051,6 +4051,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Restore purchase`
+  String get restorePurchase {
+    return Intl.message(
+      'Restore purchase',
+      name: 'restorePurchase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you've previously purchased a subscription, kindly select `
+  String get ifYouVePreviouslyPurchasedASubscriptionKindlySelect {
+    return Intl.message(
+      'If you\'ve previously purchased a subscription, kindly select ',
+      name: 'ifYouVePreviouslyPurchasedASubscriptionKindlySelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is being paid?`
+  String get whatIsBeingPaid {
+    return Intl.message(
+      'What is being paid?',
+      name: 'whatIsBeingPaid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The once-off R50.00 subscription fee enables users to have access to all the in-App services.`
+  String get theOnceOff50RandSubscription {
+    return Intl.message(
+      'The once-off R50.00 subscription fee enables users to have access to all the in-App services.',
+      name: 'theOnceOff50RandSubscription',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
