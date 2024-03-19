@@ -97,164 +97,171 @@ class _FinalDetailsPageState extends BaseMultiBlocPageState<FinalDetailsPage, Fi
         return SizedBox(
           height: MediaQuery.sizeOf(context).height,
           width: MediaQuery.sizeOf(context).width,
-          child:SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  wText(getLocalization().step7,style:theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 32,
-                      color: theme.primaryColor
-                  )),
-                  const SizedBox(height: 10,),
-                  wText(getLocalization().finalDetails,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
-                  20.height,
-                  Row(
-                    children: [
-                      const Spacer(),
-                      SizedBox(
-                        height: 64,
-                        width: 64,
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isSelectingProfilePicture = true;
-                            });
-                            _pickFile();
-                          },
-                          child: Stack(children: [
-                            // CircleAvatar(radius: 48,backgroundColor: Colors.white),
-                            Positioned(
-                              top: 1,
-                              left: 1,
-                              child: AppImageAvatar(
-                                image: (getBloc().finalDetailsEntity.profilePicture==null)? null:
-                                CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url!),
+          child: Column(
+            children:[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        wText(getLocalization().step7,style:theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 32,
+                            color: theme.primaryColor
+                        )),
+                        const SizedBox(height: 10,),
+                        wText(getLocalization().finalDetails,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
+                        20.height,
+                        Row(
+                          children: [
+                            const Spacer(),
+                            SizedBox(
+                              height: 64,
+                              width: 64,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isSelectingProfilePicture = true;
+                                  });
+                                  _pickFile();
+                                },
+                                child: Stack(children: [
+                                  // CircleAvatar(radius: 48,backgroundColor: Colors.white),
+                                  Positioned(
+                                    top: 1,
+                                    left: 1,
+                                    child: AppImageAvatar(
+                                      image: (getBloc().finalDetailsEntity.profilePicture==null)? null:
+                                      CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url!),
+                                    ),
+                                  ),
+                                  if(state is ProfilePictureAddedState && state.dataState == DataState.loading) const Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      child: SizedBox(
+                                        height: 64,
+                                        width: 64,
+                                        child: Center(child: CircularProgressIndicator()),
+                                      )
+                                  ),
+                                  Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: CircleAvatar(
+                                        radius: 9,
+                                        backgroundColor: Colors.black,
+                                        child: (getBloc().finalDetailsEntity.profilePicture==null)?
+                                        const Icon(Icons.add, color: Colors.black,size: 11):
+                                        const Icon(Icons.edit, color: Colors.black,size: 11),
+                                      )),
+                                  Positioned(
+                                      bottom:1,
+                                      right:1,
+                                      child: CircleAvatar(
+                                        radius: 8,
+                                        backgroundColor: Colors.white,
+                                        child: (getBloc().finalDetailsEntity.profilePicture==null)?
+                                        const Icon(Icons.add, color: Colors.black,size: 11):
+                                        const Icon(Icons.edit, color: Colors.black,size: 11),
+                                      ))
+
+                                ],
+                                ),
                               ),
                             ),
-                            if(state is ProfilePictureAddedState && state.dataState == DataState.loading) const Positioned(
-                                top: 0,
-                                left: 0,
-                                child: SizedBox(
-                                  height: 64,
-                                  width: 64,
-                                  child: Center(child: CircularProgressIndicator()),
-                                )
-                            ),
-                            Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: CircleAvatar(
-                                  radius: 9,
-                                  backgroundColor: Colors.black,
-                                  child: (getBloc().finalDetailsEntity.profilePicture==null)?
-                                  const Icon(Icons.add, color: Colors.black,size: 11):
-                                  const Icon(Icons.edit, color: Colors.black,size: 11),
-                                )),
-                            Positioned(
-                                bottom:1,
-                                right:1,
-                                child: CircleAvatar(
-                                  radius: 8,
-                                  backgroundColor: Colors.white,
-                                  child: (getBloc().finalDetailsEntity.profilePicture==null)?
-                                  const Icon(Icons.add, color: Colors.black,size: 11):
-                                  const Icon(Icons.edit, color: Colors.black,size: 11),
-                                ))
-
+                            const Spacer(),
                           ],
-                          ),
                         ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                  if(state is ProfilePictureAddedState && state.dataState == DataState.error)Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
-                  ),
-                  40.height,
-                  AppTextFormField(
-                      controller: aboutYouController,
-                      keyboardType: TextInputType.multiline,
-                      labelText: getLocalization().aboutYouBasedOnYourProfile,
-                      textFieldType: TextFieldType.OTHER,
-                      maxLines: 10,maxLength: 2000),
-                  GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isSelectingProfilePicture = false;
-                        });
-                        _pickFile();
-                      },
-                      child: labelledPanel(
-                          labelText: getBloc().policeClearancePath == null?
-                          getLocalization().policeClearanceOptional: getBloc().policeClearancePath!,
-                          content: Container(
-                            height: 96 ,
-                            child: Center(child: Row(
-                              children: [
-                                const Spacer(),
-                                (state is PoliceClearanceAddedState && state.dataState == DataState.loading)?
-                                const CircularProgressIndicator():SvgPicture.asset("assets/upload_icon.svg"),
-                                10.width,
-                                wText(getLocalization().upload, style: theme.textTheme.bodyMedium?.copyWith(
-                                    fontWeight: FontWeight.w400, color: Colors.grey
-                                )),
-                                const Spacer(),
-                              ],
-                            )),
-                          ))),
-
-                  if(state is PoliceClearanceAddedState && state.dataState == DataState.error)Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
-                  ),
-                  40.height,
-                  Text(getLocalization().whatIsBeingPaid, style: const TextStyle(
-                    color: Colors.black45,
-                  )),
-                  5.height,
-                  Text(getLocalization().theOnceOff50RandSubscription,),
-                  40.height,
-                  Row(
-                    children: [
-                      Container(
-                        height: 56,
-                        width: 56,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 2,
-                                color: Colors.black),
-                            borderRadius: const BorderRadius.all(Radius.circular(10))),
-                        child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
-
-                      ),
-                      const SizedBox(width: 10,),
-                      Expanded(
-                        child: PrimaryButton(
-                          onPressed: () {
-                            getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
-                          },
-                          child: Text(getLocalization().payNow),
+                        if(state is ProfilePictureAddedState && state.dataState == DataState.error)Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
                         ),
-                      ),
-                    ],
+                        40.height,
+                        AppTextFormField(
+                            controller: aboutYouController,
+                            keyboardType: TextInputType.multiline,
+                            labelText: getLocalization().aboutYouBasedOnYourProfile,
+                            textFieldType: TextFieldType.OTHER,
+                            maxLines: 10,maxLength: 2000),
+                        GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelectingProfilePicture = false;
+                              });
+                              _pickFile();
+                            },
+                            child: labelledPanel(
+                                labelText: getBloc().policeClearancePath == null?
+                                getLocalization().policeClearanceOptional: getBloc().policeClearancePath!,
+                                content: Container(
+                                  height: 96 ,
+                                  child: Center(child: Row(
+                                    children: [
+                                      const Spacer(),
+                                      (state is PoliceClearanceAddedState && state.dataState == DataState.loading)?
+                                      const CircularProgressIndicator():SvgPicture.asset("assets/upload_icon.svg"),
+                                      10.width,
+                                      wText(getLocalization().upload, style: theme.textTheme.bodyMedium?.copyWith(
+                                          fontWeight: FontWeight.w400, color: Colors.grey
+                                      )),
+                                      const Spacer(),
+                                    ],
+                                  )),
+                                ))),
+                        if(state is PoliceClearanceAddedState && state.dataState == DataState.error)Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
+                        ),
+                        40.height,
+                        Text(getLocalization().whatIsBeingPaid, style: const TextStyle(
+                          color: Colors.black45,
+                        )),
+                        5.height,
+                        Text(getLocalization().theOnceOff50RandSubscription,),
+                        40.height,
+                        Row(
+                          children: [
+                            Container(
+                              height: 56,
+                              width: 56,
+                              decoration: BoxDecoration(
+                                  border: Border.all(width: 2,
+                                      color: Colors.black),
+                                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+                              child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
+
+                            ),
+                            const SizedBox(width: 10,),
+                            Expanded(
+                              child: PrimaryButton(
+                                onPressed: () {
+                                  getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
+                                },
+                                child: Text(getLocalization().payNow),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  20.height,
-                  TertiaryButton.fullWidth(
-                    onPressed: //(state.dataState == DataState.loading || aboutYouController.text =="")?null:
-                        ()
-                    {
-                      getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
-                    },
-                    child: Text(getLocalization().restorePurchase),
-                  )
-                ],
+                ),
               ),
-            ),
-          )  ,
+
+              20.height,
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child:TertiaryButton.fullWidth(
+                  onPressed: () {
+                    getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
+                  },
+                  child: Text(getLocalization().restorePurchase),
+                ),
+              )
+            ]
+          ),
         );
       }),
     );
