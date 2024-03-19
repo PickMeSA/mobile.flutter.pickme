@@ -4,12 +4,12 @@ import 'package:test/test.dart';
 
 void main() {
   test('InAppPurchaseEvent Equatable Implementation', () {
-     const subscriptionOne = SubscriptionFound("abc","1");
+     const subscriptionOne = SubscriptionFound(userId: "abc", subscribedProductId: "1");
 
 
-     const subscriptionTwo = SubscriptionFound("abc","1");
-     const subscriptionThree = SubscriptionFound("ab","1");
-     const subscriptionFour = SubscriptionFound("abc","11");
+     const subscriptionTwo = SubscriptionFound(userId: "abc", subscribedProductId: "1");
+     const subscriptionThree = SubscriptionFound(userId: "ab", subscribedProductId: "1");
+     const subscriptionFour = SubscriptionFound(userId: "abc", subscribedProductId: "11");
 
      expect(subscriptionOne.getEventName(),'subscription_found');
      expect(subscriptionOne, subscriptionTwo);
@@ -19,9 +19,9 @@ void main() {
 
 
   test('SubscriptionNotFound Equatable Implementation', () {
-    const subscriptionOne = SubscriptionNotFound("abc");
-    const subscriptionTwo = SubscriptionNotFound("abc");
-    const subscriptionThree = SubscriptionNotFound("ab");
+    const subscriptionOne = SubscriptionNotFound(userId: "abc");
+    const subscriptionTwo = SubscriptionNotFound(userId: "abc");
+    const subscriptionThree = SubscriptionNotFound(userId: "ab");
 
     expect(subscriptionOne.getEventName(),'subscription_not_found');
     expect(subscriptionOne, subscriptionTwo);
@@ -29,10 +29,10 @@ void main() {
   });
 
   test('SubscriptionRestored Equatable Implementation', () {
-    const subscriptionOne = SubscriptionRestored("abc","1");
-    const subscriptionTwo = SubscriptionRestored("abc","1");
-    const subscriptionThree = SubscriptionRestored("ab","1");
-    const subscriptionFour = SubscriptionRestored("abc","11");
+    const subscriptionOne = SubscriptionRestored(userId: "abc", restoredProductId: "1");
+    const subscriptionTwo = SubscriptionRestored(userId:"abc", restoredProductId: "1");
+    const subscriptionThree = SubscriptionRestored(userId:"ab", restoredProductId: "1");
+    const subscriptionFour = SubscriptionRestored(userId:"abc", restoredProductId: "11");
 
     expect(subscriptionOne.getEventName(),'subscription_restored');
     expect(subscriptionOne, subscriptionTwo);

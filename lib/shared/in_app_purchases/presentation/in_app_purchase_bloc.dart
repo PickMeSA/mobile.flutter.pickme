@@ -14,5 +14,5 @@ class InAppPurchasesBloc
   late final buyInAppPurchaseUseCase = locator<BuyInAppSubscriptionUseCase>();
   late final restoreInAppPurchaseUseCase = locator<RestoreInAppSubscriptionUseCase>();
 
-  InAppPurchasesBloc(super.initialState);
+  InAppPurchasesBloc(): super(InAppPurchasesInitialState(null, [])){}
 }
