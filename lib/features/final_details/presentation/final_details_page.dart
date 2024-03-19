@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pickme/base_classes/base_multi_bloc_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -13,22 +16,25 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
+import 'package:pickme/shared/in_app_purchases/presentation/models/in_app_purchase_states.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_events.dart';
 import 'bloc/final_details_bloc.dart';
 
 @RoutePage()
-class FinalDetailsPage extends BasePage {
+class FinalDetailsPage extends BaseMultiBlocPage {
   const FinalDetailsPage({super.key});
 
   @override
   _FinalDetailsPageState createState() => _FinalDetailsPageState();
 }
 
-class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
+class _FinalDetailsPageState extends BaseMultiBlocPageState<FinalDetailsPage, FinalDetailsBloc, InAppPurchasesBloc> {
   bool isSelectingProfilePicture = false;
   final TextEditingController aboutYouController = TextEditingController();
 
@@ -47,30 +53,47 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
   @override
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return BlocConsumer<FinalDetailsBloc, FinalDetailsPageState>(
-      listener: (context, state){
-        if(state is SubmitClickedState && state.dataState == DataState.success){
-          Navigator.pop(context);
-          if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push( PaySomeoneWebViewRoute(from: 0));
-          }else{
-            context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-          }
-        }
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<FinalDetailsBloc, BaseState>(
+          listener: (context, state){
+            if(state is SubmitClickedState && state.dataState == DataState.success){
+              Navigator.pop(context);
+              if(!state.profileEntity!.subscriptionPaid!) {
+                if(Platform.isIOS){
+                  getSecondBloc().add(const CreateSubscriptionEvent());
+                }else{
+                  context.router.push( PaySomeoneWebViewRoute(from: 0));
+                }
+              }else{
+                context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
+              }
+            }
 
-        if(state is SubmitClickedState && state.dataState == DataState.loading ){
-          preloader(context);
-          getBloc().preloaderActive = true;
-        }
+            if(state is SubmitClickedState && state.dataState == DataState.loading ){
+              preloader(context);
+              getBloc().preloaderActive = true;
+            }
 
-        if(state is SubmitClickedState && state.dataState == DataState.error ){
-          if( getBloc().preloaderActive == true){
-            Navigator.pop(context);
-            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+            if(state is SubmitClickedState && state.dataState == DataState.error ){
+              if( getBloc().preloaderActive == true){
+                Navigator.pop(context);
+                wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+              }
+            }
           }
-        }
-      },
-      builder: (context, state) {
+        ),
+        BlocListener<InAppPurchasesBloc, BaseState>(
+          listener: (context, state) {
+            if (state is InAppPurchasedState) {}
+            if (state is InAppRestoredState) {}
+            if (state is InAppNotFoundState) {}
+            if (state is InAppPurchaseLoadingState) {}
+          },
+        ),
+      ],
+      child: BlocBuilder<FinalDetailsBloc, BaseState>(
+          builder: (context, state) {
         return SizedBox(
           height: MediaQuery.sizeOf(context).height,
           width: MediaQuery.sizeOf(context).width,
@@ -88,12 +111,12 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                   const SizedBox(height: 10,),
                   wText(getLocalization().finalDetails,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
                   20.height,
-                   Row(
+                  Row(
                     children: [
-                    const Spacer(),
+                      const Spacer(),
                       SizedBox(
                         height: 64,
-                          width: 64,
+                        width: 64,
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -107,8 +130,8 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                               top: 1,
                               left: 1,
                               child: AppImageAvatar(
-                                  image: (getBloc().finalDetailsEntity.profilePicture==null)? null:
-                                  CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url!),
+                                image: (getBloc().finalDetailsEntity.profilePicture==null)? null:
+                                CachedNetworkImageProvider(getBloc().finalDetailsEntity.profilePicture!.url!),
                               ),
                             ),
                             if(state is ProfilePictureAddedState && state.dataState == DataState.loading) const Positioned(
@@ -121,7 +144,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                                 )
                             ),
                             Positioned(
-                              bottom: 0,
+                                bottom: 0,
                                 right: 0,
                                 child: CircleAvatar(
                                   radius: 9,
@@ -149,16 +172,16 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                     ],
                   ),
                   if(state is ProfilePictureAddedState && state.dataState == DataState.error)Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
                   ),
                   40.height,
                   AppTextFormField(
-                    controller: aboutYouController,
+                      controller: aboutYouController,
                       keyboardType: TextInputType.multiline,
                       labelText: getLocalization().aboutYouBasedOnYourProfile,
                       textFieldType: TextFieldType.OTHER,
-                  maxLines: 10,maxLength: 2000),
+                      maxLines: 10,maxLength: 2000),
                   GestureDetector(
                       onTap: () {
                         setState(() {
@@ -166,24 +189,24 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                         });
                         _pickFile();
                       },
-                  child: labelledPanel(
-                      labelText: getBloc().policeClearancePath == null?
-                      getLocalization().policeClearanceOptional: getBloc().policeClearancePath!,
-                      content: Container(
-                    height: 96 ,
-                        child: Center(child: Row(
-                          children: [
-                            const Spacer(),
-                            (state is PoliceClearanceAddedState && state.dataState == DataState.loading)?
-                            const CircularProgressIndicator():SvgPicture.asset("assets/upload_icon.svg"),
-                            10.width,
-                            wText(getLocalization().upload, style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w400, color: Colors.grey
+                      child: labelledPanel(
+                          labelText: getBloc().policeClearancePath == null?
+                          getLocalization().policeClearanceOptional: getBloc().policeClearancePath!,
+                          content: Container(
+                            height: 96 ,
+                            child: Center(child: Row(
+                              children: [
+                                const Spacer(),
+                                (state is PoliceClearanceAddedState && state.dataState == DataState.loading)?
+                                const CircularProgressIndicator():SvgPicture.asset("assets/upload_icon.svg"),
+                                10.width,
+                                wText(getLocalization().upload, style: theme.textTheme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.w400, color: Colors.grey
+                                )),
+                                const Spacer(),
+                              ],
                             )),
-                            const Spacer(),
-                          ],
-                        )),
-                  ))),
+                          ))),
 
                   if(state is PoliceClearanceAddedState && state.dataState == DataState.error)Padding(
                     padding: const EdgeInsets.only(top: 10),
@@ -211,40 +234,29 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                       const SizedBox(width: 10,),
                       Expanded(
                         child: PrimaryButton(
-                          style: ButtonStyle(
-                              side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                return BorderSide(
-                                  color: states.contains(MaterialState.disabled)?
-                                  theme.colorScheme.primary.withOpacity(0):
-                                  theme.colorScheme.primary,
-                                  width: 2,
-                                );
-                              }
-                              ),
-                              backgroundColor: MaterialStateProperty.resolveWith(
-                                      (Set<MaterialState> states){
-                                    return states.contains(MaterialState.disabled)?
-                                    theme.colorScheme.primary.withOpacity(0.3):
-                                    theme.colorScheme.primary;
-                                  }
-                              )
-                          ),
-                          onPressed: //(state.dataState == DataState.loading || aboutYouController.text =="")?null:
-                           ()
-                               {
+                          onPressed: () {
                             getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
                           },
                           child: Text(getLocalization().payNow),
                         ),
                       ),
                     ],
+                  ),
+                  20.height,
+                  TertiaryButton.fullWidth(
+                    onPressed: //(state.dataState == DataState.loading || aboutYouController.text =="")?null:
+                        ()
+                    {
+                      getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
+                    },
+                    child: Text(getLocalization().restorePurchase),
                   )
                 ],
               ),
             ),
           )  ,
         );
-      },
+      }),
     );
   }
 
@@ -252,6 +264,10 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
   @override
   FinalDetailsBloc initBloc() {
     return locator<FinalDetailsBloc>();
+  }
+  @override
+  InAppPurchasesBloc initSecondBloc() {
+    return locator<InAppPurchasesBloc>();
   }
 
   @override
