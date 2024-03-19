@@ -14,12 +14,15 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/in_app_purchases/domain/in_app_purchase_interactor.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
+
+import '../../../shared/in_app_purchases/domain/buy_in_app_purchase_subscription_use_case.dart';
 
 @RoutePage()
 class LoginPage extends BasePage {
@@ -34,8 +37,6 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
 
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-
   final _formKey = GlobalKey<FormState>();
 
   @override

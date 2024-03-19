@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../base_classes/base_event.dart';
 
-
 @immutable
 abstract class InAppPurchaseEvent extends Equatable implements BaseEvent {
   final String userId;
@@ -15,7 +14,6 @@ abstract class InAppPurchaseEvent extends Equatable implements BaseEvent {
 
   @override
   List<Object?> get props => [userId];
-
 }
 
 class SubscriptionFound extends InAppPurchaseEvent {
@@ -30,9 +28,8 @@ class SubscriptionFound extends InAppPurchaseEvent {
   String getEventName() => 'subscription_found';
 }
 
-class SubscriptionNotFound extends InAppPurchaseEvent implements Equatable  {
+class SubscriptionNotFound extends InAppPurchaseEvent implements Equatable {
   const SubscriptionNotFound(super.userId);
-
 
   @override
   String getEventName() => 'subscription_not_found';
@@ -44,7 +41,7 @@ class SubscriptionRestored extends InAppPurchaseEvent {
   const SubscriptionRestored(super.userId, this.restoredProductId);
 
   @override
-  List<Object?> get props =>  super.props + [restoredProductId];
+  List<Object?> get props => super.props + [restoredProductId];
 
   @override
   String getEventName() => 'subscription_restored';
