@@ -17,6 +17,7 @@ import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/mixins/route_page_mixin.dart';
 import 'bloc/qualification_bloc.dart';
 
 @RoutePage()
@@ -29,7 +30,7 @@ class QualificationsPage extends BasePage {
   _QualificationsPageState createState() => _QualificationsPageState();
 }
 
-class _QualificationsPageState extends BasePageState<QualificationsPage, QualificationsBloc> {
+class _QualificationsPageState extends BasePageState<QualificationsPage, QualificationsBloc> with RoutePageMixin{
 
   @override
   void initState() {
@@ -51,7 +52,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          routePage(context: context,profileEntity: state.profileEntity!);
+          routePageReg(context: context,profileEntity: state.profileEntity!);
 
         }
 
@@ -78,7 +79,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                      children: [
                        const Spacer(),
                        InkWell(
-                           onTap:()=> routePage(context: context, profileEntity:widget.profileEntity ),
+                           onTap:()=> routePageReg(context: context, profileEntity:widget.profileEntity ),
                            child: wText(getLocalization().skip,
                                style: const TextStyle(
                                    fontSize: 14,
@@ -199,22 +200,5 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
     return locator<AppLocalizations>();
   }
 
-  void routePage({required BuildContext context,required ProfileEntity profileEntity }){
-    if(profileEntity!.skills!.isEmpty){
-      context.router.push( AddSkillsRoute(profileEntity:  profileEntity!));
-    }else if(profileEntity!.hourlyRate! == 0){
-      context.router.push(const RateAndWorkTimesRoute());
-    }else if(profileEntity!.paymentDetails!.bankName!.isEmpty){
-      context.router.push(const BankDetailsRoute());
-    }else if(profileEntity!.location!.address == "" ){
-      context.router.push(const LocationRoute());
-    }else if(profileEntity!.description!.isEmpty){
-      context.router.push(const FinalDetailsRoute());
-    }else if(!profileEntity!.subscriptionPaid!) {
-      context.router.push( PaySomeoneWebViewRoute(from: 0));
-    }else{
-      context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-    }
-  }
 
 }

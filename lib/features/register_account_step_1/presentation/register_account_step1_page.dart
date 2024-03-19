@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
+import 'package:pickme/shared/mixins/route_page_mixin.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -29,7 +30,7 @@ class RegisterAccountStep1Page extends BaseMultiBlocPage {
   State<RegisterAccountStep1Page> createState() => _RegisterAccountStep1State();
 }
 
-class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc, InAppPurchasesBloc> {
+class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc, InAppPurchasesBloc> with RoutePageMixin {
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
@@ -42,24 +43,7 @@ class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountS
           }
           if(state.dataState == DataState.success && state is SubmitAcceptedTermsAndConditionsState){
             Navigator.pop(context);
-            if (state.profileEntity!.qualifications!.isEmpty &&
-                state.profileEntity!.workExperience!.isEmpty){
-              context.router.push( QualificationsRoute(profileEntity: state.profileEntity!));
-            }else if(state.profileEntity!.skills!.isEmpty){
-              context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
-            }else if(state.profileEntity!.hourlyRate! == 0){
-              context.router.push(const RateAndWorkTimesRoute());
-            }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-              context.router.push(const BankDetailsRoute());
-            }else if(state.profileEntity!.location!.address == "" ){
-              context.router.push(const LocationRoute(),);
-            }else if(state.profileEntity!.description!.isEmpty) {
-              context.router.push(const FinalDetailsRoute());
-            }else if(!state.profileEntity!.subscriptionPaid!){
-              context.router.push( PaySomeoneWebViewRoute(from: 0));}
-            else{
-              context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-            }
+            routePageReg(context: context, profileEntity: state.profileEntity!);
           }
           if(state.dataState == DataState.error && state is SubmitAcceptedTermsAndConditionsState){
             Navigator.pop(context);
