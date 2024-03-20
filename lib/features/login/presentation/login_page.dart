@@ -14,7 +14,6 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/in_app_purchases/domain/in_app_purchase_interactor.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
@@ -22,7 +21,7 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import '../../../shared/in_app_purchases/domain/buy_in_app_purchase_subscription_use_case.dart';
+import '../../../shared/mixins/route_page_mixin.dart';
 
 @RoutePage()
 class LoginPage extends BasePage {
@@ -33,10 +32,12 @@ class LoginPage extends BasePage {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
+class _LoginPageState extends BasePageState<LoginPage, LoginBloc> with RoutePageMixin{
 
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -212,30 +213,8 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
       }
       if(state is LoginContinueClickedState && state.dataState == DataState.success){
         Navigator.pop(context);
-        if(state.profileEntity?.firstName == null){
-          context.router.push( RegisterRoute(email:emailAddressController.text ));
-        }else if(state.profileEntity!.type!.isEmpty){
-          context.router.push(const SetupProfileRoute());
-        }else if (state.profileEntity!.acceptedTermsAndConditions == false){
-          context.router.push(const RegisterAccountStep1Route());
-        }else if (state.profileEntity!.qualifications!.isEmpty &&
-            state.profileEntity!.workExperience!.isEmpty){
-          context.router.push( QualificationsRoute(profileEntity:  state.profileEntity!));
-        }else if(state.profileEntity!.skills!.isEmpty){
-          context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
-        }else if(state.profileEntity!.hourlyRate! == 0){
-          context.router.push(const RateAndWorkTimesRoute());
-        }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-          context.router.push(const BankDetailsRoute());
-        }else if(state.profileEntity!.location!.address == "" ){
-          context.router.push(const LocationRoute(),);
-        }else if(state.profileEntity!.description!.isEmpty) {
-          context.router.push(const FinalDetailsRoute());
-        }else if(!state.profileEntity!.subscriptionPaid!){
-          context.router.push( PaySomeoneWebViewRoute(from: 0));}
-        else{
-          context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
-        }
+
+       routePageReg(context: context, profileEntity: state.profileEntity!);
       }
 
       if(state is LoginContinueClickedState && state.dataState == DataState.error){
