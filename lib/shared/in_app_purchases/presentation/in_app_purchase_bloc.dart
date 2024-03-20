@@ -46,8 +46,7 @@ class InAppPurchasesBloc
     }
   }
 
-  Future<void> _onRestoreSubscription(
-      RestoreSubscriptionEvent event,
+  Future<void> _onRestoreSubscription(RestoreSubscriptionEvent event,
       Emitter<InAppPurchaseState> emit) async {
     emit(InAppPurchaseLoadingState(null, const []));
 
@@ -62,3 +61,5 @@ class InAppPurchasesBloc
           "Subscription payment failed. Please try again", null, false));
     }
   }
+
+}
