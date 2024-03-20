@@ -29,7 +29,7 @@ class QualificationsPage extends BasePage {
   _QualificationsPageState createState() => _QualificationsPageState();
 }
 
-class _QualificationsPageState extends BasePageState<QualificationsPage, QualificationsBloc> {
+class _QualificationsPageState extends BasePageState<QualificationsPage, QualificationsBloc> with SetPageRouter {
 
   @override
   void initState() {
@@ -198,6 +198,10 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
+
+}
+
+mixin SetPageRouter {
 
   void routePage({required BuildContext context,required ProfileEntity profileEntity }){
     if(profileEntity!.skills!.isEmpty){
