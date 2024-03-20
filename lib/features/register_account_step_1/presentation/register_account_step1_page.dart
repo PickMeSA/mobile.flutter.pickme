@@ -1,5 +1,4 @@
 import 'package:flutter/gestures.dart';
-import 'package:pickme/base_classes/base_multi_bloc_page.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -15,12 +14,11 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import '../../../shared/widgets/w_page_padding.dart';
 import '../domain/entities/subscription_plan_entity.dart';
 import 'bloc/register_account_step1_bloc.dart';
 
 @RoutePage()
-class RegisterAccountStep1Page extends BaseMultiBlocPage {
+class RegisterAccountStep1Page extends BasePage {
   const RegisterAccountStep1Page({super.key});
 
 
@@ -28,7 +26,7 @@ class RegisterAccountStep1Page extends BaseMultiBlocPage {
   State<RegisterAccountStep1Page> createState() => _RegisterAccountStep1State();
 }
 
-class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc, InAppPurchasesBloc> with RoutePageMixin {
+class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc> with RoutePageMixin {
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
@@ -190,7 +188,7 @@ class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountS
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                getSecondBloc().add(RestoreSubscriptionEvent());
+                                BlocProvider.of<InAppPurchasesBloc>(context).add(RestoreSubscriptionEvent());
                                 }
                           ),
                         ]
@@ -215,12 +213,4 @@ class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountS
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
-  @override
-  InAppPurchasesBloc initSecondBloc() {
-    return locator<InAppPurchasesBloc>();
-  }
-
-
-
 }
