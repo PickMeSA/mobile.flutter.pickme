@@ -12,23 +12,53 @@ import '../../../core/locator/locator.dart';
 import '../../constants/default_values.dart';
 
 part 'models/in_app_purchase_events.dart';
+
 part 'models/in_app_purchase_states.dart';
 
 @injectable
 class InAppPurchasesBloc
-    extends BaseBloc<InAppPurchaseEvent, InAppPurchaseState>  {
+    extends BaseBloc<InAppPurchaseEvent, InAppPurchaseState> {
 
   late final buyInAppPurchaseUseCase = locator<BuyInAppSubscriptionUseCase>();
-  late final restoreInAppPurchaseUseCase = locator<RestoreInAppSubscriptionUseCase>();
+  late final restoreInAppPurchaseUseCase = locator<
+      RestoreInAppSubscriptionUseCase>();
 
-  InAppPurchasesBloc(): super(InAppPurchasesInitialState(null, [])){
-    on<CreateSubscriptionEvent>((event, emit)=> _onCreateSubscriptionEvent(event, emit));
+  InAppPurchasesBloc() : super(InAppPurchaseLoadingState(null, const [])) {
+    on<CreateSubscriptionEvent>((event, emit) =>
+        _onCreateSubscriptionEvent(event, emit));
+    on<RestoreSubscriptionEvent>((event, emit) =>
+        _onRestoreSubscription(event, emit));
   }
-  _onCreateSubscriptionEvent(
-      CreateSubscriptionEvent event,
-      Emitter<InAppPurchaseState> emit
-      )async{
-    logger.d('CreateSubscriptionEvent fired!!');
 
+  Future<void> _onCreateSubscriptionEvent(CreateSubscriptionEvent event,
+      Emitter<InAppPurchaseState> emit) async {
+    emit(InAppPurchaseLoadingState(null, const []));
+
+    try {
+      final subscriptionResults = await buyInAppPurchaseUseCase();
+      emit(InAppPurchasedState(
+          null, subscriptionResults.productIds, subscriptionResults.purchased));
+    } on Exception catch (ex) {
+      emit(InAppPurchasedState(ex.toString(), null, false));
+    } catch (ex) {
+      emit(InAppPurchasedState(
+          "Subscription payment failed. Please try again", null, false));
+    }
   }
-}
+
+  Future<void> _onRestoreSubscription(
+      RestoreSubscriptionEvent event,
+      Emitter<InAppPurchaseState> emit) async {
+    emit(InAppPurchaseLoadingState(null, const []));
+
+    try {
+      final subscriptionResults = await buyInAppPurchaseUseCase();
+      emit(InAppPurchasedState(
+          null, subscriptionResults.productIds, subscriptionResults.purchased));
+    } on Exception catch (ex) {
+      emit(InAppPurchasedState(ex.toString(), null, false));
+    } catch (ex) {
+      emit(InAppPurchasedState(
+          "Subscription payment failed. Please try again", null, false));
+    }
+  }
