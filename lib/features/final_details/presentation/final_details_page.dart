@@ -81,7 +81,9 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         ),
         BlocListener<InAppPurchasesBloc, BaseState>(
           listener: (context, state) {
-            if (state is InAppPurchasedState) {}
+            if (state is InAppPurchasedState) {
+
+            }
             if (state is InAppRestoredState) {}
             if (state is InAppNotFoundState) {}
             if (state is InAppPurchaseLoadingState) {}

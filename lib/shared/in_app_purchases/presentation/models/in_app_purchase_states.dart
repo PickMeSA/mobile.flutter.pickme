@@ -3,14 +3,12 @@ part of '../in_app_purchase_bloc.dart';
 @immutable
 abstract class InAppPurchaseState extends BaseState {
   final String? error;
-  final List<String> products;
+  final List<String>? products;
 
   InAppPurchaseState(this.error, this.products);
 }
 
-class InAppPurchasesInitialState extends InAppPurchaseState {
-  InAppPurchasesInitialState(super.error, super.products);
-}
+
 class InAppPurchasedState extends InAppPurchaseState {
   final bool isSubscriptionPurchased;
 

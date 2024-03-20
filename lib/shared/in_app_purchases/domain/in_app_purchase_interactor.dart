@@ -26,7 +26,7 @@ abstract class PurchasedProductChangeDelegate { // Ideally should have been brok
 class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
 
   // Constants
-  static const kiOSInAppSubscriptionProduct = 'kM89mcnts7.pick.me ';
+  static const kiOSInAppSubscriptionProduct = 'kM89mcnts7.pick.me';
   static const shouldDisableInAppPurchasesOnAndroid = false; // Client requirement for the time being, in App Purchase on Android Will be enabled later
   static String get kAndroidInAppSubscriptionProduct =>
       kReleaseMode
@@ -34,7 +34,7 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
           : 'android.test.purchased';
 
   // Computed properties
-  List<String> get availableProductIds  {
+  List<String> get subscriptionProductIds  {
     if (Platform.isAndroid)  {
       return shouldDisableInAppPurchasesOnAndroid ? [kAndroidInAppSubscriptionProduct] : List.empty();
     } else if (Platform.isIOS) {
@@ -92,7 +92,7 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
     }
 
     final ProductDetailsResponse productDetailResponse =
-    await _inAppPurchase.queryProductDetails(availableProductIds.toSet());
+    await _inAppPurchase.queryProductDetails(subscriptionProductIds.toSet());
     if (productDetailResponse.error != null) {
       return Future.value(false);
     }
@@ -103,7 +103,7 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
     List<String> purchasedIds =
     _purchaseDetailsList.map((e) => e.productID).toList();
     final hasBoughtAllProducts =
-    availableProductIds.every((element) => purchasedIds.contains(element));
+    subscriptionProductIds.every((element) => purchasedIds.contains(element));
     return Future.value(!hasBoughtAllProducts);
   }
 

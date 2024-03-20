@@ -1,7 +1,6 @@
 
 import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_work_times_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
-import 'package:pickme/shared/features/otp/domain/entities/profile_picture_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 
 import 'otp_business_entity.dart';
