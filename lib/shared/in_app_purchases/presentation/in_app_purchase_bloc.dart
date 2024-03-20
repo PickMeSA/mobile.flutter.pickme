@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/shared/in_app_purchases/domain/buy_in_app_purchase_subscription_use_case.dart';
@@ -38,8 +39,6 @@ class InAppPurchasesBloc
       final subscriptionResults = await buyInAppPurchaseUseCase();
       emit(InAppPurchasedState(
           null, subscriptionResults.productIds, subscriptionResults.purchased));
-    } on Exception catch (ex) {
-      emit(InAppPurchasedState(ex.toString(), null, false));
     } catch (ex) {
       emit(InAppPurchasedState(
           "Subscription payment failed. Please try again", null, false));
@@ -61,5 +60,4 @@ class InAppPurchasesBloc
           "Subscription payment failed. Please try again", null, false));
     }
   }
-
 }

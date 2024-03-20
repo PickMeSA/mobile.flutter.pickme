@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/shared/in_app_purchases/domain/in_app_purchase_interactor.dart';
@@ -17,7 +18,7 @@ class SubscriptionResult {
 class BuyInAppSubscriptionUseCase implements PurchasedProductChangeDelegate {
   late final inAppPurchaseInteractor = locator<InAppPurchaseInteractor>();
 
-
+  static const kDuplicateProductIdentifier = 'storekit_duplicate_product_object';
   BuyInAppSubscriptionUseCase() {
     inAppPurchaseInteractor.addDelegate(this);
   }
@@ -31,14 +32,24 @@ class BuyInAppSubscriptionUseCase implements PurchasedProductChangeDelegate {
     final ProductDetailsResponse response = await InAppPurchase.instance
         .queryProductDetails(
             Set.from(inAppPurchaseInteractor.subscriptionProductIds));
-    List<ProductDetails> productDetails = response.productDetails;
+    List<ProductDetails> productDetailsList = response.productDetails;
 
-    if (productDetails.isEmpty) {
+    if (productDetailsList.isEmpty) {
       return SubscriptionResult(false, subscriptionProductIds);
     }
-    final purchaseParam = PurchaseParam(productDetails: productDetails.first);
-    final hasBoughtItem = await inAppPurchaseInteractor.buyNonConsumable(purchaseParam);
-    return SubscriptionResult(hasBoughtItem, subscriptionProductIds);
+    final purchaseParam = PurchaseParam(productDetails: productDetailsList.first);
+    try {
+      final hasBoughtItem = await inAppPurchaseInteractor.buyNonConsumable(
+          purchaseParam);
+      return SubscriptionResult(hasBoughtItem, subscriptionProductIds);
+    } on PlatformException catch (exception) {
+      if (exception.code==kDuplicateProductIdentifier) {
+        await inAppPurchaseInteractor.restorePurchases();
+      }
+      return SubscriptionResult(false, subscriptionProductIds);
+    } catch (ex) {
+      rethrow ;
+    }
   }
 
   @override
@@ -58,7 +69,7 @@ class BuyInAppSubscriptionUseCase implements PurchasedProductChangeDelegate {
 
   @override
   void isPending(PurchaseDetails purchaseDetails) {
-
+    inAppPurchaseInteractor.completeTransaction(purchaseDetails);
   }
 
   @override

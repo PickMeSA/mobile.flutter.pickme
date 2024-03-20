@@ -50,18 +50,26 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
   final List<PurchasedProductChangeDelegate> _delegates = List.empty(growable: true);
   StreamSubscription<List<PurchaseDetails>>? _subscription;
   List<PurchaseDetails> _purchaseDetailsList =  List<PurchaseDetails>.empty(growable: true);
+  late final Stream<List<PurchaseDetails>> purchaseUpdated =
+      _inAppPurchase.purchaseStream;
 
+  bool _initialised = false;
 
   InAppPurchaseInteractor() {
-    final Stream<List<PurchaseDetails>> purchaseUpdated =
-        _inAppPurchase.purchaseStream;
+    _subscribeToPurchaseEvent();
+  }
+
+  _subscribeToPurchaseEvent() {
+    if (_initialised) return;
     _subscription =
         purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-          _listenToPurchaseUpdated(purchaseDetailsList);
-          _subscription?.cancel();
+          _onSubscriptionUpdate(purchaseDetailsList);
         }, onDone: () {
-          _subscription?.cancel();
-        }, onError: (Object error) {});
+          _initialised = true;
+        }, onError: (Object error) {
+          _initialised = false;
+          debugPrint(error.toString());
+        });
   }
 
   @override
@@ -108,15 +116,16 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
   }
 
   Future<bool> isAvailable() async => await _inAppPurchase.isAvailable();
-  Future<bool>  buyNonConsumable(PurchaseParam purchaseParam) => _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
 
-  void restorePurchases() async {
+  Future<bool>  buyNonConsumable(PurchaseParam purchaseParam) async => _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+
+
+  Future restorePurchases() async {
     await InAppPurchase.instance.restorePurchases();
   }
 
-  void _listenToPurchaseUpdated(
+  void _onSubscriptionUpdate(
       List<PurchaseDetails> purchaseDetailsList) async {
-    await InAppPurchase.instance.restorePurchases();
     if (purchaseDetailsList.isEmpty) {
       for (final delegate in _delegates) {
         delegate?.didFindNoSubscription();
@@ -153,6 +162,15 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
           await InAppPurchase.instance.completePurchase(purchaseDetails);
         }
       }
+    }
+  }
+
+  completeTransaction(PurchaseDetails purchaseDetails) async {
+    try {
+      await InAppPurchase.instance.completePurchase(purchaseDetails);
+    } catch (exception, stackTrace) {
+      debugPrint(exception.toString());
+      debugPrintStack(stackTrace: stackTrace);
     }
   }
 }
