@@ -6,9 +6,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pickme/base_classes/base_multi_bloc_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
 import 'package:pickme/localization/generated/l10n.dart';
@@ -17,24 +15,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
-import 'package:pickme/shared/in_app_purchases/presentation/models/in_app_purchase_states.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_events.dart';
 import 'bloc/final_details_bloc.dart';
 
 @RoutePage()
-class FinalDetailsPage extends BaseMultiBlocPage {
+class FinalDetailsPage extends BasePage {
   const FinalDetailsPage({super.key});
 
   @override
   _FinalDetailsPageState createState() => _FinalDetailsPageState();
 }
 
-class _FinalDetailsPageState extends BaseMultiBlocPageState<FinalDetailsPage, FinalDetailsBloc, InAppPurchasesBloc> {
+class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
   bool isSelectingProfilePicture = false;
   final TextEditingController aboutYouController = TextEditingController();
 
@@ -61,7 +57,7 @@ class _FinalDetailsPageState extends BaseMultiBlocPageState<FinalDetailsPage, Fi
               Navigator.pop(context);
               if(!state.profileEntity!.subscriptionPaid!) {
                 if(Platform.isIOS){
-                  getSecondBloc().add(const CreateSubscriptionEvent());
+                  BlocProvider.of<InAppPurchasesBloc>(context).add(CreateSubscriptionEvent());
                 }else{
                   context.router.push( PaySomeoneWebViewRoute(from: 0));
                 }
@@ -272,10 +268,6 @@ class _FinalDetailsPageState extends BaseMultiBlocPageState<FinalDetailsPage, Fi
   FinalDetailsBloc initBloc() {
     return locator<FinalDetailsBloc>();
   }
-  @override
-  InAppPurchasesBloc initSecondBloc() {
-    return locator<InAppPurchasesBloc>();
-  }
 
   @override
   AppLocalizations initLocalization() {
@@ -287,7 +279,7 @@ class _FinalDetailsPageState extends BaseMultiBlocPageState<FinalDetailsPage, Fi
     XFile? result = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
-      getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
+      getBloc().add(ProfilePictureAddedEvent(filePath: result.path));
     } else {
       // User canceled the file picker
       // Handle accordingly (e.g., show a message)

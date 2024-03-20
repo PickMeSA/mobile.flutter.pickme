@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:logger/logger.dart';
@@ -9,6 +10,7 @@ import 'package:pickme/firebase_options.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/main.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,22 +46,25 @@ class PickMeApp{
     );
 
     return runApp(
-      MediaQuery(
-        data: windowData,
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          useInheritedMediaQuery: true,
-         routerConfig: _appRouter.config(),
-          localizationsDelegates:  const [
-            AppLocalizations.delegate,
-          ],
-          themeMode: ThemeMode.system,
-          darkTheme: AppTheme().defaultTheme,
-          theme: AppTheme().defaultTheme,
-
-
-        ),
-      )
+        MediaQuery(
+          data: windowData,
+          child: MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => InAppPurchasesBloc()),
+              ],
+              child:MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                useInheritedMediaQuery: true,
+                routerConfig: _appRouter.config(),
+                localizationsDelegates:  const [
+                  AppLocalizations.delegate,
+                ],
+                themeMode: ThemeMode.system,
+                darkTheme: AppTheme().defaultTheme,
+                theme: AppTheme().defaultTheme,
+              )
+          ),
+        )
     );
   }
 }

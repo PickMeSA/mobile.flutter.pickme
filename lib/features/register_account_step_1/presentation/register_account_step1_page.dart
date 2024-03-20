@@ -1,5 +1,4 @@
 import 'package:flutter/gestures.dart';
-import 'package:pickme/base_classes/base_multi_bloc_page.dart';
 import 'package:pickme/base_classes/base_page.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:pickme/core/locator/locator.dart';
@@ -10,18 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
 import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
+import 'package:pickme/shared/mixins/route_page_mixin.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_events.dart';
-import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_states.dart';
-import '../../../shared/widgets/w_page_padding.dart';
 import '../domain/entities/subscription_plan_entity.dart';
 import 'bloc/register_account_step1_bloc.dart';
 
 @RoutePage()
-class RegisterAccountStep1Page extends BaseMultiBlocPage {
+class RegisterAccountStep1Page extends BasePage {
   const RegisterAccountStep1Page({super.key});
 
 
@@ -29,7 +26,7 @@ class RegisterAccountStep1Page extends BaseMultiBlocPage {
   State<RegisterAccountStep1Page> createState() => _RegisterAccountStep1State();
 }
 
-class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc, InAppPurchasesBloc> {
+class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc> with RoutePageMixin {
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
@@ -42,24 +39,7 @@ class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountS
           }
           if(state.dataState == DataState.success && state is SubmitAcceptedTermsAndConditionsState){
             Navigator.pop(context);
-            if (state.profileEntity!.qualifications!.isEmpty &&
-                state.profileEntity!.workExperience!.isEmpty){
-              context.router.push( QualificationsRoute(profileEntity: state.profileEntity!));
-            }else if(state.profileEntity!.skills!.isEmpty){
-              context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
-            }else if(state.profileEntity!.hourlyRate! == 0){
-              context.router.push(const RateAndWorkTimesRoute());
-            }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-              context.router.push(const BankDetailsRoute());
-            }else if(state.profileEntity!.location!.address == "" ){
-              context.router.push(const LocationRoute(),);
-            }else if(state.profileEntity!.description!.isEmpty) {
-              context.router.push(const FinalDetailsRoute());
-            }else if(!state.profileEntity!.subscriptionPaid!){
-              context.router.push( PaySomeoneWebViewRoute(from: 0));}
-            else{
-              context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-            }
+            routePageReg(context: context, profileEntity: state.profileEntity!);
           }
           if(state.dataState == DataState.error && state is SubmitAcceptedTermsAndConditionsState){
             Navigator.pop(context);
@@ -208,7 +188,7 @@ class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountS
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                getSecondBloc().add(const RestoreSubscriptionEvent());
+                                BlocProvider.of<InAppPurchasesBloc>(context).add(RestoreSubscriptionEvent());
                                 }
                           ),
                         ]
@@ -233,12 +213,4 @@ class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountS
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
   }
-
-  @override
-  InAppPurchasesBloc initSecondBloc() {
-    return locator<InAppPurchasesBloc>();
-  }
-
-
-
 }

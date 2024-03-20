@@ -11,6 +11,7 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/mixins/route_page_mixin.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -25,7 +26,7 @@ class BankDetailsPage extends BasePage {
   _BankDetailsPageState createState() => _BankDetailsPageState();
 }
 
-class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBloc> {
+class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBloc> with RoutePageMixin {
 
   TextEditingController bankNameController = TextEditingController();
   TextEditingController accountTypeController = TextEditingController();
@@ -54,15 +55,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
         if(state is BankDetailsSubmittedState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          if(state.profileEntity!.location!.address ==""){
-            context.router.push(const LocationRoute());
-          }else if(state.profileEntity!.description!.isEmpty){
-            context.router.push(const FinalDetailsRoute());
-          }else if(!state.profileEntity!.subscriptionPaid!) {
-            context.router.push( PaySomeoneWebViewRoute(from: 0));
-          }else{
-            context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-          }
+          routePageReg(profileEntity: state.profileEntity!, context: context);
         }
 
         if(state is BankDetailsSubmittedState && state.dataState == DataState.loading ){

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
-import '../../../../base_classes/base_state.dart';
+part of '../in_app_purchase_bloc.dart';
 
 @immutable
 abstract class InAppPurchaseState extends BaseState {

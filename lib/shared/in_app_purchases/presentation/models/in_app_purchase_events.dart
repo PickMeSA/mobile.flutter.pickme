@@ -1,14 +1,10 @@
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
-import '../../../../base_classes/base_event.dart';
-
+part of '../in_app_purchase_bloc.dart';
 
 @immutable
-abstract class InAppPurchaseEvent extends Equatable implements BaseEvent {
+abstract class InAppPurchaseEvent extends BaseEvent implements Equatable {
   final String? userId;
 
-  const InAppPurchaseEvent({this.userId});
+  InAppPurchaseEvent({this.userId});
 
   @override
   bool? get stringify => false;
@@ -20,7 +16,7 @@ abstract class InAppPurchaseEvent extends Equatable implements BaseEvent {
 // Handle the event when a user wants to buy a subscription
 class CreateSubscriptionEvent extends InAppPurchaseEvent {
 
-  const CreateSubscriptionEvent({super.userId});
+  CreateSubscriptionEvent({super.userId});
 
   @override
   String getEventName() => 'create_subscription';
@@ -28,7 +24,7 @@ class CreateSubscriptionEvent extends InAppPurchaseEvent {
 // Handle the event when a user wants to restore a subscription
 class RestoreSubscriptionEvent extends InAppPurchaseEvent {
 
-  const RestoreSubscriptionEvent({super.userId});
+  RestoreSubscriptionEvent({super.userId});
 
   @override
   String getEventName() => 'restore_subscription';
@@ -37,7 +33,7 @@ class RestoreSubscriptionEvent extends InAppPurchaseEvent {
 class SubscriptionFound extends InAppPurchaseEvent {
   final String subscribedProductId;
 
-  const SubscriptionFound({super.userId, required this.subscribedProductId});
+  SubscriptionFound({super.userId, required this.subscribedProductId});
 
   @override
   List<Object?> get props => super.props + [subscribedProductId];
@@ -47,7 +43,7 @@ class SubscriptionFound extends InAppPurchaseEvent {
 }
 
 class SubscriptionNotFound extends InAppPurchaseEvent implements Equatable  {
-  const SubscriptionNotFound({super.userId});
+  SubscriptionNotFound({super.userId});
 
 
   @override
@@ -57,7 +53,7 @@ class SubscriptionNotFound extends InAppPurchaseEvent implements Equatable  {
 class SubscriptionRestored extends InAppPurchaseEvent {
   final String restoredProductId;
 
-  const SubscriptionRestored({super.userId, required this.restoredProductId});
+  SubscriptionRestored({super.userId, required this.restoredProductId});
 
   @override
   List<Object?> get props =>  super.props + [restoredProductId];

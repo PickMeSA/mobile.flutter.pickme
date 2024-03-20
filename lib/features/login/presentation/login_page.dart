@@ -21,6 +21,8 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/mixins/route_page_mixin.dart';
+
 @RoutePage()
 class LoginPage extends BasePage {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -30,7 +32,7 @@ class LoginPage extends BasePage {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
+class _LoginPageState extends BasePageState<LoginPage, LoginBloc> with RoutePageMixin{
 
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -211,30 +213,8 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
       }
       if(state is LoginContinueClickedState && state.dataState == DataState.success){
         Navigator.pop(context);
-        if(state.profileEntity?.firstName == null){
-          context.router.push( RegisterRoute(email:emailAddressController.text ));
-        }else if(state.profileEntity!.type!.isEmpty){
-          context.router.push(const SetupProfileRoute());
-        }else if (state.profileEntity!.acceptedTermsAndConditions == false){
-          context.router.push(const RegisterAccountStep1Route());
-        }else if (state.profileEntity!.qualifications!.isEmpty &&
-            state.profileEntity!.workExperience!.isEmpty){
-          context.router.push( QualificationsRoute(profileEntity:  state.profileEntity!));
-        }else if(state.profileEntity!.skills!.isEmpty){
-          context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
-        }else if(state.profileEntity!.hourlyRate! == 0){
-          context.router.push(const RateAndWorkTimesRoute());
-        }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-          context.router.push(const BankDetailsRoute());
-        }else if(state.profileEntity!.location!.address == "" ){
-          context.router.push(const LocationRoute(),);
-        }else if(state.profileEntity!.description!.isEmpty) {
-          context.router.push(const FinalDetailsRoute());
-        }else if(!state.profileEntity!.subscriptionPaid!){
-          context.router.push( PaySomeoneWebViewRoute(from: 0));}
-        else{
-          context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
-        }
+
+       routePageReg(context: context, profileEntity: state.profileEntity!);
       }
 
       if(state is LoginContinueClickedState && state.dataState == DataState.error){

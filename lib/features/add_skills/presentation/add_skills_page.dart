@@ -15,6 +15,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/mixins/route_page_mixin.dart';
 import 'package:pickme/shared/widgets/w_page_loader.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -29,7 +30,7 @@ class AddSkillsPage extends BasePage {
   @override
   _AddSkillsPageState createState() => _AddSkillsPageState();
 }
-class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
+class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> with RoutePageMixin {
   
   late TextEditingController dropdownIndustryController = TextEditingController();
   late TextEditingController dropDownSkillController = TextEditingController();
@@ -82,7 +83,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
         if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-        routePage(profileEntity: state.profileEntity!, context: context);
+          routePageReg(profileEntity: state.profileEntity!, context: context);
         }
 
         if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.loading){
@@ -111,7 +112,7 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
                      children: [
                        const Spacer(),
                        InkWell(
-                           onTap: ()=> routePage(profileEntity: widget.profileEntity, context: context),
+                           onTap: ()=> routePageReg(profileEntity: widget.profileEntity, context: context),
                            child: wText(getLocalization().skip,
                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
                      ],
@@ -234,22 +235,6 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> {
          Container();
       },
     );
-  }
-
-  void routePage({required BuildContext context,required ProfileEntity profileEntity }){
-    if(profileEntity!.hourlyRate! == 0){
-      context.router.push(const RateAndWorkTimesRoute());
-    }else if(profileEntity!.paymentDetails!.bankName!.isEmpty){
-      context.router.push(const BankDetailsRoute());
-    }else if(profileEntity!.location!.address == "" ){
-      context.router.push(const LocationRoute());
-    }else if(profileEntity!.description!.isEmpty){
-      context.router.push(const FinalDetailsRoute());
-    }else if(!profileEntity!.subscriptionPaid!) {
-      context.router.push( PaySomeoneWebViewRoute(from: 0));
-    }else{
-      context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
-    }
   }
 
 
