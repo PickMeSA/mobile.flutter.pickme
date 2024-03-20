@@ -29,13 +29,6 @@ class InAppPurchasesBloc
       Emitter<InAppPurchaseState> emit
       )async{
     logger.d('CreateSubscriptionEvent fired!!');
-    // ToDo Handle the event when a user wants to buy a subscription here
-    // emit(InAppPurchaseLoadingState());
-    // try {
-    //   final result = await buyInAppPurchaseUseCase.call();
-    //   emit(InAppPurchaseSuccessState(result));
-    // } catch (ex) {
-    //   emit(InAppPurchaseErrorState(ex.toString()));
-    // }
+
   }
 }
