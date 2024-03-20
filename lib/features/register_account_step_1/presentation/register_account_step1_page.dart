@@ -15,8 +15,6 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_events.dart';
-import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_states.dart';
 import '../../../shared/widgets/w_page_padding.dart';
 import '../domain/entities/subscription_plan_entity.dart';
 import 'bloc/register_account_step1_bloc.dart';
@@ -192,7 +190,7 @@ class _RegisterAccountStep1State extends BaseMultiBlocPageState<RegisterAccountS
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                getSecondBloc().add(const RestoreSubscriptionEvent());
+                                getSecondBloc().add(RestoreSubscriptionEvent());
                                 }
                           ),
                         ]

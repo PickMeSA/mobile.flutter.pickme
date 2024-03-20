@@ -17,13 +17,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
-import 'package:pickme/shared/in_app_purchases/presentation/models/in_app_purchase_states.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
-import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_events.dart';
 import 'bloc/final_details_bloc.dart';
 
 @RoutePage()
@@ -61,7 +59,7 @@ class _FinalDetailsPageState extends BaseMultiBlocPageState<FinalDetailsPage, Fi
               Navigator.pop(context);
               if(!state.profileEntity!.subscriptionPaid!) {
                 if(Platform.isIOS){
-                  getSecondBloc().add(const CreateSubscriptionEvent());
+                  getSecondBloc().add(CreateSubscriptionEvent());
                 }else{
                   context.router.push( PaySomeoneWebViewRoute(from: 0));
                 }
