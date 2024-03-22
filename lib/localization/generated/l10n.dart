@@ -4091,6 +4091,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Subscription not found`
+  String get subscriptionNotFound {
+    return Intl.message(
+      'Subscription not found',
+      name: 'subscriptionNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error when restoring previous purchase. Please try again`
+  String get subscriptionNotRestored {
+    return Intl.message(
+      'An error when restoring previous purchase. Please try again',
+      name: 'subscriptionNotRestored',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error when buying this subscription. Please try again`
+  String get subscriptionNotBought {
+    return Intl.message(
+      'An error when buying this subscription. Please try again',
+      name: 'subscriptionNotBought',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

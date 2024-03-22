@@ -253,7 +253,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                 padding: const EdgeInsets.all(10),
                 child:TertiaryButton.fullWidth(
                   onPressed: () {
-                    getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
+                    BlocProvider.of<InAppPurchasesBloc>(context).add(RestoreSubscriptionEvent());
                   },
                   child: Text(getLocalization().restorePurchase),
                 ),

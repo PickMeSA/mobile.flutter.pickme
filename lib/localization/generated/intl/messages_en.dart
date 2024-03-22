@@ -576,6 +576,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subscriptionFee":
             MessageLookupByLibrary.simpleMessage("Subscription fee"),
+        "subscriptionNotBought": MessageLookupByLibrary.simpleMessage(
+            "An error when buying this subscription. Please try again"),
+        "subscriptionNotFound":
+            MessageLookupByLibrary.simpleMessage("Subscription not found"),
+        "subscriptionNotRestored": MessageLookupByLibrary.simpleMessage(
+            "An error when restoring previous purchase. Please try again"),
         "successEx": MessageLookupByLibrary.simpleMessage("Success!"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
         "switchingProfiles":
