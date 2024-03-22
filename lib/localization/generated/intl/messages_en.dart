@@ -267,6 +267,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "If you\'ve previously purchased a subscription, kindly select "),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(
             "I\'m currently working in this role"),
+        "inAppPurchaseProductNotSetError": MessageLookupByLibrary.simpleMessage(
+            "IOS In App Purchase Product is not set"),
         "inYourArea": MessageLookupByLibrary.simpleMessage("In your area"),
         "inactiveListings":
             MessageLookupByLibrary.simpleMessage("Inactive listings"),

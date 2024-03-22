@@ -82,7 +82,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         BlocListener<InAppPurchasesBloc, BaseState>(
           listener: (context, state) {
             if (state is InAppPurchasedState) {
-
+              context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.isSubscriptionPurchased));
             }
             if (state is InAppRestoredState) {}
             if (state is InAppNotFoundState) {}

@@ -404,5 +404,6 @@
   "restorePurchase": "Restore purchase",
   "ifYouVePreviouslyPurchasedASubscriptionKindlySelect": "If you've previously purchased a subscription, kindly select ",
   "whatIsBeingPaid": "What is being paid?",
-  "theOnceOff50RandSubscription": "The once-off R50.00 subscription fee enables users to have access to all the in-App services."
+  "theOnceOff50RandSubscription": "The once-off R50.00 subscription fee enables users to have access to all the in-App services.",
+  "inAppPurchaseProductNotSetError": "IOS In App Purchase Product is not set"
 }

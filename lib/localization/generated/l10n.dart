@@ -4091,6 +4091,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `IOS In App Purchase Product is not set`
+  String get inAppPurchaseProductNotSetError {
+    return Intl.message(
+      'IOS In App Purchase Product is not set',
+      name: 'inAppPurchaseProductNotSetError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
