@@ -2,7 +2,12 @@ import 'dart:io';
 import 'dart:async';
 import 'package:logger/logger.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/localization/generated/l10n.dart';
 import '../../../core/locator/locator.dart';
 import '../data/subscription_remote_data_source.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -13,7 +18,7 @@ import 'package:pickme/shared/in_app_purchases/domain/product_purchase_state_cha
 @singleton
 class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
   // Constants
-  static const kiOSInAppSubscriptionProduct = 'kM89mcnts7.pick.me';
+  final kiOSInAppSubscriptionProduct = dotenv.env['IOS_IN_APP_PURCHASE_PRODUCT'];
   static const shouldDisableInAppPurchasesOnAndroid =
       false; // Client requirement for the time being, in App Purchase on Android Will be enabled later
   static String get kAndroidInAppSubscriptionProduct => kReleaseMode
@@ -27,7 +32,11 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
           ? [kAndroidInAppSubscriptionProduct]
           : List.empty();
     } else if (Platform.isIOS) {
-      return [kiOSInAppSubscriptionProduct];
+      if(kiOSInAppSubscriptionProduct == null){
+        AppLocalizations localization = locator<AppLocalizations>();
+        throw Exception(localization.inAppPurchaseProductNotSetError);
+      }
+      return [kiOSInAppSubscriptionProduct!];
     }
     return [];
   }

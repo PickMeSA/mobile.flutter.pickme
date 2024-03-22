@@ -405,6 +405,7 @@
   "ifYouVePreviouslyPurchasedASubscriptionKindlySelect": "If you've previously purchased a subscription, kindly select ",
   "whatIsBeingPaid": "What is being paid?",
   "theOnceOff50RandSubscription": "The once-off R50.00 subscription fee enables users to have access to all the in-App services.",
+  "inAppPurchaseProductNotSetError": "IOS In App Purchase Product is not set",
   "subscriptionNotFound":"Subscription not found",
   "subscriptionNotRestored": "An error when restoring previous purchase. Please try again",
   "subscriptionNotBought": "An error when buying this subscription. Please try again"

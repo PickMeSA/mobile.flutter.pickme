@@ -1,3 +1,4 @@
+.env
 /lib/core/locator/locator.config.dart
 /lib/navigation/app_route.gr.dart
 /lib/localization/generated/intl/*

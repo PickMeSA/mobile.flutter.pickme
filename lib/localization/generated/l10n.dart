@@ -4092,31 +4092,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Subscription not found`
-  String get subscriptionNotFound {
+  /// `IOS In App Purchase Product is not set`
+  String get inAppPurchaseProductNotSetError {
     return Intl.message(
-      'Subscription not found',
-      name: 'subscriptionNotFound',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `An error when restoring previous purchase. Please try again`
-  String get subscriptionNotRestored {
-    return Intl.message(
-      'An error when restoring previous purchase. Please try again',
-      name: 'subscriptionNotRestored',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `An error when buying this subscription. Please try again`
-  String get subscriptionNotBought {
-    return Intl.message(
-      'An error when buying this subscription. Please try again',
-      name: 'subscriptionNotBought',
+      'IOS In App Purchase Product is not set',
+      name: 'inAppPurchaseProductNotSetError',
       desc: '',
       args: [],
     );
