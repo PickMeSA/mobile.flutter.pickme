@@ -1,42 +1,31 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:logger/logger.dart';
 import 'package:flutter/foundation.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
-import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:injectable/injectable.dart';
 import '../../../core/locator/locator.dart';
 import '../data/subscription_remote_data_source.dart';
-
-abstract class PurchasedProductChangeDelegate { // Ideally should have been broken into two delegate in order not to violate Interface Segregation but there is only one method that makes the difference
-  void didRestorePurchase(PurchaseDetails purchaseDetails);
-
-  void didBuyPurchase(PurchaseDetails purchaseDetails);
-
-  void didFindNoSubscription();
-
-
-  void isPending(PurchaseDetails purchaseDetails) {}
-
-  void didReceivedErrorIndicatingItemOwned(bool hasBought) {}
-}
-
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
+import 'package:pickme/shared/in_app_purchases/domain/product_purchase_state_change_delegate.dart';
 
 @singleton
 class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
-
   // Constants
   static const kiOSInAppSubscriptionProduct = 'kM89mcnts7.pick.me';
-  static const shouldDisableInAppPurchasesOnAndroid = false; // Client requirement for the time being, in App Purchase on Android Will be enabled later
-  static String get kAndroidInAppSubscriptionProduct =>
-      kReleaseMode
-          ? 'name_of_android_in_app_purchase'
-          : 'android.test.purchased';
+  static const shouldDisableInAppPurchasesOnAndroid =
+      false; // Client requirement for the time being, in App Purchase on Android Will be enabled later
+  static String get kAndroidInAppSubscriptionProduct => kReleaseMode
+      ? 'name_of_android_in_app_purchase'
+      : 'android.test.purchased';
 
   // Computed properties
-  List<String> get subscriptionProductIds  {
-    if (Platform.isAndroid)  {
-      return shouldDisableInAppPurchasesOnAndroid ? [kAndroidInAppSubscriptionProduct] : List.empty();
+  List<String> get subscriptionProductIds {
+    if (Platform.isAndroid) {
+      return shouldDisableInAppPurchasesOnAndroid
+          ? [kAndroidInAppSubscriptionProduct]
+          : List.empty();
     } else if (Platform.isIOS) {
       return [kiOSInAppSubscriptionProduct];
     }
@@ -44,12 +33,14 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
   }
 
   // Immutable and Mutable properties
-  late final subscriptionRemoteDatasource = locator<
-      SubscriptionRemoteDatasource>();
+  late final logger = Logger(printer: PrettyPrinter());
+  late final subscriptionRemoteDatasource =
+      locator<SubscriptionRemoteDatasource>();
   late final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-  final List<PurchasedProductChangeDelegate> _delegates = List.empty(growable: true);
-  StreamSubscription<List<PurchaseDetails>>? _subscription;
-  List<PurchaseDetails> _purchaseDetailsList =  List<PurchaseDetails>.empty(growable: true);
+  final List<WeakReference<PurchasedProductChangeDelegate>?> _delegates =
+      List.empty(growable: true);
+  List<PurchaseDetails> _purchaseDetailsList =
+      List<PurchaseDetails>.empty(growable: true);
   late final Stream<List<PurchaseDetails>> purchaseUpdated =
       _inAppPurchase.purchaseStream;
 
@@ -59,83 +50,46 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
     _subscribeToPurchaseEvent();
   }
 
+
+  // Delegate management
+
+  addDelegate(PurchasedProductChangeDelegate delegate) =>
+      _delegates.add(WeakReference(delegate));
+
+  removeDelegate(PurchasedProductChangeDelegate delegate) =>
+      _delegates.removeWhere((element) => element?.target == delegate);
+
+
+  // Subscribing and handling in-app purchases
+
   _subscribeToPurchaseEvent() {
     if (_initialised) return;
-    _subscription =
-        purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-          _onSubscriptionUpdate(purchaseDetailsList);
-        }, onDone: () {
-          _initialised = true;
-        }, onError: (Object error) {
-          _initialised = false;
-          debugPrint(error.toString());
-        });
+    purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
+      _onSubscriptionUpdate(purchaseDetailsList);
+    }, onDone: () {
+      _initialised = true;
+    }, onError: (Object error) {
+      _initialised = false;
+      debugPrint(error.toString());
+    });
   }
 
-  @override
-  bool shouldContinueTransaction(SKPaymentTransactionWrapper transaction,
-      SKStorefrontWrapper storefront) {
-    return true;
-  }
 
-  @override
-  bool shouldShowPriceConsent() {
-    return false;
-  }
-
-  addDelegate(PurchasedProductChangeDelegate delegate) => _delegates.add(delegate);
-
-  Future<bool> shouldEnableInAppPurchases() async {
-    final bool isAvailable = await _inAppPurchase.isAvailable();
-    if (!isAvailable) {
-      return Future.value(false);
-    }
-    if (Platform.isIOS) {
-      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
-      _inAppPurchase
-          .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
-      await iosPlatformAddition.setDelegate(this);
-    } else if (shouldDisableInAppPurchasesOnAndroid) {
-      return false;
-    }
-
-    final ProductDetailsResponse productDetailResponse =
-    await _inAppPurchase.queryProductDetails(subscriptionProductIds.toSet());
-    if (productDetailResponse.error != null) {
-      return Future.value(false);
-    }
-
-    if (productDetailResponse.productDetails.isEmpty) {
-      return Future.value(false);
-    }
-    List<String> purchasedIds =
-    _purchaseDetailsList.map((e) => e.productID).toList();
-    final hasBoughtAllProducts =
-    subscriptionProductIds.every((element) => purchasedIds.contains(element));
-    return Future.value(!hasBoughtAllProducts);
-  }
-
-  Future<bool> isAvailable() async => await _inAppPurchase.isAvailable();
-
-  Future<bool>  buyNonConsumable(PurchaseParam purchaseParam) async => _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
-
-
-  Future restorePurchases() async {
-    await InAppPurchase.instance.restorePurchases();
-  }
-
-  void _onSubscriptionUpdate(
-      List<PurchaseDetails> purchaseDetailsList) async {
+  _onSubscriptionUpdate(List<PurchaseDetails> purchaseDetailsList) async {
     if (purchaseDetailsList.isEmpty) {
       for (final delegate in _delegates) {
-        delegate?.didFindNoSubscription();
+        delegate?.target?.didFindNoSubscription();
       }
       return;
     }
+    await _handlePurchaseStateChange(purchaseDetailsList);
+  }
+
+  _handlePurchaseStateChange(List<PurchaseDetails> purchaseDetailsList) async {
     for (var purchaseDetails in purchaseDetailsList) {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         for (final delegate in _delegates) {
-          delegate?.isPending(purchaseDetails);
+          delegate?.target?.isPending(purchaseDetails);
         }
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
@@ -143,19 +97,25 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
           purchaseDetails.error?.message?.contains("itemAlreadyOwned");
           _purchaseDetailsList = purchaseDetailsList;
           for (final delegate in _delegates) {
-            delegate.didReceivedErrorIndicatingItemOwned(hasBought ?? false);
+            delegate?.target?.didReceivedErrorIndicatingItemOwned(hasBought ?? false, purchaseDetails.error?.message);
           }
         } else if (purchaseDetails.status == PurchaseStatus.restored) {
           _purchaseDetailsList = purchaseDetailsList;
 
           for (final delegate in _delegates) {
-            delegate.didRestorePurchase(purchaseDetails);
+            delegate?.target?.didRestorePurchase(purchaseDetails);
           }
         } else if (purchaseDetails.status == PurchaseStatus.purchased) {
           _purchaseDetailsList = purchaseDetailsList;
 
           for (final delegate in _delegates) {
-            delegate.didBuyPurchase(purchaseDetails);
+            delegate?.target?.didBuyPurchase(purchaseDetails);
+          }
+        } else if (purchaseDetails.status == PurchaseStatus.canceled) {
+          _purchaseDetailsList = purchaseDetailsList;
+
+          for (final delegate in _delegates) {
+            delegate?.target?.didCancelPayment(purchaseDetails);
           }
         }
         if (purchaseDetails.pendingCompletePurchase) {
@@ -165,12 +125,67 @@ class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
     }
   }
 
-  completeTransaction(PurchaseDetails purchaseDetails) async {
+
+  // SKPaymentQueueDelegateWrapper Implementation
+
+  @override
+  bool shouldContinueTransaction(SKPaymentTransactionWrapper transaction,
+          SKStorefrontWrapper storefront) =>  true;
+
+  @override
+  bool shouldShowPriceConsent() => true;
+
+
+  // Public API
+
+
+  Future<bool> shouldEnableInAppPurchases() async {
+    final bool isAvailable = await _inAppPurchase.isAvailable();
+    if (!isAvailable) {
+      return Future.value(false);
+    }
+    if (Platform.isIOS) {
+      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
+          _inAppPurchase
+              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      await iosPlatformAddition.setDelegate(this);
+    } else if (shouldDisableInAppPurchasesOnAndroid) {
+      return false;
+    }
+
+    final ProductDetailsResponse productDetailResponse = await _inAppPurchase
+        .queryProductDetails(subscriptionProductIds.toSet());
+    if (productDetailResponse.error != null) {
+      return Future.value(false);
+    }
+
+    if (productDetailResponse.productDetails.isEmpty) {
+      return Future.value(false);
+    }
+    List<String> purchasedIds =
+        _purchaseDetailsList.map((e) => e.productID).toList();
+    final hasBoughtAllProducts = subscriptionProductIds
+        .every((element) => purchasedIds.contains(element));
+    return Future.value(!hasBoughtAllProducts);
+  }
+
+  Future<bool> isAvailable() async => await _inAppPurchase.isAvailable();
+
+  Future<bool> buyNonConsumable(PurchaseParam purchaseParam) async =>
+      _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+
+  Future restorePurchases() async =>
+      await InAppPurchase.instance.restorePurchases();
+
+  Future completeTransaction(PurchaseDetails purchaseDetails) async {
     try {
-      await InAppPurchase.instance.completePurchase(purchaseDetails);
+      if ( purchaseDetails.pendingCompletePurchase) {
+        await InAppPurchase.instance.completePurchase(purchaseDetails);
+      } else {
+        logger.e("Pending transaction ${purchaseDetails.transactionDate}, waiting for user action");
+      }
     } catch (exception, stackTrace) {
-      debugPrint(exception.toString());
-      debugPrintStack(stackTrace: stackTrace);
+      logger.e("Failed to complete transaction", error: exception, stackTrace: stackTrace);
     }
   }
 }

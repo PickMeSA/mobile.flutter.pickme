@@ -1,79 +1,91 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pickme/shared/in_app_purchases/domain/in_app_purchase_interactor.dart';
-import '../../../core/locator/locator.dart';
+import '../presentation/models/in_app_purchase_details.dart';
+import 'models/subscription_payment_result.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:pickme/shared/in_app_purchases/domain/product_purchase_state_change_delegate.dart';
 
-
-@immutable
-class SubscriptionResult {
-  final bool purchased;
-  final List<String> productIds;
-
-  const SubscriptionResult(this.purchased,  this.productIds);
-}
 @injectable
-class BuyInAppSubscriptionUseCase implements PurchasedProductChangeDelegate {
-  late final inAppPurchaseInteractor = locator<InAppPurchaseInteractor>();
+class BuyInAppSubscriptionUseCase extends PurchasedProductChangeDelegate {
+  WeakReference<SubscriptionPaymentResultHandler>? _currentTransactionHandler;
 
-  static const kDuplicateProductIdentifier = 'storekit_duplicate_product_object';
   BuyInAppSubscriptionUseCase() {
     inAppPurchaseInteractor.addDelegate(this);
   }
 
-  Future<SubscriptionResult> call() async {
-    final bool isAvailable = await inAppPurchaseInteractor.isAvailable();
-    if (!isAvailable) {
-      return Future.value(const SubscriptionResult(false, []));
+  /*
+  In App Purchase trigger
+  Returns: true if in App Purchases are available on device
+  Handler: It will be called back at a later stage when the user interacts with the In-App Controls
+   */
+  Future<bool> call(SubscriptionPaymentResultHandler handler) async {
+    final bool isInAppPurchasesAvailable =
+        await inAppPurchaseInteractor.isAvailable();
+    if (!isInAppPurchasesAvailable) {
+      return false;
     }
-    final subscriptionProductIds = inAppPurchaseInteractor.subscriptionProductIds;
+    _currentTransactionHandler = WeakReference(handler);
     final ProductDetailsResponse response = await InAppPurchase.instance
         .queryProductDetails(
             Set.from(inAppPurchaseInteractor.subscriptionProductIds));
     List<ProductDetails> productDetailsList = response.productDetails;
 
     if (productDetailsList.isEmpty) {
-      return SubscriptionResult(false, subscriptionProductIds);
+      return false;
     }
-    final purchaseParam = PurchaseParam(productDetails: productDetailsList.first);
+    final purchaseParam =
+        PurchaseParam(productDetails: productDetailsList.first);
     try {
-      final hasBoughtItem = await inAppPurchaseInteractor.buyNonConsumable(
-          purchaseParam);
-      return SubscriptionResult(hasBoughtItem, subscriptionProductIds);
+      await inAppPurchaseInteractor.buyNonConsumable(purchaseParam);
+      return true;
     } on PlatformException catch (exception) {
-      if (exception.code==kDuplicateProductIdentifier) {
+      if (exception.code ==
+          PurchasedProductChangeDelegate.kDuplicateProductIdentifier) {
         await inAppPurchaseInteractor.restorePurchases();
       }
-      return SubscriptionResult(false, subscriptionProductIds);
+      return false;
     } catch (ex) {
-      rethrow ;
+      rethrow;
     }
   }
+
+  // In-App Purchase Result Callbacks
 
   @override
   void didBuyPurchase(PurchaseDetails purchaseDetails) {
-    // NOOP: This Use case does not handle in app purchase restore
-  }
-
-  @override
-  void didFindNoSubscription() {
-
-  }
-
-  @override
-  void didReceivedErrorIndicatingItemOwned(bool hasBought) {
-
-  }
-
-  @override
-  void isPending(PurchaseDetails purchaseDetails) {
-    inAppPurchaseInteractor.completeTransaction(purchaseDetails);
+    final inAppPurchaseDetails = makeInAppPurchaseDetails(purchaseDetails);
+    _currentTransactionHandler?.target?.onSubscriptionPurchaseResult(
+        SubscriptionPaymentResult(true, purchaseDetails.productID, false,  purchaseDetails:
+        inAppPurchaseDetails));
   }
 
   @override
   void didRestorePurchase(PurchaseDetails purchaseDetails) {
+    final inAppPurchaseDetails = makeInAppPurchaseDetails(purchaseDetails);
+    _currentTransactionHandler?.target?.onSubscriptionPurchaseResult(
+        SubscriptionPaymentResult(true, purchaseDetails.productID, false,
+            purchaseDetails:
+                inAppPurchaseDetails)); // A restore will treated as a purchase
+  }
 
+
+  @override
+  void didCancelPayment(PurchaseDetails purchaseDetails) {
+    _currentTransactionHandler?.target?.onSubscriptionPurchaseResult(
+        SubscriptionPaymentResult(false, purchaseDetails.productID, true,  purchaseDetails:
+        null));
+  }
+
+  @override
+  void didFindNoSubscription() {
+    // NOOP: This is only handle by the restore use case
+  }
+
+  @override
+  void didReceivedErrorIndicatingItemOwned(
+      bool hasBought, String? errorMessage) {
+    _currentTransactionHandler?.target?.onSubscriptionPurchaseResult(
+        SubscriptionPaymentResult(hasBought, "", false, error: errorMessage));
   }
 }
