@@ -4092,6 +4092,16 @@ class AppLocalizations {
     );
   }
 
+  /// `IOS In App Purchase Product is not set`
+  String get inAppPurchaseProductNotSetError {
+    return Intl.message(
+      'IOS In App Purchase Product is not set',
+      name: 'inAppPurchaseProductNotSetError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Subscription not found`
   String get subscriptionNotFound {
     return Intl.message(
@@ -4117,6 +4127,56 @@ class AppLocalizations {
     return Intl.message(
       'An error when buying this subscription. Please try again',
       name: 'subscriptionNotBought',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field cannot be empty`
+  String get fieldCannotBeEmpty {
+    return Intl.message(
+      'Field cannot be empty',
+      name: 'fieldCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancellation confirmation`
+  String get cancellationConfirmation {
+    return Intl.message(
+      'Cancellation confirmation',
+      name: 'cancellationConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you would like to cancel the in-app purchase`
+  String get areYouSureYouWantToCancelThisPurchase {
+    return Intl.message(
+      'Are you sure you would like to cancel the in-app purchase',
+      name: 'areYouSureYouWantToCancelThisPurchase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
       desc: '',
       args: [],
     );

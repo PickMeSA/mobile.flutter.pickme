@@ -106,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "applied": MessageLookupByLibrary.simpleMessage("Applied"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
+        "areYouSureYouWantToCancelThisPurchase":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you would like to cancel the in-app purchase"),
         "areYouSureYouWantToDeleteYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you would like to delete your account."),
@@ -131,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Browse categories"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel booking"),
+        "cancellationConfirmation":
+            MessageLookupByLibrary.simpleMessage("Cancellation confirmation"),
         "cancellationDetails":
             MessageLookupByLibrary.simpleMessage("Cancellation details"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
@@ -211,6 +216,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Explore all jobs"),
         "exploreAllServices":
             MessageLookupByLibrary.simpleMessage("Explore all services"),
+        "fieldCannotBeEmpty":
+            MessageLookupByLibrary.simpleMessage("Field cannot be empty"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
@@ -267,6 +274,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "If you\'ve previously purchased a subscription, kindly select "),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(
             "I\'m currently working in this role"),
+        "inAppPurchaseProductNotSetError": MessageLookupByLibrary.simpleMessage(
+            "IOS In App Purchase Product is not set"),
         "inYourArea": MessageLookupByLibrary.simpleMessage("In your area"),
         "inactiveListings":
             MessageLookupByLibrary.simpleMessage("Inactive listings"),
@@ -366,6 +375,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "noAddressSpecified":
@@ -676,6 +686,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "workingDays": MessageLookupByLibrary.simpleMessage("Working days"),
         "workingDaysA": MessageLookupByLibrary.simpleMessage("Working days *"),
         "workingHours": MessageLookupByLibrary.simpleMessage("Working hours"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yesDelete": MessageLookupByLibrary.simpleMessage("Yes, Delete"),
         "yesSwitch": MessageLookupByLibrary.simpleMessage("Yes, switch"),
         "youAreAllSetup":
