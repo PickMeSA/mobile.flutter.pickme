@@ -408,5 +408,10 @@
   "inAppPurchaseProductNotSetError": "IOS In App Purchase Product is not set",
   "subscriptionNotFound":"Subscription not found",
   "subscriptionNotRestored": "An error when restoring previous purchase. Please try again",
-  "subscriptionNotBought": "An error when buying this subscription. Please try again"
+  "subscriptionNotBought": "An error when buying this subscription. Please try again",
+  "fieldCannotBeEmpty": "Field cannot be empty",
+  "cancellationConfirmation": "Cancellation confirmation",
+  "areYouSureYouWantToCancelThisPurchase": "Are you sure you would like to cancel the in-app purchase",
+  "yes": "Yes",
+  "no": "No"
 }

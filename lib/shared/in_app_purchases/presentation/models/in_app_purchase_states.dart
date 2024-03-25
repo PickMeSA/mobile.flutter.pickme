@@ -8,6 +8,9 @@ abstract class InAppPurchaseState extends BaseState {
   InAppPurchaseState(this.error, this.product);
 }
 
+class InAppPurchaseErrorState extends InAppPurchaseState {
+  InAppPurchaseErrorState(String error) : super(error, "");
+}
 
 class InAppPurchasedState extends InAppPurchaseState {
   final bool isSubscriptionPurchased;

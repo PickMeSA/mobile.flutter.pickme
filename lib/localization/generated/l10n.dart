@@ -4101,6 +4101,86 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Subscription not found`
+  String get subscriptionNotFound {
+    return Intl.message(
+      'Subscription not found',
+      name: 'subscriptionNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error when restoring previous purchase. Please try again`
+  String get subscriptionNotRestored {
+    return Intl.message(
+      'An error when restoring previous purchase. Please try again',
+      name: 'subscriptionNotRestored',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error when buying this subscription. Please try again`
+  String get subscriptionNotBought {
+    return Intl.message(
+      'An error when buying this subscription. Please try again',
+      name: 'subscriptionNotBought',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field cannot be empty`
+  String get fieldCannotBeEmpty {
+    return Intl.message(
+      'Field cannot be empty',
+      name: 'fieldCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancellation confirmation`
+  String get cancellationConfirmation {
+    return Intl.message(
+      'Cancellation confirmation',
+      name: 'cancellationConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you would like to cancel the in-app purchase`
+  String get areYouSureYouWantToCancelThisPurchase {
+    return Intl.message(
+      'Are you sure you would like to cancel the in-app purchase',
+      name: 'areYouSureYouWantToCancelThisPurchase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

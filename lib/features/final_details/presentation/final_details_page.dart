@@ -33,7 +33,7 @@ class FinalDetailsPage extends BasePage {
 class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
   bool isSelectingProfilePicture = false;
   final TextEditingController aboutYouController = TextEditingController();
-
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   void initState() {
     // TODO: implement initState
@@ -77,12 +77,22 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                 wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
               }
             }
+            if(state is UpdatePurchaseDetailsState){
+              getBloc().preloaderActive = false;
+              if(state.dataState == DataState.success){
+                context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
+              }
+            }
           }
         ),
         BlocListener<InAppPurchasesBloc, BaseState>(
           listener: (context, state) {
             if (state is InAppPurchasedState) {
-              context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.isSubscriptionPurchased));
+              if(state.isPurchasedCancelled){
+                showConfirmationDialog(context);
+              }else{
+                getBloc().add(ActivatePurchaseEvent(state.purchaseDetails!));
+              }
             }
             if (state is InAppRestoredState) {}
             if (state is InAppNotFoundState) {}
@@ -177,12 +187,22 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                           child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
                         ),
                         40.height,
-                        AppTextFormField(
+                        Form(
+                          key: formKey,
+                          child: AppTextFormField(
+                            isValidationRequired: true,
                             controller: aboutYouController,
                             keyboardType: TextInputType.multiline,
-                            labelText: getLocalization().aboutYouBasedOnYourProfile,
+                            labelText: getLocalization().aboutYouBasedOnYourProfile+"*",
                             textFieldType: TextFieldType.OTHER,
-                            maxLines: 10,maxLength: 2000),
+                            maxLines: 10,maxLength: 2000,
+                            validator: (value){
+                              if(value!.isEmpty){
+                                return getLocalization().fieldCannotBeEmpty;
+                              }
+                              return null;
+                            },
+                          ),),
                         GestureDetector(
                             onTap: () {
                               setState(() {
@@ -235,7 +255,9 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                             Expanded(
                               child: PrimaryButton(
                                 onPressed: () {
-                                  getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
+                                  if(formKey.currentState!.validate()){
+                                    getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
+                                  }
                                 },
                                 child: Text(getLocalization().payNow),
                               ),
@@ -264,7 +286,40 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       }),
     );
   }
-
+  Future<void> showConfirmationDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button to close dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: Text(getLocalization().cancellationConfirmation),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(getLocalization().areYouSureYouWantToCancelThisPurchase),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(getLocalization().yes),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(getLocalization().no),
+              onPressed: () {
+                Navigator.of(context).pop();
+                BlocProvider.of<InAppPurchasesBloc>(context).add(CreateSubscriptionEvent());
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   FinalDetailsBloc initBloc() {

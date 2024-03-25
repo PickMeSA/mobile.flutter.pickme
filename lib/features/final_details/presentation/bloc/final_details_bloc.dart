@@ -13,6 +13,10 @@ import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 
+import '../../../../shared/domain/entities/InAppPurchaseResponseEntity.dart';
+import '../../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
+import '../../domain/usecases/activate_purchase_use_case.dart';
+
 part 'final_details_event.dart';
 part 'final_details_state.dart';
 
@@ -26,10 +30,12 @@ class FinalDetailsBloc
     SubmitFinalDetailsUseCase submitFinalDetailsUseCase;
     FinalDetailsEntity finalDetailsEntity =  FinalDetailsEntity();
     String? policeClearancePath;
-    FinalDetailsBloc({required this.uploadFileUseCase, required this.submitFinalDetailsUseCase}): super(FinalDetailsPageInitState()) {
+    final ActivatePurchaseUseCase activatePurchaseUseCase;
+    FinalDetailsBloc({required this.uploadFileUseCase, required this.submitFinalDetailsUseCase, required this.activatePurchaseUseCase}): super(FinalDetailsPageInitState()) {
         on<ProfilePictureAddedEvent>((event, emit) => _onProfilePictureAddedEvent(event, emit));
         on<PoliceClearanceAddedEvent>((event, emit) => _onPoliceClearanceAddedEvent(event, emit));
         on<SubmitClickedEvent>((event, emit) => _onSubmitClickedEvent(event, emit));
+        on<ActivatePurchaseEvent>((event, emit) => _onActivatePurchaseEvent(event, emit));
     }
     _onSubmitClickedEvent(SubmitClickedEvent event, Emitter<FinalDetailsPageState> emit) async{
         if(event.description.isEmpty){
@@ -80,6 +86,16 @@ class FinalDetailsBloc
         }
     }
 
+    _onActivatePurchaseEvent(
+        ActivatePurchaseEvent event, Emitter<FinalDetailsPageState> emit) async {
+        emit(UpdatePurchaseDetailsState()..dataState= DataState.loading);
+        try {
+            final result = await activatePurchaseUseCase.call(params: ActivatePurchaseUseCaseParams(purchaseDetails: event.purchaseDetails));
+            emit(UpdatePurchaseDetailsState(activationResultDetails: result)..dataState= DataState.success);
+        } catch (e) {
+            emit(UpdatePurchaseDetailsState()..dataState= DataState.error);
+        }
+    }
 }
 
 void validateFile(File file){

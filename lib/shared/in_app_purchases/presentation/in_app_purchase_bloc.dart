@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 import '../../../core/locator/locator.dart';
 import '../../../base_classes/base_bloc.dart';
@@ -7,6 +8,7 @@ import '../../../base_classes/base_event.dart';
 import '../../../base_classes/base_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../localization/generated/l10n.dart';
+import '../domain/in_app_purchase_interactor.dart';
 import '../domain/product_purchase_state_change_delegate.dart';
 import 'package:pickme/shared/in_app_purchases/domain/models/subscription_payment_result.dart';
 import 'package:pickme/shared/in_app_purchases/domain/models/subscription_restore_result.dart';
@@ -29,6 +31,7 @@ class InAppPurchasesBloc
   late final restoreInAppPurchaseUseCase =
       locator<RestoreInAppSubscriptionUseCase>();
   late final localization = locator<AppLocalizations>();
+  final InAppPurchaseInteractor inAppPurchaseInteractor = locator<InAppPurchaseInteractor>();
 
   InAppPurchasesBloc() : super(InAppPurchaseLoadingState(null, "")) {
     on<CreateSubscriptionEvent>(
@@ -61,7 +64,6 @@ class InAppPurchasesBloc
   Future<void> _onRestoreSubscription(
       RestoreSubscriptionEvent event, Emitter<InAppPurchaseState> emit) async {
     emit(InAppPurchaseLoadingState(null, ""));
-
     bool hasTriggeredInAppPurchaseRestore = false;
     try {
       hasTriggeredInAppPurchaseRestore = await restoreInAppPurchaseUseCase();
