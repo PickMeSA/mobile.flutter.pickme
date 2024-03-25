@@ -266,7 +266,7 @@ class _JobsLandingPageState
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Expanded(
+                        if (industries.industries.length > 1) Expanded(
                           child: ConstrainedBox(
                             constraints: const BoxConstraints(
                                 minHeight: kSmallCardSize +
@@ -310,9 +310,9 @@ class _JobsLandingPageState
                               ),
                             ]),
                           ),
-                        ),
-                        10.width,
-                        Expanded(
+                        ), // First column of 2
+                        if (industries.industries.length > 3) 10.width,      // Divider for second colum if there are at least 4 element
+                        if (industries.industries.length > 3) Expanded(
                             child: ConstrainedBox(
                           constraints: const BoxConstraints(
                               minHeight: kSmallCardSize +
@@ -355,7 +355,7 @@ class _JobsLandingPageState
                                       industries.industries[3].industry)),
                             ),
                           ]),
-                        )),
+                        )), // Second column of 2
                       ],
                     ),
                 ],
