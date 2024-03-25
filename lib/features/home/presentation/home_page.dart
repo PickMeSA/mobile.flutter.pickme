@@ -161,12 +161,12 @@ class _HomePageState extends BasePageState<HomePage, HomeBloc> {
                                             ((widget.profileEntity.pictureEntity?.url ?? "").isEmpty)
                                                 ? AppImageAvatar.small()
                                                 : AppImageAvatar.small(
-                                                    image:
-                                                        CachedNetworkImageProvider(
-                                                            widget
+                                                    image: CachedNetworkImageProvider(
+                                                        widget
                                                                 .profileEntity
                                                                 .pictureEntity!
-                                                                .url!),
+                                                                .url ??
+                                                            ""),
                                                   ),
                                             const Spacer(),
                                             TextButton(
@@ -416,79 +416,76 @@ class _HomePageState extends BasePageState<HomePage, HomeBloc> {
                                               .activeJobs
                                               .isNotEmpty &&
                                           userMode.type == 'work'
-                                      ? Expanded(
-                                          child: ListView.builder(
-                                              shrinkWrap: true,
-                                              itemCount: getBloc()
-                                                  .jobListingsPageEntity!
-                                                  .activeJobs
-                                                  .length,
-                                              itemBuilder: (context, index) {
-                                                return Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    if (getBloc()
-                                                            .jobListingsPageEntity
-                                                            ?.activeJobs !=
-                                                        null)
-                                                      AppJobAdvertCard.matching(
-                                                        jobName: getBloc()
+                                      ? ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount: getBloc()
+                                              .jobListingsPageEntity!
+                                              .activeJobs
+                                              .length,
+                                          itemBuilder: (context, index) {
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                if (getBloc()
+                                                        .jobListingsPageEntity
+                                                        ?.activeJobs !=
+                                                    null)
+                                                  AppJobAdvertCard.matching(
+                                                    jobName: getBloc()
+                                                        .jobListingsPageEntity!
+                                                        .activeJobs[index]
+                                                        .title,
+                                                    employerName:
+                                                        "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.firstName} "
+                                                        "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.surname}",
+                                                    locationName: getBloc()
                                                             .jobListingsPageEntity!
                                                             .activeJobs[index]
-                                                            .title,
-                                                        employerName:
-                                                            "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.firstName} "
-                                                            "${getBloc().jobListingsPageEntity!.activeJobs[index].customer?.surname}",
-                                                        locationName: getBloc()
+                                                            .customer
+                                                            ?.address ??
+                                                        getLocalization()
+                                                            .noAddressSpecified,
+                                                    dateTime: getBloc()
+                                                        .jobListingsPageEntity!
+                                                        .activeJobs[index]
+                                                        .startDate,
+                                                    time: getBloc()
+                                                        .jobListingsPageEntity!
+                                                        .activeJobs[index]
+                                                        .startTime,
+                                                    image: (getBloc()
                                                                 .jobListingsPageEntity!
                                                                 .activeJobs[
                                                                     index]
                                                                 .customer
-                                                                ?.address ??
-                                                            getLocalization()
-                                                                .noAddressSpecified,
-                                                        dateTime: getBloc()
-                                                            .jobListingsPageEntity!
-                                                            .activeJobs[index]
-                                                            .startDate,
-                                                        time: getBloc()
-                                                            .jobListingsPageEntity!
-                                                            .activeJobs[index]
-                                                            .startTime,
-                                                        image: (getBloc()
+                                                                ?.profileImage !=
+                                                            null)
+                                                        ? CachedNetworkImageProvider(
+                                                            getBloc()
+                                                                .jobListingsPageEntity!
+                                                                .activeJobs[
+                                                                    index]
+                                                                .customer!
+                                                                .profileImage!)
+                                                        : null,
+                                                    onNext: () => context.router
+                                                        .push(JobDetailsRoute(
+                                                            jobId: getBloc()
+                                                                .jobListingsPageEntity!
+                                                                .activeJobs[
+                                                                    index]
+                                                                .id,
+                                                            job: getBloc()
                                                                     .jobListingsPageEntity!
                                                                     .activeJobs[
-                                                                        index]
-                                                                    .customer
-                                                                    ?.profileImage !=
-                                                                null)
-                                                            ? CachedNetworkImageProvider(
-                                                                getBloc()
-                                                                    .jobListingsPageEntity!
-                                                                    .activeJobs[
-                                                                        index]
-                                                                    .customer!
-                                                                    .profileImage!)
-                                                            : null,
-                                                        onNext: () => context
-                                                            .router
-                                                            .push(JobDetailsRoute(
-                                                                jobId: getBloc()
-                                                                    .jobListingsPageEntity!
-                                                                    .activeJobs[
-                                                                        index]
-                                                                    .id,
-                                                                job: getBloc()
-                                                                        .jobListingsPageEntity!
-                                                                        .activeJobs[
-                                                                    index])),
-                                                      ),
-                                                    10.height
-                                                  ],
-                                                );
-                                              }),
-                                        )
+                                                                index])),
+                                                  ),
+                                                10.height
+                                              ],
+                                            );
+                                          })
                                       : const SizedBox(),
                                   if (userMode.type == 'hire')
                                     SizedBox(
