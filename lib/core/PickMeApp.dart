@@ -18,11 +18,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'locator/locator.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 
 class PickMeApp{
 
   static Future<void> appInit(Environment env)async{
+    await dotenv.load(fileName: ".env");
+
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
