@@ -78,9 +78,16 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
               }
             }
             if(state is UpdatePurchaseDetailsState){
-              getBloc().preloaderActive = false;
+              if(state.dataState == DataState.loading){
+                getBloc().preloaderActive = false;
+              }else{
+                getBloc().preloaderActive = true;
+              }
               if(state.dataState == DataState.success){
                 context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
+              }
+              if(state.dataState == DataState.error){
+                wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
               }
             }
           }

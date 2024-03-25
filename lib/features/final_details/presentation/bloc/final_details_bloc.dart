@@ -93,7 +93,7 @@ class FinalDetailsBloc
             final result = await activatePurchaseUseCase.call(params: ActivatePurchaseUseCaseParams(purchaseDetails: event.purchaseDetails));
             emit(UpdatePurchaseDetailsState(activationResultDetails: result)..dataState= DataState.success);
         } catch (e) {
-            emit(UpdatePurchaseDetailsState()..dataState= DataState.error);
+            emit(UpdatePurchaseDetailsState(error: e.toString())..dataState= DataState.error);
         }
     }
 }
