@@ -77,12 +77,40 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                 wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
               }
             }
+            if(state is UpdatePurchaseDetailsState){
+              getBloc().preloaderActive = state.dataState == DataState.loading;
+              switch(state.dataState){
+                case DataState.loading:
+                  preloader(context);
+                  break;
+                case DataState.error:
+                  Navigator.pop(context);
+                  wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+                  break;
+                case DataState.success:
+                  Navigator.pop(context);
+                  if(state.activationResultDetails!.errorModel != null){
+                    wErrorPopUp(message: state.activationResultDetails!.errorModel!.message, type: getLocalization().error, context: context);
+                  }else{
+                    context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
+                  }
+                  break;
+                default:
+                  break;
+              }
+              if(state.dataState == DataState.success){
+                context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
+              }
+              if(state.dataState == DataState.error){
+                wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+              }
+            }
           }
         ),
         BlocListener<InAppPurchasesBloc, BaseState>(
           listener: (context, state) {
             if (state is InAppPurchasedState) {
-
+              handleInAppPurchasedState(context, state);
             }
             if (state is InAppRestoredState) {}
             if (state is InAppNotFoundState) {}
@@ -264,7 +292,40 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       }),
     );
   }
-
+  Future<void> showConfirmationDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button to close dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: Text(getLocalization().cancellationConfirmation),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(getLocalization().areYouSureYouWantToCancelThisPurchase),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(getLocalization().yes),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(getLocalization().no),
+              onPressed: () {
+                Navigator.of(context).pop();
+                BlocProvider.of<InAppPurchasesBloc>(context).add(CreateSubscriptionEvent());
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   FinalDetailsBloc initBloc() {
@@ -287,6 +348,11 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       // Handle accordingly (e.g., show a message)
     }
 
+  }
+  handleInAppPurchasedState(BuildContext context, InAppPurchasedState state) {
+    if(state.isPurchasedCancelled){
+      showConfirmationDialog(context);
+    }
   }
 
 }

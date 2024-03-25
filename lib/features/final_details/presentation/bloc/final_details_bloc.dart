@@ -13,6 +13,8 @@ import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 
+import '../../../../shared/domain/entities/InAppPurchaseResponseEntity.dart';
+
 part 'final_details_event.dart';
 part 'final_details_state.dart';
 

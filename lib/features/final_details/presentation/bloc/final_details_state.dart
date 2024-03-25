@@ -17,3 +17,8 @@ class SubmitClickedState extends FinalDetailsPageState  {
   SubmitClickedState({ this.profileEntity, super.error});
 }
 
+class UpdatePurchaseDetailsState extends FinalDetailsPageState {
+  final String? error;
+  final InAppResponseActivationResultDetails? activationResultDetails;
+  UpdatePurchaseDetailsState({this.error, this.activationResultDetails});
+}
