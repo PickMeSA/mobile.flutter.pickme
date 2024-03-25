@@ -78,10 +78,25 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
               }
             }
             if(state is UpdatePurchaseDetailsState){
-              if(state.dataState == DataState.loading){
-                getBloc().preloaderActive = false;
-              }else{
-                getBloc().preloaderActive = true;
+              getBloc().preloaderActive = state.dataState == DataState.loading;
+              switch(state.dataState){
+                case DataState.loading:
+                  preloader(context);
+                  break;
+                case DataState.error:
+                  Navigator.pop(context);
+                  wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+                  break;
+                case DataState.success:
+                  Navigator.pop(context);
+                  if(state.activationResultDetails!.errorModel != null){
+                    wErrorPopUp(message: state.activationResultDetails!.errorModel!.message, type: getLocalization().error, context: context);
+                  }else{
+                    context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
+                  }
+                  break;
+                default:
+                  break;
               }
               if(state.dataState == DataState.success){
                 context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
@@ -95,9 +110,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         BlocListener<InAppPurchasesBloc, BaseState>(
           listener: (context, state) {
             if (state is InAppPurchasedState) {
-              if(state.isPurchasedCancelled){
-                showConfirmationDialog(context);
-              }
+              handleInAppPurchasedState(context, state);
             }
             if (state is InAppRestoredState) {}
             if (state is InAppNotFoundState) {}
@@ -335,6 +348,11 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       // Handle accordingly (e.g., show a message)
     }
 
+  }
+  handleInAppPurchasedState(BuildContext context, InAppPurchasedState state) {
+    if(state.isPurchasedCancelled){
+      showConfirmationDialog(context);
+    }
   }
 
 }
