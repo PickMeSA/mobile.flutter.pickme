@@ -288,7 +288,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
                     children: [
                       10.height,
                       ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: getBloc().profileEntity!.workExperience!.length,
                         itemBuilder:(context, index) {
