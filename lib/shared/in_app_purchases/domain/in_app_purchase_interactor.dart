@@ -15,7 +15,7 @@ import 'package:pickme/shared/in_app_purchases/domain/product_purchase_state_cha
 @singleton
 class InAppPurchaseInteractor implements SKPaymentQueueDelegateWrapper {
   // Constants
-  final kiOSInAppSubscriptionProduct = dotenv.env['IOS_IN_APP_PURCHASE_PRODUCT'];
+  late final kiOSInAppSubscriptionProduct = dotenv.env['IOS_IN_APP_PURCHASE_PRODUCT'];
   static const shouldDisableInAppPurchasesOnAndroid =
       false; // Client requirement for the time being, in App Purchase on Android Will be enabled later
   static String get kAndroidInAppSubscriptionProduct => kReleaseMode

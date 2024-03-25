@@ -77,7 +77,8 @@ https://www.youtube.com/watch?v=SmJB8cy8emU
 
 ## iOS In-App Purchase
 To run the app, you will need to create a .env file in the root of the project with the following:
-- IOS_IN_APP_PURCHASE_PRODUCT=IOS_IN_APP_PURCHASE_PRODUCT
+- IOS_IN_APP_PURCHASE_PRODUCT=SECRET_VALUE_OF_IN_APP_PRODUCT_ID
+  where SECRET_VALUE_OF_IN_APP_PRODUCT_ID should be the valid subscription product ID, we suggest using a non approved in-app purchase to for development, and on the CD/CI use the approved product ID
 
 
 ## To build the release app bundle for Android, You will have to create a keys.properties file which will have the following
