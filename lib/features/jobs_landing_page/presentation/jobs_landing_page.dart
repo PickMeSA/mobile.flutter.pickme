@@ -38,9 +38,8 @@ class _JobsLandingPageState
     extends BasePageState<JobsLandingPage, JobsLandingPageBloc> {
   static const kSmallCardSize = 155.0;
   static const kOrdinaryCardSize = 192.0;
-  static const kServiceCardVerticalPadding =  32.0;
-  late final _refreshController =
-      RefreshController(initialRefresh: false);
+  static const kServiceCardVerticalPadding = 40.0;
+  late final _refreshController = RefreshController(initialRefresh: false);
   bool laterFlagged = false;
 
   void _onRefresh() async {
@@ -264,60 +263,64 @@ class _JobsLandingPageState
                   ),
                   if (industries != null)
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            height: kSmallCardSize + kOrdinaryCardSize + kServiceCardVerticalPadding,
-                            child: ListView(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                                minHeight: kSmallCardSize +
+                                    kOrdinaryCardSize +
+                                    kServiceCardVerticalPadding),
+                            child: Column(
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  AppSectionCard.small(
-                                    title: industries.industries[0].industry!,
-                                    color: const Color(0xFFF17E2C),
-                                    icon: const Icon(
-                                      Iconsax.setting,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    onClick: () => context
-                                        .router
-                                        .push(JobListRoute(
-                                            pageMode: JobListMode.categoryJobs,
-                                            filter: FilterEntity(
-                                                industryId:
-                                                    industries.industries[0].id
-                                                        .toString()),
-                                            pageTitle: industries
-                                                .industries[0].industry)),
-                                  ),
-                                  10.height,
-                                  AppSectionCard(
-                                    icon: const Icon(
-                                      Iconsax.setting,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    title: industries.industries[1].industry!,
-                                    color: const Color(0xFF23A8B3),
-                                    onClick: () => context
-                                        .router
-                                        .push(JobListRoute(
-                                            pageMode: JobListMode.categoryJobs,
-                                            filter: FilterEntity(
-                                                industryId:
-                                                    industries.industries[1].id
-                                                        .toString()),
-                                            pageTitle: industries
-                                                .industries[1].industry)),
-                                  ),
-                                ]),
+                              AppSectionCard.small(
+                                title: industries.industries[0].industry!,
+                                color: const Color(0xFFF17E2C),
+                                icon: const Icon(
+                                  Iconsax.setting,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                                onClick: () => context.router.push(JobListRoute(
+                                    pageMode: JobListMode.categoryJobs,
+                                    filter: FilterEntity(
+                                        industryId: industries.industries[0].id
+                                            .toString()),
+                                    pageTitle:
+                                        industries.industries[0].industry)),
+                              ),
+                              10.height,
+                              AppSectionCard(
+                                icon: const Icon(
+                                  Iconsax.setting,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                                title: industries.industries[1].industry!,
+                                color: const Color(0xFF23A8B3),
+                                onClick: () => context.router.push(JobListRoute(
+                                    pageMode: JobListMode.categoryJobs,
+                                    filter: FilterEntity(
+                                        industryId: industries.industries[1].id
+                                            .toString()),
+                                    pageTitle:
+                                        industries.industries[1].industry)),
+                              ),
+                            ]),
                           ),
                         ),
                         10.width,
                         Expanded(
-                            child: SizedBox(
-                          height:  kSmallCardSize + kOrdinaryCardSize + kServiceCardVerticalPadding,
-                          child: Column(children: [
+                            child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                              minHeight: kSmallCardSize +
+                                  kOrdinaryCardSize +
+                                  kServiceCardVerticalPadding),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                              children: [
                             AppSectionCard(
                               icon: const Icon(
                                 Iconsax.setting,
