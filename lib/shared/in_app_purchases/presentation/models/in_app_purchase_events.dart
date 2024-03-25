@@ -61,3 +61,7 @@ class SubscriptionRestored extends InAppPurchaseEvent {
   @override
   String getEventName() => 'subscription_restored';
 }
+class ActivatePurchaseEvent extends InAppPurchaseEvent {
+  final InAppPurchaseDetails purchaseDetails;
+  ActivatePurchaseEvent(this.purchaseDetails);
+}

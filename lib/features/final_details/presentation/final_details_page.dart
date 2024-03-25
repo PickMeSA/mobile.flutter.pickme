@@ -98,7 +98,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
               if(state.isPurchasedCancelled){
                 showConfirmationDialog(context);
               }else{
-                getBloc().add(ActivatePurchaseEvent(state.purchaseDetails!));
+                // getBloc().add(ActivatePurchaseEvent(state.purchaseDetails!));
               }
             }
             if (state is InAppRestoredState) {}

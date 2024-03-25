@@ -35,7 +35,6 @@ class FinalDetailsBloc
         on<ProfilePictureAddedEvent>((event, emit) => _onProfilePictureAddedEvent(event, emit));
         on<PoliceClearanceAddedEvent>((event, emit) => _onPoliceClearanceAddedEvent(event, emit));
         on<SubmitClickedEvent>((event, emit) => _onSubmitClickedEvent(event, emit));
-        on<ActivatePurchaseEvent>((event, emit) => _onActivatePurchaseEvent(event, emit));
     }
     _onSubmitClickedEvent(SubmitClickedEvent event, Emitter<FinalDetailsPageState> emit) async{
         if(event.description.isEmpty){
@@ -86,16 +85,6 @@ class FinalDetailsBloc
         }
     }
 
-    _onActivatePurchaseEvent(
-        ActivatePurchaseEvent event, Emitter<FinalDetailsPageState> emit) async {
-        emit(UpdatePurchaseDetailsState()..dataState= DataState.loading);
-        try {
-            final result = await activatePurchaseUseCase.call(params: ActivatePurchaseUseCaseParams(purchaseDetails: event.purchaseDetails));
-            emit(UpdatePurchaseDetailsState(activationResultDetails: result)..dataState= DataState.success);
-        } catch (e) {
-            emit(UpdatePurchaseDetailsState(error: e.toString())..dataState= DataState.error);
-        }
-    }
 }
 
 void validateFile(File file){

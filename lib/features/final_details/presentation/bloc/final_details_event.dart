@@ -14,7 +14,3 @@ class SubmitClickedEvent extends FinalDetailsPageEvent{
   final String description;
   SubmitClickedEvent({required this.description});
 }
-class ActivatePurchaseEvent extends FinalDetailsPageEvent {
-  final InAppPurchaseDetails purchaseDetails;
-  ActivatePurchaseEvent(this.purchaseDetails);
-}
