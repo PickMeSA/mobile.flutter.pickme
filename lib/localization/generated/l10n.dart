@@ -4092,6 +4092,16 @@ class AppLocalizations {
     );
   }
 
+  /// `IOS In App Purchase Product is not set`
+  String get inAppPurchaseProductNotSetError {
+    return Intl.message(
+      'IOS In App Purchase Product is not set',
+      name: 'inAppPurchaseProductNotSetError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Subscription not found`
   String get subscriptionNotFound {
     return Intl.message(
