@@ -17,9 +17,12 @@ class ActivatePurchaseUseCase extends BaseUseCase<ActivatePurchaseUseCaseParams,
   @override
   Future<InAppResponseActivationResultDetails> call({ActivatePurchaseUseCaseParams? params}) async {
     try{
+      if(params== null){
+        throw Exception('ActivatePurchaseUseCase: Params cannot be null');
+      }
       UserModel userModel = boxUser.get(current);
       return await _inAppPurchasesService.activate(
-          purchaseDetails: params!.purchaseDetails,
+          purchaseDetails: params.purchaseDetails,
           userId: userModel.id.toString()
       );
     }catch(ex){

@@ -75,7 +75,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
             if(state is SubmitClickedState && state.dataState == DataState.error ){
               if( getBloc().preloaderActive == true){
                 Navigator.pop(context);
-                wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+                wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
               }
             }
             if(state is UpdatePurchaseDetailsState){
@@ -85,10 +85,15 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                 getBloc().preloaderActive = true;
               }
               if(state.dataState == DataState.success){
-                context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
+                final activationDetails = state.activationResultDetails;
+                if(activationDetails==null){
+                  wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
+                }else{
+                  context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: activationDetails.activated,));
+                }
               }
               if(state.dataState == DataState.error){
-                wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+                wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
               }
             }
           }
@@ -98,18 +103,18 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
             if (state is InAppPurchasedState) {
               if(state.isPurchasedCancelled){
                 _showConfirmationDialog(context);
-              }else{
-                // getBloc().add(ActivatePurchaseEvent(state.purchaseDetails!));
               }
             }
-            if (state is InAppRestoredState) {}
-            if (state is InAppNotFoundState) {}
-            if (state is InAppPurchaseLoadingState) {}
             if (state is InAppPurchaseActivatedState) {
               if(state.isSubscriptionActivated){
                 context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: true,));
               }else{
-                _showRetryDialog(context, state.purchaseDetails!);
+                final purchaseDetails = state.purchaseDetails;
+                if(purchaseDetails==null){
+                  wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
+                }else{
+                  _showRetryDialog(context, purchaseDetails);
+                }
               }
             }
           },
@@ -212,7 +217,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                             textFieldType: TextFieldType.OTHER,
                             maxLines: 10,maxLength: 2000,
                             validator: (value){
-                              if(value!.isEmpty){
+                              if(value ==null || value.isEmpty){
                                 return getLocalization().fieldCannotBeEmpty;
                               }
                               return null;
