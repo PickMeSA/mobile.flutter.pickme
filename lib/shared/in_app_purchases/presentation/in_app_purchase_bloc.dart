@@ -9,6 +9,7 @@ import '../../../base_classes/base_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../features/final_details/domain/usecases/activate_purchase_use_case.dart';
 import '../../../localization/generated/l10n.dart';
+import '../../domain/entities/InAppPurchaseResponseEntity.dart';
 import '../domain/in_app_purchase_interactor.dart';
 import '../domain/product_purchase_state_change_delegate.dart';
 import 'package:pickme/shared/in_app_purchases/domain/models/subscription_payment_result.dart';
@@ -93,16 +94,29 @@ class InAppPurchasesBloc
   Future<void> _onActivate(ActivatePurchaseEvent event) async {
     String? activationError;
     try {
-       await activatePurchaseUseCase.call(
+      InAppResponseActivationResultDetails activationResult = await activatePurchaseUseCase.call(
           params: ActivatePurchaseUseCaseParams(
-              purchaseDetails: event.purchaseDetails)).whenComplete(() => emit(InAppPurchasedState(null, null, true, false, event.purchaseDetails)));
-
-      // Inspect result and emit the appropriate state based on result.activated
+              purchaseDetails: event.purchaseDetails));
+      if(activationResult.activated) {
+        return emit(InAppPurchaseActivatedState(null, null, isSubscriptionActivated: true));
+      }
+      final errorModel = activationResult.errorModel;
+      if(errorModel!=null){
+        return emit(InAppPurchaseActivatedState(errorModel.message, null,
+            isSubscriptionActivated: false,
+            purchaseDetails: event.purchaseDetails));
+      }
+      return emit(InAppPurchaseActivatedState("An error occurred while activating your subscription",
+          null,
+          isSubscriptionActivated: false,
+          purchaseDetails: event.purchaseDetails));
     } catch (e) {
       logger.e("Failed to activate purchase", error: e);
       activationError = "Activation failed, please try again";
-      // Emit error and offer retry mechanism on the UI
-      emit(InAppPurchasedState(activationError, null, true, false, event.purchaseDetails));
+      emit(InAppPurchaseActivatedState("An error occurred while activating your subscription",
+          null,
+          isSubscriptionActivated: false,
+          purchaseDetails: event.purchaseDetails));
     }
   }
   @override

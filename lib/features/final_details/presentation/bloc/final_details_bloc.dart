@@ -37,21 +37,13 @@ class FinalDetailsBloc
         on<SubmitClickedEvent>((event, emit) => _onSubmitClickedEvent(event, emit));
     }
     _onSubmitClickedEvent(SubmitClickedEvent event, Emitter<FinalDetailsPageState> emit) async{
-        if(event.description.isEmpty){
-            emit(SubmitClickedState(error: "Please enter valid description")..dataState = DataState.error);
-        }else{
-            emit(SubmitClickedState()..dataState = DataState.loading);
-
-            finalDetailsEntity = finalDetailsEntity.copyWith(newDescription: event.description);
-            try{
-                ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
-
-                emit(SubmitClickedState(profileEntity:  profileEntity)..dataState = DataState.success);
-
-            }catch(ex){
-
-                emit(SubmitClickedState(error: ex.toString())..dataState = DataState.error);
-            }
+        emit(SubmitClickedState()..dataState = DataState.loading);
+        finalDetailsEntity = finalDetailsEntity.copyWith(newDescription: event.description);
+        try{
+            ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
+            emit(SubmitClickedState(profileEntity:  profileEntity)..dataState = DataState.success);
+        }catch(ex){
+            emit(SubmitClickedState(error: ex.toString())..dataState = DataState.error);
         }
     }
     _onProfilePictureAddedEvent(ProfilePictureAddedEvent event, Emitter<FinalDetailsPageState> emit) async{

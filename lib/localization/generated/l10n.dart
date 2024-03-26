@@ -4181,6 +4181,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Failed to activate`
+  String get activationFailed {
+    return Intl.message(
+      'Failed to activate',
+      name: 'activationFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to activate the subscription. Would you like to try again?`
+  String get activationFailedDescription {
+    return Intl.message(
+      'Failed to activate the subscription. Would you like to try again?',
+      name: 'activationFailedDescription',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

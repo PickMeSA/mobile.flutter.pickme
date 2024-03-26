@@ -59,6 +59,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountNumberA":
             MessageLookupByLibrary.simpleMessage("Account number *"),
         "accountTypeA": MessageLookupByLibrary.simpleMessage("Account type *"),
+        "activationFailed":
+            MessageLookupByLibrary.simpleMessage("Failed to activate"),
+        "activationFailedDescription": MessageLookupByLibrary.simpleMessage(
+            "Failed to activate the subscription. Would you like to try again?"),
         "activeListings":
             MessageLookupByLibrary.simpleMessage("Active listings"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),

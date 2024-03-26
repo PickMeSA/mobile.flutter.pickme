@@ -413,5 +413,7 @@
   "cancellationConfirmation": "Cancellation confirmation",
   "areYouSureYouWantToCancelThisPurchase": "Are you sure you would like to cancel the in-app purchase",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "activationFailed": "Failed to activate",
+  "activationFailedDescription": "Failed to activate the subscription. Would you like to try again?"
 }

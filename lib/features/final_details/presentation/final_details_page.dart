@@ -20,6 +20,7 @@ import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
 import 'bloc/final_details_bloc.dart';
 
 @RoutePage()
@@ -96,7 +97,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
           listener: (context, state) {
             if (state is InAppPurchasedState) {
               if(state.isPurchasedCancelled){
-                showConfirmationDialog(context);
+                _showConfirmationDialog(context);
               }else{
                 // getBloc().add(ActivatePurchaseEvent(state.purchaseDetails!));
               }
@@ -104,6 +105,13 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
             if (state is InAppRestoredState) {}
             if (state is InAppNotFoundState) {}
             if (state is InAppPurchaseLoadingState) {}
+            if (state is InAppPurchaseActivatedState) {
+              if(state.isSubscriptionActivated){
+                context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: true,));
+              }else{
+                _showRetryDialog(context, state.purchaseDetails!);
+              }
+            }
           },
         ),
       ],
@@ -262,9 +270,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                             Expanded(
                               child: PrimaryButton(
                                 onPressed: () {
-                                  if(formKey.currentState!.validate()){
                                     getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
-                                  }
                                 },
                                 child: Text(getLocalization().payNow),
                               ),
@@ -293,35 +299,75 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       }),
     );
   }
-  Future<void> showConfirmationDialog(BuildContext context) async {
+  _showConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button to close dialog
       builder: (BuildContext context) {
-        return AlertDialog(
+        return AppDialog(
           backgroundColor: Colors.white,
-          title: Text(getLocalization().cancellationConfirmation),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(getLocalization().areYouSureYouWantToCancelThisPurchase),
-              ],
-            ),
-          ),
+          title: getLocalization().cancellationConfirmation,
+          content: getLocalization().areYouSureYouWantToCancelThisPurchase,
           actions: <Widget>[
-            TextButton(
-              child: Text(getLocalization().yes),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text(getLocalization().no),
-              onPressed: () {
-                Navigator.of(context).pop();
-                BlocProvider.of<InAppPurchasesBloc>(context).add(CreateSubscriptionEvent());
-              },
-            ),
+            Row(
+              children: [
+                Expanded(
+                  child: PrimaryButtonDark(
+                    child: Text(getLocalization().yes),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                20.width,
+                Expanded(
+                  child: SecondaryButtonDark(
+                    child: Text(getLocalization().no),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      BlocProvider.of<InAppPurchasesBloc>(context).add(CreateSubscriptionEvent());
+                    },
+                  ),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+  _showRetryDialog(BuildContext context, InAppPurchaseDetails purchaseDetails) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button to close dialog
+      builder: (BuildContext context) {
+        return AppDialog(
+          backgroundColor: Colors.white,
+          title: getLocalization().activationFailed,
+          content: getLocalization().activationFailedDescription,
+          actions: <Widget>[
+            Row(
+              children: [
+                Expanded(
+                  child: PrimaryButtonDark(
+                    child: Text(getLocalization().yes),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      BlocProvider.of<InAppPurchasesBloc>(context).add(ActivatePurchaseEvent(purchaseDetails));
+                    },
+                  ),
+                ),
+                20.width,
+                Expanded(
+                  child: SecondaryButtonDark(
+                    child: Text(getLocalization().no),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ],
+            )
           ],
         );
       },

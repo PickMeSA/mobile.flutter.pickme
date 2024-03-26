@@ -35,3 +35,12 @@ class InAppNotFoundState extends InAppPurchaseState {
 class InAppPurchaseLoadingState extends InAppPurchaseState {
   InAppPurchaseLoadingState(super.error, super.products);
 }
+
+class InAppPurchaseActivatedState extends InAppPurchaseState {
+  final InAppPurchaseDetails? purchaseDetails;
+  final bool isSubscriptionActivated;
+  InAppPurchaseActivatedState(super.error, super.product,{
+    this.isSubscriptionActivated = false,
+    this.purchaseDetails,
+  }): assert(isSubscriptionActivated == true || purchaseDetails != null);
+}
