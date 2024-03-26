@@ -38,14 +38,5 @@ void main() {
     InAppPurchaseActivationResponseModel responseModel = InAppPurchaseActivationResponseModel.fromJson(responseJson);
     InAppResponseActivationResultDetails expectedEntity = InAppResponseActivationResultDetails.fromModel(responseModel);
 
-    // test('activate should return expected response entity on successful response', () async {
-    //   when(mockApiService.post('/activate', data: requestEntity.toModel().toJson()))
-    //       .thenAnswer((_) async => Response(data: responseJson, statusCode: 200, requestOptions: RequestOptions(path: '/activate')));
-    //
-    //   // final result = await inAppPurchasesService.activate(requestEntity);
-    //
-    //   expect(result, equals(expectedEntity));
-    //   verify(mockApiService.post('/activate', data: requestEntity.toModel().toJson())).called(1);
-    // });
   });
 }
