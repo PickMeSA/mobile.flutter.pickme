@@ -1,6 +1,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pickme/features/add_memberships/presentation/add_memberships_page.dart';
@@ -102,6 +103,7 @@ import '../features/lets_begin/presentation/lets_begin_page.dart';
 import '../features/scan_qr_code/presentation/scan_qr_code_page.dart';
 import '../features/verify_its_you/presentation/verify_its_you_page.dart';
 import '../shared/domain/entities/my_job_listings_page_entity.dart';
+import '../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
 
 part 'app_route.gr.dart';
 

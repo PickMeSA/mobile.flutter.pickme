@@ -14,6 +14,8 @@ import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 
 import '../../../../shared/domain/entities/InAppPurchaseResponseEntity.dart';
+import '../../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
+import '../../domain/usecases/activate_purchase_use_case.dart';
 
 part 'final_details_event.dart';
 part 'final_details_state.dart';
@@ -28,27 +30,20 @@ class FinalDetailsBloc
     SubmitFinalDetailsUseCase submitFinalDetailsUseCase;
     FinalDetailsEntity finalDetailsEntity =  FinalDetailsEntity();
     String? policeClearancePath;
-    FinalDetailsBloc({required this.uploadFileUseCase, required this.submitFinalDetailsUseCase}): super(FinalDetailsPageInitState()) {
+    final ActivatePurchaseUseCase activatePurchaseUseCase;
+    FinalDetailsBloc({required this.uploadFileUseCase, required this.submitFinalDetailsUseCase, required this.activatePurchaseUseCase}): super(FinalDetailsPageInitState()) {
         on<ProfilePictureAddedEvent>((event, emit) => _onProfilePictureAddedEvent(event, emit));
         on<PoliceClearanceAddedEvent>((event, emit) => _onPoliceClearanceAddedEvent(event, emit));
         on<SubmitClickedEvent>((event, emit) => _onSubmitClickedEvent(event, emit));
     }
     _onSubmitClickedEvent(SubmitClickedEvent event, Emitter<FinalDetailsPageState> emit) async{
-        if(event.description.isEmpty){
-            emit(SubmitClickedState(error: "Please enter valid description")..dataState = DataState.error);
-        }else{
-            emit(SubmitClickedState()..dataState = DataState.loading);
-
-            finalDetailsEntity = finalDetailsEntity.copyWith(newDescription: event.description);
-            try{
-                ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
-
-                emit(SubmitClickedState(profileEntity:  profileEntity)..dataState = DataState.success);
-
-            }catch(ex){
-
-                emit(SubmitClickedState(error: ex.toString())..dataState = DataState.error);
-            }
+        emit(SubmitClickedState()..dataState = DataState.loading);
+        finalDetailsEntity = finalDetailsEntity.copyWith(newDescription: event.description);
+        try{
+            ProfileEntity profileEntity = await submitFinalDetailsUseCase.call(params: SubmitFinalDetailsUseCaseParams(finalDetailsEntity: finalDetailsEntity));
+            emit(SubmitClickedState(profileEntity:  profileEntity)..dataState = DataState.success);
+        }catch(ex){
+            emit(SubmitClickedState(error: ex.toString())..dataState = DataState.error);
         }
     }
     _onProfilePictureAddedEvent(ProfilePictureAddedEvent event, Emitter<FinalDetailsPageState> emit) async{

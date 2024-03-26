@@ -11,6 +11,6 @@ class PoliceClearanceAddedEvent extends FinalDetailsPageEvent{
   PoliceClearanceAddedEvent({required this.filePath});
 }
 class SubmitClickedEvent extends FinalDetailsPageEvent{
-  final String description;
-  SubmitClickedEvent({required this.description});
+  final String? description;
+  SubmitClickedEvent({this.description});
 }

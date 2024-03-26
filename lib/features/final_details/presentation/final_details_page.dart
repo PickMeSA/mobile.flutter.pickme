@@ -20,6 +20,7 @@ import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
 import 'bloc/final_details_bloc.dart';
 
 @RoutePage()
@@ -33,7 +34,7 @@ class FinalDetailsPage extends BasePage {
 class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
   bool isSelectingProfilePicture = false;
   final TextEditingController aboutYouController = TextEditingController();
-
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   void initState() {
     // TODO: implement initState
@@ -74,35 +75,25 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
             if(state is SubmitClickedState && state.dataState == DataState.error ){
               if( getBloc().preloaderActive == true){
                 Navigator.pop(context);
-                wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+                wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
               }
             }
             if(state is UpdatePurchaseDetailsState){
-              getBloc().preloaderActive = state.dataState == DataState.loading;
-              switch(state.dataState){
-                case DataState.loading:
-                  preloader(context);
-                  break;
-                case DataState.error:
-                  Navigator.pop(context);
-                  wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
-                  break;
-                case DataState.success:
-                  Navigator.pop(context);
-                  if(state.activationResultDetails!.errorModel != null){
-                    wErrorPopUp(message: state.activationResultDetails!.errorModel!.message, type: getLocalization().error, context: context);
-                  }else{
-                    context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
-                  }
-                  break;
-                default:
-                  break;
+              if(state.dataState == DataState.loading){
+                getBloc().preloaderActive = false;
+              }else{
+                getBloc().preloaderActive = true;
               }
               if(state.dataState == DataState.success){
-                context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: state.activationResultDetails!.activated,));
+                final activationDetails = state.activationResultDetails;
+                if(activationDetails==null){
+                  wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
+                }else{
+                  context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: activationDetails.activated,));
+                }
               }
               if(state.dataState == DataState.error){
-                wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+                wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
               }
             }
           }
@@ -110,11 +101,22 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
         BlocListener<InAppPurchasesBloc, BaseState>(
           listener: (context, state) {
             if (state is InAppPurchasedState) {
-              handleInAppPurchasedState(context, state);
+              if(state.isPurchasedCancelled){
+                _showConfirmationDialog(context);
+              }
             }
-            if (state is InAppRestoredState) {}
-            if (state is InAppNotFoundState) {}
-            if (state is InAppPurchaseLoadingState) {}
+            if (state is InAppPurchaseActivatedState) {
+              if(state.isSubscriptionActivated){
+                context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: true,));
+              }else{
+                final purchaseDetails = state.purchaseDetails;
+                if(purchaseDetails==null){
+                  wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
+                }else{
+                  _showRetryDialog(context, purchaseDetails);
+                }
+              }
+            }
           },
         ),
       ],
@@ -205,12 +207,22 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                           child: Text(getBloc().uploadErrorMessage, style: TextStyle(color: theme.colorScheme.error),),
                         ),
                         40.height,
-                        AppTextFormField(
+                        Form(
+                          key: formKey,
+                          child: AppTextFormField(
+                            isValidationRequired: true,
                             controller: aboutYouController,
                             keyboardType: TextInputType.multiline,
-                            labelText: getLocalization().aboutYouBasedOnYourProfile,
+                            labelText: getLocalization().aboutYouBasedOnYourProfile+"*",
                             textFieldType: TextFieldType.OTHER,
-                            maxLines: 10,maxLength: 2000),
+                            maxLines: 10,maxLength: 2000,
+                            validator: (value){
+                              if(value ==null || value.isEmpty){
+                                return getLocalization().fieldCannotBeEmpty;
+                              }
+                              return null;
+                            },
+                          ),),
                         GestureDetector(
                             onTap: () {
                               setState(() {
@@ -263,7 +275,7 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
                             Expanded(
                               child: PrimaryButton(
                                 onPressed: () {
-                                  getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
+                                    getBloc().add(SubmitClickedEvent(description: aboutYouController.text));
                                 },
                                 child: Text(getLocalization().payNow),
                               ),
@@ -292,35 +304,75 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       }),
     );
   }
-  Future<void> showConfirmationDialog(BuildContext context) async {
+  _showConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button to close dialog
       builder: (BuildContext context) {
-        return AlertDialog(
+        return AppDialog(
           backgroundColor: Colors.white,
-          title: Text(getLocalization().cancellationConfirmation),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(getLocalization().areYouSureYouWantToCancelThisPurchase),
-              ],
-            ),
-          ),
+          title: getLocalization().cancellationConfirmation,
+          content: getLocalization().areYouSureYouWantToCancelThisPurchase,
           actions: <Widget>[
-            TextButton(
-              child: Text(getLocalization().yes),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text(getLocalization().no),
-              onPressed: () {
-                Navigator.of(context).pop();
-                BlocProvider.of<InAppPurchasesBloc>(context).add(CreateSubscriptionEvent());
-              },
-            ),
+            Row(
+              children: [
+                Expanded(
+                  child: PrimaryButtonDark(
+                    child: Text(getLocalization().yes),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                20.width,
+                Expanded(
+                  child: SecondaryButtonDark(
+                    child: Text(getLocalization().no),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      BlocProvider.of<InAppPurchasesBloc>(context).add(CreateSubscriptionEvent());
+                    },
+                  ),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+  _showRetryDialog(BuildContext context, InAppPurchaseDetails purchaseDetails) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button to close dialog
+      builder: (BuildContext context) {
+        return AppDialog(
+          backgroundColor: Colors.white,
+          title: getLocalization().activationFailed,
+          content: getLocalization().activationFailedDescription,
+          actions: <Widget>[
+            Row(
+              children: [
+                Expanded(
+                  child: PrimaryButtonDark(
+                    child: Text(getLocalization().yes),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      BlocProvider.of<InAppPurchasesBloc>(context).add(ActivatePurchaseEvent(purchaseDetails));
+                    },
+                  ),
+                ),
+                20.width,
+                Expanded(
+                  child: SecondaryButtonDark(
+                    child: Text(getLocalization().no),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ],
+            )
           ],
         );
       },
@@ -348,11 +400,6 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
       // Handle accordingly (e.g., show a message)
     }
 
-  }
-  handleInAppPurchasedState(BuildContext context, InAppPurchasedState state) {
-    if(state.isPurchasedCancelled){
-      showConfirmationDialog(context);
-    }
   }
 
 }

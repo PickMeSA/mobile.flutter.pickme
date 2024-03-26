@@ -10,6 +10,7 @@ import 'package:pickme/firebase_options.dart';
 import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/main.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,7 +25,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class PickMeApp{
 
   static Future<void> appInit(Environment env)async{
-    await dotenv.load(fileName: ".env");
+    try{
+      await dotenv.load(fileName: ".env");
+    }catch(ex){
+      logger.e(ex);
+      logger.e("Please check that you have a .env file in the root directory of the project.");
+    }
 
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(

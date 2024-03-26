@@ -8,6 +8,9 @@ abstract class InAppPurchaseState extends BaseState {
   InAppPurchaseState(this.error, this.product);
 }
 
+class InAppPurchaseErrorState extends InAppPurchaseState {
+  InAppPurchaseErrorState(String error) : super(error, "");
+}
 
 class InAppPurchasedState extends InAppPurchaseState {
   final bool isSubscriptionPurchased;
@@ -31,4 +34,13 @@ class InAppNotFoundState extends InAppPurchaseState {
 
 class InAppPurchaseLoadingState extends InAppPurchaseState {
   InAppPurchaseLoadingState(super.error, super.products);
+}
+
+class InAppPurchaseActivatedState extends InAppPurchaseState {
+  final InAppPurchaseDetails? purchaseDetails;
+  final bool isSubscriptionActivated;
+  InAppPurchaseActivatedState(super.error, super.product,{
+    this.isSubscriptionActivated = false,
+    this.purchaseDetails,
+  }): assert(isSubscriptionActivated == true || purchaseDetails != null);
 }
