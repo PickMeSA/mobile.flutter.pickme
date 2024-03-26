@@ -9,6 +9,8 @@ abstract class InAppPurchasesService extends PickMeCoreApi{
   Future<InAppResponseActivationResultDetails> activate({
     required InAppPurchaseDetails purchaseDetails,
     required String userId,
+    required String productId,
+    required String salt,
   });
   Future<InAppResponseActivationResultDetails> restoreSubscription(InAppPurchaseActivationRequestEntity requestEntity);
   Future<InAppResponseActivationResultDetails> checkSubscription(InAppPurchaseActivationRequestEntity requestEntity);

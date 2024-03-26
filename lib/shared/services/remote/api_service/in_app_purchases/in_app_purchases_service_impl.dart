@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pickme/shared/domain/entities/InAppPurchaseRequestEntity.dart';
 import 'package:pickme/shared/domain/entities/InAppPurchaseResponseEntity.dart';
@@ -10,9 +9,7 @@ import '../../../../../core/locator/locator.dart';
 import '../../../../../localization/generated/l10n.dart';
 import '../../../../constants/default_values.dart';
 import '../../../../in_app_purchases/presentation/models/in_app_purchase_details.dart';
-import '../../../../local/hive_storage_init.dart';
 import '../../../../remote/api-service.dart';
-import '../../../local/Hive/user_local_storage/user/user_model.dart';
 import 'in_app_purchases_service.dart';
 
 @Injectable(as: InAppPurchasesService)
@@ -26,14 +23,11 @@ class InAppPurchasesServiceImpl extends InAppPurchasesService{
   Future<InAppResponseActivationResultDetails> activate({
     required InAppPurchaseDetails purchaseDetails,
     required String userId,
+    required String productId,
+    required String salt,
   }) async{
     try{
-      final productId = dotenv.env["IOS_IN_APP_PURCHASE_PRODUCT"];
-      final salt = dotenv.env["SALT"];
-      if(productId == null || salt == null){
-        logger.e("Product id or salt is not defined in .env file");
-        throw localization.anErrorOccurredWhileProcessingYourRequest;
-      }
+
       final productIdHash = generateHash(productId, salt);
       Response<dynamic> response = await apiService.post("$baseUrl$version/user/activate", data: {
         "verificationData": purchaseDetails.verificationData,
