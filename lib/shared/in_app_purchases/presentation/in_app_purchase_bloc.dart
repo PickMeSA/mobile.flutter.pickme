@@ -33,21 +33,22 @@ class InAppPurchasesBloc
   late final restoreInAppPurchaseUseCase =
       locator<RestoreInAppSubscriptionUseCase>();
   late final localization = locator<AppLocalizations>();
-  late final ActivatePurchaseUseCase activatePurchaseUseCase = locator<ActivatePurchaseUseCase>();
-  Emitter<InAppPurchaseState>? _currentSubscriptionEmitHandler,_currentRestoreSubscriptionEmitHandler;//Because of asynchronous behavior of in-app purchase package
-  final InAppPurchaseInteractor inAppPurchaseInteractor = locator<InAppPurchaseInteractor>();
+  late final ActivatePurchaseUseCase activatePurchaseUseCase =
+      locator<ActivatePurchaseUseCase>();
+  final InAppPurchaseInteractor inAppPurchaseInteractor =
+      locator<InAppPurchaseInteractor>();
 
   InAppPurchasesBloc() : super(InAppPurchaseLoadingState()) {
     on<CreateSubscriptionEvent>(
         (event, emit) => _onCreateSubscriptionEvent(event, emit));
     on<RestoreSubscriptionEvent>(
         (event, emit) => _onRestoreSubscription(event, emit));
-    on<ActivatePurchaseEvent>((event, emit) => _onActivatePurchaseEvent(event, emit));
+    on<ActivatePurchaseEvent>(
+        (event, emit) => _onActivatePurchaseEvent(event, emit));
   }
 
   _onCreateSubscriptionEvent(
       CreateSubscriptionEvent event, Emitter<InAppPurchaseState> emit) async {
-    _currentSubscriptionEmitHandler = emit;
     emit(InAppPurchaseLoadingState());
     bool hasTriggeredInAppPurchase = false;
     try {
@@ -69,7 +70,6 @@ class InAppPurchasesBloc
 
   _onRestoreSubscription(
       RestoreSubscriptionEvent event, Emitter<InAppPurchaseState> emit) async {
-    _currentRestoreSubscriptionEmitHandler = emit;
     emit(InAppPurchaseLoadingState());
     bool hasTriggeredInAppPurchaseRestore = false;
     try {
@@ -89,52 +89,61 @@ class InAppPurchasesBloc
       ActivatePurchaseEvent event, Emitter<InAppPurchaseState> emit) async {
     emit(InAppPurchaseLoadingState());
     try {
-      InAppResponseActivationResultDetails activationResult = await activatePurchaseUseCase.call(
-          params: ActivatePurchaseUseCaseParams(
-              purchaseDetails: event.purchaseDetails));
-      if(activationResult.activated) {
-        emit(InAppPurchaseActivatedState(null, null, isSubscriptionActivated: true));
+      InAppResponseActivationResultDetails activationResult =
+          await activatePurchaseUseCase.call(
+              params: ActivatePurchaseUseCaseParams(
+                  purchaseDetails: event.purchaseDetails));
+      if (activationResult.activated) {
+        emit(InAppPurchaseActivatedState(null, null,
+            isSubscriptionActivated: true));
         return;
       }
       final errorModel = activationResult.errorModel;
-      if(errorModel!=null){
+      if (errorModel != null) {
         emit(InAppPurchaseActivatedState(errorModel.message, null,
             isSubscriptionActivated: false,
             purchaseDetails: event.purchaseDetails));
         return;
       }
-      emit(InAppPurchaseActivatedState("An error occurred while activating your subscription",
-          null,
+      emit(InAppPurchaseActivatedState(
+          "An error occurred while activating your subscription", null,
           isSubscriptionActivated: false,
           purchaseDetails: event.purchaseDetails));
       return;
     } catch (e) {
-      emit(InAppPurchaseActivatedState("An error occurred while activating your subscription",
-          null,
+      emit(InAppPurchaseActivatedState(
+          "An error occurred while activating your subscription", null,
           isSubscriptionActivated: false,
           purchaseDetails: event.purchaseDetails));
       logger.e("Failed to activate purchase", error: e);
     }
   }
+
   @override
-  onSubscriptionPurchaseResult(SubscriptionPaymentResult result){
+  onSubscriptionPurchaseResult(SubscriptionPaymentResult result) {
     logger.i("$result");
     final purchaseDetails = result.purchaseDetails;
-    if(result.purchased && purchaseDetails != null){
+    if (result.purchased && purchaseDetails != null) {
       add(ActivatePurchaseEvent(purchaseDetails));
       return;
     }
-    emit(InAppPurchasedState(result.error, result.productId, result.purchased, result.cancelled, purchaseDetails));
+    emit(InAppPurchasedState(result.error, result.productId, result.purchased,
+        result.cancelled, purchaseDetails));
   }
 
   @override
   onSubscriptionRestoreResult(SubscriptionRestoreResult result) {
     logger.i("$result");
     final purchaseDetails = result.purchaseDetails;
-    if(result.restored && purchaseDetails != null) {
+    if (result.restored && purchaseDetails != null) {
       add(ActivatePurchaseEvent(purchaseDetails));
       return;
     }
-    emit(InAppRestoredState(null, result.productId, result.restored, result.purchaseDetails));
+    emit(InAppRestoredState(
+        result.error ?? localization.anErrorOccurredWhileProcessingYourRequest,
+        result.productId,
+        result.restored,
+        result.purchaseDetails));
   }
+
 }

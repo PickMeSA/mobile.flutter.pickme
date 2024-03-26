@@ -411,7 +411,7 @@
   "subscriptionNotBought": "An error when buying this subscription. Please try again",
   "fieldCannotBeEmpty": "Field cannot be empty",
   "cancellationConfirmation": "Cancellation confirmation",
-  "areYouSureYouWantToCancelThisPurchase": "Are you sure you would like to cancel the in-app purchase",
+  "areYouSureYouWantToCancelThisPurchase": "Are you sure you would like the subscription payment?",
   "yes": "Yes",
   "no": "No",
   "retry": "Retry",
