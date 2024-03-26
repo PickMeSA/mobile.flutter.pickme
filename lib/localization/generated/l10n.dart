@@ -4182,20 +4182,30 @@ class AppLocalizations {
     );
   }
 
-  /// `Failed to activate`
+  /// `Retry`
+  String get retry {
+    return Intl.message(
+      'Retry',
+      name: 'retry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activation failure`
   String get activationFailed {
     return Intl.message(
-      'Failed to activate',
+      'Activation failure',
       name: 'activationFailed',
       desc: '',
       args: [],
     );
   }
 
-  /// `Failed to activate the subscription. Would you like to try again?`
+  /// `Your payment was received but an error occurred while activating your subscription.`
   String get activationFailedDescription {
     return Intl.message(
-      'Failed to activate the subscription. Would you like to try again?',
+      'Your payment was received but an error occurred while activating your subscription.',
       name: 'activationFailedDescription',
       desc: '',
       args: [],

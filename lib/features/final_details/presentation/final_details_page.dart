@@ -98,24 +98,39 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
             }
           }
         ),
-        BlocListener<InAppPurchasesBloc, BaseState>(
+        BlocListener<InAppPurchasesBloc, InAppPurchaseState>(
           listener: (context, state) {
-            if (state is InAppPurchasedState) {
-              if(state.isPurchasedCancelled){
-                _showConfirmationDialog(context);
-              }
+            if(getBloc().preloaderActive){
+              getBloc().preloaderActive = false;
             }
-            if (state is InAppPurchaseActivatedState) {
-              if(state.isSubscriptionActivated){
-                context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: true,));
-              }else{
-                final purchaseDetails = state.purchaseDetails;
-                if(purchaseDetails==null){
-                  wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
-                }else{
-                  _showRetryDialog(context, purchaseDetails);
+            switch(state.runtimeType){
+              case InAppNotFoundState:
+                wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
+                break;
+              case InAppRestoredState:
+                wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
+                break;
+              case InAppPurchaseLoadingState:
+                preloader(context);
+                getBloc().preloaderActive = true;
+                break;
+              case InAppPurchasedState:
+                if((state as InAppPurchasedState).isPurchasedCancelled){
+                  _showConfirmationDialog(context);
                 }
-              }
+                break;
+              case InAppPurchaseActivatedState:
+                if((state as InAppPurchaseActivatedState).isSubscriptionActivated){
+                  context.router.push( PaymentOutcomeRoute(from: 0, paymentSuccess: true,));
+                }else{
+                  final purchaseDetails = (state as InAppPurchaseActivatedState).purchaseDetails;
+                  if(purchaseDetails==null){
+                    wErrorPopUp(message: getLocalization().anErrorOccurredWhileProcessingYourRequest, type: getLocalization().error, context: context);
+                  }else{
+                    _showRetryDialog(context, purchaseDetails);
+                  }
+                }
+                break;
             }
           },
         ),
@@ -354,20 +369,20 @@ class _FinalDetailsPageState extends BasePageState<FinalDetailsPage, FinalDetail
             Row(
               children: [
                 Expanded(
-                  child: PrimaryButtonDark(
-                    child: Text(getLocalization().yes),
+                  child: SecondaryButtonDark(
+                    child: Text(getLocalization().cancel),
                     onPressed: () {
                       Navigator.of(context).pop();
-                      BlocProvider.of<InAppPurchasesBloc>(context).add(ActivatePurchaseEvent(purchaseDetails));
                     },
                   ),
                 ),
                 20.width,
                 Expanded(
-                  child: SecondaryButtonDark(
-                    child: Text(getLocalization().no),
+                  child: PrimaryButtonDark(
+                    child: Text(getLocalization().retry),
                     onPressed: () {
                       Navigator.of(context).pop();
+                      BlocProvider.of<InAppPurchasesBloc>(context).add(ActivatePurchaseEvent(purchaseDetails));
                     },
                   ),
                 ),

@@ -29,7 +29,7 @@ class InAppPurchasesServiceImpl extends InAppPurchasesService{
     try{
 
       final productIdHash = generateHash(productId, salt);
-      Response<dynamic> response = await apiService.post("$baseUrl$version/user/activate", data: {
+      Response<dynamic> response = await apiService.post("$baseUrl$version/users/activate", data: {
         "verificationData": purchaseDetails.verificationData,
         "transactionId": purchaseDetails.purchaseID,
         "userIdentifier": userId,

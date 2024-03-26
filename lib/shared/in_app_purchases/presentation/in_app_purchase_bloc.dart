@@ -37,7 +37,7 @@ class InAppPurchasesBloc
   Emitter<InAppPurchaseState>? _currentSubscriptionEmitHandler,_currentRestoreSubscriptionEmitHandler;//Because of asynchronous behavior of in-app purchase package
   final InAppPurchaseInteractor inAppPurchaseInteractor = locator<InAppPurchaseInteractor>();
 
-  InAppPurchasesBloc() : super(InAppPurchaseLoadingState(null, "")) {
+  InAppPurchasesBloc() : super(InAppPurchaseLoadingState()) {
     on<CreateSubscriptionEvent>(
         (event, emit) => _onCreateSubscriptionEvent(event, emit));
     on<RestoreSubscriptionEvent>(
@@ -48,7 +48,7 @@ class InAppPurchasesBloc
   _onCreateSubscriptionEvent(
       CreateSubscriptionEvent event, Emitter<InAppPurchaseState> emit) async {
     _currentSubscriptionEmitHandler = emit;
-    emit(InAppPurchaseLoadingState(null, ""));
+    emit(InAppPurchaseLoadingState());
     bool hasTriggeredInAppPurchase = false;
     try {
       hasTriggeredInAppPurchase = await buyInAppPurchaseUseCase(this);
@@ -70,7 +70,7 @@ class InAppPurchasesBloc
   _onRestoreSubscription(
       RestoreSubscriptionEvent event, Emitter<InAppPurchaseState> emit) async {
     _currentRestoreSubscriptionEmitHandler = emit;
-    emit(InAppPurchaseLoadingState(null, ""));
+    emit(InAppPurchaseLoadingState());
     bool hasTriggeredInAppPurchaseRestore = false;
     try {
       hasTriggeredInAppPurchaseRestore = await restoreInAppPurchaseUseCase();
@@ -87,36 +87,33 @@ class InAppPurchasesBloc
 
   _onActivatePurchaseEvent(
       ActivatePurchaseEvent event, Emitter<InAppPurchaseState> emit) async {
-    emit(InAppPurchaseLoadingState(null, ""));
-    await _onActivate(event);
-  }
-
-  Future<void> _onActivate(ActivatePurchaseEvent event) async {
-    String? activationError;
+    emit(InAppPurchaseLoadingState());
     try {
       InAppResponseActivationResultDetails activationResult = await activatePurchaseUseCase.call(
           params: ActivatePurchaseUseCaseParams(
               purchaseDetails: event.purchaseDetails));
       if(activationResult.activated) {
-        return emit(InAppPurchaseActivatedState(null, null, isSubscriptionActivated: true));
+        emit(InAppPurchaseActivatedState(null, null, isSubscriptionActivated: true));
+        return;
       }
       final errorModel = activationResult.errorModel;
       if(errorModel!=null){
-        return emit(InAppPurchaseActivatedState(errorModel.message, null,
+        emit(InAppPurchaseActivatedState(errorModel.message, null,
             isSubscriptionActivated: false,
             purchaseDetails: event.purchaseDetails));
+        return;
       }
-      return emit(InAppPurchaseActivatedState("An error occurred while activating your subscription",
-          null,
-          isSubscriptionActivated: false,
-          purchaseDetails: event.purchaseDetails));
-    } catch (e) {
-      logger.e("Failed to activate purchase", error: e);
-      activationError = "Activation failed, please try again";
       emit(InAppPurchaseActivatedState("An error occurred while activating your subscription",
           null,
           isSubscriptionActivated: false,
           purchaseDetails: event.purchaseDetails));
+      return;
+    } catch (e) {
+      emit(InAppPurchaseActivatedState("An error occurred while activating your subscription",
+          null,
+          isSubscriptionActivated: false,
+          purchaseDetails: event.purchaseDetails));
+      logger.e("Failed to activate purchase", error: e);
     }
   }
   @override
@@ -124,7 +121,8 @@ class InAppPurchasesBloc
     logger.i("$result");
     final purchaseDetails = result.purchaseDetails;
     if(result.purchased && purchaseDetails != null){
-      return _onActivate(ActivatePurchaseEvent(purchaseDetails));
+      add(ActivatePurchaseEvent(purchaseDetails));
+      return;
     }
     emit(InAppPurchasedState(result.error, result.productId, result.purchased, result.cancelled, purchaseDetails));
   }
@@ -134,7 +132,8 @@ class InAppPurchasesBloc
     logger.i("$result");
     final purchaseDetails = result.purchaseDetails;
     if(result.restored && purchaseDetails != null) {
-      return _onActivate(ActivatePurchaseEvent(purchaseDetails));
+      add(ActivatePurchaseEvent(purchaseDetails));
+      return;
     }
     emit(InAppRestoredState(null, result.productId, result.restored, result.purchaseDetails));
   }
