@@ -4,6 +4,8 @@ import 'package:pickme/shared/services/remote/api_service/in_app_purchases/in_ap
 import '../../../../base_classes/base_usecase.dart';
 import '../../../../shared/domain/entities/InAppPurchaseResponseEntity.dart';
 import '../../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
+import '../../../../shared/local/hive_storage_init.dart';
+import '../../../../shared/services/local/Hive/user_local_storage/user/user_model.dart';
 
 @injectable
 class ActivatePurchaseUseCase extends BaseUseCase<ActivatePurchaseUseCaseParams, InAppResponseActivationResultDetails>{
@@ -14,7 +16,11 @@ class ActivatePurchaseUseCase extends BaseUseCase<ActivatePurchaseUseCaseParams,
   @override
   Future<InAppResponseActivationResultDetails> call({ActivatePurchaseUseCaseParams? params}) async {
     try{
-      return await _inAppPurchasesService.activate(params!.purchaseDetails);
+      UserModel userModel = boxUser.get(current);
+      return await _inAppPurchasesService.activate(
+          purchaseDetails: params!.purchaseDetails,
+          userId: userModel.id.toString()
+      );
     }catch(ex){
       rethrow;
     }

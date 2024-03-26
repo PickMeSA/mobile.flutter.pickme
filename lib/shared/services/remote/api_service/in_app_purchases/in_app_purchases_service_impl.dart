@@ -23,9 +23,11 @@ class InAppPurchasesServiceImpl extends InAppPurchasesService{
       {required this.apiService});
 
   @override
-  Future<InAppResponseActivationResultDetails> activate(InAppPurchaseDetails purchaseDetails) async{
+  Future<InAppResponseActivationResultDetails> activate({
+    required InAppPurchaseDetails purchaseDetails,
+    required String userId,
+  }) async{
     try{
-      UserModel userModel = boxUser.get(current);
       final productId = dotenv.env["IOS_IN_APP_PURCHASE_PRODUCT"];
       final salt = dotenv.env["SALT"];
       if(productId == null || salt == null){
@@ -36,7 +38,7 @@ class InAppPurchasesServiceImpl extends InAppPurchasesService{
       Response<dynamic> response = await apiService.post("$baseUrl$version/user/activate", data: {
         "verificationData": purchaseDetails.verificationData,
         "transactionId": purchaseDetails.purchaseID,
-        "userIdentifier": userModel.id.toString(),
+        "userIdentifier": userId,
         "productIdentifier": productIdHash,
         "skin": "IOS"
       });
