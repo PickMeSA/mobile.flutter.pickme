@@ -371,6 +371,18 @@ class _FinalDetailsPageState
           _showConfirmationDialog(context);
         }
         break;
+      case InAppPurchaseRecoverableErrorState:
+        if (error != null) {
+          _onNonRecoverableError(context, error);
+        } else {
+          final purchaseDetails = (state as InAppPurchaseRecoverableErrorState).purchaseDetails;
+          if (purchaseDetails == null) {
+            _onNonRecoverableError(context, error);
+          } else {
+            _showRetryDialog(context, purchaseDetails);
+          }
+        }
+        break;
       case InAppPurchaseActivatedState:
         if (error != null) {
           _onNonRecoverableError(context, error);
