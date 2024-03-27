@@ -399,6 +399,6 @@
   "whyDoesPickMeNeedMyWorkPermitNumber": "Why does PickMe need my Work Permit number?",
   "foreignNationalRequiresAWork": "Foreign nationals require a work permit or work visa to legally be able to work in most countries.",
   "aMandatoryIdPassport": "A mandatory ID/Passport check ensures that there is a real person behind a process and proves that they are who they claim to be. This prevents anyone from carrying out a process in apps and online platforms on other people’s behalf without authorization, creating false identities, or committing fraud.\nThankfully, nowadays most online ID verification solutions can safely and accurately carry out global verification and identity checks online for users and companies all around the world, with even greater legitimacy than the traditional process.",
-  "howDoiKnowIfMyDataIsSecure": "How do I know if my data is secure?"
-
+  "howDoiKnowIfMyDataIsSecure": "How do I know if my data is secure?",
+  "fileExceedsUploadableSize": "Image exceeds size limit. Please upload an image less than 4MB"
 }

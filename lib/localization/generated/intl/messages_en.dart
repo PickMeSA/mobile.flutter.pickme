@@ -208,6 +208,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Explore all jobs"),
         "exploreAllServices":
             MessageLookupByLibrary.simpleMessage("Explore all services"),
+        "fileExceedsUploadableSize": MessageLookupByLibrary.simpleMessage(
+            "Image exceeds size limit. Please upload an image less than 4MB"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),

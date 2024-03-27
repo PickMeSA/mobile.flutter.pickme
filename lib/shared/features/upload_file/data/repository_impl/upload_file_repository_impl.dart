@@ -6,12 +6,15 @@ import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file
 import 'package:pickme/shared/features/upload_file/domain/repository/upload_file_repository.dart';
 import 'package:pickme/shared/services/remote/api_service/upload_file_service/upload_file_service.dart';
 
+import '../../../../../localization/generated/l10n.dart';
+
 
 @Injectable(as: UploadFileRepository)
 class UploadFileRepositoryImpl extends UploadFileRepository {
-  UploadFileService uploadFileService;
+  final localization;
+  final UploadFileService uploadFileService;
 
-  UploadFileRepositoryImpl({required this.uploadFileService});
+  UploadFileRepositoryImpl({required this.uploadFileService, required this.localization});
 
   @override
   Future<UploadedFileEntity> call({UploadFileRepositoryParams? params}) async {
@@ -20,7 +23,7 @@ class UploadFileRepositoryImpl extends UploadFileRepository {
     } on DioException catch (networkException) {
       if (networkException.response?.statusCode ==
           HttpStatus.requestEntityTooLarge) {
-        throw DataError("Error: Image exceeds size limit. Please upload an image less than 4MB");
+        throw DataError(localization.fileExceedsUploadableSize);
       }
       rethrow;
     } catch (exception) {

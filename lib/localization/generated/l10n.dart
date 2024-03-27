@@ -4041,6 +4041,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Image exceeds size limit. Please upload an image less than 4MB`
+  String get fileExceedsUploadableSize {
+    return Intl.message(
+      'Image exceeds size limit. Please upload an image less than 4MB',
+      name: 'fileExceedsUploadableSize',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
