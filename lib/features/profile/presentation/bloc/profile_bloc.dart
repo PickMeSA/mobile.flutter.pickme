@@ -16,6 +16,8 @@ import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remo
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 
+import '../../../final_details/domain/models/final_details_entity.dart';
+
 part 'profile_event.dart';
 part 'profile_state.dart';
 

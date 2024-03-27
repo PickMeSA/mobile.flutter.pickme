@@ -13,6 +13,8 @@ import 'package:pickme/shared/constants/qualifications.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 
+import '../../../final_details/domain/models/final_details_entity.dart';
+
 part 'edit_qualification_details_event.dart';
 part 'edit_qualification_details_state.dart';
 

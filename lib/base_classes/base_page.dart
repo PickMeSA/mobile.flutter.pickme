@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../shared/widgets/w_progress_indicator.dart';
 import 'base_bloc.dart';
 import 'base_widget.dart';
 
@@ -85,4 +86,6 @@ abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends Bas
   }
 
   Widget buildView(BuildContext context);
+
+  addLoader(BuildContext context) => preloader(context);
 }

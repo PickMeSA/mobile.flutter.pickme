@@ -5,12 +5,12 @@ import 'package:test/test.dart';
 
 void main() {
   test('InAppPurchaseEvent Equatable Implementation', () {
-     var subscriptionOne = SubscriptionFound(userId: "abc", subscribedProductId: "1");
+     var subscriptionOne = SubscriptionFoundEvent(userId: "abc", subscribedProductId: "1");
 
 
-     var subscriptionTwo = SubscriptionFound(userId: "abc", subscribedProductId: "1");
-     var subscriptionThree = SubscriptionFound(userId: "ab", subscribedProductId: "1");
-     var subscriptionFour = SubscriptionFound(userId: "abc", subscribedProductId: "11");
+     var subscriptionTwo = SubscriptionFoundEvent(userId: "abc", subscribedProductId: "1");
+     var subscriptionThree = SubscriptionFoundEvent(userId: "ab", subscribedProductId: "1");
+     var subscriptionFour = SubscriptionFoundEvent(userId: "abc", subscribedProductId: "11");
 
      expect(subscriptionOne.getEventName(),'subscription_found');
      expect(subscriptionOne, subscriptionTwo);

@@ -5,7 +5,6 @@ import 'package:pickme/features/add_skills/domain/entities/skills_page_entity.da
 
 import 'package:pickme/features/bank_details/domain/entities/bank_details_entities.dart';
 import 'package:pickme/features/final_details/data/response_models/submit_final_details_model_response/submit_final_details_model_response.dart';
-import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
 import 'package:pickme/features/otp/data/response_models/otp_model_response/location_model_response.dart';
 import 'package:pickme/features/otp/data/response_models/otp_model_response/payment_details_model_response.dart';
 import 'package:pickme/features/otp/data/response_models/otp_model_response/work_times_model_response.dart';
@@ -15,13 +14,11 @@ import 'package:pickme/features/rate_and_work_times/domain/entities/rates_and_wo
 import 'package:pickme/features/setup_profile/data/response_models/setup_profile_model_response/setup-profile_remote-submit_profile_type_model_response.dart';
 import 'package:pickme/features/setup_profile/domain/entities/profile_type_entity.dart';
 import 'package:pickme/shared/domain/entities/industry_entity.dart';
-import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_business_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_full_profile_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_industry_model_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_location_model_response_model_response.dart';
 import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_payment_details_model_response.dart';
-import 'package:pickme/shared/features/otp/data/models/otp_model_response/otp_skill_id_model_response.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_business_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_payment_details_entity.dart';
@@ -37,6 +34,7 @@ import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/services/remote/api_service/profile_service/profile_service.dart';
 
+import '../../../../../features/final_details/domain/models/final_details_entity.dart';
 import '../../../../../features/qualification/data/response_models/qualification_model_response/submit_remote_qualification_and_experience_model_response.dart';
 import '../../../../../features/rate_and_work_times/data/response_models/rate_and_work_times_model_response/submit_remote_rate_and_work_times_model_response.dart';
 

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import '../presentation/models/in_app_purchase_details.dart';
 import 'models/subscription_payment_result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:pickme/shared/in_app_purchases/domain/product_purchase_state_change_delegate.dart';

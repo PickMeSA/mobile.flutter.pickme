@@ -6,15 +6,13 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
 import 'package:pickme/features/final_details/domain/usecases/submit_final_details_usecase.dart';
 import 'package:pickme/shared/constants/numerical.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
-
 import '../../../../shared/domain/entities/InAppPurchaseResponseEntity.dart';
-import '../../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
+import '../../domain/models/final_details_entity.dart';
 import '../../domain/usecases/activate_purchase_use_case.dart';
 
 part 'final_details_event.dart';

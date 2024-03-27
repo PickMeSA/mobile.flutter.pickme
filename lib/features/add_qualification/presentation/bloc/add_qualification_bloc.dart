@@ -7,11 +7,12 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
 import 'package:pickme/shared/constants/numerical.dart';
 import 'package:pickme/shared/constants/qualifications.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
+
+import '../../../final_details/domain/models/final_details_entity.dart';
 
 part 'add_qualification_event.dart';
 part 'add_qualification_state.dart';
