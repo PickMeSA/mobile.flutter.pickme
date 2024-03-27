@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import '../../../core/locator/locator.dart';
 import '../../../localization/generated/l10n.dart';
 import '../../constants/default_values.dart';
-import '../../domain/entities/InAppPurchaseRequestEntity.dart';
 import '../../domain/entities/InAppPurchaseResponseEntity.dart';
 import '../../models/in_app_purchases/in_app_purchase_activate_request_model.dart';
 import '../../models/in_app_purchases/in_app_purchase_activation_response_model.dart';
@@ -33,7 +32,7 @@ class InAppPurchasesServiceImpl extends SubscriptionRemoteDatasource {
           InAppPurchaseActivationResponseModel.fromJson(response.data);
       return InAppResponseActivationResultDetails.fromModel(responseModel);
     } on DioException catch (ex) {
-      logger.e(ex);
+      logger.e({"Activation error":ex});
       final errorMessage = ex.message ?? "";
       if (errorMessage.isEmpty) {
         throw errorMessage;

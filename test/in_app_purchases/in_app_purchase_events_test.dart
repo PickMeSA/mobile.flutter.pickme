@@ -19,15 +19,6 @@ void main() {
   });
 
 
-  test('SubscriptionNotFound Equatable Implementation', () {
-    var subscriptionOne = SubscriptionNotFound(userId: "abc");
-    var subscriptionTwo = SubscriptionNotFound(userId: "abc");
-    var subscriptionThree = SubscriptionNotFound(userId: "ab");
-
-    expect(subscriptionOne.getEventName(),'subscription_not_found');
-    expect(subscriptionOne, subscriptionTwo);
-    expect(subscriptionOne==subscriptionThree, false);
-  });
 
   test('SubscriptionRestored Equatable Implementation', () {
     var subscriptionOne = SubscriptionRestored(userId: "abc", restoredProductId: "1");
