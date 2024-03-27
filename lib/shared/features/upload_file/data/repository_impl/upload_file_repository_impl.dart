@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/exceptions/data_error.dart';
+import '../../../../../core/locator/locator.dart';
 import '../../../../../localization/generated/l10n.dart';
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/repository/upload_file_repository.dart';
@@ -10,10 +11,10 @@ import 'package:pickme/shared/services/remote/api_service/upload_file_service/up
 
 @Injectable(as: UploadFileRepository)
 class UploadFileRepositoryImpl extends UploadFileRepository {
-  final AppLocalizations localization;
+  late final AppLocalizations localization = locator<AppLocalizations>();
   final UploadFileService uploadFileService;
 
-  UploadFileRepositoryImpl({required this.uploadFileService, required this.localization});
+  UploadFileRepositoryImpl({required this.uploadFileService});
 
   @override
   Future<UploadedFileEntity> call({UploadFileRepositoryParams? params}) async {
