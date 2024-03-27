@@ -112,7 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
         "areYouSureYouWantToCancelThisPurchase":
             MessageLookupByLibrary.simpleMessage(
-                "Are you sure you would like to cancel the in-app purchase"),
+                "Are you sure you would like the subscription payment?"),
         "areYouSureYouWantToDeleteYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you would like to delete your account."),

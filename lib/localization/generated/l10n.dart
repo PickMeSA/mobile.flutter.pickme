@@ -4152,10 +4152,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Are you sure you would like to cancel the in-app purchase`
+  /// `Are you sure you would like the subscription payment?`
   String get areYouSureYouWantToCancelThisPurchase {
     return Intl.message(
-      'Are you sure you would like to cancel the in-app purchase',
+      'Are you sure you would like the subscription payment?',
       name: 'areYouSureYouWantToCancelThisPurchase',
       desc: '',
       args: [],

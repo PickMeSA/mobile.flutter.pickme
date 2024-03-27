@@ -185,8 +185,7 @@ class _FinalDetailsPageState
                           controller: aboutYouController,
                           keyboardType: TextInputType.multiline,
                           labelText:
-                              getLocalization().aboutYouBasedOnYourProfile +
-                                  "*",
+                              getLocalization().aboutYouBasedOnYourProfile,
                           textFieldType: TextFieldType.OTHER,
                           maxLines: 10,
                           maxLength: 2000,

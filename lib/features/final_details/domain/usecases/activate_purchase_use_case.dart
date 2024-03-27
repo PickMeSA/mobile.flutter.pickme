@@ -1,5 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pickme/shared/functions/md5_hasher.dart';
 import '../../../../base_classes/base_usecase.dart';
 import '../../../../core/locator/locator.dart';
 import '../../../../localization/generated/l10n.dart';
@@ -41,9 +42,10 @@ class ActivatePurchaseUseCase extends BaseUseCase<ActivatePurchaseUseCaseParams,
         throw localization.anErrorOccurredWhileProcessingYourRequest;
       }
 
+
       final activationRequest = InAppPurchaseActivationRequestModel(
           userIdentifier: userModel.id.toString(),
-          productIdentifier: productId,
+          productIdentifier: generateHash(productId, salt),
           skin: 'IOS',
           transactionID: transactionID,
           verificationData: params.purchaseDetails.verificationData);
