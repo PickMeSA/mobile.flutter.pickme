@@ -324,9 +324,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     FinalDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<FinalDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const FinalDetailsPage(),
+        child: FinalDetailsPage(
+          key: args.key,
+          profileEntity: args.profileEntity,
+        ),
       );
     },
     ForgotPasswordRoute.name: (routeData) {
@@ -1823,16 +1827,40 @@ class FiltersRouteArgs {
 
 /// generated route for
 /// [FinalDetailsPage]
-class FinalDetailsRoute extends PageRouteInfo<void> {
-  const FinalDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class FinalDetailsRoute extends PageRouteInfo<FinalDetailsRouteArgs> {
+  FinalDetailsRoute({
+    Key? key,
+    required ProfileEntity profileEntity,
+    List<PageRouteInfo>? children,
+  }) : super(
           FinalDetailsRoute.name,
+          args: FinalDetailsRouteArgs(
+            key: key,
+            profileEntity: profileEntity,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'FinalDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<FinalDetailsRouteArgs> page =
+      PageInfo<FinalDetailsRouteArgs>(name);
+}
+
+class FinalDetailsRouteArgs {
+  const FinalDetailsRouteArgs({
+    this.key,
+    required this.profileEntity,
+  });
+
+  final Key? key;
+
+  final ProfileEntity profileEntity;
+
+  @override
+  String toString() {
+    return 'FinalDetailsRouteArgs{key: $key, profileEntity: $profileEntity}';
+  }
 }
 
 /// generated route for

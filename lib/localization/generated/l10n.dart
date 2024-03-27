@@ -4211,6 +4211,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Profile not found`
+  String get profileNotFound {
+    return Intl.message(
+      'Profile not found',
+      name: 'profileNotFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

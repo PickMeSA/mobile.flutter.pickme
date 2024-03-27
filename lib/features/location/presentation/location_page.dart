@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_loader.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -54,7 +55,12 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
 
             Navigator.pop(context);
          if(state.profileEntity!.description!.isEmpty) {
-              context.router.push(const FinalDetailsRoute());
+           final profileEntity = state.profileEntity;
+           if(profileEntity != null){
+             context.router.push(FinalDetailsRoute(profileEntity: state.profileEntity!));
+           }else{
+             wErrorPopUp(message: getLocalization().profileNotFound, type: "error", context: context);
+           }
             }else if(!state.profileEntity!.subscriptionPaid!){
               context.router.push( PaySomeoneWebViewRoute(from: 0));}
             else{

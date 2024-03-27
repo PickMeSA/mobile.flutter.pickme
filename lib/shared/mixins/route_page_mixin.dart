@@ -14,7 +14,7 @@ mixin RoutePageMixin{
     }else if(profileEntity.location!.address == "" ){
       context.router.push(const LocationRoute());
     }else if(profileEntity.description!.isEmpty || !profileEntity.subscriptionPaid!){
-      context.router.push(const FinalDetailsRoute());
+      context.router.push(FinalDetailsRoute(profileEntity: profileEntity));
     }else{
       context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
     }

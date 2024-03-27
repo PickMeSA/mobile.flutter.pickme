@@ -18,6 +18,7 @@ import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../mixins/route_page_mixin.dart';
 import 'bloc/otp_bloc.dart';
 
 @RoutePage()
@@ -32,7 +33,7 @@ class OTPPage extends BasePage {
   _otpPageState createState() => _otpPageState();
 }
 
-class _otpPageState extends BasePageState<OTPPage, otpBloc> {
+class _otpPageState extends BasePageState<OTPPage, otpBloc> with RoutePageMixin {
 
   @override
   void initState() {
@@ -82,29 +83,7 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
         //RegisterOTPCompleteState/////////////////////////////////////
         //Success
         if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
-
-          if(state.profileEntity!.type!.isEmpty){
-            context.router.push(const SetupProfileRoute());
-          }else if (state.profileEntity!.acceptedTermsAndConditions == false){
-            context.router.push(const RegisterAccountStep1Route());
-          }else if (state.profileEntity!.qualifications!.isEmpty &&
-              state.profileEntity!.workExperience!.isEmpty){
-            context.router.push( QualificationsRoute(profileEntity: state.profileEntity));
-          }else if(state.profileEntity!.skills!.isEmpty){
-            context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
-          }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.push(const RateAndWorkTimesRoute());
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.location!.address == "" ){
-            context.router.push(const LocationRoute(),);
-          }else if(state.profileEntity!.description!.isEmpty) {
-            context.router.push(const FinalDetailsRoute());
-          }else if(!state.profileEntity!.subscriptionPaid!){
-            context.router.push( PaySomeoneWebViewRoute(from: 0));}
-          else{
-           context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
-         }
+          routePageReg(context: context, profileEntity: state.profileEntity);
         }
         //loading
         if(state is RegisterOTPCompleteState && state.dataState == DataState.loading){

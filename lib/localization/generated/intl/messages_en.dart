@@ -484,6 +484,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
         "present": MessageLookupByLibrary.simpleMessage("Present"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "profileNotFound":
+            MessageLookupByLibrary.simpleMessage("Profile not found"),
         "proposeAlternative":
             MessageLookupByLibrary.simpleMessage("Propose Alternative"),
         "proposeAnotherTime":

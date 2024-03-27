@@ -19,13 +19,14 @@ import 'package:pickme/shared/widgets/w_labeled_panel.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/features/otp/domain/entities/profile_entity.dart';
 import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
 import 'bloc/final_details_bloc.dart';
 
 @RoutePage()
 class FinalDetailsPage extends BasePage {
-  const FinalDetailsPage({super.key});
-
+  const FinalDetailsPage({super.key, required this.profileEntity});
+  final ProfileEntity profileEntity;
   @override
   State<FinalDetailsPage> createState() => _FinalDetailsPageState();
 }
@@ -34,9 +35,18 @@ class _FinalDetailsPageState
     extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
   bool isSelectingProfilePicture = false;
   DialogRoute? _dialogRoute;
-
+  bool subscriptionPaid = false;
   final TextEditingController aboutYouController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    final paid = widget.profileEntity.subscriptionPaid;
+    if(paid!=null && paid){
+      subscriptionPaid = true;
+    }
+    super.initState();
+  }
 
   @override
   PreferredSizeWidget? buildAppbar() {
@@ -240,12 +250,12 @@ class _FinalDetailsPageState
                           ),
                         ),
                       40.height,
-                      Text(getLocalization().whatIsBeingPaid,
+                      if(!subscriptionPaid) Text(getLocalization().whatIsBeingPaid,
                           style: const TextStyle(
                             color: Colors.black45,
                           )),
-                      5.height,
-                      Text(
+                      if(!subscriptionPaid)5.height,
+                      if(!subscriptionPaid) Text(
                         getLocalization().theOnceOff50RandSubscription,
                       ),
                       40.height,
@@ -272,7 +282,7 @@ class _FinalDetailsPageState
                                 getBloc().add(SubmitClickedEvent(
                                     description: aboutYouController.text));
                               },
-                              child: Text(getLocalization().payNow),
+                              child: Text(subscriptionPaid?getLocalization().createProfile:getLocalization().payNow),
                             ),
                           ),
                         ],
