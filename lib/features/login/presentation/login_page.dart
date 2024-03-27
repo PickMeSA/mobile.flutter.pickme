@@ -36,8 +36,6 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> with RoutePage
 
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-
   final _formKey = GlobalKey<FormState>();
 
   @override

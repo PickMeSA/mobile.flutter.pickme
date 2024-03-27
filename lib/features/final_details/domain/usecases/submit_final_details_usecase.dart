@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:pickme/base_classes/base_usecase.dart';
-import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 
+import '../models/final_details_entity.dart';
 import '../repository/submit_final_details_repository.dart';
 
 @Injectable()

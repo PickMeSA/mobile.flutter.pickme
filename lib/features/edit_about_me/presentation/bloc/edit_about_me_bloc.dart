@@ -4,9 +4,10 @@ import 'package:pickme/base_classes/base_event.dart';
 import 'package:pickme/base_classes/base_state.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:pickme/features/final_details/domain/entities/final_details_entity.dart';
 import 'package:pickme/features/final_details/domain/usecases/submit_final_details_usecase.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+
+import '../../../final_details/domain/models/final_details_entity.dart';
 
 part 'edit_about_me_event.dart';
 part 'edit_about_me_state.dart';

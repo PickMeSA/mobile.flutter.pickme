@@ -30,10 +30,10 @@ class RestoreSubscriptionEvent extends InAppPurchaseEvent {
   String getEventName() => 'restore_subscription';
 }
 
-class SubscriptionFound extends InAppPurchaseEvent {
+class SubscriptionFoundEvent extends InAppPurchaseEvent {
   final String subscribedProductId;
 
-  SubscriptionFound({super.userId, required this.subscribedProductId});
+  SubscriptionFoundEvent({super.userId, required this.subscribedProductId});
 
   @override
   List<Object?> get props => super.props + [subscribedProductId];
@@ -42,13 +42,6 @@ class SubscriptionFound extends InAppPurchaseEvent {
   String getEventName() => 'subscription_found';
 }
 
-class SubscriptionNotFound extends InAppPurchaseEvent implements Equatable  {
-  SubscriptionNotFound({super.userId});
-
-
-  @override
-  String getEventName() => 'subscription_not_found';
-}
 
 class SubscriptionRestored extends InAppPurchaseEvent {
   final String restoredProductId;
@@ -61,6 +54,7 @@ class SubscriptionRestored extends InAppPurchaseEvent {
   @override
   String getEventName() => 'subscription_restored';
 }
+
 class ActivatePurchaseEvent extends InAppPurchaseEvent {
   final InAppPurchaseDetails purchaseDetails;
   ActivatePurchaseEvent(this.purchaseDetails);

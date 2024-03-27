@@ -6,15 +6,15 @@ class InAppPurchaseActivationRequestEntity extends Equatable{
   final String userIdentifier;
   final String productIdentifier;
   final String skin;
-  final String receiptNumber;
-  final String icloudIdentifier;
+  final String transactionID;
+  final String verificationData;
 
   const InAppPurchaseActivationRequestEntity({
     required this.userIdentifier,
     required this.productIdentifier,
     required this.skin,
-    required this.receiptNumber,
-    required this.icloudIdentifier,
+    required this.transactionID,
+    required this.verificationData,
   });
 
   factory InAppPurchaseActivationRequestEntity.fromModel(InAppPurchaseActivationRequestModel model) {
@@ -22,8 +22,8 @@ class InAppPurchaseActivationRequestEntity extends Equatable{
       userIdentifier: model.userIdentifier,
       productIdentifier: model.productIdentifier,
       skin: model.skin,
-      receiptNumber: model.receiptNumber,
-      icloudIdentifier: model.icloudIdentifier,
+      transactionID: model.transactionID,
+      verificationData: model.verificationData,
     );
   }
 
@@ -32,8 +32,8 @@ class InAppPurchaseActivationRequestEntity extends Equatable{
       userIdentifier: userIdentifier,
       productIdentifier: productIdentifier,
       skin: skin,
-      receiptNumber: receiptNumber,
-      icloudIdentifier: icloudIdentifier,
+      transactionID: transactionID,
+      verificationData: verificationData,
     );
   }
 
@@ -42,8 +42,8 @@ class InAppPurchaseActivationRequestEntity extends Equatable{
     userIdentifier,
     productIdentifier,
     skin,
-    receiptNumber,
-    icloudIdentifier,
+    transactionID,
+    verificationData,
   ];
 
 }

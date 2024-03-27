@@ -10,19 +10,19 @@ _$InAppPurchaseActivationRequestModelImpl
     _$$InAppPurchaseActivationRequestModelImplFromJson(
             Map<String, dynamic> json) =>
         _$InAppPurchaseActivationRequestModelImpl(
-          userIdentifier: json['user_identifier'] as String,
-          productIdentifier: json['product_identifier'] as String,
+          userIdentifier: json['userIdentifier'] as String,
+          productIdentifier: json['productIdentifier'] as String,
           skin: json['skin'] as String,
-          receiptNumber: json['receipt_number'] as String,
-          icloudIdentifier: json['icloud_identifier'] as String,
+          transactionID: json['transactionID'] as String,
+          verificationData: json['verificationData'] as String,
         );
 
 Map<String, dynamic> _$$InAppPurchaseActivationRequestModelImplToJson(
         _$InAppPurchaseActivationRequestModelImpl instance) =>
     <String, dynamic>{
-      'user_identifier': instance.userIdentifier,
-      'product_identifier': instance.productIdentifier,
+      'userIdentifier': instance.userIdentifier,
+      'productIdentifier': instance.productIdentifier,
       'skin': instance.skin,
-      'receipt_number': instance.receiptNumber,
-      'icloud_identifier': instance.icloudIdentifier,
+      'transactionID': instance.transactionID,
+      'verificationData': instance.verificationData,
     };

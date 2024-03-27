@@ -60,9 +60,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account number *"),
         "accountTypeA": MessageLookupByLibrary.simpleMessage("Account type *"),
         "activationFailed":
-            MessageLookupByLibrary.simpleMessage("Failed to activate"),
+            MessageLookupByLibrary.simpleMessage("Activation failure"),
         "activationFailedDescription": MessageLookupByLibrary.simpleMessage(
-            "Failed to activate the subscription. Would you like to try again?"),
+            "Your payment was received but an error occurred while activating your subscription."),
         "activeListings":
             MessageLookupByLibrary.simpleMessage("Active listings"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
@@ -528,6 +528,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "restorePurchase":
             MessageLookupByLibrary.simpleMessage("Restore purchase"),
+        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
