@@ -11,16 +11,15 @@ abstract class BasePage extends BaseWidget{
 abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends BaseWidgetState<T,B>{
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   bool subscribeToVisibilityEvents = false;
-  DialogRoute? _dialogRoute = null;
+  DialogRoute? _dialogRoute;
 
   BasePageState({
     this.subscribeToVisibilityEvents =false
   });
 
   dismissLoadingIndicator() {
-    final dialogRoute = _dialogRoute;
-    if (dialogRoute != null) {
-      Navigator.of(context).pop(dialogRoute);
+    if (_dialogRoute != null) {
+      Navigator.of(context).pop(_dialogRoute);
       _dialogRoute = null;
     }
   }

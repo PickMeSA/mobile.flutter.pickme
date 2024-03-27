@@ -4051,6 +4051,186 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `An error occurred while processing your request. Please try again later.`
+  String get anErrorOccurredWhileProcessingYourRequest {
+    return Intl.message(
+      'An error occurred while processing your request. Please try again later.',
+      name: 'anErrorOccurredWhileProcessingYourRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restore purchase`
+  String get restorePurchase {
+    return Intl.message(
+      'Restore purchase',
+      name: 'restorePurchase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you've previously purchased a subscription, kindly select `
+  String get ifYouVePreviouslyPurchasedASubscriptionKindlySelect {
+    return Intl.message(
+      'If you\'ve previously purchased a subscription, kindly select ',
+      name: 'ifYouVePreviouslyPurchasedASubscriptionKindlySelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is being paid?`
+  String get whatIsBeingPaid {
+    return Intl.message(
+      'What is being paid?',
+      name: 'whatIsBeingPaid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The once-off R50.00 subscription fee enables users to have access to all the in-App services.`
+  String get theOnceOff50RandSubscription {
+    return Intl.message(
+      'The once-off R50.00 subscription fee enables users to have access to all the in-App services.',
+      name: 'theOnceOff50RandSubscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IOS In App Purchase Product is not set`
+  String get inAppPurchaseProductNotSetError {
+    return Intl.message(
+      'IOS In App Purchase Product is not set',
+      name: 'inAppPurchaseProductNotSetError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription not found`
+  String get subscriptionNotFound {
+    return Intl.message(
+      'Subscription not found',
+      name: 'subscriptionNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error when restoring previous purchase. Please try again`
+  String get subscriptionNotRestored {
+    return Intl.message(
+      'An error when restoring previous purchase. Please try again',
+      name: 'subscriptionNotRestored',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error when buying this subscription. Please try again`
+  String get subscriptionNotBought {
+    return Intl.message(
+      'An error when buying this subscription. Please try again',
+      name: 'subscriptionNotBought',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field cannot be empty`
+  String get fieldCannotBeEmpty {
+    return Intl.message(
+      'Field cannot be empty',
+      name: 'fieldCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancellation confirmation`
+  String get cancellationConfirmation {
+    return Intl.message(
+      'Cancellation confirmation',
+      name: 'cancellationConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you would like the subscription payment?`
+  String get areYouSureYouWantToCancelThisPurchase {
+    return Intl.message(
+      'Are you sure you would like the subscription payment?',
+      name: 'areYouSureYouWantToCancelThisPurchase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message(
+      'Retry',
+      name: 'retry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activation failure`
+  String get activationFailed {
+    return Intl.message(
+      'Activation failure',
+      name: 'activationFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your payment was received but an error occurred while activating your subscription.`
+  String get activationFailedDescription {
+    return Intl.message(
+      'Your payment was received but an error occurred while activating your subscription.',
+      name: 'activationFailedDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile not found`
+  String get profileNotFound {
+    return Intl.message(
+      'Profile not found',
+      name: 'profileNotFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

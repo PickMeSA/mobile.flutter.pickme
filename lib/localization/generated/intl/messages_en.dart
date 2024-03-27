@@ -59,6 +59,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountNumberA":
             MessageLookupByLibrary.simpleMessage("Account number *"),
         "accountTypeA": MessageLookupByLibrary.simpleMessage("Account type *"),
+        "activationFailed":
+            MessageLookupByLibrary.simpleMessage("Activation failure"),
+        "activationFailedDescription": MessageLookupByLibrary.simpleMessage(
+            "Your payment was received but an error occurred while activating your subscription."),
         "activeListings":
             MessageLookupByLibrary.simpleMessage("Active listings"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
@@ -95,6 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "anEmailContainingALinkToResetYourPasswordHasBeenSentToYourEmailAddress":
             MessageLookupByLibrary.simpleMessage(
                 "An email containing a link to reset your password has been sent to you email address"),
+        "anErrorOccurredWhileProcessingYourRequest":
+            MessageLookupByLibrary.simpleMessage(
+                "An error occurred while processing your request. Please try again later."),
         "applicationSent":
             MessageLookupByLibrary.simpleMessage("Application sent"),
         "applicationSenttext": MessageLookupByLibrary.simpleMessage(
@@ -103,6 +110,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "applied": MessageLookupByLibrary.simpleMessage("Applied"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
+        "areYouSureYouWantToCancelThisPurchase":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you would like the subscription payment?"),
         "areYouSureYouWantToDeleteYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you would like to delete your account."),
@@ -128,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Browse categories"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel booking"),
+        "cancellationConfirmation":
+            MessageLookupByLibrary.simpleMessage("Cancellation confirmation"),
         "cancellationDetails":
             MessageLookupByLibrary.simpleMessage("Cancellation details"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
@@ -208,6 +220,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Explore all jobs"),
         "exploreAllServices":
             MessageLookupByLibrary.simpleMessage("Explore all services"),
+        "fieldCannotBeEmpty":
+            MessageLookupByLibrary.simpleMessage("Field cannot be empty"),
         "fileExceedsUploadableSize": MessageLookupByLibrary.simpleMessage(
             "Image exceeds size limit. Please upload an image less than 4MB"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
@@ -261,8 +275,13 @@ class MessageLookup extends MessageLookupByLibrary {
                 "ID verification, ID check or identity verification is the process that ensures a person is who they are supposed to be. But… How to guarantee safety when this process is done online?"),
         "identityIsTheAttribute": MessageLookupByLibrary.simpleMessage(
             "Identity is the attribute of identical, the exact correspondence of one thing with another when compared. It is the set of unique traits and characteristics associated with a unique and irreplaceable individual. This turns essential when we talk about people and especially within the online environment, where identity theft is a more common phenomenon than we realize."),
+        "ifYouVePreviouslyPurchasedASubscriptionKindlySelect":
+            MessageLookupByLibrary.simpleMessage(
+                "If you\'ve previously purchased a subscription, kindly select "),
         "imCurrentlyWorkingInThisRole": MessageLookupByLibrary.simpleMessage(
             "I\'m currently working in this role"),
+        "inAppPurchaseProductNotSetError": MessageLookupByLibrary.simpleMessage(
+            "IOS In App Purchase Product is not set"),
         "inYourArea": MessageLookupByLibrary.simpleMessage("In your area"),
         "inactiveListings":
             MessageLookupByLibrary.simpleMessage("Inactive listings"),
@@ -362,6 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "newHereCreateAccount":
             MessageLookupByLibrary.simpleMessage("New here? Create Account"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next Step"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
         "noAccountCreateOne":
             MessageLookupByLibrary.simpleMessage("No account? Create one"),
         "noAddressSpecified":
@@ -466,6 +486,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
         "present": MessageLookupByLibrary.simpleMessage("Present"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "profileNotFound":
+            MessageLookupByLibrary.simpleMessage("Profile not found"),
         "proposeAlternative":
             MessageLookupByLibrary.simpleMessage("Propose Alternative"),
         "proposeAnotherTime":
@@ -508,6 +530,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reschedule request sent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "restorePurchase":
+            MessageLookupByLibrary.simpleMessage("Restore purchase"),
+        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "reviewJobListing":
             MessageLookupByLibrary.simpleMessage("Review job listing"),
@@ -570,6 +595,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subscriptionFee":
             MessageLookupByLibrary.simpleMessage("Subscription fee"),
+        "subscriptionNotBought": MessageLookupByLibrary.simpleMessage(
+            "An error when buying this subscription. Please try again"),
+        "subscriptionNotFound":
+            MessageLookupByLibrary.simpleMessage("Subscription not found"),
+        "subscriptionNotRestored": MessageLookupByLibrary.simpleMessage(
+            "An error when restoring previous purchase. Please try again"),
         "successEx": MessageLookupByLibrary.simpleMessage("Success!"),
         "surname": MessageLookupByLibrary.simpleMessage("Surname *"),
         "switchingProfiles":
@@ -591,6 +622,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "An account already exists for the email."),
         "theCLientHasSelectedAFlexibleDate": MessageLookupByLibrary.simpleMessage(
             "The client has selected a flexible time and date which requires you to specify the date and time you would like the booking to be set."),
+        "theOnceOff50RandSubscription": MessageLookupByLibrary.simpleMessage(
+            "The once-off R50.00 subscription fee enables users to have access to all the in-App services."),
         "thePasswordProvidedIsTooWeak": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak"),
         "timeFormat": MessageLookupByLibrary.simpleMessage("HH:MM *"),
@@ -635,6 +668,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "weveSentaOneTimePine": m6,
         "whatAreYouLookingFor":
             MessageLookupByLibrary.simpleMessage("What are you looking for?"),
+        "whatIsBeingPaid":
+            MessageLookupByLibrary.simpleMessage("What is being paid?"),
         "whatIsYourHourlyRateAndWorkTimes":
             MessageLookupByLibrary.simpleMessage(
                 "What is your hourly rate & work times?"),
@@ -660,6 +695,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "workingDays": MessageLookupByLibrary.simpleMessage("Working days"),
         "workingDaysA": MessageLookupByLibrary.simpleMessage("Working days *"),
         "workingHours": MessageLookupByLibrary.simpleMessage("Working hours"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yesDelete": MessageLookupByLibrary.simpleMessage("Yes, Delete"),
         "yesSwitch": MessageLookupByLibrary.simpleMessage("Yes, switch"),
         "youAreAllSetup":

@@ -48,6 +48,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
 
   @override
   Widget buildView(BuildContext context) {
+    dismissLoadingIndicator();
     return SmartRefresher(
       controller: _refreshController,
       onRefresh: _onRefresh,
@@ -668,8 +669,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
     if (result != null) {
       getBloc().add(ProfilePictureAddedEvent(filePath: result.path!));
     } else {
-      // User canceled the file picker
-      // Handle accordingly (e.g., show a message)
+      dismissLoadingIndicator();
     }
   }
 }
