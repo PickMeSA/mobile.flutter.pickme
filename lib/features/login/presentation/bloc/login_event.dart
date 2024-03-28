@@ -6,8 +6,8 @@ abstract class LoginEvent extends BaseEvent{
 
 class LoginContinueClickedEvent extends LoginEvent{
 
-
-  LoginContinueClickedEvent();
+  final String email;
+  LoginContinueClickedEvent(this.email);
 }
 
 class NumberChangedEvent extends LoginEvent{

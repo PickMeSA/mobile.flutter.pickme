@@ -61,3 +61,13 @@ class InAppPurchaseActivatedState extends InAppPurchaseState {
   @override
   List<Object?> get props => [error, isSubscriptionActivated, purchaseDetails];
 }
+class InAppPurchaseRecoverableErrorState extends InAppPurchaseState {
+  final InAppPurchaseDetails? purchaseDetails;
+  final String? error_;
+  InAppPurchaseRecoverableErrorState(this.error_, {
+    this.purchaseDetails,
+  }): super(error_, null,  DataState.error);
+
+  @override
+  List<Object?> get props => [purchaseDetails];
+}

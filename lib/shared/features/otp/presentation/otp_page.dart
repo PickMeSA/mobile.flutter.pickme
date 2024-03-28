@@ -1,4 +1,3 @@
-
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,12 +11,15 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../functions/utlis.dart';
+import '../../../mixins/route_page_mixin.dart';
 import 'bloc/otp_bloc.dart';
 
 @RoutePage()
@@ -26,54 +28,53 @@ class OTPPage extends BasePage {
   final String verificationId;
   UserEntity? userModel;
   bool? fromregister;
-   OTPPage({required this.verificationId,super.key, this.userModel, this.fromregister = false});
+
+  OTPPage(
+      {required this.verificationId,
+      super.key,
+      this.userModel,
+      this.fromregister = false});
 
   @override
   _otpPageState createState() => _otpPageState();
 }
 
-class _otpPageState extends BasePageState<OTPPage, otpBloc> {
-
+class _otpPageState extends BasePageState<OTPPage, otpBloc>
+    with PaymentPageMixin {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
-    @override
+  @override
   PreferredSizeWidget? buildAppbar() {
     return null;
   }
 
   @override
   Widget buildView(BuildContext context) {
-
     var theme = Theme.of(context);
     return BlocConsumer<otpBloc, otpPageState>(
-      listener: (context, state){
-
+      listener: (context, state) {
         //OTPGetTokenState////////////////////////////////////////////////////
         //success
-        if(state is OTPGetTokenState && state.dataState == DataState.success){
-
-            getBloc().add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
-
+        if (state is OTPGetTokenState && state.dataState == DataState.success) {
+          getBloc()
+              .add(SaveRemoteProfileDataEvent(userModel: widget.userModel!));
         }
 
         //error
-        if(state is OTPGetTokenState && state.dataState == DataState.error){
-        // error dialog
-          if(getBloc().preloaderActive) {
+        if (state is OTPGetTokenState && state.dataState == DataState.error) {
+          // error dialog
+          if (getBloc().preloaderActive) {
             Navigator.pop(context);
             getBloc().preloaderActive = false;
-
           }
-
         }
         //loading
-        if(state is OTPGetTokenState && state.dataState == DataState.loading){
-          if(!getBloc().preloaderActive){
+        if (state is OTPGetTokenState && state.dataState == DataState.loading) {
+          if (!getBloc().preloaderActive) {
             getBloc().preloaderActive = true;
             preloader(context);
           }
@@ -81,192 +82,205 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
 
         //RegisterOTPCompleteState/////////////////////////////////////
         //Success
-        if(state is RegisterOTPCompleteState && state.dataState == DataState.success){
-
-          if(state.profileEntity!.type!.isEmpty){
-            context.router.push(const SetupProfileRoute());
-          }else if (state.profileEntity!.acceptedTermsAndConditions == false){
-            context.router.push(const RegisterAccountStep1Route());
-          }else if (state.profileEntity!.qualifications!.isEmpty &&
-              state.profileEntity!.workExperience!.isEmpty){
-            context.router.push( QualificationsRoute(profileEntity: state.profileEntity));
-          }else if(state.profileEntity!.skills!.isEmpty){
-            context.router.push( AddSkillsRoute(profileEntity:  state.profileEntity!));
-          }else if(state.profileEntity!.hourlyRate! == 0){
-            context.router.push(const RateAndWorkTimesRoute());
-          }else if(state.profileEntity!.paymentDetails!.bankName!.isEmpty){
-            context.router.push(const BankDetailsRoute());
-          }else if(state.profileEntity!.location!.address == "" ){
-            context.router.push(const LocationRoute(),);
-          }else if(state.profileEntity!.description!.isEmpty) {
-            context.router.push(const FinalDetailsRoute());
-          }else if(!state.profileEntity!.subscriptionPaid!){
-            context.router.push( PaySomeoneWebViewRoute(from: 0));}
-          else{
-           context.router.pushAndPopUntil( BottomNavigationBarRoute(profileEntity: state.profileEntity), predicate: (Route<dynamic> route) => false);
-         }
+        if (state is RegisterOTPCompleteState &&
+            state.dataState == DataState.success) {
+          _routePage(context: context, profileEntity: state.profileEntity);
         }
         //loading
-        if(state is RegisterOTPCompleteState && state.dataState == DataState.loading){
-          if(!getBloc().preloaderActive){
+        if (state is RegisterOTPCompleteState &&
+            state.dataState == DataState.loading) {
+          if (!getBloc().preloaderActive) {
             getBloc().preloaderActive = true;
             preloader(context);
           }
         }
         //error
-        if(state is RegisterOTPCompleteState && state.dataState == DataState.error){
+        if (state is RegisterOTPCompleteState &&
+            state.dataState == DataState.error) {
           // will use error dialog
-          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          wErrorPopUp(
+              message: state.error!,
+              type: getLocalization().error,
+              context: context);
           print(state.error);
         }
 
         // SaveRemoteProfileDataState/////////////////////////////////////////
         //loading
-        if(state is SaveRemoteProfileDataState && state.dataState == DataState.loading){
-          if(!getBloc().preloaderActive){
+        if (state is SaveRemoteProfileDataState &&
+            state.dataState == DataState.loading) {
+          if (!getBloc().preloaderActive) {
             getBloc().preloaderActive = true;
             preloader(context);
           }
         }
         //success
-        if(state is SaveRemoteProfileDataState && state.dataState == DataState.success){
-          getBloc().add(GetProfileProgressEvent(userModel:  state.userModel));
+        if (state is SaveRemoteProfileDataState &&
+            state.dataState == DataState.success) {
+          getBloc().add(GetProfileProgressEvent(userModel: state.userModel));
         }
         //error
-        if(state is SaveRemoteProfileDataState && state.dataState == DataState.error){
+        if (state is SaveRemoteProfileDataState &&
+            state.dataState == DataState.error) {
           Navigator.pop(context);
-          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          wErrorPopUp(
+              message: state.error!,
+              type: getLocalization().error,
+              context: context);
         }
 
         //GetProfileProgressState////////////////////////////////////
         //success
-        if(state is GetProfileProgressState && state.dataState == DataState.success){
+        if (state is GetProfileProgressState &&
+            state.dataState == DataState.success) {
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          getBloc().add(RegisterOTPCompleteEvent(userEntity: UserEntity(
-              mobile: state.profileEntity?.mobile??"",
-              surname: state.profileEntity?.surname??"",
-              firstName: state.profileEntity?.firstName??"",
-              email: state.profileEntity?.email??"",
-              idNumber: state.profileEntity?.email??"",
-              passportNumber: state.profileEntity?.passportNumber??""
-          ), profileEntity: state.profileEntity));
+          getBloc().add(RegisterOTPCompleteEvent(
+              userEntity: UserEntity(
+                  mobile: state.profileEntity?.mobile ?? "",
+                  surname: state.profileEntity?.surname ?? "",
+                  firstName: state.profileEntity?.firstName ?? "",
+                  email: state.profileEntity?.email ?? "",
+                  idNumber: state.profileEntity?.email ?? "",
+                  passportNumber: state.profileEntity?.passportNumber ?? ""),
+              profileEntity: state.profileEntity));
         }
 
-        if(state is GetProfileProgressState && state.dataState == DataState.error){
+        if (state is GetProfileProgressState &&
+            state.dataState == DataState.error) {
           Navigator.pop(context);
-          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          wErrorPopUp(
+              message: state.error!,
+              type: getLocalization().error,
+              context: context);
         }
 
-        if(state is GetProfileProgressState && state.dataState == DataState.loading){
-          if(!getBloc().preloaderActive){
+        if (state is GetProfileProgressState &&
+            state.dataState == DataState.loading) {
+          if (!getBloc().preloaderActive) {
             getBloc().preloaderActive = true;
             preloader(context);
           }
         }
-
-
       },
       builder: (context, state) {
-         return SizedBox(
-           width: MediaQuery.sizeOf(context).width,
-           height: MediaQuery.sizeOf(context).height,
-           child: Stack(
-             children:[
-               Positioned(
-                   top: 0,
-                   child: Container(
-                     color: Colors.white38,
-                     height: MediaQuery.sizeOf(context).height * (1/3) ,
-                     width: MediaQuery.sizeOf(context).width,
-                     child:  Padding(
-                       padding: EdgeInsets.all(20.0),
-                       child: Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                            SizedBox(
-                             width: 25,
-                             height: 25,
-                             child: InkWell(onTap: ()=> context.router.pop(),
-                                 child: Icon(Icons.arrow_back)),),
-                           Padding(
-                             padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                           child: wText(getLocalization().enterYourOTP,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                           ),
-                           Padding(
-                             padding: EdgeInsets.only( right: 32, bottom: 8),
-                             child: wText(getLocalization().weveSentaOneTimePine(obscureNumber(widget.userModel!.mobile)),style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                           )
-                         ],
-                       ),
-                     ),)
-               ),
-               Positioned(bottom: 0,
-                 child: Container(height: MediaQuery.sizeOf(context).height * (2/3) ,
-                   width: MediaQuery.sizeOf(context).width,
-                   decoration: const BoxDecoration(
-                     color: Colors.white,
-                     borderRadius: BorderRadius.only(topRight: Radius.circular(32), topLeft: Radius.circular(32) ),
-                   ),
-                   child: Padding(
-                     padding: const EdgeInsets.all(10.0),
-                     child: Column(
-                       children: [
-                         Padding(
-                           padding: const EdgeInsets.only(top: 50),
-                           child: OTPInput(
-                             length: 6,
-                             onchange: (String pin){
+        return SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
+          child: Stack(
+            children: [
+              Positioned(
+                  top: 0,
+                  child: Container(
+                    color: Colors.white38,
+                    height: MediaQuery.sizeOf(context).height * (1 / 3),
+                    width: MediaQuery.sizeOf(context).width,
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: InkWell(
+                                onTap: () => context.router.pop(),
+                                child: Icon(Icons.arrow_back)),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(top: 25, right: 32, bottom: 8),
+                            child: wText(getLocalization().enterYourOTP,
+                                style: TextStyle(
+                                    fontSize: 32, fontWeight: FontWeight.w600)),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 32, bottom: 8),
+                            child: wText(
+                                getLocalization().weveSentaOneTimePine(
+                                    obscureNumber(widget.userModel!.mobile)),
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.w400)),
+                          )
+                        ],
+                      ),
+                    ),
+                  )),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  height: MediaQuery.sizeOf(context).height * (2 / 3),
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(32),
+                        topLeft: Radius.circular(32)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: OTPInput(
+                            length: 6,
+                            onchange: (String pin) {
                               getBloc().add(OTPEnteredEvent(otp: pin));
                               getBloc().add(OTPGetTokenEvent(stage: 2));
-                           },),
-                         ),
-                         if(state.dataState == DataState.error && state is OTPGetTokenState)
-                         wText(getLocalization().incorrectOtpEntered, style: TextStyle(color: Colors.red)),
-                         const Spacer(),
-                         PrimaryButton(
-                           width: MediaQuery.sizeOf(context).width,
-                           style: ButtonStyle(
-                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                 return BorderSide(
-                                   color: states.contains(MaterialState.disabled)?
-                                   theme.colorScheme.secondary.withOpacity(0):
-                                   theme.colorScheme.secondary,
-                                   width: 2,
-                                 );
-                               }
-                               ),
-                               backgroundColor: MaterialStateProperty.resolveWith(
-                                       (Set<MaterialState> states){
-                                     return states.contains(MaterialState.disabled)?
-                                     theme.colorScheme.secondary.withOpacity(0.3):
-                                     theme.colorScheme.secondary;
-                                   }
-                               )
-                           ),
-                           onPressed: !getBloc().checked?null:() {
-                           //  getBloc().add(OTPGetTokenEvent(smsCode: getBloc().otp!,verificationId: "" ));
-                             getToken(otp: getBloc().otp!);
-                           },
-                           child: Text(getLocalization().ccontinue),
-                         ),
-                         Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
-                         child: Center(
-                          child: InkWell(
-                            onTap: ()=> context.router.push(ResendOTPRoute(userModel: widget.userModel!)) ,
-                            child: wText(getLocalization().iDidntReceiveACode, style:
-                            const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                          )
-                         ),)
-
-                       ],
-                     ),
-                   ),
-                   ),
-                 ),
-             ],
-           ),
-         );
+                            },
+                          ),
+                        ),
+                        if (state.dataState == DataState.error &&
+                            state is OTPGetTokenState)
+                          wText(getLocalization().incorrectOtpEntered,
+                              style: TextStyle(color: Colors.red)),
+                        const Spacer(),
+                        PrimaryButton(
+                          width: MediaQuery.sizeOf(context).width,
+                          style: ButtonStyle(side:
+                              MaterialStateProperty.resolveWith(
+                                  (Set<MaterialState> states) {
+                            return BorderSide(
+                              color: states.contains(MaterialState.disabled)
+                                  ? theme.colorScheme.secondary.withOpacity(0)
+                                  : theme.colorScheme.secondary,
+                              width: 2,
+                            );
+                          }), backgroundColor:
+                              MaterialStateProperty.resolveWith(
+                                  (Set<MaterialState> states) {
+                            return states.contains(MaterialState.disabled)
+                                ? theme.colorScheme.secondary.withOpacity(0.3)
+                                : theme.colorScheme.secondary;
+                          })),
+                          onPressed: !getBloc().checked
+                              ? null
+                              : () {
+                                  //  getBloc().add(OTPGetTokenEvent(smsCode: getBloc().otp!,verificationId: "" ));
+                                  getToken(otp: getBloc().otp!);
+                                },
+                          child: Text(getLocalization().ccontinue),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 24, bottom: 14),
+                          child: Center(
+                              child: InkWell(
+                            onTap: () => context.router.push(
+                                ResendOTPRoute(userModel: widget.userModel!)),
+                            child: wText(getLocalization().iDidntReceiveACode,
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w600)),
+                          )),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }
@@ -274,15 +288,13 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
   Future<void> getToken({required String otp}) async {
     try {
       getBloc().add(OTPGetTokenEvent(stage: 0));
-      PhoneAuthCredential credential =  PhoneAuthProvider.credential(
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: widget.verificationId!, smsCode: otp);
       getBloc().add(OTPGetTokenEvent(stage: 1));
     } catch (ex) {
       getBloc().add(OTPGetTokenEvent(stage: -1));
-
     }
   }
-
 
   @override
   otpBloc initBloc() {
@@ -294,4 +306,29 @@ class _otpPageState extends BasePageState<OTPPage, otpBloc> {
     return locator<AppLocalizations>();
   }
 
+  _routePage(
+      {required BuildContext context, required ProfileEntity profileEntity}) {
+    if (isNullOrDefault(profileEntity.type)) {
+      context.router.push(const SetupProfileRoute());
+    } else if (isNullOrDefault(profileEntity.acceptedTermsAndConditions)) {
+      context.router.push(const RegisterAccountStep1Route());
+    } else if (isNullOrDefault(profileEntity.qualifications) &&
+        isNullOrDefault(profileEntity.workExperience)) {
+      context.router.push(QualificationsRoute(profileEntity: profileEntity));
+    } else if (isNullOrDefault(profileEntity.skills)) {
+      context.router.push(AddSkillsRoute(profileEntity: profileEntity!));
+    } else if (isNullOrDefault(profileEntity.hourlyRate)) {
+      context.router.push(const RateAndWorkTimesRoute());
+    } else if (isNullOrDefault(profileEntity.paymentDetails?.bankName)) {
+      context.router.push(const BankDetailsRoute());
+    } else if (isNullOrDefault(profileEntity.location?.address)) {
+      context.router.push(
+        const LocationRoute(),
+      );
+    } else if (isNullOrDefault(profileEntity.description)) {
+      context.router.push(FinalDetailsRoute(profileEntity: profileEntity));
+    } else {
+      routeToPaymentOrHome(context: context, profileEntity: profileEntity);
+    }
+  }
 }

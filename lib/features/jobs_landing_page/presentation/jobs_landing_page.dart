@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/base_classes/base_page.dart';
@@ -28,18 +30,19 @@ import 'bloc/jobs_landing_page_bloc.dart';
 class JobsLandingPage extends BasePage {
   const JobsLandingPage({super.key});
 
-
   @override
   State<JobsLandingPage> createState() => _JobsLandingPageState();
 }
 
-class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPageBloc> {
-
-  RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+class _JobsLandingPageState
+    extends BasePageState<JobsLandingPage, JobsLandingPageBloc> {
+  static const kSmallCardSize = 155.0;
+  static const kOrdinaryCardSize = 192.0;
+  static const kServiceCardVerticalPadding = 40.0;
+  late final _refreshController = RefreshController(initialRefresh: false);
   bool laterFlagged = false;
 
-  void _onRefresh() async{
+  void _onRefresh() async {
     // monitor network fetch
     getBloc().add(JobsLandingPageEnteredEvent());
     // if failed,use refreshFailed()
@@ -51,59 +54,69 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
     super.initState();
     getBloc().add(JobsLandingPageEnteredEvent());
   }
+
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     return BlocConsumer<JobsLandingPageBloc, JobsLandingPageState>(
-        listener: (context, state) {
+      listener: (context, state) {
         //loading GetIndustriesState
-          if(state is GetTopIndustriesState && state.dataState == DataState.loading){
-            if(!getBloc().preloaderActive){
-              getBloc().preloaderActive = true;
-              preloader(context);
-            }
+        if (state is GetTopIndustriesState &&
+            state.dataState == DataState.loading) {
+          if (!getBloc().preloaderActive) {
+            getBloc().preloaderActive = true;
+            preloader(context);
           }
-          //loading
-          if(state is GetTopIndustriesState && state.dataState == DataState.success){
-            getBloc().preloaderActive = false;
-            Navigator.of(context, rootNavigator: true).pop();
-          }
-          //error
-          if(state is GetTopIndustriesState && state.dataState == DataState.error){
-            getBloc().preloaderActive = false;
-            Navigator.of(context, rootNavigator: true).pop();
-            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
-          }
-        },
-        builder: (context, state) {
-          PaginatedIndustryEntity? industries = getBloc().pageEntity?.services;
-          return Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).height,
-            padding: wPagePadding(top: 0),
-            child: SmartRefresher(
-              controller: _refreshController,
-              onRefresh: _onRefresh,
-              child: SingleChildScrollView(
+        }
+        //loading
+        if (state is GetTopIndustriesState &&
+            state.dataState == DataState.success) {
+          getBloc().preloaderActive = false;
+          Navigator.of(context, rootNavigator: true).pop();
+        }
+        //error
+        if (state is GetTopIndustriesState &&
+            state.dataState == DataState.error) {
+          getBloc().preloaderActive = false;
+          Navigator.of(context, rootNavigator: true).pop();
+          wErrorPopUp(
+              message: state.error!,
+              type: getLocalization().error,
+              context: context);
+        }
+      },
+      builder: (context, state) {
+        PaginatedIndustryEntity? industries = getBloc().pageEntity?.services;
+        return Container(
+          width: MediaQuery.sizeOf(context).width,
+          padding: wPagePadding(top: 0),
+          child: SmartRefresher(
+            controller: _refreshController,
+            onRefresh: _onRefresh,
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   AppExplorationTile(
                     title: getLocalization().exploreAllJobs,
-                    onClick: ()=>context.router.push(AllServicesRoute(pageMode: ServicesPageMode.working)),
+                    onClick: () => context.router.push(
+                        AllServicesRoute(pageMode: ServicesPageMode.working)),
                   ),
                   10.height,
                   AppExplorationTile(
                     title: getLocalization().myJobRequests,
                     count: getBloc().pageEntity?.jobRequests.length,
                     icon: const Icon(Iconsax.document_text_14),
-                    onClick: (){
-                      try{
-                        context.router.push(JobOffersListRoute(jobRequests: getBloc().pageEntity?.jobRequests??[]));
-                      }catch(ex){
+                    onClick: () {
+                      try {
+                        context.router.push(JobOffersListRoute(
+                            jobRequests:
+                                getBloc().pageEntity?.jobRequests ?? []));
+                      } catch (ex) {
                         logger.e(ex);
                       }
-                      },
+                    },
                   ),
                   // 10.height,
                   // AppExplorationTile(
@@ -115,12 +128,15 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                   40.height,
                   Row(
                     children: [
-                      Expanded(child: Text(
+                      Expanded(
+                          child: Text(
                         getLocalization().recommendedForYou,
                         style: theme.textTheme.titleMedium,
                       )),
                       TextButton(
-                          onPressed: ()=> context.router.push(JobListRoute(pageMode: JobListMode.recommendedJobs, filter: FilterEntity())),
+                          onPressed: () => context.router.push(JobListRoute(
+                              pageMode: JobListMode.recommendedJobs,
+                              filter: FilterEntity())),
                           child: Row(
                             children: [
                               Text(
@@ -137,33 +153,47 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                           ))
                     ],
                   ),
-                  if(getBloc().pageEntity!=null)ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: (getBloc().pageEntity!.recommendedJobs.length<3)?getBloc().pageEntity?.recommendedJobs.length:3,
-                    itemBuilder: (BuildContext context, int index){
-                      var e = getBloc().pageEntity!.recommendedJobs[index];
-                      return AppJobAdvertCard.matching(
-                        jobName: e.title,
-                        employerName: "${e.customer?.firstName} ${e.customer?.surname}",
-                        locationName: e.address??e.customer?.address??getLocalization().noAddressSpecified,
-                        dateTime: e.startDate,
-                        time: e.startTime,
-                        image: (e.customer?.profileImage!=null)?
-                        CachedNetworkImageProvider(e.customer!.profileImage!):null,
-                        onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
-                        ,);
-                    },
-                  ),
+                  if (getBloc().pageEntity != null)
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount:
+                          (getBloc().pageEntity!.recommendedJobs.length < 3)
+                              ? getBloc().pageEntity?.recommendedJobs.length
+                              : 3,
+                      itemBuilder: (BuildContext context, int index) {
+                        var e = getBloc().pageEntity!.recommendedJobs[index];
+                        return AppJobAdvertCard.matching(
+                          jobName: e.title,
+                          employerName:
+                              "${e.customer?.firstName} ${e.customer?.surname}",
+                          locationName: e.address ??
+                              e.customer?.address ??
+                              getLocalization().noAddressSpecified,
+                          dateTime: e.startDate,
+                          time: e.startTime,
+                          image: (e.customer?.profileImage != null)
+                              ? CachedNetworkImageProvider(
+                                  e.customer!.profileImage!)
+                              : null,
+                          onNext: () => context.router
+                              .push(JobDetailsRoute(jobId: e.id, job: e)),
+                        );
+                      },
+                    ),
                   40.height,
                   Row(
                     children: [
-                      Expanded(child: Text(
+                      Expanded(
+                          child: Text(
                         getLocalization().inYourArea,
                         style: theme.textTheme.titleMedium,
                       )),
                       TextButton(
-                          onPressed: ()=> context.router.push(JobListRoute(pageMode: JobListMode.inYourArea, filter: FilterEntity(distance: 20), pageTitle: getLocalization().inYourArea)),
+                          onPressed: () => context.router.push(JobListRoute(
+                              pageMode: JobListMode.inYourArea,
+                              filter: FilterEntity(distance: 20),
+                              pageTitle: getLocalization().inYourArea)),
                           child: Row(
                             children: [
                               Text(
@@ -180,27 +210,41 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                           ))
                     ],
                   ),
-                  if(getBloc().pageEntity!=null)Column(
-                    children: getBloc().pageEntity?.jobsNearMe.map((e) => AppJobAdvertCard.matching(
-                      jobName: e.title,
-                      employerName: "${e.customer?.firstName} ${e.customer?.surname}",
-                      locationName: e.address??e.customer?.address??getLocalization().noAddressSpecified,
-                      dateTime: DateTime.now(),
-                      time: e.startTime,
-                      image: (e.customer?.profileImage!=null)?
-                        CachedNetworkImageProvider(e.customer!.profileImage!):null,
-                      onNext: ()=>context.router.push(JobDetailsRoute(jobId: e.id, job: e))
-                      ,)).toList()??[],
-                  ),
+                  if (getBloc().pageEntity != null)
+                    Column(
+                      children: getBloc()
+                              .pageEntity
+                              ?.jobsNearMe
+                              .map((e) => AppJobAdvertCard.matching(
+                                    jobName: e.title,
+                                    employerName:
+                                        "${e.customer?.firstName} ${e.customer?.surname}",
+                                    locationName: e.address ??
+                                        e.customer?.address ??
+                                        getLocalization().noAddressSpecified,
+                                    dateTime: DateTime.now(),
+                                    time: e.startTime,
+                                    image: (e.customer?.profileImage != null)
+                                        ? CachedNetworkImageProvider(
+                                            e.customer!.profileImage!)
+                                        : null,
+                                    onNext: () => context.router.push(
+                                        JobDetailsRoute(jobId: e.id, job: e)),
+                                  ))
+                              .toList() ??
+                          [],
+                    ),
                   40.height,
                   Row(
                     children: [
-                      Expanded(child: Text(
+                      Expanded(
+                          child: Text(
                         getLocalization().otherServices,
                         style: theme.textTheme.titleMedium,
                       )),
                       TextButton(
-                          onPressed: ()=> context.router.push(AllServicesRoute(pageMode: ServicesPageMode.working)),
+                          onPressed: () => context.router.push(AllServicesRoute(
+                              pageMode: ServicesPageMode.working)),
                           child: Row(
                             children: [
                               Text(
@@ -217,57 +261,109 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
                           ))
                     ],
                   ),
-                  if(industries!=null )Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                            children: [
+                  if (industries != null)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        if (industries.industries.length > 1) Expanded(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                                minHeight: kSmallCardSize +
+                                    kOrdinaryCardSize +
+                                    kServiceCardVerticalPadding),
+                            child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
                               AppSectionCard.small(
                                 title: industries.industries[0].industry!,
                                 color: const Color(0xFFF17E2C),
-                                icon: const Icon(Iconsax.setting,
+                                icon: const Icon(
+                                  Iconsax.setting,
                                   color: Colors.white,
                                   size: 20,
                                 ),
-                                onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[0].id.toString()), pageTitle: industries.industries[0].industry)),
+                                onClick: () => context.router.push(JobListRoute(
+                                    pageMode: JobListMode.categoryJobs,
+                                    filter: FilterEntity(
+                                        industryId: industries.industries[0].id
+                                            .toString()),
+                                    pageTitle:
+                                        industries.industries[0].industry)),
                               ),
                               10.height,
                               AppSectionCard(
-                                icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
+                                icon: const Icon(
+                                  Iconsax.setting,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                                 title: industries.industries[1].industry!,
                                 color: const Color(0xFF23A8B3),
-                                onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[1].id.toString()), pageTitle: industries.industries[1].industry)),
+                                onClick: () => context.router.push(JobListRoute(
+                                    pageMode: JobListMode.categoryJobs,
+                                    filter: FilterEntity(
+                                        industryId: industries.industries[1].id
+                                            .toString()),
+                                    pageTitle:
+                                        industries.industries[1].industry)),
                               ),
                             ]),
-                      ),
-                      10.width,
-                      Expanded(
-                        child: Column(
-                            children: [
-                              AppSectionCard(
-                                icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                                title: industries.industries[2].industry!,
-                                color: const Color(0xFF3EB62B),
-                                onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[2].id.toString()), pageTitle: industries.industries[2].industry)),
+                          ),
+                        ), // First column of 2
+                        if (industries.industries.length > 3) 10.width,      // Divider for second colum if there are at least 4 element
+                        if (industries.industries.length > 3) Expanded(
+                            child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                              minHeight: kSmallCardSize +
+                                  kOrdinaryCardSize +
+                                  kServiceCardVerticalPadding),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                              children: [
+                            AppSectionCard(
+                              icon: const Icon(
+                                Iconsax.setting,
+                                color: Colors.white,
+                                size: 20,
                               ),
-                              10.height,
-                              AppSectionCard.small(
-                                icon: const Icon(Iconsax.setting, color: Colors.white, size: 20,),
-                                title: industries.industries[3].industry!,
-                                color: const Color(0xFFF44F4E),
-                                onClick:() => context.router.push(JobListRoute(pageMode: JobListMode.categoryJobs, filter: FilterEntity(industryId: industries.industries[3].id.toString()), pageTitle: industries.industries[3].industry)),
+                              title: industries.industries[2].industry!,
+                              color: const Color(0xFF3EB62B),
+                              onClick: () => context.router.push(JobListRoute(
+                                  pageMode: JobListMode.categoryJobs,
+                                  filter: FilterEntity(
+                                      industryId: industries.industries[2].id
+                                          .toString()),
+                                  pageTitle:
+                                      industries.industries[2].industry)),
+                            ),
+                            10.height,
+                            AppSectionCard.small(
+                              icon: const Icon(
+                                Iconsax.setting,
+                                color: Colors.white,
+                                size: 20,
                               ),
-                            ]),
-                      ),
-                    ],
-                  )
-
+                              title: industries.industries[3].industry!,
+                              color: const Color(0xFFF44F4E),
+                              onClick: () => context.router.push(JobListRoute(
+                                  pageMode: JobListMode.categoryJobs,
+                                  filter: FilterEntity(
+                                      industryId: industries.industries[3].id
+                                          .toString()),
+                                  pageTitle:
+                                      industries.industries[3].industry)),
+                            ),
+                          ]),
+                        )), // Second column of 2
+                      ],
+                    ),
                 ],
               ),
             ),
           ),
-          );
-        },
+        );
+      },
     );
   }
 
@@ -282,12 +378,14 @@ class _JobsLandingPageState extends BasePageState<JobsLandingPage, JobsLandingPa
   }
 
   @override
-  PreferredSizeWidget buildAppbar(){
+  PreferredSizeWidget buildAppbar() {
     return getAppBar(
-      title:   wText(getLocalization().jobs),
+      title: wText(getLocalization().jobs),
       leading: const Icon(Iconsax.briefcase),
       actions: [
-        TextButton(onPressed: ()=> context.router.push(const BurgerMenuRoute()), child: SvgPicture.asset("assets/menu.svg"))
+        TextButton(
+            onPressed: () => context.router.push(const BurgerMenuRoute()),
+            child: SvgPicture.asset("assets/menu.svg"))
       ],
     );
   }

@@ -1,30 +1,30 @@
 import 'dart:io';
-
-import 'package:auto_route/annotations.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_ui_components/flutter_ui_components.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:pickme/base_classes/base_state.dart';
-import 'package:pickme/core/locator/locator.dart';
-import 'package:pickme/localization/generated/l10n.dart';
-import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
+import 'bloc/final_details_bloc.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/annotations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pickme/navigation/app_route.dart';
-import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
+import 'package:pickme/core/locator/locator.dart';
+import 'package:pickme/shared/widgets/w_text.dart';
+import 'package:pickme/base_classes/base_page.dart';
+import 'package:pickme/base_classes/base_state.dart';
+import 'package:pickme/localization/generated/l10n.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_labeled_panel.dart';
-import 'package:pickme/shared/widgets/w_progress_indicator.dart';
-import 'package:pickme/shared/widgets/w_text.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_ui_components/flutter_ui_components.dart';
+import '../../../shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
 import '../../../shared/in_app_purchases/presentation/models/in_app_purchase_details.dart';
-import 'bloc/final_details_bloc.dart';
 
 @RoutePage()
 class FinalDetailsPage extends BasePage {
-  const FinalDetailsPage({super.key});
+  const FinalDetailsPage({super.key, required this.profileEntity});
+
+  final ProfileEntity profileEntity;
 
   @override
   State<FinalDetailsPage> createState() => _FinalDetailsPageState();
@@ -33,16 +33,13 @@ class FinalDetailsPage extends BasePage {
 class _FinalDetailsPageState
     extends BasePageState<FinalDetailsPage, FinalDetailsBloc> {
   bool isSelectingProfilePicture = false;
-  DialogRoute? _dialogRoute;
 
+  bool get hasPaidSubscription => widget.profileEntity.subscriptionPaid == true;
   final TextEditingController aboutYouController = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
-  PreferredSizeWidget? buildAppbar() {
-    return null;
-  }
-
+  PreferredSizeWidget? buildAppbar() => null;
 
   @override
   Widget buildView(BuildContext context) {
@@ -185,8 +182,7 @@ class _FinalDetailsPageState
                           controller: aboutYouController,
                           keyboardType: TextInputType.multiline,
                           labelText:
-                              getLocalization().aboutYouBasedOnYourProfile +
-                                  "*",
+                              getLocalization().aboutYouBasedOnYourProfile,
                           textFieldType: TextFieldType.OTHER,
                           maxLines: 10,
                           maxLength: 2000,
@@ -241,13 +237,19 @@ class _FinalDetailsPageState
                           ),
                         ),
                       40.height,
-                      Text(getLocalization().whatIsBeingPaid,
-                          style: const TextStyle(
-                            color: Colors.black45,
-                          )),
-                      5.height,
-                      Text(
-                        getLocalization().theOnceOff50RandSubscription,
+                      Visibility(
+                        visible: !hasPaidSubscription,
+                        child: Text(getLocalization().whatIsBeingPaid,
+                            style: const TextStyle(
+                              color: Colors.black45,
+                            )),
+                      ),
+                      Visibility(
+                          visible: !hasPaidSubscription, child: 5.height),
+                      Visibility(
+                        visible: !hasPaidSubscription,
+                        child: Text(
+                            getLocalization().theOnceOff50RandSubscription),
                       ),
                       40.height,
                       Row(
@@ -273,7 +275,9 @@ class _FinalDetailsPageState
                                 getBloc().add(SubmitClickedEvent(
                                     description: aboutYouController.text));
                               },
-                              child: Text(getLocalization().payNow),
+                              child: Text(hasPaidSubscription
+                                  ? getLocalization().createProfile
+                                  : getLocalization().payNow),
                             ),
                           ),
                         ],
@@ -301,7 +305,7 @@ class _FinalDetailsPageState
   }
 
   _handleSubmitClickedState(SubmitClickedState state, BuildContext context) {
-     _dismissLoadingIndicator();
+    dismissLoadingIndicator();
     switch (state.dataState) {
       case DataState.init:
         break;
@@ -319,7 +323,7 @@ class _FinalDetailsPageState
         }
       case DataState.loading:
       case DataState.reloading:
-        _addLoadingIndicator(context);
+        addLoadingIndicator(context);
       case DataState.error:
         _onNonRecoverableError(context, state.error);
     }
@@ -327,13 +331,13 @@ class _FinalDetailsPageState
 
   _handleUpdatePurchaseDetailsState(
       BuildContext context, UpdatePurchaseDetailsState state) {
-    _dismissLoadingIndicator();
+    dismissLoadingIndicator();
     switch (state.dataState) {
       case DataState.init:
         break;
       case DataState.loading:
       case DataState.reloading:
-        _addLoadingIndicator(context);
+        addLoadingIndicator(context);
       case DataState.success:
         final activationDetails = state.activationResultDetails;
         if (activationDetails == null) {
@@ -350,7 +354,7 @@ class _FinalDetailsPageState
   }
 
   _handleInAppPurchaseState(InAppPurchaseState state, BuildContext context) {
-    _dismissLoadingIndicator();
+    dismissLoadingIndicator();
     final error = state.error, product = state.product;
 
     switch (state.runtimeType) {
@@ -366,10 +370,23 @@ class _FinalDetailsPageState
         }
         break;
       case InAppPurchaseLoadingState:
-        _addLoadingIndicator(context);
+        addLoadingIndicator(context);
       case InAppPurchasedState:
         if ((state as InAppPurchasedState).isPurchasedCancelled) {
           _showConfirmationDialog(context);
+        }
+        break;
+      case InAppPurchaseRecoverableErrorState:
+        if (error != null) {
+          _onNonRecoverableError(context, error);
+        } else {
+          final purchaseDetails =
+              (state as InAppPurchaseRecoverableErrorState).purchaseDetails;
+          if (purchaseDetails == null) {
+            _onNonRecoverableError(context, error);
+          } else {
+            _showRetryDialog(context, purchaseDetails);
+          }
         }
         break;
       case InAppPurchaseActivatedState:
@@ -489,11 +506,9 @@ class _FinalDetailsPageState
     if (result != null) {
       getBloc().add(ProfilePictureAddedEvent(filePath: result.path));
     } else {
-      // User canceled the file picker
-      // Handle accordingly (e.g., show a message)
+      dismissLoadingIndicator();
     }
   }
-
   // mark - Loading, Error Handling
 
   _onNonRecoverableError(BuildContext context, String? error) {
@@ -503,18 +518,4 @@ class _FinalDetailsPageState
         type: getLocalization().error,
         context: context);
   }
-
-  _dismissLoadingIndicator() {
-    final dialogRoute = _dialogRoute;
-    if (dialogRoute != null) {
-      Navigator.of(context).pop(dialogRoute);
-      _dialogRoute = null;
-    }
-  }
-
-  _addLoadingIndicator(BuildContext context) {
-    if (_dialogRoute != null) return;
-    _dialogRoute = preloader(context);
-  }
-
 }

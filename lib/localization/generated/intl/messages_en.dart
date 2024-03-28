@@ -112,7 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "applyFilters": MessageLookupByLibrary.simpleMessage("Apply filters"),
         "areYouSureYouWantToCancelThisPurchase":
             MessageLookupByLibrary.simpleMessage(
-                "Are you sure you would like to cancel the in-app purchase"),
+                "Are you sure you would like the subscription payment?"),
         "areYouSureYouWantToDeleteYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you would like to delete your account."),
@@ -222,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Explore all services"),
         "fieldCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Field cannot be empty"),
+        "fileExceedsUploadableSize": MessageLookupByLibrary.simpleMessage(
+            "Image exceeds size limit. Please upload an image less than 4MB"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
@@ -484,6 +486,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Preferred industry *"),
         "present": MessageLookupByLibrary.simpleMessage("Present"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "profileNotFound":
+            MessageLookupByLibrary.simpleMessage("Profile not found"),
         "proposeAlternative":
             MessageLookupByLibrary.simpleMessage("Propose Alternative"),
         "proposeAnotherTime":

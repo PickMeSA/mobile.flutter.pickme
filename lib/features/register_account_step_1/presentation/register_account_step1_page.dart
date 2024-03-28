@@ -8,12 +8,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
 import 'package:pickme/shared/in_app_purchases/presentation/in_app_purchase_bloc.dart';
 import 'package:pickme/shared/mixins/route_page_mixin.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/functions/utlis.dart';
 import '../domain/entities/subscription_plan_entity.dart';
 import 'bloc/register_account_step1_bloc.dart';
 
@@ -21,98 +23,107 @@ import 'bloc/register_account_step1_bloc.dart';
 class RegisterAccountStep1Page extends BasePage {
   const RegisterAccountStep1Page({super.key});
 
-
   @override
   State<RegisterAccountStep1Page> createState() => _RegisterAccountStep1State();
 }
 
-class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc> with RoutePageMixin {
+class _RegisterAccountStep1State
+    extends BasePageState<RegisterAccountStep1Page, RegisterAccountStep1Bloc>
+    with PaymentPageMixin {
   @override
   Widget buildView(BuildContext context) {
     var theme = Theme.of(context);
     return MultiBlocListener(
-      listeners: [
-        BlocListener<RegisterAccountStep1Bloc, RegisterAccountStep1State>(
+        listeners: [
+          BlocListener<RegisterAccountStep1Bloc, RegisterAccountStep1State>(
+              listener: (context, state) {
+            if (state.dataState == DataState.loading &&
+                state is SubmitAcceptedTermsAndConditionsState) {
+              preloader(context);
+            }
+            if (state.dataState == DataState.success &&
+                state is SubmitAcceptedTermsAndConditionsState) {
+              Navigator.pop(context);
+              _routePage(context, state.profileEntity!);
+            }
+            if (state.dataState == DataState.error &&
+                state is SubmitAcceptedTermsAndConditionsState) {
+              Navigator.pop(context);
+              wErrorPopUp(
+                  message: state.error!,
+                  type: getLocalization().error,
+                  context: context);
+            }
+          }),
+          BlocListener<InAppPurchasesBloc, BaseState>(
             listener: (context, state) {
-          if(state.dataState == DataState.loading && state is SubmitAcceptedTermsAndConditionsState){
-            preloader(context);
-          }
-          if(state.dataState == DataState.success && state is SubmitAcceptedTermsAndConditionsState){
-            Navigator.pop(context);
-            routePageReg(context: context, profileEntity: state.profileEntity!);
-          }
-          if(state.dataState == DataState.error && state is SubmitAcceptedTermsAndConditionsState){
-            Navigator.pop(context);
-            wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
-          }
-        }),
-        BlocListener<InAppPurchasesBloc, BaseState>(
-          listener: (context, state) {
-            if (state is InAppPurchasedState) {}
-            if (state is InAppRestoredState) {}
-            if (state is InAppNotFoundState) {}
-            if (state is InAppPurchaseLoadingState) {}
-          },
-        ),
-      ],
-      child: BlocBuilder<RegisterAccountStep1Bloc, RegisterAccountStep1State>(builder: (context, state) {
-        return Container(
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height,
-        //  padding: wPagePadding(),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  wText(
-                    getLocalization().step1,
-                    style: theme.textTheme.headlineLarge!.copyWith(
-                      color: theme.primaryColor,
-                      // fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  Row(
+              if (state is InAppPurchasedState) {}
+              if (state is InAppRestoredState) {}
+              if (state is InAppNotFoundState) {}
+              if (state is InAppPurchaseLoadingState) {}
+            },
+          ),
+        ],
+        child: BlocBuilder<RegisterAccountStep1Bloc, RegisterAccountStep1State>(
+          builder: (context, state) {
+            return Container(
+              width: MediaQuery.sizeOf(context).width,
+              height: MediaQuery.sizeOf(context).height,
+              //  padding: wPagePadding(),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: wText(
-                          getLocalization().letsOnboardYou,
-                          style: theme.textTheme.headlineLarge!.copyWith(
-                            fontWeight: FontWeight.w300
-                          ),
+                      wText(
+                        getLocalization().step1,
+                        style: theme.textTheme.headlineLarge!.copyWith(
+                          color: theme.primaryColor,
+                          // fontWeight: FontWeight.bold
                         ),
                       ),
-                    ],
-                  ),
-                  30.height,
-                  Column(
-                    children: mockSubscriptionPlans.map((plan) =>
-                        AppSubscriptionPlan(
-                      price: "${getLocalization().r}${plan.price.toStringAsFixed(2)}",
-                      subscriptionType: plan.subscriptionType,
-                      entityType: plan.entityType,
-                      selected: true,
-                      includedItems: plan.includedItems,
-                          onInformationClick: ()=>context.router.push(const MembershipInformationRoute()),
-                    )).toList(),
-                  ),
-                  10.height,
-                  Row(
-                    children: [
-                      AppCheckbox(value: state.checked, onChanged: (bool? checked){
-                        getBloc().add(TermsAndConditionsToggledEvent());
-                      }),
-                      16.width,
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                              children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: wText(
+                              getLocalization().letsOnboardYou,
+                              style: theme.textTheme.headlineLarge!
+                                  .copyWith(fontWeight: FontWeight.w300),
+                            ),
+                          ),
+                        ],
+                      ),
+                      30.height,
+                      Column(
+                        children: mockSubscriptionPlans
+                            .map((plan) => AppSubscriptionPlan(
+                                  price:
+                                      "${getLocalization().r}${plan.price.toStringAsFixed(2)}",
+                                  subscriptionType: plan.subscriptionType,
+                                  entityType: plan.entityType,
+                                  selected: true,
+                                  includedItems: plan.includedItems,
+                                  onInformationClick: () => context.router
+                                      .push(const MembershipInformationRoute()),
+                                ))
+                            .toList(),
+                      ),
+                      10.height,
+                      Row(
+                        children: [
+                          AppCheckbox(
+                              value: state.checked,
+                              onChanged: (bool? checked) {
+                                getBloc().add(TermsAndConditionsToggledEvent());
+                              }),
+                          16.width,
+                          Expanded(
+                            child: RichText(
+                              text: TextSpan(children: [
                                 TextSpan(
                                     text: "${getLocalization().iHaveReadThe} ",
-                                    style: theme.textTheme.bodyMedium
-                                ),
-
+                                    style: theme.textTheme.bodyMedium),
                                 TextSpan(
                                     text: getLocalization().termsAndConditions,
                                     style: theme.textTheme.bodyMedium!.copyWith(
@@ -120,67 +131,72 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                                     ),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        context.router.push(const TermsAndConditionsRoute());
-                                      }
-                                ),
-                              ]
+                                        context.router.push(
+                                            const TermsAndConditionsRoute());
+                                      }),
+                              ]),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                  40.height,
-                  Row(
-                    children: [
-                      Container(
-                        height: 56,
-                        width: 56,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 2,
-                                color: Colors.black),
-                            borderRadius: const BorderRadius.all(Radius.circular(10))),
-                        child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
-
-                      ),
-                      const SizedBox(width: 10,),
-                      Expanded(
-                        child: PrimaryButton(
-                          style: ButtonStyle(
-                              side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                      40.height,
+                      Row(
+                        children: [
+                          Container(
+                            height: 56,
+                            width: 56,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(width: 2, color: Colors.black),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(10))),
+                            child: InkWell(
+                                onTap: () => context.router.pop(),
+                                child: const Icon(Icons.arrow_back)),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: PrimaryButton(
+                              style: ButtonStyle(side:
+                                  MaterialStateProperty.resolveWith(
+                                      (Set<MaterialState> states) {
                                 return BorderSide(
-                                  color: states.contains(MaterialState.disabled)?
-                                  theme.colorScheme.secondary.withOpacity(0):
-                                  theme.colorScheme.secondary,
+                                  color: states.contains(MaterialState.disabled)
+                                      ? theme.colorScheme.secondary
+                                          .withOpacity(0)
+                                      : theme.colorScheme.secondary,
                                   width: 2,
                                 );
-                              }
-                              ),
-                              backgroundColor: MaterialStateProperty.resolveWith(
-                                      (Set<MaterialState> states){
-                                    return states.contains(MaterialState.disabled)?
-                                    theme.colorScheme.secondary.withOpacity(0.3):
-                                    theme.colorScheme.secondary;
-                                  }
-                              )
+                              }), backgroundColor:
+                                  MaterialStateProperty.resolveWith(
+                                      (Set<MaterialState> states) {
+                                return states.contains(MaterialState.disabled)
+                                    ? theme.colorScheme.secondary
+                                        .withOpacity(0.3)
+                                    : theme.colorScheme.secondary;
+                              })),
+                              onPressed: !state.checked
+                                  ? null
+                                  : () {
+                                      getBloc().add(
+                                          SubmitAcceptedTermsAndConditionsEvent());
+                                    },
+                              child: Text(getLocalization().nextStep),
+                            ),
                           ),
-                          onPressed: !state.checked?null:() {
-                            getBloc().add(SubmitAcceptedTermsAndConditionsEvent());
-                          },
-                          child: Text(getLocalization().nextStep),
-                        ),
+                        ],
                       ),
-
-                    ],
-                  ),
-                  20.height,
-                  RichText(
-                    text: TextSpan(
-                        children: [
+                      20.height,
+                      RichText(
+                        text: TextSpan(children: [
                           TextSpan(
-                              text: "${getLocalization().ifYouVePreviouslyPurchasedASubscriptionKindlySelect} ",
-                              style: theme.textTheme.bodyMedium!.copyWith(color: Colors.black54,)
-                          ),
-
+                              text:
+                                  "${getLocalization().ifYouVePreviouslyPurchasedASubscriptionKindlySelect} ",
+                              style: theme.textTheme.bodyMedium!.copyWith(
+                                color: Colors.black54,
+                              )),
                           TextSpan(
                               text: getLocalization().restorePurchase,
                               style: theme.textTheme.bodyMedium!.copyWith(
@@ -188,20 +204,18 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                BlocProvider.of<InAppPurchasesBloc>(context).add(RestoreSubscriptionEvent());
-                                }
-                          ),
-                        ]
-                    ),
-                  )
-                ],
+                                  BlocProvider.of<InAppPurchasesBloc>(context)
+                                      .add(RestoreSubscriptionEvent());
+                                }),
+                        ]),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-        );
-      },
-      )
-    );
+            );
+          },
+        ));
   }
 
   @override
@@ -212,5 +226,26 @@ class _RegisterAccountStep1State extends BasePageState<RegisterAccountStep1Page,
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  _routePage(BuildContext context, ProfileEntity profileEntity) {
+    if (isNullOrDefault(profileEntity.qualifications) &&
+        isNullOrDefault(profileEntity.workExperience)) {
+      context.router.push(QualificationsRoute(profileEntity: profileEntity!));
+    } else if (isNullOrDefault(profileEntity.skills)) {
+      context.router.push(AddSkillsRoute(profileEntity: profileEntity));
+    } else if (isNullOrDefault(profileEntity.hourlyRate)) {
+      context.router.push(const RateAndWorkTimesRoute());
+    } else if (isNullOrDefault(profileEntity?.paymentDetails?.bankName)) {
+      context.router.push(const BankDetailsRoute());
+    } else if (isNullOrDefault(profileEntity!.location!.address)) {
+      context.router.push(
+        const LocationRoute(),
+      );
+    } else if (isNullOrDefault(profileEntity.description)) {
+      context.router.push(FinalDetailsRoute(profileEntity: profileEntity));
+    } else {
+      routeToPaymentOrHome(context: context, profileEntity: profileEntity);
+    }
   }
 }

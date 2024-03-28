@@ -1,0 +1,3 @@
+class ProfileNotFound implements Exception {
+
+}

@@ -25,6 +25,7 @@
 /.flutter-plugins-dependencies
 /.metadata
 /pickme.iml
+.env
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -95,6 +96,7 @@ proguard/
 
 # Log Files
 *.log
+*.env
 /lib/shared/models/candidate_profile/work_experience_model_response.g.dart
 /lib/shared/models/jobs/my_job_listings_job_model_response.g.dart
 /lib/shared/models/location/location_model_response/location_model_response.g.dart

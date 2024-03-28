@@ -111,9 +111,8 @@ class InAppPurchasesBloc
           purchaseDetails: event.purchaseDetails));
       return;
     } catch (e) {
-      emit(InAppPurchaseActivatedState(
-          "An error occurred while activating your subscription", null,
-          isSubscriptionActivated: false,
+      emit(InAppPurchaseRecoverableErrorState(
+          "An error occurred while activating your subscription",
           purchaseDetails: event.purchaseDetails));
       logger.e("Failed to activate purchase", error: e);
     }

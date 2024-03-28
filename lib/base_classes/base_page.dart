@@ -4,48 +4,53 @@ import '../shared/widgets/w_progress_indicator.dart';
 import 'base_bloc.dart';
 import 'base_widget.dart';
 
-abstract class BasePage extends BaseWidget{
-  const BasePage({Key? key}) : super(key:key);
+abstract class BasePage extends BaseWidget {
+  const BasePage({Key? key}) : super(key: key);
 }
 
-abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends BaseWidgetState<T,B>{
+abstract class BasePageState<T extends BasePage, B extends BaseBloc>
+    extends BaseWidgetState<T, B> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   bool subscribeToVisibilityEvents = false;
-  
-  BasePageState({
-    this.subscribeToVisibilityEvents =false
-  });
-  
- 
-  @override 
-  Widget build(BuildContext context){
-    return BlocProvider<B>(create: (context)=> baseBloc,
-    child: WillPopScope(
-      onWillPop: onBackPressed,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        extendBody: true,
-        backgroundColor: scaffoldBackgroundColor(),
-        key: _scaffoldkey,
-        appBar: buildAppbar(),
-        bottomNavigationBar: bottomNavigationBar(),
-        floatingActionButton: floatingActionButton(),
-        body: SafeArea(child: buildView(context)),
+  DialogRoute? _dialogRoute;
+  BasePageState({this.subscribeToVisibilityEvents = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<B>(
+      create: (context) => baseBloc,
+      child: WillPopScope(
+        onWillPop: onBackPressed,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          extendBody: true,
+          backgroundColor: scaffoldBackgroundColor(),
+          key: _scaffoldkey,
+          appBar: buildAppbar(),
+          bottomNavigationBar: bottomNavigationBar(),
+          floatingActionButton: floatingActionButton(),
+          body: SafeArea(child: buildView(context)),
+        ),
       ),
-    ),);
+    );
   }
 
-  Future<bool> onBackPressed({dynamic param}){
+  @override
+  void dispose() {
+    super.dispose();
+    dismissLoadingIndicator();
+  }
+
+  Future<bool> onBackPressed({dynamic param}) {
     return _onWillPop();
   }
 
-  Future<bool> _onWillPop({dynamic param}){
-    if(Navigator.canPop(context)){
-      if(param != null){
-        Navigator.pop(context,param);
-            return Future.value(false);
-
-      }else{
+  Future<bool> _onWillPop({dynamic param}) {
+    if (Navigator.canPop(context)) {
+      if (param != null) {
+        Navigator.pop(context, param);
+        return Future.value(false);
+      } else {
         Navigator.pop(context);
         return Future.value(false);
       }
@@ -87,5 +92,20 @@ abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends Bas
 
   Widget buildView(BuildContext context);
 
+  dismissLoadingIndicator() {
+    final dialogRoute = _dialogRoute;
+    if (dialogRoute != null) {
+      Navigator.of(context).pop(dialogRoute);
+      _dialogRoute = null;
+    }
+  }
+
+  addLoadingIndicator(BuildContext context) {
+    if (_dialogRoute != null) return;
+    _dialogRoute = preloader(context);
+  }
   addLoader(BuildContext context) => preloader(context);
+
+
 }
+

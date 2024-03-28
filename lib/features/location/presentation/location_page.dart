@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
 import 'package:pickme/shared/features/otp/domain/entities/otp_location_entity.dart';
+import 'package:pickme/shared/functions/utlis.dart';
+import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_page_loader.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
@@ -53,14 +55,20 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
         if(state is LocationRemoteSubmitLocationState && state.dataState == DataState.success){
 
             Navigator.pop(context);
-         if(state.profileEntity!.description!.isEmpty) {
-              context.router.push(const FinalDetailsRoute());
-            }else if(!state.profileEntity!.subscriptionPaid!){
-              context.router.push( PaySomeoneWebViewRoute(from: 0));}
-            else{
+            final profileEntity = state.profileEntity;
+            if(profileEntity == null) {
+              wErrorPopUp(message: getLocalization().profileNotFound, type: "error", context: context);
+              return;
+            }
+            if(isNullOrDefault(profileEntity.description) || isNullOrDefault(state.profileEntity?.subscriptionPaid)) {
+              if (Platform.isIOS) {
+                context.router.push(FinalDetailsRoute(profileEntity: profileEntity));
+              } else {
+                context.router.push(PaySomeoneWebViewRoute(from: 0));
+              }
+            } else {
               context.router.pushAndPopUntil( BottomNavigationBarRoute(), predicate: (Route<dynamic> route) => false);
             }
-
         }
 
         if(state is LocationRemoteSubmitLocationState && state.dataState == DataState.loading){
@@ -69,7 +77,7 @@ class _LocationPageState extends BasePageState<LocationPage, LocationBloc> {
         }
 
         if(state is LocationRemoteSubmitLocationState && state.dataState == DataState.error){
-          print(state.error);
+          wErrorPopUp(message: getLocalization().profileNotFound, type: "error", context: context);
         }
       },
       builder: (context, state) {

@@ -4152,10 +4152,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Are you sure you would like to cancel the in-app purchase`
+  /// `Are you sure you would like the subscription payment?`
   String get areYouSureYouWantToCancelThisPurchase {
     return Intl.message(
-      'Are you sure you would like to cancel the in-app purchase',
+      'Are you sure you would like the subscription payment?',
       name: 'areYouSureYouWantToCancelThisPurchase',
       desc: '',
       args: [],
@@ -4207,6 +4207,26 @@ class AppLocalizations {
     return Intl.message(
       'Your payment was received but an error occurred while activating your subscription.',
       name: 'activationFailedDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile not found`
+  String get profileNotFound {
+    return Intl.message(
+      'Profile not found',
+      name: 'profileNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image exceeds size limit. Please upload an image less than 4MB`
+  String get fileExceedsUploadableSize {
+    return Intl.message(
+      'Image exceeds size limit. Please upload an image less than 4MB',
+      name: 'fileExceedsUploadableSize',
       desc: '',
       args: [],
     );

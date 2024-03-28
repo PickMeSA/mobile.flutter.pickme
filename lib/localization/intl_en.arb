@@ -416,5 +416,7 @@
   "no": "No",
   "retry": "Retry",
   "activationFailed": "Activation failure",
-  "activationFailedDescription": "Your payment was received but an error occurred while activating your subscription."
+  "activationFailedDescription": "Your payment was received but an error occurred while activating your subscription.",
+  "profileNotFound": "Profile not found",
+  "fileExceedsUploadableSize": "Image exceeds size limit. Please upload an image less than 4MB"
 }
