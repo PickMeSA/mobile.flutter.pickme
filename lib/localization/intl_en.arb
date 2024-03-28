@@ -417,5 +417,8 @@
   "retry": "Retry",
   "activationFailed": "Activation failure",
   "activationFailedDescription": "Your payment was received but an error occurred while activating your subscription.",
-  "profileNotFound": "Profile not found"
+  "profileNotFound": "Profile not found",
+  "fileExceedsUploadableSize": MessageLookupByLibrary.simpleMessage(
+              "Image exceeds size limit. Please upload an image less than 4MB"),
+
 }
