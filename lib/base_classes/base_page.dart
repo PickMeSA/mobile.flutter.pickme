@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../shared/widgets/w_progress_indicator.dart';
 import 'base_bloc.dart';
 import 'base_widget.dart';
 
@@ -10,12 +11,24 @@ abstract class BasePage extends BaseWidget{
 abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends BaseWidgetState<T,B>{
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   bool subscribeToVisibilityEvents = false;
-  
+  DialogRoute? _dialogRoute;
+
   BasePageState({
     this.subscribeToVisibilityEvents =false
   });
-  
- 
+
+  dismissLoadingIndicator() {
+    if (_dialogRoute != null) {
+      Navigator.of(context).pop(_dialogRoute);
+      _dialogRoute = null;
+    }
+  }
+
+  addLoadingIndicator(BuildContext context) {
+    if (_dialogRoute != null) return;
+    _dialogRoute = preloader(context);
+  }
+
   @override 
   Widget build(BuildContext context){
     return BlocProvider<B>(create: (context)=> baseBloc,
@@ -85,4 +98,12 @@ abstract class BasePageState<T extends BasePage, B extends BaseBloc> extends Bas
   }
 
   Widget buildView(BuildContext context);
+
+  addLoader(BuildContext context) => preloader(context);
+
+  @override
+  void dispose() {
+    super.dispose();
+    dismissLoadingIndicator();
+  }
 }
