@@ -112,7 +112,7 @@ class ProfileServiceImpl extends ProfileService{
           data: skillsPageEntity.skillListEntity.toResponse().toJson());
 
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
-          data: skillsPageEntity.preferredIndustryEntity.toResponse().toJson());
+          data: {"industryId": skillsPageEntity.preferredIndustryEntity.id});
 
       return returnProfileEntity(response: response);
     }catch(ex){
