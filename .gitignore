@@ -25,6 +25,7 @@
 /.flutter-plugins-dependencies
 /.metadata
 /pickme.iml
+.env
 
 # Android related
 **/android/**/gradle-wrapper.jar
