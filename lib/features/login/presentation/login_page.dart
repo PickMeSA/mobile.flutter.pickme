@@ -26,14 +26,15 @@ import '../../../shared/mixins/route_page_mixin.dart';
 @RoutePage()
 class LoginPage extends BasePage {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-   LoginPage({super.key});
+
+  LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BasePageState<LoginPage, LoginBloc> with RoutePageMixin{
-
+class _LoginPageState extends BasePageState<LoginPage, LoginBloc>
+    with RoutePageMixin {
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -41,204 +42,250 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> with RoutePage
   @override
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
-   return BlocConsumer<LoginBloc,LoginState>
-     (builder: (context , state){
-     return SingleChildScrollView(
-       child: SizedBox(
-         width: MediaQuery.sizeOf(context).width,
-         child: Form(
-           key: _formKey,
-           child: Column(
-             children: [
-               SizedBox(height: 250,
-                 child: Stack(
-                   children:[
-                     Positioned(
-                         top: 0,
-                         child: Container(
-                           color: Colors.white,
-                           height: 258,
-                           width: MediaQuery.sizeOf(context).width,
-                           child:  Stack(
-                             children:[
-                             Positioned(
-                             top: 12,
-                             right:  -30,
-                             child: Container(
-                               child: SvgPicture.asset("assets/bottom_welcome_pebble.svg"),
-                             ),
-                           ),
-                               Positioned(
-                                 top: 0,
-                                 left:  29.78,
-                                 child: Container(
-                                   child: SvgPicture.asset("assets/top_welcome_pebble.svg"),
-                                 ),
-                               ),
-                               Positioned(
-                                 top: 12,
-                                 right:  0,
-                                 child: Container(
-                                   child: SvgPicture.asset("assets/welcome_back_lady.svg"),
-                                 ),
-                               ),
-                               Padding(
-                               padding: EdgeInsets.all(30.0),
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   SizedBox(
-                                     width: 25,
-                                     height: 25,
-                                     child: InkWell(onTap: ()=> context.router.pop()
-                                         ,child: Icon(Icons.arrow_back)),),
-                                   Padding(
-                                     padding: EdgeInsets.only(top: 25, right: 32, bottom: 8),
-                                     child: wText(getLocalization().welcomeBack,style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                                   ),
-                                   Padding(
-                                     padding: EdgeInsets.only( right: 32, bottom: 8),
-                                     child: wText(getLocalization().logIntoYourAccountWithYourEmailAndPassword,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
-                                   )
-                                 ],
-                               ),
-                             ),]
-                           ),)
-                     ),
-                   ],
-                 ),
-               ),
-               Container(
-                 width: MediaQuery.sizeOf(context).width,
-                 decoration: const BoxDecoration(
-                   color: Colors.white,
-                   borderRadius: BorderRadius.only(
-                       topRight: Radius.circular(32),
-                       topLeft: Radius.circular(32) ),
-                 ),
-                 child: Padding(
-                   padding: const EdgeInsets.only(left: 20.0, right: 20),
-                   child: SingleChildScrollView(
-                     child: Column(
-                       children: [
-                         Padding(
-                           padding: const EdgeInsets.only(top: 20, bottom:  10),
-                           child: AppTextFormField(
-                             onChanged: (value)=> getBloc().add(NumberChangedEvent(email: value, password: passwordController.text)),
-                             controller: emailAddressController,
-                             validator:(value){
-                               if(value.isEmptyOrNull)
-                                 return getLocalization().pleaseEnterAUsername;
-                             },
-                             padding: const EdgeInsets.only(left: 20, right: 20),
-                             textFieldType: TextFieldType.EMAIL, labelText: getLocalization().emailAddress,),
-                         ),
-                         Padding(
-                           padding: const EdgeInsets.only( bottom:  10),
-                           child: AppTextFormField(
-                             onChanged: (value)=> getBloc().add(NumberChangedEvent(email: emailAddressController.text , password:value )),
-                             controller: passwordController,
-                             validator: (value){
-                               if(value.isEmptyOrNull)
-                                 return getLocalization().pleaseEnterAPassword;
-                             },
-
-                             padding: const EdgeInsets.only(left: 20, right: 20),
-                             textFieldType: TextFieldType.PASSWORD, labelText: getLocalization().passwordA,),
-
-                         ),
-                         150.height,
-                         Padding(padding: const EdgeInsets.only(top: 10, bottom: 14),
-                           child: InkWell(
-                             onTap: (){
-                               context.router.push( ForgotPasswordRoute());
-                             } ,
-                             child: wText(getLocalization().forgotPassword, style:
-                             const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                           ),),
-
-                         PrimaryButton(
-                           width: MediaQuery.sizeOf(context).width,
-                           style: ButtonStyle(
-                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                 return BorderSide(
-                                   color: states.contains(MaterialState.disabled)?
-                                   theme.colorScheme.secondary.withOpacity(0):
-                                   theme.colorScheme.secondary,
-                                   width: 2,
-                                 );
-                               }
-                               ),
-                               backgroundColor: MaterialStateProperty.resolveWith(
-                                       (Set<MaterialState> states){
-                                     return states.contains(MaterialState.disabled)?
-                                     theme.colorScheme.secondary.withOpacity(0.3):
-                                     theme.colorScheme.secondary;
-                                   }
-                               )
-                           ),
-                           onPressed: !getBloc().checked?null:()async {
-                             if(_formKey.currentState!.validate()){
-                               authenticate(username: emailAddressController.text, password: passwordController.text);
-                             }
-                           },
-                           child: Text(getLocalization().ccontinue),
-                         ),
-                         Padding(padding: const EdgeInsets.only(top: 24, bottom: 14),
-                           child: Center(
-                               child: InkWell(
-                                 onTap: (){
-                                   context.router.push( const LetsBeginRoute());
-                                 } ,
-                                 child: wText(getLocalization().noAccountCreateOne, style:
-                                 const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                               )
-                           ),)
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-             ],
-           ),
-         ),
-       ),
-     );
-   },
-       listener: (context , state){
-      if(state is LoginContinueClickedState && state.dataState == DataState.loading){
+    return BlocConsumer<LoginBloc, LoginState>(builder: (context, state) {
+      return SingleChildScrollView(
+        child: SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 250,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                          top: 0,
+                          child: Container(
+                            color: Colors.white,
+                            height: 258,
+                            width: MediaQuery.sizeOf(context).width,
+                            child: Stack(children: [
+                              Positioned(
+                                top: 12,
+                                right: -30,
+                                child: Container(
+                                  child: SvgPicture.asset(
+                                      "assets/bottom_welcome_pebble.svg"),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0,
+                                left: 29.78,
+                                child: Container(
+                                  child: SvgPicture.asset(
+                                      "assets/top_welcome_pebble.svg"),
+                                ),
+                              ),
+                              Positioned(
+                                top: 12,
+                                right: 0,
+                                child: Container(
+                                  child: SvgPicture.asset(
+                                      "assets/welcome_back_lady.svg"),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(30.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 25,
+                                      height: 25,
+                                      child: InkWell(
+                                          onTap: () => context.router.pop(),
+                                          child: Icon(Icons.arrow_back)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 25, right: 32, bottom: 8),
+                                      child: wText(
+                                          getLocalization().welcomeBack,
+                                          style: TextStyle(
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.w600)),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(right: 32, bottom: 8),
+                                      child: wText(
+                                          getLocalization()
+                                              .logIntoYourAccountWithYourEmailAndPassword,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400)),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          )),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(32),
+                        topLeft: Radius.circular(32)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, bottom: 10),
+                            child: AppTextFormField(
+                              onChanged: (value) => getBloc().add(
+                                  NumberChangedEvent(
+                                      email: value,
+                                      password: passwordController.text)),
+                              controller: emailAddressController,
+                              validator: (value) {
+                                if (value.isEmptyOrNull)
+                                  return getLocalization().pleaseEnterAUsername;
+                              },
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              textFieldType: TextFieldType.EMAIL,
+                              labelText: getLocalization().emailAddress,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: AppTextFormField(
+                              onChanged: (value) => getBloc().add(
+                                  NumberChangedEvent(
+                                      email: emailAddressController.text,
+                                      password: value)),
+                              controller: passwordController,
+                              validator: (value) {
+                                if (value.isEmptyOrNull)
+                                  return getLocalization().pleaseEnterAPassword;
+                              },
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              textFieldType: TextFieldType.PASSWORD,
+                              labelText: getLocalization().passwordA,
+                            ),
+                          ),
+                          150.height,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 14),
+                            child: InkWell(
+                              onTap: () {
+                                context.router.push(ForgotPasswordRoute());
+                              },
+                              child: wText(getLocalization().forgotPassword,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600)),
+                            ),
+                          ),
+                          PrimaryButton(
+                            width: MediaQuery.sizeOf(context).width,
+                            style: ButtonStyle(side:
+                                MaterialStateProperty.resolveWith(
+                                    (Set<MaterialState> states) {
+                              return BorderSide(
+                                color: states.contains(MaterialState.disabled)
+                                    ? theme.colorScheme.secondary.withOpacity(0)
+                                    : theme.colorScheme.secondary,
+                                width: 2,
+                              );
+                            }), backgroundColor:
+                                MaterialStateProperty.resolveWith(
+                                    (Set<MaterialState> states) {
+                              return states.contains(MaterialState.disabled)
+                                  ? theme.colorScheme.secondary.withOpacity(0.3)
+                                  : theme.colorScheme.secondary;
+                            })),
+                            onPressed: !getBloc().checked
+                                ? null
+                                : () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      authenticate(
+                                          username: emailAddressController.text,
+                                          password: passwordController.text);
+                                    }
+                                  },
+                            child: Text(getLocalization().ccontinue),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 24, bottom: 14),
+                            child: Center(
+                                child: InkWell(
+                              onTap: () {
+                                context.router.push(const LetsBeginRoute());
+                              },
+                              child: wText(getLocalization().noAccountCreateOne,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600)),
+                            )),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }, listener: (context, state) {
+      if (state is LoginContinueClickedState &&
+          state.dataState == DataState.loading) {
         preloader(context);
       }
-      if(state is LoginContinueClickedState && state.dataState == DataState.success){
+      if (state is LoginContinueClickedState &&
+          state.dataState == DataState.success) {
         Navigator.pop(context);
-
-       routePageReg(context: context, profileEntity: state.profileEntity!);
+        final profileEntity = state.profileEntity;
+        if (profileEntity != null) {
+          routePageReg(context: context, profileEntity: profileEntity);
+        } else {
+          wErrorPopUp(
+              message: state.error!,
+              type: getLocalization().error,
+              context: context);
+        }
       }
 
-      if(state is LoginContinueClickedState && state.dataState == DataState.error){
+      if (state is LoginContinueClickedState &&
+          state.dataState == DataState.error) {
         Navigator.pop(context);
-        wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+        wErrorPopUp(
+            message: state.error!,
+            type: getLocalization().error,
+            context: context);
       }
-   });
+    });
   }
 
-  Future<void> authenticate({ required String username, required String password})  async {
+  Future<void> authenticate(
+      {required String username, required String password}) async {
     preloader(context);
-    await widget.firebaseAuth.signInWithEmailAndPassword(
-        email: username,
-        password: password).then((value)async{
-
-          if(value.user!.emailVerified){
-            String? token = await value.user?.getIdToken();
-            TokenModel tokenModel =
-            TokenModel(
-                refreshToken: token??"",
-                accessToken: token??"",
-                tokenID: token??"");
-            boxTokens.put(current, tokenModel);
-            UserModel userModel = UserModel(id: "");
-            userModel.id = value.user?.uid;
-            boxProfile.put(current, ProfileModel(
+    await widget.firebaseAuth
+        .signInWithEmailAndPassword(email: username, password: password)
+        .then((value) async {
+      if (value.user!.emailVerified) {
+        String? token = await value.user?.getIdToken();
+        TokenModel tokenModel = TokenModel(
+            refreshToken: token ?? "",
+            accessToken: token ?? "",
+            tokenID: token ?? "");
+        boxTokens.put(current, tokenModel);
+        UserModel userModel = UserModel(id: "");
+        userModel.id = value.user?.uid;
+        boxProfile.put(
+            current,
+            ProfileModel(
                 workPermitNumber: "",
                 idNumber: "",
                 emailAddress: username,
@@ -246,18 +293,20 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> with RoutePage
                 surname: "",
                 firstName: "",
                 passportNumber: ""));
-            boxUser.put(current, userModel);
-            Navigator.pop(context);
-            getBloc().add(LoginContinueClickedEvent());
-          }else{
-            //context.router.pop();
-            Navigator.pop(context);
-            context.router.push(VerifyItsYouRoute());
-          }
-
-    }).catchError((error, stackTrace){
+        boxUser.put(current, userModel);
+        Navigator.pop(context);
+        getBloc().add(LoginContinueClickedEvent());
+      } else {
+        //context.router.pop();
+        Navigator.pop(context);
+        context.router.push(VerifyItsYouRoute());
+      }
+    }).catchError((error, stackTrace) {
       Navigator.pop(context);
-      wErrorPopUp(message: error.toString(), type: getLocalization().error, context: context);
+      wErrorPopUp(
+          message: error.toString(),
+          type: getLocalization().error,
+          context: context);
     });
   }
 
@@ -268,7 +317,6 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> with RoutePage
 
   @override
   AppLocalizations initLocalization() {
-   return locator<AppLocalizations>();
+    return locator<AppLocalizations>();
   }
-
 }
