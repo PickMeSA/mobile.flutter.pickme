@@ -61,6 +61,7 @@ class _ProfilePageState extends BasePageState<ProfilePage, ProfileBloc> {
           } else if (state is SubmitClickedState) {
             _handleSubmitClickedState(state, context);
           } else {
+            dismissLoadingIndicator();
             logger.i("ProfilePage: Unhandled state");
           }
         },

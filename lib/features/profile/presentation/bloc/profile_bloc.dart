@@ -16,6 +16,10 @@ import 'package:pickme/shared/features/otp/domain/use_cases/otp_usecase/get_remo
 import 'package:pickme/shared/features/upload_file/domain/entities/uploaded_file_entity.dart';
 import 'package:pickme/shared/features/upload_file/domain/usecases/upload_file_usecase.dart';
 
+import '../../../../core/locator/locator.dart';
+import '../../../../shared/data/cache/in_memory_cache.dart';
+import '../../../../shared/local/hive_storage_init.dart';
+import '../../../../shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import '../../../final_details/domain/models/final_details_entity.dart';
 
 part 'profile_event.dart';
@@ -44,6 +48,7 @@ class ProfileBloc
 
 
     late List<ChipOption> skills;
+    late final cache = locator<ProgramCache>();
 
     Future<void> _onDeleteProfileEvent(
         DeleteProfileEvent event,
@@ -92,6 +97,7 @@ class ProfileBloc
             validateFile(file);
             UploadedFileEntity uploadedFileEntity = await uploadFileUseCase.call(params: UploadFileUseCaseParams(filePath: event.filePath));
             finalDetailsEntity = finalDetailsEntity.copyWith(newProfilePicture: uploadedFileEntity);
+            cache.updateProfileUrl(uploadedFileEntity.url);
             emit(ProfilePictureAddedState()..dataState = DataState.success);
         }catch(ex){
             emit(ProfilePictureAddedState(error: ex.toString())..dataState = DataState.error);
