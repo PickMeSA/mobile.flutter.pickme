@@ -110,7 +110,7 @@ class ProfileServiceImpl extends ProfileService{
       UserModel userModel = boxUser.get(current);
       await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: skillsPageEntity.skillListEntity.toResponse().toJson());
-
+      //data: skillsPageEntity.preferredIndustryEntity.toResponse().toJson();
       Response<dynamic> response = await apiService.put("$baseUrl$version/profiles/${userModel.id}",
           data: {"industryId": skillsPageEntity.preferredIndustryEntity.id});
 

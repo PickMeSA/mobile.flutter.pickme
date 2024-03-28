@@ -59,7 +59,7 @@ class _JobsHiringLandingPageState
         listener: (context, state) {
           if (state is GetTopIndustriesState &&
               state.dataState == DataState.error) {
-            getBloc().preloaderActive = false;
+          dismissLoadingIndicator();
             Navigator.of(context, rootNavigator: true).pop();
             wErrorPopUp(
                 message: "An error occurred while fetching your data.",
@@ -69,16 +69,12 @@ class _JobsHiringLandingPageState
           //loading
           if (state is GetTopIndustriesState &&
               state.dataState == DataState.loading) {
-            if (!getBloc().preloaderActive) {
-              getBloc().preloaderActive = true;
-              preloader(context);
-            }
+            addLoadingIndicator(context);
           }
           //loading
           if (state is GetTopIndustriesState &&
               state.dataState == DataState.success) {
-            getBloc().preloaderActive = false;
-            Navigator.of(context, rootNavigator: true).pop();
+            dismissLoadingIndicator();
           }
         },
         builder: (context, state) {
@@ -253,7 +249,8 @@ class _JobsHiringLandingPageState
                   state.paginatedCandidates == null
                       ? const SizedBox.shrink()
                       : ListView.builder(
-                          itemExtent: 150.0, // Defined in AppCandidateProfile
+                          itemExtent: 150.0,
+                          // Defined in AppCandidateProfile
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount:
