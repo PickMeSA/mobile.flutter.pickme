@@ -4042,6 +4042,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Image exceeds size limit. Please upload an image less than 4MB`
+  String get fileExceedsUploadableSize {
+    return Intl.message(
+      'Image exceeds size limit. Please upload an image less than 4MB',
+      name: 'fileExceedsUploadableSize',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An error occurred while processing your request. Please try again later.`
   String get anErrorOccurredWhileProcessingYourRequest {
     return Intl.message(

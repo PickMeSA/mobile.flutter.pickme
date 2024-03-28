@@ -222,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Explore all services"),
         "fieldCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Field cannot be empty"),
+        "fileExceedsUploadableSize": MessageLookupByLibrary.simpleMessage(
+            "Image exceeds size limit. Please upload an image less than 4MB"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "finalDetails": MessageLookupByLibrary.simpleMessage("Final details"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name *"),
