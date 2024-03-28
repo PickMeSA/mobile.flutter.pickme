@@ -18,10 +18,6 @@ class GetRemoteProfileUseCase
   @override
   Future<ProfileEntity> call({GetRemoteProfileUseCaseParams? params}) async {
     final email = params?.email;
-    if (email == null && params?.id == null) {
-      throw GenericException(
-          localization.anErrorOccurredWhileProcessingYourRequest);
-    }
     try {
       final profile = await getRemoteProfileRepository.call(
           params: GetRemoteProfileRepositoryParams(id: params?.id));
