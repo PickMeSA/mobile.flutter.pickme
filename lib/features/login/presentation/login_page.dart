@@ -14,6 +14,8 @@ import 'package:pickme/localization/generated/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/functions/utlis.dart';
 import 'package:pickme/shared/local/hive_storage_init.dart';
 import 'package:pickme/shared/services/local/Hive/profile_local_storage/profile/profile_model.dart';
 import 'package:pickme/shared/services/local/Hive/user_local_storage/user/user_model.dart';
@@ -34,7 +36,7 @@ class LoginPage extends BasePage {
 }
 
 class _LoginPageState extends BasePageState<LoginPage, LoginBloc>
-    with RoutePageMixin {
+    with PaymentPageMixin {
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -248,7 +250,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc>
         Navigator.pop(context);
         final profileEntity = state.profileEntity;
         if (profileEntity != null) {
-          routePageReg(context: context, profileEntity: profileEntity);
+          _routePage(context: context, profileEntity: profileEntity);
         } else {
           wErrorPopUp(
               message: state.error!,
@@ -295,7 +297,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc>
                 passportNumber: ""));
         boxUser.put(current, userModel);
         Navigator.pop(context);
-        getBloc().add(LoginContinueClickedEvent());
+        getBloc().add(LoginContinueClickedEvent(username));
       } else {
         //context.router.pop();
         Navigator.pop(context);
@@ -318,5 +320,31 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc>
   @override
   AppLocalizations initLocalization() {
     return locator<AppLocalizations>();
+  }
+
+  void _routePage({required BuildContext context, required ProfileEntity profileEntity}) {
+
+    if(isNullOrDefault(profileEntity.firstName)){
+      context.router.push( RegisterRoute(email:emailAddressController.text ));
+    }else if(isNullOrDefault(profileEntity.type)){
+      context.router.push(const SetupProfileRoute());
+    }else if (isNullOrDefault(profileEntity.acceptedTermsAndConditions)){
+      context.router.push(const RegisterAccountStep1Route());
+    }else if (isNullOrDefault(profileEntity.qualifications) &&
+        isNullOrDefault(profileEntity.workExperience)){
+      context.router.push( QualificationsRoute(profileEntity: profileEntity));
+    }else if(isNullOrDefault(profileEntity.skills)){
+      context.router.push( AddSkillsRoute(profileEntity: profileEntity));
+    }else if(isNullOrDefault(profileEntity.hourlyRate)){
+      context.router.push(const RateAndWorkTimesRoute());
+    }else if(isNullOrDefault(profileEntity.paymentDetails?.bankName)){
+      context.router.push(const BankDetailsRoute());
+    }else if(isNullOrDefault(profileEntity.location?.address)){
+      context.router.push(const LocationRoute(),);
+    }else if(isNullOrDefault(profileEntity.description)) {
+      context.router.push(FinalDetailsRoute(profileEntity: profileEntity));
+    } else {
+      routeToPaymentOrHome(context: context, profileEntity: profileEntity);
+    }
   }
 }

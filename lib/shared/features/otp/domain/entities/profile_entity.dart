@@ -63,4 +63,9 @@ class ProfileEntity {
   this.workPermit,
    this.subscriptionPaid});
 
+  factory ProfileEntity.withEmail(String?email) {
+    final profile = ProfileEntity();
+    profile.email = email;
+    return profile;
+  }
 }

@@ -1,4 +1,3 @@
-
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ui_components/flutter_ui_components.dart';
@@ -11,6 +10,8 @@ import 'package:pickme/base_classes/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickme/navigation/app_route.dart';
+import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/functions/utlis.dart';
 import 'package:pickme/shared/mixins/route_page_mixin.dart';
 import 'package:pickme/shared/widgets/w_error_popup.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -26,8 +27,9 @@ class BankDetailsPage extends BasePage {
   _BankDetailsPageState createState() => _BankDetailsPageState();
 }
 
-class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBloc> with RoutePageMixin {
-
+class _BankDetailsPageState
+    extends BasePageState<BankDetailsPage, BankDetailsBloc>
+    with PaymentPageMixin {
   TextEditingController bankNameController = TextEditingController();
   TextEditingController accountTypeController = TextEditingController();
   TextEditingController accountNumberController = TextEditingController();
@@ -42,7 +44,7 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
     getBloc().add(BankDetailsPageEnteredEvent());
   }
 
-    @override
+  @override
   PreferredSizeWidget? buildAppbar() {
     return null;
   }
@@ -51,28 +53,34 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<BankDetailsBloc, BankDetailsPageState>(
-      listener: (context, state){
-        if(state is BankDetailsSubmittedState && state.dataState == DataState.success){
+      listener: (context, state) {
+        if (state is BankDetailsSubmittedState &&
+            state.dataState == DataState.success) {
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          routePageReg(profileEntity: state.profileEntity!, context: context);
+          _routePage(profileEntity: state.profileEntity!, context: context);
         }
 
-        if(state is BankDetailsSubmittedState && state.dataState == DataState.loading ){
+        if (state is BankDetailsSubmittedState &&
+            state.dataState == DataState.loading) {
           preloader(context);
           getBloc().preloaderActive = true;
         }
 
-        if(state is BankDetailsSubmittedState && state.dataState == DataState.error ){
+        if (state is BankDetailsSubmittedState &&
+            state.dataState == DataState.error) {
           Navigator.pop(context);
-          wErrorPopUp(message: state.error!, type: getLocalization().error, context: context);
+          wErrorPopUp(
+              message: state.error!,
+              type: getLocalization().error,
+              context: context);
         }
       },
       builder: (context, state) {
         return SizedBox(
           height: MediaQuery.sizeOf(context).height,
           width: MediaQuery.sizeOf(context).width,
-          child:SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
@@ -80,59 +88,71 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    wText(getLocalization().step5,style:theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 32,
-                      color: theme.primaryColor
-                    )),
-                    const SizedBox(height: 10,),
-                    wText(getLocalization().bankDetails,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
-                30.height,
+                    wText(getLocalization().step5,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 32,
+                            color: theme.primaryColor)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    wText(getLocalization().bankDetails,
+                        style: const TextStyle(
+                            fontSize: 32, fontWeight: FontWeight.w400)),
+                    30.height,
                     AppTextFormField(
-                      validator: (value){
-                        if(value!.isEmpty)
-                          return "Account number is required";
-                        String pattern =
-                            r'^[0-9]';
-                        RegExp regex =  RegExp(pattern);
-                        if(!regex.hasMatch(value))
+                      validator: (value) {
+                        if (value!.isEmpty) return "Account number is required";
+                        String pattern = r'^[0-9]';
+                        RegExp regex = RegExp(pattern);
+                        if (!regex.hasMatch(value))
                           return "Please enter a valid account number";
                       },
-                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      onChanged: (value) => getBloc().add(
+                          BankDetailsValueChangedEvent(
+                              bankDetailsEntity: getFormData())),
                       controller: accountNumberController,
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       textFieldType: TextFieldType.NUMBER,
-                      labelText: getLocalization().accountNumberA,),
+                      labelText: getLocalization().accountNumberA,
+                    ),
                     20.height,
                     AppTextFormField(
-                      validator: (value){
-                        if(value!.isEmpty)
-                          return "Branch code is required";
-                        String pattern =
-                            r'^[0-9]';
-                        RegExp regex =  RegExp(pattern);
-                        if(!regex.hasMatch(value))
+                      validator: (value) {
+                        if (value!.isEmpty) return "Branch code is required";
+                        String pattern = r'^[0-9]';
+                        RegExp regex = RegExp(pattern);
+                        if (!regex.hasMatch(value))
                           return "Please enter a valid branch code";
                       },
-                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      onChanged: (value) => getBloc().add(
+                          BankDetailsValueChangedEvent(
+                              bankDetailsEntity: getFormData())),
                       controller: branchCodeController,
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       textFieldType: TextFieldType.NUMBER,
-                      labelText: getLocalization().branchCodeA,),
+                      labelText: getLocalization().branchCodeA,
+                    ),
                     20.height,
                     AppTextFormField(
-                      onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
+                      onChanged: (value) => getBloc().add(
+                          BankDetailsValueChangedEvent(
+                              bankDetailsEntity: getFormData())),
                       controller: bankAccountHolderController,
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       textFieldType: TextFieldType.NAME,
-                      labelText: getLocalization().accountHolderName,),
+                      labelText: getLocalization().accountHolderName,
+                    ),
                     20.height,
-            AppTextFormField(
-                onChanged: (value)=> getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData())),
-                controller: bankNameController,
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                textFieldType: TextFieldType.NAME,
-                labelText: getLocalization().bankA,),
+                    AppTextFormField(
+                      onChanged: (value) => getBloc().add(
+                          BankDetailsValueChangedEvent(
+                              bankDetailsEntity: getFormData())),
+                      controller: bankNameController,
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      textFieldType: TextFieldType.NAME,
+                      labelText: getLocalization().bankA,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: AppDropdownMenu<AccountTypeEntity>(
@@ -140,80 +160,82 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
                         label: wText(getLocalization().accountTypeA),
                         enableFilter: false,
                         filled: true,
-                        onSelected: (values){
-                          getBloc().add(BankDetailsValueChangedEvent(bankDetailsEntity: getFormData()));
+                        onSelected: (values) {
+                          getBloc().add(BankDetailsValueChangedEvent(
+                              bankDetailsEntity: getFormData()));
                         },
-                        dropdownMenuEntries:getBloc().accountTypeEntityEntries??[],
-                        width: MediaQuery.of(context).size.width-40,),
+                        dropdownMenuEntries:
+                            getBloc().accountTypeEntityEntries ?? [],
+                        width: MediaQuery.of(context).size.width - 40,
+                      ),
                     ),
-                      100.height,
+                    100.height,
                     Row(
                       children: [
                         Container(
                           height: 56,
                           width: 56,
                           decoration: BoxDecoration(
-                              border: Border.all(width: 2,
-                                  color: Colors.black),
-                              borderRadius: const BorderRadius.all(Radius.circular(10))),
-                          child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
-
+                              border: Border.all(width: 2, color: Colors.black),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          child: InkWell(
+                              onTap: () => context.router.pop(),
+                              child: const Icon(Icons.arrow_back)),
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Expanded(
                           child: PrimaryButton(
-                            style: ButtonStyle(
-                                side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                  return BorderSide(
-                                    color: states.contains(MaterialState.disabled)?
-                                    theme.colorScheme.secondary.withOpacity(0):
-                                    theme.colorScheme.secondary,
-                                    width: 2,
-                                  );
-                                }
-                                ),
-                                backgroundColor: MaterialStateProperty.resolveWith(
-                                        (Set<MaterialState> states){
-                                      return states.contains(MaterialState.disabled)?
-                                      theme.colorScheme.secondary.withOpacity(0.3):
-                                      theme.colorScheme.secondary;
+                            style: ButtonStyle(side:
+                                MaterialStateProperty.resolveWith(
+                                    (Set<MaterialState> states) {
+                              return BorderSide(
+                                color: states.contains(MaterialState.disabled)
+                                    ? theme.colorScheme.secondary.withOpacity(0)
+                                    : theme.colorScheme.secondary,
+                                width: 2,
+                              );
+                            }), backgroundColor:
+                                MaterialStateProperty.resolveWith(
+                                    (Set<MaterialState> states) {
+                              return states.contains(MaterialState.disabled)
+                                  ? theme.colorScheme.secondary.withOpacity(0.3)
+                                  : theme.colorScheme.secondary;
+                            })),
+                            onPressed: !getBloc().checked
+                                ? null
+                                : () {
+                                    if (_key.currentState!.validate()) {
+                                      getBloc().add(BankDetailsSubmittedEvent(
+                                          bankDetailsEntity: getFormData()));
                                     }
-                                )
-                            ),
-                            onPressed: !getBloc().checked?null:() {
-                              if(_key.currentState!.validate()) {
-                                getBloc().add(BankDetailsSubmittedEvent(
-                                    bankDetailsEntity: getFormData()));
-                              }
-                              // context.router.push(const LocationRoute());
-                            },
+                                    // context.router.push(const LocationRoute());
+                                  },
                             child: Text(getLocalization().nextStep),
                           ),
                         ),
                       ],
                     )
-
-
-
                   ],
                 ),
               ),
             ),
-          )  ,
+          ),
         );
       },
     );
   }
 
-  BankDetailsEntity getFormData (){
+  BankDetailsEntity getFormData() {
     return BankDetailsEntity(
-      accountHolderName: bankAccountHolderController.text,
+        accountHolderName: bankAccountHolderController.text,
         accountNumber: accountNumberController.text,
         accountType: accountTypeController.text,
         bank: bankNameController.text,
         branchCode: branchCodeController.text);
   }
-
 
   @override
   BankDetailsBloc initBloc() {
@@ -225,5 +247,14 @@ class _BankDetailsPageState extends BasePageState<BankDetailsPage, BankDetailsBl
     return locator<AppLocalizations>();
   }
 
-
+  _routePage(
+      {required ProfileEntity profileEntity, required BuildContext context}) {
+    if (isNullOrDefault(profileEntity.location?.address)) {
+      context.router.push(const LocationRoute());
+    } else if (isNullOrDefault(profileEntity?.description)) {
+      context.router.push(FinalDetailsRoute(profileEntity: profileEntity));
+    } else {
+      routeToPaymentOrHome(context: context, profileEntity: profileEntity);
+    }
+  }
 }

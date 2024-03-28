@@ -17,6 +17,7 @@ import 'package:pickme/shared/widgets/w_progress_indicator.dart';
 import 'package:pickme/shared/widgets/w_qualification_slab.dart';
 import 'package:pickme/shared/widgets/w_text.dart';
 
+import '../../../shared/functions/utlis.dart';
 import '../../../shared/mixins/route_page_mixin.dart';
 import 'bloc/qualification_bloc.dart';
 
@@ -30,7 +31,7 @@ class QualificationsPage extends BasePage {
   _QualificationsPageState createState() => _QualificationsPageState();
 }
 
-class _QualificationsPageState extends BasePageState<QualificationsPage, QualificationsBloc> with RoutePageMixin{
+class _QualificationsPageState extends BasePageState<QualificationsPage, QualificationsBloc> with PaymentPageMixin{
 
   @override
   void initState() {
@@ -52,8 +53,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.success){
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          routePageReg(context: context,profileEntity: state.profileEntity!);
-
+          _routePage(context: context,profileEntity: state.profileEntity!);
         }
 
         if(state is AddQualificationRemoteSubmitState && state.dataState == DataState.loading ){
@@ -79,7 +79,7 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
                      children: [
                        const Spacer(),
                        InkWell(
-                           onTap:()=> routePageReg(context: context, profileEntity:widget.profileEntity ),
+                           onTap:()=> _routePage(context: context, profileEntity:widget.profileEntity),
                            child: wText(getLocalization().skip,
                                style: const TextStyle(
                                    fontSize: 14,
@@ -189,6 +189,21 @@ class _QualificationsPageState extends BasePageState<QualificationsPage, Qualifi
     );
   }
 
+  _routePage({required BuildContext context,required ProfileEntity profileEntity }){
+    if(isNullOrDefault(profileEntity.skills)){
+      context.router.push( AddSkillsRoute(profileEntity: profileEntity));
+    }else if(isNullOrDefault(profileEntity.hourlyRate)){
+      context.router.push(const RateAndWorkTimesRoute());
+    }else if(isNullOrDefault(profileEntity.paymentDetails?.bankName)){
+      context.router.push(const BankDetailsRoute());
+    }else if(isNullOrDefault(profileEntity.location)){
+      context.router.push(const LocationRoute());
+    }else if(isNullOrDefault(profileEntity.description)){
+      context.router.push( FinalDetailsRoute(profileEntity: profileEntity));
+    } else {
+      routeToPaymentOrHome(context: context, profileEntity: profileEntity);
+    }
+  }
 
   @override
   QualificationsBloc initBloc() {

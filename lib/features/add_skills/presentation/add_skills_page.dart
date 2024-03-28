@@ -1,4 +1,3 @@
-
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -15,6 +14,7 @@ import 'package:pickme/navigation/app_route.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pickme/shared/constants/default_values.dart';
 import 'package:pickme/shared/features/otp/domain/entities/profile_entity.dart';
+import 'package:pickme/shared/functions/utlis.dart';
 import 'package:pickme/shared/mixins/route_page_mixin.dart';
 import 'package:pickme/shared/widgets/w_page_loader.dart';
 import 'package:pickme/shared/widgets/w_progress_indicator.dart';
@@ -25,22 +25,26 @@ import 'bloc/add_skills_bloc.dart';
 @RoutePage()
 class AddSkillsPage extends BasePage {
   ProfileEntity profileEntity;
-   AddSkillsPage({required this.profileEntity,super.key});
+
+  AddSkillsPage({required this.profileEntity, super.key});
 
   @override
   _AddSkillsPageState createState() => _AddSkillsPageState();
 }
-class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> with RoutePageMixin {
-  
-  late TextEditingController dropdownIndustryController = TextEditingController();
+
+class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc>
+    with PaymentPageMixin {
+  late TextEditingController dropdownIndustryController =
+      TextEditingController();
   late TextEditingController dropDownSkillController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     getBloc().add(AddSkillsGetPreferredIndustryListEvent());
   }
 
-    @override
+  @override
   PreferredSizeWidget? buildAppbar() {
     return null;
   }
@@ -49,194 +53,211 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> wi
   Widget buildView(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlocConsumer<AddSkillsBloc, AddSkillsPageState>(
-      listener: (context, state){
+      listener: (context, state) {
         //AddSkillsGetPreferredIndustryListState//////
         //////////////////////////////////////////////
-        if(state is AddSkillsGetPreferredIndustryListState && state.dataState == DataState.success){
+        if (state is AddSkillsGetPreferredIndustryListState &&
+            state.dataState == DataState.success) {
           getBloc().add(AddSkillGetSkillsListEvent());
         }
 
-        if(state is AddSkillsGetPreferredIndustryListState && state.dataState == DataState.loading){
+        if (state is AddSkillsGetPreferredIndustryListState &&
+            state.dataState == DataState.loading) {}
 
-        }
-
-        if(state is AddSkillsGetPreferredIndustryListState && state.dataState == DataState.error){
-
-        }
+        if (state is AddSkillsGetPreferredIndustryListState &&
+            state.dataState == DataState.error) {}
 
         //AddSkillGetSkillsListState//////
         //////////////////////////////////////////////
-        if(state is AddSkillGetSkillsListState && state.dataState == DataState.success){
+        if (state is AddSkillGetSkillsListState &&
+            state.dataState == DataState.success) {}
 
-        }
+        if (state is AddSkillGetSkillsListState &&
+            state.dataState == DataState.loading) {}
 
-        if(state is AddSkillGetSkillsListState && state.dataState == DataState.loading){
-
-        }
-
-        if(state is AddSkillGetSkillsListState && state.dataState == DataState.error){
-
-        }
+        if (state is AddSkillGetSkillsListState &&
+            state.dataState == DataState.error) {}
 
         //AddSkillSubmitRemoteSkillsAndIndustryState//////
         //////////////////////////////////////////////
-        if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.success){
+        if (state is AddSkillSubmitRemoteSkillsAndIndustryState &&
+            state.dataState == DataState.success) {
           Navigator.pop(context);
           getBloc().preloaderActive = false;
-          routePageReg(profileEntity: state.profileEntity!, context: context);
+          _routePage(profileEntity: state.profileEntity!, context: context);
         }
 
-        if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.loading){
+        if (state is AddSkillSubmitRemoteSkillsAndIndustryState &&
+            state.dataState == DataState.loading) {
           preloader(context);
           getBloc().preloaderActive = true;
         }
 
-        if(state is AddSkillSubmitRemoteSkillsAndIndustryState && state.dataState == DataState.error){
-
-        }
+        if (state is AddSkillSubmitRemoteSkillsAndIndustryState &&
+            state.dataState == DataState.error) {}
       },
       builder: (context, state) {
-         return state.dataState == DataState.success && state is AddSkillGetSkillsListState
-             || state.dataState == DataState.success && state is SkillSelectedState
-             || state.dataState == DataState.success && state is SkillChipDeletedState?
-           SizedBox(
-           height: MediaQuery.sizeOf(context).height,
-           width: MediaQuery.sizeOf(context).width,
-           child:SingleChildScrollView(
-             child: Padding(
-               padding: const EdgeInsets.all(20.0),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Row(
-                     children: [
-                       const Spacer(),
-                       InkWell(
-                           onTap: ()=> routePageReg(profileEntity: widget.profileEntity, context: context),
-                           child: wText(getLocalization().skip,
-                               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))
-                     ],
-                   ),
-                   wText(
-                     getLocalization().step3,
-                     style: theme.textTheme.headlineLarge!.copyWith(
-                       color: theme.primaryColor,
-                     ),
-                   ),
-                   const SizedBox(height: 10,),
-                   wText(getLocalization().skillsAndIndustry,style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400)),
-                  const SizedBox(height: 20,),
-                   wText(getLocalization().industry,style: theme.textTheme.bodyMedium?.copyWith(
-                       fontSize: 16,
-                       fontWeight: FontWeight.w600)),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 60),
-                    child: DropdownSearch<PreferredIndustryEntity>(
-                      onChanged: (selected){
-                        getBloc().add(PreferredIndustrySelectedEvent(preferredIndustry: selected!));
-                      },
-
-                        items: getBloc().preferredIndustryListEntity!.preferredIndustryListEntity!
-                            .map((PreferredIndustryEntity industry) {
+        return state.dataState == DataState.success &&
+                    state is AddSkillGetSkillsListState ||
+                state.dataState == DataState.success &&
+                    state is SkillSelectedState ||
+                state.dataState == DataState.success &&
+                    state is SkillChipDeletedState
+            ? SizedBox(
+                height: MediaQuery.sizeOf(context).height,
+                width: MediaQuery.sizeOf(context).width,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Spacer(),
+                            InkWell(
+                                onTap: () => _routePage(
+                                    profileEntity: widget.profileEntity,
+                                    context: context),
+                                child: wText(getLocalization().skip,
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600)))
+                          ],
+                        ),
+                        wText(
+                          getLocalization().step3,
+                          style: theme.textTheme.headlineLarge!.copyWith(
+                            color: theme.primaryColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        wText(getLocalization().skillsAndIndustry,
+                            style: const TextStyle(
+                                fontSize: 32, fontWeight: FontWeight.w400)),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        wText(getLocalization().industry,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w600)),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20, bottom: 60),
+                          child: DropdownSearch<PreferredIndustryEntity>(
+                            onChanged: (selected) {
+                              getBloc().add(PreferredIndustrySelectedEvent(
+                                  preferredIndustry: selected!));
+                            },
+                            items: getBloc()
+                                .preferredIndustryListEntity!
+                                .preferredIndustryListEntity!
+                                .map((PreferredIndustryEntity industry) {
                               logger.d(industry.industry);
                               return industry;
                             }).toList(),
-                        selectedItem: getBloc().selectedIndustry,
-
-                  ),),
-
-                   wText(getLocalization().skillsMax5,style: theme.textTheme.bodyMedium?.copyWith(
-                       fontSize: 16,
-                   fontWeight: FontWeight.w600)),
-
-                   Padding(
-                     padding: const EdgeInsets.only(top: 10, bottom: 30),
-                     child:AppMultiSelectDropdownMenu<SkillEntity>(
-                         leadingIcon: const Icon(Iconsax.add),
-                         onSearch: (selected){
-                           // getBloc().add(SkillSelectedEvent(skill: selected!));
-                         },
-                         onChanged: (selected){
-                           getBloc().add(SkillSelectedEvent(skill: selected!));
-                         },
-                         width: MediaQuery.sizeOf(context).width - 70,
-                         enableFilter: true,
-                         dropdownMenuEntries: getBloc().skillEntries,
-                         label: wText(getLocalization().skillsA,
-                             style: theme.textTheme.bodyMedium?.copyWith(
-                                 fontWeight: FontWeight.w400,
-                                 fontSize: 16,
-                                 color: Colors.grey)
-                         )
-                     ),
-                   ),
-
-                   SizedBox(
-                     height: 250 ,
-                     child: Center(
-                       child: ChipGroup(
-                         inputs: getBloc().chipOptions,
-                         onDeleted: (int index){
-                           getBloc().add(SkillChipDeletedEvent(index: 0));
-                         },
-                       ),
-                     ),
-                   ),
-
-                   const SizedBox(height: 50,),
-                   Row(
-                     children: [
-                       Container(
-                         height: 56,
-                         width: 56,
-                         decoration: BoxDecoration(
-                             border: Border.all(width: 2,
-                                 color: Colors.black),
-                             borderRadius: const BorderRadius.all(Radius.circular(10))),
-                         child: InkWell(onTap: ()=> context.router.pop(),child: const Icon(Icons.arrow_back)) ,
-
-                       ),
-                       const SizedBox(width: 10,),
-                       Expanded(
-                         child: PrimaryButton(
-                           style: ButtonStyle(
-                               side: MaterialStateProperty.resolveWith((Set<MaterialState> states){
-                                 return BorderSide(
-                                   color: states.contains(MaterialState.disabled)?
-                                   theme.colorScheme.secondary.withOpacity(0):
-                                   theme.colorScheme.secondary,
-                                   width: 2,
-                                 );
-                               }
-                               ),
-                               backgroundColor: MaterialStateProperty.resolveWith(
-                                       (Set<MaterialState> states){
-                                     return states.contains(MaterialState.disabled)?
-                                     theme.colorScheme.secondary.withOpacity(0.3):
-                                     theme.colorScheme.secondary;
-                                   }
-                               )
-                           ),
-                           onPressed: !getBloc().checked?null:() {
-                             getBloc().add(AddSkillSubmitRemoteSkillsAndIndustryEvent());
-                           },
-                           child: Text(getLocalization().nextStep),
-                         ),
-                       ),
-                     ],
-                   )
-                 ],
-               ),
-             ),
-           )  ,
-         ):
-          state.dataState == DataState.loading && state is AddSkillsGetPreferredIndustryListState ?
-          pageLoader():
-         Container();
+                            selectedItem: getBloc().selectedIndustry,
+                          ),
+                        ),
+                        wText(getLocalization().skillsMax5,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.w600)),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 30),
+                          child: AppMultiSelectDropdownMenu<SkillEntity>(
+                              leadingIcon: const Icon(Iconsax.add),
+                              onSearch: (selected) {
+                                // getBloc().add(SkillSelectedEvent(skill: selected!));
+                              },
+                              onChanged: (selected) {
+                                getBloc()
+                                    .add(SkillSelectedEvent(skill: selected!));
+                              },
+                              width: MediaQuery.sizeOf(context).width - 70,
+                              enableFilter: true,
+                              dropdownMenuEntries: getBloc().skillEntries,
+                              label: wText(getLocalization().skillsA,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                      color: Colors.grey))),
+                        ),
+                        SizedBox(
+                          height: 250,
+                          child: Center(
+                            child: ChipGroup(
+                              inputs: getBloc().chipOptions,
+                              onDeleted: (int index) {
+                                getBloc().add(SkillChipDeletedEvent(index: 0));
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 56,
+                              width: 56,
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(width: 2, color: Colors.black),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10))),
+                              child: InkWell(
+                                  onTap: () => context.router.pop(),
+                                  child: const Icon(Icons.arrow_back)),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: PrimaryButton(
+                                style: ButtonStyle(side:
+                                    MaterialStateProperty.resolveWith(
+                                        (Set<MaterialState> states) {
+                                  return BorderSide(
+                                    color:
+                                        states.contains(MaterialState.disabled)
+                                            ? theme.colorScheme.secondary
+                                                .withOpacity(0)
+                                            : theme.colorScheme.secondary,
+                                    width: 2,
+                                  );
+                                }), backgroundColor:
+                                    MaterialStateProperty.resolveWith(
+                                        (Set<MaterialState> states) {
+                                  return states.contains(MaterialState.disabled)
+                                      ? theme.colorScheme.secondary
+                                          .withOpacity(0.3)
+                                      : theme.colorScheme.secondary;
+                                })),
+                                onPressed: !getBloc().checked
+                                    ? null
+                                    : () {
+                                        getBloc().add(
+                                            AddSkillSubmitRemoteSkillsAndIndustryEvent());
+                                      },
+                                child: Text(getLocalization().nextStep),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            : state.dataState == DataState.loading &&
+                    state is AddSkillsGetPreferredIndustryListState
+                ? pageLoader()
+                : Container();
       },
     );
   }
-
 
   @override
   AddSkillsBloc initBloc() {
@@ -248,4 +269,18 @@ class _AddSkillsPageState extends BasePageState<AddSkillsPage, AddSkillsBloc> wi
     return locator<AppLocalizations>();
   }
 
+  _routePage(
+      {required BuildContext context, required ProfileEntity profileEntity}) {
+    if (isNullOrDefault(profileEntity.hourlyRate)) {
+      context.router.push(const RateAndWorkTimesRoute());
+    } else if (isNullOrDefault(profileEntity.paymentDetails?.bankName)) {
+      context.router.push(const BankDetailsRoute());
+    } else if (isNullOrDefault(profileEntity.location?.address)) {
+      context.router.push(const LocationRoute());
+    } else if (isNullOrDefault(profileEntity.description)) {
+      context.router.push(FinalDetailsRoute(profileEntity: profileEntity));
+    } else {
+      routeToPaymentOrHome(context: context, profileEntity: profileEntity);
+    }
+  }
 }
